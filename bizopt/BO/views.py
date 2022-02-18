@@ -6,4 +6,8 @@ def index_page(request):
 def signin_page(request):
     content = {}
     return render(request, 'signin.html', content)
+
+def login_page(request):
+    content = {}
+    return render(request, 'login.html', content)
 # Create your views here.
