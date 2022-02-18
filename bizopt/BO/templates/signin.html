@@ -142,19 +142,22 @@ button:focus {
                <div class="tab">
                   <h6>Введите ваше имя</h6>
                   <p>
-                      <input placeholder="Имя..." oninput="this.className = ''" id="name">
+                      <input placeholder="Имя" oninput="this.className = ''" id="name">
                       <br>
                       <br>
-                      <input placeholder="Фамилия..." oninput="this.className = ''" id="surname">
+                      <input placeholder="Фамилия" oninput="this.className = ''" id="surname">
                   </p>
                </div>
                 <div class="tab">
                   <h6>Введите пароль</h6>
                   <p>
-                      <input placeholder="Пароль" oninput="this.className = ''" id="password">
+                      <input placeholder="Логин" oninput="this.className = ''" id="login">
                       <br>
                       <br>
-                      <input placeholder="Подтвердите пароль" oninput="this.className = ''" id="sug_password">
+                      <input placeholder="Пароль" type="password" oninput="this.className = ''" id="password">
+                      <br>
+                      <br>
+                      <input placeholder="Подтвердите пароль" type="password" oninput="this.className = ''" id="sug_password">
                   </p>
                </div>
                <div class="tab">
@@ -204,12 +207,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function showTab(n) {
     let x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
-	if (n == 0) {
+	if (n === 0) {
 		document.getElementById("prevBtn").style.display = "none";
 	} else {
 		document.getElementById("prevBtn").style.display = "inline";
 	}
-	if (n == (x.length - 1)) {
+	if (n === (x.length - 1)) {
 		document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
 	} else {
 		document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
@@ -219,7 +222,7 @@ function showTab(n) {
 
 function nextPrev(n) {
 	var x = document.getElementsByClassName("tab");
-	if (n == 1 && !validateForm()) return false;
+	if (n === 1 && !validateForm()) return false;
 	x[currentTab].style.display = "none";
 	currentTab = currentTab + n;
 	if (currentTab >= x.length) {
@@ -241,12 +244,12 @@ function validateForm() {
     p1 = document.getElementById("password").value;
     p2 = document.getElementById("sug_password").value;
 	for (i = 0; i < y.length; i++) {
-		if (y[i].value == "") {
+		if (y[i].value === "") {
 			y[i].className += " invalid";
 			valid = false;
 		}
 	}
-    if(p1 != p2){
+    if(p1 !== p2){
         alert("Пароли не совпадают")
         valid = false;
     }

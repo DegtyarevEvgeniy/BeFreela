@@ -125,14 +125,18 @@ button:focus {
          <div class="col-md-8">
             <form id="regForm">
                <h1 id="register">Survey Form Log</h1>
-
+                <div class="all-steps" id="all-steps">
+                   <span class="step">
+                       <i class="fa fa-user"></i>
+                   </span>
+               </div>
                <div class="tab">
                   <p>
                       <br>
-                      <input placeholder="Почта" oninput="this.className = ''" id="email">
+                      <input placeholder="Логин" oninput="this.className = ''" id="login">
                       <br>
                       <br>
-                      <input placeholder="Пароль" oninput="this.className = ''" id="password">
+                      <input placeholder="Пароль" type="password" oninput="this.className = ''" id="password">
                   </p>
                </div>
 
@@ -143,9 +147,7 @@ button:focus {
                </div>
                <div style="overflow:auto;" id="nextprevious">
                   <div style="float:right;">
-                      <button type="button" id="prevBtn" >
-                        <i class="fa fa-angle-double-left"></i>
-                        </button> <button type="button" id="nextBtn"  >
+                      <button type="button" id="nextBtn" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                       </button>
                   </div>
@@ -168,12 +170,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function showTab(n) {
     let x = document.getElementsByClassName("tab");
     x[n].style.display = "block";
-	if (n == 0) {
+	if (n === 0) {
 		document.getElementById("prevBtn").style.display = "none";
 	} else {
 		document.getElementById("prevBtn").style.display = "inline";
 	}
-	if (n == (x.length - 1)) {
+	if (n === (x.length - 1)) {
 		document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
 	} else {
 		document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
@@ -183,7 +185,7 @@ function showTab(n) {
 
 function nextPrev(n) {
 	var x = document.getElementsByClassName("tab");
-	if (n == 1 && !validateForm()) return false;
+	if (n === 1 && !validateForm()) return false;
 	x[currentTab].style.display = "none";
 	currentTab = currentTab + n;
 	if (currentTab >= x.length) {
@@ -202,18 +204,13 @@ function validateForm() {
     let x, y, i, p1, p2, valid = true;
     x = document.getElementsByClassName("tab");
 	y = x[currentTab].getElementsByTagName("input");
-    p1 = document.getElementById("password").value;
-    p2 = document.getElementById("sug_password").value;
+
 	for (i = 0; i < y.length; i++) {
 		if (y[i].value == "") {
 			y[i].className += " invalid";
 			valid = false;
 		}
 	}
-    if(p1 != p2){
-        alert("Пароли не совпадают")
-        valid = false;
-    }
 	if (valid) {
 		document.getElementsByClassName("step")[currentTab].className += " finish";
 	}
