@@ -130,6 +130,9 @@ button:focus {
                        <i class="fa fa-user"></i>
                    </span>
                    <span class="step">
+                       <i class="fa fa-unlock-alt"></i>
+                   </span>
+                   <span class="step">
                        <i class="fa fa-map-marker"></i>
                    </span>
                    <span class="step">
@@ -139,31 +142,40 @@ button:focus {
                <div class="tab">
                   <h6>Введите ваше имя</h6>
                   <p>
-                      <input placeholder="Имя..." oninput="this.className = ''" name="name">
+                      <input placeholder="Имя..." oninput="this.className = ''" id="name">
                       <br>
                       <br>
-                      <input placeholder="Фамилия..." oninput="this.className = ''" name="surname">
+                      <input placeholder="Фамилия..." oninput="this.className = ''" id="surname">
+                  </p>
+               </div>
+                <div class="tab">
+                  <h6>Введите пароль</h6>
+                  <p>
+                      <input placeholder="Пароль" oninput="this.className = ''" id="password">
+                      <br>
+                      <br>
+                      <input placeholder="Подтвердите пароль" oninput="this.className = ''" id="sug_password">
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите ваш город</h6>
                   <p>
-                      <input placeholder="Город" oninput="this.className = ''" name="city">
+                      <input placeholder="Город" oninput="this.className = ''" id="city">
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите вашу данные</h6>
                   <p>
-                      <input placeholder="Почта" oninput="this.className = ''" name="email">
+                      <input placeholder="Почта" oninput="this.className = ''" id="email">
                       <br>
                       <br>
-                      <input placeholder="Номер телефона" oninput="this.className = ''" name="phone">
+                      <input placeholder="Номер телефона" oninput="this.className = ''" id="phone">
                   </p>
                </div>
                <div class="thanks-message text-center" id="text-message">
                   <img src="https://i.imgur.com/O18mJ1K.png" width="100" class="mb-4">
-                  <h3>Thankyou for your feedback!</h3>
-                  <span>Thanks for your valuable information. It helps us to improve our services!</span>
+                  <h3>Вы успешно зарегестрированны</h3>
+                  <span>Можете пока порадоваться, ибо другого ничего нет</span>
                </div>
                <div style="overflow:auto;" id="nextprevious">
                   <div style="float:right;">
@@ -181,7 +193,7 @@ button:focus {
 </body>
 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
 <script type='text/Javascript'>
-var currentTab = 0;
+let currentTab = 0;
 document.addEventListener("DOMContentLoaded", function (event) {
 
 
@@ -190,8 +202,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 });
 
 function showTab(n) {
-	var x = document.getElementsByClassName("tab");
-	x[n].style.display = "block";
+    let x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
 	if (n == 0) {
 		document.getElementById("prevBtn").style.display = "none";
 	} else {
@@ -223,24 +235,31 @@ function nextPrev(n) {
 }
 
 function validateForm() {
-	var x, y, i, valid = true;
-	x = document.getElementsByClassName("tab");
+    let x, y, i, p1, p2, valid = true;
+    x = document.getElementsByClassName("tab");
 	y = x[currentTab].getElementsByTagName("input");
+    p1 = document.getElementById("password").value;
+    p2 = document.getElementById("sug_password").value;
 	for (i = 0; i < y.length; i++) {
 		if (y[i].value == "") {
 			y[i].className += " invalid";
 			valid = false;
 		}
 	}
+    if(p1 != p2){
+        alert("Пароли не совпадают")
+        valid = false;
+    }
 	if (valid) {
 		document.getElementsByClassName("step")[currentTab].className += " finish";
 	}
+
 	return valid;
 }
 
 function fixStepIndicator(n) {
-	var i, x = document.getElementsByClassName("step");
-	for (i = 0; i < x.length; i++) {
+    let i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
 		x[i].className = x[i].className.replace(" active", "");
 	}
 	x[n].className += " active";
