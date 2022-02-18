@@ -21,5 +21,6 @@ from BO import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_page),
+    path('signin/', views.signin_page),
 
 ]
