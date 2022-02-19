@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 
 from BO import views
-
+from BO.views import RegisterUser
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_page),
-    path('signin/', views.signin_page),
+    path('signin/', RegisterUser.as_view(), name='signin'),
+
     path('login/', views.login_page),
 ]
