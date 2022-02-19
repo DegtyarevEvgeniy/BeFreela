@@ -148,7 +148,7 @@ button:focus {
                       <input placeholder="Фамилия" oninput="this.className = ''" id="surname">
                   </p>
                </div>
-                <div class="tab">
+                <div class="tab" id="2">
                   <h6>Введите пароль</h6>
                   <p>
                       <input placeholder="Логин" oninput="this.className = ''" id="login">
@@ -180,7 +180,7 @@ button:focus {
                   <h3>Вы успешно зарегестрированны</h3>
                   <span>Можете пока порадоваться, ибо другого ничего нет</span>
                </div>
-               <div style="overflow:auto;" id="nextprevious">
+               <div style="overflow:auto;" id="next-previous">
                   <div style="float:right;">
                       <button type="button" id="prevBtn" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
@@ -209,6 +209,8 @@ function showTab(n) {
     x[n].style.display = "block";
 	if (n === 0) {
 		document.getElementById("prevBtn").style.display = "none";
+        document.getElementById("password").value = '';
+        document.getElementById("sug_password").value = '';
 	} else {
 		document.getElementById("prevBtn").style.display = "inline";
 	}
@@ -221,18 +223,16 @@ function showTab(n) {
 }
 
 function nextPrev(n) {
-	var x = document.getElementsByClassName("tab");
+	let x = document.getElementsByClassName("tab");
+
 	if (n === 1 && !validateForm()) return false;
 	x[currentTab].style.display = "none";
 	currentTab = currentTab + n;
 	if (currentTab >= x.length) {
-
-		document.getElementById("nextprevious").style.display = "none";
+		document.getElementById("next-previous").style.display = "none";
 		document.getElementById("all-steps").style.display = "none";
 		document.getElementById("register").style.display = "none";
 		document.getElementById("text-message").style.display = "block";
-
-
 	}
 	showTab(currentTab);
 }
