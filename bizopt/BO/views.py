@@ -38,6 +38,30 @@ class LoginUser(DataMixin, LoginView):
     def get_success_url(self):
         return reverse_lazy('home')
 
+def profile (request, name):
+    context = get_base_context()
+    try:
+        pers_data = User.objects.get(username=name)
+        pers_data.save()
+    except User.DoesNotExist:
+        pers_data = {
+            'username': name,
+            'gender': '',
+            'name': '',
+            'surname': '',
+            'city': '',
+        }
+        item = User(
+            username = '',
+            surname = '',
+            name = '',
+            gender = '',
+            city = '',
+        )
+        item.save()
+    context['user'] = pers_data
+    return render(request, 'profile.html', context)
+
 
 def login_page(request):
     content = {}
