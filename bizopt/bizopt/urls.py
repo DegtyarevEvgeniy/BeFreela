@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path
 
 from BO import views
-from BO.views import RegisterUser
+from BO.views import RegisterUser, LoginUser
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_page),
