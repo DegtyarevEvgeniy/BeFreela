@@ -59,7 +59,6 @@ def profile (request, name):
     except User.DoesNotExist:
         pers_data = {
             'username': name,
-            'gender': '',
             'name': '',
             'surname': '',
             'city': '',
@@ -68,7 +67,6 @@ def profile (request, name):
             username = '',
             surname = '',
             name = '',
-            gender = '',
             city = '',
         )
         item.save()
