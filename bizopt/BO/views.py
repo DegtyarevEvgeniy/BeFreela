@@ -6,6 +6,18 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
+
+def get_base_context():
+    context = {
+        'menu': [
+            {'link': '/', 'text': 'Главная'},
+            {'link': '/profile_in/', 'text': 'Профиль'},
+        ],
+        'main_header': 'BizOpt',
+    }
+    return context
+
+
 def index_page(request):
     content = {}
     return render(request, 'index.html', content)
@@ -25,6 +37,7 @@ class RegisterUser(DataMixin, CreateView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Регистрация')
         return dict(list(context.items()) + list(c_def.items()))
+
 
 class LoginUser(DataMixin, LoginView):
     form_class = AuthenticationForm

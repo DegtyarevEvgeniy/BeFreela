@@ -1,0 +1,9 @@
+{% for item in menu %}
+<!--<a href="{{ item.link }}">{{ item.text }}</a>&nbsp;|-->
+    
+<li class="nav-item">
+    
+    <a class="nav-link active" aria-current="page" href="{{ item.link }}">{{ item.text }}</a>&nbsp;
+</li>
+{% endfor %}
+<hr>
