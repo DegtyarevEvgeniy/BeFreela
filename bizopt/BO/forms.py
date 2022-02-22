@@ -1,8 +1,11 @@
-class UserForm(forms.Form):
-    login = forms.CharField(label='login', required=True)
-    password = forms.CharField(label='password1', required=True)
+from django import forms
 
-    phone = forms.IntegerField(label='login')
-    name = forms.CharField(label="name", required=True)
-    surname = forms.CharField(label="surname",required=True)
-    city = forms.CharField(label="city")
+
+class UserForm(forms.Form):
+    login = forms.CharField(label='login', required=True, help_text="Логин")
+    password = forms.CharField(label='password1', required=True, help_text="Пароль")
+    sug_password = forms.CharField(label='password2', required=True, help_text="Подтвердите пароль")
+    phone = forms.Integer(max_length=20, help_text="Телефон")
+    name = forms.CharField(max_length=20, help_text="Имя")
+    surname = forms.CharField(max_length=30, help_text="Фамилия")
+    city = forms.CharField(max_length=20, help_text="Город")
