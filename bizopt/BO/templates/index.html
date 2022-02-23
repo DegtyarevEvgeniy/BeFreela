@@ -1,10 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Main</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://avatars.mds.yandex.net/get-adfox-content/2788782/220215_market_1735978_5033274_4.e62f054883f43bd74800700de5ae7263.png/optimize.webp" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+
+.btn {
+	font-size: 20px;
+	font-family: monospace;
+	color: #fff;
+	background: linear-gradient(to left, #f5af19, #f12711, #f5af19);
+	text-decoration: none;
+	padding: 0px 20px;
+	border-radius: 10px;
+	background-size: 200%;
+	transition: .5s;
+}
+
+.btn:hover {
+	background-position: right;
+}
+</style>
+
+
+{% endblock %}
