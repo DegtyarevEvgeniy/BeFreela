@@ -56,7 +56,8 @@ class LoginUser(DataMixin, LoginView):
     def get_success_url(self):
         return reverse_lazy('home')
 
-def profile (request, name):
+
+def profile(request, name):
     context = get_base_context()
     try:
         pers_data = User.objects.get(username=name)
@@ -69,10 +70,10 @@ def profile (request, name):
             'city': '',
         }
         item = User(
-            username = '',
-            surname = '',
-            name = '',
-            city = '',
+            username='',
+            surname='',
+            name='',
+            city='',
         )
         item.save()
     context['user'] = pers_data
