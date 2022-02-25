@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Меню:
+
+{% for i in menu %}
+    <a href="{{i.link}}">{{i.title}}</a>
+{% endfor %}
+
+<hr>
+
+</body>
+</html>
