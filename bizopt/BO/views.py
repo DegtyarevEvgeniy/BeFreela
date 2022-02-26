@@ -7,37 +7,55 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
 
-def get_base_context():
-    context = {
-        'menu': [
-            {'link': '/', 'text': 'Главная'},
-            {'link': '/creators/', 'text': 'Создатели'},
-            {'link': '/employers/', 'text': 'Предприниматели'},
-            {'link': '/tasks/', 'text': 'Задачи'},
-        ],
-        'main_header': 'BizOpt',
-    }
-    return context
+def gen_menu():
+    return [
+        {'link': '/', 'text': 'Главная'},
+        {'link': '/creators/', 'text': 'Создатели'},
+        {'link': '/employers/', 'text': 'Предприниматели'},
+        {'link': '/tasks/', 'text': 'Задачи'},
+    ]
+
+#
+# def get_base_context():
+#     context = {
+#         'menu': [
+#             {'link': '/', 'text': 'Главная'},
+#             {'link': '/creators/', 'text': 'Создатели'},
+#             {'link': '/employers/', 'text': 'Предприниматели'},
+#             {'link': '/tasks/', 'text': 'Задачи'},
+#         ],
+#         'main_header': 'BizOpt',
+#     }
+#     return context
 
 
 def creators_page(request):
-    content = {}
+    content = {
+        'menu':gen_menu()
+    }
     return render(request, 'creators.html', content)
 
 
 def tasks_page(request):
-    content = {}
+    content = {
+        'menu': gen_menu()
+    }
     return render(request, 'tasks.html', content)
 
 
 def employers_page(request):
-    content = {}
+    content = {
+        'menu': gen_menu()
+    }
     return render(request, 'employers.html', content)
 
 
 def index_page(request):
-    content = {}
+    content = {
+        'menu': gen_menu()
+    }
     return render(request, 'index.html', content)
+
 
 class RegisterUser(DataMixin, CreateView):
     form_class = UserCreationForm
@@ -64,7 +82,7 @@ class LoginUser(DataMixin, LoginView):
 
 
 def profile(request, name):
-    context = get_base_context()
+    context = gen_menu()
     try:
         pers_data = User.objects.get(username=name)
         pers_data.save()
@@ -87,6 +105,8 @@ def profile(request, name):
 
 
 def login_page(request):
-    content = {}
+    content = {
+        'menu': gen_menu()
+    }
     return render(request, 'login.html', content)
 # Create your views here.
