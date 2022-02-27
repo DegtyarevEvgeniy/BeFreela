@@ -9,11 +9,17 @@ from django.urls import reverse_lazy
 
 def gen_menu():
     return [
-        {'link': '/', 'text': 'Главная'},
-        {'link': '/creators/', 'text': 'Создатели'},
-        {'link': '/employers/', 'text': 'Предприниматели'},
-        {'link': '/tasks/', 'text': 'Задачи'},
+        {'position': 'out', 'link': '/', 'text': 'Главная'},
+        {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
+        {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
+        {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+        {'position': 'out', 'link': '', 'text': 'Профиль'},
+        {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
+        {'position': 'in', 'link': '', 'text': 'Заказы'},
+        {'position': 'in', 'link': '', 'text': 'Настройки профиля'},
+        {'position': 'in', 'link': '', 'text': 'Выйти'},
     ]
+
 
 #
 # def get_base_context():
@@ -31,7 +37,7 @@ def gen_menu():
 
 def creators_page(request):
     content = {
-        'menu':gen_menu()
+        'menu': gen_menu()
     }
     return render(request, 'creators.html', content)
 
