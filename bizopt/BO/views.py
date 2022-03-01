@@ -12,6 +12,7 @@ def gen_menu():
         {'position': 'out', 'link': '/', 'text': 'Главная'},
         {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
         # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
+        # {'position': 'mid', 'link': '/login/', 'text': 'Войти'},
         {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
         {'position': 'out', 'link': '', 'text': 'Профиль'},
         {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
@@ -41,6 +42,12 @@ def creators_page(request):
         'menu': gen_menu()
     }
     return render(request, 'creators.html', content)
+
+def becomeCreator_page(request):
+    content = {
+        'menu': gen_menu()
+    }
+    return render(request, 'becomeCreator.html', content)
 
 def edit_profile_page(request):
     content = {
