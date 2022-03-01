@@ -42,6 +42,11 @@ def creators_page(request):
     }
     return render(request, 'creators.html', content)
 
+def edit_profile_page(request):
+    content = {
+        'menu': gen_menu()
+    }
+    return render(request, 'edit.html', content)
 
 def tasks_page(request):
     content = {
