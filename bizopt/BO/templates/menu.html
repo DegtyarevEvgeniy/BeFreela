@@ -21,22 +21,36 @@
 
                 {% for item in menu %}
                 {% if item.text != "Профиль" %}
+
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" style="color: white;"
                            href="{{ item.link }}">{{ item.text }}</a>&nbsp;
                     </li>
                     {% else %}
+
+                {% if item.position == "out" %}
+                    {% if user.is_authenticated %}
                         <div class="dropdown">
                             <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
                                id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ item.text }}
                             </a>
+                            {%else%}
+                            <a class="nav-link active" aria-current="page" style="color: white;"
+                           href="/login/">Войти</a>&nbsp;
+
+                            {% endif %}
+
                             <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-                                {% if item.position == "in" %}
+                                {% if item.position == "in"  %}
                                 <li style="display: flex"><a class="dropdown-item" href="{{ item.link }}">{{ item.name }}</a></li>
                             </ul>
                         </div>
                                 {% endif %}
+
+
+                    {% endif %}
+
                     {% endif %}
                 {% endfor %}
 
