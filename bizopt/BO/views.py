@@ -11,12 +11,13 @@ def gen_menu():
     return [
         {'position': 'out', 'link': '/', 'text': 'Главная'},
         {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
-        {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
+        # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
         {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
         {'position': 'out', 'link': '', 'text': 'Профиль'},
         {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
         {'position': 'in', 'link': '', 'text': 'Заказы'},
         {'position': 'in', 'link': '', 'text': 'Настройки профиля'},
+        {'position': 'in', 'link': '', 'text': 'Криейтерам'},
         {'position': 'in', 'link': '', 'text': 'Выйти'},
     ]
 
@@ -48,12 +49,12 @@ def tasks_page(request):
     }
     return render(request, 'tasks.html', content)
 
-
-def employers_page(request):
-    content = {
-        'menu': gen_menu()
-    }
-    return render(request, 'employers.html', content)
+#
+# def employers_page(request):
+#     content = {
+#         'menu': gen_menu()
+#     }
+#     return render(request, 'employers.html', content)
 
 
 def index_page(request):
