@@ -16,7 +16,7 @@ def gen_menu():
         {'position': 'out', 'link': '', 'text': 'Профиль'},
         {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
         {'position': 'in', 'link': '', 'text': 'Заказы'},
-        {'position': 'in', 'link': '', 'text': 'Настройки профиля'},
+        {'position': 'in', 'link': 'edit/', 'text': 'Настройки профиля'},
         {'position': 'in', 'link': '', 'text': 'Криейтерам'},
         {'position': 'in', 'link': '', 'text': 'Выйти'},
     ]
@@ -39,7 +39,7 @@ def gen_menu():
 def creators_page(request):
     content = {
         'menu': gen_menu()
-    }
+    } 
     return render(request, 'creators.html', content)
 
 def edit_profile_page(request):
