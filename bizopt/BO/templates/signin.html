@@ -143,37 +143,37 @@ button:focus {
                <div class="tab">
                   <h6>Введите ваше имя</h6>
                   <p>
-                      <input placeholder="Имя" oninput="this.className = ''" id="name">
+                      <input placeholder="Имя" oninput="this.className = ''" id="name" value="{{form.name}}">
                       <br>
                       <br>
-                      <input placeholder="Фамилия" oninput="this.className = ''" id="surname">
+                      <input placeholder="Фамилия" oninput="this.className = ''" id="surname" value="{{form.surname}}">
                   </p>
                </div>
                 <div class="tab" id="2">
                   <h6>Введите пароль</h6>
                   <p>
-                      <input placeholder="Логин" oninput="this.className = ''" id="login">
+                      <input placeholder="Логин" oninput="this.className = ''" id="login" value="{{form.login}}">
                       <br>
                       <br>
-                      <input placeholder="Пароль" type="password" oninput="this.className = ''" id="password">
+                      <input placeholder="Пароль" type="password" oninput="this.className = ''" id="password" value="{{form.password}}">
                       <br>
                       <br>
-                      <input placeholder="Подтвердите пароль" type="password" oninput="this.className = ''" id="sug_password">
+                      <input placeholder="Подтвердите пароль" type="password" oninput="this.className = ''" id="sug_password" value="{{form.password1}}">
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите ваш город</h6>
                   <p>
-                      <input placeholder="Город" oninput="this.className = ''" id="city">
+                      <input placeholder="Город" oninput="this.className = ''" id="city" value="{{form.city}}">
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите вашу данные</h6>
                   <p>
-                      <input placeholder="Почта" oninput="this.className = ''" id="email">
+                      <input placeholder="Почта" oninput="this.className = ''" id="email" value="{{form.email}}">
                       <br>
                       <br>
-                      <input placeholder="Номер телефона" oninput="this.className = ''" id="phone">
+                      <input placeholder="Номер телефона" oninput="this.className = ''" id="phone" value="{{form.phone}}">
                   </p>
                </div>
                <div style="overflow:auto;" id="next-previous">

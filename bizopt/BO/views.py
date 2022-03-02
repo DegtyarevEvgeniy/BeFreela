@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
+from django.http import HttpResponseRedirect, Http404
 
 def gen_menu():
     return [
@@ -63,15 +64,44 @@ def index_page(request):
     return render(request, 'index.html', content)
 
 
-class RegisterUser(DataMixin, CreateView):
-    form_class = UserCreationForm
-    template_name = 'signin.html'
-    success_url = reverse_lazy('login')
+def edit_profile(request, name):
+    context = gen_menu()
+    try:
+        person = User.objects.get(login=name)
+        if request.method == "POST":
+            person.name = request.POST.get("name")
+            person.surname = request.POST.get("surname")
+            person.city = request.POST.get("city")
+            person.save()
+            print(person.name)
+            return HttpResponseRedirect("/profile/")
+        else:
+            context['user']=person
+            return render(request, "editProfile.html", context)
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Регистрация')
-        return dict(list(context.items()) + list(c_def.items()))
+    except User.DoesNotExist:
+        raise Http404
+
+
+def register(request):
+    context = gen_menu()
+
+    if request.method == "POST":
+        user = UserCreationForm(request.POST)
+        u_data = user.data
+        item = User(login=u_data['login'],
+                    password=u_data['password'],
+                    name=u_data['name'],
+                    surname=u_data['surname'],
+                    phone=u_data['phone'],
+                    email=u_data['email'],
+                    city=u_data['city'],)
+        item.save()
+
+    print(item.login)
+    form = UserCreationForm()
+    context['form'] = form
+    return render(request, "signin.html", context)
 
 
 class LoginUser(DataMixin, LoginView):
