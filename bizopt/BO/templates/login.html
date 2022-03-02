@@ -125,7 +125,13 @@ button:focus {
          <div class="col-md-8">
             <form id="regForm">
                <h1 id="register">Survey Form Log</h1>
-
+			   <div class="all-steps" id="all-steps">
+				<a onclick="surTab(0)"> 
+					<span class="step">
+					<i class="fa fa-user"></i>
+				</span>
+				</a>
+			</div>
                <div class="tab">
                   <p>
                       <br>
@@ -134,6 +140,7 @@ button:focus {
                       <br>
                       <input placeholder="Пароль" oninput="this.className = ''" id="password">
                   </p>
+				  <h7>еще нет аккаунта? <a href="../signin/">создай его</a></h7>
                </div>
                <div style="overflow:auto;" id="nextprevious">
                   <div style="float:right;">

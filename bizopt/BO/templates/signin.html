@@ -123,23 +123,33 @@ button:focus {
    <div class="container mt-5">
       <div class="row d-flex justify-content-center align-items-center">
          <div class="col-md-8">
-            <form id="regForm" method="POST">
+            {% comment %} <form id="regForm" method="POST"> {% endcomment %}
+                <form id="regForm">
 
                <h1 id="register">Survey Form</h1>
                <div class="all-steps" id="all-steps">
-                   <span class="step">
+                   <a onclick="surTab(0)"> 
+                       <span class="step">
                        <i class="fa fa-user"></i>
                    </span>
-                   <span class="step">
+                   </a>
+                   <a onclick="surTab(1)"> 
+                       <span class="step">
                        <i class="fa fa-unlock-alt"></i>
                    </span>
-                   <span class="step">
+                   </a>
+                   <a onclick="surTab(2)"> 
+                       <span class="step">
                        <i class="fa fa-map-marker"></i>
                    </span>
-                   <span class="step">
+                   </a>
+                   <a onclick="surTab(3)"> 
+                       <span class="step">
                        <i class="fa fa-envelope"></i>
                    </span>
+                   </a>
                </div>
+
                <div class="tab">
                   <h6>Введите ваше имя</h6>
                   <p>
@@ -148,6 +158,7 @@ button:focus {
                       <br>
                       <input placeholder="Фамилия" oninput="this.className = ''" id="surname">
                   </p>
+                  <h7>уже есть аккаунт? <a href="../login/">войди в него</a></h7>
                </div>
                 <div class="tab" id="2">
                   <h6>Введите пароль</h6>
@@ -181,12 +192,10 @@ button:focus {
                       <button type="button" id="prevBtn" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
                       </button>
+                        {% comment %} {% csrf_token %} {% endcomment %}
                       <button type="button" id="nextBtn" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                       </button>
-                      {% csrf_token %}
-                      <button type="submit">Registration </button>
-
                   </div>
                </div>
             </form>
@@ -228,10 +237,18 @@ function nextPrev(n) {
 	if (n === 1 && !validateForm()) return false;
 	x[currentTab].style.display = "none";
 	currentTab = currentTab + n;
-    console.log(currentTab, x.length)
 	if (currentTab === x.length) {
+        document.getElementById('nextBtn').type = "submit"
         window.location='../';
 	}
+	showTab(currentTab);
+}
+
+function surTab(n) {
+	let x = document.getElementsByClassName("tab");
+
+	x[currentTab].style.display = "none";
+	currentTab = n;
 	showTab(currentTab);
 }
 
