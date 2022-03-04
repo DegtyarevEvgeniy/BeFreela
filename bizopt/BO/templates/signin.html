@@ -123,8 +123,8 @@ button:focus {
    <div class="container mt-5">
       <div class="row d-flex justify-content-center align-items-center">
          <div class="col-md-8">
-            {% comment %} <form id="regForm" method="POST"> {% endcomment %}
-                <form id="regForm">
+            <form id="regForm" method="POST">
+
 
                <h1 id="register">Survey Form</h1>
                <div class="all-steps" id="all-steps">
@@ -153,38 +153,38 @@ button:focus {
                <div class="tab">
                   <h6>Введите ваше имя</h6>
                   <p>
-                      <input placeholder="Имя" oninput="this.className = ''" id="name">
+                      <input placeholder="Имя" oninput="this.className = ''" id="name" value="{{form.name}}">
                       <br>
                       <br>
-                      <input placeholder="Фамилия" oninput="this.className = ''" id="surname">
+                      <input placeholder="Фамилия" oninput="this.className = ''" id="surname" value="{{form.surname}}">
                   </p>
                   <h7>уже есть аккаунт? <a href="../login/">войди в него</a></h7>
                </div>
                 <div class="tab" id="2">
                   <h6>Введите пароль</h6>
                   <p>
-                      <input placeholder="Логин" oninput="this.className = ''" id="login">
+                      <input value="{{form.login}}" placeholder="Логин" oninput="this.className = ''" id="login" >
                       <br>
                       <br>
-                      <input placeholder="Пароль" type="password" oninput="this.className = ''" id="password">
+                      <input value="{{form.password}}" placeholder="Пароль" type="password" oninput="this.className = ''" id="password" >
                       <br>
                       <br>
-                      <input placeholder="Подтвердите пароль" type="password" oninput="this.className = ''" id="sug_password">
+                      <input placeholder="Подтвердите пароль" type="password" oninput="this.className = ''" id="sug_password" value="{{form.sug_password}}">
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите ваш город</h6>
                   <p>
-                      <input placeholder="Город" oninput="this.className = ''" id="city">
+                      <input placeholder="Город" oninput="this.className = ''" id="city" value="{{form.city}}">
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите вашу данные</h6>
                   <p>
-                      <input placeholder="Почта" oninput="this.className = ''" id="email">
+                      <input placeholder="Почта" oninput="this.className = ''" id="email" value="{{form.email}}">
                       <br>
                       <br>
-                      <input placeholder="Номер телефона" oninput="this.className = ''" id="phone">
+                      <input placeholder="Номер телефона" oninput="this.className = ''" id="phone" value="{{form.phone}}">
                   </p>
                </div>
                <div style="overflow:auto;" id="next-previous">
@@ -192,8 +192,9 @@ button:focus {
                       <button type="button" id="prevBtn" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
                       </button>
-                        {% comment %} {% csrf_token %} {% endcomment %}
+                        {% csrf_token %}
                       <button type="button" id="nextBtn" onclick="nextPrev(1)">
+
                         <i class="fa fa-angle-double-right"></i>
                       </button>
                   </div>
