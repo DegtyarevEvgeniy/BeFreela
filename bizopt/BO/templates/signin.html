@@ -153,38 +153,38 @@ button:focus {
                <div class="tab">
                   <h6>Введите ваше имя</h6>
                   <p>
-                      <input placeholder="Имя" oninput="this.className = ''" id="name" value="{{form.name}}">
+                      {{form.name}}
                       <br>
                       <br>
-                      <input placeholder="Фамилия" oninput="this.className = ''" id="surname" value="{{form.surname}}">
+                      {{form.surname}}
                   </p>
                   <h7>уже есть аккаунт? <a href="../login/">войди в него</a></h7>
                </div>
                 <div class="tab" id="2">
                   <h6>Введите пароль</h6>
                   <p>
-                      <input value="{{form.login}}" placeholder="Логин" oninput="this.className = ''" id="login" >
+                      {{form.login}}
                       <br>
                       <br>
-                      <input value="{{form.password}}" placeholder="Пароль" type="password" oninput="this.className = ''" id="password" >
+                      {{form.password}}
                       <br>
                       <br>
-                      <input placeholder="Подтвердите пароль" type="password" oninput="this.className = ''" id="sug_password" value="{{form.sug_password}}">
+                      {{form.sug_password}}
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите ваш город</h6>
                   <p>
-                      <input placeholder="Город" oninput="this.className = ''" id="city" value="{{form.city}}">
+                      {{form.city}}
                   </p>
                </div>
                <div class="tab">
                   <h6>Введите вашу данные</h6>
                   <p>
-                      <input placeholder="Почта" oninput="this.className = ''" id="email" value="{{form.email}}">
+                      {{form.email}}
                       <br>
                       <br>
-                      <input placeholder="Номер телефона" oninput="this.className = ''" id="phone" value="{{form.phone}}">
+                      {{form.phone}}
                   </p>
                </div>
                <div style="overflow:auto;" id="next-previous">
@@ -235,7 +235,6 @@ function showTab(n) {
 function nextPrev(n) {
 	let x = document.getElementsByClassName("tab");
 
-	if (n === 1 && !validateForm()) return false;
 	x[currentTab].style.display = "none";
 	currentTab = currentTab + n;
 	if (currentTab === x.length) {

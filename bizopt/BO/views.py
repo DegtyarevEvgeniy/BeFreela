@@ -93,7 +93,6 @@ def register(request):
         u_data = user.data
         item = User(login=u_data["login"],
                     password=u_data["password"],
-                    sug_password=u_data["sug_password"],
                     name=u_data["name"],
                     surname=u_data["surname"],
                     phone=u_data["phone"],
