@@ -1,0 +1,62 @@
+{% extends "menu.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Menu3</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light" id="menu">
+                        <li>
+                            <a onclick="changeContent(0)" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline border-bottom">item1</span> 
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="changeContent(1)" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline border-bottom">item2</span> 
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="changeContent(2)" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline border-bottom">item3</span> 
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="changeContent(3)" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline border-bottom">item4</span> 
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="changeContent(4)" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline border-bottom">item5</span> 
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                </div>
+            </div>
+            <div class="col py-2"  style="margin: 0px!important" >
+
+                <div id="texts" class="d-flex flex-column align-items-center align-items-sm-center min-vh-100 mt-5">
+                    <p id="0" style="display: inline-block">text1</p>
+                    <p id="1" style="display: none">text2</p>
+                    <p id="2" style="display: none">text3</p>
+                    <p id="3" style="display: none">text4</p>
+                    <p id="4" style="display: none">text5</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        function changeContent(n){
+            let Texts = document.getElementById("texts").children;
+            for(let i = 0; i < Texts.length; i++){
+                i == n ? Texts[i].style.display="inline-block" : Texts[i].style.display="none" ;
+            }
+         }
+    
+    </script>
+{% endblock %}

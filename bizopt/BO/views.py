@@ -7,6 +7,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 
 
+
+
 def gen_menu():
     return [
         {'position': 'out', 'link': '/', 'text': 'Главная'},
@@ -36,7 +38,12 @@ def gen_menu():
 #     }
 #     return context
 
-
+def test_page(request, param='testmenu.htmml'):
+    content = {
+            'menu': gen_menu(), 
+        } 
+    show_page = param
+    return render(request, str(show_page), content)
 def creators_page(request):
     content = {
         'menu': gen_menu()
