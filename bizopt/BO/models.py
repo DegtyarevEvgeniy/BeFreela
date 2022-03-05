@@ -9,6 +9,7 @@ class User(models.Model):
     surname = models.CharField(max_length=30, default='')
     phone = models.IntegerField(default='')
     city = models.CharField(max_length=20, default='')
+    userImage = models.ImageField(upload_to='images/', default='images/default.png')
 
 
 class Orders(models.Model):

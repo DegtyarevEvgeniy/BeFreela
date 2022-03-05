@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from .utils import *
 from django.views.generic import CreateView
@@ -5,6 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from django.core.files.storage import FileSystemStorage
 
 
 def gen_menu():
@@ -49,11 +52,44 @@ def becomeCreator_page(request):
     }
     return render(request, 'becomeCreator.html', content)
 
+
 def edit_profile_page(request):
     content = {
         'menu': gen_menu()
     }
+    if request.method == 'POST':
+        if request.FILES:
+            # получаем загруженный файл
+            file = request.FILES['myfile']
+            fs = FileSystemStorage()
+            # сохраняем на файловой системе
+            filename = fs.save(os.path.join("images", file.name), file)
+            # TODO: Будем сохранять картинку в базу,
+            #       когда напишется логика сохранения всего контента формы в базу
+            #       Текущие недостатки:
+            #           1. /edit должен быть доступен только залогиненым пользователям,
+            #               а значит на странице сразу будут заполнены все поля(имя, ...).
+            #               Сейчас - нет. Поэтому в базу не update, а insert
+            #           2. Нет web-формы на /edit, значит по нажатию на кнопку ничего не случится.
+            #              Добавил кнопку, понимающую только картинку, текстовый контент не отправляется на backend
+            #           3. Что делать, если картинка с именем уже существует.
+            #               а) переименовать на рандом и сохранить.
+            #               б) игнорировать
+            item = User(login='default',
+                        password=123,
+                        email='example@example.com',
+                        name='Name',
+                        surname='Surname',
+                        phone=123456789,
+                        city='Orlando',
+                        userImage=filename
+                        )
+            item.save()
+            content['imgPath'] = filename
+            return render(request, 'edit.html', content)
+    # content['imgPath'] = '/images/default.png'
     return render(request, 'edit.html', content)
+
 
 def tasks_page(request):
     content = {
