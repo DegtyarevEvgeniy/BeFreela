@@ -106,17 +106,19 @@ def register(request):
     return render(request, "signin.html", context)
 
 
-class LoginUser(DataMixin, LoginView):
-    form_class = AuthenticationForm
-    template_name = 'login.html'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Авторизация")
-        return dict(list(context.items()) + list(c_def.items()))
-
-    def get_success_url(self):
-        return reverse_lazy('home')
+def login(request):
+    context = gen_menu()
+    form = UserLoginForm()
+    context['form'] = form
+    formm = UserLoginForm(request.POST)
+    if formm.is_valid():
+        form_data = formm.data
+        if (form_data['login'],) in User.objects.values_list('login'):
+            user_data = User.objects.get(login=form_data['login'])
+            if user_data['password'] == form_data['password']:
+                return render(request, 'login.html', context)
+            else:
+                return render(request, 'login.html', context)
 
 
 def profile(request, name):
