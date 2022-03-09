@@ -55,6 +55,19 @@
       cursor: pointer;
       border: solid 1px #BA68C8
     }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      /* display: none; <- Crashes Chrome on hover */
+      -webkit-appearance: none;
+      margin: 0;
+      /* <-- Apparently some margin are still there even though it's hidden */
+    }
+
+    input[type=number] {
+      -moz-appearance: textfield;
+      /* Firefox */
+    }
   </style>
 </head>
 
@@ -67,54 +80,52 @@
       <div id="main_change" class="col-md-10">
         <div class="p-3 py-5">
           <div class="d-flex justify-content-center align-items-center mb-3">
-            <h4 class="text-right">Настройки профиля</h4>
+            <h4 class="text-right">Создать задание</h4>
           </div>
 
-          <div class="row mt-3">
-            <div class="col-md-8">
-              <div class="input-group mb-6">
+          <div class="row mt-12">
+            <div class="col-md-3">
+              <div class="input-group mb-3">
+                <span class="input-group-text">₽</span>
+                <input type="number" placeholder="Стоимость заказа" class="form-control">
+                <span class="input-group-text">.00</span>
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="input-group mb-7">
                 <div class="input-group-prepend">
-                  <label class="input-group-text" for="inputGroupSelect01">Какое у вас образование?</label>
+                  <label class="input-group-text" for="inputGroupSelect01">Срок выполнения</label>
                 </div>
                 <select class="custom-select" id="inputGroupSelect01">
                   <option selected>Выбрать</option>
-                  <option value="1">Дошкольное</option>
-                  <option value="2">Начальное общее</option>
-                  <option value="3">Основное общее</option>
-                  <option value="4">Среднее общее</option>
-                  <option value="5">среднее профессиональное</option>
-                  <option value="6">высшее образование - бакалавриат</option>
-                  <option value="7">высшее образование - специалитет, магистратура</option>
-                  <option value="8">высшее образование - подготовка кадров высшей квалификации</option>
-                  <option value="9"></option>
-                  <option value="10"></option>
+                  <option value="1">1 день</option>
+                  <option value="2">2 - 5 дней</option>
+                  <option value="3">5 - 10 дней</option>
+                  <option value="4">2 - 3 недели</option>
+                  <option value="5">месяц</option>
+                  <option value="6">2 - 5 месяцев</option>
+                  <option value="7">более полугода</option>
                 </select>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Есть опыт работы?</label>
-              </div>
-              </div>
           </div>
 
           <div class="row mt-3">
             <div class="col-md-9">
-              <label class="labels">Расскажите о себе</label>
+              <label class="labels">Расскажите о заказе</label>
               <textarea class="form-control"></textarea>
             </div>
           </div>
 
           <div class="row mt-3">
             <div class="col-md-9">
-              <label class="labels">Загрузить сертификат</label>
+              <label class="labels">Дополнительная информация</label>
               <input id="fileupload" class="form-control" name="myfile" type="file" multiple />
             </div>
           </div>
 
           <div class="mt-5 text-center">
-            <button class="btn btn-primary profile-button" type="submit">Сохранить</button>
+            <button class="btn btn-primary profile-button" type="submit">Опубликовать</button>
           </div>
         </div>
       </div>
