@@ -1,4 +1,4 @@
-{% extends "menu.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
@@ -21,12 +21,13 @@
 
 <script>
     
-    $('#showContent1').on('click', {content: ''}, function(e){
-        var output = e.data.content;
-        $('#content').html({% include "baseProductCard.html" %});
+    $('#showContent1').on('click', {title:'Заголовок 1', content: 'Содержимое 1...'}, function(e){
+      var output = '<b>'+e.data.title+': </b>' + e.data.content;
+      $('#content').html({% include "baseResumeCard.html" %});
     });
+    
     $('#showContent2').on('click', {title:'Заголовок 2', content: 'Содержимое 2...'}, function(e){
-      var output = {% include 'baseResumeCard.html' %};
+      var output = '<b>'+e.data.title+': </b>' + e.data.content;
       $('#content').html(output);
     });
     
