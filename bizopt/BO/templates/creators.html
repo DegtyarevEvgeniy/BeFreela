@@ -1,7 +1,8 @@
-{% extends "menu.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -11,15 +12,25 @@
   </div>
 </div>
 
-<p>hello</p>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<button id="showContent1">Резюме</button>
+<button id="showContent2">Товар</button>
+
+<div id="content"></div>
 
 <script>
     
-$(document).ready(function(){
-    $('p').css('border', 'solid 3px red');
-});
-
+    $('#showContent1').on('click', {title:'Заголовок 1', content: 'Содержимое 1...'}, function(e){
+      var output = '<b>'+e.data.title+': </b>' + e.data.content;
+      $('#content').html({% include "baseResumeCard.html" %});
+    });
+    
+    $('#showContent2').on('click', {title:'Заголовок 2', content: 'Содержимое 2...'}, function(e){
+      var output = '<b>'+e.data.title+': </b>' + e.data.content;
+      $('#content').html(output);
+    });
+    
 </script>
 
 {% endblock %}
