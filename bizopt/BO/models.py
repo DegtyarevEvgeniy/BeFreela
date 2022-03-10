@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.forms import ModelForm
 
 class User(models.Model):
     login = models.CharField(max_length=20, default='anonymous', unique=True)
@@ -9,6 +9,12 @@ class User(models.Model):
     surname = models.CharField(max_length=30, default='')
     phone = models.IntegerField(default='')
     city = models.CharField(max_length=20, default='')
+
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['login', 'password', 'email', 'name', 'surname', 'phone', 'city']
 
 
 class Orders(models.Model):

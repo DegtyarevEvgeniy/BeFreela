@@ -119,43 +119,44 @@ button:focus {
 }
 </style>
 </head>
-<body oncontextmenu='return false' class='snippet-body'>
-   <div class="container mt-5">
-      <div class="row d-flex justify-content-center align-items-center">
-         <div class="col-md-8">
-            <form id="regForm" method="POST">
-               <h1 id="register">Survey Form Log</h1>
-			   <div class="all-steps" id="all-steps">
-				<a onclick="surTab(0)"> 
-					<span class="step">
-					<i class="fa fa-user"></i>
-				</span>
-				</a>
-			</div>
-               <div class="tab">
-                  <p>
-                      <br>
-                      <input placeholder="Почта" oninput="this.className = ''" id="email">
-                      <br>
-                      <br>
-                      <input placeholder="Пароль" oninput="this.className = ''" id="password">
-                  </p>
-				  <h7>еще нет аккаунта? <a href="../signin/">создай его</a></h7>
-               </div>
-               <div style="overflow:auto;" id="nextprevious">
-                  <div style="float:right;">
-                      <button type="button" id="prevBtn" >
-                        <i class="fa fa-angle-double-left"></i>
-                        </button> <button type="button" id="nextBtn"  >
-                        <i class="fa fa-angle-double-right"></i>
-                      </button>
-                  </div>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
-</body>
+{% block content %}
+
+{% if form.errors %}
+  <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
+{% endif %}
+
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+<table>
+
+<tr>
+  <td>{{ form.username.label_tag }}</td>
+  <td>{{ form.username }}</td>
+</tr>
+
+<tr>
+  <td>{{ form.password.label_tag }}</td>
+  <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="login" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{# Assumes you setup the password_reset view in your URLconf #}
+<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+
+{% endblock %}
 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
 <script type='text/Javascript'>
 let currentTab = 0;

@@ -1,11 +1,18 @@
 from django import forms
 
+from django.contrib.auth.models import User
 
-class UserForm(forms.Form):
-    login = forms.CharField(label='login', required=True, help_text="Логин")
-    password = forms.CharField(label='password1', required=True, help_text="Пароль")
-    sug_password = forms.CharField(label='password2', required=True, help_text="Подтвердите пароль")
-    phone = forms.IntegerField(help_text="Телефон")
-    name = forms.CharField(max_length=20, help_text="Имя")
-    surname = forms.CharField(max_length=30, help_text="Фамилия")
-    city = forms.CharField(max_length=20, help_text="Город")
+
+class UserRegistrationForm(forms.ModelForm):
+    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'email')
+
+    def clean_password2(self):
+        cd = self.cleaned_data
+        if cd['password'] != cd['password2']:
+            raise forms.ValidationError('Passwords don\'t match.')
+        return cd['password2']

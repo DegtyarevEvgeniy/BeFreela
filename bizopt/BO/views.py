@@ -6,9 +6,9 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from .models import *
 from django.http import HttpResponseRedirect, Http404
-
+from .forms import UserRegistrationForm
+from django.contrib.auth.models import User
 
 def gen_menu():
     context = {
@@ -16,7 +16,7 @@ def gen_menu():
             {'position': 'out', 'link': '/', 'text': 'Главная'},
             {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
             # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
-            # {'position': 'mid', 'link': '/login/', 'text': 'Войти'},
+            {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
             {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
             {'position': 'out', 'link': '', 'text': 'Профиль'},
             {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
@@ -86,28 +86,32 @@ def edit_profile(request, name):
         raise Http404
 
 
-class RegisterUser(DataMixin, CreateView):
-    form_class = UserCreationForm
-    template_name = 'signin.html'
-    success_url = reverse_lazy('login')
+def register(request):
+    context = gen_menu()
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        print('kyy')
+        # Create a new user object but avoid saving it yet
+        new_user = user_form.save(commit=False)
+        # Set the chosen password
+        new_user.set_password(user_form.cleaned_data['password'])
+        # Save the User object
+        print(user_form['username'])
+        user = User.objects.create_user(user_form['username'], user_form['email'], user_form['password'])
+        user.save()
+        # user = User.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
+        #
+        # # Обновите поля и сохраните их снова
+        # user.first_name = 'John'
+        # user.last_name = 'Citizen'
+        # user.save()
+        return render(request, 'index.html', context)
+    else:
+        print('ky')
+        user_form = UserRegistrationForm()
+        context['user_form'] = user_form
+    return render(request, 'signin.html', context)
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Регистрация')
-        return dict(list(context.items()) + list(c_def.items()))
-
-
-class LoginUser(DataMixin, LoginView):
-    form_class = AuthenticationForm
-    template_name = 'login.html'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title="Авторизация")
-        return dict(list(context.items()) + list(c_def.items()))
-
-    def get_success_url(self):
-        return reverse_lazy('home')
 
 
 def profile(request, name):
