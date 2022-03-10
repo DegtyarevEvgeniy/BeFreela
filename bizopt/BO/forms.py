@@ -25,3 +25,19 @@ class UserLoginForm(forms.Forms):
                             widget=forms.TextInput(attrs={'placeholder': 'Логин'}))
     password = forms.CharField(label='password1', required=True, help_text="Пароль",
                                widget=forms.TextInput(attrs={'placeholder': 'Пароль'}))
+
+
+class OrdersCreators(forms.Form):
+    desc = forms.CharField(label='desc', required=True, help_text="Описание",
+                            widget=forms.TextInput(attrs={'placeholder': 'Описание'}))
+    type = forms.CharField(label='type', required=True, help_text="Тип работы",
+                            widget=forms.TextInput(attrs={'placeholder': 'Тип работы'}))
+    time = forms.CharField(label='time', required=True, help_text="Время выполнения",
+                            widget=forms.TextInput(attrs={'placeholder': 'Время выполнения'}))
+    price = forms.IntegerField(label='price', required=True, help_text="Цена",
+                            widget=forms.TextInput(attrs={'placeholder': 'Цена'}))
+    cond = forms.CharField(label='cond', help_text="Условия",
+                            widget=forms.TextInput(attrs={'placeholder': 'Условия'}))
+    #image
+
+

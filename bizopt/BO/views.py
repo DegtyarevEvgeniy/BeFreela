@@ -117,7 +117,7 @@ def login(request):
             user_data = User.objects.get(login=form_data['login'])
             if user_data['password'] == form_data['password']:
                 return render(request, 'login.html', context)
-            else:
+            else:  #
                 return render(request, 'login.html', context)
 
 
