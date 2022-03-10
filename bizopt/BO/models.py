@@ -20,4 +20,9 @@ class Orders(models.Model):
     time = models.CharField(max_length=100, default='-')
 
 
+class Creator(models.Model):
+    cover = models.ImageField(upload_to='images/')
+    description = models.CharField(max_length=500, default='-')
+    company = models.BooleanField(default=0)
+    achievements = models.ImageField(upload_to='images/')
 
