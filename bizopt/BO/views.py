@@ -1,26 +1,32 @@
 from django.shortcuts import render
 from .utils import *
+from .forms import *
 from django.views.generic import CreateView
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
+from .models import *
+from django.http import HttpResponseRedirect, Http404
 
 
 def gen_menu():
-    return [
-        {'position': 'out', 'link': '/', 'text': 'Главная'},
-        {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
-        # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
-        # {'position': 'mid', 'link': '/login/', 'text': 'Войти'},
-        {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-        {'position': 'out', 'link': '', 'text': 'Профиль'},
-        {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
-        {'position': 'in', 'link': '', 'text': 'Заказы'},
-        {'position': 'in', 'link': 'edit/', 'text': 'Настройки профиля'},
-        {'position': 'in', 'link': '', 'text': 'Криейтерам'},
-        {'position': 'in', 'link': '', 'text': 'Выйти'},
-    ]
+    context = {
+        'menu': [
+            {'position': 'out', 'link': '/', 'text': 'Главная'},
+            {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
+            # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
+            # {'position': 'mid', 'link': '/login/', 'text': 'Войти'},
+            {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+            {'position': 'out', 'link': '', 'text': 'Профиль'},
+            {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
+            {'position': 'in', 'link': '', 'text': 'Заказы'},
+            {'position': 'in', 'link': 'edit/', 'text': 'Настройки профиля'},
+            {'position': 'in', 'link': '', 'text': 'Криейтерам'},
+            {'position': 'in', 'link': '', 'text': 'Выйти'},
+        ]
+    }
+    return context
 
 
 #
@@ -38,42 +44,46 @@ def gen_menu():
 
 
 def creators_page(request):
-    content = {
-        'menu': gen_menu()
-    } 
-    return render(request, 'creators.html', content)
+    context = gen_menu()
+    return render(request, 'creators.html', context)
+
 
 def becomeCreator_page(request):
-    content = {
-        'menu': gen_menu()
-    }
-    return render(request, 'becomeCreator.html', content)
-
-def edit_profile_page(request):
-    content = {
-        'menu': gen_menu()
-    }
-    return render(request, 'edit.html', content)
+    context = gen_menu()
+    return render(request, 'becomeCreator.html', context)
 
 def tasks_page(request):
-    content = {
-        'menu': gen_menu()
-    }
-    return render(request, 'tasks.html', content)
+    context = gen_menu()
+    return render(request, 'tasks.html', context)
 
-#
-# def employers_page(request):
-#     content = {
-#         'menu': gen_menu()
-#     }
-#     return render(request, 'employers.html', content)
+
+def employers_page(request):
+    context = gen_menu()
+    return render(request, 'employers.html', context)
 
 
 def index_page(request):
-    content = {
-        'menu': gen_menu()
-    }
-    return render(request, 'index.html', content)
+    context = gen_menu()
+    return render(request, 'index.html', context)
+
+
+def edit_profile(request, name):
+    context = gen_menu()
+    try:
+        person = User.objects.get(login=name)
+        if request.method == "POST":
+            person.name = request.POST.get("name")
+            person.surname = request.POST.get("surname")
+            person.city = request.POST.get("city")
+            person.save()
+            print(person.name)
+            return HttpResponseRedirect("/profile/")
+        else:
+            context['user']=person
+            return render(request, "editProfile.html", context)
+
+    except User.DoesNotExist:
+        raise Http404
 
 
 class RegisterUser(DataMixin, CreateView):
