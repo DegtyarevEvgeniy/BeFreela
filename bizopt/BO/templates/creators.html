@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "menu.html" %}
 
-</body>
-</html>
+{% block content %}
+
+
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://avatars.mds.yandex.net/get-market_banners/1523118/4733548_4.09ad065ab7da3f95401400482b860252.jpg.4733548/orig" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>hello</p>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    
+$(document).ready(function(){
+    $('p').css('border', 'solid 3px red');
+});
+
+</script>
+
+{% endblock %}
