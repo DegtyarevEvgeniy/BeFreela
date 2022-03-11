@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<head>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -12,18 +13,29 @@
   </div>
 </div>
 
-
-
-<button id="showContent1">Резюме</button>
+    <button id="showContent1">Резюме</button>
 <button id="showContent2">Товар</button>
 
 <div id="content"></div>
 
+
+
 <script>
     
-    $('#showContent1').on('click', {title:'Заголовок 1', content: 'Содержимое 1...'}, function(e){
-      var output = '<b>'+e.data.title+': </b>' + e.data.content;
-      $('#content').html({% include "baseResumeCard.html" %});
+    $('#showContent1').on('click', {title:'Заголовок 1', content: 'Содержимое 1...'}, function(inBody){
+      
+        var xhr = new XMLHttpRequest() 
+            xhr.open('GET', 'baseResumeCard')
+            xhr.onload = function(){
+                
+                console.log(xhr.response)
+                $('#content').html( xhr.response)
+   }
+   xhr.send()  
+
+
+        
+//      $('#content').html(output);
     });
     
     $('#showContent2').on('click', {title:'Заголовок 2', content: 'Содержимое 2...'}, function(e){
@@ -32,5 +44,7 @@
     });
     
 </script>
+</head>
+
 
 {% endblock %}
