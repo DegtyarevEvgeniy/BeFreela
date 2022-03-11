@@ -22,7 +22,7 @@ def gen_menu():
             {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
             {'position': 'in', 'link': '', 'text': 'Заказы'},
             {'position': 'in', 'link': 'edit/', 'text': 'Настройки профиля'},
-            {'position': 'in', 'link': '', 'text': 'Криейтерам'},
+            {'position': 'in', 'link': 'becomeCreator/', 'text': 'Криейтерам'},
 
         ]
     }
