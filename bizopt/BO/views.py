@@ -90,22 +90,22 @@ def register(request):
     context = gen_menu()
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
-        print('kyy')
         # Create a new user object but avoid saving it yet
         new_user = user_form.save(commit=False)
         # Set the chosen password
         new_user.set_password(user_form.cleaned_data['password'])
         # Save the User object
-        print(user_form['username'])
-        user = User.objects.create_user(user_form['username'], user_form['email'], user_form['password'])
+
+        user = User.objects.create_user(request.POST.get("username"), request.POST.get("email"),
+                                        request.POST.get("password"))
         user.save()
         # user = User.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
-        #
+
         # # Обновите поля и сохраните их снова
         # user.first_name = 'John'
         # user.last_name = 'Citizen'
         # user.save()
-        return render(request, 'index.html', context)
+        return HttpResponseRedirect("/")
     else:
         print('ky')
         user_form = UserRegistrationForm()
