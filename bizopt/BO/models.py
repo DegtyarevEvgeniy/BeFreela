@@ -33,3 +33,9 @@ class Creator(models.Model):
     company = models.BooleanField(default=0)
     achievements = models.ImageField(upload_to='images/')
 
+
+class Product(models.Model):
+    product_name = models.CharField(max_length=500, default='-')
+    cost = models.IntegerField(default=0)
+    availability = models.CharField(max_length=100, default='-')
+    description = models.CharField(max_length=1000, default='-')

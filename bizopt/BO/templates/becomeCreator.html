@@ -48,7 +48,7 @@
     }
 
     .labels {
-      font-size: 11px
+      font-size: 14px
     }
 
     .add-experience:hover {
@@ -147,6 +147,20 @@
 
       var xhr = new XMLHttpRequest()
       xhr.open('GET', 'becomeCreatorTemplates/2/')
+      xhr.onload = function () {
+
+        $('#MainWindowContainer').html(xhr.response)
+      }
+      xhr.send()
+    });
+
+    $('#addBtn_3').on('click', {
+      title: 'Заголовок 1',
+      content: 'Содержимое 1...'
+    }, function (inBody) {
+
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', 'becomeCreatorTemplates/3/')
       xhr.onload = function () {
 
         $('#MainWindowContainer').html(xhr.response)

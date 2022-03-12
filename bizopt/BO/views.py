@@ -63,6 +63,22 @@ def baseProductCard_page(request):
 
 def becomeCreator_page(request):
     context = gen_menu()
+    if request.method == 'POST':
+        if request.FILES:
+            file = request.FILES['additional_info']
+            fs = FileSystemStorage()
+            fs.save(os.path.join("images/products", file.name), file)
+        product = Product()
+        product.product_name = request.POST['product_name']
+        product.cost = request.POST['cost']
+        product.availability = request.POST['avail']
+        product.description = request.POST['descr']
+        print(product.product_name,
+              product.cost,
+              product.availability,
+              product.description)
+        product.save()
+        # return render(request, "becomeCreatorTemplates/template2.html", context)
     return render(request, 'becomeCreator.html', context)
 
 
@@ -102,6 +118,8 @@ def edit_profile_page(request):
             return render(request, 'edit.html', content)
     # content['imgPath'] = '/images/default.png'
     return render(request, 'edit.html', content)
+
+
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu()
     path = f"becomeCreatorTemplates/template{name}.html"
