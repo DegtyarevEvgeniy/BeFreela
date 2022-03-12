@@ -57,11 +57,14 @@ def baseProductCard_page(request):
     context = gen_menu()
     return render(request, 'baseProductCard.html', context)
 
-
-
 def becomeCreator_page(request):
     context = gen_menu()
     return render(request, 'becomeCreator.html', context)
+
+def becomeCreatorTemplate_page(request, name):
+    content = gen_menu()
+    path = f"becomeCreatorTemplates/template{name}.html"
+    return render(request, path, content)
 
 def tasks_page(request):
     context = gen_menu()
