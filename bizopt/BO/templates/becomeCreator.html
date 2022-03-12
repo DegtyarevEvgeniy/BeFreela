@@ -83,27 +83,29 @@
                 Меню
               </span>
             </a>
-            <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light" id="menu">
+            <ul
+              class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light"
+              id="menu">
               <li class="mb-2 mt-3 border-bottom">
-                <a href="#" class="nav-link px-0 align-middle">
+                <a href="#" onclick="changeWindow('WindowCreateTask')" class="nav-link px-0 align-middle">
                   <!-- <i class="fs-4 bi-people"></i>  -->
                   <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мой профиль</span>
                 </a>
               </li>
               <li class="mb-2 mt-3 border-bottom">
-                <a href="#" class="nav-link px-0 align-middle">
+                <a href="#" onclick="changeWindow('WindowCreateTask2')" class="nav-link px-0 align-middle">
                   <!-- <i class="fs-4 bi-people"></i>  -->
                   <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мои товары</span>
                 </a>
               </li>
               <li class="mb-2 mt-3 border-bottom">
-                <a href="#" class="nav-link px-0 align-middle">
+                <a href="#" onclick="changeWindow(2)" class="nav-link px-0 align-middle">
                   <!-- <i class="fs-4 bi-people"></i>  -->
                   <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Создать товар</span>
                 </a>
               </li>
               <li class="mb-2 mt-3 border-bottom">
-                <a href="#" class="nav-link px-0 align-middle">
+                <a href="#" onclick="changeWindow(3)" class="nav-link px-0 align-middle">
                   <!-- <i class="fs-4 bi-people"></i>  -->
                   <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Регламент</span>
                 </a>
@@ -113,8 +115,10 @@
         </div>
       </div>
     </div>
-    <div class="container rounded bg-white mt-5 mb-5" style="display: inline-block!important;">
-      <div class="row">
+    <!--  -->
+    <div id="MainWindowContainer" class="container rounded bg-white mt-5 mb-5" style="display: inline-block!important;">
+      <!--  -->
+      <div class="row k" id="WindowCreateTask">
         <div class="col-md-1">
           <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
         </div>
@@ -171,8 +175,81 @@
           </div>
         </div>
       </div>
+      <!--  -->
+      <div class="row k" id="WindowCreateTask2" style="display: none">
+        <div class="col-md-1">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
+        </div>
+        <div id="main_change" class="col-md-10">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+              <h4 class="text-right">Создать</h4>
+            </div>
+
+            <div class="row mt-12">
+              <div class="col-md-3">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">₽</span>
+                  <input type="number" placeholder="Стоимость заказа" class="form-control">
+                  <span class="input-group-text">.00</span>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="input-group mb-7">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Срок выполнения</label>
+                  </div>
+                  <select class="custom-select" id="inputGroupSelect01">
+                    <option selected>Выбрать</option>
+                    <option value="1">1 день</option>
+                    <option value="2">2 - 5 дней</option>
+                    <option value="3">5 - 10 дней</option>
+                    <option value="4">2 - 3 недели</option>
+                    <option value="5">месяц</option>
+                    <option value="6">2 - 5 месяцев</option>
+                    <option value="7">более полугода</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-9">
+                <label class="labels">Расскажите о заказе</label>
+                <textarea class="form-control"></textarea>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col-md-9">
+                <label class="labels">Дополнительная информация</label>
+                <input id="fileupload" class="form-control" name="myfile" type="file" multiple />
+              </div>
+            </div>
+
+            <div class="mt-5 text-center">
+              <button class="btn btn-primary profile-button" type="submit">Опубликовать</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
     </div>
   </div>
-
+  </div>
+  </div>
+  </div>
+  <script>
+    function changeWindow(id) {
+      let blocks = ['WindowCreateTask', 'WindowCreateTask2'];
+      for (let block in blocks) {
+        // blocks[block] != id ? document.getElementById(blocks[block]).style.display = "none" : document.getElementById(blocks[block]).style.display = "flex";
+        document.getElementById(blocks[block]).style.display = "none";
+      }
+      document.getElementById(id).style.display = "flex";
+      // document.getElementById(blocks[0]).style.display = "none";
+      // document.getElementById(blocks[1]).style.display = "inline-block";
+    }
+  </script>
 </body>
 {% endblock %}
