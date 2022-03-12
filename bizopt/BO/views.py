@@ -13,17 +13,17 @@ from django.contrib.auth.models import User
 def gen_menu():
     context = {
         'menu': [
-            {'position': 'out', 'link': '/', 'text': 'Главная'},
-            {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
+            {'position': 'out', 'link': 'http://127.0.0.1:8000/', 'text': 'Главная'},
+            {'position': 'out', 'link': 'http://127.0.0.1:8000/creators/', 'text': 'Создатели'},
             # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
-            {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
-            {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+            # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
+            {'position': 'out', 'link': 'http://127.0.0.1:8000/tasks/', 'text': 'Задачи'},
             {'position': 'out', 'link': '', 'text': 'Профиль'},
             {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
             {'position': 'in', 'link': '', 'text': 'Заказы'},
-            {'position': 'in', 'link': 'edit/', 'text': 'Настройки профиля'},
-            {'position': 'in', 'link': '', 'text': 'Криейтерам'},
-            {'position': 'in', 'link': '', 'text': 'Выйти'},
+            {'position': 'in', 'link': 'http://127.0.0.1:8000/edit/', 'text': 'Настройки профиля'},
+            {'position': 'in', 'link': 'http://127.0.0.1:8000/becomeCreator/', 'text': 'Криейтерам'},
+
         ]
     }
     return context
@@ -46,6 +46,17 @@ def gen_menu():
 def creators_page(request):
     context = gen_menu()
     return render(request, 'creators.html', context)
+
+
+def baseResumeCard_page(request):
+    context = gen_menu()
+    return context
+
+
+def baseProductCard_page(request):
+    context = gen_menu()
+    return context
+
 
 
 def becomeCreator_page(request):
@@ -89,22 +100,14 @@ def edit_profile(request, name):
 def register(request):
     context = gen_menu()
     if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        # Create a new user object but avoid saving it yet
-        new_user = user_form.save(commit=False)
-        # Set the chosen password
-        new_user.set_password(user_form.cleaned_data['password'])
-        # Save the User object
 
-        user = User.objects.create_user(request.POST.get("username"), request.POST.get("email"),
-                                        request.POST.get("password"))
+        user = User.objects.create_user(request.POST.get("username"), request.POST.get("email"), request.POST.get("password"))
+
+        user.first_name = request.POST.get("name")
+        user.last_name = request.POST.get("surname")
+        user.phone = request.POST.get("phone")
+        user.city = request.POST.get("city")
         user.save()
-        # user = User.objects.create_user('myusername', 'myemail@crazymail.com', 'mypassword')
-
-        # # Обновите поля и сохраните их снова
-        # user.first_name = 'John'
-        # user.last_name = 'Citizen'
-        # user.save()
         return HttpResponseRedirect("/")
     else:
         print('ky')

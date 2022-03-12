@@ -1,15 +1,22 @@
 from django import forms
 
-from django.contrib.auth.models import User
 
-
-class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password', widget=forms.PasswordInput)
-
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'email')
+class UserRegistrationForm(forms.Form):
+    username = forms.CharField(label='Логин', required=True,
+                               widget=forms.TextInput(attrs={'placeholder': 'Логин'}))
+    password = forms.CharField(label='Пароль', required=True,
+                               widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Повторите пароль', required=True,
+                                widget=forms.PasswordInput)
+    phone = forms.IntegerField(label='Телефон', widget=forms.TextInput(attrs={'placeholder': 'Телефон'}))
+    name = forms.CharField(label='Имя', max_length=20,
+                           widget=forms.TextInput(attrs={'placeholder': 'Имя'}))
+    surname = forms.CharField(label='Фамилия', max_length=30,
+                              widget=forms.TextInput(attrs={'placeholder': 'Фамилия'}))
+    city = forms.CharField(label='Город', max_length=20,
+                           widget=forms.TextInput(attrs={'placeholder': 'Город'}))
+    email = forms.CharField(label='Почта', max_length=20,
+                            widget=forms.TextInput(attrs={'placeholder': 'Почта'}))
 
     def clean_password2(self):
         cd = self.cleaned_data
