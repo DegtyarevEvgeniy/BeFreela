@@ -17,18 +17,20 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as authViews
 from BO import views
-from BO.views import RegisterUser, LoginUser
-
+from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('logout/', authViews.LogoutView.as_view(), name='logout'),
+    path('login/', views.login_page),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index_page),
-    path('edit/', views.edit_profile_page),
+    path('edit/<str:name>', views.edit_profile),
     path('tasks/', views.tasks_page),
     # path('employers/', views.employers_page),
     path('creators/', views.creators_page),
-    path('signin/', RegisterUser.as_view(), name='signin'),
-    path('login/', LoginUser.as_view(), name='login'),
+    path('signin/', views.register, name='signin'),
     path('becomeCreator/', views.becomeCreator_page),
+    path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
+    path('creators/baseResumeCard/', views.baseResumeCard_page),
+    path('creators/baseProductCard/', views.baseProductCard_page),
 ]

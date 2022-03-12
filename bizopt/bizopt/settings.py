@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'BO'
+    'BO',
+
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -129,3 +131,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+

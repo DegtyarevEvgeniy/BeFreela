@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.forms import ModelForm
 
 class User(models.Model):
     login = models.CharField(max_length=20, default='anonymous', unique=True)
@@ -10,6 +10,12 @@ class User(models.Model):
     phone = models.IntegerField(default='')
     city = models.CharField(max_length=20, default='')
     userImage = models.ImageField(upload_to='images/', default='images/default.png')
+
+
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = ['login', 'password', 'email', 'name', 'surname', 'phone', 'city']
 
 
 class Orders(models.Model):
