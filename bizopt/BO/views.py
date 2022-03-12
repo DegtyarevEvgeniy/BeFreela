@@ -50,12 +50,12 @@ def creators_page(request):
 
 def baseResumeCard_page(request):
     context = gen_menu()
-    return context
+    return render(request, 'baseResumeCard.html', context)
 
 
 def baseProductCard_page(request):
     context = gen_menu()
-    return context
+    return render(request, 'baseProductCard.html', context)
 
 
 
