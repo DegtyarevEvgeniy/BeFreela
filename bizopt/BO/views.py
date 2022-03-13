@@ -73,10 +73,7 @@ def becomeCreator_page(request):
         product.cost = request.POST['cost']
         product.availability = request.POST['avail']
         product.description = request.POST['descr']
-        print(product.product_name,
-              product.cost,
-              product.availability,
-              product.description)
+
         product.save()
         # return render(request, "becomeCreatorTemplates/template2.html", context)
     return render(request, 'becomeCreator.html', context)
