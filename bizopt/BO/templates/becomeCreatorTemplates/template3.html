@@ -1,0 +1,63 @@
+<div class="row k" id="WindowCreateTask2">
+    <div class="col-md-1">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
+    </div>
+
+    <div id="main_change" class="col-md-10">
+        <form method="post" enctype="multipart/form-data">
+           {% csrf_token %}
+
+              <div class="p-3 py-5">
+                <div class="d-flex justify-content-center align-items-center mb-3">
+                  <h4 class="text-right">Создать товар</h4>
+              </div>
+
+              <div class="row mt-3">
+                <label class="labels">Наименование</label>
+                <input type="text" name="product_name" maxlength="500" class="form-control" required>
+              </div>
+
+              <div class="row mt-3">
+                  <div class="col-md-9">
+                    <label class="labels">Изображения</label>
+                    <input id="fileupload" class="form-control" name="additional_info" type="file" multiple />
+                  </div>
+              </div>
+              <br>
+
+                <div class="row mt-12">
+                  <div class="col-md-3">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">₽</span>
+                      <input name="cost" type="number" placeholder="Стоимость" class="form-control" required>
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="input-group mb-7">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Наличие товара</label>
+                      </div>
+                      <select name="avail" class="custom-select" id="inputGroupSelect01">
+                        <option selected value="1">В наличии</option>
+                        <option value="2">Отсутствует в продаже</option>
+                        <option value="3">Изготовление на заказ</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row mt-3">
+                  <div class="col-md-9">
+                    <label class="labels">Описание товара</label>
+                    <textarea name="descr" class="form-control" maxlength="1000"></textarea>
+                  </div>
+                </div>
+
+                <div class="mt-5 text-center">
+                  <button class="btn btn-primary profile-button" type="submit">Опубликовать</button>
+                </div>
+              </div>
+      </form>
+    </div>
+  </div>

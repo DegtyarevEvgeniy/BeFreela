@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 from .utils import *
 from .forms import *
@@ -9,6 +11,8 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from .forms import UserRegistrationForm
 from django.contrib.auth.models import User
+from django.core.files.storage import FileSystemStorage
+
 
 def gen_menu():
     context = {
@@ -59,12 +63,68 @@ def baseProductCard_page(request):
 
 def becomeCreator_page(request):
     context = gen_menu()
+    if request.method == 'POST':
+        if request.FILES:
+            file = request.FILES['additional_info']
+            fs = FileSystemStorage()
+            fs.save(os.path.join("images/products", file.name), file)
+        product = Product()
+        product.product_name = request.POST['product_name']
+        product.cost = request.POST['cost']
+        product.availability = request.POST['avail']
+        product.description = request.POST['descr']
+        print(product.product_name,
+              product.cost,
+              product.availability,
+              product.description)
+        product.save()
+        # return render(request, "becomeCreatorTemplates/template2.html", context)
     return render(request, 'becomeCreator.html', context)
+
+
+def edit_profile_page(request):
+    content = {
+        'menu': gen_menu()
+    }
+    if request.method == 'POST':
+        if request.FILES:
+            # получаем загруженный файл
+            file = request.FILES['myfile']
+            fs = FileSystemStorage()
+            # сохраняем на файловой системе
+            filename = fs.save(os.path.join("images", file.name), file)
+            # TODO: Будем сохранять картинку в базу,
+            #       когда напишется логика сохранения всего контента формы в базу
+            #       Текущие недостатки:
+            #           1. /edit должен быть доступен только залогиненым пользователям,
+            #               а значит на странице сразу будут заполнены все поля(имя, ...).
+            #               Сейчас - нет. Поэтому в базу не update, а insert
+            #           2. Нет web-формы на /edit, значит по нажатию на кнопку ничего не случится.
+            #              Добавил кнопку, понимающую только картинку, текстовый контент не отправляется на backend
+            #           3. Что делать, если картинка с именем уже существует.
+            #               а) переименовать на рандом и сохранить.
+            #               б) игнорировать
+            item = User(login='default',
+                        password=123,
+                        email='example@example.com',
+                        name='Name',
+                        surname='Surname',
+                        phone=123456789,
+                        city='Orlando',
+                        userImage=filename
+                        )
+            item.save()
+            content['imgPath'] = filename
+            return render(request, 'edit.html', content)
+    # content['imgPath'] = '/images/default.png'
+    return render(request, 'edit.html', content)
+
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu()
     path = f"becomeCreatorTemplates/template{name}.html"
     return render(request, path, content)
+
 
 def tasks_page(request):
     context = gen_menu()

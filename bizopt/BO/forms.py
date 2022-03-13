@@ -23,3 +23,10 @@ class UserRegistrationForm(forms.Form):
         if cd['password'] != cd['password2']:
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
+
+
+class ProductCreationForm(forms.Form):
+    product_name = forms.CharField(required=True)
+    cost = forms.CharField(required=True)
+    availability = forms.ChoiceField()
+    description = forms.CharField()

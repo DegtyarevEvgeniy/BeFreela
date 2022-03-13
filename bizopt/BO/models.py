@@ -9,6 +9,7 @@ class User(models.Model):
     surname = models.CharField(max_length=30, default='')
     phone = models.IntegerField(default='')
     city = models.CharField(max_length=20, default='')
+    userImage = models.ImageField(upload_to='images/', default='images/default.png')
 
 
 class UserForm(ModelForm):
@@ -32,3 +33,9 @@ class Creator(models.Model):
     company = models.BooleanField(default=0)
     achievements = models.ImageField(upload_to='images/')
 
+
+class Product(models.Model):
+    product_name = models.CharField(max_length=500, default='-')
+    cost = models.IntegerField(default=0)
+    availability = models.CharField(max_length=100, default='-')
+    description = models.CharField(max_length=1000, default='-')
