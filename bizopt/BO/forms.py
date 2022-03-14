@@ -30,3 +30,4 @@ class ProductCreationForm(forms.Form):
     cost = forms.CharField(required=True)
     availability = forms.ChoiceField()
     description = forms.CharField()
+    picture = forms.ImageField()
