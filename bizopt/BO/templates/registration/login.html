@@ -142,10 +142,29 @@
 							{{ form.password.label_tag }}
 							{{ form.password }}
 						</p>
+						{% if form.errors %}
+						<div class="alert alert-danger" id="loginError" role="alert">
+							Your username and password didn't match. Please try again.	  
+						</div>					
+						{% endif %}
+					
+						{% if next %}
+						{% if user.is_authenticated %}
+						<div class="alert alert-warning" id="loginError" role="alert">
+							Your account doesn't have access to this page. To proceed,
+							please login with an account that has access.	  
+						</div>
+						{% else %}
+						<div class="alert alert-warning" id="loginError" role="alert">
+							Please login to see this page.	  
+						</div>
+						{% endif %}
+						{% endif %}
 						<p style="font-size: small;">Забыли пароль? <a href="{% url 'password_reset' %}">востановите
 								его</a></p>
 						<h7>Еще нет аккаунта? <a href="/signin">создай его</a></h7>
 					</div>
+					
 					<div style="overflow: auto;" id="nextprevious">
 						<div style="float: right;">
 							{% csrf_token %}
@@ -159,18 +178,7 @@
 		</div>
 	</div>
 
-	{% if form.errors %}
-	<p>Your username and password didn't match. Please try again.</p>
-	{% endif %}
 
-	{% if next %}
-	{% if user.is_authenticated %}
-	<p>Your account doesn't have access to this page. To proceed,
-		please login with an account that has access.</p>
-	{% else %}
-	<p>Please login to see this page.</p>
-	{% endif %}
-	{% endif %}
 
 	{# Assumes you setup the password_reset view in your URLconf #}
 </body>

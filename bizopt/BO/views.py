@@ -17,16 +17,16 @@ from django.core.files.storage import FileSystemStorage
 def gen_menu():
     context = {
         'menu': [
-            {'position': 'out', 'link': 'http://127.0.0.1:8000/', 'text': 'Главная'},
-            {'position': 'out', 'link': 'http://127.0.0.1:8000/creators/', 'text': 'Создатели'},
+            {'position': 'out', 'link': '/', 'text': 'Главная'},
+            {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
             # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
             # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
-            {'position': 'out', 'link': 'http://127.0.0.1:8000/tasks/', 'text': 'Задачи'},
+            {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
             {'position': 'out', 'link': '', 'text': 'Профиль'},
             {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
             {'position': 'in', 'link': '', 'text': 'Заказы'},
-            {'position': 'in', 'link': 'http://127.0.0.1:8000/edit/', 'text': 'Настройки профиля'},
-            {'position': 'in', 'link': 'http://127.0.0.1:8000/becomeCreator/', 'text': 'Криейтерам'},
+            {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
+            {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
 
         ]
     }
