@@ -33,4 +33,6 @@ urlpatterns = [
     path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
     path('creators/baseResumeCard/', views.baseResumeCard_page),
     path('creators/baseProductCard/', views.baseProductCard_page),
+    path('yourTasks/', views.yourTasks_page),
+    path('yourTasks/addTask/', views.addTask_page),
 ]
