@@ -33,6 +33,9 @@ def gen_menu():
     return context
 
 
+
+
+
 #
 # def get_base_context():
 #     context = {
@@ -143,6 +146,21 @@ def employers_page(request):
 def index_page(request):
     context = gen_menu()
     return render(request, 'index.html', context)
+
+
+def cardProduct_page(request):
+    context = gen_menu()
+    return render(request, 'cardProduct.html', context)
+
+
+def cardResume_page(request):
+    context = gen_menu()
+    return render(request, 'cardResume.html', context)
+
+
+def cardTask_page(request):
+    context = gen_menu()
+    return render(request, 'cardTask.html', context)
 
 
 def edit_profile(request, name):
