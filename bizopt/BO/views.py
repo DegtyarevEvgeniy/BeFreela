@@ -73,19 +73,32 @@ def baseProductCard_page(request):
 
 def becomeCreator_page(request):
     context = gen_menu()
-    if request.method == 'POST':
+    if request.method == 'POST':   # для редактирования профиля
         if request.FILES:
-            file = request.FILES['additional_info']
+            file = request.FILES['images_for_creator']
             fs = FileSystemStorage()
-            fs.save(os.path.join("images/products", file.name), file)
-        product = Product()
-        product.product_name = request.POST['product_name']
-        product.cost = request.POST['cost']
-        product.availability = request.POST['avail']
-        product.description = request.POST['descr']
-
-        product.save()
+            fs.save(os.path.join("images/creator", file.name), file)
+        creator = Creator()
+        creator.description = request.POST['descr']
+        if request.POST['iscompany'] == "on":
+            creator.company = True
+        else:
+            creator.company = False
+        creator.save()
         # return render(request, "becomeCreatorTemplates/template2.html", context)
+    # if request.method == 'POST':    # для создания собственного продукта
+    #     print("HERE!!!!!!!!!!!")
+    #     if request.FILES:
+    #         file = request.FILES['additional_info']
+    #         fs = FileSystemStorage()
+    #         fs.save(os.path.join("images/products", file.name), file)
+    #     product = Product()
+    #     product.product_name = request.POST['product_name']
+    #     product.cost = request.POST['cost']
+    #     product.description = request.POST['descr']
+    #
+    #     product.save()
+    #     # return render(request, "becomeCreatorTemplates/template2.html", context)
     return render(request, 'becomeCreator.html', context)
 
 
@@ -168,14 +181,18 @@ def edit_profile(request, name):
     try:
         person = User.objects.get(login=name)
         if request.method == "POST":
+            if request.FILES:
+                # TODO: 'tag->name' неизвестен без фронта - "editProfile.html"
+                file = request.FILES['tag->name']
+                fs = FileSystemStorage()
+                fs.save(os.path.join("images/products", file.name), file)
             person.name = request.POST.get("name")
             person.surname = request.POST.get("surname")
             person.city = request.POST.get("city")
             person.save()
-            print(person.name)
             return HttpResponseRedirect("/profile/")
         else:
-            context['user']=person
+            context['user'] = person
             return render(request, "editProfile.html", context)
 
     except User.DoesNotExist:
@@ -186,7 +203,9 @@ def register(request):
     context = gen_menu()
     if request.method == 'POST':
 
-        user = User.objects.create_user(request.POST.get("username"), request.POST.get("email"), request.POST.get("password"))
+        user = User.objects.create_user(request.POST.get("username"),
+                                        request.POST.get("email"),
+                                        request.POST.get("password"))
 
         user.first_name = request.POST.get("name")
         user.last_name = request.POST.get("surname")
