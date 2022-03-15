@@ -13,6 +13,9 @@
   <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
   <style>
+    *{
+      transition: 0.5s;
+    }
     body {
       background: rgb(99, 39, 120)
     }
@@ -75,7 +78,7 @@
 
 <body oncontextmenu='return false' class='snippet-body'>
   <div class="d-flex" id="wrapper">
-    <div class=" bg-dark" id="sidebar-wrapper">
+    <div class="bg-dark" id="sidebar-wrapper">
       <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 xol-sm-2 bg-dark">
           <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
@@ -126,6 +129,17 @@
   </div>
   </div>
   <script>
+
+    $(function() {
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', 'becomeCreatorTemplates/1/')
+      xhr.onload = function () {
+
+        $('#MainWindowContainer').html(xhr.response)
+      }
+      xhr.send()
+    });
+
     $('#addBtn_1').on('click', {
       title: 'Заголовок 1',
       content: 'Содержимое 1...'

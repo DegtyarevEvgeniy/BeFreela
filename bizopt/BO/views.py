@@ -23,7 +23,7 @@ def gen_menu():
             # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
             {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
             {'position': 'out', 'link': '', 'text': 'Профиль'},
-            {'position': 'in', 'link': '', 'text': 'Ваши задачи'},
+            {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
             {'position': 'in', 'link': '', 'text': 'Заказы'},
             {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
             {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
@@ -31,6 +31,9 @@ def gen_menu():
         ]
     }
     return context
+
+
+
 
 
 #
@@ -56,6 +59,13 @@ def baseResumeCard_page(request):
     context = gen_menu()
     return render(request, 'baseResumeCard.html', context)
 
+def yourTasks_page(request):
+    context = gen_menu()
+    return render(request, 'yourTasks.html', context)
+
+def addTask_page(request):
+    context = gen_menu()
+    return render(request, 'addTask.html', context)
 
 def baseProductCard_page(request):
     context = gen_menu()
@@ -136,6 +146,21 @@ def employers_page(request):
 def index_page(request):
     context = gen_menu()
     return render(request, 'index.html', context)
+
+
+def cardProduct_page(request):
+    context = gen_menu()
+    return render(request, 'cardProduct.html', context)
+
+
+def cardResume_page(request):
+    context = gen_menu()
+    return render(request, 'cardResume.html', context)
+
+
+def cardTask_page(request):
+    context = gen_menu()
+    return render(request, 'cardTask.html', context)
 
 
 def edit_profile(request, name):
