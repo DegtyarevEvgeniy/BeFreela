@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from .forms import UserRegistrationForm
+from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
 
@@ -27,6 +28,7 @@ def gen_menu():
             {'position': 'in', 'link': '', 'text': 'Заказы'},
             {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
             {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
+            {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
 
         ]
     }
@@ -54,6 +56,9 @@ def creators_page(request):
     context = gen_menu()
     return render(request, 'creators.html', context)
 
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
 
 def baseResumeCard_page(request):
     context = gen_menu()
