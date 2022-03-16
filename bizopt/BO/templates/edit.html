@@ -90,19 +90,19 @@
                             <label class="labels">Номер телефона</label>
                             <input type="text" class="form-control" placeholder="Номер телефона" value=""></div>
                         <div class="col-md-12">
-                            <label class="labels">Город</label>
-                            <input type="text" class="form-control" placeholder="Город" value=""></div>
-                        <div class="col-md-12">
                             <label class="labels">Почта</label>
                             <input type="text" class="form-control" placeholder="Почта" value=""></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label class="labels">Страна</label>
                             <input type="text" class="form-control" placeholder="Страна" value=""></div>
-                        <div class="col-md-6">
-                            <label class="labels">Город/Регион</label>
-                            <input type="text" class="form-control" value="" placeholder="Город"></div>
+                        <div class="col-md-4">
+                            <label class="labels">Город</label>
+                            <input type="text" class="form-control" placeholder="Город" value=""></div>
+                        <div class="col-md-4">
+                            <label class="labels">Регион</label>
+                            <input type="text" class="form-control" placeholder="Регион"></div>
                     </div>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
