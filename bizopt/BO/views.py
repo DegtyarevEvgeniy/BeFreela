@@ -244,6 +244,13 @@ def profile(request, name):
     return render(request, 'profile.html', context)
 
 
+def edit(request):
+    content = {
+        'menu': gen_menu()
+    }
+    return render(request, 'edit.html', content)
+
+
 def login_page(request):
     content = {
         'menu': gen_menu()
