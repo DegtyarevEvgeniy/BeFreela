@@ -212,7 +212,7 @@ def register(request):
         user.phone = request.POST.get("phone")
         user.city = request.POST.get("city")
         user.save()
-        return HttpResponseRedirect("/")
+        return HttpResponseRedirect("/accounts/login/")
     else:
         print('ky')
         user_form = UserRegistrationForm()
