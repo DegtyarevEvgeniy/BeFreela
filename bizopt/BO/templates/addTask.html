@@ -1,98 +1,204 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <br>
 
-<h1>addTask</h1>
 
-<div class="container">
+  <div class="container">
+    <div class="title">addTask</div>
+    <div class="content">
+      <form action="#">
 
-  <section class="panel panel-default">
-<div class="panel-heading">
-<h3 class="panel-title">Panel heading</h3>
-</div>
-<div class="panel-body">
+        <div class="user-details">
+          <div class="col-md">
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInputGrid" placeholder="Название задачи" value="">
+              <label for="floatingInputGrid">Название задачи</label>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-floating">
+              <select class="form-select" id="floatingSelectGrid" aria-label="Варианты из бд">
+                <option selected>Выбери...</option>
+                <option value="1">v1</option>
+                <option value="2">v2</option>
+                <option value="3">v3</option>
+              </select>
+              <label for="floatingSelectGrid">Works with selects</label>
+            </div>
+          </div>
+      </div>
 
-<form action="designer-finish.html" class="form-horizontal" role="form">
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Описание</label>
+        </div>
 
-<div class="form-group">
-  <label for="name" class="col-sm-3 control-label">Тип заказа</label>
-  <div class="col-sm-9">
-    <label class="radio-inline">
-    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Внешный заказ
-  </label>
-  <label class="radio-inline">
-    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Внутренный заказ
-  </label>
+          <div class="input-box">
+            <br>
+            <div class="input-group mb-3">
+              <span class="input-group-text">Цена</span>
+              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+              <span class="input-group-text">руб</span>
+            </div>
+          </div>
+
+
+  <div class="form-group">
+    <label for="inputDate">Введите дату:</label>
+    <input type="date" class="form-control">
   </div>
-</div> <!-- form-group // -->
-
-   <div class="form-group">
-    <label for="name" class="col-sm-3 control-label">Буюртмачи</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" name="name" id="name" placeholder="Исм ёки корхона номи">
-    </div>
-  </div> <!-- form-group // -->
-  <div class="form-group">
-    <label for="name" class="col-sm-3 control-label">Название продукта</label>
-    <div class="col-sm-9">
-      <input type="text" class="form-control" name="name" id="name" placeholder="Название">
-    </div>
-  </div> <!-- form-group // -->
-  <div class="form-group">
-    <label for="about" class="col-sm-3 control-label">Описание</label>
-    <div class="col-sm-9">
-      <textarea class="form-control"></textarea>
-    </div>
-  </div> <!-- form-group // -->
-  <div class="form-group">
-    <label for="qty" class="col-sm-3 control-label">Количество</label>
-    <div class="col-sm-3">
-   <input type="text" class="form-control" name="qty" id="qty" placeholder="шт.">
-    </div>
-  </div> <!-- form-group // -->
-  <div class="form-group">
-    <label class="col-sm-3 control-label">Сроки</label>
-    <div class="col-sm-3">
-    <label class="control-label small" for="date_start">Начало: </label>
-    <input type="text" class="form-control" name="date_start" id="date_start" placeholder="Начало">
-    </div>
-  <div class="col-sm-3">
-    <label class="control-label small" for="date_finish">Конец:</label>
-    <input type="text" class="form-control" name="date_finish" id="date_finish" placeholder="Конец">
-    </div>
-  </div> <!-- form-group // -->
-  <div class="form-group">
-    <label for="name" class="col-sm-3 control-label">Загрузить</label>
-    <div class="col-sm-3">
-      <label class="control-label small" for="file_img">Картинка (jpg/png):</label> <input type="file" name="file_img">
-    </div>
-  <div class="col-sm-3">
-      <label class="control-label small" for="file_img">Файлы:</label>  <input type="file" name="file_archive">
-    </div>
-  </div> <!-- form-group // -->
-  <div class="form-group">
-    <label for="tech" class="col-sm-3 control-label">Технолог</label>
-    <div class="col-sm-3">
-   <select class="form-control">
-  <option value="">Выберите</option>
-  <option value="texnolog2">Технолог 2</option>
-  <option value="texnolog3">Технолог 3</option>
-   </select>
-    </div>
-  </div> <!-- form-group // -->
-  <hr>
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-primary">Отправить</button>
-    </div>
-  </div> <!-- form-group // -->
-</form>
-
-</div><!-- panel-body // -->
-</section><!-- panel// -->
 
 
-</div> <!-- container// -->
+        <div class="button">
+          <input type="submit" value="Создать">
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+.container{
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+.container .title{
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.container .title::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.content form .user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #9b59b6;
+}
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+ }
+ form .category{
+   display: flex;
+   width: 80%;
+   margin: 14px 0 ;
+   justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+ }
+ form .category label .dot{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+ #dot-1:checked ~ .category label .one,
+ #dot-2:checked ~ .category label .two,
+ #dot-3:checked ~ .category label .three{
+   background: #9b59b6;
+   border-color: #d9d9d9;
+ }
+ form input[type="radio"]{
+   display: none;
+ }
+ form .button{
+   height: 45px;
+   margin: 35px 0
+ }
+ form .button input{
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+ }
+ form .button input:hover{
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  }
+ @media(max-width: 584px){
+ .container{
+  max-width: 100%;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
+}
+
+</style>
+
+
+<script>
+
+</script>
 
 
 
