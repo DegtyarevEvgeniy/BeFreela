@@ -29,10 +29,12 @@ class Orders(models.Model):
 
 
 class Creator(models.Model):
-    cover = models.ImageField(upload_to='images/')
+    cover = models.ImageField(upload_to='images/creator')
     description = models.CharField(max_length=500, default='-')
-    company = models.BooleanField(default=0)
-    achievements = models.ImageField(upload_to='images/')
+    is_company = models.BooleanField(default=0)
+    company_name = models.CharField(max_length=50, default='-')
+    activity_type = models.CharField(max_length=70, default='-')
+    achievements = models.ImageField(upload_to='images/creator')
 
 
 class Product(models.Model):

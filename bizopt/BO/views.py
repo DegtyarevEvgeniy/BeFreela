@@ -76,34 +76,38 @@ def baseProductCard_page(request):
     context = gen_menu()
     return render(request, 'baseProductCard.html', context)
 
+
 def becomeCreator_page(request):
     context = gen_menu()
-    if request.method == 'POST':   # для редактирования профиля
+    if request.method == 'POST' and "profile_saver" in request.POST:   # для редактирования профиля
+        print("PROFILE_SAVER")
         if request.FILES:
-            file = request.FILES['images_for_creator']
+            file = request.FILES['profile_images']
             fs = FileSystemStorage()
             fs.save(os.path.join("images/creator", file.name), file)
         creator = Creator()
-        creator.description = request.POST['descr']
-        if request.POST['iscompany'] == "on":
-            creator.company = True
+        # TODO: creator.cover и creator.achievements - фантастические поля
+        creator.description = request.POST['profile_description']
+        creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
+        if 'iscompany' in request.POST:
+            creator.is_company = True
+            creator.company_name = request.POST['profile_company_name']
         else:
             creator.company = False
         creator.save()
-        # return render(request, "becomeCreatorTemplates/template2.html", context)
-    # if request.method == 'POST':    # для создания собственного продукта
-    #     print("HERE!!!!!!!!!!!")
-    #     if request.FILES:
-    #         file = request.FILES['additional_info']
-    #         fs = FileSystemStorage()
-    #         fs.save(os.path.join("images/products", file.name), file)
-    #     product = Product()
-    #     product.product_name = request.POST['product_name']
-    #     product.cost = request.POST['cost']
-    #     product.description = request.POST['descr']
-    #
-    #     product.save()
-    #     # return render(request, "becomeCreatorTemplates/template2.html", context)
+    if request.method == 'POST' and "product_creator" in request.POST:    # для создания собственного продукта
+        print("PRODUCT_CREATOR")
+        if request.FILES:
+            file = request.FILES['product_photos']
+            fs = FileSystemStorage()
+            fs.save(os.path.join("images/products", file.name), file)
+        product = Product()
+        product.product_name = request.POST['product_name']
+        product.cost = request.POST['product_cost']
+        product.description = request.POST['product_description']
+        # TODO: как будет готов фронт для "availability", сохранить ее в БД
+        product.availability = request.POST['??????']
+        product.save()
     return render(request, 'becomeCreator.html', context)
 
 

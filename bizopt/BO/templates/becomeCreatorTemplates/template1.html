@@ -16,21 +16,16 @@
   <div id="main_change" class="col-md-8 ml-3">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-
       <div class="p-3 py-5">
-
         <div class="row mt-3">
           <div class="col-md-9">
             <h1 class="labels">Изображения</h1>
             <img class="rounded mt-5 border-right mr-2 ml-2 p-3" width="150px"
               src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-
             <img class="rounded mt-5 border-right mr-2 ml-2 p-3" width="150px"
               src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-
             <img class="rounded mt-5 border-right mr-2 ml-2 p-3" width="150px"
               src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-
           </div>
         </div>
         <br>
@@ -38,7 +33,7 @@
         <div class="row mt-3 mb-3">
           <div class="col-md-12">
             <h1 class="labels">Расскажите о себе</h1>
-            <textarea name="descr" class="form-control"></textarea>
+            <textarea name="profile_description" class="form-control"></textarea>
           </div>
         </div>
 
@@ -47,14 +42,10 @@
             <div class="input-group-prepend">
               <label class="input-group-text" for="inputGroupSelect01">Вид деятельности</label>
             </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option value="1" selected>option</option>
-              <option value="2">option</option>
-              <option value="3">option</option>
-              <option value="4">option</option>
-              <option value="5">option</option>
-              <option value="6">option</option>
-              <option value="7">option</option>
+            <select name="profile_activity_type" class="custom-select" id="inputGroupSelect01">
+              <option value="1_Hand-made">Hand-made</option>
+              <option value="2_Hard-luxury" selected>Тяжелый люкс</option>
+              <option value="3_Garden-gifts">Дары огорода</option>
             </select>
           </div>
         </div>
@@ -67,24 +58,24 @@
             </div>
           </div>
           <div class="col-md-6" id="companyTriggerOn" style="display: none;">
-            <label class="labels">Название компании</label>
-            <input type="text" class="form-control" placeholder="Город" value="">
+            <input type="text" name="profile_company_name" class="form-control" placeholder="Название компании" value="">
           </div>
         </div>
 
         <div class="row mt-3 mb-3">
           <div class="col-md-8">
             <label class="labels">Загрузить фото</label>
-            <input id="fileupload" class="form-control" name="images_for_creator" type="file" />
+            <input id="fileupload" class="form-control" name="profile_images" type="file" multiple/>
           </div>
         </div>
 
         <div class="mt-5 text-center">
-          <button class="btn btn-primary profile-button" type="submit">Сохранить</button>
+          <button name="profile_saver" class="btn btn-primary profile-button" type="submit">Сохранить</button>
         </div>
       </div>
     </form>
   </div>
+
 </div>
 <script>
   function isCompany(){
