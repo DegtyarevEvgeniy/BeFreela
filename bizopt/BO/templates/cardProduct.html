@@ -3,8 +3,105 @@
 {% block content %}
 
 
-<p>cardProduct</p>
+<main>
 
 
+  <div class="product-card-details-container-outer">
+    <div class="container">
+      <div class="product-card-details-container">
+
+        <div class="product-card-details row">
+
+            <div class="col-md-5 p-1">
+              <img class="product-card-details-img" src='https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=643&q=80'/>
+            </div>
+            <div class="col-md-7 p-1">
+
+              <div class="product-card-details-content">
+                <ul class="list-group list-group-flush">
+
+                  <li class="list-group-item">
+                    <h2 class="product-card-details-product-name">Product Name</h2>
+                  </li>
+
+                  <li class="list-group-item">
+                    <h6>Product Description:</h6>
+                    <h6 class="product-card-details-product-desc">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione enim sint, quia natus quod eos laborum aliquid tempore quasi labore dicta asperiores blanditiis laudantium. Est minus obcaecati quibusdam cupiditate ipsam.
+                    </h6>
+
+                  </li>
+
+                  <li class="list-group-item">
+                    <h6>Category Tags: <span class="badge bg-black">White</span>    </h6>
+                  </li>
+
+
+                  <li class="list-group-item">
+
+                    <h6> Quantity: </h6>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-dark">-</button>
+                      <input type="text" class="form-control" placeholder="0" style="width: 2.4rem;" disabled>
+                      <button type="button" class="btn btn-dark">+</button>
+                    </div>
+
+                  </li>
+
+                  <li class="list-group-item">
+                    <a href="" class="btn btn-dark">WishList</a>
+                    <a href="" class="btn btn-dark">Add To Cart</a>
+                  </li>
+
+              </ul>
+              </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+
+</main>
+
+
+
+<style>
+
+
+main {
+  padding-top: 100px;
+}
+
+@media (min-width: 768px) {
+  .product-card-details {
+    max-height: 640px;
+  }
+}
+
+.product-card-details {
+  border-radius: 8px;
+  box-shadow: 0 7px 25px -10px rgba(0,0,0,0.33);
+}
+
+.product-card-details-img {
+  width: 100%;
+  max-height: 620px;
+  object-fit: cover;
+}
+
+.product-card-details-content {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
+<script>
+
+
+</script>
 
 {% endblock %}
