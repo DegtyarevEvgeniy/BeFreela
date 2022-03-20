@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, addTasks
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
@@ -75,6 +75,18 @@ def addTask_page(request):
 def baseProductCard_page(request):
     context = gen_menu()
     return render(request, 'baseProductCard.html', context)
+
+
+def addTask_page(request):
+    context = gen_menu()
+    if request.method == 'POST':
+        form = addTasks(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/yourTasks/')
+    else:
+        form = addTasks()
+    return render(request, 'addTask.html', context)
 
 
 def becomeCreator_page(request):

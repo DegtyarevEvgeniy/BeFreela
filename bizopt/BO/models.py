@@ -42,3 +42,11 @@ class Product(models.Model):
     cost = models.IntegerField(default=0)
     availability = models.CharField(max_length=100, default='-')
     description = models.CharField(max_length=1000, default='-')
+
+
+class Task(models.Model):
+    name = models.CharField(max_length=50, default='anonymous')
+    select = models.CharField(max_length=50, default='')
+    description = models.CharField(max_length=500, default='-')
+    price = models.IntegerField(default='')
+    time = models.DateField(default='')

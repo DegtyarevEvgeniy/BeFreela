@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', views.logout_view),
     path('login/', views.login_page),
+    path('addTask/', views.addTask_page, name='AddTask'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index_page),
     path('edit/', views.edit),

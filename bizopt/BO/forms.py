@@ -31,3 +31,11 @@ class ProductCreationForm(forms.Form):
     availability = forms.ChoiceField()
     description = forms.CharField()
     picture = forms.ImageField()
+
+
+class addTasks(forms.Form):
+    task_name = forms.CharField(required=True)
+    select = forms.CharField()
+    description = forms.CharField()
+    price = forms.IntegerField(required=True)
+    data = forms.DateField()
