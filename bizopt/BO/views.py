@@ -35,9 +35,6 @@ def gen_menu():
     return context
 
 
-
-
-
 #
 # def get_base_context():
 #     context = {
@@ -54,7 +51,18 @@ def gen_menu():
 
 def creators_page(request):
     context = gen_menu()
+    creators = Creator.objects.all()
+    products = Product.objects.all()
+    context['creators'] = [{'first_name': creator.first_name,
+                             'activity_type': creator.activity_type
+                            }
+                            for creator in creators]
+    context['products'] = [{'product_name': product.product_name,
+                            'cost': product.cost
+                            }
+                           for product in products]
     return render(request, 'creators.html', context)
+
 
 def logout_view(request):
     logout(request)
@@ -91,13 +99,17 @@ def addTask_page(request):
 
 def becomeCreator_page(request):
     context = gen_menu()
+    user = User.objects.get(username=request.user)
     if request.method == 'POST' and "profile_saver" in request.POST:   # для редактирования профиля
-        print("PROFILE_SAVER")
+        context['first_name'] = user.first_name
+        # TODO: на фронте не отрисовывается email
+        context['email'] = user.email
         if request.FILES:
             file = request.FILES['profile_images']
             fs = FileSystemStorage()
             fs.save(os.path.join("images/creator", file.name), file)
         creator = Creator()
+        creator.first_name = user.first_name
         # TODO: creator.cover и creator.achievements - фантастические поля
         creator.description = request.POST['profile_description']
         creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
@@ -118,8 +130,9 @@ def becomeCreator_page(request):
         product.cost = request.POST['product_cost']
         product.description = request.POST['product_description']
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
-        product.availability = request.POST['??????']
+        # product.availability = request.POST['??????']
         product.save()
+    print(context)
     return render(request, 'becomeCreator.html', context)
 
 
@@ -163,6 +176,8 @@ def edit_profile_page(request):
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu()
+    user = User.objects.get(username=request.user)
+    content['first_name'] = user.first_name
     path = f"becomeCreatorTemplates/template{name}.html"
     return render(request, path, content)
 

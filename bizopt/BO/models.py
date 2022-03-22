@@ -29,6 +29,8 @@ class Orders(models.Model):
 
 
 class Creator(models.Model):
+    first_name = models.CharField(max_length=30, default='')
+    email = models.CharField(max_length=20, default='example@example.com')
     cover = models.ImageField(upload_to='images/creator')
     description = models.CharField(max_length=500, default='-')
     is_company = models.BooleanField(default=0)
