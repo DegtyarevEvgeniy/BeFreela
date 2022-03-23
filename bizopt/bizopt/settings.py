@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BO',
+    'account.apps.AccountConfig'
 
 ]
 
@@ -70,7 +71,7 @@ TEMPLATES = [
         },
     },
 ]
-
+AUTH_USER_MODEL = 'account.Account'
 WSGI_APPLICATION = 'bizopt.wsgi.application'
 
 

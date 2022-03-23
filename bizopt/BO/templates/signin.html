@@ -140,24 +140,39 @@
 						</a>
 					</div>
 					<div class="tab">
-						{{ user_form.name }}
+						{{ form.first_name.label }}:
+						{{ form.first_name }}
+
 						<br>
 						<br>
-						{{ user_form.surname }}
+						{{ form.last_name.label }}:
+						{{ form.last_name }}
+						<br>
+						<br>
+						{{ form.phone.label }}:
+						{{ form.phone }}
+						<br>
+						<br>
+						{{ form.city.label }}:
+						{{ form.city }}
 						<br>
 						<br>
 					</div>
 					<div class="tab">
-						{{ user_form.username }}
+						{{ form.username.label }}:
+						{{ form.username }}
 						<br>
 						<br>
-						{{ user_form.password }}
+						{{ form.password1.label }}:
+						{{ form.password1 }}
 						<br>
 						<br>
-						{{ user_form.password2 }}
+						{{ form.password2.label}}:
+						{{ form.password2}}
 						<br>
 						<br>
-					</div>
+						{{ form.email.label}}:
+						{{ form.email}}					</div>
 					{% csrf_token %}
 					<div style="overflow:auto;" id="next-previous">
 						<div style="float:right;">

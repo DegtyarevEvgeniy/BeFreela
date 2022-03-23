@@ -11,8 +11,9 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
 from .forms import UserRegistrationForm, addTasks
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
 from django.core.files.storage import FileSystemStorage
+
+from account.models import Account
 
 
 def gen_menu():
@@ -99,7 +100,8 @@ def addTask_page(request):
 
 def becomeCreator_page(request):
     context = gen_menu()
-    user = User.objects.get(username=request.user)
+    print(request.user)
+    user = Account.objects.get(email=request.user)
     if request.method == 'POST' and "profile_saver" in request.POST:   # для редактирования профиля
         context['first_name'] = user.first_name
         # TODO: на фронте не отрисовывается email
@@ -158,7 +160,7 @@ def edit_profile_page(request):
             #           3. Что делать, если картинка с именем уже существует.
             #               а) переименовать на рандом и сохранить.
             #               б) игнорировать
-            item = User(login='default',
+            item = Account(login='default',
                         password=123,
                         email='example@example.com',
                         name='Name',
@@ -176,7 +178,7 @@ def edit_profile_page(request):
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu()
-    user = User.objects.get(username=request.user)
+    user = Account.objects.get(email=request.user)
     content['first_name'] = user.first_name
     path = f"becomeCreatorTemplates/template{name}.html"
     return render(request, path, content)
@@ -212,10 +214,11 @@ def cardTask_page(request):
     return render(request, 'cardTask.html', context)
 
 
-def edit_profile(request, name):
+def edit_profile(request):
     context = gen_menu()
     try:
-        person = User.objects.get(login=name)
+        name = request.user
+        person = Account.objects.get(username=name)
         if request.method == "POST":
             if request.FILES:
                 # TODO: 'tag->name' неизвестен без фронта - "editProfile.html"
@@ -231,45 +234,45 @@ def edit_profile(request, name):
             context['user'] = person
             return render(request, "editProfile.html", context)
 
-    except User.DoesNotExist:
+    except Account.DoesNotExist:
         raise Http404
 
-
-def register(request):
-    context = gen_menu()
-    if request.method == 'POST':
-
-        user = User.objects.create_user(request.POST.get("username"),
-                                        request.POST.get("email"),
-                                        request.POST.get("password"))
-
-        user.first_name = request.POST.get("name")
-        user.last_name = request.POST.get("surname")
-        user.phone = request.POST.get("phone")
-        user.city = request.POST.get("city")
-        user.save()
-        return HttpResponseRedirect("/accounts/login/")
-    else:
-        print('ky')
-        user_form = UserRegistrationForm()
-        context['user_form'] = user_form
-    return render(request, 'signin.html', context)
-
+#
+# def register(request):
+#     context = gen_menu()
+#     if request.method == 'POST':
+#
+#         user = Account.objects.create_user(request.POST.get("username"),
+#                                         request.POST.get("email"),
+#                                         request.POST.get("password"))
+#
+#         user.first_name = request.POST.get("name")
+#         user.last_name = request.POST.get("surname")
+#         user.phone = request.POST.get("phone")
+#         user.city = request.POST.get("city")
+#         user.save()
+#         return HttpResponseRedirect("/accounts/login/")
+#     else:
+#         print('ky')
+#         user_form = UserRegistrationForm()
+#         context['user_form'] = user_form
+#     return render(request, 'signin.html', context)
+#
 
 
 def profile(request, name):
     context = gen_menu()
     try:
-        pers_data = User.objects.get(username=name)
+        pers_data = Account.objects.get(username=name)
         pers_data.save()
-    except User.DoesNotExist:
+    except Account.DoesNotExist:
         pers_data = {
             'username': name,
             'name': '',
             'surname': '',
             'city': '',
         }
-        item = User(
+        item = Account(
             username='',
             surname='',
             name='',

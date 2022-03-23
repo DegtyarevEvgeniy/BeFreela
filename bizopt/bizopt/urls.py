@@ -19,6 +19,8 @@ from django.contrib.auth import views as authViews
 from BO import views
 from django.conf.urls import include
 
+from account.views import SignUpView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', views.logout_view),
@@ -30,7 +32,7 @@ urlpatterns = [
     path('tasks/', views.tasks_page),
     # path('employers/', views.employers_page),
     path('creators/', views.creators_page),
-    path('signin/', views.register, name='signin'),
+    path('signin/', SignUpView.as_view(), name='signin'),
     path('becomeCreator/', views.becomeCreator_page),
     path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
     path('creators/baseResumeCard/', views.baseResumeCard_page),
