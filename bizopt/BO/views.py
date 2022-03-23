@@ -219,17 +219,19 @@ def edit_profile(request):
     try:
         name = request.user
         person = Account.objects.get(email=name)
+        print(person.first_name)
         if request.method == "POST":
             if request.FILES:
                 # TODO: 'tag->name' неизвестен без фронта - "editProfile.html"
                 file = request.FILES['tag->name']
                 fs = FileSystemStorage()
                 fs.save(os.path.join("images/products", file.name), file)
-            person.name = request.POST.get("name")
-            person.surname = request.POST.get("surname")
+            person.first_name = request.POST.get("first_name")
+            person.last_name = request.POST.get("last_name")
+            person.phone = request.POST.get("phone")
             person.city = request.POST.get("city")
             person.save()
-            return HttpResponseRedirect("/profile/")
+            return HttpResponseRedirect("/")
         else:
             context['user'] = person
             return render(request, "editProfile.html", context)
