@@ -28,7 +28,7 @@ urlpatterns = [
     path('addTask/', views.addTask_page, name='AddTask'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index_page),
-    path('edit/', views.edit),
+    path('edit/', views.edit_profile),
     path('tasks/', views.tasks_page),
     # path('employers/', views.employers_page),
     path('creators/', views.creators_page),

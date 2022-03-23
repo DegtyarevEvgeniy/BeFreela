@@ -137,43 +137,43 @@ def becomeCreator_page(request):
     print(context)
     return render(request, 'becomeCreator.html', context)
 
-
-def edit_profile_page(request):
-    content = {
-        'menu': gen_menu()
-    }
-    if request.method == 'POST':
-        if request.FILES:
-            # получаем загруженный файл
-            file = request.FILES['myfile']
-            fs = FileSystemStorage()
-            # сохраняем на файловой системе
-            filename = fs.save(os.path.join("images", file.name), file)
-            # TODO: Будем сохранять картинку в базу,
-            #       когда напишется логика сохранения всего контента формы в базу
-            #       Текущие недостатки:
-            #           1. /edit должен быть доступен только залогиненым пользователям,
-            #               а значит на странице сразу будут заполнены все поля(имя, ...).
-            #               Сейчас - нет. Поэтому в базу не update, а insert
-            #           2. Нет web-формы на /edit, значит по нажатию на кнопку ничего не случится.
-            #              Добавил кнопку, понимающую только картинку, текстовый контент не отправляется на backend
-            #           3. Что делать, если картинка с именем уже существует.
-            #               а) переименовать на рандом и сохранить.
-            #               б) игнорировать
-            item = Account(login='default',
-                        password=123,
-                        email='example@example.com',
-                        name='Name',
-                        surname='Surname',
-                        phone=123456789,
-                        city='Orlando',
-                        userImage=filename
-                        )
-            item.save()
-            content['imgPath'] = filename
-            return render(request, 'edit.html', content)
-    # content['imgPath'] = '/images/default.png'
-    return render(request, 'edit.html', content)
+#
+# def edit_profile_page(request):
+#     content = {
+#         'menu': gen_menu()
+#     }
+#     if request.method == 'POST':
+#         if request.FILES:
+#             # получаем загруженный файл
+#             file = request.FILES['myfile']
+#             fs = FileSystemStorage()
+#             # сохраняем на файловой системе
+#             filename = fs.save(os.path.join("images", file.name), file)
+#             # TODO: Будем сохранять картинку в базу,
+#             #       когда напишется логика сохранения всего контента формы в базу
+#             #       Текущие недостатки:
+#             #           1. /edit должен быть доступен только залогиненым пользователям,
+#             #               а значит на странице сразу будут заполнены все поля(имя, ...).
+#             #               Сейчас - нет. Поэтому в базу не update, а insert
+#             #           2. Нет web-формы на /edit, значит по нажатию на кнопку ничего не случится.
+#             #              Добавил кнопку, понимающую только картинку, текстовый контент не отправляется на backend
+#             #           3. Что делать, если картинка с именем уже существует.
+#             #               а) переименовать на рандом и сохранить.
+#             #               б) игнорировать
+#             item = Account(login='default',
+#                         password=123,
+#                         email='example@example.com',
+#                         name='Name',
+#                         surname='Surname',
+#                         phone=123456789,
+#                         city='Orlando',
+#                         userImage=filename
+#                         )
+#             item.save()
+#             content['imgPath'] = filename
+#             return render(request, 'edit.html', content)
+#     # content['imgPath'] = '/images/default.png'
+#     return render(request, 'edit.html', content)
 
 
 def becomeCreatorTemplate_page(request, name):
@@ -218,7 +218,7 @@ def edit_profile(request):
     context = gen_menu()
     try:
         name = request.user
-        person = Account.objects.get(username=name)
+        person = Account.objects.get(email=name)
         if request.method == "POST":
             if request.FILES:
                 # TODO: 'tag->name' неизвестен без фронта - "editProfile.html"
