@@ -52,6 +52,11 @@ def gen_menu():
 
 def creators_page(request):
     context = gen_menu()
+    products = Product.objects.all()
+    context['products'] = [{'product_name': product.product_name,
+                            'cost': product.cost
+                            }
+                           for product in products]
 
     return render(request, 'creators.html', context)
 
