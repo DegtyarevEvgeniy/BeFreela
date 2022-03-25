@@ -52,16 +52,12 @@ def gen_menu():
 
 def creators_page(request):
     context = gen_menu()
-    creators = Creator.objects.all()
     products = Product.objects.all()
-    context['creators'] = [{'first_name': creator.first_name,
-                             'activity_type': creator.activity_type
-                            }
-                            for creator in creators]
     context['products'] = [{'product_name': product.product_name,
                             'cost': product.cost
                             }
                            for product in products]
+
     return render(request, 'creators.html', context)
 
 
@@ -71,18 +67,25 @@ def logout_view(request):
 
 def baseResumeCard_page(request):
     context = gen_menu()
+    creators = Creator.objects.all()
+    context['creators'] = [{'first_name': creator.first_name,
+                            'activity_type': creator.activity_type
+                            }
+                           for creator in creators]
+
     return render(request, 'baseResumeCard.html', context)
 
 def yourTasks_page(request):
     context = gen_menu()
     return render(request, 'yourTasks.html', context)
 
-def addTask_page(request):
-    context = gen_menu()
-    return render(request, 'addTask.html', context)
-
 def baseProductCard_page(request):
     context = gen_menu()
+    products = Product.objects.all()
+    context['products'] = [{'product_name': product.product_name,
+                            'cost': product.cost
+                            }
+                           for product in products]
     return render(request, 'baseProductCard.html', context)
 
 
@@ -90,11 +93,16 @@ def addTask_page(request):
     context = gen_menu()
     if request.method == 'POST':
         form = addTasks(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/yourTasks/')
+        task = Task()
+        task.name = request.POST['task_name']
+        task.select = request.POST['select']
+        task.description = request.POST['description']
+        task.price = request.POST['price']
+        task.time = request.POST['data']
+        task.save()
     else:
         form = addTasks()
+        context["form"] = form
     return render(request, 'addTask.html', context)
 
 
