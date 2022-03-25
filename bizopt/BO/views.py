@@ -52,16 +52,7 @@ def gen_menu():
 
 def creators_page(request):
     context = gen_menu()
-    creators = Creator.objects.all()
-    products = Product.objects.all()
-    context['creators'] = [{'first_name': creator.first_name,
-                             'activity_type': creator.activity_type
-                            }
-                            for creator in creators]
-    context['products'] = [{'product_name': product.product_name,
-                            'cost': product.cost
-                            }
-                           for product in products]
+
     return render(request, 'creators.html', context)
 
 
@@ -71,6 +62,12 @@ def logout_view(request):
 
 def baseResumeCard_page(request):
     context = gen_menu()
+    creators = Creator.objects.all()
+    context['creators'] = [{'first_name': creator.first_name,
+                            'activity_type': creator.activity_type
+                            }
+                           for creator in creators]
+
     return render(request, 'baseResumeCard.html', context)
 
 def yourTasks_page(request):
@@ -79,6 +76,11 @@ def yourTasks_page(request):
 
 def baseProductCard_page(request):
     context = gen_menu()
+    products = Product.objects.all()
+    context['products'] = [{'product_name': product.product_name,
+                            'cost': product.cost
+                            }
+                           for product in products]
     return render(request, 'baseProductCard.html', context)
 
 
