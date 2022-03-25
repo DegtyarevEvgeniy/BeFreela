@@ -34,8 +34,13 @@ class ProductCreationForm(forms.Form):
 
 
 class addTasks(forms.Form):
-    task_name = forms.CharField(required=True)
-    select = forms.CharField()
-    description = forms.CharField()
-    price = forms.IntegerField(required=True)
-    data = forms.DateField()
+    data = (
+        (1, "v1"),
+        (2, "v2"),
+        (3, "v3"),
+    )
+    task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={'placeholder': 'Название'}))
+    select = forms.ChoiceField(label='Теги', choices=data, widget=forms.Select)
+    description = forms.CharField(label='Описание', widget=forms.TextInput(attrs={'placeholder': 'Описание'}))
+    price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={'placeholder': 'Цена'}))
+    data = forms.DateField(label='Дата', widget=forms.TextInput(attrs={'placeholder': 'Дата'}))

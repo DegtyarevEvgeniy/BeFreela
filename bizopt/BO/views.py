@@ -77,10 +77,6 @@ def yourTasks_page(request):
     context = gen_menu()
     return render(request, 'yourTasks.html', context)
 
-def addTask_page(request):
-    context = gen_menu()
-    return render(request, 'addTask.html', context)
-
 def baseProductCard_page(request):
     context = gen_menu()
     return render(request, 'baseProductCard.html', context)
@@ -90,11 +86,16 @@ def addTask_page(request):
     context = gen_menu()
     if request.method == 'POST':
         form = addTasks(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/yourTasks/')
+        task = Task()
+        task.name = request.POST['task_name']
+        task.select = request.POST['select']
+        task.description = request.POST['description']
+        task.price = request.POST['price']
+        task.time = request.POST['data']
+        task.save()
     else:
         form = addTasks()
+        context["form"] = form
     return render(request, 'addTask.html', context)
 
 
