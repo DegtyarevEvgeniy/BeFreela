@@ -209,6 +209,11 @@ def index_page(request):
 
 def cardProduct_page(request):
     context = gen_menu()
+    products = Product.objects.all()
+    context['products'] = [{'product_name': product.product_name,
+                            'cost': product.cost
+                            }
+                           for product in products]
     return render(request, 'cardProduct.html', context)
 
 
