@@ -322,4 +322,10 @@ def login_page(request):
         'menu': gen_menu()
     }
     return render(request, 'login.html', content)
+
+def forgot_password_page(request):
+    content = {
+        'menu': gen_menu()
+    }
+    return render(request, 'forgotPassword.html', content)
 # Create your views here.
