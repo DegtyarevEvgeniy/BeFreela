@@ -1,11 +1,15 @@
   {%for product in products%}
-  <figure class="snip1418"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample85.jpg" alt="sample85"/>
+  <figure class="snip1418">
+    <img src="{{ product.picture.url }}" alt="sample85"/>
     <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
     <figcaption>
-      <h3>{{product.product_name}}</h3>
-      <p>{{product.availability}}</p>
+      <h3>{{ product.product_name }}</h3>
+        <p>
+            <label>Наличие:     </label> {{ product.availability }}
+        </p>
+      <label>Цена:     </label>
       <div class="price">
-        {{product.cost}}
+        {{ product.cost }}  ₽
       </div>
     </figcaption><a href="#"></a>
   </figure>

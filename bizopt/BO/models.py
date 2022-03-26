@@ -16,7 +16,7 @@ class Orders(models.Model):
 class Creator(models.Model):
     first_name = models.CharField(max_length=30, default='')
     email = models.CharField(max_length=20, default='example@example.com')
-    cover = models.ImageField(upload_to='images/creator')
+    cover = models.ImageField(upload_to='images/creator', default='images/default.png')
     description = models.CharField(max_length=500, default='-')
     is_company = models.BooleanField(default=0)
     company_name = models.CharField(max_length=50, default='-')
@@ -29,6 +29,8 @@ class Product(models.Model):
     cost = models.IntegerField(default=0)
     availability = models.CharField(max_length=100, default='-')
     description = models.CharField(max_length=1000, default='-')
+    picture = models.ImageField(upload_to='images/product',
+                                default='images/default.png')
 
 
 class Task(models.Model):

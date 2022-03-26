@@ -52,12 +52,6 @@ def gen_menu():
 
 def creators_page(request):
     context = gen_menu()
-    products = Product.objects.all()
-    context['products'] = [{'product_name': product.product_name,
-                            'cost': product.cost
-                            }
-                           for product in products]
-
     return render(request, 'creators.html', context)
 
 
@@ -69,7 +63,8 @@ def baseResumeCard_page(request):
     context = gen_menu()
     creators = Creator.objects.all()
     context['creators'] = [{'first_name': creator.first_name,
-                            'activity_type': creator.activity_type
+                            'activity_type': creator.activity_type,
+                            'avatar': creator.cover.url
                             }
                            for creator in creators]
 
@@ -83,7 +78,9 @@ def baseProductCard_page(request):
     context = gen_menu()
     products = Product.objects.all()
     context['products'] = [{'product_name': product.product_name,
-                            'cost': product.cost
+                            'cost': product.cost,
+                            'availability': product.availability,
+                            'picture': product.picture
                             }
                            for product in products]
     return render(request, 'baseProductCard.html', context)
@@ -100,6 +97,7 @@ def addTask_page(request):
         task.price = request.POST['price']
         task.time = request.POST['data']
         task.save()
+        context["form"] = form
     else:
         form = addTasks()
         context["form"] = form
@@ -108,17 +106,18 @@ def addTask_page(request):
 
 def becomeCreator_page(request):
     context = gen_menu()
-    print(request.user)
     user = Account.objects.get(email=request.user)
     if request.method == 'POST' and "profile_saver" in request.POST:   # для редактирования профиля
         context['first_name'] = user.first_name
-        # TODO: на фронте не отрисовывается email
         context['email'] = user.email
+        creator = Creator()
         if request.FILES:
             file = request.FILES['profile_images']
+            # TODO: надо сделать сохранение нескольких фоток товара в базу
+            #  и multiple вернуть на фронт
             fs = FileSystemStorage()
-            fs.save(os.path.join("images/creator", file.name), file)
-        creator = Creator()
+            local_path_to_file = fs.save(os.path.join("images/creator", file.name), file)
+            creator.cover = local_path_to_file
         creator.first_name = user.first_name
         # TODO: creator.cover и creator.achievements - фантастические поля
         creator.description = request.POST['profile_description']
@@ -131,18 +130,22 @@ def becomeCreator_page(request):
         creator.save()
     if request.method == 'POST' and "product_creator" in request.POST:    # для создания собственного продукта
         print("PRODUCT_CREATOR")
+        product = Product()
         if request.FILES:
             file = request.FILES['product_photos']
             fs = FileSystemStorage()
-            fs.save(os.path.join("images/products", file.name), file)
-        product = Product()
+            # TODO: надо сделать сохранение нескольких фоток товара в базу
+            #  и multiple вернуть на фронт
+            local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
+            product.picture = local_path_to_file
         product.product_name = request.POST['product_name']
         product.cost = request.POST['product_cost']
         product.description = request.POST['product_description']
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
-    print(context)
+    if request.method == 'GET' and "product_cards" in request.GET:
+        print("CARDS")
     return render(request, 'becomeCreator.html', context)
 
 #
@@ -186,14 +189,25 @@ def becomeCreator_page(request):
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu()
-    user = Account.objects.get(email=request.user)
+    user = Account.objects.get(email=request.user.email)
     content['first_name'] = user.first_name
+    content['email'] = user.email
     path = f"becomeCreatorTemplates/template{name}.html"
+    if name == '2':
+        products = Product.objects.all()
+        content['products'] = [{'product_name': product.product_name,
+                                'cost': product.cost
+                                }
+                               for product in products]
     return render(request, path, content)
 
 
 def tasks_page(request):
     context = gen_menu()
+    tasks = Task.objects.all()
+    context['task_cards'] = [{'name': task.name,
+                              'description': task.description
+                            } for task in tasks]
     return render(request, 'tasks.html', context)
 
 
@@ -232,13 +246,11 @@ def edit_profile(request):
     try:
         name = request.user
         person = Account.objects.get(email=name)
-        print(person.first_name)
         if request.method == "POST":
             if request.FILES:
-                # TODO: 'tag->name' неизвестен без фронта - "editProfile.html"
-                file = request.FILES['tag->name']
+                file = request.FILES['myfile']
                 fs = FileSystemStorage()
-                fs.save(os.path.join("images/products", file.name), file)
+                fs.save(os.path.join("images/profile", file.name), file)
             person.first_name = request.POST.get("first_name")
             person.last_name = request.POST.get("last_name")
             person.phone = request.POST.get("phone")
