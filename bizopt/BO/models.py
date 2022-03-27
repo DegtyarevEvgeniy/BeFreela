@@ -25,7 +25,6 @@ class Creator(models.Model):
 
 
 class Product(models.Model):
-    task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     product_name = models.CharField(max_length=500, default='-')
     cost = models.IntegerField(default=0)
     availability = models.CharField(max_length=100, default='-')
@@ -36,8 +35,12 @@ class Product(models.Model):
 
 class Task(models.Model):
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField(max_length=50, default='anonymous') 
+    name = models.CharField(max_length=50, default='anonymous')
     select = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=500, default='-')
     price = models.IntegerField(default='')
     time = models.DateField(default='')
+
+
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=50, default='')
