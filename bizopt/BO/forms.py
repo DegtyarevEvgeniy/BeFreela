@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import ModelChoiceField
+from .models import *
 
 
 class UserRegistrationForm(forms.Form):
@@ -34,13 +36,11 @@ class ProductCreationForm(forms.Form):
 
 
 class addTasks(forms.Form):
-    data = (
-        (1, "v1"),
-        (2, "v2"),
-        (3, "v3"),
-    )
     task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={'placeholder': 'Название'}))
-    select = forms.ChoiceField(label='Теги', choices=data, widget=forms.Select)
+    select = forms.ModelChoiceField(
+        queryset=Tag.objects.values_list("tag_name", flat=True).distinct(),
+        empty_label=None
+    )
     description = forms.CharField(label='Описание', widget=forms.TextInput(attrs={'placeholder': 'Описание'}))
     price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={'placeholder': 'Цена'}))
     data = forms.DateField(label='Дата', widget=forms.TextInput(attrs={'placeholder': 'Дата'}))

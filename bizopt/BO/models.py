@@ -40,3 +40,7 @@ class Task(models.Model):
     description = models.CharField(max_length=500, default='-')
     price = models.IntegerField(default='')
     time = models.DateField(default='')
+
+
+class Tag(models.Model):
+    tag_name = models.CharField(max_length=50, default='')
