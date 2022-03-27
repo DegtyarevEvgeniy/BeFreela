@@ -35,10 +35,10 @@ class MyAccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
     username = models.CharField(max_length=20, default='', unique=True)
-    email = models.EmailField(max_length=40, default='', unique=True)
+    email = models.EmailField(default='', unique=True)
     first_name = models.CharField(max_length=20, default='')
     last_name = models.CharField(max_length=30, default='')
-    phone = models.IntegerField(default='')
+    phone = models.IntegerField(max_length= 18,default='')
     city = models.CharField(max_length=30, default='')
     userImage = models.ImageField(upload_to='images/', default='images/default.png')
     is_admin = models.BooleanField(default=False)

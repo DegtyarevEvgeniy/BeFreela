@@ -121,6 +121,7 @@ def becomeCreator_page(request):
         creator.first_name = user.first_name
         # TODO: creator.cover и creator.achievements - фантастические поля
         creator.description = request.POST['profile_description']
+        creator.email = user.email
         creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
         if 'iscompany' in request.POST:
             creator.is_company = True
@@ -211,6 +212,7 @@ def tasks_page(request):
     return render(request, 'tasks.html', context)
 
 
+
 def employers_page(request):
     context = gen_menu()
     return render(request, 'employers.html', context)
@@ -221,18 +223,30 @@ def index_page(request):
     return render(request, 'index.html', context)
 
 
-def cardProduct_page(request):
-    context = gen_menu()
-    products = Product.objects.all()
-    context['products'] = [{'product_name': product.product_name,
-                            'cost': product.cost
-                            }
-                           for product in products]
-    return render(request, 'cardProduct.html', context)
+# def cardProduct_page(request):
+#     context = gen_menu()
+#     products = Product.objects.all()
+#     context['products'] = [{'product_name': product.product_name,
+#                             'cost': product.cost
+#                             }
+#                            for product in products]
+#     return render(request, 'cardProduct.html', context)
 
+
+def cardProduct_page(request,name = 1):
+    context = gen_menu()
+    try:
+        product = Task.objects.get(task_id=name)
+        context['product'] = product
+        return render(request, 'cardProduct.html', context)
+    except Task.DoesNotExist:
+        raise Http404
 
 def cardResume_page(request):
     context = gen_menu()
+    print(Creator.objects.all())
+    profile = Creator.objects.get(email=request.user)
+    context['profile'] = profile
     return render(request, 'cardResume.html', context)
 
 
@@ -322,6 +336,7 @@ def login_page(request):
         'menu': gen_menu()
     }
     return render(request, 'login.html', content)
+
 
 def forgot_password_page(request):
     content = {

@@ -20,8 +20,7 @@ def gen_menu():
             {'position': 'in', 'link': '', 'text': 'Заказы'},
             {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
             {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
-            {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
-
+            {'position': 'in', 'link': '/logout/', 'text': 'Выйти'}
         ]
     }
     return context
