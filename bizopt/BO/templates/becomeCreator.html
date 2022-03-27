@@ -1,201 +1,195 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 
 
 <head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>BizOpt</title>
-  <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
-  <link href='' rel='stylesheet'>
-  <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
-  <style>
-    *{
-      transition: 0.5s;
-    }
-    body {
-      background: rgb(99, 39, 120)
-    }
-
-    .form-control:focus {
-      box-shadow: none;
-      border-color: #BA68C8
-    }
-
-    .profile-button {
-      background: rgb(99, 39, 120);
-      box-shadow: none;
-      border: none
-    }
-
-    .profile-button:hover {
-      background: #682773
-    }
-
-    .profile-button:focus {
-      background: #682773;
-      box-shadow: none
-    }
-
-    .profile-button:active {
-      background: #682773;
-      box-shadow: none
-    }
-
-    .back:hover {
-      color: #682773;
-      cursor: pointer
-    }
-
-    .labels {
-      font-size: 14px
-    }
-
-    .add-experience:hover {
-      background: #BA68C8;
-      color: #fff;
-      cursor: pointer;
-      border: solid 1px #BA68C8
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      /* display: none; <- Crashes Chrome on hover */
-      -webkit-appearance: none;
-      margin: 0;
-      /* <-- Apparently some margin are still there even though it's hidden */
-    }
-
-    input[type=number] {
-      -moz-appearance: textfield;
-      /* Firefox */
-    }
-  </style>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>BizOpt</title>
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='' rel='stylesheet'>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            transition: 0.5s;
+        }
+        
+        body {
+            background: #343a40bf;
+        }
+        
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #BA68C8
+        }
+        
+        .profile-button {
+            background: rgb(99, 39, 120);
+            box-shadow: none;
+            border: none
+        }
+        
+        .profile-button:hover {
+            background: #682773
+        }
+        
+        .profile-button:focus {
+            background: #682773;
+            box-shadow: none
+        }
+        
+        .profile-button:active {
+            background: #682773;
+            box-shadow: none
+        }
+        
+        .back:hover {
+            color: #682773;
+            cursor: pointer
+        }
+        
+        .labels {
+            font-size: 14px
+        }
+        
+        .add-experience:hover {
+            background: #BA68C8;
+            color: #fff;
+            cursor: pointer;
+            border: solid 1px #BA68C8
+        }
+        
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0;
+            /* <-- Apparently some margin are still there even though it's hidden */
+        }
+        
+        input[type=number] {
+            -moz-appearance: textfield;
+            /* Firefox */
+        }
+    </style>
 </head>
 
 <body oncontextmenu='return false' class='snippet-body'>
-  <div class="d-flex" id="wrapper">
-    <div class="bg-dark" id="sidebar-wrapper">
-      <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 xol-sm-2 bg-dark">
-          <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-            <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-              <span class="fs-5 d-none d-sm-inline" style="font-size: large;">
+    <div class="d-flex" id="wrapper">
+        <div class="bg-dark" id="sidebar-wrapper">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 xol-sm-2 bg-dark">
+                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                            <span class="fs-5 d-none d-sm-inline" style="font-size: large;">
                 Меню
               </span>
-            </a>
-            <ul
-              class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light sticky-top"
-              id="menu">
-              <li class="mb-2 mt-3 border-bottom">
-                <a href="#" id="addBtn_1" onclick="Function()" class="nav-link px-0 align-middle">
-                  <!-- <i class="fs-4 bi-people"></i>  -->
-                  <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мой профиль</span>
-                </a>
-              </li>
-              <li class="mb-2 mt-3 border-bottom">
-                <a href="#" id="addBtn_2" class="nav-link px-0 align-middle">
-                  <!-- <i class="fs-4 bi-people"></i>  -->
-                  <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мои товары</span>
-                </a>
-              </li>
-              <li class="mb-2 mt-3 border-bottom">
-                <a href="#" id="addBtn_3" class="nav-link px-0 align-middle">
-                  <!-- <i class="fs-4 bi-people"></i>  -->
-                  <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Создать товар</span>
-                </a>
-              </li>
-              <li class="mb-2 mt-3 border-bottom">
-                <a href="#" id="addBtn_4" class="nav-link px-0 align-middle">
-                  <!-- <i class="fs-4 bi-people"></i>  -->
-                  <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Регламент</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+                        </a>
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light sticky-top" id="menu">
+                            <li class="mb-2 mt-3 border-bottom">
+                                <a href="#" id="addBtn_1" onclick="Function()" class="nav-link px-0 align-middle">
+                                    <!-- <i class="fs-4 bi-people"></i>  -->
+                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мой профиль</span>
+                                </a>
+                            </li>
+                            <li class="mb-2 mt-3 border-bottom">
+                                <a href="#" id="addBtn_2" class="nav-link px-0 align-middle">
+                                    <!-- <i class="fs-4 bi-people"></i>  -->
+                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мои товары</span>
+                                </a>
+                            </li>
+                            <li class="mb-2 mt-3 border-bottom">
+                                <a href="#" id="addBtn_3" class="nav-link px-0 align-middle">
+                                    <!-- <i class="fs-4 bi-people"></i>  -->
+                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Создать товар</span>
+                                </a>
+                            </li>
+                            <li class="mb-2 mt-3 border-bottom">
+                                <a href="#" id="addBtn_4" class="nav-link px-0 align-middle">
+                                    <!-- <i class="fs-4 bi-people"></i>  -->
+                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Регламент</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div id="MainWindowContainer" class="container rounded bg-white mt-5 mb-5" style="display: inline-block!important;" w3-inslude-html="template.html">
+
+        </div>
     </div>
-
-    <div id="MainWindowContainer" class="container rounded bg-white mt-5 mb-5" style="display: inline-block!important;"
-      w3-inslude-html="template.html">
-
     </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  <script>
+    </div>
+    </div>
+    <script>
+        $(function() {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'becomeCreatorTemplates/1/')
+            xhr.onload = function() {
 
-    $(function() {
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'becomeCreatorTemplates/1/')
-      xhr.onload = function () {
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
 
-        $('#MainWindowContainer').html(xhr.response)
-      }
-      xhr.send()
-    });
+        $('#addBtn_1').on('click', {
+            title: 'Заголовок 1',
+            content: 'Содержимое 1...'
+        }, function(inBody) {
 
-    $('#addBtn_1').on('click', {
-      title: 'Заголовок 1',
-      content: 'Содержимое 1...'
-    }, function (inBody) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'becomeCreatorTemplates/1/')
+            xhr.onload = function() {
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'becomeCreatorTemplates/1/')
-      xhr.onload = function () {
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
 
-        $('#MainWindowContainer').html(xhr.response)
-      }
-      xhr.send()
-    });
+        $('#addBtn_2').on('click', {
+            title: 'Заголовок 1',
+            content: 'Содержимое 1...'
+        }, function(inBody) {
 
-    $('#addBtn_2').on('click', {
-      title: 'Заголовок 1',
-      content: 'Содержимое 1...'
-    }, function (inBody) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'becomeCreatorTemplates/2/')
+            xhr.onload = function() {
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'becomeCreatorTemplates/2/')
-      xhr.onload = function () {
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
 
-        $('#MainWindowContainer').html(xhr.response)
-      }
-      xhr.send()
-    });
+        $('#addBtn_3').on('click', {
+            title: 'Заголовок 1',
+            content: 'Содержимое 1...'
+        }, function(inBody) {
 
-    $('#addBtn_3').on('click', {
-      title: 'Заголовок 1',
-      content: 'Содержимое 1...'
-    }, function (inBody) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'becomeCreatorTemplates/3/')
+            xhr.onload = function() {
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'becomeCreatorTemplates/3/')
-      xhr.onload = function () {
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
 
-        $('#MainWindowContainer').html(xhr.response)
-      }
-      xhr.send()
-    });
+        $('#addBtn_4').on('click', {
+            title: 'Заголовок 1',
+            content: 'Содержимое 1...'
+        }, function(inBody) {
 
-    $('#addBtn_4').on('click', {
-      title: 'Заголовок 1',
-      content: 'Содержимое 1...'
-    }, function (inBody) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'becomeCreatorTemplates/4/')
+            xhr.onload = function() {
 
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'becomeCreatorTemplates/4/')
-      xhr.onload = function () {
-
-        $('#MainWindowContainer').html(xhr.response)
-      }
-      xhr.send()
-    });
-
-  </script>
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
+    </script>
 </body>
 {% endblock %}
