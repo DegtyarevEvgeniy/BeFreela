@@ -37,6 +37,17 @@
 
 
   <script>
+    $(function() {
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', 'baseProductCard')
+      xhr.onload = function () {
+
+        console.log(xhr.response)
+        $('#content').html(xhr.response)
+      }
+      xhr.send()
+  });
+
     $('#showContent1').on('click', {
       title: 'Заголовок 1',
       content: 'Содержимое 1...'
