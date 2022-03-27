@@ -221,9 +221,9 @@ function nextPrev(n) {
     let x = document.getElementsByClassName("tab");
     x[currentTab].style.display = "none";
     currentTab = currentTab + n;
-    //if (currentTab === x.length) {
-     //   document.getElementById('nextBtn').type = "submit"
-    // }
+    if (currentTab === x.length) {
+       document.getElementById('nextBtn').type = "submit"
+    }
     showTab(currentTab);
 }
 
