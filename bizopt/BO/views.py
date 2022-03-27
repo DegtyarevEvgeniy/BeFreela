@@ -233,18 +233,18 @@ def index_page(request):
 #     return render(request, 'cardProduct.html', context)
 
 
-def cardProduct_page(request,name = 1):
+def cardProduct_page(request):
     context = gen_menu()
     try:
-        product = Task.objects.get(task_id=name)
-        context['product'] = product
+        # # product = Task.objects.get(task_id=name)
+        # context['product'] = product
         return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist:
         raise Http404
 
 def cardResume_page(request):
     context = gen_menu()
-    print(Creator.objects.all())
+    # print(Creator.objects.all()
     profile = Creator.objects.get(email=request.user)
     context['profile'] = profile
     return render(request, 'cardResume.html', context)
