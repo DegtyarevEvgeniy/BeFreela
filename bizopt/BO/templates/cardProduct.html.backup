@@ -7,17 +7,20 @@
     <div class="product-card-details-container-outer">
         <div class="container">
             <div class="product-card-details-container">
-                <div class="wrapper">
-                    <div class="search-input">
-                        <a href="" target="_blank" hidden></a>
-                        <input type="text" placeholder="Type to search..">
-                        <div class="autocom-box">
-                            <!-- here list are inserted from javascript -->
+                <div class="container mb-4">
+                    <div class="d-flex flex-column bd-highlight">
+                        <div class="input-group">
+                            <a href="" target="_blank" class="autocom-a" hidden></a>
+                            <input type="text" class="form-control input-field" id="input" placeholder="Start typing..." autocomplete="off">
+                            <a class="btn btn-outline-secondary" type="button" id="search-auto-button"><i class="fas fa-search"></i></a>
                         </div>
-                        <div class="icon"><i class="fas fa-search"></i></div>
+                        <div class="row automcom-box">
+                            <!-- place for autocompleted text -->
+                        </div>
                     </div>
                 </div>
                 <div class="product-card-details row">
+
                     <div class="col-md-5 p-1">
                         <img class="product-card-details-img" src='https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=643&q=80' />
                     </div>
@@ -76,6 +79,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <a href="" class="btn btn-dark">Нравится</a>
                                 </li>
 
@@ -122,84 +126,6 @@
         justify-content: center;
         align-items: center;
     }
-    /* ------------ */
-    
-     ::selection {
-        color: #fff;
-        background: #664AFF;
-    }
-    
-    .wrapper {
-        max-width: 100%;
-        margin: 2rem;
-    }
-    
-    .wrapper .search-input {
-        background: #fff;
-        width: 100%;
-        border-radius: 5px;
-        position: relative;
-        box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
-    }
-    
-    .search-input input {
-        height: 55px;
-        width: 100%;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        padding: 0 60px 0 20px;
-        font-size: 18px;
-        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-    }
-    
-    .search-input.active input {
-        border-radius: 5px 5px 0 0;
-    }
-    
-    .search-input .autocom-box {
-        padding: 0;
-        opacity: 0;
-        pointer-events: none;
-        max-height: 280px;
-        overflow-y: auto;
-    }
-    
-    .search-input.active .autocom-box {
-        padding: 10px 8px;
-        opacity: 1;
-        pointer-events: auto;
-    }
-    
-    .autocom-box li {
-        list-style: none;
-        padding: 8px 12px;
-        display: none;
-        width: 100%;
-        cursor: default;
-        border-radius: 3px;
-    }
-    
-    .search-input.active .autocom-box li {
-        display: block;
-    }
-    
-    .autocom-box li:hover {
-        background: #efefef;
-    }
-    
-    .search-input .icon {
-        position: absolute;
-        right: 0px;
-        top: 0px;
-        height: 55px;
-        width: 55px;
-        text-align: center;
-        line-height: 55px;
-        font-size: 20px;
-        color: #644bff;
-        cursor: pointer;
-    }
 </style>
 
 <script>
@@ -233,11 +159,11 @@
     ];
 
     // getting all required elements
-    const searchWrapper = document.querySelector(".search-input");
-    const inputBox = searchWrapper.querySelector("input");
-    const suggBox = searchWrapper.querySelector(".autocom-box");
-    const icon = searchWrapper.querySelector(".icon");
-    let linkTag = searchWrapper.querySelector("a");
+    const searchWrapper = document.getElementsByClassName(".search-input");
+    const inputBox = document.getElementsByClassName(".input-group");
+    const suggBox = document.getElementsByClassName(".autocom-box");
+    const icon = document.getElementsByClassName(".icon");
+    let linkTag = document.getElementById("search-auto-button");
     let webLink;
 
     // if user press any key and release
@@ -256,7 +182,7 @@
             });
             emptyArray = emptyArray.map((data) => {
                 // passing return data inside li tag
-                return data = `<li>${data}</li>`;
+                return data = `<li class="list-group-item">${data}</li>`;
             });
             searchWrapper.classList.add("active"); //show autocomplete box
             showSuggestions(emptyArray);
@@ -285,7 +211,7 @@
         let listData;
         if (!list.length) {
             userValue = inputBox.value;
-            listData = `<li>${userValue}</li>`;
+            listData = `<li class="list-group-item">${userValue}</li>`;
         } else {
             listData = list.join('');
         }
