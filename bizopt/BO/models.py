@@ -3,7 +3,6 @@ from django.db import models
 from django.forms import ModelForm
 
 
-
 class Orders(models.Model):
     user = models.CharField(max_length=20, default='anonymous')
     description = models.CharField(max_length=500, default='-')

@@ -119,7 +119,7 @@ def becomeCreator_page(request):
             local_path_to_file = fs.save(os.path.join("images/creator", file.name), file)
             creator.cover = local_path_to_file
         creator.first_name = user.first_name
-        # TODO: creator.cover и creator.achievements - фантастические поля
+        # TODO: creator.achievements - странный предмет: вроде бы есть, а вроде и нет.
         creator.description = request.POST['profile_description']
         creator.email = user.email
         creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
@@ -190,9 +190,20 @@ def becomeCreator_page(request):
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu()
-    user = Account.objects.get(email=request.user.email)
-    content['first_name'] = user.first_name
-    content['email'] = user.email
+    # user = Account.objects.get(email=request.user.email)
+    # content['first_name'] = user.first_name
+    # content['email'] = user.email
+    # content['creator_avatar'] = user.userImage
+    try:
+        creator = Creator.objects.get(email=request.user.email)
+        content['first_name'] = creator.first_name
+        content['email'] = creator.email
+        content['creator_avatar'] = creator.cover
+    except:
+        user = Account.objects.get(email=request.user.email)
+        content['first_name'] = user.first_name
+        content['email'] = user.email
+        content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '2':
         products = Product.objects.all()
@@ -210,7 +221,6 @@ def tasks_page(request):
                               'description': task.description
                             } for task in tasks]
     return render(request, 'tasks.html', context)
-
 
 
 def employers_page(request):
@@ -233,11 +243,11 @@ def index_page(request):
 #     return render(request, 'cardProduct.html', context)
 
 
-def cardProduct_page(request):
+def cardProduct_page(request, product_id):  # TODO: product_id - заглушка. Мне нужен product_id с фронта при переходе с creators -> creators/cardProduct.
     context = gen_menu()
     try:
-        # # product = Task.objects.get(task_id=name)
-        # context['product'] = product
+        product = Task.objects.get(task_id=product_id)
+        context['product'] = product
         return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist:
         raise Http404
@@ -258,13 +268,16 @@ def cardTask_page(request):
 def edit_profile(request):
     context = gen_menu()
     try:
-        name = request.user
-        person = Account.objects.get(email=name)
+        email = request.user
+        person = Account.objects.get(email=email)
         if request.method == "POST":
             if request.FILES:
-                file = request.FILES['myfile']
+                file = request.FILES['profile_photo']
                 fs = FileSystemStorage()
-                fs.save(os.path.join("images/profile", file.name), file)
+                filename = "profile_" + str(person.username) + ".png"
+                path_to_local_image = os.path.join("images/profile", filename)
+                fs.save(path_to_local_image, file)
+                person.userImage = path_to_local_image
             person.first_name = request.POST.get("first_name")
             person.last_name = request.POST.get("last_name")
             person.phone = request.POST.get("phone")
