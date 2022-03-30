@@ -1,5 +1,4 @@
 {% extends "base.html" %} {% block content %}
-
 <!doctype html>
 <html>
 
@@ -12,7 +11,7 @@
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
         body {
-            background: rgb(99, 39, 120)
+            background: #343a40bf;
         }
         
         .form-control:focus {
@@ -63,68 +62,53 @@
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"> {# <img class="rounded-circle mt-5" width="150px"
-                        src="{ imgPath }">#}
-                    <span class="font-weight-bold"><!--{{user.first_name}} {{user.last_name}}--> {{user.username}}
-                    </span>
-                    <span class="text-black-50">{{user.email}}</span>
-                    <span> </span>
+                    <!-- <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">-->
+                    <img class="rounded-circle mt-5" width="150px" src="../../media/images/profile/userImg.jpg">
+                    <span class="font-weight-bold ">{{user.first_name}} {{user.last_name}}</span>
+                    <span>{{user.email}}</span>
+                    <span class="text-black-50 "> {{user.username}}</span>
                 </div>
             </div>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div id="main_change" class="col-md-8">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="text-right">Настройки профиля</h4>
+            <div id="main_change " class="col-md-8 ">
+                <form method="post " enctype="multipart/form-data ">
+                    {% csrf_token %}
+                    <div class="p-3 py-5 ">
+                        <div class="d-flex justify-content-between align-items-center mb-3 ">
+                            <h4 class="text-right ">Настройки профиля</h4>
                         </div>
-                        <div class="row mt-2">
-                            <div class="col-md-6">
-                                <label class="labels">Имя</label>
-                                <input type="text" name="first_name" class="form-control" id="first_name" placeholder="имя" value="{{user.first_name}}"></div>
-                            <div class="col-md-6">
-                                <label class="labels">Фамилия</label>
-                                <input type="text" name="last_name" class="form-control" id="last_name" value="{{user.last_name}}" placeholder="Фамилия"></div>
+                        <div class="row mt-2 ">
+                            <div class="col-md-6 ">
+                                <label class="labels ">Имя</label>
+                                <input type="text " name="first_name " class="form-control " id="first_name " placeholder="{{user.first_name}} "></div>
+                            <div class="col-md-6 ">
+                                <label class="labels ">Фамилия</label>
+                                <input type="text " name="last_name " class="form-control " id="last_name " placeholder="{{user.last_name}} "></div>
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-md-12">
-                                <label class="labels">Номер телефона</label>
-                                <input type="text" name="phone" class="form-control" id="phone" placeholder="Номер телефона" value="{{user.phone}}"></div>
-                            <div class="col-md-12">
-                                <label class="labels">Город</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="Город" value="{{user.city}}"></div>
-                            <div class="col-md-12">
-                                <label class="labels">Почта</label>
-                                <input type="text" class="form-control" id="email" placeholder="Почта" value="{{user.email}}"></div>
+                        <div class="row mt-3 ">
+                            <div class="col-md-12 ">
+                                <label class="labels ">Номер телефона</label>
+                                <input type="text " name="phone " class="form-control " id="phone " placeholder="{{user.phone}} "></div>
+                            <div class="col-md-12 ">
+                                <label class="labels ">Город</label>
+                                <input type="text " name="city " class="form-control " id="city " placeholder="{{user.city}} "></div>
+                            <div class="col-md-12 ">
+                                <label class="labels ">Почта</label>
+                                <input type="text " class="form-control " id="email " placeholder="{{user.email}} "></div>
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="coll-md-3">
-                                <label class="labels">Загрузить фото</label>
-                                <input id="fileupload" class="form-control" name="myfile" type="file" />
-                                <div class="mt-5 text-center">
-                                    <button class="btn btn-primary profile-button" type="submit">Сохранить</button>
+                        <div class="row mt-3 ">
+                            <div class="coll-md-3 ">
+                                <div class="input-group">
+                                    <input type="file" class="form-control" id="" aria-describedby="" aria-label="">
+                                </div>
+                                <div class="mt-5 text-center ">
+                                    <button class="btn btn-primary profile-button " type="submit ">Сохранить</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4" style="display: none;" id="creator">
-                    <div class="p-3 py-5">
-                        <div class="d-flex justify-content-between align-items-center experience">
-                            <span>Настройки создателя</span>
-                            <button class="btn btn-outline-success border rounded px-3 p-1" type="submit">
-                                Сохранить
-                            </button>
-                        </div>
-                        <br>
-                        <div class="col-md-12">
-                            <label class="labels">Сфера деятельности</label>
-                            <input type="text" class="form-control" placeholder="" value="">
-                        </div>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
     </div>
