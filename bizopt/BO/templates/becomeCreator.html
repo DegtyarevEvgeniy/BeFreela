@@ -87,6 +87,12 @@
                             </span>
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light sticky-top" id="menu">
+                           <li class="mb-2 mt-3 border-bottom">
+                                <a href="#" id="addBtn_5" onclick="Function()" class="nav-link px-0 align-middle">
+                                    <!-- <i class="fs-4 bi-people"></i>  -->
+                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Дашборд</span>
+                                </a>
+                            </li>
                             <li class="mb-2 mt-3 border-bottom">
                                 <a href="#" id="addBtn_1" onclick="Function()" class="nav-link px-0 align-middle">
                                     <!-- <i class="fs-4 bi-people"></i>  -->
@@ -124,7 +130,20 @@
     <script>
         $(function() {
             var xhr = new XMLHttpRequest()
-            xhr.open('GET', 'becomeCreatorTemplates/1/')
+            xhr.open('GET', 'becomeCreatorTemplates/5/')
+            xhr.onload = function() {
+
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
+        $('#addBtn_5').on('click', {
+            title: 'Заголовок 1',
+            content: 'Содержимое 1...'
+        }, function(inBody) {
+
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', 'becomeCreatorTemplates/5/')
             xhr.onload = function() {
 
                 $('#MainWindowContainer').html(xhr.response)
