@@ -276,6 +276,10 @@ def cardResume_page(request):
 
 def cardTask_page(request):
     context = gen_menu(request)
+    tasks = Task.objects.all()
+    context['task_cards'] = [{'name': task.name,
+                              'description': task.description
+                              } for task in tasks]
     return render(request, 'cardTask.html', context)
 
 
