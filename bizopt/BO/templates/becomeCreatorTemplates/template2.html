@@ -1,29 +1,89 @@
-
 <div class="row">
-  <div class="col-md-1">
-    <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
+  <div class="d-flex justify-content-center align-items-center mb-3 mt-5">
+    <h4 class="text-right">Профиль</h4>
+  </div>
+  <div class="col-md-3 border-right">
+    <div class="d-flex flex-column align-items-center text-center py-5">
+      <img class="rounded-circle mt-5" width="150px"
+{#        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"#}
+        src="{{ creator_avatar.url }}">
+      <span class="font-weight-bold">{{ first_name }}
+      </span>
+      <span class="text-black-50">{{ email }}</span>
+      <span> </span>
+    </div>
   </div>
 
-  <div id="main_change" class="col-md-10">
-    <form method="post" name="product_cards" enctype="multipart/form-data">
+  <div id="main_change" class="col-md-8 ml-3">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-
       <div class="p-3 py-5">
-        <div class="d-flex justify-content-center align-items-center mb-3">
-          <h4 class="text-right">Мои товары</h4>
+        <div class="row mt-3">
+          <div class="col-md-9">
+            <h1 class="labels">Изображения</h1>
+            <img class="rounded mt-5 border-right mr-2 ml-2 p-3" width="150px"
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <img class="rounded mt-5 border-right mr-2 ml-2 p-3" width="150px"
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <img class="rounded mt-5 border-right mr-2 ml-2 p-3" width="150px"
+              src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+          </div>
+        </div>
+        <br>
+
+        <div class="row mt-3 mb-3">
+          <div class="col-md-12">
+            <h1 class="labels">Расскажите о себе</h1>
+            <textarea name="profile_description" class="form-control"></textarea>
+          </div>
         </div>
 
-        {% comment %} ------ {% endcomment %}
         <div class="row mt-3">
-          <div class="col-md-6">
-            card1
-          </div>
-          <div class="col-md-6">
-            card2
+          <div class="input-group mb-7">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Вид деятельности</label>
+            </div>
+            <select name="profile_activity_type" class="custom-select" id="inputGroupSelect01">
+              <option value="1_Hand-made">Hand-made</option>
+              <option value="2_Hard-luxury" selected>Тяжелый люкс</option>
+              <option value="3_Garden-gifts">Дары огорода</option>
+            </select>
           </div>
         </div>
-        {% comment %} ------ {% endcomment %}
+
+        <div class="row mt-3 d-flex align-items-center">
+          <div class="col-md-6">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()" id="isCompanyTrigger">
+              <label class="form-check-label" for="isCompanyTrigger">Вы являетесь компанией?</label>
+            </div>
+          </div>
+          <div class="col-md-6" id="companyTriggerOn" style="display: none;">
+            <input type="text" name="profile_company_name" class="form-control" placeholder="Название компании" value="">
+          </div>
+        </div>
+
+        <div class="row mt-3 mb-3">
+          <div class="col-md-8">
+            <label class="labels">Загрузить фото</label>
+            <input id="fileupload" class="form-control" name="profile_images" type="file"/>
+          </div>
+        </div>
+
+        <div class="mt-5 text-center">
+          <button name="profile_saver" class="btn btn-primary profile-button" type="submit">Сохранить</button>
+        </div>
       </div>
     </form>
   </div>
+
 </div>
+<script>
+  function isCompany(){
+    if (document.getElementById('isCompanyTrigger').checked){
+      document.getElementById('companyTriggerOn').style.display = "flex";
+    } else{
+      document.getElementById('companyTriggerOn').style.display = "none";
+    }
+  }
+</script>
