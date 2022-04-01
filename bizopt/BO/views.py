@@ -31,7 +31,7 @@ def gen_menu(request):
                 {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'position': 'out', 'link': '', 'text': user.email},
                 {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
-                {'position': 'in', 'link': '', 'text': 'Заказы'},
+                {'position': 'in', 'link': '/orders/', 'text': 'Заказы'},
                 {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
                 {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
                 {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
@@ -49,7 +49,7 @@ def gen_menu(request):
                 {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'position': 'out', 'link': '', 'text': 'user.email'},
                 {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
-                {'position': 'in', 'link': '', 'text': 'Заказы'},
+                {'position': 'in', 'link': '/orders/', 'text': 'Заказы'},
                 {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
                 {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
                 {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
@@ -371,4 +371,11 @@ def forgot_password_page(request):
         'menu': gen_menu(request)
     }
     return render(request, 'forgotPassword.html', content)
+# Create your views here.
+
+def orders_page(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    return render(request, 'orders.html', content)
 # Create your views here.
