@@ -134,25 +134,31 @@ def becomeCreator_page(request):
     if request.method == 'POST' and "profile_saver" in request.POST:   # для редактирования профиля
         context['first_name'] = user.first_name
         context['email'] = user.email
-        creator = Creator()
-        if request.FILES:
-            file = request.FILES['profile_images']
-            # TODO: надо сделать сохранение нескольких фоток товара в базу
-            #  и multiple вернуть на фронт
-            fs = FileSystemStorage()
-            local_path_to_file = fs.save(os.path.join("images/creator", file.name), file)
-            creator.cover = local_path_to_file
-        creator.first_name = user.first_name
-        # TODO: creator.cover и creator.achievements - фантастические поля
-        creator.description = request.POST['profile_description']
-        creator.email = user.email
-        creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
-        if 'iscompany' in request.POST:
-            creator.is_company = True
-            creator.company_name = request.POST['profile_company_name']
+        the_same_creator_by_email = Creator.objects.filter(email=user.email)
+        if len(the_same_creator_by_email) != 0:
+            # TODO: вывести на экране где нибудь сообщение об ошибке, предложенное в данном context
+            context['error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
         else:
-            creator.company = False
-        creator.save()
+            creator = Creator()
+            if request.FILES:
+                file = request.FILES['profile_images']
+                # TODO: надо сделать сохранение нескольких фоток товара в базу
+                #  и multiple вернуть на фронт
+                fs = FileSystemStorage()
+                filename = "creator_" + str(user.email) + ".png"
+                local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
+                creator.cover = local_path_to_file
+            creator.first_name = user.first_name
+            # TODO: creator.cover и creator.achievements - фантастические поля
+            creator.description = request.POST['profile_description']
+            creator.email = user.email
+            creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
+            if 'iscompany' in request.POST:
+                creator.is_company = True
+                creator.company_name = request.POST['profile_company_name']
+            else:
+                creator.company = False
+            creator.save()
     if request.method == 'POST' and "product_creator" in request.POST:    # для создания собственного продукта
         print("PRODUCT_CREATOR")
         product = Product()
@@ -214,9 +220,16 @@ def becomeCreator_page(request):
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
-    user = Account.objects.get(email=request.user.email)
-    content['first_name'] = user.first_name
-    content['email'] = user.email
+    try:
+        creator = Creator.objects.get(email=request.user.email)
+        content['first_name'] = creator.first_name
+        content['email'] = creator.email
+        content['creator_avatar'] = creator.cover
+    except:
+        user = Account.objects.get(email=request.user.email)
+        content['first_name'] = user.first_name
+        content['email'] = user.email
+        content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '2':
         products = Product.objects.all()
@@ -286,13 +299,16 @@ def cardTask_page(request):
 def edit_profile(request):
     context = gen_menu(request)
     try:
-        name = request.user
-        person = Account.objects.get(email=name)
+        email = request.user
+        person = Account.objects.get(email=email)
         if request.method == "POST":
             if request.FILES:
-                file = request.FILES['myfile']
+                file = request.FILES['profile_photo']
                 fs = FileSystemStorage()
-                fs.save(os.path.join("images/profile", file.name), file)
+                filename = "profile_" + str(person.username) + ".png"
+                path_to_local_image = os.path.join("images/profile", filename)
+                fs.save(path_to_local_image, file)
+                person.userImage = path_to_local_image
             person.first_name = request.POST.get("first_name")
             person.last_name = request.POST.get("last_name")
             person.phone = request.POST.get("phone")
