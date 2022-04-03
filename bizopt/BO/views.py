@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
-from .forms import UserRegistrationForm, addTasks
+from .forms import *
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
 
@@ -231,12 +231,15 @@ def becomeCreatorTemplate_page(request, name):
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
-    if name == '2':
+    if name == '3':
         products = Product.objects.all()
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.cost
                                 }
                                for product in products]
+    if name == '2':
+        form = MyProfile(request.POST)
+        content['form1'] = form
     return render(request, path, content)
 
 
