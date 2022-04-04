@@ -12,6 +12,7 @@
                     <h4 class="text-right">Создать товар</h4>
                 </div>
                 <div class="row mt-4">
+                    <!-- start of bloc 1 -->
                     <div class="col-md-8">
                         <label>Название товара</label>
                         <div class="input-group mt-2 mb-2">
@@ -267,7 +268,6 @@
                               <option value="Zambia">Zambia</option>
                               <option value="Zimbabwe">Zimbabwe</option>
                           </select>
-                            <!-- <a class="btn btn-outline-secondary" type="button"><i class="fa fa-plus"></i></a> -->
                         </div>
                         <br>
                         <br>
@@ -279,31 +279,91 @@
                         <br>
                         <label>Комплект товара</label>
                         <div class="input-group mt-2 mb-2">
-                            <input type="text" class="form-control">
+                            <input type="text" id="inputvalue" class="form-control">
                             <button class="btn btn-outline-secondary" id="btnAdd" onclick="abbInput()" type="button"><i class="fa fa-plus"></i></button>
                             <br>
                         </div>
-
-
-
                         <!-- template start -->
-                        <div id="inputDiv">
-                        </div>
+                        <div id="inputDiv" class="col-md-12"></div>
+                        <br>
+                        <br>
                         <!-- template end -->
                     </div>
+                    <!-- end of bloc 1 -->
+
+                    <!-- sart of block 2 -->
+                    <div class="col-md-8">
+                        <table class="table table-hover border text-left  ">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Премет</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Бренд</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Код</th>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <label>Цена</label>
+                        <div class=" input-group mb-3 ">
+                            <input type="text " class="form-control ">
+                            <span class="input-group-text ">.00</span>
+                        </div>
+                    </div>
+                    <!-- end of block 2 -->
+
+                    <!-- sart of block 3 -->
+                    <div class="col-md-8">
+                        <label>Ключевые слова</label>
+                        <div class="input-group mt-2 mb-2">
+                            <input type="text" id="keyValue" class="form-control">
+                            <button class="btn btn-outline-secondary" id="btnAddkey" onclick="addKey()" type="button"><i class="fa fa-plus"></i></button>
+                            <br>
+                        </div>
+                        <div id="keyDiv">
+                        </div>
+                    </div>
+                    <!-- end of block 3 -->
                 </div>
             </div>
         </form>
     </div>
     <script>
+        var inputnum = 0,
+            keynum = 0;
+
         function abbInput() {
-            var $inputGroup = '<div class="input-group mt-2 mb-2" id="added"> <button class="btn btn-outline-secondary" id="btnRm" onclick="removeInput(this)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control"> </div>';
-            document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+            inputnum++;
+            if (inputnum < 15) {
+                var $inputGroup = `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" disabled  value="${document.getElementById('inputvalue').value}"> <button class="btn btn-outline-secondary" type="button" onclick="editInput(this, true)"><i class="fa fa-pen"></i></button> </div>`;
+                document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+            }
         }
 
         function removeInput(el) {
-            var element = el.parentElement;
-            element.remove();
+            el.parentElement.remove()
         }
+
+        function editInput(el, cond) {
+            let input = el.parentElement;
+            console.log(input.getElementsByClassName("form-control");
+            }
+
+            function addKey() {
+                keynum++;
+                if (keynum < 15) {
+                    var $inputGroup = `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" disabled value="${document.getElementById('keyValue').value}"> </div>`;
+                    document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+                }
+            }
     </script>
 </div>
