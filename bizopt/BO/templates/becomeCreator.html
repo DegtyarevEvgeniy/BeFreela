@@ -77,58 +77,91 @@
 </head>
 
 <body oncontextmenu='return false' class='snippet-body'>
-    <div class="d-flex" id="wrapper">
-        <div class="bg-dark" id="sidebar-wrapper">
-            <div class="row flex-nowrap">
-                <div class="col-auto col-md-3 col-xl-2 xol-sm-2 bg-dark">
-                    <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <a class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none" href="#">
-                            <span class="fs-5 d-none d-sm-inline" style="font-size: large;">
-                                BIZOPT Partners
-                            </span>
-                        </a>
-                        
-                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start hover-text-light sticky-top" id="menu">
-                          
-                           <li class="mb-2 mt-3 border-bottom Btn">
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Дашборд</span>
-                                </a>
-                            </li>
-                            
-                            <li class="mb-2 mt-3 border-bottom Btn">
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мой профиль</span>
-                                </a>
-                            </li>
-                            
-                            <li class="mb-2 mt-3 border-bottom Btn">
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Мои товары</span>
-                                </a>
-                            </li>
-                            
-                            <li class="mb-2 mt-3 border-bottom Btn">
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Создать товар</span>
-                                </a>
-                            </li>
-                            <li class="mb-2 mt-3 border-bottom Btn">
-                                <a href="#" class="nav-link px-0 align-middle">
-                                    <span class="ms-1 d-none d-sm-inline text-white" style="font-size: large;">Регламент</span>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="MainWindowContainer" class="container rounded bg-white mt-5 mb-5" style="display: inline-block!important;" w3-inslude-html="template.html">
+
+       
+              <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h3>BIZOPT Partners</h3>
+      </div>
+
+      <ul class="list-unstyled components">
+      
+         
+        <li>
+          <a href="#">Главная</a>
+        </li>
+        
+       
+        <li class="active">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Мой профиль</a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li>
+              <a href="#">Данные продавца</a>
+            </li>
+            <li>
+              <a href="#">Пользователи</a>
+            </li>
+            <li>
+              <a href="#">Мои данные</a>
+            </li>
+          </ul>
+        </li>
+     
+        
+        <li>
+          <a href="#">Мои товары</a>
+        </li>
+        
+        <li>
+          <a href="#">Резюме</a>
+        </li>
+        
+      </ul>
+
+      <ul class="list-unstyled CTAs">
+       
+        <li>
+          <a href="/" class="article">Обратно на главую</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+     
+
+       <div id="MainWindowContainer" class="container rounded bg-white " style="display: inline-block!important;" w3-inslude-html="template.html">
 
         </div>
     </div>
+  </div>
+
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- Popper.JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+      });
+    });
+  </script>       
+       
+        
+        
+       
+
+        
+    
+    
+    
     <script>
         $(function() {
             var xhr = new XMLHttpRequest()
@@ -151,4 +184,164 @@
         
 
     </script>
+    
+    
+    <style>
+
+
+p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+
+
+.text-sidebar {
+  color: $text-sidebar;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #2B393B;
+    color: #BFE3F7;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background:$lila-60 /*#6d7fcc*/;
+}
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid $lila-line;
+}
+
+#sidebar ul p {
+    color: $text-sidebar;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+}
+
+#sidebar ul li a:hover {
+    color: $lila;
+    background: $text-sidebar-hover;
+}
+
+#sidebar ul li.active>a, a[aria-expanded="true"] {
+    color: $text-sidebar;
+    background: $lila-60;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: $lila-60;
+}
+
+ul.CTAs {
+    padding: 20px;
+}
+
+ul.CTAs a {
+    text-align: center;
+    font-size: 0.9em !important;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+a.download {
+    background: $text-sidebar;
+    color: $lila;
+}
+
+a.article,
+a.article:hover {
+    background: $lila-60 !important;
+    color: $text-sidebar !important;
+}
+
+
+#content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+    
+    </style>
 </body>
