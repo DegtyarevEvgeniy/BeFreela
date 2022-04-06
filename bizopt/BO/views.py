@@ -403,7 +403,7 @@ def forgot_password_page(request):
     return render(request, 'forgotPassword.html', content)
 
 
-# Create your views here.
+
 
 def orders_page(request):
     content = {
@@ -417,4 +417,4 @@ def orders_page(request):
     } for task in tasks]
 
     return render(request, 'orders.html', content)
-# Create your views here.
+
