@@ -2,16 +2,6 @@ import uuid
 from django.db import models
 from django.forms import ModelForm
 
-
-class Orders(models.Model):
-    user = models.CharField(max_length=20, default='anonymous')
-    description = models.CharField(max_length=500, default='-')
-    type = models.CharField(max_length=20, default='-')
-    delivery = models.CharField(max_length=20, default='-')
-    price = models.IntegerField(default='')
-    time = models.CharField(max_length=100, default='-')
-
-
 class Creator(models.Model):
     first_name = models.CharField(max_length=30, default='')
     email = models.CharField(max_length=20, default='example@example.com')
@@ -24,6 +14,7 @@ class Creator(models.Model):
 
 
 class Product(models.Model):
+
     product_name = models.CharField(max_length=500, default='-')
     cost = models.IntegerField(default=0)
     availability = models.CharField(max_length=100, default='-')
@@ -33,6 +24,7 @@ class Product(models.Model):
 
 
 class Task(models.Model):
+
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=50, default='anonymous')
     select = models.CharField(max_length=50, default='')

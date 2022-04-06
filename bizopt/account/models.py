@@ -1,29 +1,30 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password= None, first_name=None, last_name=None, phone='89001234567', city=''):
+    def create_user(self, email, username, password= None, first_name=None, last_name=None, phone=None, city=''):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
             first_name=first_name,
             last_name=last_name,
-            phone=phone,
+            phone=phonenumbers.parse(phone, "RU"),
             city=city
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password, first_name, last_name, phone='89001234567', city=''):
+    def create_superuser(self, email, username, password, first_name, last_name, phone, city=''):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
             username=username,
             first_name=first_name,
             last_name=last_name,
-            phone=phone,
+            phone=phonenumbers.parse(phone, "RU"),
             city=city
         )
         user.is_admin = True
@@ -38,7 +39,7 @@ class Account(AbstractBaseUser):
     email = models.EmailField(default='', unique=True)
     first_name = models.CharField(max_length=20, default='')
     last_name = models.CharField(max_length=30, default='')
-    phone = models.IntegerField(default='')
+    phone = PhoneNumberField()
     city = models.CharField(max_length=30, default='')
     userImage = models.ImageField(upload_to='images/', default='images/default.png')
     is_admin = models.BooleanField(default=False)
@@ -47,7 +48,7 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'phone']
 
     objects = MyAccountManager()
 

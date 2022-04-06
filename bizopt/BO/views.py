@@ -9,11 +9,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
-from .forms import UserRegistrationForm, addTasks
+from .forms import addTasks
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
-
+from phonenumber_field.modelfields import PhoneNumberField
 from account.models import Account
+import phonenumbers
 
 
 def gen_menu():
@@ -280,7 +281,10 @@ def edit_profile(request):
                 person.userImage = path_to_local_image
             person.first_name = request.POST.get("first_name")
             person.last_name = request.POST.get("last_name")
-            person.phone = request.POST.get("phone")
+            try:
+                person.phone = phonenumbers.parse(request.POST.get("phone"), "RU")
+            except:
+                pass
             person.city = request.POST.get("city")
             person.save()
             return HttpResponseRedirect("/")
