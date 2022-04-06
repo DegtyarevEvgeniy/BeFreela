@@ -11,6 +11,13 @@ class ProductCreationForm(forms.Form):
     picture = forms.ImageField()
 
 
+class MyProfile(forms.Form):
+    select = forms.ModelChoiceField(
+        queryset=Tag.objects.values_list("tag_name", flat=True).distinct(),
+        empty_label=None
+    )
+
+
 class addTasks(forms.Form):
     task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={'placeholder': 'Название'}))
     select = forms.ModelChoiceField(

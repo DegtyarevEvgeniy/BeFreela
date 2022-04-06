@@ -1,53 +1,182 @@
-{#<form method="POST">#}
+<div class="d-flex flex-row">
+    <h1 style="margin: auto">Мои товары</h1>
 
-<div class="row">
-  <div class="col-md-1">
-    <div class="d-flex flex-column align-items-center text-center p-3 py-5"></div>
-  </div>
-  <div id="main_change" class="col-md-10">
-    <div class="p-3 py-5">
-      <div class="d-flex justify-content-center align-items-center mb-3">
-        <h4 class="text-right">Создать товар</h4>
-      </div>
-
-      <div class="row mt-2">
-        <div class="col-md-12 justify-content-center">
-          <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="col-md-6">
-                <label class="labels">Название</label>
-                <input type="text" name="product_name" class="form-control" placeholder="Название товара" value="">
+    <a class="btn btn-primary Btnn" role="button" style="margin: auto">Создать товар</a>
+</div>
+<div class="card">
+    <div class="card-body">
+        <!-- Grid row -->
+        <div class="row">
+            <!-- Grid column -->
+            <div class="col-md-12">
+                <h2 class="py-3 text-center font-bold font-up blue-text">Мои товары</h2>
             </div>
-            <label class="labels">Загрузить фото</label>
-            <input id="fileupload" class="form-control"
-                   name="product_photos" type="file" />
-            <div class="row mt-3">
-                <div class="col-md-9">
-                    <label class="labels">Описание товара</label>
-                    <textarea name="product_description" class="form-control"></textarea>
-                </div>
-            </div>
-            <br>
-            <div class="row mt-4">
-                <div class="col-md-4">
-                    <label class="labels">Цена</label>
-                    <div class="input-group mb-4">
-                        <input type="number" name="product_cost" class="form-control" style="text-align: right;" multiple>
-                        <span class="input-group-text">.00 ₽</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-5 text-center">
-                <button name="product_creator" class="btn btn-primary profile-button" type="submit">Создать</button>
-            </div>
-          </form>
+            <!-- Grid column -->
         </div>
-      </div>
+        <!-- Grid row -->
+        <!--Table-->
+        <table class="table table-hover table-responsive mb-0">
+            <!--Table head-->
+            <thead>
+                <tr>
+                    <th scope="row">#</th>
+                    <th class="th-lg"><a>First Name</a></th>
+                    <th class="th-lg"><a href="">Last Name</a></th>
+                    <th class="th-lg"><a href="">Username</a></th>
+                    <th class="th-lg"><a href="">Username</a></th>
+                    <th class="th-lg"><a href="">Username</a></th>
+                    <th class="th-lg"><a href="">Username</a></th>
+                </tr>
+            </thead>
+            <!--Table head-->
+            <!--Table body-->
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Paul</td>
+                    <td>Topolski</td>
+                    <td>@P_Topolski</td>
+                    <td>Paul</td>
+                    <td>Topolski</td>
+                    <td>@P_Topolski</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                </tr>
 
 
-      </div>
+            </tbody>
+            <!--Table body-->
+        </table>
+        <!--Bottom Table UI-->
+        <div class="d-flex justify-content-center">
+            <!--Pagination -->
+            <nav class="my-4 pt-2">
+                <ul class="pagination pagination-circle pg-blue mb-0">
+                    <!--First-->
+                    <li class="page-item disabled clearfix d-none d-md-block"><a class="page-link">First</a></li>
+                    <!--Arrow left-->
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <!--Numbers-->
+                    <li class="page-item active"><a class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link">2</a></li>
+                    <li class="page-item"><a class="page-link">3</a></li>
+                    <li class="page-item"><a class="page-link">4</a></li>
+                    <li class="page-item"><a class="page-link">5</a></li>
+                    <!--Arrow right-->
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    <!--First-->
+                    <li class="page-item clearfix d-none d-md-block"><a class="page-link">Last</a></li>
+                </ul>
+            </nav>
+            <!--/Pagination -->
+        </div>
+        <!--Bottom Table UI-->
     </div>
-  </div>
+</div>
 
-{#</form>#}
+
+
+<style>
+    .hm-gradient {
+        background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+    }
+
+    .darken-grey-text {
+        color: #2E2E2E;
+    }
+
+    .input-group.md-form.form-sm.form-2 input {
+        border: 1px solid #bdbdbd;
+        border-top-left-radius: 0.25rem;
+        border-bottom-left-radius: 0.25rem;
+    }
+
+    .input-group.md-form.form-sm.form-2 input.purple-border {
+        border: 1px solid #9e9e9e;
+    }
+
+    .input-group.md-form.form-sm.form-2 input[type=text]:focus:not([readonly]).purple-border {
+        border: 1px solid #ba68c8;
+        box-shadow: none;
+    }
+
+    .form-2 .input-group-addon {
+        border: 1px solid #ba68c8;
+    }
+
+    .danger-text {
+        color: #ff3547;
+    }
+
+    .success-text {
+        color: #00C851;
+    }
+
+    .table-bordered.red-border,
+    .table-bordered.red-border th,
+    .table-bordered.red-border td {
+        border: 1px solid #ff3547 !important;
+    }
+
+    .table.table-bordered th {
+        text-align: center;
+    }
+
+</style>
+
+<script>
+    $('.Btnn').on('click', {}, function(inBody) {
+        var xhr = new XMLHttpRequest()
+        var index = $(this).index() + 1
+        xhr.open('GET', `becomeCreatorTemplates/8/`)
+        xhr.onload = function() {
+            $('#MainWindowContainer').html(xhr.response)
+        }
+        xhr.send()
+    });
+
+</script>

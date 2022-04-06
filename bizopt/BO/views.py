@@ -9,7 +9,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, Http404
-from .forms import addTasks
+from .forms import *
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
@@ -17,23 +17,46 @@ from account.models import Account
 import phonenumbers
 
 
-def gen_menu():
-    context = {
-        'menu': [
-            {'position': 'out', 'link': '/', 'text': 'Главная'},
-            {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
-            # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
-            # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
-            {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-            {'position': 'out', 'link': '', 'text': 'Профиль'},
-            {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
-            {'position': 'in', 'link': '', 'text': 'Заказы'},
-            {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-            {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
-            {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
+def gen_menu(request):
+    if request.user.is_authenticated:
+        user = Account.objects.get(email=request.user.email)
 
-        ]
-    }
+        context = {
+            'user': Account.objects.get(email=request.user.email),
+            'menu': [
+                {'position': 'out', 'link': '/', 'text': 'Главная'},
+                {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
+                # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
+                # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
+                {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+                {'position': 'out', 'link': '', 'text': user.email},
+                {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
+                {'position': 'in', 'link': '/orders/', 'text': 'Заказы'},
+                {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
+                {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
+                {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
+
+            ]
+        }
+    else:
+        context = {
+
+            'menu': [
+                {'position': 'out', 'link': '/', 'text': 'Главная'},
+                {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
+                # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
+                # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
+                {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+                {'position': 'out', 'link': '', 'text': 'user.email'},
+                {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
+                {'position': 'in', 'link': '/orders/', 'text': 'Заказы'},
+                {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
+                {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
+                {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
+
+            ]
+        }
+
     return context
 
 
@@ -52,7 +75,7 @@ def gen_menu():
 
 
 def creators_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     return render(request, 'creators.html', context)
 
 
@@ -60,8 +83,9 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
 
+
 def baseResumeCard_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     creators = Creator.objects.all()
     context['creators'] = [{'first_name': creator.first_name,
                             'activity_type': creator.activity_type,
@@ -71,14 +95,17 @@ def baseResumeCard_page(request):
 
     return render(request, 'baseResumeCard.html', context)
 
+
 def yourTasks_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     return render(request, 'yourTasks.html', context)
 
+
 def baseProductCard_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     products = Product.objects.all()
-    context['products'] = [{'product_name': product.product_name,
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
                             'cost': product.cost,
                             'availability': product.availability,
                             'picture': product.picture
@@ -88,7 +115,7 @@ def baseProductCard_page(request):
 
 
 def addTask_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     if request.method == 'POST':
         form = addTasks(request.POST)
         task = Task()
@@ -106,31 +133,37 @@ def addTask_page(request):
 
 
 def becomeCreator_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     user = Account.objects.get(email=request.user)
-    if request.method == 'POST' and "profile_saver" in request.POST:   # для редактирования профиля
+    if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
         context['first_name'] = user.first_name
         context['email'] = user.email
-        creator = Creator()
-        if request.FILES:
-            file = request.FILES['profile_images']
-            # TODO: надо сделать сохранение нескольких фоток товара в базу
-            #  и multiple вернуть на фронт
-            fs = FileSystemStorage()
-            local_path_to_file = fs.save(os.path.join("images/creator", file.name), file)
-            creator.cover = local_path_to_file
-        creator.first_name = user.first_name
-        # TODO: creator.achievements - странный предмет: вроде бы есть, а вроде и нет.
-        creator.description = request.POST['profile_description']
-        creator.email = user.email
-        creator.activity_type = request.POST['profile_activity_type'].split("_")[1]
-        if 'iscompany' in request.POST:
-            creator.is_company = True
-            creator.company_name = request.POST['profile_company_name']
+        the_same_creator_by_email = Creator.objects.filter(email=user.email)
+        if len(the_same_creator_by_email) != 0:
+            # TODO: вывести на экране где нибудь сообщение об ошибке, предложенное в данном context
+            context[
+                'error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
         else:
-            creator.company = False
-        creator.save()
-    if request.method == 'POST' and "product_creator" in request.POST:    # для создания собственного продукта
+            creator = Creator()
+            if request.FILES:
+                file = request.FILES['profile_images']
+                # TODO: надо сделать сохранение нескольких фоток товара в базу
+                #  и multiple вернуть на фронт
+                fs = FileSystemStorage()
+                filename = "creator_" + str(user.email) + ".png"
+                local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
+                creator.cover = local_path_to_file
+            creator.first_name = user.first_name
+            # TODO: creator.cover и creator.achievements - фантастические поля
+            creator.description = request.POST['profile_description']
+            creator.email = user.email
+            if 'iscompany' in request.POST:
+                creator.is_company = True
+                creator.company_name = request.POST['profile_company_name']
+            else:
+                creator.company = False
+            creator.save()
+    if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
         product = Product()
         if request.FILES:
@@ -149,6 +182,7 @@ def becomeCreator_page(request):
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
     return render(request, 'becomeCreator.html', context)
+
 
 #
 # def edit_profile_page(request):
@@ -190,11 +224,7 @@ def becomeCreator_page(request):
 
 
 def becomeCreatorTemplate_page(request, name):
-    content = gen_menu()
-    # user = Account.objects.get(email=request.user.email)
-    # content['first_name'] = user.first_name
-    # content['email'] = user.email
-    # content['creator_avatar'] = user.userImage
+    content = gen_menu(request)
     try:
         creator = Creator.objects.get(email=request.user.email)
         content['first_name'] = creator.first_name
@@ -206,31 +236,34 @@ def becomeCreatorTemplate_page(request, name):
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
-    if name == '2':
+    if name == '3':
         products = Product.objects.all()
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.cost
                                 }
                                for product in products]
+    if name == '2':
+        form = MyProfile(request.POST)
+        content['form1'] = form
     return render(request, path, content)
 
 
 def tasks_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     tasks = Task.objects.all()
     context['task_cards'] = [{'name': task.name,
                               'description': task.description
-                            } for task in tasks]
+                              } for task in tasks]
     return render(request, 'tasks.html', context)
 
 
 def employers_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     return render(request, 'employers.html', context)
 
 
 def index_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
     return render(request, 'index.html', context)
 
 
@@ -244,30 +277,40 @@ def index_page(request):
 #     return render(request, 'cardProduct.html', context)
 
 
-def cardProduct_page(request, product_id):  # TODO: product_id - заглушка. Мне нужен product_id с фронта при переходе с creators -> creators/cardProduct.
-    context = gen_menu()
+def cardProduct_page(request, product_id):
+    context = gen_menu(request)
     try:
-        product = Task.objects.get(task_id=product_id)
-        context['product'] = product
+        product = Product.objects.get(id=product_id)
+        context['product'] = {'product_name': product.product_name,
+                              'cost': product.cost,
+                              'availability': product.availability,
+                              'picture': product.picture,
+                              'description': product.description
+                              }
+
         return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist:
         raise Http404
 
+
 def cardResume_page(request):
-    context = gen_menu()
-    # print(Creator.objects.all()
+    context = gen_menu(request)
     profile = Creator.objects.get(email=request.user)
     context['profile'] = profile
     return render(request, 'cardResume.html', context)
 
 
 def cardTask_page(request):
-    context = gen_menu()
+    context = gen_menu(request)
+    task = Task.objects.get(id=1)
+    context['task'] = {'name': task.name,
+                       'description': task.description
+                      }
     return render(request, 'cardTask.html', context)
 
 
 def edit_profile(request):
-    context = gen_menu()
+    context = gen_menu(request)
     try:
         email = request.user
         person = Account.objects.get(email=email)
@@ -295,6 +338,7 @@ def edit_profile(request):
     except Account.DoesNotExist:
         raise Http404
 
+
 #
 # def register(request):
 #     context = gen_menu()
@@ -319,7 +363,7 @@ def edit_profile(request):
 
 
 def profile(request, name):
-    context = gen_menu()
+    context = gen_menu(request)
     try:
         pers_data = Account.objects.get(username=name)
         pers_data.save()
@@ -343,21 +387,38 @@ def profile(request, name):
 
 def edit(request):
     content = {
-        'menu': gen_menu()
+        'menu': gen_menu(request)
     }
     return render(request, 'edit.html', content)
 
 
 def login_page(request):
     content = {
-        'menu': gen_menu()
+        'menu': gen_menu(request)
     }
+
     return render(request, 'login.html', content)
 
 
 def forgot_password_page(request):
     content = {
-        'menu': gen_menu()
+        'menu': gen_menu(request)
     }
     return render(request, 'forgotPassword.html', content)
-# Create your views here.
+
+
+
+
+def orders_page(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    tasks = Task.objects.all()
+    content['tasks'] = [{
+        'name': task.name,
+        'price': task.price,
+        'description': task.description
+    } for task in tasks]
+
+    return render(request, 'orders.html', content)
+
