@@ -2,131 +2,39 @@
 
 {% block content %}
 
-<div class="imageCover"></div>
-<header class="profile-info">
-  <div class="avatar">
-    <img src="https://images.unsplash.com/photo-1485178575877-1a13bf489dfe?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=991&q=80">
-  </div>
-  <div class="info-container">
-   <h1>О себе</h1>
-    <h2>{{profile.first_name}}</h2>
-    <p><b>Компания</b> {{profile.company_name}}</p>
-    <p><b>Вид(ы) деятельности</b> {{profile.activity_type}}</p>
-    <h3>{{profile.description}}</h3>
-  </div>
-</header>
-<div class="grid">
-  <div class="block"></div>
-  <div class="block"></div>
-  <div class="block"></div>
-  <div class="block"></div>
-  <div class="block"></div>
-  <div class="block"></div>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+
+    <div class="d-flex flex-row " style="width: 80%; margin: auto">
+        <img class="rounded-circle mt-5" width="300px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+
+
+
+        <div style="">
+
+            <h1>Имя</h1>
+
+            <p>Вид деятельности</p>
+
+            <p>отзывы (рейтинг)</p>
+
+            <p>О себе</p>
+
+            <p>Компания</p>
+
+        </div>
+
+    </div>
+
+
 </div>
-<footer>hello :)</footer>
-    
+
 <style>
-
-body {
-  margin: 0 auto;
-  background: #ececec;
-  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width: 80vw;
-}
-
-.imageCover {
-  top: 0;
-  left: 0;
-  position: absolute;
-  width: 100%;
-  height: 330px;
-  background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-   background-position: 0 -500px;
-  background-repeat: no-repeat;
-   background-attachment: fixed;
-  background-size: cover;
-  z-index: -1;
-}
-
-.profile-info {
-  margin: auto;
-  margin-top: 270px;
-  margin-bottom: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  width: 80%;
-  min-height: 220px;
-  background: #fff;
-  border-radius: 13px;
-  padding: 0 2rem;
-  box-shadow: 0px 0px 15px -10px #000;
-}
-
-.profile-info .avatar {
-  position: relative;
-  top: -50px;
-  border-radius: 5px;
-  padding: 3px;
-  background: #fff;
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 200px;
-  max-height: 200px;
-  width: 10vw;
-}
-
-.profile-info .avatar img{
-  border-radius: 5px;
-  min-width: 100px;
-  min-height: 100px;
-  max-width: 200px;
-  max-height: 200px;
-  width: 10vw;
-  height: 10vw;
-  object-fit: cover;
-}
-
-.profile-info .info-container {
-  margin: 0 25px;
-  width: 60%;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.profile-info .info-container > h1 {
-  margin-right: 30px;
-}
-
-.profile-info .info-container > p {
-  font-weight: 300;
-  margin-right: 10px;
-}
-
-.profile-info .info-container > h3 {
-  font-weight: 300;
-}
-
-.grid {
-  margin: 0 auto;
-  width: 80%;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 40px 16px;
-}
-
-.block {
-  box-shadow: 0px 0px 15px -15px #000;
-  border-radius: 10px;
-  width: 100%;
-  height: 300px;
-  background: #fff;
-}
-
-footer {
-  margin: 5rem auto;
-  text-align: center;
-}
+    .contantM {
+        width: 100%;
+        height: 40%;
+        padding: 10px;
+    }
 
 </style>
+
 {% endblock %}
