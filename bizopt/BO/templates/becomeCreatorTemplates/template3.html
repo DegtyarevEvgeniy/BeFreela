@@ -24,62 +24,64 @@
                     <th class="th-lg"><a href="">Last Name</a></th>
                     <th class="th-lg"><a href="">Username</a></th>
                     <th class="th-lg"><a href="">Username</a></th>
-                    <th class="th-lg"><a href="">Username</a></th>
-                    <th class="th-lg"><a href="">Username</a></th>
+                    <th class="th-lg"><a href="">Название товара</a></th>
+                    <th class="th-lg"><a href="">Цена</a></th>
                 </tr>
             </thead>
+
             <!--Table head-->
             <!--Table body-->
             <tbody>
+            {% for product in products %}
                 <tr>
                     <th scope="row">1</th>
                     <td>Mark</td>
                     <td>Otto</td>
                     <td>@mdo</td>
                     <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>{{ product.product_name }}</td>
+                    <td>{{ product.cost }}</td>
                 </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Paul</td>
-                    <td>Topolski</td>
-                    <td>@P_Topolski</td>
-                    <td>Paul</td>
-                    <td>Topolski</td>
-                    <td>@P_Topolski</td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-
-
+{#                <tr>#}
+{#                    <th scope="row">2</th>#}
+{#                    <td>Jacob</td>#}
+{#                    <td>Thornton</td>#}
+{#                    <td>@fat</td>#}
+{#                    <td>Jacob</td>#}
+{#                    <td>Thornton</td>#}
+{#                    <td>@fat</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <th scope="row">3</th>#}
+{#                    <td>Larry</td>#}
+{#                    <td>the Bird</td>#}
+{#                    <td>@twitter</td>#}
+{#                    <td>Larry</td>#}
+{#                    <td>the Bird</td>#}
+{#                    <td>@twitter</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <th scope="row">4</th>#}
+{#                    <td>Paul</td>#}
+{#                    <td>Topolski</td>#}
+{#                    <td>@P_Topolski</td>#}
+{#                    <td>Paul</td>#}
+{#                    <td>Topolski</td>#}
+{#                    <td>@P_Topolski</td>#}
+{#                </tr>#}
+{#                <tr>#}
+{#                    <th scope="row">5</th>#}
+{#                    <td>Larry</td>#}
+{#                    <td>the Bird</td>#}
+{#                    <td>@twitter</td>#}
+{#                    <td>Larry</td>#}
+{#                    <td>the Bird</td>#}
+{#                    <td>@twitter</td>#}
+{#                </tr>#}
+            {% endfor %}
             </tbody>
             <!--Table body-->
+
         </table>
         <!--Bottom Table UI-->
         <div class="d-flex justify-content-center">
