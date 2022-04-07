@@ -324,10 +324,8 @@ def edit_profile(request):
                 person.userImage = path_to_local_image
             person.first_name = request.POST.get("first_name")
             person.last_name = request.POST.get("last_name")
-            try:
-                person.phone = phonenumbers.parse(request.POST.get("phone"), "RU")
-            except:
-                pass
+            person.phone = request.POST.get("phone")
+
             person.city = request.POST.get("city")
             person.save()
             return HttpResponseRedirect("/")
