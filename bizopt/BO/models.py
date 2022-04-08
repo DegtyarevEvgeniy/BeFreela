@@ -14,7 +14,10 @@ class Creator(models.Model):
 
 
 class Product(models.Model):
-
+    id_creator = models.CharField(max_length=200, default='-') #кто создал
+    id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
+    status1 = models.CharField(max_length=20, default='-') #запрос в работе
+    status2 = models.CharField(max_length=20, default='-') #в ожидании в работе готово
     product_name = models.CharField(max_length=500, default='-')
     cost = models.IntegerField(default=0)
     availability = models.CharField(max_length=100, default='-')
@@ -24,7 +27,9 @@ class Product(models.Model):
 
 
 class Task(models.Model):
-
+    id_creator = models.CharField(max_length=200, default='-') #кто создал
+    status1 = models.CharField(max_length=20, default='-')
+    id_user_do = models.CharField(max_length=20, default='-') #кто делает
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=50, default='anonymous')
     select = models.CharField(max_length=50, default='')
