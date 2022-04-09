@@ -1,6 +1,6 @@
 import os
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .utils import *
 from .forms import *
 from django.views.generic import CreateView
@@ -240,7 +240,7 @@ def becomeCreatorTemplate_page(request, name):
     if name == '3':
         products = Product.objects.all()
         content['products'] = [{'product_name': product.product_name,
-                                'cost': product.cost
+                                'cost': product.price
                                 }
                                for product in products]
     if name == '2':
@@ -248,8 +248,21 @@ def becomeCreatorTemplate_page(request, name):
         content['form1'] = form
 
     if name == '8':
-        form = ProductCreateForm()
-        content['form8'] = form
+        error = ''
+
+        if request.method == 'POST':
+            form = ProductCreateForm(request.POST)
+            if form.is_valid():
+                product = Product()
+                product.product_name = request.POST['product_name']
+                product.save()
+                return redirect('becomeCreator/')
+            else:
+                error = form.errors
+        else:
+            form = ProductCreateForm()
+            content['form8'] = form
+
     return render(request, path, content)
 
 

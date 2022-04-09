@@ -379,8 +379,16 @@
                     </div>
                 </div>
             </div>
+             {% csrf_token %}
+
+            <span>{{error}}</span>
+
+            <button type="submit">
+                        <i class="fa fa-angle-double-right">Сохранить</i>
+            </button>
+
             <!-- end of block 3 -->
-            {% csrf_token %}
+
             <div style="overflow:auto;" id="next-previous">
                 <div style="float:right;">
                     <button type="button" id="prevBtn" style="display: none;" onclick="nextPrev(-1)">

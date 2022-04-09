@@ -15,8 +15,8 @@ COUNTRY_CHOICE = [
 class ProductCreateForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['product_name', 'country', 'brand',  'description',  'width_product', 'height_product', 'length_product', 'width_packaging', 'height_packaging', 'length_packaging', 'price']
-
+        # fields = '__all__'['product_name', 'country', 'brand',  'description',  'width_product', 'height_product', 'length_product', 'width_packaging', 'height_packaging', 'length_packaging', 'price']
+        fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={
                 'class': 'form-control',
