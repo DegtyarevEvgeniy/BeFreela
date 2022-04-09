@@ -1,14 +1,67 @@
 from django import forms
 from django.forms import ModelChoiceField
+
+from django.forms import ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
 
 
-class ProductCreationForm(forms.Form):
-    product_name = forms.CharField(required=True)
-    cost = forms.CharField(required=True)
-    availability = forms.ChoiceField()
-    description = forms.CharField()
-    picture = forms.ImageField()
+COUNTRY_CHOICE = [
+    ('Afghanistan', 'Afghanistan'),
+    ('Aland Islands', 'Åland Islands'),
+    ('Albania', 'Albania'),
+    ('Algeria', 'Algeria'),
+]
+
+class ProductCreateForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['product_name', 'country', 'brand',  'description',  'width_product', 'height_product', 'length_product', 'width_packaging', 'height_packaging', 'length_packaging', 'price']
+
+        widgets = {
+            'product_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': "name",
+            }),
+            'price': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'country': Select(attrs={
+                'class': 'input-group mt-2 mb-2',
+            }, choices=COUNTRY_CHOICE),
+
+            'brand': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'description': Textarea(attrs={
+                'class': 'form-control',
+            }),
+            'width_product': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'height_product': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'length_product': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'width_packaging': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'height_packaging': TextInput(attrs={
+                'class': 'form-control',
+            }),
+            'length_packaging': TextInput(attrs={
+                'class': 'form-control',
+            }),
+
+        }
+
+    # product_name = forms.CharField(required=True)
+    # cost = forms.CharField(required=True)
+    # availability = forms.ChoiceField()
+    # description = forms.CharField()
+    # picture = forms.ImageField()
+
 
 
 class MyProfile(forms.Form):

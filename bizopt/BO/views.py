@@ -15,6 +15,7 @@ from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
 from account.models import Account
 import phonenumbers
+from .forms import ProductCreateForm
 
 
 def gen_menu(request):
@@ -245,6 +246,10 @@ def becomeCreatorTemplate_page(request, name):
     if name == '2':
         form = MyProfile(request.POST)
         content['form1'] = form
+
+    if name == '8':
+        form = ProductCreateForm()
+        content['form8'] = form
     return render(request, path, content)
 
 

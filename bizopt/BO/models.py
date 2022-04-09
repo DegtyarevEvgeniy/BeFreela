@@ -18,11 +18,21 @@ class Product(models.Model):
     id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
     status1 = models.CharField(max_length=20, default='-') #запрос в работе
     status2 = models.CharField(max_length=20, default='-') #в ожидании в работе готово
-    product_name = models.CharField(max_length=500, default='-')
-    cost = models.IntegerField(default=0)
-    availability = models.CharField(max_length=100, default='-')
-    description = models.CharField(max_length=1000, default='-')
-    picture = models.ImageField(upload_to='images/product',
+    product_name = models.CharField('Название', max_length=500, default='-')
+    country = models.CharField('Страна', max_length=30, default='-')
+    brand = models.CharField('Бренд', max_length=30, default='-')
+    # set = list
+    price = models.IntegerField('Цена', default=0)
+    description = models.CharField('Описание', max_length=1000, default='-')
+    # keywords = list
+    width_product = models.FloatField('', default=0)
+    height_product = models.FloatField('', default=0)
+    length_product = models.FloatField('', default=0)
+    width_packaging = models.FloatField('', default=0)
+    height_packaging = models.FloatField('', default=0)
+    length_packaging = models.FloatField('', default=0)
+    availability = models.CharField('', max_length=100, default='-')
+    picture = models.ImageField('', upload_to='images/product',
                                 default='images/default.png')
 
 
