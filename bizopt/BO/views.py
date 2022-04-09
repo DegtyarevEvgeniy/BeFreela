@@ -248,20 +248,8 @@ def becomeCreatorTemplate_page(request, name):
         content['form1'] = form
 
     if name == '8':
-        error = ''
-
-        if request.method == 'POST':
-            form = ProductCreateForm(request.POST)
-            if form.is_valid():
-                product = Product()
-                product.product_name = request.POST['product_name']
-                product.save()
-                return redirect('becomeCreator/')
-            else:
-                error = form.errors
-        else:
-            form = ProductCreateForm()
-            content['form8'] = form
+        form = ProductCreateForm()
+        content['form8'] = form
 
     return render(request, path, content)
 
