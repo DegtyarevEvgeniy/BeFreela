@@ -175,8 +175,8 @@ def becomeCreator_page(request):
             local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
             product.picture = local_path_to_file
         product.product_name = request.POST['product_name']
-        product.cost = request.POST['product_cost']
-        product.description = request.POST['product_description']
+        product.price = request.POST['price']
+        product.description = request.POST['description']
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
@@ -209,7 +209,7 @@ def becomeCreator_page(request):
 #             #               а) переименовать на рандом и сохранить.
 #             #               б) игнорировать
 #             item = Account(login='default',
-#                         password=123,
+#                         password=123,becomeCreator_page
 #                         email='example@example.com',
 #                         name='Name',
 #                         surname='Surname',
