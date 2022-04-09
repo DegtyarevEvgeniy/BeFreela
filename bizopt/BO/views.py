@@ -251,9 +251,10 @@ def becomeCreatorTemplate_page(request, name):
 def tasks_page(request):
     context = gen_menu(request)
     tasks = Task.objects.all()
-    context['task_cards'] = [{'name': task.name,
+    context['task_cards'] = [{'id': task.id,
+                              'name': task.name,
                               'description': task.description
-                              } for task in tasks]
+                            } for task in tasks]
     return render(request, 'tasks.html', context)
 
 
@@ -300,13 +301,16 @@ def cardResume_page(request):
     return render(request, 'cardResume.html', context)
 
 
-def cardTask_page(request):
+def cardTask_page(request, task_id):
     context = gen_menu(request)
-    task = Task.objects.get(id=1)
-    context['task'] = {'name': task.name,
-                       'description': task.description
-                      }
-    return render(request, 'cardTask.html', context)
+    try:
+        task = Task.objects.get(id=task_id)
+        context['task'] = {'name': task.name,
+                           'description': task.description
+                           }
+        return render(request, 'cardTask.html', context)
+    except Task.DoesNotExist:
+        raise Http404
 
 
 def edit_profile(request):
