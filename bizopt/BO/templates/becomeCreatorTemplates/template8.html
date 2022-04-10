@@ -297,7 +297,7 @@
             <!-- end of bloc 1 -->
 
             <!-- sart of block 2 -->
-            <div class="tab">
+            <div class="tab" style="display: none">
                 <table class="table table-hover border text-left  ">
                     <tbody>
                         <tr>
@@ -329,7 +329,7 @@
 
 
             <!-- sart of block 3 -->
-            <div class="tab">
+            <div class="tab" style="display: none">
 
                 <h2>Описнание</h2>
 <!--                <textarea>-->
@@ -383,10 +383,6 @@
 
             <span>{{error}}</span>
 
-            <button name="product_creator" type="submit">
-                        <i class="fa fa-angle-double-right">Сохранить</i>
-            </button>
-
             <!-- end of block 3 -->
 
             <div style="overflow:auto;" id="next-previous">
@@ -394,7 +390,7 @@
                     <button type="button" id="prevBtn" style="display: none;" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
                     </button>
-                    <button type="button" id="nextBtn" onclick="nextPrev(1)">
+                    <button name="product_creator" type="button" id="nextBtn" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                     </button>
                 </div>
