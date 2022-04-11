@@ -26,6 +26,7 @@
                     <th class="th-lg"><a href="">Username</a></th>
                     <th class="th-lg"><a href="">Название товара</a></th>
                     <th class="th-lg"><a href="">Цена</a></th>
+                    <th class="th-lg"><a href="">Удалить</a></th>
                 </tr>
             </thead>
 
@@ -41,6 +42,7 @@
                     <td>Mark</td>
                     <td>{{ product.product_name }}</td>
                     <td>{{ product.cost }}</td>
+                    <td><button type="button" class="btn btn-outline-secondary">x</button></td>
                 </tr>
 
             {% endfor %}
