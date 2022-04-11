@@ -7,11 +7,15 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>BizOpt</title>
     <link href='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css' rel='stylesheet'>
-    <link href='' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
             background: #343a40bf;
+            width: 100%!important;
+            height: 100%!important;
+            padding: 0px;
         }
         
         .form-control:focus {
@@ -54,79 +58,46 @@
             cursor: pointer;
             border: solid 1px #BA68C8
         }
+        #main_change{
+            margin: 0 auto;
+        }
     </style>
 </head>
 
-<body oncontextmenu='return false' class='snippet-body'>
+<body>
     <div class="container rounded bg-white mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                    <!-- <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">-->
-                    <img class="rounded-circle mt-5" width="150px" src="{{user.userImage.url}}" alt="Error">
-                    <span class="font-weight-bold ">{{user.first_name}} {{user.last_name}}</span>
-                    <span>{{user.email}}</span>
-                    <span class="text-black-50 "> {{user.username}}</span>
-                </div>
+            <nav class="navbar navbar-light justify-content-center">
+                <a class="Btn" style="margin: 0px 5px" href="#">Данные пользователя</a>
+                <a class="Btn" style="margin: 0px 5px" href="#">Пользователи</a>
+                <a class="Btn" style="margin: 0px 5px" href="#">Мои данные</a>
+            </nav>
+            <hr>
+            <div class="row" id="MainWindowContainer">
             </div>
-            <div id="main_change " class="col-md-8 ">
-                <form method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <div class="p-3 py-5 ">
-                        <div class="d-flex justify-content-between align-items-center mb-3 ">
-                            <h4 class="text-right ">Настройки профиля</h4>
-                        </div>
-                        <div class="row mt-2 ">
-                            <div class="col-md-6 ">
-                                <label class="labels">Имя</label>
-                                <input type="text" name="first_name" class="form-control " id="first_name" placeholder="{{user.first_name}}" value="{{user.first_name}}"></div>
-                            <div class="col-md-6 ">
-                                <label class="labels">Фамилия</label>
-                                <input type="text" name="last_name" class="form-control " id="last_name" placeholder="{{user.last_name}}" value="{{user.last_name}}"></div>
-                        </div>
-                        <div class="row mt-3 ">
-                            <div class="col-md-12 ">
-                                <label class="labels">Номер телефона</label>
-                                <input type="text" name="phone" class="form-control" id="phone" placeholder="{{user.phone}}" value="{{user.phone}}"></div>
-                            <div class="col-md-12 ">
-                                <label class="labels">Город</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="{{user.city}}" value="{{user.city}}"></div>
-                            <div class="col-md-12 ">
-                                <label class="labels">Почта</label>
-                                <input type="text" class="form-control" id="email" placeholder="{{user.email}}" value="{{user.email}}" ></div>
-                        </div>
-
-                        <div class="row mt-3">
-                            <div class="coll-md-3">
-                                <div class="input-group">
-                                    <input type="file" name="profile_photo" class="form-control" id="profile_photo" aria-describedby="" aria-label="">
-                                </div>
-                                <div class="mt-5 text-center ">
-                                    <button class="btn btn-primary profile-button " type="submit">Сохранить</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+           
     </div>
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js'></script>
-    <script type='text/javascript' src=''></script>
-    <script type='text/javascript' src=''></script>
-    <script type='text/Javascript'></script>
 </body>
-<script>
-    function isCreator() {
+<script type="text/javascript">
+    $(function () {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', '/edit/1/')
+        xhr.onload = function () {
 
-        if (!document.getElementById('creatorSwitcher').checked) {
-            document.getElementById('creator').style.display = 'none';
-            document.getElementById('main_change').className = ('col-md-8');
-        } else {
-            document.getElementById('main_change').className = ('col-md-5 border-right');
-            document.getElementById('creator').style.display = 'inline-block';
+            $('#MainWindowContainer').html(xhr.response)
         }
-    }
+        xhr.send()
+    });
+
+    $('.Btn').on('click', {}, function (inBody) {
+        var xhr = new XMLHttpRequest()
+        var index = $(this).index() + 1
+        xhr.open('GET', `/edit/${index}/`)
+        xhr.onload = function () {
+            $('#MainWindowContainer').html(xhr.response)
+        }
+        xhr.send()
+    });
 </script>
 
 </html>

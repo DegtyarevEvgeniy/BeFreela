@@ -115,7 +115,7 @@ def baseProductCard_page(request):
     return render(request, 'baseProductCard.html', context)
 
 
-def addTask_page(request):
+def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
     if request.method == 'POST':
         form = addTasks(request.POST)
@@ -151,7 +151,7 @@ def becomeCreator_page(request):
                 # TODO: надо сделать сохранение нескольких фоток товара в базу
                 #  и multiple вернуть на фронт
                 fs = FileSystemStorage()
-                filename = "creator_" + str(user.email) + ".png"
+                filename = f"creator_{str(user.email)}.png"
                 local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
@@ -296,8 +296,8 @@ def cardProduct_page(request, product_id):
                               }
 
         return render(request, 'cardProduct.html', context)
-    except Task.DoesNotExist:
-        raise Http404
+    except Task.DoesNotExist as e:
+        raise Http404 from e
 
 
 def cardResume_page(request):
@@ -315,8 +315,8 @@ def cardTask_page(request, task_id):
                            'description': task.description
                            }
         return render(request, 'cardTask.html', context)
-    except Task.DoesNotExist:
-        raise Http404
+    except Task.DoesNotExist as e:
+        raise Http404 from e
 
 
 def edit_profile(request):
@@ -328,7 +328,7 @@ def edit_profile(request):
             if request.FILES:
                 file = request.FILES['profile_photo']
                 fs = FileSystemStorage()
-                filename = "profile_" + str(person.username) + ".png"
+                filename = f"profile_{str(person.username)}.png"
                 path_to_local_image = os.path.join("images/profile", filename)
                 fs.save(path_to_local_image, file)
                 person.userImage = path_to_local_image
@@ -343,8 +343,8 @@ def edit_profile(request):
             context['user'] = person
             return render(request, "editProfile.html", context)
 
-    except Account.DoesNotExist:
-        raise Http404
+    except Account.DoesNotExist as e:
+        raise Http404 from e
 
 
 #
@@ -399,7 +399,12 @@ def edit(request):
     }
     return render(request, 'edit.html', content)
 
-
+def editProfileTemplate_profile(request, name):
+    content = {
+        'menu': gen_menu(request)
+    }
+    path = f"editProfileTemplates/template{name}.html"
+    return render(request, path, content)
 def login_page(request):
     content = {
         'menu': gen_menu(request)
