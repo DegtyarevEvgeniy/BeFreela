@@ -89,7 +89,7 @@ def baseResumeCard_page(request):
     context = gen_menu(request)
     creators = Creator.objects.all()
     context['creators'] = [{'first_name': creator.first_name,
-                            'activity_type': creator.activity_type,
+                            'tag': creator.tag,
                             'avatar': creator.cover.url
                             }
                            for creator in creators]
