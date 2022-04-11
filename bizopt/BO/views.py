@@ -247,7 +247,7 @@ def becomeCreatorTemplate_page(request, name):
         form = MyProfile(request.POST)
         content['form1'] = form
 
-    if name == '8':
+    if name == '6':
         form = ProductCreateForm()
         content['form8'] = form
 
