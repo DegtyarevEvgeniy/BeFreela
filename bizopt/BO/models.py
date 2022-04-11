@@ -17,11 +17,16 @@ class Creator(models.Model):
     published = models.BooleanField(default=1)
 
 
-class Product(models.Model):
+class Product_buy(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
     id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
+    task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status1 = models.CharField(max_length=20, default='-') #запрос в работе
     status2 = models.CharField(max_length=20, default='-') #в ожидании в работе готово
+
+
+class Product_creator(models.Model):
+    id_creator = models.CharField(max_length=200, default='-') #кто создал
     product_name = models.CharField('Название', max_length=500, default='-')
     country = models.CharField('Страна', max_length=30, default='-')
     brand = models.CharField('Бренд', max_length=30, default='-')
