@@ -107,7 +107,7 @@ def baseProductCard_page(request):
     products = Product.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
-                            'cost': product.cost,
+                            'cost': product.price,
                             'availability': product.availability,
                             'picture': product.picture
                             }
@@ -289,7 +289,7 @@ def cardProduct_page(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
         context['product'] = {'product_name': product.product_name,
-                              'cost': product.cost,
+                              'cost': product.price,
                               'availability': product.availability,
                               'picture': product.picture,
                               'description': product.description

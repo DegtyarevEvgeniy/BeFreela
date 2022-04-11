@@ -9,8 +9,12 @@ class Creator(models.Model):
     description = models.CharField(max_length=500, default='-')
     is_company = models.BooleanField(default=0)
     company_name = models.CharField(max_length=50, default='-')
-    activity_type = models.CharField(max_length=70, default='-')
-    achievements = models.ImageField(upload_to='images/creator')
+    telegram = models.CharField(max_length=50, default='-')
+    vk = models.CharField(max_length=50, default='-')
+    whatsapp = models.CharField(max_length=50, default='-')
+    instagram = models.CharField(max_length=50, default='-')
+    tag = models.CharField(max_length=50, default='-')
+    published = models.BooleanField(default=1)
 
 
 class Product(models.Model):
