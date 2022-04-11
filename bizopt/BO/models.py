@@ -54,3 +54,7 @@ class Task(models.Model):
 
 class Tag(models.Model):
     tag_name = models.CharField(max_length=50, default='')
+
+
+class Hashtags(models.Model):
+    tag_name = models.CharField(max_length=50, default='')
