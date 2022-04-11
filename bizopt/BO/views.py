@@ -399,12 +399,6 @@ def edit(request):
     }
     return render(request, 'edit.html', content)
 
-def editProfileTemplate_profile(request, name):
-    content = {
-        'menu': gen_menu(request)
-    }
-    path = f"editProfileTemplates/template{name}.html"
-    return render(request, path, content)
 def login_page(request):
     content = {
         'menu': gen_menu(request)

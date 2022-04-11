@@ -182,17 +182,16 @@
                 </li>
 
 
-                <li class="active Btn">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Мой
-                        профиль</a>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Мой профиль</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
+                        <li class="ExtBtn">
                             <a href="#">Данные продавца</a>
                         </li>
-                        <li>
+                        <li class="ExtBtn">
                             <a href="#">Пользователи</a>
                         </li>
-                        <li>
+                        <li class="ExtBtn">
                             <a href="#">Мои данные</a>
                         </li>
                     </ul>
@@ -212,14 +211,14 @@
             <ul class="list-unstyled CTAs">
 
                 <li>
-                    <a href="/" class="article ">Обратно на главую</a>
+                    <a href="/" class="article">Обратно на главую</a>
                 </li>
             </ul>
         </nav>
 
         <!-- Page Content  -->
         <div id="content">
-            <div id="MainWindowContainer" class="container rounded bg-white " w3-inslude-html="template.html">
+            <div id="MainWindowContainer" class="container rounded bg-white" w3-inslude-html="template.html">
                 
             </div>
         </div>
@@ -241,6 +240,16 @@
         $('.Btn').on('click', {}, function (inBody) {
             var xhr = new XMLHttpRequest()
             var index = $(this).index() + 1
+            xhr.open('GET', `becomeCreatorTemplates/${index}/`)
+            xhr.onload = function () {
+                $('#MainWindowContainer').html(xhr.response)
+            }
+            xhr.send()
+        });
+
+        $('.ExtBtn').on('click', {}, function (inBody) {
+            var xhr = new XMLHttpRequest()
+            var index = $(this).index() + 11
             xhr.open('GET', `becomeCreatorTemplates/${index}/`)
             xhr.onload = function () {
                 $('#MainWindowContainer').html(xhr.response)
