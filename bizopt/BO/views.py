@@ -166,7 +166,7 @@ def becomeCreator_page(request):
             creator.save()
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
-        product = Product()
+        product = Product_creator()
         if request.FILES:
             file = request.FILES['product_photos']
             fs = FileSystemStorage()
@@ -238,7 +238,7 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '3':
-        products = Product.objects.all()
+        products = Product_creator.objects.all()
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price
                                 }
@@ -287,7 +287,7 @@ def index_page(request):
 def cardProduct_page(request, product_id):
     context = gen_menu(request)
     try:
-        product = Product.objects.get(id=product_id)
+        product = Product_creator.objects.get(id=product_id)
         context['product'] = {'product_name': product.product_name,
                               'cost': product.price,
                               'availability': product.availability,
