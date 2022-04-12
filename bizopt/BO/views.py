@@ -136,6 +136,7 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
 def becomeCreator_page(request):
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
+    print(request.POST)
     if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
         context['first_name'] = user.first_name
         context['email'] = user.email
@@ -164,6 +165,8 @@ def becomeCreator_page(request):
             else:
                 creator.company = False
             creator.save()
+
+
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
         product = Product_creator()
@@ -180,8 +183,10 @@ def becomeCreator_page(request):
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
+        return redirect('/becomeCreator/')
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
+
     return render(request, 'becomeCreator.html', context)
 
 
