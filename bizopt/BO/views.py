@@ -185,7 +185,8 @@ def becomeCreator_page(request):
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
-        return redirect('/becomeCreator/')
+
+
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
 
