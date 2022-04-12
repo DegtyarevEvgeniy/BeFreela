@@ -67,7 +67,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="" class="btn btn-dark">Нравится</a>
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <button class="btn btn-dark" type="submit">Нравится</button>
+                                    </form>
+{#                                    <a href="" >Нравится</a>#}
                                 </li>
 
                             </ul>

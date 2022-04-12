@@ -104,7 +104,7 @@ def yourTasks_page(request):
 
 def baseProductCard_page(request):
     context = gen_menu(request)
-    products = Product.objects.all()
+    products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
@@ -180,6 +180,8 @@ def becomeCreator_page(request):
         product.product_name = request.POST['product_name']
         product.price = request.POST['price']
         product.description = request.POST['description']
+        account = Account.objects.get(email=request.user)
+        product.id_creator = account.id
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
@@ -243,7 +245,8 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '3':
-        products = Product_creator.objects.all()
+        account = Account.objects.get(email=request.user)
+        products = Product_creator.objects.filter(id_creator=account.id)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price
                                 }
@@ -291,18 +294,40 @@ def index_page(request):
 
 def cardProduct_page(request, product_id):
     context = gen_menu(request)
-    try:
-        product = Product_creator.objects.get(id=product_id)
-        context['product'] = {'product_name': product.product_name,
-                              'cost': product.price,
-                              'availability': product.availability,
-                              'picture': product.picture,
-                              'description': product.description
-                              }
+    if request.method == "POST":
+        try:
+            product_buy = Product_buy()
+            product = Product_creator.objects.get(id=product_id)
+            product_buy.id_creator = product.id_creator
+            user_buy = Account.objects.get(email=request.user)
+            product_buy.id_user_buy = user_buy.id
+            # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
+            product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
+            product_buy.status1 = 'in waiting'
+            product_buy.status2 = 'None'
+            product_buy.save()
+            context['product'] = {'product_name': product.product_name,
+                                  'cost': product.price,
+                                  'availability': product.availability,
+                                  'picture': product.picture,
+                                  'description': product.description
+                                  }
+            return render(request, 'cardProduct.html', context)
+        except Task.DoesNotExist as e:
+            raise Http404 from e
+    else:
+        try:
+            product = Product_creator.objects.get(id=product_id)
+            context['product'] = {'product_name': product.product_name,
+                                  'cost': product.price,
+                                  'availability': product.availability,
+                                  'picture': product.picture,
+                                  'description': product.description
+                                  }
 
-        return render(request, 'cardProduct.html', context)
-    except Task.DoesNotExist as e:
-        raise Http404 from e
+            return render(request, 'cardProduct.html', context)
+        except Task.DoesNotExist as e:
+            raise Http404 from e
 
 
 def cardResume_page(request):
