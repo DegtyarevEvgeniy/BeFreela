@@ -181,7 +181,7 @@ def becomeCreator_page(request):
         product.price = request.POST['price']
         product.description = request.POST['description']
         account = Account.objects.get(email=request.user)
-        product.id_creator = account.id
+        product.id_creator = account.email
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
@@ -246,19 +246,23 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '1':
+        # product = Product_buy.objects.get(product_name=request.product_name)
+        # product.status1 = "in_work"
+        # product.status2 = "in_waiting"
         try:
-            products = Product_buy.objects.get(id_creator=request.user)
+            products = Product_buy.objects.filter(id_creator=request.user, status1="in work")
             content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
                                     'status2': product.status2
                                     }
                                    for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user, status1="in_waiting")
+            products_v = Product_buy.objects.filter(id_creator=request.user, status1="in waiting")
             content['products_v'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
-                                    'status1': product.status1
+                                    'status1': product.status1,
+                                    'id_user_buy': product.id_user_buy,
                                     }
                                    for product in products_v]
         except Product_buy.DoesNotExist as e:
@@ -323,10 +327,10 @@ def cardProduct_page(request, product_id):
             product_buy.product_name = product.product_name
 
             user_buy = Account.objects.get(email=request.user)
-            product_buy.id_user_buy = user_buy.id
+            product_buy.id_user_buy = user_buy.email
 
             # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
-            product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
+            # product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
             product_buy.status1 = 'in waiting'
             product_buy.status2 = 'None'
             product_buy.save()
