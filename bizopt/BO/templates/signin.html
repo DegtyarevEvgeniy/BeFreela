@@ -134,38 +134,21 @@
 								<i class="fa fa-unlock-alt"></i>
 							</span>
                         </a>
-                        <a onclick="surTab(2)">
-                            <span class="step">
-								<i class="fa fa-unlock-alt"></i>
-							</span>
-                        </a>
                     </div>
                     <div class="tab">
                         {{ form.first_name.label }}: {{ form.first_name }}
-
                         <br>
-                        <br> {{ form.last_name.label }}: {{ form.last_name }}
+                        <br> 
+                        {{ form.last_name.label }}: {{ form.last_name }}
                         <br>
                         <br>
                     </div>
 
                     <div class="tab">
-                        {{ form.username.label }}: {{ form.username }}
+                        {{ form.password1.label }}: {{ form.password1 }}
                         <br>
-                        <br> {{ form.password1.label }}: {{ form.password1 }}
-                        <br>
-                        <br> {{ form.password2.label}}: {{ form.password2}}
-                        <br>
-                        <br>
-
-                    </div>
-
-                    <div class="tab">
-                        {{form.phone.label}} {{form.phone}}
-                        <br>
-                        <br> {{ form.email.label}} {{ form.email}}
-                        <br>
-                        <br> {{ form.city.label}} {{ form.city}}
+                        <br> 
+                        {{ form.password2.label}}: {{ form.password2}}
                         <br>
                         <br>
                     </div>
