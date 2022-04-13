@@ -246,14 +246,23 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '1':
-        account = Account.objects.get(email=request.user)
-        products = Product_buy.objects.filter(id_creator=account.id, status2='in waiting')
-        content['products'] = [{'id': product.id,
-                                'product_name': product.product_name,
-                                'customer': product.id_user_buy,
-                                'status2': product.status2
-                                }
-                               for product in products]
+        try:
+            products = Product_buy.objects.get(id_creator=request.user)
+            content['products'] = [{'id': product.id,
+                                    'product_name': product.product_name,
+                                    'customer': product.id_user_buy,
+                                    'status2': product.status2
+                                    }
+                                   for product in products]
+            products_v = Product_buy.objects.filter(id_creator=request.user, status1="in_waiting")
+            content['products_v'] = [{'id': product.id,
+                                    'product_name': product.product_name,
+                                    'customer': product.id_user_buy,
+                                    'status1': product.status1
+                                    }
+                                   for product in products_v]
+        except Product_buy.DoesNotExist as e:
+            content['products'] = None
 
     if name == '3':
         account = Account.objects.get(email=request.user)

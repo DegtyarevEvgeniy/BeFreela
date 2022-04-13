@@ -89,27 +89,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="col-xs-3">123441</td>
-                                <td class="col-xs-3">Сделеать стул</td>
-                                <td class="col-xs-3">@idЗаказчика</td>
-                                <td class="col-xs-3"><button type="button" class="btn btn-secondary btn-sm">Согласиться</button></td>
-
-                            </tr>
-                            <tr>
-                                <td class="col-xs-3">123441</td>
-                                <td class="col-xs-3">Сделеать стул</td>
-                                <td class="col-xs-3">@idЗаказчика</td>
-                                <td class="col-xs-3"><button type="button" class="btn btn-secondary btn-sm">Согласиться</button></td>
-
-                            </tr>
-                            <tr>
-                                <td class="col-xs-3">123441</td>
-                                <td class="col-xs-3">Сделеать стул</td>
-                                <td class="col-xs-3">@idЗаказчика</td>
-                                <td class="col-xs-3"><button type="button" class="btn btn-secondary btn-sm">Согласиться</button></td>
-
-                            </tr>
+                            {% for product in products_v %}
+                    <tr>
+                        <td class="col-xs-3">{{ product.id }}</td>
+                        <td class="col-xs-3">{{ product.product_name }}</td>
+                        <td class="col-xs-6">1</td>
+                        <td class="col-xs-3">{{ product.customer }}</td>
+                        <td class="col-xs-3">2021-05-23</td>
+                        <td class="col-xs-6">{{ product.status2 }}</td>
+                    </tr>
+                    {% endfor %}
 
                         </tbody>
                     </table>
