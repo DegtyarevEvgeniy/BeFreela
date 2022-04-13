@@ -245,6 +245,16 @@ def becomeCreatorTemplate_page(request, name):
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
+    if name == '1':
+        account = Account.objects.get(email=request.user)
+        products = Product_buy.objects.filter(id_creator=account.id, status2='in waiting')
+        content['products'] = [{'id': product.id,
+                                'product_name': product.product_name,
+                                'customer': product.id_user_buy,
+                                'status2': product.status2
+                                }
+                               for product in products]
+
     if name == '3':
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.id)
@@ -298,10 +308,14 @@ def cardProduct_page(request, product_id):
     if request.method == "POST":
         try:
             product_buy = Product_buy()
+
             product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
+            product_buy.product_name = product.product_name
+
             user_buy = Account.objects.get(email=request.user)
             product_buy.id_user_buy = user_buy.id
+
             # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
             product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
             product_buy.status1 = 'in waiting'
