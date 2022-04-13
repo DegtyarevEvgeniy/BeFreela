@@ -27,7 +27,13 @@
                         <td class="col-xs-6">1</td>
                         <td class="col-xs-3">{{ product.customer }}</td>
                         <td class="col-xs-3">2021-05-23</td>
-                        <td class="col-xs-6">{{ product.status2 }}</td>
+                        <th class="col-xs-6">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>{{ product.status2 }}</option>
+                                <option value="1">В работе</option>
+                                <option value="3">Сделано</option>
+                            </select>
+                            </th>
                     </tr>
                     {% endfor %}
                 </tbody>
