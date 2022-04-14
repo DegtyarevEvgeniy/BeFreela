@@ -270,7 +270,7 @@ def becomeCreatorTemplate_page(request, name):
 
     if name == '3':
         account = Account.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.id)
+        products = Product_creator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price
                                 }
