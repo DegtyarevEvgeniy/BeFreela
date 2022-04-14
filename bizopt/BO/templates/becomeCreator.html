@@ -13,6 +13,11 @@
     <script src="https://kit.fontawesome.com/185cad9bb6.js" crossorigin="anonymous"></script>
 
     <style>
+        *:focus,*:active,*:hover{
+            outline: none !important;
+            box-shadow: none !important;
+
+        }
         .form-control:focus {
             box-shadow: none;
             border-color: #BA68C8
@@ -229,7 +234,7 @@
     <script type="text/javascript">
         $(function () {
             var xhr = new XMLHttpRequest()
-            xhr.open('GET', 'becomeCreatorTemplates/1/')
+            xhr.open('GET', `becomeCreatorTemplates/${4}/`)
             xhr.onload = function () {
 
                 $('#MainWindowContainer').html(xhr.response)
