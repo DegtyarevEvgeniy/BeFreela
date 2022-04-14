@@ -475,9 +475,7 @@ def forgot_password_page(request):
 
 
 def orders_page(request):
-    content = {
-        'menu': gen_menu(request)
-    }
+    content = gen_menu(request)
     tasks = Task.objects.all()
     content['tasks'] = [{
         'name': task.name,
