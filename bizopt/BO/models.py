@@ -55,7 +55,7 @@ class Task(models.Model):
     select = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=500, default='-')
     price = models.IntegerField(default='')
-    time = models.CharField(max_length=50, default='-')
+    time = models.DateField(max_length=50, default='-')
 
 
 class Tag(models.Model):

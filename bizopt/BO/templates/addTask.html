@@ -12,6 +12,7 @@
                 <div class="col-md">
                     <div class="form-floating">
                         {{ form.task_name }}
+                        <label for="floatingInputGrid">Название задачи</label>
                     </div>
                 </div>
                 <div class="col-md">
@@ -23,18 +24,21 @@
 
             <div class="form-floating">
                 {{ form.description }}
+                <label for="floatingTextarea2">Описание</label>
             </div>
 
             <div class="input-box">
                 <br>
                 <div class="input-group mb-3">
+                    <span class="input-group-text">Цена</span>
                     {{ form.price }}
+                    <span class="input-group-text">руб</span>
                 </div>
             </div>
 
 
             <div class="form-group">
-                {{ form.data }}
+                {{ form.date }}
             </div>
 
 

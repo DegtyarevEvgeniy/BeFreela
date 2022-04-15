@@ -71,11 +71,29 @@ class MyProfile(forms.Form):
 
 
 class addTasks(forms.Form):
-    task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={'placeholder': 'Название'}))
-    select = forms.ModelChoiceField(
-        queryset=Tag.objects.values_list("tag_name", flat=True).distinct(),
-        empty_label=None
-    )
-    description = forms.CharField(label='Описание', widget=forms.TextInput(attrs={'placeholder': 'Описание'}))
-    price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={'placeholder': 'Цена'}))
-    data = forms.DateField(label='Дата', widget=forms.TextInput(attrs={'placeholder': 'Дата'}))
+    task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Название',
+        'id': "floatingInputGrid",
+    }))
+
+    select = forms.ModelChoiceField(queryset=Tag.objects.values_list("tag_name", flat=True).distinct(), widget =forms.Select(attrs = {
+        'class': "form-select",
+    }))
+
+
+    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={
+        'class': 'form-control',
+        'placeholder': 'Описание',
+        'style': "height: 100px",
+        'id': "floatingTextarea2",
+
+    }))
+    price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Цена',
+    }))
+    date = forms.DateField(label='Дата', widget=forms.DateInput(attrs={
+        'class': 'form-control',
+        'type': 'date'
+    }))
