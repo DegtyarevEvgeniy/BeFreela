@@ -124,7 +124,7 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
         task.select = request.POST['select']
         task.description = request.POST['description']
         task.price = request.POST['price']
-        task.time = request.POST['data']
+        task.time = request.POST['date']
         task.save()
         context["form"] = form
     else:
