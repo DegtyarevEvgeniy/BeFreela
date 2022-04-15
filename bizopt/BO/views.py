@@ -98,8 +98,15 @@ def baseResumeCard_page(request):
 
 
 def yourTasks_page(request):
-    context = gen_menu(request)
-    return render(request, 'yourTasks.html', context)
+    content = gen_menu(request)
+    tasks = Task.objects.filter(id_creator=request.user)
+    content['tasks'] = [{
+        'name': task.name,
+        'price': task.price,
+        'description': task.description
+    } for task in tasks]
+
+    return render(request, 'yourTasks.html', content)
 
 
 def baseProductCard_page(request):
@@ -125,8 +132,10 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
         task.description = request.POST['description']
         task.price = request.POST['price']
         task.time = request.POST['date']
+        task.id_creator = request.user
         task.save()
         context["form"] = form
+        return redirect('/orders/')
     else:
         form = addTasks()
         context["form"] = form
@@ -476,7 +485,7 @@ def forgot_password_page(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(id_user_do=request.user, status1="in work")
     content['tasks'] = [{
         'name': task.name,
         'price': task.price,
