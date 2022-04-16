@@ -11,7 +11,7 @@
 
 
         <div>
-           <h1 style="margin-left: 5%; font-size: 50px">Дегтярев Евгений</h1>
+           <h1 style="margin-left: 5%; font-size: 50px">{{ profile.first_name }}</h1>
             <div class="" style="width: 30%; text-align: inherit; padding-top: 0%">
                 
 
@@ -27,7 +27,7 @@
                 </div>
 
                 <div>
-                    <div class="tagOut"><p style="width:0; margin: 0; color: aliceblue">swimming</p></div>
+                    <div class="tagOut"><p style="width:0; margin: 0; color: aliceblue">{{ profile.tag }}</p></div>
                 </div>
             </div>
             
@@ -35,13 +35,13 @@
                 <p>О себе</p>
                 <br>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa nihil atque deleniti ipsum autem eligendi expedita, ea obcaecati porro dolorem suscipit, tempore quas. Ab porro impedit atque, ipsum nesciunt vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit numquam minima dicta omnis cum distinctio quae quasi magnam hic ab quia fuga, sequi voluptatem aut facilis modi nam harum. Quasi!</p>
+                <p>{{ profile.description }}</p>
 
 
 
 
                 <p>Компания</p>
-
+                <p>{{ profile.company_name }}</p>
             </div>
 
         </div>
@@ -49,7 +49,48 @@
 
 
     </div>
-    
+
+    <div id="content" class="row" style="margin-top: 50px; margin-left: 80px">
+
+    {% for product in products %}
+    {% if profile.email == product.id_creator %}
+
+    <div class="card" style="width: 18rem;">
+        <img src="{{ product.picture.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ product.product_name }}</h5>
+            <p>
+                <label>Наличие:     </label> {{ product.availability }}
+            </p>
+            <label>Цена:     </label>
+            <div class="price">
+                {{ product.cost }} ₽
+            </div>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="cardProduct/{{ product.id }}" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+
+<!--    <figure class="snip1418">-->
+<!--        <img src="{{ product.picture.url }}" alt="sample85" />-->
+<!--        <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>-->
+<!--        <figcaption>-->
+<!--            <h3>{{ product.product_name }}</h3>-->
+<!--            <p>-->
+<!--                <label>Наличие:     </label> {{ product.availability }}-->
+<!--            </p>-->
+<!--            <label>Цена:     </label>-->
+<!--            <div class="price">-->
+<!--                {{ product.cost }} ₽-->
+<!--            </div>-->
+<!--        </figcaption>-->
+<!--        <a href='cardProduct/{{ product.id }}'></a>-->
+<!--    </figure>-->
+    {% endif %}
+    {% endfor %}
+
+    </div>
+
     <style>
     
         .tagOut{
@@ -64,6 +105,49 @@
 
 </div>
 
+<script>
+    $(function() {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'baseProductCard ')
+        xhr.onload = function() {
+
+            console.log(xhr.response)
+            $('#content').html(xhr.response)
+        }
+        xhr.send()
+    });
+
+    $('#showContent1').on('click', {
+        title: 'Заголовок 1',
+        content: 'Содержимое 1...'
+    }, function(inBody) {
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'baseResumeCard')
+        xhr.onload = function() {
+
+            console.log(xhr.response)
+            $('#content').html(xhr.response)
+        }
+        xhr.send()
+    });
+
+    $('#showContent2').on('click', {
+        title: 'Заголовок 2',
+        content: 'Содержимое 2...'
+    }, function(inBody) {
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'baseProductCard')
+        xhr.onload = function() {
+
+            console.log(xhr.response)
+            $('#content').html(xhr.response)
+        }
+        xhr.send()
+
+    });
+</script>
 <style>
     .contantM {
         width: 100%;

@@ -395,6 +395,15 @@ def cardResume_page(request):
     context = gen_menu(request)
     profile = Creator.objects.get(email=request.user)
     context['profile'] = profile
+    products = Product_creator.objects.all()
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture,
+                            'id_creator': product.id_creator
+                            }
+                           for product in products]
     return render(request, 'cardResume.html', context)
 
 
