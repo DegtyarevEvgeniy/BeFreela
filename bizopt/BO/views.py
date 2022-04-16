@@ -132,12 +132,12 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
             task.description = request.POST['description']
             task.price = request.POST['price']
             task.time = request.POST['date']
-            task.id_creator = request.user
+            task.id_creator = str(request.user)
             task.save()
             task.tags.add(form.cleaned_data['select'])
             task.save()
         context["form"] = form
-        return redirect('/orders/')
+        return redirect('/yourTasks/')
     else:
         form = addTasks()
         context["form"] = form
