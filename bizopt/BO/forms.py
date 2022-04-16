@@ -97,3 +97,18 @@ class addTasks(forms.Form):
         'class': 'form-control',
         'type': 'date'
     }))
+
+
+class Resume(forms.Form):
+    description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
+    is_company = forms.BooleanField(required=False)
+    company_name = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
+    email = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
+    first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
+    cover = forms.ImageField(required=False)
+    telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
+    vk = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
+    whatsapp = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
+    instagram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
+    tag = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
+    published = forms.BooleanField(required=False)

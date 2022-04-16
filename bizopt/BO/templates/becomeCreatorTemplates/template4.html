@@ -13,19 +13,21 @@
   </div>
 
   <div id="main_change" class="col-md-8 ml-3">
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" action="./">
       {% csrf_token %}
       <div class="p-3 py-5">
         <div class="row mt-3 d-flex align-items-center">
           <div class="col-md-4">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()"
-                id="isCompanyTrigger">
-              <label class="form-check-label" for="isCompanyTrigger">Вы являетесь компанией?</label>
+<!--              <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()"-->
+<!--                id="isCompanyTrigger">-->
+<!--              <label class="form-check-label" for="isCompanyTrigger">Вы являетесь компанией?</label>-->
+                {{ form9.is_company }}
             </div>
           </div>
           <div class="col-md-8" id="companyTriggerOn" style="opacity: 0;">
-            <input type="text" id="companyInput" name="profile_company_name" class="form-control" placeholder="Название компании" disables>
+<!--            <input type="text" id="companyInput" name="profile_company_name" class="form-control" placeholder="Название компании" disables>-->
+              {{ form9.company_name }}
           </div>
         </div>
 
@@ -33,8 +35,9 @@
 
         <div class="row mt-3 mb-3">
           <div class="col-md-12">
-            <h1 class="labels">Расскажите о себе</h1>
-            <textarea name="profile_description" class="form-control"></textarea>
+<!--            <h1 class="labels">Расскажите о себе</h1>-->
+<!--            <textarea name="profile_description" class="form-control"></textarea>-->
+              {{ form9.description }}
           </div>
         </div>
 
@@ -42,38 +45,43 @@
           <h1 class="labels mb-4">Контакты</h1>
           <div class="col-md-6">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="@tag">
-              <snap class="input-group-text" style="color: white; background-color: #229ED9;">
-                <i class="fab fa-telegram"></i>
-              </snap>
+<!--              <input type="text" class="form-control" placeholder="@tag">-->
+<!--              <snap class="input-group-text" style="color: white; background-color: #229ED9;">-->
+<!--                <i class="fab fa-telegram"></i>-->
+<!--              </snap>-->
+                {{ form9.telegram }}
             </div>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="https://vk.com/yourid">
-              <snap class="input-group-text" style="color: white; background-color: #4c75a3;">
-                <i class="fab fa-vk"></i>
-              </snap>
+<!--              <input type="text" class="form-control" placeholder="https://vk.com/yourid">-->
+<!--              <snap class="input-group-text" style="color: white; background-color: #4c75a3;">-->
+<!--                <i class="fab fa-vk"></i>-->
+<!--              </snap>-->
+                {{ form9.vk }}
             </div>
           </div>
           <div class="col-md-6">
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder=" https://instagram.com/tag">
-              <snap class="input-group-text" style="color: white; background-color: #ac2bac;">
-                <i class="fab fa-instagram"></i>
-              </snap>
+<!--              <input type="text" class="form-control" placeholder=" https://instagram.com/tag">-->
+<!--              <snap class="input-group-text" style="color: white; background-color: #ac2bac;">-->
+<!--                <i class="fab fa-instagram"></i>-->
+<!--              </snap>-->
+                {{ form9.instagram }}
             </div>
             <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="+71234567890">
-              <snap class="input-group-text" style="color: white; background-color: #25d366;">
-                <i class="fab fa-whatsapp"></i>
-              </snap>
+<!--              <input type="text" class="form-control" placeholder="+71234567890">-->
+<!--              <snap class="input-group-text" style="color: white; background-color: #25d366;">-->
+<!--                <i class="fab fa-whatsapp"></i>-->
+<!--              </snap>-->
+                {{ form9.whatsapp }}
             </div>
           </div>
         </div>
 
         <div class="row mt-3 mb-3">
           <div class="col-md-8">
-            <label class="labels">Загрузить фото</label>
-            <input id="fileupload" class="form-control" name="profile_images" type="file" />
+<!--            <label class="labels">Загрузить фото</label>-->
+<!--            <input id="fileupload" class="form-control" name="profile_images" type="file" />-->
+              {{ form9.cover }}
           </div>
         </div>
 
@@ -82,8 +90,9 @@
         <div class="row mt-3 mb-3">
           <div class="col-md-12">
             <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" value="1">
-              <label class="form-check-label">Хотите опубликовать резюме?</label>
+<!--              <input class="form-check-input" type="checkbox" value="1">-->
+<!--              <label class="form-check-label">Хотите опубликовать резюме?</label>-->
+                {{ form9.published }}
             </div>
           </div>
         </div>

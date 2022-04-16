@@ -316,6 +316,10 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
 
+    elif name == '4':
+        form = Resume()
+        content['form9'] = form
+
     return render(request, path, content)
 
 
