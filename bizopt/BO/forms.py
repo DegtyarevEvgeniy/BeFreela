@@ -3,7 +3,7 @@ from django.forms import ModelChoiceField
 
 from django.forms import ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
-
+from taggit.models import Tag
 
 COUNTRY_CHOICE = [
     ('Afghanistan', 'Afghanistan'),
@@ -65,7 +65,7 @@ class ProductCreateForm(ModelForm):
 
 class MyProfile(forms.Form):
     select = forms.ModelChoiceField(
-        queryset=Tag.objects.values_list("tag_name", flat=True).distinct(),
+        queryset=Tag.objects.all(),
         empty_label=None
     )
 
@@ -77,7 +77,7 @@ class addTasks(forms.Form):
         'id': "floatingInputGrid",
     }))
 
-    select = forms.ModelChoiceField(queryset=Tag.objects.values_list("tag_name", flat=True).distinct(), widget =forms.Select(attrs = {
+    select = forms.ModelChoiceField(queryset=Tag.objects.all(), widget =forms.Select(attrs = {
         'class': "form-select",
     }))
 

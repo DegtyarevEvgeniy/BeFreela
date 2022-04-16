@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.forms import ModelForm
+from taggit.managers import TaggableManager
 
 class Creator(models.Model):
     first_name = models.CharField(max_length=30, default='')
@@ -34,7 +35,7 @@ class Product_creator(models.Model):
     # set = list
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
-    # keywords = list
+    tags = TaggableManager()
     width_product = models.FloatField('', default=0)
     height_product = models.FloatField('', default=0)
     length_product = models.FloatField('', default=0)
@@ -56,10 +57,11 @@ class Task(models.Model):
     description = models.CharField(max_length=500, default='-')
     price = models.IntegerField(default='')
     time = models.DateField(max_length=50, default='-')
+    tags = TaggableManager()
 
+    def __unicode__(self):
+        return self.tags
 
-class Tag(models.Model):
-    tag_name = models.CharField(max_length=50, default='')
 
 
 class Hashtags(models.Model):

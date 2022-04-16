@@ -7,7 +7,7 @@
    
    
     
-        <header>{{ task.name }}</header>
+        <header>{{ task.name }} Tags: {{ task.tags.all|join:", " }}</header>
         <input type="radio" name="slider" checked id="home">
         <input type="radio" name="slider" id="blog">
         <input type="radio" name="slider" id="code">

@@ -16,7 +16,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from account.models import Account
 import phonenumbers
 from .forms import ProductCreateForm
-
+from taggit.models import Tag
 
 def gen_menu(request):
     if request.user.is_authenticated:
@@ -119,13 +119,15 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
     if request.method == 'POST':
         form = addTasks(request.POST)
-        task = Task()
-        task.name = request.POST['task_name']
-        task.select = request.POST['select']
-        task.description = request.POST['description']
-        task.price = request.POST['price']
-        task.time = request.POST['date']
-        task.save()
+        if form.is_valid():
+            task = Task()
+            task.name = request.POST['task_name']
+            task.description = request.POST['description']
+            task.price = request.POST['price']
+            task.time = request.POST['date']
+            task.save()
+            task.tags.add(form.cleaned_data['select'])
+            task.save()
         context["form"] = form
     else:
         form = addTasks()
@@ -369,9 +371,7 @@ def cardTask_page(request, task_id):
     context = gen_menu(request)
     try:
         task = Task.objects.get(id=task_id)
-        context['task'] = {'name': task.name,
-                           'description': task.description
-                           }
+        context['task'] = task
         return render(request, 'cardTask.html', context)
     except Task.DoesNotExist as e:
         raise Http404 from e
