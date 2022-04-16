@@ -63,12 +63,11 @@ class Task(models.Model):
         return self.tags
 
 
-
 class Hashtags(models.Model):
     tag_name = models.CharField(max_length=50, default='')
 
 
-class Parter(models.Model):
+class Partner(models.Model):
     password = models.CharField(max_length=50, default='')
     last_login = models.CharField(max_length=200, default='-')
     username = models.CharField(max_length=200, default='-')

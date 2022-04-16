@@ -147,7 +147,6 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
 def becomeCreator_page(request):
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
-    print(request.POST)
     if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
         context['first_name'] = user.first_name
         context['email'] = user.email
@@ -177,7 +176,6 @@ def becomeCreator_page(request):
                 creator.company = False
             creator.save()
 
-
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
         product = Product_creator()
@@ -201,10 +199,34 @@ def becomeCreator_page(request):
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
 
+    if request.method == "POST" and "partner" in request.POST:
+        partner = Partner()
+        # TODO: сделать что-то с сохранением единажды на template13
+        #  и доделать сохранение с template12 полностью(там заглушка)
+        if request.POST.get('INN', None):
+            partner.inn = request.POST['INN']
+        if request.POST.get('short_name', None):
+            partner.name_small = request.POST['short_name']
+        if request.POST.get('full_name', None):
+            partner.name_full = request.POST['full_name']
+        if request.POST.get('payment_account', None):
+            partner.payment_account = request.POST['payment_account']
+        if request.POST.get('payment_account', None):
+            partner.payment_account = request.POST['payment_account']
+        if request.POST.get('reg_form', None):
+            partner.reg_form = request.POST.get('reg_form', None)
+        if request.POST.get('my_first_name', None):
+            partner.first_name = request.POST['my_first_name']
+        if request.POST.get('my_last_name', None):
+            partner.last_name = request.POST['my_last_name']
+        if request.POST.get('my_email', None):
+            partner.email = request.POST['my_email']
+        partner.save()
+
     return render(request, 'becomeCreator.html', context)
 
 
-#
+
 # def edit_profile_page(request):
 #     content = {
 #         'menu': gen_menu()
@@ -279,18 +301,18 @@ def becomeCreatorTemplate_page(request, name):
         except Product_buy.DoesNotExist as e:
             content['products'] = None
 
-    if name == '3':
+    elif name == '3':
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price
                                 }
                                for product in products]
-    if name == '2':
+    elif name == '2':
         form = MyProfile(request.POST)
         content['form1'] = form
 
-    if name == '6':
+    elif name == '6':
         form = ProductCreateForm()
         content['form8'] = form
 
