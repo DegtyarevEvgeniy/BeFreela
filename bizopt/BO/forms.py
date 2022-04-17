@@ -100,15 +100,46 @@ class addTasks(forms.Form):
 
 
 class Resume(forms.Form):
-    description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
-    is_company = forms.BooleanField(required=False)
-    company_name = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
-    email = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
-    first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
+    description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.Textarea(attrs={
+        'class': "form-control",
+    }))
+    is_company = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+        'class': "form-check-input",
+        'onchange': "isCompany()",
+        'id': "isCompanyTrigger",
+    }))
+    company_name = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "Название компании",
+
+    }))
+    email = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+    }))
+    first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+    }))
     cover = forms.ImageField(required=False)
-    telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
-    vk = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
-    whatsapp = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
-    instagram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput())
-    tag = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput())
-    published = forms.BooleanField(required=False)
+    telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "@tag",
+    }))
+    vk = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "https://vk.com/yourid",
+    }))
+    whatsapp = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "+71234567890",
+    }))
+    instagram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': " https://instagram.com/tag",
+    }))
+    tag = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+    }))
+    published = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+        'class': "form-check-input",
+        'value': "1",
+    }))
