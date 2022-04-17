@@ -46,12 +46,11 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    country = models.CharField(default='')
-    inn = models.IntegerField(default='')
-    name_small = models.CharField(default='')
-    nameFull = models.CharField(default='')
-    payment_account = models.IntegerField(default='')
-    reg_form = models.CharField(default='')
+    inn = models.IntegerField(default=0)
+    name_small = models.CharField(max_length=20,default='')
+    nameFull = models.CharField(max_length=20,default='')
+    payment_account = models.IntegerField(default=0)
+    reg_form = models.CharField(max_length=20,default='')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']

@@ -167,7 +167,7 @@ def becomeCreator_page(request):
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
             # TODO: creator.cover и creator.achievements - фантастические поля
-            creator.description = request.POST['profile_description']
+            creator.description = request.POST['description']
             creator.email = user.email
             if 'iscompany' in request.POST:
                 creator.is_company = True
