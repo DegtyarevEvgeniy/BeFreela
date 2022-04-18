@@ -20,13 +20,10 @@
             <thead>
                 <tr>
                     <th scope="row">#</th>
-                    <th class="th-lg"><a>First Name</a></th>
-                    <th class="th-lg"><a href="">Last Name</a></th>
-                    <th class="th-lg"><a href="">Username</a></th>
-                    <th class="th-lg"><a href="">Username</a></th>
                     <th class="th-lg"><a href="">Название товара</a></th>
+                    <th class="th-lg"><a href="">Бренд</a></th>
                     <th class="th-lg"><a href="">Цена</a></th>
-                    <th class="th-lg"><a href="">Удалить</a></th>
+                    <th class="th-lg"><a href="">Опубликовать</a></th>
                 </tr>
             </thead>
 
@@ -34,15 +31,13 @@
             <!--Table body-->
             <tbody>
             {% for product in products %}
+
                 <tr>
                     <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
                     <td>{{ product.product_name }}</td>
+                    <td>text</td>
                     <td>{{ product.cost }}</td>
-                    <td><button type="button" class="btn btn-outline-secondary">x</button></td>
+                    <td>text</td>
                 </tr>
 
             {% endfor %}
