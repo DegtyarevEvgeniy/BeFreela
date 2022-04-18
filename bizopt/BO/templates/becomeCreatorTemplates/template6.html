@@ -284,7 +284,7 @@
                 <label>Комплект товара</label>
                 <div class="input-group mt-2 mb-2">
                     <input type="text" id="inputvalue" class="form-control">
-                    <button class="btn btn-outline-secondary" id="btnAdd" onclick="abbInput()" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-outline-secondary" id="btnAdd" onclick="addInput(this)" type="button"><i class="fa fa-plus"></i></button>
                     <br>
                 </div>
                 <!-- template start -->
@@ -339,7 +339,7 @@
                 <label>Ключевые слова</label>
                 <div class="input-group mt-2 mb-2">
                     <input type="text" id="keyValue" class="form-control">
-                    <button class="btn btn-outline-secondary" id="btnAddkey" onclick="addKey()" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-outline-secondary" id="btnAddkey" onclick="addKey(this)" type="button"><i class="fa fa-plus"></i></button>
                     <br>
                 </div>
                 <div id="keyDiv"></div>
@@ -402,12 +402,14 @@
         keynum = 0,
         currentTab = 0;
 
-    function abbInput() {
+    function addInput(el) {
         inputnum++;
+        let input = el.parentElement.getElementsByTagName("input")[0];
         if (inputnum < 15) {
             var $inputGroup =
                 `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" value="${document.getElementById('inputvalue').value}" disabled> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button></div>`;
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+            input.value = "";
         }
     }
 
@@ -420,21 +422,16 @@
         let BtnImage = el.parentElement.getElementsByTagName("span")[0];
         inputPole.disabled ? BtnImage.innerHTML = "edit_off" : BtnImage.innerHTML = "mode_edit";
         inputPole.disabled ? inputPole.removeAttribute("disabled") : inputPole.setAttribute("disabled", "disabled");
-        console.log(BtnImage.innerHTML);
-
     }
 
-    function addKey() {
+    function addKey(el) {
         keynum++;
+        let key = el.parentElement.getElementsByTagName("input")[0];
         if (keynum < 15) {
             var $inputGroup =
                 `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" disabled value="${document.getElementById('keyValue').value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
             document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-
-            function editInput(el, cond) {
-                let input = el.parentElement;
-                console.log(input.getElementsByClassName("form-control"));
-            }
+            key.value = "";
         }
     }
 
@@ -476,6 +473,5 @@
             x.length; i++) {
             x[i].className = x[i].className.replace(" active", "");
         }
-        // x[n].className += " active";
     }
 </script>
