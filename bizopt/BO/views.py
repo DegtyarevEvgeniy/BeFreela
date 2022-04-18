@@ -422,16 +422,24 @@ def cardTask_page(request, task_id):
 
 def editTask_page(request):
     context = gen_menu(request)
-    try:
-        tasks = Task.objects.filter(id_creator=request.user)
-        context['task_cards'] = [{'id': task.id,
-                                  'name': task.name,
-                                  'description': task.description
-                                  } for task in tasks]
-        return render(request, 'editTask.html', context)
-    except Task.DoesNotExist as e:
-        raise Http404 from e
-
+    if request.method == 'POST':
+        form = addTasks(request.POST)
+        if form.is_valid():
+            task = Task()
+            task.name = request.POST['task_name']
+            task.description = request.POST['description']
+            task.price = request.POST['price']
+            task.time = request.POST['date']
+            task.id_creator = str(request.user)
+            task.save()
+            task.tags.add(form.cleaned_data['select'])
+            task.save()
+        context["form"] = form
+        return redirect('/yourTasks/')
+    else:
+        form = addTasks()
+        context["form"] = form
+    return render(request, 'editTask.html', context)
 
 def edit_profile(request):
     context = gen_menu(request)
