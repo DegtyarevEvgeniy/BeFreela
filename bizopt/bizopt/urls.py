@@ -46,6 +46,7 @@ urlpatterns = [
     path('creators/cardProduct/<product_id>/', views.cardProduct_page),
     path('creators/cardResume/', views.cardResume_page),
     path('tasks/cardTask/<task_id>/', views.cardTask_page),
+    path('yourTasks/editTask/', views.editTask_page),
     path('orders/', views.orders_page),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]

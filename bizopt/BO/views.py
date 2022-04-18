@@ -420,6 +420,18 @@ def cardTask_page(request, task_id):
     except Task.DoesNotExist as e:
         raise Http404 from e
 
+def editTask_page(request):
+    context = gen_menu(request)
+    try:
+        tasks = Task.objects.filter(id_creator=request.user)
+        context['task_cards'] = [{'id': task.id,
+                                  'name': task.name,
+                                  'description': task.description
+                                  } for task in tasks]
+        return render(request, 'editTask.html', context)
+    except Task.DoesNotExist as e:
+        raise Http404 from e
+
 
 def edit_profile(request):
     context = gen_menu(request)

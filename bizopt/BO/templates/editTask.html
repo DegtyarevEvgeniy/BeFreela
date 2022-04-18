@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="task-edit position">
+        <h1>Редактирование задачи</h1>
+    </div>
+
+<!--<div class="row mt-3 mb-3">-->
+<!--                    <div class="col-md-12">-->
+<!--                        <h1 class="labels">Расскажите о себе</h1>-->
+<!--                        &lt;!&ndash;            <textarea name="profile_description" class="form-control"></textarea>&ndash;&gt;-->
+<!--                        {{ form9.description }}-->
+<!--                    </div>-->
+<!--                </div>-->
+
+    <div>
+        <div class="all-position">
+            <div class="input-group mb-3 name-task">
+                <span class="input-group-text">Название задачи</span>
+                <input type="text" class="form-control position-name" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="text">
+            </div>
+            <div class="price-and-date">
+                <div class="input-group mb-3 price-and-date-width">
+                    <span class="input-group-text">Цена</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="text">
+                </div>
+                <div class="input-group mb-3 price-and-date-width date">
+                    <span class="input-group-text">Дата</span>
+                    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" value="text">
+                </div>
+            </div>
+
+            <div class="input-group mb-3 name-task">
+                <label class="input-group-text" for="inputGroupSelect01">Профиль</label>
+                <select class="form-select" id="inputGroupSelect01">
+                    <option selected>text</option>
+                    <option value="text">1</option>
+                    <option value="text">2</option>
+                    <option value="text">3</option>
+                </select>
+            </div>
+            <div class="input-group name-task">
+                <span class="input-group-text" >Описание задачи</span>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+            <button type="button" class="btn btn-secondary button">Сохранить</button>
+        </div>
+    </div>
+
+<style>
+    .position {
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+    .all-position {
+        margin-left: 520px;
+        margin-right: 400px;
+    }
+
+    .name-task {
+        width: 500px;
+        padding-bottom: 70px;
+    }
+    .price-and-date {
+        display: inline-block;
+        position: relative;
+    }
+    .price-and-date-width {
+        width: 230px;
+    }
+    .date {
+        left: 270px;
+        bottom: 55px;
+    }
+
+    .task-about {
+        left: 600px;
+        bottom: 270px;
+        height: 300px;
+    }
+
+
+</style>
+
+{% endblock %}
