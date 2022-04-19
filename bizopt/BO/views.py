@@ -1,4 +1,5 @@
 import os
+import re
 
 from django.shortcuts import render, redirect
 from .utils import *
@@ -78,7 +79,6 @@ def gen_menu(request):
 def creators_page(request):
     context = gen_menu(request)
     return render(request, 'creators.html', context)
-
 
 def logout_view(request):
     logout(request)
