@@ -303,7 +303,7 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '3':
         account = Account.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.email)
+        products = Product_creator.objects.filter(id_crea tor=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price
                                 }
