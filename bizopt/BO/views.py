@@ -299,7 +299,7 @@ def becomeCreatorTemplate_page(request, name):
                                     }
                                    for product in products_v]
         except Product_buy.DoesNotExist as e:
-            content['products'] = None
+            content['products'] = None 
 
     elif name == '3':
         account = Account.objects.get(email=request.user)
