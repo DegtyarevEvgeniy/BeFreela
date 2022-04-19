@@ -153,8 +153,7 @@ def becomeCreator_page(request):
         the_same_creator_by_email = Creator.objects.filter(email=user.email)
         if len(the_same_creator_by_email) != 0:
             # TODO: вывести на экране где нибудь сообщение об ошибке, предложенное в данном context
-            context[
-                'error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
+            context['error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
         else:
             creator = Creator()
             if request.FILES:

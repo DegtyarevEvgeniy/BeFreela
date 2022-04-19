@@ -118,6 +118,7 @@ class Resume(forms.Form):
     }))
     first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
         'class': "form-control",
+        'value': "TROLOLO"
     }))
     cover = forms.ImageField(required=False)
     telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
