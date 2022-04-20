@@ -185,6 +185,9 @@ def becomeCreator_page(request):
             #  и multiple вернуть на фронт
             local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
             product.picture = local_path_to_file
+        #if "product_creator_tags" in request.POST:
+        #   form = MyForm(request.POST)
+        #   product.tags.add(form.cleaned_data['select'])
         product.product_name = request.POST['product_name']
         product.price = request.POST['price']
         product.description = request.POST['description']

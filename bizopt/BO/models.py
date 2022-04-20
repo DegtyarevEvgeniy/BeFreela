@@ -35,7 +35,6 @@ class Product_creator(models.Model):
     # set = list
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
-    tags = TaggableManager()
     width_product = models.FloatField('', default=0)
     height_product = models.FloatField('', default=0)
     length_product = models.FloatField('', default=0)
@@ -45,7 +44,7 @@ class Product_creator(models.Model):
     availability = models.CharField('', max_length=100, default='-')
     picture = models.ImageField('', upload_to='images/product',
                                 default='images/default.png')
-
+    tags = TaggableManager()
 
 class Task(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
@@ -58,6 +57,7 @@ class Task(models.Model):
     price = models.IntegerField(default='')
     time = models.DateField(max_length=50, default='-')
     tags = TaggableManager()
+
 
     def __unicode__(self):
         return self.tags
