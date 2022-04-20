@@ -1,8 +1,8 @@
   {% for creator in creators %}
-      <div class="wrapper">
+  <!-- <div class="wrapper">
         <div class="img-area">
           <div class="inner-area">
-            <img src="{{ creator.avatar }}" alt="">
+            <img src="" alt="">
           </div>
         </div>
 
@@ -34,5 +34,32 @@
             <span>12.8k</span>
           </div>
         </div>
+      </div> -->
+  <div class="uk-margin-auto uk-padding-remove uk-card uk-card-hover uk-card-body uk-width-1-2@m" href="#">
+    <div class=" uk-padding-auto uk-card-header">
+      <div class=" uk-padding-auto uk-grid-small uk-flex-middle" uk-grid>
+        <div class=" uk-padding-auto uk-width-auto">
+          <img class="uk-border-circle" width="200" height="200" src="{{ creator.avatar }}">
+        </div>
+        <div class=" uk-padding-auto uk-width-expand">
+          <h3 class="uk-card-title uk-margin-remove-bottom">{{ creator.first_name }}</h3>
+          <p class="uk-text-meta uk-margin-remove-top">{{ creator.tag }}</p>
+          <div class=" uk-padding-auto social-icons">
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-facebook-f"></i></a>
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-twitter"></i></a>
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-instagram"></i></a>
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
       </div>
+    </div>
+    <div class=" uk-padding-auto uk-card-body">
+      <p class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+    </div>
+    <div class=" uk-padding-auto uk-card-footer">
+      <a href="#" class="uk-margin-right uk-button uk-button-text">Сохранить</a>
+      <a href="#" class="uk-margin-left uk-button uk-button-text">Написать</a>
+    </div>
+  </div>
+
   {% endfor %}
