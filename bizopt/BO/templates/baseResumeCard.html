@@ -1,39 +1,29 @@
   {% for creator in creators %}
-      <div class="wrapper">
-        <div class="img-area">
-          <div class="inner-area">
-            <img src="{{ creator.avatar }}"
-                    {% comment %}src="https://images.unsplash.com/photo-1492288991661-058aa541ff43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"{% endcomment %} alt="">
-          </div>
+  <div class="uk-margin-auto uk-padding-remove uk-card uk-card-hover uk-card-body uk-width-1-2@m" href="#">
+    <div class=" uk-padding-auto uk-card-header">
+      <div class=" uk-padding-auto uk-grid-small uk-flex-middle" uk-grid>
+        <div class=" uk-padding-auto uk-width-auto">
+          <img class="uk-border-circle" width="200" height="200" src="{{ creator.avatar }}">
         </div>
-
-        <div class="name">{{ creator.first_name }}</div>
-        <div class="about">{{ creator.tag }}</div>
-        <div class="social-icons">
-          <a href="#" class="fb"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="twitter"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="insta"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="yt"><i class="fab fa-youtube"></i></a>
-        </div>
-        <div class="buttons">
-          <a type="button" href="cardResume">Написать</a>
-          <button>Запомнить</button>
-        </div>
-        <div class="social-share">
-          <div class="row">
-            <i class="far fa-heart"></i>
-            <i class="icon-2 fas fa-heart"></i>
-            <span>20.4k</span>
-          </div>
-          <div class="row">
-            <i class="far fa-comment"></i>
-            <i class="icon-2 fas fa-comment"></i>
-            <span>14.3k</span>
-          </div>
-          <div class="row">
-            <i class="fas fa-share"></i>
-            <span>12.8k</span>
+        <div class=" uk-padding-auto uk-width-expand">
+          <h3 class="uk-card-title uk-margin-remove-bottom">{{ creator.first_name }}</h3>
+          <p class="uk-text-meta uk-margin-remove-top">{{ creator.tag }}</p>
+          <div class=" uk-padding-auto social-icons">
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-facebook-f"></i></a>
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-twitter"></i></a>
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-instagram"></i></a>
+            <a class="roundedSocialBtn" href="#"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
       </div>
+    </div>
+    <div class=" uk-padding-auto uk-card-body">
+      <p class="uk-text-truncate">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+    </div>
+    <div class=" uk-padding-auto uk-card-footer">
+      <a href="#" class="uk-margin-right uk-button uk-button-text">Сохранить</a>
+      <a href="cardResume" class="uk-margin-left uk-button uk-button-text">Написать</a>
+    </div>
+  </div>
+
   {% endfor %}

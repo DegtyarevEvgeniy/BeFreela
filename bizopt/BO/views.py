@@ -1,4 +1,5 @@
 import os
+import re
 
 from django.shortcuts import render, redirect
 from .utils import *
@@ -79,7 +80,6 @@ def creators_page(request):
     context = gen_menu(request)
     return render(request, 'creators.html', context)
 
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
@@ -153,8 +153,7 @@ def becomeCreator_page(request):
         the_same_creator_by_email = Creator.objects.filter(email=user.email)
         if len(the_same_creator_by_email) != 0:
             # TODO: вывести на экране где нибудь сообщение об ошибке, предложенное в данном context
-            context[
-                'error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
+            context['error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
         else:
             creator = Creator()
             if request.FILES:
@@ -302,7 +301,7 @@ def becomeCreatorTemplate_page(request, name):
                                     }
                                    for product in products_v]
         except Product_buy.DoesNotExist as e:
-            content['products'] = None
+            content['products'] = None 
 
     elif name == '3':
         account = Account.objects.get(email=request.user)
@@ -423,6 +422,26 @@ def cardTask_page(request, task_id):
     except Task.DoesNotExist as e:
         raise Http404 from e
 
+def editTask_page(request):
+    context = gen_menu(request)
+    if request.method == 'POST':
+        form = addTasks(request.POST)
+        if form.is_valid():
+            task = Task()
+            task.name = request.POST['task_name']
+            task.description = request.POST['description']
+            task.price = request.POST['price']
+            task.time = request.POST['date']
+            task.id_creator = str(request.user)
+            task.save()
+            task.tags.add(form.cleaned_data['select'])
+            task.save()
+        context["form"] = form
+        return redirect('/yourTasks/')
+    else:
+        form = addTasks()
+        context["form"] = form
+    return render(request, 'editTask.html', context)
 
 def edit_profile(request):
     context = gen_menu(request)
@@ -523,12 +542,12 @@ def forgot_password_page(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    tasks = Task.objects.filter(id_user_do=request.user, status1="in work")
-    content['tasks'] = [{
-        'name': task.name,
-        'price': task.price,
-        'description': task.description
-    } for task in tasks]
+    productss = Product_buy.objects.filter(id_user_buy=request.user)
+    content['products'] = [{
+        'id': product.id,
+        'product_name': product.product_name,
+        'id_user_buy': product.id_user_buy,
+    } for product in productss]
 
     return render(request, 'orders.html', content)
 
