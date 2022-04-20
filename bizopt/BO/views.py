@@ -539,12 +539,12 @@ def forgot_password_page(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    tasks = Task.objects.filter(id_user_do=request.user, status1="in work")
-    content['tasks'] = [{
-        'name': task.name,
-        'price': task.price,
-        'description': task.description
-    } for task in tasks]
+    productss = Product_buy.objects.filter(id_user_buy=request.user)
+    content['products'] = [{
+        'id': product.id,
+        'product_name': product.product_name,
+        'id_user_buy': product.id_user_buy,
+    } for product in productss]
 
     return render(request, 'orders.html', content)
 
