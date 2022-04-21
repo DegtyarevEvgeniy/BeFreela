@@ -443,6 +443,12 @@ def editTask_page(request):
         context["form"] = form
     return render(request, 'editTask.html', context)
 
+def infoTask_page(request):
+    context = gen_menu(request)
+    form = addTasks()
+    context["form"] = form
+    return render(request, 'infoTask.html', context)
+
 def edit_profile(request):
     context = gen_menu(request)
     try:
