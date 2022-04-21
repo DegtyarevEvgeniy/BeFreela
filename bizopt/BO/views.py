@@ -307,7 +307,8 @@ def becomeCreatorTemplate_page(request, name):
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
-                                'cost': product.price
+                                'cost': product.price,
+                                'id': product.id,
                                 }
                                for product in products]
     elif name == '2':

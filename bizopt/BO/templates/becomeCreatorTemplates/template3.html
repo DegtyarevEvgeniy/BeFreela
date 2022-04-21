@@ -34,12 +34,14 @@
             {% for product in products %}
 
                 <tr>
-                    <th scope="row">1</th>
+                    <th scope="row">{{product.id}}</th>
                     <td>{{ product.product_name }}</td>
                     <td>text</td>
                     <td>{{ product.cost }}</td>
                     <td>text</td>
-                    <td><button type="button" class="btn btn-outline-secondary">X</button></td>
+                    <td>
+                        <button type="button" name="delete" class="btn btn-outline-secondary">X</button>
+                    </td>
                 </tr>
 
             {% endfor %}
