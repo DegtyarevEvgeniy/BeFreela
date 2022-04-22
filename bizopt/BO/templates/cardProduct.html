@@ -1,102 +1,137 @@
 {% extends "base.html" %} {% block content %}
 
-
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
+</head>
 <main>
 
+    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" style="width: 90%; margin: 0 auto;" uk-grid uk-lightbox="animation: slide">
+        <div class="uk-card-media-left uk-cover-container">
+            <a style="width: 100%; height: 100%" class="uk-inline" href="{{ product.picture.url }}"
+                data-caption="Caption 1">
+                <img src="{{ product.picture.url }}" alt="" uk-cover>
+            </a>
+            <canvas width="400" height="400"></canvas>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <div class="uk-card-body">
+                    <h4 class="product-card-details-product-name">
+                        {{product.product_name}}
+                    </h4>
 
-    <div class="product-card-details-container-outer">
+                    <hr class="uk-divider-medium uk-margin-samll">
+
+                    <h4>Описание:</h4>
+                    <h5 class="product-card-details-product-desc">
+                        {{product.description}}
+                    </h5>
+
+                    <hr class="uk-divider-medium uk-margin-samll">
+
+                    <h4>Есть в наличии: {% if product.availability == true%}
+                        <span class="badge bg-red"></span> {%else%}
+                        <span class="badge bg-green">White</span> {%endif%}
+                    </h4>
+
+                    <hr class="uk-divider-medium uk-margin-samll">
+
+                    <h4> Цена: </h4>
+                    <h4>{{product.cost}}</h4>
+
+                    <hr class="uk-divider-medium uk-margin-samll">
+
+                    <button type="submit" class="uk-button uk-button-primary uk-margin-right uk-border-rounded">Показать</button>
+                    <button type="submit" class="uk-button uk-button-primary uk-margin-left uk-border-rounded">Отправить запрос</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- <div class="product-card-details-container-outer">
         <div class="container">
             <div class="product-card-details-container">
-
                 <div class="product-card-details row">
                     <div class="col-md-5 p-1">
                         <img class="product-card-details-img" src={{ product.picture.url }} />
                     </div>
                     <div class="col-md-7 p-1">
-
                         <div class="product-card-details-content">
                             <ul class="list-group list-group-flush">
-
                                 <li class="list-group-item">
-                                    <h2 class="product-card-details-product-name">
+                                    <h4 class="product-card-details-product-name">
                                         {{product.product_name}}
-                                    </h2>
+                                    </h4>
                                 </li>
-
                                 <li class="list-group-item">
                                     <h6>Описание:</h6>
                                     <h6 class="product-card-details-product-desc">
                                         {{product.description}}
                                     </h6>
-
                                 </li>
-
                                 <li class="list-group-item">
-
                                     <h6>Есть в наличии: {% if product.availability == true%}
                                         <span class="badge bg-red"></span> {%else%}
                                         <span class="badge bg-green">White</span> {%endif%}
                                     </h6>
                                 </li>
-
-
                                 <li class="list-group-item">
-
                                     <h6> Цена: </h6>
-                                    <h3>{{product.cost}}</h3>
-
+                                    <h4>{{product.cost}}</h4>
                                 </li>
-
                                 <li class="list-group-item">
-<!--                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-<!--                                      Показать-->
-<!--                                    </button>-->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="exampleModalLabel">Контакты</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     тут контакты для связи
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Закрыть</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="d-flex flex-row bd-highlight mb-3">
-                                        <button type="button" class="btn btn-primary" style="margin-right: 5%" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <button type="button" class="btn btn-primary" style="margin-right: 5%"
+                                            data-bs-toggle="modal" data-bs-target="#exampleModal">
                                             Показать
                                         </button>
-                                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Отправить запрос</button>
-
-
+                                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                                            data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Отправить
+                                            запрос</button>
                                         <form method="post" enctype="multipart/form-data">
                                             {% csrf_token %}
-                                            <div class="offcanvas offcanvas-top" style="height: 10%; background-color: #25d366"  tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
+                                            <div class="offcanvas offcanvas-top"
+                                                style="height: 10%; background-color: #25d366" tabindex="-1"
+                                                id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
                                                 <div class="offcanvas-header">
                                                     <h5 id="offcanvasTopLabel" style="margin: auto">Успешно!</h5>
-                                                    <button type="submit" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close" id="liveAlertBtn"></button>
+                                                    <button type="submit" class="btn-close text-reset"
+                                                        data-bs-dismiss="offcanvas" aria-label="Close"
+                                                        id="liveAlertBtn"></button>
                                                 </div>
                                                 <div class="offcanvas-body">
                                                 </div>
                                             </div>
-
                                         </form>
                                     </div>
                                 </li>
-
                             </ul>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -108,24 +143,24 @@
     main {
         padding-top: 100px;
     }
-    
+
     @media (min-width: 768px) {
         .product-card-details {
             max-height: 640px;
         }
     }
-    
+
     .product-card-details {
         border-radius: 8px;
         box-shadow: 0 7px 25px -10px rgba(0, 0, 0, 0.33);
     }
-    
+
     .product-card-details-img {
         width: 100%;
         max-height: 620px;
         object-fit: cover;
     }
-    
+
     .product-card-details-content {
         height: 100%;
         display: flex;
@@ -134,14 +169,17 @@
     }
 </style>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
 
+<script>
     var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     var alertTrigger = document.getElementById('liveAlertBtn')
 
     function alert(message, type) {
         var wrapper = document.createElement('div')
-        wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message + '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
+        wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
 
         alertPlaceholder.append(wrapper)
     }
