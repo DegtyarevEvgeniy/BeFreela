@@ -26,16 +26,15 @@ def gen_menu(request):
         context = {
             'user': Account.objects.get(email=request.user.email),
             'menu': [
-                {'position': 'out', 'link': '/', 'text': 'Главная'},
-                {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
-                # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
-                # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
+                {'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
+                {'position': 'out', 'link': '/creators/', 'text': 'Товары'},
                 {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'position': 'out', 'link': '', 'text': user.email},
-                {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
-                {'position': 'in', 'link': '/orders/', 'text': 'Заказы'},
+                {'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
+                {'position': 'in', 'link': '/addTask/', 'text': 'Создать задачу'},
+                {'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
+                {'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
                 {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-                {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
                 {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
 
             ]
@@ -44,18 +43,10 @@ def gen_menu(request):
         context = {
 
             'menu': [
-                {'position': 'out', 'link': '/', 'text': 'Главная'},
-                {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
-                # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
-                # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
+                {'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
+                {'position': 'out', 'link': '/creators/', 'text': 'Товары'},
                 {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'position': 'out', 'link': '', 'text': 'user.email'},
-                {'position': 'in', 'link': '/yourTasks/', 'text': 'Ваши задачи'},
-                {'position': 'in', 'link': '/orders/', 'text': 'Заказы'},
-                {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-                {'position': 'in', 'link': '/becomeCreator/', 'text': 'Криейтерам'},
-                {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
-
+                {'position': 'out', 'link': 'accounts/login/', 'text': 'Войти'},
             ]
         }
 

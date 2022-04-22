@@ -1,88 +1,118 @@
-{% if user.is_authenticated %}
-   {% for item in menu %}
-    {% if item.text != user.email %}
+<nav class="uk-navbar-container" uk-navbar>
 
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="{{ item.link }}">{{ item.text }}</a>
-    </li>
-    {% else %}
+    <div class="uk-navbar-left">
 
-    {% if item.position == "out" %}
-    {% if user.is_authenticated %}
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
-            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="rounded-circle" width="150px" src="{{user.userImage}}">
-            {{ item.text }}
-            
-        </a>
-        {%else%}
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="accounts/login/">Войти</a>
-
-        {% endif %}
-
-        <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark color_menu"
-            aria-labelledby="dropdownMenuLink">
-            {% if item.position == "in"  %}
-            <li style="display: flex"><a class="dropdown-item"
-                    href="{{ item.link }}">{{ item.name }}</a></li>
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href="#">
+                    <h1>BIZOPT</h1>
+                </a></li>
+            <!--            <li>-->
+            <!--                <a href="#">Parent</a>-->
+            <!--                <div class="uk-navbar-dropdown">-->
+            <!--                    <ul class="uk-nav uk-navbar-dropdown-nav">-->
+            <!--                        <li class="uk-active"><a href="#">Active</a></li>-->
+            <!--                        <li><a href="#">Item</a></li>-->
+            <!--                        <li><a href="#">Item</a></li>-->
+            <!--                    </ul>-->
+            <!--                </div>-->
+            <!--            </li>-->
+            <!--            <li><a href="#">Item</a></li>-->
         </ul>
+
     </div>
-    {% endif %}
-    {% endif %}
+    <div class="uk-navbar-center">
 
 
-    {% endif %}
-    {% endfor %}
-    
-    
-{%else%}
-  
-  
-{% for item in menu %}
-    {% if item.text != 'user.email' %}
+        <form class="uk-search uk-search-default uk-search-navbar">
+            <span uk-search-icon></span>
+            <input class="uk-search-input" type="search" placeholder="Search">
+        </form>
+    </div>
 
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="{{ item.link }}">{{ item.text }}</a>
-    </li>
-    {% else %}
+    <div class="uk-navbar-right">
 
-    {% if item.position == "out" %}
-    {% if user.is_authenticated %}
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
-            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="rounded-circle" width="150px" src="user.userImage">
+        <ul class="uk-navbar-nav">
 
-            {{ item.text }}
-            
-        </a>
-        {%else%}
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="accounts/login/">Войти</a>
+            {% if user.is_authenticated %}
+            {% for item in menu %}
+            {% if item.text != user.email %}
 
-        {% endif %}
+            <li class="uk-active"><a href="{{ item.link }}">{{ item.text }}</a></li>
 
-        <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark color_menu"
-            aria-labelledby="dropdownMenuLink">
-            {% if item.position == "in"  %}
-            <li style="display: flex"><a class="dropdown-item"
-                    href="{{ item.link }}">{{ item.name }}</a></li>
+            <!--            <li class="nav-item">-->
+            <!--                <a class="nav-link active" aria-current="page" style="color: white;" href="{{ item.link }}">{{ item.text }}</a>-->
+            <!--            </li>-->
+
+            {% else %}
+
+            {% if item.position == "out" %}
+
+
+            <li>
+            <a href="{{ item.link }}">{{item.text}}</a>
+
+            <!--                <li><a class="nav-link active" aria-current="page" style="color: white;" href="accounts/login/">Войти</a></li>-->
+            <div class="uk-navbar-dropdown">
+
+                {% endif %}
+                <ul class="uk-nav uk-navbar-dropdown-nav">
+                    {% if item.position == "in"  %}
+                    <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                </ul>
+            </div>
+            {% endif %}
+
+
+            {% endif %}
+            </li>
+            {% endfor %}
+
+
+
+            {% else %}
+
+            {% for item in menu %}
+            {% if item.text != user.email %}
+
+            <li class="uk-active"><a href="{{ item.link }}">{{ item.text }}</a></li>
+
+            <!--            <li class="nav-item">-->
+            <!--                <a class="nav-link active" aria-current="page" style="color: white;" href="{{ item.link }}">{{ item.text }}</a>-->
+            <!--            </li>-->
+
+            {% else %}
+
+
+
+
+            <!--                <li><a class="nav-link active" aria-current="page" style="color: white;" href="accounts/login/">Войти</a></li>-->
+
+
+            {% endif %}
+
+            {% endfor %}
+
+
+            {% endif %}
+
+
+
+
+            <!--            <li class="uk-active"><a href="#">Active</a></li>-->
+            <!--            <li>-->
+            <!--                <a href="#">Parent</a>-->
+            <!--                <div class="uk-navbar-dropdown">-->
+            <!--                    <ul class="uk-nav uk-navbar-dropdown-nav">-->
+            <!--                        <li class="uk-active"><a href="#">Active</a></li>-->
+            <!--                        <li><a href="#">Item</a></li>-->
+            <!--                        <li><a href="#">Item</a></li>-->
+            <!--                    </ul>-->
+            <!--                </div>-->
+            <!--            </li>-->
+            <!--            <li><a href="#">Item</a></li>-->
+
         </ul>
+
     </div>
-    {% endif %}
-    {% endif %}
 
-
-
-    {% endif %}
-    {% endfor %}
-    
-{% endif %}
-
-   
-  
- 
+</nav>
