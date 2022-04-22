@@ -38,6 +38,7 @@
 
 {% for product in products %}
 {% if profile.email == product.id_creator %}
+{% if product.availability == 1 %}
 
 <div class="card" style="width: 18rem;">
     <img src="{{ product.picture.url }}" class="card-img-top" alt="...">
@@ -56,6 +57,7 @@
     </div>
 </div>
 
+{% endif %}
 {% endif %}
 {% endfor %}
 
