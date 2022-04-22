@@ -27,7 +27,7 @@ def gen_menu(request):
             'user': Account.objects.get(email=request.user.email),
             'menu': [
                 {'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
-                {'position': 'out', 'link': '/creators/', 'text': 'Товары'},
+                {'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'position': 'out', 'link': '', 'text': user.email},
                 {'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
@@ -534,7 +534,6 @@ def forgot_password_page(request):
         'menu': gen_menu(request)
     }
     return render(request, 'forgotPassword.html', content)
-
 
 
 
