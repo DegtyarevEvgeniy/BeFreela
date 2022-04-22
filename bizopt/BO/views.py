@@ -172,8 +172,6 @@ def becomeCreator_page(request):
         if request.FILES:
             file = request.FILES['product_photos']
             fs = FileSystemStorage()
-            # TODO: надо сделать сохранение нескольких фоток товара в базу
-            #  и multiple вернуть на фронт
             local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
             product.picture = local_path_to_file
         #if "product_creator_tags" in request.POST:
