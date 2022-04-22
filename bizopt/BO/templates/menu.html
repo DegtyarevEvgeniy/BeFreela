@@ -49,21 +49,21 @@
 
 
             <li>
-            <a href="{{ item.link }}">{{item.text}}</a>
+                <a href="{{ item.link }}">{{item.text}}</a>
 
-            <!--                <li><a class="nav-link active" aria-current="page" style="color: white;" href="accounts/login/">Войти</a></li>-->
-            <div class="uk-navbar-dropdown">
+                <!--                <li><a class="nav-link active" aria-current="page" style="color: white;" href="accounts/login/">Войти</a></li>-->
+                <div class="uk-navbar-dropdown">
+
+                    {% endif %}
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        {% if item.position == "in"  %}
+                        <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+                    </ul>
+                </div>
+                {% endif %}
+
 
                 {% endif %}
-                <ul class="uk-nav uk-navbar-dropdown-nav">
-                    {% if item.position == "in"  %}
-                    <li><a href="{{ item.link }}">{{ item.name }}</a></li>
-                </ul>
-            </div>
-            {% endif %}
-
-
-            {% endif %}
             </li>
             {% endfor %}
 
