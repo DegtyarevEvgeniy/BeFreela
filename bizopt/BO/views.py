@@ -313,9 +313,14 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
 
+    elif name == '4':
+        form = Resume()
+        content['form9'] = form
+
     # elif name == '4':
     #     try:
-    #         res = Creator.objects.get(email=request.email)
+    #         email = request.user
+    #         res = Creator.objects.get(email=email)
     #     except 404:
     #         res = Creator()
     #     if request.method == 'POST':
