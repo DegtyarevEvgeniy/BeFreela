@@ -1,0 +1,17 @@
+image: python:latest
+
+
+before_script:
+    - python3 -V
+
+stages:
+    - hello
+
+hello-job:
+    stages: hello
+
+    before_script:
+        echo "starting"
+
+    script:
+        - echo "ending"
