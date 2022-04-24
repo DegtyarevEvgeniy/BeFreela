@@ -452,11 +452,15 @@ def edit_profile(request):
                 path_to_local_image = os.path.join("images/profile", filename)
                 fs.save(path_to_local_image, file)
                 person.userImage = path_to_local_image
-            person.first_name = request.POST.get("first_name")
-            person.last_name = request.POST.get("last_name")
-            person.phone = request.POST.get("phone")
-
-            person.city = request.POST.get("city")
+            if request.POST.get('first_name', None):
+                print(request.POST['first_name'])
+                person.first_name = request.POST['first_name']
+            if request.POST.get('last_name', None):
+                person.last_name = request.POST['last_name']
+            if request.POST.get('phone', None):
+                person.phone = request.POST['phone']
+            if request.POST.get('city', None):
+                person.city = request.POST['city']
             person.save()
             return HttpResponseRedirect("/")
         else:
