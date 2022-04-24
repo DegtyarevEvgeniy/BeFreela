@@ -157,7 +157,7 @@ def becomeCreator_page(request):
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
             # TODO: creator.cover и creator.achievements - фантастические поля
-            creator.description = request.POST['description']
+            creator.description = request.POST.get('description', '-')
             creator.email = user.email
             if 'iscompany' in request.POST:
                 creator.is_company = True
@@ -165,6 +165,24 @@ def becomeCreator_page(request):
             else:
                 creator.company = False
             creator.save()
+
+    # if request.method == 'POST' and "profile_saver" in request.POST:
+    #     try:
+    #         res = Creator.objects.get(email=request.email)
+    #     except:
+    #         res = Creator()
+    #     form = Resume(request.POST)
+    #     if form.is_valid():
+    #         res.is_company = request.POST.get('is_company', None)
+    #         res.company_name = request.POST['company_name']
+    #         res.description = request.POST.get('description', None)
+    #         res.telegram = request.POST['telegram']
+    #         res.vk = request.POST['vk']
+    #         res.instagram = request.POST['instagram']
+    #         res.whatsapp = request.POST['whatsapp']
+    #         # res.cover = request.POST['cover']
+    #         res.published = request.POST['published']
+    #         res.save()
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
@@ -315,28 +333,13 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         form = Resume()
-        content['form9'] = form
-
-    # elif name == '4':
-    #     try:
-    #         email = request.user
-    #         res = Creator.objects.get(email=email)
-    #     except 404:
-    #         res = Creator()
-    #     if request.method == 'POST':
-    #         form = Resume(request.POST)
-    #         content["form9"] = form
-    #         if form.is_valid():
-    #             res.is_company = request.POST['is_company']
-    #             res.company_name = request.POST['company_name']
-    #             res.description = request.POST['description']
-    #             res.telegram = request.POST['telegram']
-    #             res.vk = request.POST['vk']
-    #             res.instagram = request.POST['instagram']
-    #             res.whatsapp = request.POST['whatsapp']
-    #             res.cover = request.POST['cover']
-    #             res.published = request.POST['published']
-    #             res.save()
+        content['form'] = form
+        try:
+            creator = Creator.objects.get(email=request.email)
+            content['creator'] = creator
+        except:
+            creator = Creator()
+            content['creator'] = creator
 
     return render(request, path, content)
 
