@@ -14,7 +14,7 @@ from .forms import *
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
-from account.models import Account
+from account.models import Account  
 import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
@@ -189,7 +189,7 @@ def becomeCreator_page(request):
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
-    if request.method == "POST" and "delete" in request.POST:
+    if request.method == 'POST' and "delete" in request.POST:
         print('qq')
         product = Product_creator.objects.get(product_id=request.POST['id'])
         product.delete()
@@ -216,7 +216,6 @@ def becomeCreator_page(request):
         if request.POST.get('my_email', None):
             partner.email = request.POST['my_email']
         partner.save()
-
     return render(request, 'becomeCreator.html', context)
 
 
@@ -273,7 +272,7 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '1':
-        if request.method == "POST" and "delete" in request.POST:
+        if request.method == "POST" and "agree" in request.POST:
             product = Product_buy.objects.get(product_id=request.POST['id'])
             product.status1 = "in_work"
             product.status2 = "in_waiting"

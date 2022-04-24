@@ -225,7 +225,6 @@
         <!-- Page Content  -->
         <div id="content">
             <div id="MainWindowContainer" class="container rounded bg-white" w3-inslude-html="template.html">
-
             </div>
         </div>
     </div>
@@ -234,7 +233,7 @@
 
     <script type="text/javascript">
         $(function() {
-            var pageNumber = 1; //here is a number of page
+            var pageNumber = 3; //here is a number of page
             var xhr = new XMLHttpRequest()
             xhr.open('GET', `becomeCreatorTemplates/${pageNumber}/`)
             xhr.onload = function() {

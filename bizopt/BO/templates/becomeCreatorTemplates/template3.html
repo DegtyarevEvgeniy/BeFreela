@@ -19,35 +19,41 @@
             <!--Table head-->
             <thead>
                 <tr>
-                    <th scope="row" class="th-lg"><a href="">Название товара</a></th>
-                    <th class="th-lg"><a href="">Бренд</a></th>
-                    <th class="th-lg"><a href="">Цена</a></th>
-                    <th class="th-lg"><a href="">Опубликовано</a></th>
-                    <th class="th-lg"><a href="">Удалить</a></th>
+                    <th scope="row" class="th-lg">Название товара</th>
+                    <th class="th-lg">Бренд</th>
+                    <th class="th-lg">Цена</th>
+                    <th class="th-lg">Опубликовано</th>
+                    <th class="th-lg">Удалить</th>
                 </tr>
             </thead>
 
             <!--Table head-->
             <!--Table body-->
-            <tbody>
-                <form method="POST" action="">
+                <form method="POST" id="goodsList" action="./" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <tbody>
 
-                    {% for product in products %}
+                {% for product in products %}
                     <tr>
                         <th scope="row">{{ product.product_name }}</th>
                         <td>text</td>
                         <td>{{ product.cost }}</td>
                         <td>text</td>
                         <td>
-                            <button type="submit" name="delete" href="#" class="btn btn-outline-secondary">X</button>
+                            
+
+                             <button name="delete" form="goodsList" type="submit" href="/becomeCreator/"
+                                class="btn btn-outline-secondary">X</button>
                         </td>
                     </tr>
 
-                    {% endfor %}
-                </form>
-
+                {% endfor %}
             </tbody>
+
+            </form>
+
+
+
             <!--Table body-->
 
         </table>
