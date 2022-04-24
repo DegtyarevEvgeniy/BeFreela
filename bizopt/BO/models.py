@@ -28,6 +28,7 @@ class Product_buy(models.Model):
 
 
 class Product_creator(models.Model):
+    product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     id_creator = models.CharField(max_length=200, default='-') #кто создал
     product_name = models.CharField('Название', max_length=500, default='-')
     country = models.CharField('Страна', max_length=30, default='-')

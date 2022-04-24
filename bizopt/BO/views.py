@@ -26,7 +26,7 @@ def gen_menu(request):
         context = {
             'user': Account.objects.get(email=request.user.email),
             'menu': [
-                {'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
+                {'position': 'out', 'link': '/creators/resume', 'text': 'Исполнители'},
                 {'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'position': 'out', 'link': '', 'text': user.email},
@@ -189,7 +189,10 @@ def becomeCreator_page(request):
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
-
+    if request.method == "POST" and "delete" in request.POST:
+        print('qq')
+        product = Product_creator.objects.get(product_id=request.POST['id'])
+        product.delete()
     if request.method == "POST" and "partner" in request.POST:
         partner = Partner()
         # TODO: сделать что-то с сохранением единажды на template13
@@ -270,25 +273,26 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '1':
-        # product = Product_buy.objects.get(product_name=request.product_name)
-        # product.status1 = "in_work"
-        # product.status2 = "in_waiting"
+        if request.method == "POST" and "delete" in request.POST:
+            product = Product_buy.objects.get(product_id=request.POST['id'])
+            product.status1 = "in_work"
+            product.status2 = "in_waiting"
         try:
             products = Product_buy.objects.filter(id_creator=request.user, status1="in work")
-            content['products'] = [{'id': product.id,
+            content['products'] = [{'id': product.product_id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
-                                    'status2': product.status2
+                                    'status2': product.status2,
                                     }
                                    for product in products]
             products_v = Product_buy.objects.filter(id_creator=request.user, status1="in waiting")
-            content['products_v'] = [{'id': product.id,
-                                    'product_name': product.product_name,
-                                    'customer': product.id_user_buy,
-                                    'status1': product.status1,
-                                    'id_user_buy': product.id_user_buy,
-                                    }
-                                   for product in products_v]
+            content['products_v'] = [{'id': product.product_id,
+                                       'product_name': product.product_name,
+                                       'customer': product.id_user_buy,
+                                       'status1': product.status1,
+                                       'id_user_buy': product.id_user_buy,
+                                      }
+                                     for product in products_v]
         except Product_buy.DoesNotExist as e:
             content['products'] = None 
 
@@ -297,9 +301,10 @@ def becomeCreatorTemplate_page(request, name):
         products = Product_creator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price,
-                                'id': product.id,
+                                'id': product.product_id,
                                 }
                                for product in products]
+
     elif name == '2':
         form = MyProfile(request.POST)
         content['form1'] = form

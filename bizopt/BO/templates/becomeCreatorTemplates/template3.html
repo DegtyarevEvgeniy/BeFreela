@@ -31,20 +31,24 @@
             <!--Table head-->
             <!--Table body-->
             <tbody>
-            {% for product in products %}
+            <form method="POST" action="">
+                            {% csrf_token %}
 
-                <tr>
-                    <th scope="row">{{product.id}}</th>
-                    <td>{{ product.product_name }}</td>
-                    <td>text</td>
-                    <td>{{ product.cost }}</td>
-                    <td>text</td>
-                    <td>
-                        <button type="button" name="delete" class="btn btn-outline-secondary">X</button>
-                    </td>
-                </tr>
+            {% for product in products %}
+                    <tr>
+                        <th scope="row">{{product.id}}</th>
+                        <td>{{ product.product_name }}</td>
+                        <td>text</td>
+                        <td>{{ product.cost }}</td>
+                        <td>text</td>
+                        <td>
+                            <button type="submit" name="delete" href="#" class="btn btn-outline-secondary">X</button>
+                        </td>
+                    </tr>
 
             {% endfor %}
+                                                </form>
+
             </tbody>
             <!--Table body-->
 
