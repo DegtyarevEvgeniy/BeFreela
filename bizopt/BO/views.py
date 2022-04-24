@@ -313,9 +313,25 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
 
-    elif name == '4':
-        form = Resume()
-        content['form9'] = form
+    # elif name == '4':
+    #     try:
+    #         res = Creator.objects.get(email=request.email)
+    #     except 404:
+    #         res = Creator()
+    #     if request.method == 'POST':
+    #         form = Resume(request.POST)
+    #         content["form9"] = form
+    #         if form.is_valid():
+    #             res.is_company = request.POST['is_company']
+    #             res.company_name = request.POST['company_name']
+    #             res.description = request.POST['description']
+    #             res.telegram = request.POST['telegram']
+    #             res.vk = request.POST['vk']
+    #             res.instagram = request.POST['instagram']
+    #             res.whatsapp = request.POST['whatsapp']
+    #             res.cover = request.POST['cover']
+    #             res.published = request.POST['published']
+    #             res.save()
 
     return render(request, path, content)
 
