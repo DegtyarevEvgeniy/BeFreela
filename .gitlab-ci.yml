@@ -31,7 +31,7 @@ pylint-job:
     before_script:
         - pip install -r requirements.txt
 
-    scripr:
+    script:
         -pylint ./chat
 
 hello-job:
