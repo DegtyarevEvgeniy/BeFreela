@@ -196,7 +196,9 @@ def becomeCreator_page(request):
     if request.method == "POST" and "partner" in request.POST:
         partner = Partner()
         # TODO: сделать что-то с сохранением единажды на template13
-        #  и доделать сохранение с template12 полностью(там заглушка)
+        #  и доделать сохранение с template12 полностью(там заглушка).
+        #  Сейчас нет возможности контролировать дублирующихся партнеров по-людски.
+        # TODO: как идентифицировать пользователя в будущем? уникальность по email?
         if request.POST.get('INN', None):
             partner.inn = request.POST['INN']
         if request.POST.get('short_name', None):
@@ -316,6 +318,21 @@ def becomeCreatorTemplate_page(request, name):
         form = Resume()
         content['form9'] = form
 
+    elif name == '11' or name == '12' or name == '13':
+        try:
+            partner = Partner.objects.get(email=request.user)
+            content['partner'] = {
+                'first_name': partner.first_name,
+                'last_name': partner.last_name,
+                'email': partner.email,
+                'INN': partner.inn,
+                'name_small': partner.name_small,
+                'name_full': partner.name_full,
+                'payment_account': partner.payment_account,
+                'reg_form': partner.reg_form
+            }
+        except Exception:
+            pass
     # elif name == '4':
     #     try:
     #         email = request.user

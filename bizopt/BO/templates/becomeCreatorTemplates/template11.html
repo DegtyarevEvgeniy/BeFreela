@@ -7,13 +7,13 @@
             <!-- start of bloc 1 -->
             <div class="tab" style="display: block;">
                 <label class="labels">ИНН</label>
-                <input type="text" class="form-control" name="INN" id="">
+                <input type="text" class="form-control" name="INN" id="" value="{{ partner.INN }}">
                 <br>
                 <label class="labels">Краткое наиименование</label>
-                <input type="text" class="form-control" name="short_name" id="">
+                <input type="text" class="form-control" name="short_name" id="" value="{{ partner.name_small }}">
                 <br>
                 <label class="labels">Полное наименование</label>
-                <input type="text" class="form-control" name="full_name" id="">
+                <input type="text" class="form-control" name="full_name" id="" value="{{ partner.name_full }}">
                 <br>
                 <label class="labels">Форма регистрации</label>
                 <div class="input-group mb-3">
@@ -26,7 +26,7 @@
                   </div>
                 <br>
                 <label class="labels">Расчетный счет</label>
-                <input type="text" class="form-control" name="payment_account" id="">
+                <input type="text" class="form-control" name="payment_account" id="" value="{{ partner.payment_account }}">
                 <br>
             </div>
             <!-- end of bloc 1 -->
