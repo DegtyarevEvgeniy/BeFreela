@@ -29,7 +29,7 @@
 
             <!--Table head-->
             <!--Table body-->
-                <form method="POST" id="goodsList" action="./" enctype="multipart/form-data">
+                <form method="GET" id="goodsList" action="./" enctype="multipart/form-data">
                     {% csrf_token %}
                     <tbody>
 
@@ -42,7 +42,7 @@
                         <td>
                             
 
-                             <button name="delete" form="goodsList" type="submit" href="/becomeCreator/"
+                             <button name="delete" form="goodsList" value= {{product.id}} type="submit" href="/becomeCreator/"
                                 class="btn btn-outline-secondary">X</button>
                         </td>
                     </tr>

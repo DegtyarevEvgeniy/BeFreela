@@ -189,10 +189,17 @@ def becomeCreator_page(request):
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
-    if request.method == 'POST' and "delete" in request.POST:
+    if request.method == 'GET' and "delete" in request.GET:
         print('qq')
-        product = Product_creator.objects.get(product_id=request.POST['id'])
+        product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
+    if request.method == 'GET' and "status" in request.GET:
+        print('keff')
+        product = Product_buy.objects.get(id=request.GET['status'])
+        product.status1 = 'in work'
+        product.status2 = 'in waiting'
+        product.save()
+
     if request.method == "POST" and "partner" in request.POST:
         partner = Partner()
         # TODO: сделать что-то с сохранением единажды на template13
@@ -274,20 +281,16 @@ def becomeCreatorTemplate_page(request, name):
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '1':
-        if request.method == "POST" and "agree" in request.POST:
-            product = Product_buy.objects.get(product_id=request.POST['id'])
-            product.status1 = "in_work"
-            product.status2 = "in_waiting"
         try:
             products = Product_buy.objects.filter(id_creator=request.user, status1="in work")
-            content['products'] = [{'id': product.product_id,
+            content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
                                     'status2': product.status2,
                                     }
                                    for product in products]
             products_v = Product_buy.objects.filter(id_creator=request.user, status1="in waiting")
-            content['products_v'] = [{'id': product.product_id,
+            content['products_v'] = [{'id': product.id,
                                        'product_name': product.product_name,
                                        'customer': product.id_user_buy,
                                        'status1': product.status1,
