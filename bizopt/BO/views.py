@@ -377,6 +377,14 @@ def employers_page(request):
 
 def index_page(request):
     context = gen_menu(request)
+    products = Product_creator.objects.all()
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture
+                            }
+                           for product in products]
     return render(request, 'index.html', context)
 
 
