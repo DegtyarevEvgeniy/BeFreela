@@ -9,8 +9,8 @@
 
         <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" style="width: 90%; margin: 0 auto;"
             uk-grid uk-lightbox="animation: slide">
-            <div class="uk-card-media-left uk-cover-container uk-padding">
-                <a style="width: 90%; height: 90%" class="uk-inline" href="{{ product.picture.url }}"
+            <div class="uk-card-media-left uk-cover-container uk-padding-large text-center">
+                <a style="width: 80%; height: 80%" class="uk-inline" href="{{ product.picture.url }}"
                     data-caption="Caption 1">
                     <img src="{{ product.picture.url }}" alt="" uk-cover>
                 </a>
@@ -58,37 +58,6 @@
 
 </main>
 
-
-
-<style>
-    main {
-        padding-top: 100px;
-    }
-
-    @media (min-width: 768px) {
-        .product-card-details {
-            max-height: 640px;
-        }
-    }
-
-    .product-card-details {
-        border-radius: 8px;
-        box-shadow: 0 7px 25px -10px rgba(0, 0, 0, 0.33);
-    }
-
-    .product-card-details-img {
-        width: 100%;
-        max-height: 620px;
-        object-fit: cover;
-    }
-
-    .product-card-details-content {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
