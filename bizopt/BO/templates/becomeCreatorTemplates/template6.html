@@ -284,7 +284,8 @@
                 <label>Комплект товара</label>
                 <div class="input-group mt-2 mb-2">
                     <input type="text" id="inputvalue" class="form-control">
-                    <button class="btn btn-outline-secondary" id="btnAdd" name="addComplect" onclick="addInput(this)" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-outline-secondary" id="btnAdd" name="addComplect" onclick="addInput(this)"
+                        type="button"><i class="fa fa-plus"></i></button>
                     <br>
                 </div>
                 <!-- template start -->
@@ -339,21 +340,23 @@
                 <label>Ключевые слова</label>
                 <div class="input-group mt-2 mb-2">
                     <input type="text" id="keyValue" class="form-control">
-                    <button class="btn btn-outline-secondary" id="btnAddkey" name="addKey" onclick="addKey(this)" type="button"><i class="fa fa-plus"></i></button>
+                    <button class="btn btn-outline-secondary" id="btnAddkey" name="addkey" onclick="addKey(this)"
+                        type="button"><i class="fa fa-plus"></i></button>
                     <br>
                 </div>
                 <div id="keyDiv"></div>
                 <br>
                 <br>
                 <label>Дополнительная информация о товаре</label>
-                <button class="btn btn-outline-secondary" onclick="showExtraInputs()" type="button"><i class="fa fa-arrow-down"></i></button>
+                <button class="btn btn-outline-secondary" onclick="showExtraInputs()" type="button"><i
+                        class="fa fa-arrow-down"></i></button>
                 <br>
                 <!--         IMAGE       -->
 
                 <div class="row mt-3 mb-3">
                     <div class="col-md-8">
                         <label class="labels">Загрузить фото</label>
-                            <input id="fileupload" class="form-control" name="product_photos" type="file" />
+                        <input id="fileupload" class="form-control" name="product_photos" type="file" />
                     </div>
                 </div>
 
@@ -437,6 +440,7 @@
 
     function addKey(el) {
         keynum++;
+        console.log(el)
         let key = el.parentElement.getElementsByTagName("input")[0];
         if (keynum < 15) {
             var $inputGroup =
@@ -452,7 +456,7 @@
 
     }
 
-    document.addEventListener("DOMContentLoaded", function(event) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         showTab(currentTab);
     });
 
