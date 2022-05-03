@@ -164,11 +164,18 @@ def becomeCreator_page(request):
                 local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
-            creator.description = request.POST('description', '-')
-            creator.whatsapp = request.POST('whatsapp', '-')
-            creator.vk = request.POST('vk', '-')
-            creator.telegram = request.POST('telegram', '-')
-            creator.published = request.POST('published', 1)
+            if request.POST.get('description', None):
+                creator.description = request.POST['description']
+            if request.POST.get('telegram', None):
+                creator.telegram = request.POST['telegram']
+            if request.POST.get('vk', None):
+                creator.vk = request.POST['vk']
+            if request.POST.get('whatsapp', None):
+                creator.whatsapp = request.POST['whatsapp']
+            if request.POST.get('instagram', None):
+                creator.instagram = request.POST['instagram']
+            if request.POST.get('published', 0):
+                creator.published = request.POST['published']
             creator.email = user.email
             if 'iscompany' in request.POST:
                 creator.is_company = True
