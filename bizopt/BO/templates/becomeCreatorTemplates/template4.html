@@ -19,16 +19,12 @@
                 <div class="row mt-3 d-flex align-items-center">
                     <div class="col-md-4">
                         <div class="form-check form-switch">
-                            <!--              <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()"-->
-                            <!--                id="isCompanyTrigger">-->
-                            {{ form9.is_company }}
-
+                                          <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()" id="isCompanyTrigger" placeholder="{{creator.is_company}}" value="{{creator.is_company}}">
                             <label class="form-check-label" for="isCompanyTrigger">Вы являетесь компанией?</label>
                         </div>
                     </div>
                     <div class="col-md-8" id="companyTriggerOn" style="opacity: 0;">
-                        <!--            <input type="text" id="companyInput" name="profile_company_name" class="form-control" placeholder="Название компании" disables>-->
-                        {{ form9.company_name }}
+                                    <input type="text" id="companyInput" name="profile_company_name" class="form-control" placeholder="{{creator.company_name}}" value="{{creator.company_name}}">
                     </div>
                 </div>
 
@@ -37,8 +33,7 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-12">
                         <h1 class="labels">Расскажите о себе</h1>
-                        <!--            <textarea name="profile_description" class="form-control"></textarea>-->
-                        {{ form9.description }}
+                                    <textarea name="profile_description" class="form-control" placeholder="{{creator.description}}" value="{{creator.description}}"></textarea>
                     </div>
                 </div>
 
@@ -46,17 +41,13 @@
                     <h1 class="labels mb-4">Контакты</h1>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <!--              <input type="text" class="form-control" placeholder="@tag">-->
-
-                            {{ form9.telegram }}
+                                          <input type="text" class="form-control" placeholder="{{creator.telegram}}" value="{{creator.telegram}}">
                             <snap class="input-group-text" style="color: white; background-color: #229ED9;">
                                 <i class="fab fa-telegram"></i>
                             </snap>
                         </div>
                         <div class="input-group mb-3">
-                            <!--              <input type="text" class="form-control" placeholder="https://vk.com/yourid">-->
-
-                            {{ form9.vk }}
+                                          <input type="text" class="form-control" placeholder="{{creator.vk}}" value="{{creator.vk}}">
                             <snap class="input-group-text" style="color: white; background-color: #4c75a3;">
                                 <i class="fab fa-vk"></i>
                             </snap>
@@ -64,17 +55,13 @@
                     </div>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <!--              <input type="text" class="form-control" placeholder=" https://instagram.com/tag">-->
-
-                            {{ form9.instagram }}
+                                          <input type="text" class="form-control" placeholder="{{creator.instagram}}" value="{{creator.instagram}}">
                             <snap class="input-group-text" style="color: white; background-color: #ac2bac;">
                                 <i class="fab fa-instagram"></i>
                             </snap>
                         </div>
                         <div class="input-group mb-3">
-                            <!--              <input type="text" class="form-control" placeholder="+71234567890">-->
-
-                            {{ form9.whatsapp }}
+                                          <input type="text" class="form-control" placeholder="{{creator.whatsapp}}" value="{{creator.whatsapp}}">
                             <snap class="input-group-text" style="color: white; background-color: #25d366;">
                                 <i class="fab fa-whatsapp"></i>
                             </snap>
@@ -86,7 +73,6 @@
                     <div class="col-md-8">
                         <label class="labels">Загрузить фото</label>
                                    <input id="fileupload" class="form-control" name="profile_images" type="file" >
-{#                        {{ form9.cover }}#}
                     </div>
                 </div>
 
@@ -95,9 +81,7 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-12">
                         <div class="form-check form-switch">
-                            <!--              <input class="form-check-input" type="checkbox" value="1">-->
-
-                            {{ form9.published }}
+                                          <input class="form-check-input" type="checkbox" placeholder="{{creator.published}}" value="{{creator.published}}">
                             <label class="form-check-label">Хотите опубликовать резюме?</label>
                         </div>
                     </div>

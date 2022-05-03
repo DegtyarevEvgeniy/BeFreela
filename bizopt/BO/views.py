@@ -138,26 +138,37 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
 def becomeCreator_page(request):
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
+
     if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
         context['first_name'] = user.first_name
         context['email'] = user.email
-        the_same_creator_by_email = Creator.objects.filter(email=user.email)
-        if len(the_same_creator_by_email) != 0:
-            # TODO: вывести на экране где нибудь сообщение об ошибке, предложенное в данном context
-            context['error'] = "You are unable to become another CREATOR because of existed one associated with your account email"
-        else:
+        try:
+            creator = Creator.objects.get(email=request.user)
+            if request.POST.get('description', None):
+                creator.description = request.POST['description']
+            if request.POST.get('telegram', None):
+                creator.telegram = request.POST['telegram']
+            if request.POST.get('vk', None):
+                creator.vk = request.POST['vk']
+            if request.POST.get('whatsapp', None):
+                creator.whatsapp = request.POST['whatsapp']
+            if request.POST.get('instagram', None):
+                creator.instagram = request.POST['instagram']
+            creator.save()
+        except:
             creator = Creator()
             if request.FILES:
                 file = request.FILES['profile_images']
-                # TODO: надо сделать сохранение нескольких фоток товара в базу
-                #  и multiple вернуть на фронт
                 fs = FileSystemStorage()
                 filename = f"creator_{str(user.email)}.png"
                 local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
-            # TODO: creator.cover и creator.achievements - фантастические поля
-            creator.description = request.POST['description']
+            creator.description = request.POST('description', '-')
+            creator.whatsapp = request.POST('whatsapp', '-')
+            creator.vk = request.POST('vk', '-')
+            creator.telegram = request.POST('telegram', '-')
+            creator.published = request.POST('published', 1)
             creator.email = user.email
             if 'iscompany' in request.POST:
                 creator.is_company = True
@@ -189,10 +200,12 @@ def becomeCreator_page(request):
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
+
     if request.method == 'GET' and "delete" in request.GET:
         print('qq')
         product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
+
     if request.method == 'GET' and "status" in request.GET:
         print('keff')
         product = Product_buy.objects.get(id=request.GET['status'])
@@ -318,8 +331,12 @@ def becomeCreatorTemplate_page(request, name):
         content['form8'] = form
 
     elif name == '4':
-        form = Resume()
-        content['form9'] = form
+        try:
+            creator = Creator.objects.get(email=request.email)
+            content['creator'] = creator
+        except:
+            creator = Creator()
+            content['creator'] = creator
 
     elif name == '11' or name == '12' or name == '13':
         try:
@@ -336,26 +353,6 @@ def becomeCreatorTemplate_page(request, name):
             }
         except Exception:
             pass
-    # elif name == '4':
-    #     try:
-    #         email = request.user
-    #         res = Creator.objects.get(email=email)
-    #     except 404:
-    #         res = Creator()
-    #     if request.method == 'POST':
-    #         form = Resume(request.POST)
-    #         content["form9"] = form
-    #         if form.is_valid():
-    #             res.is_company = request.POST['is_company']
-    #             res.company_name = request.POST['company_name']
-    #             res.description = request.POST['description']
-    #             res.telegram = request.POST['telegram']
-    #             res.vk = request.POST['vk']
-    #             res.instagram = request.POST['instagram']
-    #             res.whatsapp = request.POST['whatsapp']
-    #             res.cover = request.POST['cover']
-    #             res.published = request.POST['published']
-    #             res.save()
 
     return render(request, path, content)
 
