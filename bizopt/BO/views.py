@@ -92,6 +92,7 @@ def yourTasks_page(request):
     content = gen_menu(request)
     tasks = Task.objects.filter(id_creator=request.user)
     content['tasks'] = [{
+        'id': task.id,
         'name': task.name,
         'price': task.price,
         'description': task.description
@@ -144,16 +145,11 @@ def becomeCreator_page(request):
         context['email'] = user.email
         try:
             creator = Creator.objects.get(email=request.user)
-            if request.POST.get('description', None):
-                creator.description = request.POST['description']
-            if request.POST.get('telegram', None):
-                creator.telegram = request.POST['telegram']
-            if request.POST.get('vk', None):
-                creator.vk = request.POST['vk']
-            if request.POST.get('whatsapp', None):
-                creator.whatsapp = request.POST['whatsapp']
-            if request.POST.get('instagram', None):
-                creator.instagram = request.POST['instagram']
+            creator.description = request.POST['description']
+            creator.telegram = request.POST['telegram']
+            creator.vk = request.POST['vk']
+            creator.whatsapp = request.POST['whatsapp']
+            creator.instagram = request.POST['instagram']
             creator.save()
         except:
             creator = Creator()
@@ -164,18 +160,12 @@ def becomeCreator_page(request):
                 local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
-            if request.POST.get('description', None):
-                creator.description = request.POST['description']
-            if request.POST.get('telegram', None):
-                creator.telegram = request.POST['telegram']
-            if request.POST.get('vk', None):
-                creator.vk = request.POST['vk']
-            if request.POST.get('whatsapp', None):
-                creator.whatsapp = request.POST['whatsapp']
-            if request.POST.get('instagram', None):
-                creator.instagram = request.POST['instagram']
-            if request.POST.get('published', 0):
-                creator.published = request.POST['published']
+            creator.description = request.POST['description']
+            creator.telegram = request.POST['telegram']
+            creator.vk = request.POST['vk']
+            creator.whatsapp = request.POST['whatsapp']
+            creator.instagram = request.POST['instagram']
+            creator.published = request.POST['published']
             creator.email = user.email
             if 'iscompany' in request.POST:
                 creator.is_company = True
@@ -347,7 +337,7 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         try:
-            creator = Creator.objects.get(email=request.email)
+            creator = Creator.objects.get(email=request.user)
             content['creator'] = creator
         except:
             creator = Creator()
@@ -477,26 +467,29 @@ def cardTask_page(request, task_id):
     except Task.DoesNotExist as e:
         raise Http404 from e
 
-def editTask_page(request):
+def editTask_page(request, task_id):
     context = gen_menu(request)
-    if request.method == 'POST':
-        form = addTasks(request.POST)
-        if form.is_valid():
-            task = Task()
-            task.name = request.POST['task_name']
-            task.description = request.POST['description']
-            task.price = request.POST['price']
-            task.time = request.POST['date']
-            task.id_creator = str(request.user)
-            task.save()
-            task.tags.add(form.cleaned_data['select'])
-            task.save()
-        context["form"] = form
-        return redirect('/yourTasks/')
-    else:
-        form = addTasks()
-        context["form"] = form
-    return render(request, 'editTask.html', context)
+    try:
+        if request.method == 'POST':
+            form = addTasks(request.POST)
+            if form.is_valid():
+                task = Task.objects.get(id=task_id)
+                task.name = request.POST['task_name']
+                task.description = request.POST['description']
+                task.price = request.POST['price']
+                task.time = request.POST['date']
+                task.id_creator = str(request.user)
+                task.save()
+                task.tags.add(form.cleaned_data['select'])
+                task.save()
+            context["form"] = form
+            return redirect('/yourTasks/')
+        else:
+            form = addTasks()
+            context["form"] = form
+        return render(request, 'editTask.html', context)
+    except Account.DoesNotExist as e:
+        raise Http404 from e
 
 def infoTask_page(request):
     context = gen_menu(request)
