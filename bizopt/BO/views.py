@@ -222,6 +222,8 @@ def becomeCreator_page(request):
 
     if request.method == "POST" and "partner" in request.POST:
         partner = Partner()
+        account = Account.objects.get(email=request.user)
+
         # TODO: сделать что-то с сохранением единажды на template13
         #  и доделать сохранение с template12 полностью(там заглушка).
         #  Сейчас нет возможности контролировать дублирующихся партнеров по-людски.
@@ -240,10 +242,16 @@ def becomeCreator_page(request):
             partner.reg_form = request.POST.get('reg_form', None)
         if request.POST.get('my_first_name', None):
             partner.first_name = request.POST['my_first_name']
+        else:
+            partner.first_name = account.first_name
         if request.POST.get('my_last_name', None):
             partner.last_name = request.POST['my_last_name']
+        else:
+            partner.last_name = account.last_name
         if request.POST.get('my_email', None):
             partner.email = request.POST['my_email']
+        else:
+            partner.email = account.email
         partner.save()
     return render(request, 'becomeCreator.html', context)
 
