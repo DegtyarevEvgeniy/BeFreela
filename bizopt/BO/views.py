@@ -195,18 +195,17 @@ def becomeCreator_page(request):
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
-        return redirect('/becomeCreator/')
+        return redirect('/becomeCreator/?3')
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
 
     if request.method == 'GET' and "delete" in request.GET:
-        print('qq')
         product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
+        return redirect('/becomeCreator/?3')
 
     if request.method == 'GET' and "status" in request.GET:
-        print('keff')
         product = Product_buy.objects.get(id=request.GET['status'])
         product.status1 = 'in work'
         product.status2 = 'in waiting'

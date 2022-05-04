@@ -1,6 +1,6 @@
 <div class="row d-flex justify-content-center align-items-center">
     <div class="col-md-8">
-        <form id="regForm" method="POST" action="./" enctype="multipart/form-data">
+        <form id="regForm" method="POST" action="" enctype="multipart/form-data">
             <h1 class="mb-5">Создать товар</h1>
 
             <!-- start of bloc 1 -->
@@ -401,7 +401,7 @@
             <div style="overflow:auto;" id="next-previous">
                 <div style="float:right;">
                     <button type="button" id="prevBtn" style="display: none;" onclick="nextPrev(-1)">
-                        <i class="fa fa-angle-double-left"></i>
+                        <i class="fa fa-angle-double-left"></i> 
                     </button>
                     <button name="product_creator" type="button" id="nextBtn" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
@@ -411,6 +411,26 @@
         </form>
     </div>
 </div>
+<script>
+    // $('.redirect').on('click', {}, function (inBody) {
+    //     var xhr = new XMLHttpRequest()
+    //     xhr.open('GET', `becomeCreatorTemplates/3/`)
+    //     xhr.onload = function () {
+    //         $('#MainWindowContainer').html(xhr.response)
+    //     }
+    //     xhr.send()
+    // });
+    function submitForm() {
+        var http = new XMLHttpRequest();
+        http.open("POST", "<<whereverTheFormIsGoing>>", true);
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        var params = "search=" + document.get; // probably use document.getElementById(...).value
+        http.send(params);
+        http.onload = function () {
+            alert(http.responseText);
+        }
+    }
+</script>
 <script>
     var inputnum = 0,
         keynum = 0,
@@ -462,24 +482,28 @@
 
     function showTab(n) {
         let x = document.getElementsByClassName("tab");
-        x[n].style.display = "block";
-        if (n === 0) {
-            document.getElementById("prevBtn").style.display = "none";
-        } else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
-        fixStepIndicator(n)
+        try {
+            x[n].style.display = "block";
+            if (n === 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            fixStepIndicator(n)
+        } catch {}
     }
 
     function nextPrev(n) {
         let x = document.getElementsByClassName("tab");
-        x[currentTab].style.display = "none";
-        currentTab = currentTab + n;
-        if (currentTab === x.length) {
-            document.getElementById('nextBtn').href = "/becomeCreator/"
-            document.getElementById('nextBtn').type = "submit"
-        }
-        showTab(currentTab);
+        try {
+            x[currentTab].style.display = "none";
+            currentTab = currentTab + n;
+            if (currentTab === x.length) {
+                document.getElementById('nextBtn').type = "submit"
+                document.getElementById('next-previous').classList.add("redirect");
+            }
+            showTab(currentTab);
+        } catch {}
     }
 
     function fixStepIndicator(n) {

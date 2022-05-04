@@ -29,26 +29,24 @@
 
             <!--Table head-->
             <!--Table body-->
-                <form method="GET" id="goodsList" action="./" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <tbody>
+            <form method="GET" id="goodsList" action="/becomeCreator/" >
+                {% csrf_token %}
+                <tbody>
 
-                {% for product in products %}
+                    {% for product in products %}
                     <tr>
-                        <th scope="row"  class="uk-text-truncate">{{ product.product_name }}</th>
+                        <th scope="row" class="uk-text-truncate">{{ product.product_name }}</th>
                         <td>text</td>
                         <td>{{ product.cost }}</td>
                         <td>text</td>
                         <td>
-                            
-
-                             <button name="delete" form="goodsList" value= {{product.id}} type="submit" href="/becomeCreator/"
-                                class="btn btn-outline-secondary">X</button>
+                            <button name="delete" form="goodsList" value={{product.id}} href="" type="submit"
+                                 class="btn btn-outline-secondary"> X </button>
                         </td>
                     </tr>
 
-                {% endfor %}
-            </tbody>
+                    {% endfor %}
+                </tbody>
 
             </form>
 
