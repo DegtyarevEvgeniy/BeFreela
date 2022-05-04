@@ -26,16 +26,17 @@ def gen_menu(request):
         context = {
             'user': Account.objects.get(email=request.user.email),
             'menu': [
-                {'position': 'out', 'link': '/creators/resume', 'text': 'Исполнители'},
-                {'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'position': 'out', 'link': '', 'text': user.email},
-                {'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
-                {'position': 'in', 'link': '/addTask/', 'text': 'Создать задачу'},
-                {'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
-                {'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
-                {'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-                {'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
+                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/resume', 'text': 'Исполнители'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
+                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+                {'xpos': 'right', 'position': 'out', 'link': '', 'text': user.email},
+                {'xpos': 'right', 'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
+                {'xpos': 'right', 'position': 'in', 'link': '/addTask/', 'text': 'Создать задачу'},
+                {'xpos': 'right', 'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
+                {'xpos': 'right', 'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
+                {'xpos': 'right', 'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
+                {'xpos': 'right', 'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
 
             ]
         }
@@ -43,10 +44,11 @@ def gen_menu(request):
         context = {
 
             'menu': [
-                {'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
-                {'position': 'out', 'link': '/creators/', 'text': 'Товары'},
-                {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'position': 'out', 'link': 'accounts/login/', 'text': 'Войти'},
+                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/', 'text': 'Товары'},
+                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+                {'xpos': 'right', 'position': 'out', 'link': 'accounts/login/', 'text': 'Войти'},
             ]
         }
 
