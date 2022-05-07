@@ -54,20 +54,66 @@ def gen_menu(request):
 
     return context
 
+def gen_submenu(request):
 
-#
-# def get_base_context():
-#     context = {
-#         'menu': [
-#             {'link': '/', 'text': 'Главная'},
-#             {'link': '/creators/', 'text': 'Создатели'},
-#             {'link': '/employers/', 'text': 'Предприниматели'},
-#             {'link': '/tasks/', 'text': 'Задачи'},
-#         ],
-#         'main_header': 'BizOpt',
-#     }
-#     return context
+    context = {
+            'submenu': [
+                {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
+                {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина'},
 
+            ]
+        }
+    return context
 
 def creators_page(request):
     context = gen_menu(request)
@@ -379,15 +425,17 @@ def employers_page(request):
 
 
 def index_page(request):
-    context = gen_menu(request)
+    context = {**gen_menu(request), **gen_submenu(request)}
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
                             'availability': product.availability,
-                            'picture': product.picture
+                            'picture': product.picture,
+                            'description': product.description
                             }
                            for product in products]
+    
     return render(request, 'index.html', context)
 
 
