@@ -240,8 +240,11 @@
 
 <script type="text/javascript">
     $(function () {
-
-        var pageNumber = window.location.search[1]; //here is a number of page
+        if (window.location.search){
+            var pageNumber = window.location.search[1]; //here is a number of page
+        } else {
+            var pageNumber = "1";
+        }
         var xhr = new XMLHttpRequest()
         xhr.open('GET', `becomeCreatorTemplates/${pageNumber}/`)
         xhr.onload = function () {
