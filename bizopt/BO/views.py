@@ -156,8 +156,10 @@ def goods_page(request):
 def resumes_page(request):
     context = gen_menu(request)
     creators = Creator.objects.all()
+    persons = Account.objects.all()
+    # context['persons'] = persons
     context['creators'] = [{'first_name':creator.first_name,
-                            'email':creator.email,
+                            'email':person,
                             'cover':creator.cover,
                             'description':creator.description,
                             'is_company':creator.is_company,
@@ -169,7 +171,7 @@ def resumes_page(request):
                             'tag':creator.tag,
                             'published':creator.published,
                             }
-                           for creator in creators]
+                           for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
