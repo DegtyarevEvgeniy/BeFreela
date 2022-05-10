@@ -218,7 +218,7 @@ def becomeCreator_page(request):
                 local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
-            creator.description = request.POST['description']
+            creator.description = request.POST['profile_description']
             creator.telegram = request.POST['telegram']
             creator.vk = request.POST['vk']
             creator.whatsapp = request.POST['whatsapp']

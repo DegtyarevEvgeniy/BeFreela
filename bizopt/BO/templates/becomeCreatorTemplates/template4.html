@@ -46,14 +46,14 @@
                     <h1 class="labels mb-4">Контакты</h1>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" maxlength="50" placeholder="{{creator.telegram}}"
+                            <input type="text" name="telegram" class="form-control" maxlength="50" placeholder="{{creator.telegram}}"
                                 value="{{creator.telegram}}">
                             <snap class="input-group-text" style="color: white; background-color: #229ED9;">
                                 <i class="fab fa-telegram"></i>
                             </snap>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" maxlength="50" placeholder="{{creator.vk}}"
+                            <input type="text" class="form-control" name="vk" maxlength="50" placeholder="{{creator.vk}}"
                                 value="{{creator.vk}}">
                             <snap class="input-group-text" style="color: white; background-color: #4c75a3;">
                                 <i class="fab fa-vk"></i>
@@ -62,14 +62,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" maxlength="50" placeholder="{{creator.instagram}}"
+                            <input type="text" class="form-control" name="instagram" maxlength="50" placeholder="{{creator.instagram}}"
                                 value="{{creator.instagram}}">
                             <snap class="input-group-text" style="color: white; background-color: #ac2bac;">
                                 <i class="fab fa-instagram"></i>
                             </snap>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="whatsappInput" maxlength="12"
+                            <input type="text" class="form-control" name="whatsapp" id="whatsappInput" maxlength="12"
                                 placeholder="{{creator.whatsapp}}" value="{{creator.whatsapp}}">
                             <snap class="input-group-text" style="color: white; background-color: #25d366;">
                                 <i class="fab fa-whatsapp"></i>
@@ -90,7 +90,7 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-12">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" placeholder="{{creator.published}}"
+                            <input class="form-check-input" type="checkbox" name="published" placeholder="{{creator.published}}"
                                 value="{{creator.published}}">
                             <label class="form-check-label">Хотите опубликовать резюме?</label>
                         </div>
