@@ -27,7 +27,7 @@ def gen_menu(request):
             'user': Account.objects.get(email=request.user.email),
             'menu': [
                 {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/resume', 'text': 'Исполнители'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'xpos': 'right', 'position': 'out', 'link': '', 'text': user.email},
@@ -152,6 +152,25 @@ def goods_page(request):
                            for product in products]
     return render(request, 'goods.html', context)
 
+
+def resumes_page(request):
+    context = gen_menu(request)
+    creators = Creator.objects.all()
+    context['creators'] = [{'first_name':creator.first_name,
+                            'email':creator.email,
+                            'cover':creator.cover,
+                            'description':creator.description,
+                            'is_company':creator.is_company,
+                            'company_name':creator.company_name,
+                            'telegram':creator.telegram,
+                            'vk':creator.vk,
+                            'whatsapp':creator.whatsapp,
+                            'instagram':creator.instagram,
+                            'tag':creator.tag,
+                            'published':creator.published,
+                            }
+                           for creator in creators]
+    return render(request, 'resumes.html', context)
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
@@ -356,6 +375,10 @@ def becomeCreatorTemplate_page(request, name):
         except Product_buy.DoesNotExist as e:
             content['products'] = None 
 
+    elif name == '2':
+        form = MyProfile(request.POST)
+        content['form1'] = form
+
     elif name == '3':
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
@@ -365,14 +388,6 @@ def becomeCreatorTemplate_page(request, name):
                                 }
                                for product in products]
 
-    elif name == '2':
-        form = MyProfile(request.POST)
-        content['form1'] = form
-
-    elif name == '6':
-        form = ProductCreateForm()
-        content['form8'] = form
-
     elif name == '4':
         try:
             creator = Creator.objects.get(email=request.user)
@@ -380,8 +395,12 @@ def becomeCreatorTemplate_page(request, name):
         except:
             creator = Creator()
             content['creator'] = creator
+    
+    elif name == '6':
+        form = ProductCreateForm()
+        content['form8'] = form
 
-    elif name == '11' or name == '12' or name == '13':
+    elif name in ['11', '12', '13']:
         try:
             partner = Partner.objects.get(email=request.user)
             content['partner'] = {
