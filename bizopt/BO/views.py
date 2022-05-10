@@ -124,16 +124,7 @@ def logout_view(request):
     return HttpResponseRedirect("/")
 
 
-def baseResumeCard_page(request):
-    context = gen_menu(request)
-    creators = Creator.objects.all()
-    context['creators'] = [{'first_name': creator.first_name,
-                            'tag': creator.tag,
-                            'avatar': creator.cover.url
-                            }
-                           for creator in creators]
 
-    return render(request, 'baseResumeCard.html', context)
 
 
 def yourTasks_page(request):
@@ -149,7 +140,7 @@ def yourTasks_page(request):
     return render(request, 'yourTasks.html', content)
 
 
-def baseProductCard_page(request):
+def goods_page(request):
     context = gen_menu(request)
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
@@ -159,7 +150,7 @@ def baseProductCard_page(request):
                             'picture': product.picture
                             }
                            for product in products]
-    return render(request, 'baseProductCard.html', context)
+    return render(request, 'goods.html', context)
 
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
