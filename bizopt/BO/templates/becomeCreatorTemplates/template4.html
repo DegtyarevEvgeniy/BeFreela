@@ -19,12 +19,16 @@
                 <div class="row mt-3 d-flex align-items-center">
                     <div class="col-md-4">
                         <div class="form-check form-switch">
-                                          <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()" id="isCompanyTrigger" placeholder="{{creator.is_company}}" value="{{creator.is_company}}">
+                            <input class="form-check-input" type="checkbox" name="iscompany" onchange="isCompany()"
+                                id="isCompanyTrigger" placeholder="{{creator.is_company}}"
+                                value="{{creator.is_company}}">
                             <label class="form-check-label" for="isCompanyTrigger">Вы являетесь компанией?</label>
                         </div>
                     </div>
                     <div class="col-md-8" id="companyTriggerOn" style="opacity: 0;">
-                                    <input type="text" id="companyInput" name="profile_company_name" class="form-control" placeholder="{{creator.company_name}}" value="{{creator.company_name}}">
+                        <input type="text" id="companyInput" name="profile_company_name" maxlength="50"
+                            class="form-control" placeholder="{{creator.company_name}}"
+                            value="{{creator.company_name}}">
                     </div>
                 </div>
 
@@ -33,7 +37,8 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-12">
                         <h1 class="labels">Расскажите о себе</h1>
-                                    <textarea name="profile_description" class="form-control" placeholder="{{creator.description}}" value="{{creator.description}}"></textarea>
+                        <textarea name="profile_description" maxlength="500" class="form-control"
+                            placeholder="{{creator.description}}" value="{{creator.description}}"></textarea>
                     </div>
                 </div>
 
@@ -41,13 +46,15 @@
                     <h1 class="labels mb-4">Контакты</h1>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                                          <input type="text" class="form-control" placeholder="{{creator.telegram}}" value="{{creator.telegram}}">
+                            <input type="text" name="telegram" class="form-control" maxlength="50" placeholder="{{creator.telegram}}"
+                                value="{{creator.telegram}}">
                             <snap class="input-group-text" style="color: white; background-color: #229ED9;">
                                 <i class="fab fa-telegram"></i>
                             </snap>
                         </div>
                         <div class="input-group mb-3">
-                                          <input type="text" class="form-control" placeholder="{{creator.vk}}" value="{{creator.vk}}">
+                            <input type="text" class="form-control" name="vk" maxlength="50" placeholder="{{creator.vk}}"
+                                value="{{creator.vk}}">
                             <snap class="input-group-text" style="color: white; background-color: #4c75a3;">
                                 <i class="fab fa-vk"></i>
                             </snap>
@@ -55,13 +62,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                                          <input type="text" class="form-control" placeholder="{{creator.instagram}}" value="{{creator.instagram}}">
+                            <input type="text" class="form-control" name="instagram" maxlength="50" placeholder="{{creator.instagram}}"
+                                value="{{creator.instagram}}">
                             <snap class="input-group-text" style="color: white; background-color: #ac2bac;">
                                 <i class="fab fa-instagram"></i>
                             </snap>
                         </div>
                         <div class="input-group mb-3">
-                                          <input type="text" class="form-control" placeholder="{{creator.whatsapp}}" value="{{creator.whatsapp}}">
+                            <input type="text" class="form-control" name="whatsapp" id="whatsappInput" maxlength="12"
+                                placeholder="{{creator.whatsapp}}" value="{{creator.whatsapp}}">
                             <snap class="input-group-text" style="color: white; background-color: #25d366;">
                                 <i class="fab fa-whatsapp"></i>
                             </snap>
@@ -72,7 +81,7 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-8">
                         <label class="labels">Загрузить фото</label>
-                                   <input id="fileupload" class="form-control" name="profile_images" type="file" >
+                        <input id="fileupload" class="form-control" name="profile_images" type="file">
                     </div>
                 </div>
 
@@ -81,7 +90,8 @@
                 <div class="row mt-3 mb-3">
                     <div class="col-md-12">
                         <div class="form-check form-switch">
-                                          <input class="form-check-input" type="checkbox" placeholder="{{creator.published}}" value="{{creator.published}}">
+                            <input class="form-check-input" type="checkbox" name="published" placeholder="{{creator.published}}"
+                                value="{{creator.published}}">
                             <label class="form-check-label">Хотите опубликовать резюме?</label>
                         </div>
                     </div>
@@ -111,4 +121,35 @@
         }
     }
 
+    function setInputFilter(textbox, inputFilter, errMsg) {
+        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop", "focusout"].forEach(
+            function (event) {
+                textbox.addEventListener(event, function (e) {
+                    if (inputFilter(this.value)) {
+                        // Accepted value
+                        if (["keydown", "mousedown", "focusout"].indexOf(e.type) >= 0) {
+                            this.classList.remove("input-error");
+                            this.setCustomValidity("");
+                        }
+                        this.oldValue = this.value;
+                        this.oldSelectionStart = this.selectionStart;
+                        this.oldSelectionEnd = this.selectionEnd;
+                    } else if (this.hasOwnProperty("oldValue")) {
+                        // Rejected value - restore the previous one
+                        this.classList.add("input-error");
+                        this.setCustomValidity(errMsg);
+                        this.reportValidity();
+                        this.value = this.oldValue;
+                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                    } else {
+                        // Rejected value - nothing to restore
+                        this.value = "";
+                    }
+                });
+            });
+    }
+
+    setInputFilter(document.getElementById("whatsappInput"), function (value) {
+        return /^\d*\+?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+    }, "Введите только номер без пробелов");
 </script>
