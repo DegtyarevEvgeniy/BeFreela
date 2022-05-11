@@ -95,20 +95,22 @@
                                 <th class="col-xs-3">Статус</th>
                             </tr>
                         </thead>
-                        <form method="GET" id="goodsList" action="./" enctype="multipart/form-data">
+
+                        <form method="GET" id="goodsList" enctype="multipart/form-data">
 
                             <tbody>
 
-                                    {% for product in products_v %}
+                                {% for product in products_v %}
                                 <tr>
                                     <td class="col-xs-3">{{ product.id }}</td>
                                     <td class="col-xs-3">{{ product.product_name }}</td>
                                     <td class="col-xs-3">{{ product.id_user_buy }}</td>
-                                    <td class="col-xs-3"><button name="status" form="goodsList" value= {{product.id}} type="submit" href="/becomeCreator/"
-                                class="btn btn-outline-secondary">Согласиться</button></td>
+                                    <td class="col-xs-3">
+                                        <button name="status" form="goodsList" type="submit" value={{product.id}} class="btn btn-outline-secondary">Согласиться</button>
+                                    </td>
                                 </tr>
-                                {% endfor %}
 
+                                {% endfor %}
 
                             </tbody>
                         </form>

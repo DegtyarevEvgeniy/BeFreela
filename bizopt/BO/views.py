@@ -268,6 +268,7 @@ def becomeCreator_page(request):
         product.status1 = 'in work'
         product.status2 = 'in waiting'
         product.save()
+        return redirect('/becomeCreator/?1')
 
     if request.method == "POST" and "partner" in request.POST:
         partner = Partner()
