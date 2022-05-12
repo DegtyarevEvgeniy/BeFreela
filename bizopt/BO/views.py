@@ -134,7 +134,9 @@ def yourTasks_page(request):
         'id': task.id,
         'name': task.name,
         'price': task.price,
-        'description': task.description
+        'description': task.description,
+        'time': task.time,
+        'status': task.status1,
     } for task in tasks]
 
     return render(request, 'yourTasks.html', content)
