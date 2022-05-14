@@ -123,10 +123,6 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
 
-
-
-
-
 def yourTasks_page(request):
     content = gen_menu(request)
     tasks = Task.objects.filter(id_creator=request.user)
@@ -465,7 +461,7 @@ def index_page(request):
 
 
 def cardProduct_page(request, product_id):
-    context = gen_menu(request)
+    context = {**gen_menu(request), **gen_submenu(request)}
     if request.method == "POST":
         try:
             product_buy = Product_buy()

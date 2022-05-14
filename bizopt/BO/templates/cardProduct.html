@@ -1,84 +1,199 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %}
 
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
-</head>
-<main class="uk-padding-small">
+{% block content %}
 
-    <body>
+<!-- SUB MENU -->
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <nav class="uk-navbar-container" uk-navbar
+        style="position: relative; z-index: 980; padding: 0 10%; background-color: #f8f8f8 !important;">
 
-        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s" style="width: 90%; margin: 0 auto;"
-            uk-grid uk-lightbox="animation: slide">
-            <div class="uk-card-media-left uk-cover-container uk-padding-large text-center">
-                <a style="width: 80%; height: 80%" class="uk-inline" href="{{ product.picture.url }}"
-                    data-caption="Caption 1">
-                    <img src="{{ product.picture.url }}" alt="" uk-cover>
-                </a>
-            </div>
-            <form method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div>
-                    <div class="uk-card-body">
-                        <h4 class="product-card-details-product-name uk-text-break">
-                            {{product}}
-                        </h4>
+        <div class="uk-navbar-left">
 
-                        <hr class="uk-divider-medium uk-margin-samll ">
-
-                        <h4>Описание:</h4>
-                        <h5 class="product-card-details-product-desc uk-text-break">
-                            {{product.description}}
-                        </h5>
-
-                        <hr class="uk-divider-medium uk-margin-samll">
-
-                        <h4>Есть в наличии: {% if product.availability == true%}
-                            <span class="badge bg-red"></span> {%else%}
-                            <span class="badge bg-green">White</span> {%endif%}
-                        </h4>
-
-                        <hr class="uk-divider-medium uk-margin-samll">
-
-                        <h4> Цена: </h4>
-                        <h4>{{product.cost}}</h4>
-
-                        <hr class="uk-divider-medium uk-margin-samll">
-
-                        <button type="submit"
-                            class="uk-button uk-button-primary uk-margin-right uk-border-rounded">Показать</button>
-                        <button type="submit"
-                        class="uk-button uk-button-primary uk-margin-left uk-border-rounded" onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Отправить
-                            запрос</button>
+            <ul class="uk-navbar-nav">
+                <li class="uk-active">
+                    {% for item in submenu %}
+                    {% if item.xpos == 'left' and item.position == 'out' %}
+                    <a href="{{item.link}}">{{item.text}}</a>
+                    {% endif %}
+                    {% endfor %}
+                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-4">
+                        <div class="uk-navbar-dropdown-grid uk-child-width-1-5" uk-grid>
+                            <div>
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    {% for item in submenu %}
+                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "1" %}
+                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    {% for item in submenu %}
+                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "2" %}
+                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    {% for item in submenu %}
+                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "3" %}
+                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    {% for item in submenu %}
+                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "4" %}
+                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-navbar-dropdown-nav">
+                                    {% for item in submenu %}
+                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "5" %}
+                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </li>
+            </ul>
+
         </div>
 
-    </body>
+        <div class="uk-navbar-center" style="width: 40%; margin: 0 auto; font-size: 25px;">
 
-</main>
+            <ul class="uk-navbar-nav" style="width: 100%;">
+                <form class="uk-search uk-search-default" style="width: 100%;">
+                    <input class="uk-search-input" type="search" placeholder="Search" style="width: 100%;">
+                </form>
+            </ul>
+
+        </div>
+
+        <div class="uk-navbar-right">
+
+            <ul class="uk-navbar-nav">
+                {% for item in submenu %}
+                {% if item.xpos == 'right' %}
+                <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </nav>
+</div>
+
+<!-- END SUB MENU -->
+<br>
+
+
+<h1 style="text-align: center;  width: 60%; margin: auto;">Даджет / Робот мойщик окон Даджет W100, робот для мойки окон, робот стеклоочиститель</h1>
+<br>
+<br>
+<div class="uk-child-width-1-2 uk-text-center" uk-grid>
+
+    <div>
+        <div class="uk-child-width-1-2 uk-text-right" uk-grid >
+            
+            <ul class="uk-thumbnav uk-thumbnav-vertical" uk-margin style="padding: 2%;">
+                <li class="uk-active"><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" width="100" height="67" alt=""></a></li>
+                <li><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" width="100" height="67" alt=""></a></li>
+                <li><a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" width="100" height="67" alt=""></a></li>
+            </ul>
+            <div class="uk-cover-container">
+                <canvas width="auto" height="auto"></canvas>
+                <img src="{{ product.picture.url }}" alt="" uk-cover>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+
+        <h2 style="text-align:initial;">200 000 руб</h2>
+
+                <div class="uk-flex">
+                    <div class="uk-width-auto">
+                        <img class="uk-border-circle" width="80" height="80" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg">
+                    </div>
+                    <div style="padding-left: 2%;">
+                        <h3 class="uk-card-title uk-margin-remove-bottom">Дегтярев Евгений Алексеевич</h3>
+                        <div>
+                            <span>4.7</span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="uk-flex" style="margin-top: 4%;">
+                    <div class="uk-width-auto">
+                        <img class="uk-border-circle" width="40" height="40" src="https://free-png.ru/wp-content/uploads/2021/06/free-png.ru-39-700x700.png">
+                    </div>
+
+                        <p style="margin-top: auto; margin-bottom: auto; padding-left: 2%;">Провернный продавец</p>
+
+                </div>
+
+                <div class="uk-flex" style="margin-top: 4%;">
+                    <div class="uk-width-auto">
+                        <img class="uk-border-circle" width="40" height="40" src="https://www.const-foto.ru/f/delivery.png">
+                    </div>
+
+                        <p style="margin-top: auto; margin-bottom: auto; padding-left: 2%;">Доставка от поставщика</p>
+
+                </div>
+
+                
+                
+
+
+
+    </div>
+</div>
+
+
+
+<div class="uk-grid-small" uk-grid>
+    <div class="uk-width-expand" uk-leader="fill: -">Lorem ipsum dolor sit amet</div>
+    <div>$20.90</div>
+</div>
+
+
+
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+    </form>
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
+<style>
 
-<script>
-    var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-    var alertTrigger = document.getElementById('liveAlertBtn')
-
-    function alert(message, type) {
-        var wrapper = document.createElement('div')
-        wrapper.innerHTML = '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' + message +
-            '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
-
-        alertPlaceholder.append(wrapper)
+    .checked {
+        color: orange;
     }
 
-    if (alertTrigger) {
-        alertTrigger.addEventListener('click', function () {
-            alert('Nice, you triggered this alert message!', 'success')
-        })
-    }
-</script>
+</style>
+
 
 {% endblock %}
