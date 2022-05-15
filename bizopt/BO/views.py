@@ -45,8 +45,8 @@ def gen_menu(request):
 
             'menu': [
                 {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/', 'text': 'Исполнители'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/', 'text': 'Товары'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
+                {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'xpos': 'right', 'position': 'out', 'link': 'accounts/login/', 'text': 'Войти'},
             ]
