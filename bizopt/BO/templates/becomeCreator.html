@@ -175,54 +175,47 @@
 <body class='snippet-body'>
 
 
-    <div class="wrapper">
+    <div class="wrapper" style="background: #C4C4C4">
         <!-- Sidebar  -->
-        <nav id="sidebar">
+        <nav id="sidebar" style="background: #C4C4C4">
             <div class="sidebar-header">
-                <h3>BIZOPT Partners</h3>
+                <h3 style="color:black;">BIZOPT Partners</h3>
             </div>
+            <div style="margin: auto; width: 50%">
+                <a href="#" style="font-size: 24px">Тут имя</a>
+            </div>
+                <ul class="list-unstyled components uk-margin-left">
 
-            <ul class="list-unstyled components">
-
-
-                <li class="Btn">
-                    <a href="#">Главная</a>
-                </li>
-
-
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Мой
-                        профиль</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li class="ExtBtn">
-                            <a href="#">Данные продавца</a>
-                        </li>
-                        <li class="ExtBtn">
-                            <a href="#">Пользователи</a>
-                        </li>
-                        <li class="ExtBtn">
-                            <a href="#">Мои данные</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="active uk-margin-top">
+                        <h4>Профиль</h4>
+                        <a href="#">Настройки</a>
+                    </li>
 
 
-                <li class="Btn">
-                    <a href="#">Мои товары</a>
-                </li>
+                    <li class="Btn uk-margin-top">
+                        <h4>Маркетплейс</h4>
+                        <a href="#">Кабинет</a>
+                        <a href="#">Товар</a>
+                    </li>
 
-                <li class="Btn">
-                    <a href="#">Резюме</a>
-                </li>
+                    <li class="Btn uk-margin-top">
+                        <h4>Платформа</h4>
+                        <a href="#">Кабинет</a>
+                        <a href="#">Профиль</a>
+                        <a href="#">Резюме</a>
+                    </li>
+                    <li class="Btn uk-margin-top">
+                        <a href="#">Выйти</a>
+                    </li>
 
-            </ul>
 
-            <ul class="list-unstyled CTAs">
+                </ul>
+                <ul class="list-unstyled CTAs">
 
-                <li>
-                    <a href="/" class="article">Обратно на главую</a>
-                </li>
-            </ul>
+                    <li>
+                        <a href="/" class="article">Обратно на главую</a>
+                    </li>
+                </ul>
         </nav>
 
         <!-- Page Content  -->
@@ -296,9 +289,12 @@
     a,
     a:hover,
     a:focus {
-        color: inherit;
+        color: black;
         text-decoration: none;
         transition: all 0.3s;
+        margin-top: 2%;
+        padding: 3px;
+        padding-left: 0
     }
 
     .navbar {
@@ -326,7 +322,10 @@
     .text-sidebar {
         /* color: $text-sidebar; */
     }
+    .textNav a{
+        margin-top: 1%;
 
+    }
     .wrapper {
         display: flex;
         width: 100%;
@@ -362,11 +361,9 @@
 
     #sidebar ul p {
         /* color: $text-sidebar; */
-        padding: 10px;
     }
 
     #sidebar ul li a {
-        padding: 10px;
         font-size: 1.1em;
         display: block;
     }
