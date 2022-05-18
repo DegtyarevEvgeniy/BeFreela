@@ -668,3 +668,5 @@ def orders_page(request):
 
     return render(request, 'orders.html', content)
 
+def partners_page(request):
+    return render(request, 'showPartner.html')

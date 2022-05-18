@@ -34,6 +34,7 @@ urlpatterns = [
     path('', views.index_page),
     path('edit/', views.edit_profile),
     path('tasks/', views.tasks_page),
+    path('partners/', views.partners_page),
     # path('employers/', views.employers_page),
     path('creators/resumes/', views.resumes_page),
     path('signin/', SignUpView.as_view(), name='signin'),
