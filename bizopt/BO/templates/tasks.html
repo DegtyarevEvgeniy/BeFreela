@@ -1,46 +1,106 @@
 {% extends "base.html" %} {% block content %}
 
-<div class="uk-flex">
+<div class="uk-flex-column">
     <div style="width: 50%; margin: auto">
-        <div>
+        <div class="uk-margin-large-bottom">
             <h1>Задачи</h1>
         </div>
         <div class="uk-flex-column">
-            <div class="uk-flex">
-                <p>Вырезать скалку</p>
-                <button>Посмотреть</button>
-            </div>
-            <div>
-                <p>Хочу Купить ...
-                    Куплена в 2017 году.
-                    Полностью рабочая, 3 раза менялась термопаста.
-                    Прилагаю скрин furmark, так же у меня перед покупкой возможны любые проверки. Либо могу сам прогнать стресс-тесты и выслать скрин.
-                    Возможна авито доставка.</p>
-            </div>
-            <div class="uk-flex">
-                <div class="uk-flex">
-                    <img style="height: 50px" src="https://www.nchti.ru/wp-content/images/profile-anonymous2.png">
-                    <div class="uk-flex-column">
-                        <p>Виталик, 27 лет</p>
-                        <p>Хороший покупатель</p>
-                    </div>
+            {% for card in task_cards %}
+            <div class="uk-margin-medium-bottom">
+                <div class="uk-flex uk-margin-small-bottom">
+                    <p class="textSize">{{ card.name }}</p>
+                    <a class="uk-button uk-button-default buttonStyle" style="margin-left:auto" href="cardTask/{{ card.id }}">Посмотреть</a>
                 </div>
-                <p>1500 руб</p>
+                <div>
+                    <p>{{ card.description }}</p>
+                </div>
+                <div class="uk-flex">
+                    <div class="uk-flex">
+                        <img style="height: 50px" src="https://www.nchti.ru/wp-content/images/profile-anonymous2.png">
+                        <div class="uk-flex-column uk-margin-small-left">
+                            <p style="margin-bottom: 2%">Виталик, 27 лет</p>
+                            <p class="smallText" style="margin: 0">Хороший покупатель</p>
+                        </div>
+                    </div>
+                    <p style="margin-left:auto; margin-top: 0" class="textSize">до 1500 руб</p>
+                </div>
+                <hr class="uk-divider-icon">
             </div>
-        </div>
-    </div>
-    <div class="uk-flex-column">
-        <div>
-            <button>Мои задачи</button>
-            <button>Создать задачу</button>
-        </div>
-        <div>
-            <a href="#">Инструкция</a>
+            {% endfor %}
         </div>
     </div>
 </div>
 
 
+
+
+<!--<div class="container rounded bg-white mt-5 mb-5">-->
+<!--    <form method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        <div id="main_change" class="col-md-12">-->
+<!--            <div class="p-3 py-5">-->
+<!--                <div class="d-flex justify-content-between align-items-center mb-3">-->
+<!--                    <h4 class="text-right">Ваши задачи</h4>-->
+<!--                </div>-->
+<!--                <div class="row">-->
+<!--                    {% for card in task_cards %}-->
+<!--                    &lt;!&ndash; start of card template &ndash;&gt;-->
+<!--                    &lt;!&ndash;-->
+<!--                        <div class="card m-2 p-0" style="width: 18rem;">-->
+<!--                             src - фото(ссылка на фото)  alt - оставить дефолтным-->
+<!--                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" class="card-img-top" alt="task img">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">{{ card.name }}</h5>-->
+<!--                                <p class="card-text cuttedText " max-width="100">{{ card.description }}</p>-->
+<!--                                <a href="cardTask/{{ card.id }}" class="btn btn-primary">перейти</a>-->
+<!--                                <div class="d-inline-block ml-5">-->
+<!--                                    <a href="#" class="btn btn-secondary">-->
+<!--                                        <i class="fa-solid fa-share"></i>-->
+<!--                                    </a>-->
+<!--                                    <a href="#" class="btn btn-secondary">-->
+<!--                                        <i class="fa-solid fa-heart"></i>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="card-footer text-muted text-right">-->
+<!--                                2 days ago-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--&ndash;&gt;-->
+
+<!--                    <div class="col-sm-6">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-body">-->
+<!--                                <h5 class="card-title">{{ card.name }}</h5>-->
+<!--                                <p class="card-text">{{ card.description }}</p>-->
+<!--                                <a href="cardTask/{{ card.id }}" class="btn btn-primary">Go somewhere</a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+<!--                    {% endfor %}-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+<style>
+    .textSize {
+        font-size: 24px;
+    }
+    .buttonStyle {
+        background: #C4C4C4;
+        height: 10%;
+    }
+    .smallText {
+        font-size: 12px;
+        color: green;
+    }
+</style>
 
 
 
