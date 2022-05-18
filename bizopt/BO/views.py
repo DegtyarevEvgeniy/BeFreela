@@ -1,7 +1,9 @@
 import os
 import re
 
-from django.shortcuts import render, redirect
+from django.core import paginator
+from django.core.paginator import PageNotAnInteger, EmptyPage
+from django.shortcuts import render, redirect, get_object_or_404
 from .utils import *
 from .forms import *
 from django.views.generic import CreateView
@@ -19,6 +21,30 @@ import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
 
+from taggit.models import Tag
+
+def post_list(request, tag_slug=None):
+    object_list = Product_creator.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+    page = request.GET.get('page')
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        # Если страница не является целым числом, поставим первую страницу
+        posts = paginator.page(1)
+    except EmptyPage:
+        # Если страница больше максимальной, доставить последнюю страницу результатов
+        posts = paginator.page(paginator.num_pages)
+
+    return render(request,
+                  'blog/post/list.html',
+                  {'page': page,
+                   'posts': posts,
+                   'tag': tag})
 def gen_menu(request):
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
