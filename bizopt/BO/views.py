@@ -546,7 +546,7 @@ def cardResume_page(request):
     return render(request, 'cardResume.html', context)
 
 
-def cardResume_page(request):
+def sertCardResume_page(request):
     context = gen_menu(request)
     profile = Creator.objects.get(email=request.user)
     context['profile'] = profile
