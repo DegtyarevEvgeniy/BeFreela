@@ -181,41 +181,32 @@
             <div class="sidebar-header">
                 <h3 style="color:black;">BIZOPT Partners</h3>
             </div>
-            <div style="margin: auto; width: 50%">
-                <a href="#" style="font-size: 24px">Тут имя</a>
-            </div >
-                <ul class="list-unstyled components uk-margin-left">
+            <ul class="list-unstyled components uk-margin-left">
 
-                    <li class="active uk-margin-top">
-                        <h4>Профиль</h4>
-                        <a href="#">Настройки</a>
-                    </li>
+                <li class="active uk-margin-top">
+                    <h4>Профиль</h4>
+                    <a href="#">Настройки</a>
+                </li>
 
 
-                    <li class="Btn uk-margin-top">
-                        <h4>Маркетплейс</h4>
-                        <a href="#">Кабинет</a>
-                        <a href="#">Товар</a>
-                    </li>
+                <li class="Btn uk-margin-top">
+                    <h4>Маркетплейс</h4>
+                    <a href="#">Кабинет</a>
+                    <a href="#">Товар</a>
+                </li>
 
-                    <li class="Btn uk-margin-top">
-                        <h4>Платформа</h4>
-                        <a href="#">Кабинет</a>
-                        <a href="#">Профиль</a>
-                        <a href="#">Резюме</a>
-                    </li>
-                    <li class="Btn uk-margin-top">
-                        <a href="#">Выйти</a>
-                    </li>
+                <li class="Btn uk-margin-top">
+                    <h4>Платформа</h4>
+                    <a href="#">Кабинет</a>
+                    <a href="#">Профиль</a>
+                    <a href="#">Резюме</a>
+                </li>
+                <li class="Btn uk-margin-top">
+                    <a href="#">Выйти</a>
+                </li>
 
 
-                </ul>
-                <ul class="list-unstyled CTAs">
-
-                    <li>
-                        <a href="/" class="article">Обратно на главую</a>
-                    </li>
-                </ul>
+            </ul>
         </nav>
 
         <!-- Page Content  -->
@@ -234,7 +225,7 @@
 <script type="text/javascript">
     $(function () {
         var num = window.location.search[1];
-        if ($.isNumeric(num) && ![0, 2, 5, 8, 9].indexOf(num)){
+        if ($.isNumeric(num) && ![0, 2, 5, 8, 9].indexOf(num)) {
             // если у вас не работает страница с номером темплейта, как в массиве, просто удалите его из массива
             num = num; //here is a number of page
         } else {
@@ -322,10 +313,12 @@
     .text-sidebar {
         /* color: $text-sidebar; */
     }
-    .textNav a{
+
+    .textNav a {
         margin-top: 1%;
 
     }
+
     .wrapper {
         display: flex;
         width: 100%;
