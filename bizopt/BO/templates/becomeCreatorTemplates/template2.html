@@ -1,19 +1,14 @@
 <div class="row d-flex justify-content-center align-items-center">
     <div class="col-md-8">
         <form id="regForm" method="POST" action="" enctype="multipart/form-data">
-            <h1 id="register">Настройки профиля</h1>
-                    <div class="all-steps" id="all-steps">
-                        <a onclick="surTab(0)">
+            <h1 id="register">Данные продавца</h1>
+            <div class="all-steps" id="all-steps">
+                        <a onclick="surTab(0)" style="margin: 0 5px ;">
                             <span class="step">
 								<i class="fa fa-user"></i>
 							</span>
                         </a>
-                        <a onclick="surTab(1)">
-                            <span class="step">
-								<i class="fa fa-unlock-alt"></i>
-							</span>
-                        </a>
-                        <a onclick="surTab(2)">
+                        <a onclick="surTab(1)" style="margin: 0 5px ;">
                             <span class="step">
 								<i class="fa fa-unlock-alt"></i>
 							</span>
@@ -23,13 +18,14 @@
             <!-- start of bloc 1 -->
             <div class="tab" style="display: block;">
                 <label class="labels">ИНН</label>
-                <input type="text" class="form-control" name="INN" id="" value="{{ partner.INN }}">
+                <input type="text" class="form-control" name="INN" id="" value="{{ partner.INN }}header
+                header">
                 <br>
                 <label class="labels">Краткое наиименование</label>
                 <input type="text" class="form-control" name="short_name" id="" value="{{ partner.name_small }}">
                 <br>
-                <label class="labels">Полное наименование</label>
-                <input type="text" class="form-control" name="full_name" id="" value="{{ partner.name_full }}">
+                <label class="labels">Расчетный счет</label>
+                <input type="text" class="form-control" name="payment_account" id="" value="{{ partner.payment_account }}">
                 <br>
                 <label class="labels">Форма регистрации</label>
                 <div class="input-group mb-3">
@@ -41,8 +37,6 @@
                     </select>
                   </div>
                 <br>
-                <label class="labels">Расчетный счет</label>
-                <input type="text" class="form-control" name="payment_account" id="" value="{{ partner.payment_account }}">
                 <br>
             </div>
             <!-- end of bloc 1 -->
@@ -55,29 +49,10 @@
                 <label class="labels">Фамилия</label>
                 <input type="text" class="form-control" name="my_last_name" id="">
                 <br>
-                <label class="labels">Почта</label>
-                <input type="text" class="form-control" name="my_email" id="">
-                <br>
-                <div class="input-group">
-                    <input type="file" class="form-control" aria-describedby="" aria-label="">
-                </div>
                 <br>
             </div>
             <!-- end of bloc 2 -->
             
-            <!-- start of bloc 3 -->
-            <div class="tab" >
-                <label class="labels">Имя</label>
-                <input type="text" class="form-control" name="my_first_name" placeholder="{{partner.first_name}}" id="">
-                <br>
-                <label class="labels">Фамилия</label>
-                <input type="text" class="form-control" name="my_last_name" placeholder="{{partner.last_name}}"id="">
-                <br>
-                <label class="labels">Почта</label>
-                <input type="text" class="form-control" name="my_email" placeholder="{{partner.email}}" id="">
-                <br>
-            </div>
-            <!-- end of bloc 3 -->
 
 
             <div style="overflow:auto;" id="next-previous">
@@ -93,131 +68,57 @@
         </form>
     </div>
 </div>
+
 <script>
-    // $('.redirect').on('click', {}, function (inBody) {
-    //     var xhr = new XMLHttpRequest()
-    //     xhr.open('GET', `becomeCreatorTemplates/3/`)
-    //     xhr.onload = function () {
-    //         $('#MainWindowContainer').html(xhr.response)
-    //     }
-    //     xhr.send()
-    // });
-    function submitForm() {
-        var http = new XMLHttpRequest();
-        http.open("POST", "<<whereverTheFormIsGoing>>", true);
-        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        var params = "search=" + document.get; // probably use document.getElementById(...).value
-        http.send(params);
-        http.onload = function () {
-            alert(http.responseText);
-        }
+
+let currentTab = 0;
+document.addEventListener("DOMContentLoaded", function(event) {
+    showTab(currentTab);
+});
+
+function showTab(n) {
+    let x = document.getElementsByClassName("tab");
+    let header = document.getElementById('register');
+    console.log(n)
+    x[n].style.display = "block";
+    if (n === 0) {
+        document.getElementById("prevBtn").style.display = "none";
+        header.innerHTML = 'Данные продавца'
+    } else {
+        document.getElementById("prevBtn").style.display = "inline";
+        header.innerHTML = 'Мои данные'
     }
-</script>
-<script>
-    var inputnum = 0,
-        keynum = 0,
-        currentTab = 0;
-
-    function addInput(el) {
-        let input = el.parentElement.getElementsByTagName("input")[0];
-        if (inputnum < 15 && input.value) {
-            inputnum++;
-            input.removeAttribute("disabled");
-            input.placeholder = "";
-            var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" value="${document.getElementById('inputvalue').value}" disabled> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button></div>`;
-            document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-            input.value = "";
-        } else if (inputnum >= 15) {
-            input.value = "";
-            input.setAttribute("disabled", "disabled");
-            input.placeholder = "Простите, но вы ввели максимальное количество комплектов";
-        } else {
-            input.placeholder = "Для добавления элемента необходимо заполнить это поле";
-        }
+    if (n === (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+    } else {
+        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
     }
+    fixStepIndicator(n)
+}
 
-    function removeInput(el, arg) {
-        let mainInput = el.parentElement.parentElement.parentElement.getElementsByClassName("changible")[0];
-        arg ? inputnum-- : keynum--;
-        if (inputnum < 15 || keynum < 15) {
-            mainInput.removeAttribute("disabled");
-            mainInput.placeholder = "";
-        }
-        el.parentElement.remove();
+function nextPrev(n) {
+    let x = document.getElementsByClassName("tab");
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+    if (currentTab === x.length) {
+        document.getElementById('nextBtn').type = "submit"
     }
+    showTab(currentTab);
+}
 
-    function changeInput(el) {
-        let inputPole = el.parentElement.getElementsByTagName("input")[0];
-        let BtnImage = el.parentElement.getElementsByTagName("span")[0];
-        inputPole.placeholder = "";
-        if (inputPole.value){
-            inputPole.disabled ? BtnImage.innerHTML = "edit_off" : BtnImage.innerHTML = "mode_edit";
-            inputPole.disabled ? inputPole.removeAttribute("disabled") : inputPole.setAttribute("disabled", "disabled");
-        } else {
-            inputPole.placeholder = "Заполните это поле или удалите его";
-        }
+function surTab(n) {
+    let x = document.getElementsByClassName("tab");
+    x[currentTab].style.display = "none";
+    currentTab = n;
+    showTab(currentTab);
+}
+
+function fixStepIndicator(n) {
+    let i, x = document.getElementsByClassName("step");
+    for (i = 0; i <
+        x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
     }
-
-    function addKey(el) {
-        keynum++;
-        let key = el.parentElement.getElementsByTagName("input")[0];
-        key.placeholder = "";
-        if (keynum < 15 && key.value) {
-            var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" disabled value="${document.getElementById('keyValue').value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
-            document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-            key.value = "";
-        } else if (keynum >= 15) {
-            input.value = "";
-            key.setAttribute("disabled", "disabled");
-            key.placeholder = "Простите, но вы ввели максимальное количество ключевых слов";
-        } else {
-            key.placeholder = "Для добавления элемента необходимо заполнить это поле";
-        }
-    }
-
-    function showExtraInputs() {
-        let extrInput = document.getElementById('extraInputs');
-        extrInput.className == "d-none" ? extrInput.className = "" : extrInput.className = "d-none";
-
-    }
-
-    document.addEventListener("DOMContentLoaded", function (event) {
-        showTab(currentTab);
-    });
-
-    function showTab(n) {
-        let x = document.getElementsByClassName("tab");
-        try {
-            x[n].style.display = "block";
-            if (n === 0) {
-                document.getElementById("prevBtn").style.display = "none";
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            fixStepIndicator(n)
-        } catch {}
-    }
-
-    function nextPrev(n) {
-        let x = document.getElementsByClassName("tab");
-        try {
-            x[currentTab].style.display = "none";
-            currentTab = currentTab + n;
-            if (currentTab === x.length) {
-                document.getElementById('nextBtn').type = "submit"
-                document.getElementById('next-previous').classList.add("redirect");
-            }
-            showTab(currentTab);
-        } catch {}
-    }
-
-    function fixStepIndicator(n) {
-        let i, x = document.getElementsByClassName("step");
-        for (i = 0; i <
-            x.length; i++) {
-            x[i].className = x[i].className.replace(" active", "");
-        }
-    }
+    x[n].className += " active";
+}
 </script>
