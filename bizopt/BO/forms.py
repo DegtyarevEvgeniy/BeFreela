@@ -90,8 +90,7 @@ class addTasks(forms.Form):
 
     }))
     price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Цена',
+        'class': 'form-control'
     }))
     date = forms.DateField(label='Дата', widget=forms.DateInput(attrs={
         'class': 'form-control',
