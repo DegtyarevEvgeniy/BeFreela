@@ -184,6 +184,7 @@ def resumes_page(request):
     persons = Account.objects.all()
     # context['persons'] = persons
     context['creators'] = [{'id':creator.id,
+                            'username': creator.username,
                             'first_name':creator.first_name,
                             'email':person,
                             'cover':creator.cover,
@@ -222,7 +223,7 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     return render(request, 'addTask.html', context)
 
 
-def becomeCreator_page(request):
+def becomeCreator_page(request):  # sourcery skip: low-code-quality
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
 
@@ -236,6 +237,7 @@ def becomeCreator_page(request):
             creator.vk = request.POST['vk']
             creator.whatsapp = request.POST['whatsapp']
             creator.instagram = request.POST['instagram']
+            creator.username = request.user.username
             creator.save()
         except:
             creator = Creator()
@@ -246,6 +248,7 @@ def becomeCreator_page(request):
                 local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                 creator.cover = local_path_to_file
             creator.first_name = user.first_name
+            creator.username = request.user.username
             creator.description = request.POST['profile_description']
             creator.telegram = request.POST['telegram']
             creator.vk = request.POST['vk']
@@ -546,9 +549,9 @@ def cardResume_page(request):
     return render(request, 'cardResume.html', context)
 
 
-def sertCardResume_page(request):
+def sertCardResume_page(request, username):
     context = gen_menu(request)
-    profile = Creator.objects.get(email=request.user)
+    profile = Creator.objects.get(username=username)
     context['profile'] = profile
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
