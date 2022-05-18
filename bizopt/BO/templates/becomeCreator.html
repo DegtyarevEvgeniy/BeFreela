@@ -194,23 +194,6 @@
                 </li>
 
 
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Мой
-                        профиль</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li class="ExtBtn">
-                            <a href="#">Данные продавца</a>
-                        </li>
-                        <li class="ExtBtn">
-                            <a href="#">Пользователи</a>
-                        </li>
-                        <li class="ExtBtn">
-                            <a href="#">Мои данные</a>
-                        </li>
-                    </ul>
-                </li>
-
-
                 <li class="Btn">
                     <a href="#">Мои товары</a>
                 </li>
@@ -264,16 +247,6 @@
     $('.Btn').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
         var index = $(this).index() + 1
-        xhr.open('GET', `becomeCreatorTemplates/${index}/`)
-        xhr.onload = function () {
-            $('#MainWindowContainer').html(xhr.response)
-        }
-        xhr.send()
-    });
-
-    $('.ExtBtn').on('click', {}, function (inBody) {
-        var xhr = new XMLHttpRequest()
-        var index = $(this).index() + 11
         xhr.open('GET', `becomeCreatorTemplates/${index}/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
