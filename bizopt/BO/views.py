@@ -36,6 +36,7 @@ def gen_menu(request):
                 {'xpos': 'right', 'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
                 {'xpos': 'right', 'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
                 {'xpos': 'right', 'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
+                {'xpos': 'right', 'position': 'in', 'link': '/partners/', 'text': 'Сотрудничество'},
                 {'xpos': 'right', 'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
 
             ]
@@ -668,3 +669,5 @@ def orders_page(request):
 
     return render(request, 'orders.html', content)
 
+def partners_page(request):
+    return render(request, 'showPartner.html')
