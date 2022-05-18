@@ -39,10 +39,10 @@
 {% for product in products %}
 {% if profile.email == product.id_creator %}
 
-<div class="card" style="width: 18rem;">
+<div class="card">
     <img src="{{ product.picture.url }}" class="card-img-top" alt="...">
     <div class="card-body">
-        <h5 class="card-title">{{ product.product_name }}</h5>
+        <h5 class="card-title uk-text-break">{{ product.product_name }}</h5>
         <p>
             <label>Наличие: </label> {{ product.availability }}
         </p>
