@@ -26,6 +26,23 @@ class Product_buy(models.Model):
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status1 = models.CharField(max_length=20, default='-') #запрос в работе
     status2 = models.CharField(max_length=20, default='-') #в ожидании в работе готово
+    message = models.CharField(max_length=200, default='-')
+    payed_partner = models.BooleanField(default=0)
+    payed_user = models.BooleanField(default=0)
+
+
+class Comments_partner(models.Model):
+    id_creator = models.CharField(max_length=200, default='-')
+    id_partner = models.CharField(max_length=200, default='-')
+    review = models.CharField(max_length=200, default='-')
+    rating = models.IntegerField(default='')
+
+
+class Comments_product(models.Model):
+    id_creator = models.CharField(max_length=200, default='-')
+    id_product = models.CharField(max_length=200, default='-')
+    review = models.CharField(max_length=200, default='-')
+    rating = models.IntegerField(default='')
 
 
 class Product_creator(models.Model):
