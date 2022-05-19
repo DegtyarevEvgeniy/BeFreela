@@ -4,6 +4,7 @@ from django.forms import ModelForm
 from taggit.managers import TaggableManager
 
 class Creator(models.Model):
+    username = models.CharField(max_length=20, default='', unique=True)
     first_name = models.CharField(max_length=30, default='')
     email = models.CharField(max_length=20, default='example@example.com')
     cover = models.ImageField(upload_to='images/creator', default='images/default.png')
