@@ -493,8 +493,8 @@ def index_page(request):
 
 def cardProduct_page(request, product_id):
     context = {**gen_menu(request), **gen_submenu(request)}
-    if request.method == "POST":
-        try:
+    try:
+        if request.method == "POST":
             product_buy = Product_buy()
 
             product = Product_creator.objects.get(id=product_id)
@@ -509,28 +509,17 @@ def cardProduct_page(request, product_id):
             product_buy.status1 = 'in waiting'
             product_buy.status2 = 'None'
             product_buy.save()
-            context['product'] = {'product_name': product.product_name,
-                                  'cost': product.price,
-                                  'availability': product.availability,
-                                  'picture': product.picture,
-                                  'description': product.description
-                                  }
-            return render(request, 'cardProduct.html', context)
-        except Task.DoesNotExist as e:
-            raise Http404 from e
-    else:
-        try:
+        else:
             product = Product_creator.objects.get(id=product_id)
-            context['product'] = {'product_name': product.product_name,
-                                  'cost': product.price,
-                                  'availability': product.availability,
-                                  'picture': product.picture,
-                                  'description': product.description
-                                  }
-
-            return render(request, 'cardProduct.html', context)
-        except Task.DoesNotExist as e:
-            raise Http404 from e
+        context['product'] = {'product_name': product.product_name,
+                              'cost': product.price,
+                              'availability': product.availability,
+                              'picture': product.picture,
+                              'description': product.description
+                              }
+        return render(request, 'cardProduct.html', context)
+    except Task.DoesNotExist as e:
+        raise Http404 from e
 
 
 def cardResume_page(request):
