@@ -708,6 +708,7 @@ def orders_page(request):
         'id': product.id,
         'product_name': product.product_name,
         'id_user_buy': product.id_user_buy,
+        'status1': product.status1,
     } for product in productss]
 
     return render(request, 'orders.html', content)
