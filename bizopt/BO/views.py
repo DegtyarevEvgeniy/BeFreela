@@ -343,6 +343,23 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         else:
             partner.email = account.email
         partner.save()
+
+    if request.method == 'POST' and "products_in_work" in request.POST:
+        print("products_in_work")
+        statuses_list = request.POST.getlist('services')
+        # TODO: БЕЗ ЭТОГО СЛОВАРЯ ВОЗМОЖНЫХ ЗНАЧЕНИЙ СТАТУСА ВСЕ СЛОМАЕТСЯ!!!!!
+        #  ПРОВЕРИТЬ СООТВЕТСТВИЕ СЛОВАРЯ ЗНАЧЕНИЯМ НА ФРОНТЕ!
+
+        statuses = {
+            '1': 'in_process',
+            '2': 'done',
+            '3': 'awaiting_payment',
+            '4': 'end_partner_late'
+        }
+        products = Product_buy.objects.all()
+        for i in range(len(products)):
+            products[i].status2 = statuses[statuses_list[i]]
+            products[i].save()
     return render(request, 'becomeCreator.html', context)
 
 
@@ -523,7 +540,7 @@ def cardProduct_page(request, product_id):
         else:
             product = Product_creator.objects.get(id=product_id)
             # creator [= Creat]or.objects.get(email=product.id_creator)
-        context['product'] = product
+        context['products'] = product
         # context['creator'] = creator
         return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist as e:
