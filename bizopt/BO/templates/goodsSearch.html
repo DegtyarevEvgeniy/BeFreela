@@ -1,0 +1,300 @@
+{% extends "base.html" %} {% block content %}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>BizOpt</title>
+
+</head>
+
+<body>
+<div class="uk-margin-large-left uk-margin-medium-top uk-flex">
+    <div style="width: 20%">
+            <div class="uk-margin-small-left">
+                <h4 class="uk-margin-small-bottom">Электроника - Смартфоны</h4>
+                <h2 class="uk-margin-medium-bottom uk-margin-small-top">Смартфоны</h2>
+                <div class="textStyleHeaderRegion uk-margin-medium-bottom">
+                    <input type="checkbox" value="value2" class="uk-margin-small-right">
+                    <label>Мой регион</label>
+                </div>
+            </div>
+            <div>
+                <hr style="background-color: black; height: 3px; width: 80%">
+                <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                    <p>Рейтинг продавца</p>
+                    <div class="uk-margin-small-left">
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>от <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span></label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value2">
+                            <label>от <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span></label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>от <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span></label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value2">
+                            <label>Не важно</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                    <p>Цена</p>
+                    <div class="uk-margin-small-left">
+                        <input class="uk-input uk-margin-right" type="text" placeholder="от" style="width: 30%; border-radius: 5em; background-color: #C4C4C4; color: white">
+                        <input class="uk-input" type="text" placeholder="до" style="width: 30%; border-radius: 5em; background-color: #C4C4C4; color: white">
+                    </div>
+                </div>
+                <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                    <p>Срок изготовления</p>
+                    <div class="uk-margin-small-left">
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>до 1го дня</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value2">
+                            <label>до 3ех дней</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>до 1 недели</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value2">
+                            <label>до 1 месяца</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>до 3ех месяцев</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>более 1го года</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="textStyleHeader textAll">
+                    <p>Исполнитель</p>
+                    <div class="uk-margin-small-left">
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>ИП</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" value="value1">
+                            <label>ООО</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
+
+    </div>
+
+<!--        <div class="position-relative">-->
+<!--            <div class="position-absolute top-50 start-50 translate-middle">-->
+<!--                <div>-->
+<!--                    <button class="twoBut" id="showContent1">Резюме</button>-->
+<!--                    <button class="twoBut" id="showContent2">Товар</button>-->
+<!--                    <br>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    <br>
+    <br>
+        <div id="content" class="row" style="margin-top: 50px" >
+            {% include "baseProductCard.html" %}
+
+        </div>
+</div>
+
+</body>
+
+<style>
+    .textStyleHeader p{
+        font-family: 'Inter';
+        font-size: 20px;
+        font-style: normal;
+        line-height: 15px;
+
+    }
+    .textStyleHeaderRegion label{
+        font-family: 'Inter';
+        font-size: 18px;
+        font-style: normal;
+        line-height: 15px;
+        margin-bottom: 5px;
+    }
+
+    .textAll label {
+        font-family: 'Inter';
+        font-style: normal;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .checked {
+        color: orange;
+    }
+</style>
+<script src="js/uikit-icons.min.js"></script>
+<!--<script>-->
+<!--    $(function() {-->
+<!--        var xhr = new XMLHttpRequest()-->
+<!--        xhr.open('GET', 'baseProductCard ')-->
+<!--        xhr.onload = function() {-->
+
+<!--            console.log(xhr.response)-->
+<!--            $('#content').html(xhr.response)-->
+<!--        }-->
+<!--        xhr.send()-->
+<!--    });-->
+
+<!--    $('#showContent1').on('click', {-->
+<!--        title: 'Заголовок 1',-->
+<!--        content: 'Содержимое 1...'-->
+<!--    }, function(inBody) {-->
+
+<!--        var xhr = new XMLHttpRequest()-->
+<!--        xhr.open('GET', 'baseResumeCard')-->
+<!--        xhr.onload = function() {-->
+
+<!--            console.log(xhr.response)-->
+<!--            $('#content').html(xhr.response)-->
+<!--        }-->
+<!--        xhr.send()-->
+<!--    });-->
+
+<!--    $('#showContent2').on('click', {-->
+<!--        title: 'Заголовок 2',-->
+<!--        content: 'Содержимое 2...'-->
+<!--    }, function(inBody) {-->
+
+<!--        var xhr = new XMLHttpRequest()-->
+<!--        xhr.open('GET', 'baseProductCard')-->
+<!--        xhr.onload = function() {-->
+
+<!--            console.log(xhr.response)-->
+<!--            $('#content').html(xhr.response)-->
+<!--        }-->
+<!--        xhr.send()-->
+
+<!--    });-->
+<!--</script>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<body style="width: 100%; height: 100%;">-->
+
+
+<!--<h1 style="margin-left: 5%">Исполнители</h1>-->
+<!--<br>-->
+<!--<br>-->
+<!--<div style="width: 90%; height: auto; margin: auto">-->
+<!--    <div class="uk-flex uk-flex-center">-->
+<!--    {% for creator in creators %}-->
+<!--        <div>-->
+<!--            <div class="uk-card uk-card-default uk-card-body">-->
+<!--                    <div class="uk-card uk-card-default uk-card-body uk-padding-remove">-->
+<!--                        <div class="uk-flex">-->
+<!--                            <div class="uk-card uk-card-default uk-card-body" style="width: 40%; height: auto; padding: 5%" >-->
+<!--                                <img src="{{ creator.avatar }}">-->
+<!--                                <br>-->
+<!--                                <br>-->
+<!--                                <br>-->
+<!--                                <br>-->
+<!--                                <br>-->
+<!--                                <br>-->
+<!--                                <a href="cardResume" class="uk-margin-left uk-button uk-button-text uk-margin-remove button" >Подробнее</a>-->
+<!--                            </div>-->
+<!--                            <div class="uk-card uk-card-default uk-card-body uk-margin-left" style="width: 70%">-->
+<!--                                <h3 class = "uk-card-title">{{ creator.first_name }}</h3>-->
+<!--                                <p>{{ creator.description }} о себе  о себе  о себе о себе  о себе  о себе о себе  о себе  о себе</p>-->
+<!--                                <div>-->
+<!--                                    <div class="uk-flex-inline">-->
+<!--                                        <div class="">-->
+<!--                                            <p class="uk-text-default" style="color: black">Деятельность:</p>-->
+<!--                                            <p class="uk-text-small textCard">Резьба по дереву</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="" style="margin-left: 32%">-->
+<!--                                            <p class="uk-text-default" style="color: black">Стоимость:</p>-->
+<!--                                            <p class="uk-text-small textCard" style="padding: 4px">от 2000 руб</p>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="uk-flex-inline">-->
+<!--                                        <div>-->
+<!--                                            <p class="uk-text-default" style="color: black">Срок изготовления:</p>-->
+<!--                                            <p class="uk-text-small textCard">от 5 дней</p>-->
+<!--                                        </div>-->
+<!--                                        <div class="uk-margin-left">-->
+<!--                                            <p class="uk-text-default" style="color: black">Стаж работы:</p>-->
+<!--                                            <p class="uk-text-small textCard">2 года</p>-->
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--            </div>-->
+<!--    {% endfor %}-->
+<!--    </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</body>-->
+
+<!--<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>-->
+<!--<style>-->
+<!--    .button {-->
+<!--        width: 100%;-->
+<!--        color: white;-->
+<!--        background: #2D3995;-->
+<!--        margin: auto;-->
+<!--        border-radius: 5px;-->
+<!--        padding-top: 5%;-->
+<!--        padding-bottom: 5%;-->
+<!--    }-->
+<!--    .textCard {-->
+<!--        color: black;-->
+<!--        background: rgba(69, 101, 232, 0.34);-->
+<!--        border-radius: 5px;-->
+<!--        padding: 2px;-->
+<!--        text-align: center;-->
+<!--    }-->
+<!--</style>-->
+{% endblock %}

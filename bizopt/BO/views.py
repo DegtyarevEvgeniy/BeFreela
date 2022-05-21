@@ -177,6 +177,17 @@ def goods_page(request):
                            for product in products]
     return render(request, 'goods.html', context)
 
+def goodsSearch_page(request):
+    context = gen_menu(request)
+    products = Product_creator.objects.all()
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture
+                            }
+                           for product in products]
+    return render(request, 'goodsSearch.html', context)
 
 def resumes_page(request):
     context = gen_menu(request)
@@ -511,7 +522,7 @@ def cardProduct_page(request, product_id):
             product_buy.save()
         else:
             product = Product_creator.objects.get(id=product_id)
-            # creator = Creator.objects.get(email=product.id_creator)
+            # creator [= Creat]or.objects.get(email=product.id_creator)
         context['product'] = product
         # context['creator'] = creator
         return render(request, 'cardProduct.html', context)
