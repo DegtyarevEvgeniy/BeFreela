@@ -2,7 +2,7 @@ import os
 import re
 
 from django.core import paginator
-from django.core.paginator import PageNotAnInteger, EmptyPage
+from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from .utils import *
 from .forms import *
@@ -24,12 +24,13 @@ from taggit.models import Tag
 from taggit.models import Tag
 
 def post_list(request, tag_slug=None):
-    object_list = Product_creator.published.all()
+    object_list = Product_creator.objects.all()
     tag = None
 
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
         object_list = object_list.filter(tags__in=[tag])
+    paginator = Paginator(object_list, 3)  # 3 поста на каждой странице
     page = request.GET.get('page')
     try:
         posts = paginator.page(page)
@@ -41,10 +42,12 @@ def post_list(request, tag_slug=None):
         posts = paginator.page(paginator.num_pages)
 
     return render(request,
-                  'blog/post/list.html',
+                  'goodsSearch.html',
                   {'page': page,
                    'posts': posts,
                    'tag': tag})
+
+
 def gen_menu(request):
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
@@ -214,9 +217,11 @@ def resumes_page(request):
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
+
     if request.method == 'POST':
         form = addTasks(request.POST)
-        if form.is_valid():
+        if form.is_valid() and "addtask" in request.POST:
+            print('kkk')
             task = Task()
             task.name = request.POST['task_name']
             task.description = request.POST['description']
@@ -224,10 +229,11 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
             task.time = request.POST['date']
             task.id_creator = str(request.user)
             task.save()
-            task.tags.add(form.cleaned_data['select'])
+            task.tags.add(request.POST['tag'])
             task.save()
+            return redirect('/yourTasks/')
         context["form"] = form
-        return redirect('/yourTasks/')
+
     else:
         form = addTasks()
         context["form"] = form
