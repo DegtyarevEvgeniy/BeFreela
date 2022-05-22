@@ -1,157 +1,123 @@
-
-<div class="d-flex flex-row">
-    <h1 style="margin: auto">Заказы в работе</h1>
-
-    <a class="btn btn-primary Btnn" role="button" style="margin: auto">Создать задачу</a>
-</div>
-<div class="center">
-
-    <form method="POST" id="products_in_work_id" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="col-sm-9 scrollspy-example" style="margin: auto">
-            <div class="container">
-                <table class="table table-fixed col-sm-9 scrollspy-example" data-spy="scroll" data-target="#spy">
-                    <thead>
-                        <tr>
-                            <th class="col-xs-3">ID</th>
-                            <th class="col-xs-3">Название задачи</th>
-                            <th class="col-xs-3">Кол-во шт товара</th>
-                            <th class="col-xs-3">Заказчик</th>
-                            <th class="col-xs-3">Дедлайн</th>
-                            <th class="col-xs-6">Статус</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for product in products %}
-                        <tr>
-                            <td class="col-xs-3">{{ product.id }}</td>
-                            <td class="col-xs-3">{{ product.product_name }}</td>
-                            <td class="col-xs-6">1</td>
-                            <td class="col-xs-3">{{ product.customer }}</td>
-                            <td class="col-xs-3">2021-05-23</td>
-                            <th class="col-xs-6">
-                                <select name="services" id="services" class="form-select" aria-label="Default select example">
-                                    <option {% if product.status2 == 'in_process' %}selected{% endif %} value="1">В работе</option>
-                                    <option {% if product.status2 == 'done' %}selected{% endif %} value="2">Сделано</option>
-                                    <option {% if product.status2 == 'awaiting_payment' %}selected{% endif %} value="3">Ожидает оплаты</option>
-                                    <option {% if product.status2 == 'end_partner_late' %}selected{% endif %} value="4">Отказ</option>
-                                </select>
-                            </th>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <button name="products_in_work" type="submit" class="btn btn-secondary button button">Сохранить</button>
-    </form>
-
-    <div class="d-flex flex-row" style="margin-top: 20px">
-
-        <div class="shadow-none p-3 mb-5 bg-light rounded" style="width: 45%; margin: auto">
-            <h1>Отзывы</h1>
-            <div class="col-sm-8 scrollspy-example shadow p-3 mb-5 bg-body rounded" style="margin: auto">
-
-
-                <div class="d-flex flex-row" style="padding-bottom: 10px;">
-
-                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="70" height="58" class="d-inline-block align-text-top">
-                    <div style="width: 100%; height: auto">
-                        <h4 style="margin-left: 5%"> User Name</h4>
-                        <div style="margin-left: 5%">
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+        <form id="regForm" method="POST" action="" enctype="multipart/form-data">
+            <h1 id="register">Данные продавца</h1>
+            <div class="all-steps" id="all-steps">
+                        <a onclick="surTab(0)" style="margin: 0 5px ;">
+                            <span class="step">
+								<i class="fa fa-user"></i>
+							</span>
+                        </a>
+                        <a onclick="surTab(1)" style="margin: 0 5px ;">
+                            <span class="step">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+                        </a>
                     </div>
 
-                </div>
-
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta fugit minus optio alias dolorum sapiente, facere iusto recusandae quo amet, asperiores deserunt, doloribus atque dolore saepe neque perspiciatis reprehenderit doloremque!
-                </p>
-                <style>
-                    .colorStarTrue {
-
-                        font-weight: 900;
-                        color: #f8ce0b;
-                    }
-
-                </style>
+            <!-- start of bloc 1 -->
+            <div class="tab" style="display: block;">
+                <label class="labels">ИНН</label>
+                <input type="text" class="form-control" name="INN" id="" value="{{ partner.INN }}">
+                <br>
+                <label class="labels">Краткое наиименование</label>
+                <input type="text" class="form-control" name="short_name" id="" value="{{ partner.name_small }}">
+                <br>
+                <label class="labels">Расчетный счет</label>
+                <input type="text" class="form-control" name="payment_account" id="" value="{{ partner.payment_account }}">
+                <br>
+                <label class="labels">Форма регистрации</label>
+                <div class="input-group mb-3">
+                    <select name="reg_form" class="form-select" id="inputGroupSelect02">
+                      <option value="1">ИП без НДС</option>
+                      <option value="2">ИП с НДС</option>
+                      <option value="3">ИП на НПД</option>
+                      <option value="4" selected>Самозанятый</option>
+                    </select>
+                  </div>
+                <br>
+                <br>
             </div>
-        </div>
+            <!-- end of bloc 1 -->
 
-        <div class="shadow-none p-3 mb-5 bg-light rounded" style="width: 45%; margin: auto">
-            <h1>Запросы</h1>
-            <div class="col-sm-12 scrollspy-example shadow p-3 mb-5 bg-body rounded " style="margin: auto">
-                <h1></h1>
-                <div class="container">
-                    <table class="table table-fixed col-sm-9 scrollspy-example" data-spy="scroll" data-target="#spy">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-3">ID Запроса</th>
-                                <th class="col-xs-3">Название Товара</th>
-                                <th class="col-xs-3">Заказчик</th>
-                                <th class="col-xs-3">Статус</th>
-                            </tr>
-                        </thead>
+            <!-- start of bloc 2 -->
+            <div class="tab" >
+                <label class="labels">Имя</label>
+                <input type="text" class="form-control" name="my_first_name" id="">
+                <br>
+                <label class="labels">Фамилия</label>
+                <input type="text" class="form-control" name="my_last_name" id="">
+                <br>
+                <br>
+            </div>
+            <!-- end of bloc 2 -->
+            
 
-                        <form method="GET" id="goodsList" enctype="multipart/form-data">
-                            <tbody>
-                                {% for product in products_v %}
-                                <tr>
-                                    <td class="col-xs-3">{{ product.id }}</td>
-                                    <td class="col-xs-3">{{ product.product_name }}</td>
-                                    <td class="col-xs-3">{{ product.id_user_buy }}</td>
-                                    <td class="col-xs-3">
-                                        <button name="status" form="goodsList" type="submit" value={{product.id}} class="btn btn-outline-secondary">Согласиться</button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </form>
-                    </table>
+
+            <div style="overflow:auto;" id="next-previous">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" style="display: none;" onclick="nextPrev(-1)">
+                        <i class="fa fa-angle-double-left"></i>
+                    </button>
+                    <button name="product_creator" type="button" id="nextBtn" onclick="nextPrev(1)">
+                        <i class="fa fa-angle-double-right"></i>
+                    </button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-
 </div>
 
+<script>
 
-<style>
-    .scrollspy-example {
-        position: relative;
-        height: 350px;
-        overflow: auto;
+let currentTab = 0;
+document.addEventListener("DOMContentLoaded", function(event) {
+    showTab(currentTab);
+});
+
+function showTab(n) {
+    let x = document.getElementsByClassName("tab");
+    let header = document.getElementById('register');
+    console.log(n)
+    x[n].style.display = "block";
+    if (n === 0) {
+        document.getElementById("prevBtn").style.display = "none";
+        header.innerHTML = 'Данные продавца'
+    } else {
+        document.getElementById("prevBtn").style.display = "inline";
+        header.innerHTML = 'Мои данные'
     }
-
-    .table-fixed {
-        width: 100%;
-        background-color: #f3f3f3;
-
+    if (n === (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+    } else {
+        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
     }
+    fixStepIndicator(n)
+}
 
-    .center {
-        width: 100%;
-        height: auto;
+function nextPrev(n) {
+    let x = document.getElementsByClassName("tab");
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+    if (currentTab === x.length) {
+        document.getElementById('nextBtn').type = "submit"
     }
+    showTab(currentTab);
+}
 
+function surTab(n) {
+    let x = document.getElementsByClassName("tab");
+    x[currentTab].style.display = "none";
+    currentTab = n;
+    showTab(currentTab);
+}
 
-    .img {
-        height: 50px;
-        width: 50px;
-        background-color: aqua;
+function fixStepIndicator(n) {
+    let i, x = document.getElementsByClassName("step");
+    for (i = 0; i <
+        x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
     }
-
-    .button {
-        width: 71.5%;
-        margin-left: 13.5%;
-        margin-top: 1%;
-
-    }
-
-</style>
+    x[n].className += " active";
+}
+</script>
