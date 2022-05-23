@@ -48,7 +48,7 @@ urlpatterns = [
     path('yourTasks/', views.yourTasks_page),
     path('addTask/', views.addTask_page),
     path('creators/goods/', views.goods_page),
-    path('creators/goods/search/', views.goodsSearch_page),
+    path('creators/goods/search/<product_name>', views.goodsSearch_page),
     path('creators/goods/<product_id>/', views.cardProduct_page),
     path('creators/cardResume/', views.cardResume_page),
     path('creators/cardResume/<username>', views.sertCardResume_page),

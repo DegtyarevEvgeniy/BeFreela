@@ -3,6 +3,7 @@ import re
 
 from django.core import paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
+from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .utils import *
 from .forms import *
@@ -22,6 +23,23 @@ from .forms import ProductCreateForm
 from taggit.models import Tag
 
 from taggit.models import Tag
+
+
+def goodsSearch_page(request, product_name):
+    context = gen_menu(request)
+    products = Product_creator.objects.filter(
+        Q(product_name__icontains=product_name)
+    )
+    print(products)
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture
+                            }
+                           for product in products]
+    return render(request, 'goodsSearch.html', context)
+
 
 def post_list(request, tag_slug=None):
     object_list = Product_creator.objects.all()
@@ -180,17 +198,6 @@ def goods_page(request):
                            for product in products]
     return render(request, 'goods.html', context)
 
-def goodsSearch_page(request):
-    context = gen_menu(request)
-    products = Product_creator.objects.all()
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture
-                            }
-                           for product in products]
-    return render(request, 'goodsSearch.html', context)
 
 def resumes_page(request):
     context = gen_menu(request)
@@ -546,7 +553,7 @@ def cardProduct_page(request, product_id):
             product_buy.save()
         else:
             product = Product_creator.objects.get(id=product_id)
-            # creator [= Creat]or.objects.get(email=product.id_creator)
+            # creator = Creator.objects.get(email=product.id_creator)
         context['products'] = product
         # context['creator'] = creator
         return render(request, 'cardProduct.html', context)
