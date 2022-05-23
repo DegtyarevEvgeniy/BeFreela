@@ -542,6 +542,7 @@ def cardProduct_page(request, product_id):
             # product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
             product_buy.status1 = 'in waiting'
             product_buy.status2 = 'None'
+            product_buy.message = request.POST['message']
             product_buy.save()
         else:
             product = Product_creator.objects.get(id=product_id)
