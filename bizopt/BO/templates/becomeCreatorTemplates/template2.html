@@ -1,4 +1,3 @@
-
 <div class="d-flex flex-row">
     <h1 style="margin: auto">Заказы в работе</h1>
 
@@ -6,120 +5,158 @@
 </div>
 <div class="center">
 
-    <form method="POST" id="products_in_work_id" enctype="multipart/form-data">
+    <form method="POST" id="products_in_work_id"
+        style="background-color: rgba(204, 204, 204, 0.2); margin: 5% 0 ;padding: 2% 20px;"
+        enctype="multipart/form-data">
         {% csrf_token %}
-        <div class="col-sm-9 scrollspy-example" style="margin: auto">
-            <div class="container">
-                <table class="table table-fixed col-sm-9 scrollspy-example" data-spy="scroll" data-target="#spy">
-                    <thead>
-                        <tr>
-                            <th class="col-xs-3">ID</th>
-                            <th class="col-xs-3">Название задачи</th>
-                            <th class="col-xs-3">Кол-во шт товара</th>
-                            <th class="col-xs-3">Заказчик</th>
-                            <th class="col-xs-3">Дедлайн</th>
-                            <th class="col-xs-6">Статус</th>
-                        </tr>
-                    </thead>
+        <div class="container">
+            <table class="uk-table uk-table-justify uk-table-divider uk-table-large" data-spy="scroll" data-target="#spy">
+                <thead>
+                    <tr class="uk-text-center">
+                        <th class="">ID</th>
+                        <th class="">Название задачи</th>
+                        <th class="">Кол-во шт товара</th>
+                        <th class="">Заказчик</th>
+                        <th class="">Дедлайн</th>
+                        <th class="">Статус</th>
+                        <th class="">Отказаться/Завершить</th>
+                        <th class="">Посмотреть пожелания</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        {% for product in products %}
-                        <tr>
-                            <td class="col-xs-3">{{ product.id }}</td>
-                            <td class="col-xs-3">{{ product.product_name }}</td>
-                            <td class="col-xs-6">1</td>
-                            <td class="col-xs-3">{{ product.customer }}</td>
-                            <td class="col-xs-3">2021-05-23</td>
-                            <th class="col-xs-6">
-                                <select name="services" id="services" class="form-select" aria-label="Default select example">
-                                    <option {% if product.status2 == 'in_process' %}selected{% endif %} value="1">В работе</option>
-                                    <option {% if product.status2 == 'done' %}selected{% endif %} value="2">Сделано</option>
-                                    <option {% if product.status2 == 'awaiting_payment' %}selected{% endif %} value="3">Ожидает оплаты</option>
-                                    <option {% if product.status2 == 'end_partner_late' %}selected{% endif %} value="4">Отказ</option>
-                                </select>
-                            </th>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td class="uk-text-break">{{ product.id }}</td>
+                        <td class="uk-text-break">{{ product.product_name }}</td>
+                        <td class="uk-text-break">1</td>
+                        <td class="uk-text-break">{{ product.customer }}</td>
+                        <td class="">2021-05-23</td>
+                        <th class="">
+                                <button class="uk-badge" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="В работе" >1</button>
+                                <button class="uk-badge" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Сделано" >2</button>
+                                <button class="uk-badge" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Ожидает оплаты" >3</button>
+                                <button class="uk-badge" style="background-color: #ee395b;border-color: #ee395b; padding: 10%; margin: 2px;" uk-tooltip="Отказ" >4</button> 
+                        </th>
+                        <td class="uk-text-break">
+                            <button name="" form="products_in_work_id" type="button"
+                                class="uk-button uk-button-danger uk-border-rounded">отказаться</button>
+                        </td>
+
+                        <td class="uk-text-break">
+                            <button name="" form="products_in_work_id" type="button"
+                                class="uk-button uk-button-primary uk-border-rounded" href="#modal-overflow"
+                                uk-toggle>Посмотреть</button>
+                            <div id="modal-overflow" uk-modal>
+                                <div class="uk-modal-dialog">
+
+                                    <button class="uk-modal-close-default" type="button" uk-close></button>
+
+                                    <div class="uk-modal-header">
+                                        <h2 class="uk-modal-title uk-text-truncate">Пожелание к товару
+                                            {{ product.product_name }}</h2>
+                                    </div>
+
+                                    <div class="uk-modal-body" uk-overflow-auto>
+                                        <p class="uk-text-small uk-text-break uk-text-emphasis"> Lorem ipsum dolor
+                                            sit amet consectetur adipisicing elit. Possimus est dolore nulla porro
+                                            hic dolor molestiae fugit. Beatae in reprehenderit explicabo consequatur
+                                            commodi. Ducimus, tempora repudiandae maxime itaque soluta eaque. </p>
+
+                                    </div>
+
+                                    <div class="uk-modal-footer uk-text-right">
+                                        <button class="uk-button uk-button-primary uk-modal-close"
+                                            type="button">Закрыть</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+
         <button name="products_in_work" type="submit" class="btn btn-secondary button button">Сохранить</button>
     </form>
 
-    <div class="d-flex flex-row" style="margin-top: 20px">
+    <div class="uk-flex uk-flex-top uk-text-left" style="margin-top: 20px">
 
-        <div class="shadow-none p-3 mb-5 bg-light rounded" style="width: 45%; margin: auto">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m" style="box-shadow: none; ">
             <h1>Отзывы</h1>
-            <div class="col-sm-8 scrollspy-example shadow p-3 mb-5 bg-body rounded" style="margin: auto">
+            <div class="d-flex flex-row" style="padding-bottom: 10px;">
 
-
-                <div class="d-flex flex-row" style="padding-bottom: 10px;">
-
-                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="70" height="58" class="d-inline-block align-text-top">
-                    <div style="width: 100%; height: auto">
-                        <h4 style="margin-left: 5%"> User Name</h4>
-                        <div style="margin-left: 5%">
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star colorStarTrue"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
+                <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="70" height="58"
+                    class="d-inline-block align-text-top">
+                <div style="width: 100%; height: auto">
+                    <h4 style="margin-left: 5%"> User Name</h4>
+                    <div style="margin-left: 5%">
+                        <i class="fa-solid fa-star colorStarTrue"></i>
+                        <i class="fa-solid fa-star colorStarTrue"></i>
+                        <i class="fa-solid fa-star colorStarTrue"></i>
+                        <i class="fa-solid fa-star colorStarTrue"></i>
+                        <i class="fa-solid fa-star"></i>
                     </div>
-
                 </div>
 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta fugit minus optio alias dolorum sapiente, facere iusto recusandae quo amet, asperiores deserunt, doloribus atque dolore saepe neque perspiciatis reprehenderit doloremque!
-                </p>
-                <style>
-                    .colorStarTrue {
-
-                        font-weight: 900;
-                        color: #f8ce0b;
-                    }
-
-                </style>
             </div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta fugit minus optio alias dolorum
+                sapiente, facere iusto recusandae quo amet, asperiores deserunt, doloribus atque dolore saepe neque
+                perspiciatis reprehenderit doloremque!
+            </p>
+            <style>
+                .colorStarTrue {
+                    font-weight: 900;
+                    color: #f8ce0b;
+                }
+            </style>
         </div>
-
-        <div class="shadow-none p-3 mb-5 bg-light rounded" style="width: 45%; margin: auto">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m"
+            style="box-shadow: none; border-left: 1px solid rgb(156, 156, 156)">
             <h1>Запросы</h1>
-            <div class="col-sm-12 scrollspy-example shadow p-3 mb-5 bg-body rounded " style="margin: auto">
-                <h1></h1>
-                <div class="container">
-                    <table class="table table-fixed col-sm-9 scrollspy-example" data-spy="scroll" data-target="#spy">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-3">ID Запроса</th>
-                                <th class="col-xs-3">Название Товара</th>
-                                <th class="col-xs-3">Заказчик</th>
-                                <th class="col-xs-3">Статус</th>
-                            </tr>
-                        </thead>
+            <div style="margin: auto">
+                <form method="GET" id="goodsList" enctype="multipart/form-data">
+                    <div class="uk-overflow-aut">
+                        <table class="uk-table uk-table-justify" data-spy="scroll" data-target="#spy">
+                            <thead>
+                                <tr>
+                                    <th class="uk-width-small">ID Запроса</th>
+                                    <th class="">Название Товара</th>
+                                    <th class="">Заказчик</th>
+                                    <th class="">Статус</th>
+                                </tr>
+                            </thead>
 
-                        <form method="GET" id="goodsList" enctype="multipart/form-data">
                             <tbody>
                                 {% for product in products_v %}
                                 <tr>
-                                    <td class="col-xs-3">{{ product.id }}</td>
-                                    <td class="col-xs-3">{{ product.product_name }}</td>
-                                    <td class="col-xs-3">{{ product.id_user_buy }}</td>
-                                    <td class="col-xs-3">
-                                        <button name="status" form="goodsList" type="submit" value={{product.id}} class="btn btn-outline-secondary">Согласиться</button>
+                                    <td class="">{{ product.id }}</td>
+                                    <td class="">{{ product.product_name }}</td>
+                                    <td class="">{{ product.id_user_buy }}</td>
+                                    <td class="">
+                                        <button name="status" form="goodsList" type="submit" value="{{product.id}}"
+                                            class="uk-button uk-button-primary uk-border-rounded"
+                                            style="margin:auto; padding: 0 15px!important">Согласиться</button>
+                                    </td>
+                                    <td class="">
+                                        <button name="status" form="goodsList" type="button" value="{{product.id}}"
+                                            class="uk-button uk-button-danger uk-border-rounded"
+                                            style="margin:auto; padding: 0 15px!important">Отказаться</button>
                                     </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
-                        </form>
-                    </table>
-                </div>
+                        </table>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-
 </div>
+
 
 
 <style>
@@ -153,5 +190,23 @@
         margin-top: 1%;
 
     }
-
 </style>
+
+<script type="text/javascript">
+    function showId() {
+        for (i in "{{products_v}}") {
+            // var $inputGroup =
+            //     `   <tr>
+            //             <td class=""></td>
+            //             <td class=""></td>
+            //             <td class=""></td>
+            //             <td class="">
+            //                 <button name="status" form="goodsList" type="button" value="{{product.id}}"
+            //                     class="uk-button uk-button-primary uk-border-rounded" style="margin:auto; padding: 0 15px!important" onclick="showId()">Согласиться</button>
+            //             </td>
+            //         </tr>`;
+            console.log(i)
+        }
+
+    }
+</script>
