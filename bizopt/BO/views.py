@@ -505,7 +505,9 @@ def cardProduct_page(request, product_id):
             product = Product_creator.objects.get(id=product_id)
             # creator = Creator.objects.get(email=product.id_creator)
         context['products'] = product
-        # context['creator'] = creator
+        messages = Comments_product.objects.filter(id_product=product_id)
+        context['messages'] = messages
+         # context['creator'] = creator
         return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist as e:
         raise Http404 from e

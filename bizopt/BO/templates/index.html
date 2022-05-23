@@ -83,8 +83,8 @@
 
             <ul class="uk-navbar-nav" style="width: 100%;">
                 <form class="uk-search uk-search-default" style="width: 100%;">
-                    <a href="" class="uk-search-icon-flip" uk-search-icon></a>
-                    <input class="uk-search-input" type="search" placeholder="Search" style="width: 100%;">
+                    <a class="uk-search-icon-flip" type="submit" id="searchBtn" uk-search-icon></a>
+                    <input class="uk-search-input" type="search" placeholder="Search" id="search_pole" onchange="red(this)" style="width: 100%;">
                 </form>
             </ul>
 
@@ -208,7 +208,7 @@
                     <h6 class="text-uppercase fw-bold mb-4">
                         <i class="fas fa-gem me-3"></i>BIZOPT
                     </h6>
-                    <p>
+                    <p>window.location.replace(...)
                         Here you can use rows and columns to organize your footer content. Lorem ipsum
                         dolor sit amet, consectetur adipisicing elit.
                     </p>
@@ -287,4 +287,12 @@
 </footer>
 <!-- Footer -->
 
+<script type="text/javascript">
+    function red(el){
+        document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
+        console.log( "creators/goods/search/" + el.value)
+    }
+</script>
+
 {% endblock %}
+
