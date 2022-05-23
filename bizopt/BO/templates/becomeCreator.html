@@ -216,7 +216,7 @@
         <ul class="list-unstyled CTAs">
 
             <li>
-                <a href="#" class="article">Выйти</a>
+                <a href="/" class="article">Выйти</a>
             </li>
         </ul>
     </nav>
@@ -244,7 +244,7 @@
             num = 1;
         }
         var xhr = new XMLHttpRequest()
-        xhr.open('GET', `becomeCreatorTemplates/${num}/`)
+        xhr.open('GET', `becomeCreatorTemplates/${2}/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
         }

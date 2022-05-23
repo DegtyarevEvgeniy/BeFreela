@@ -421,7 +421,7 @@ def becomeCreatorTemplate_page(request, name):
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
-    if name == '1':
+    if name == '2':
         try:
             products = Product_buy.objects.filter(id_creator=request.user, status1="in work")
             content['products'] = [{'id': product.id,
@@ -441,9 +441,9 @@ def becomeCreatorTemplate_page(request, name):
         except Product_buy.DoesNotExist as e:
             content['products'] = None 
 
-    elif name == '2':
-        form = MyProfile(request.POST)
-        content['form1'] = form
+    # elif name == '3':
+        # form = MyProfile(request.POST)
+        # content['form1'] = form
 
     elif name == '3':
         account = Account.objects.get(email=request.user)

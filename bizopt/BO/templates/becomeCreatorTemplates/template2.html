@@ -1,4 +1,3 @@
-
 <div class="d-flex flex-row">
     <h1 style="margin: auto">Заказы в работе</h1>
 
@@ -10,36 +9,38 @@
         {% csrf_token %}
         <div class="col-sm-9 scrollspy-example" style="margin: auto">
             <div class="container">
-                <table class="table table-fixed col-sm-9 scrollspy-example" data-spy="scroll" data-target="#spy">
+                <table class="uk-table uk-table-justify" data-spy="scroll" data-target="#spy">
                     <thead>
                         <tr>
-                            <th class="col-xs-3">ID</th>
-                            <th class="col-xs-3">Название задачи</th>
-                            <th class="col-xs-3">Кол-во шт товара</th>
-                            <th class="col-xs-3">Заказчик</th>
-                            <th class="col-xs-3">Дедлайн</th>
-                            <th class="col-xs-6">Статус</th>
+                            <th class="">ID</th>
+                            <th class="">Название задачи</th>
+                            <th class="">Кол-во шт товара</th>
+                            <th class="">Заказчик</th>
+                            <th class="">Дедлайн</th>
+                            <th class="">Статус</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {% for product in products %}
                         <tr>
-                            <td class="col-xs-3">{{ product.id }}</td>
-                            <td class="col-xs-3">{{ product.product_name }}</td>
-                            <td class="col-xs-6">1</td>
-                            <td class="col-xs-3">{{ product.customer }}</td>
-                            <td class="col-xs-3">2021-05-23</td>
-                            <th class="col-xs-6">
-                                <select name="services" id="services" class="form-select" aria-label="Default select example">
-                                    <option {% if product.status2 == 'in_process' %}selected{% endif %} value="1">В работе</option>
-                                    <option {% if product.status2 == 'done' %}selected{% endif %} value="2">Сделано</option>
-                                    <option {% if product.status2 == 'awaiting_payment' %}selected{% endif %} value="3">Ожидает оплаты</option>
-                                    <option {% if product.status2 == 'end_partner_late' %}selected{% endif %} value="4">Отказ</option>
-                                </select>
-                            </th>
-                        </tr>
-                        {% endfor %}
+                            <td class="uk-text-break">{{ product.id }}</td>
+                            <td class="uk-text-break">{{ product.product_name }}</td>
+                            <td class="uk-text-break">1</td>
+                            <td class="uk-text-break">{{ product.customer }}</td>
+                            <td class="">2021-05-23</td>
+                            <th class=""> <select name="services" id="services" class="form-select"
+                                    aria-label="Default select example">
+                                    <option {% if product.status2 == 'in_process' %}selected{% endif %} value="1">В
+                                        работе</option>
+                                    <option {% if product.status2 == 'done' %}selected{% endif %} value="2">Сделано
+                                    </option>
+                                    <option {% if product.status2 == 'awaiting_payment' %}selected{% endif %} value="3">
+                                        Ожидает оплаты</option>
+                                    <option {% if product.status2 == 'end_partner_late' %}selected{% endif %} value="4">
+                                        Отказ</option>
+                                </select> </th>
+                        </tr> {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -56,7 +57,8 @@
 
                 <div class="d-flex flex-row" style="padding-bottom: 10px;">
 
-                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="70" height="58" class="d-inline-block align-text-top">
+                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="70" height="58"
+                        class="d-inline-block align-text-top">
                     <div style="width: 100%; height: auto">
                         <h4 style="margin-left: 5%"> User Name</h4>
                         <div style="margin-left: 5%">
@@ -71,7 +73,9 @@
                 </div>
 
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta fugit minus optio alias dolorum sapiente, facere iusto recusandae quo amet, asperiores deserunt, doloribus atque dolore saepe neque perspiciatis reprehenderit doloremque!
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta fugit minus optio alias dolorum
+                    sapiente, facere iusto recusandae quo amet, asperiores deserunt, doloribus atque dolore saepe neque
+                    perspiciatis reprehenderit doloremque!
                 </p>
                 <style>
                     .colorStarTrue {
@@ -79,7 +83,6 @@
                         font-weight: 900;
                         color: #f8ce0b;
                     }
-
                 </style>
             </div>
         </div>
@@ -87,39 +90,51 @@
         <div class="shadow-none p-3 mb-5 bg-light rounded" style="width: 45%; margin: auto">
             <h1>Запросы</h1>
             <div class="col-sm-12 scrollspy-example shadow p-3 mb-5 bg-body rounded " style="margin: auto">
-                <h1></h1>
                 <div class="container">
-                    <table class="table table-fixed col-sm-9 scrollspy-example" data-spy="scroll" data-target="#spy">
-                        <thead>
-                            <tr>
-                                <th class="col-xs-3">ID Запроса</th>
-                                <th class="col-xs-3">Название Товара</th>
-                                <th class="col-xs-3">Заказчик</th>
-                                <th class="col-xs-3">Статус</th>
-                            </tr>
-                        </thead>
+                    <form method="GET" id="goodsList" enctype="multipart/form-data">
+                        <div class="uk-overflow-aut">
+                            <table class="uk-table uk-table-justify" data-spy="scroll" data-target="#spy">
+                                <thead>
+                                    <tr>
+                                        <th class="uk-width-small">ID Запроса</th>
+                                        <th class="">Название Товара</th>
+                                        <th class="">Заказчик</th>
+                                        <th class="">Статус</th>
+                                    </tr>
+                                </thead>
 
-                        <form method="GET" id="goodsList" enctype="multipart/form-data">
-                            <tbody>
-                                {% for product in products_v %}
-                                <tr>
-                                    <td class="col-xs-3">{{ product.id }}</td>
-                                    <td class="col-xs-3">{{ product.product_name }}</td>
-                                    <td class="col-xs-3">{{ product.id_user_buy }}</td>
-                                    <td class="col-xs-3">
-                                        <button name="status" form="goodsList" type="submit" value={{product.id}} class="btn btn-outline-secondary">Согласиться</button>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </form>
-                    </table>
+                                <tbody>
+                                    <tr>
+                                        <td class="uk-text-small">380457039457</td>
+                                        <td class="">asdasdasdasdasdasdasdasd</td>
+                                        <td class="">asdasdasdasdasdasdasdasd</td>
+                                        <td class="">
+                                            <button name="status" form="goodsList" type="button" value={{product.id}}
+                                                class="btn btn-outline-secondary"
+                                                onclick="showId()">Согласиться</button>
+                                        </td>
+                                    </tr>
+                                    {% for product in products_v %}
+                                    <tr>
+                                        <td class="">{{ product.id }}</td>
+                                        <td class="">{{ product.product_name }}</td>
+                                        <td class="">{{ product.id_user_buy }}</td>
+                                        <td class="">
+                                            <button name="status" form="goodsList" type="submit" value={{product.id}}
+                                                class="btn btn-outline-secondary">Согласиться</button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
 
 
 <style>
@@ -153,5 +168,23 @@
         margin-top: 1%;
 
     }
-
 </style>
+
+<script type="text/javascript">
+    function showId() {
+        for (i in "{{products_v}}") {
+            // var $inputGroup =
+            //     `   <tr>
+            //             <td class=""></td>
+            //             <td class=""></td>
+            //             <td class=""></td>
+            //             <td class="">
+            //                 <button name="status" form="goodsList" type="button" value={{product.id}}
+            //                     class="btn btn-outline-secondary" onclick="showId()">Согласиться</button>
+            //             </td>
+            //         </tr>`;
+            console.log(i)
+        }
+
+    }
+</script>
