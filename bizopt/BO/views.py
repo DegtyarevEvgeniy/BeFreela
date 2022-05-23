@@ -22,8 +22,6 @@ import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
 
-from taggit.models import Tag
-
 
 def goodsSearch_page(request, product_name):
     context = gen_menu(request)
@@ -103,63 +101,15 @@ def gen_menu(request):
     return context
 
 def gen_submenu(request):
-
+    tags = Tag.objects.all()
     context = {
             'submenu': [
                 {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '1', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '2', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '3', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '4', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'left', 'position': 'in', 'link': '5', 'text': 'элемент'},
-                {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина'},
 
-            ]
+                {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина' },
+            ],
+            'tags': [{'text': tag}
+                     for tag in tags]
         }
     return context
 
@@ -746,3 +696,4 @@ def orders_page(request):
 
 def partners_page(request):
     return render(request, 'showPartner.html')
+
