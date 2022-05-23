@@ -10,9 +10,9 @@
         enctype="multipart/form-data">
         {% csrf_token %}
         <div class="container">
-            <table class="uk-table uk-table-justify uk-table-divider" data-spy="scroll" data-target="#spy">
+            <table class="uk-table uk-table-justify uk-table-divider uk-table-large" data-spy="scroll" data-target="#spy">
                 <thead>
-                    <tr>
+                    <tr class="uk-text-center">
                         <th class="">ID</th>
                         <th class="">Название задачи</th>
                         <th class="">Кол-во шт товара</th>
@@ -33,10 +33,10 @@
                         <td class="uk-text-break">{{ product.customer }}</td>
                         <td class="">2021-05-23</td>
                         <th class="">
-                                <button class="uk-button uk-button-primary uk-text-center" style="border-color: #1e87f0; border-radius: 100px; width: 20%; height:20%; padding: 0" uk-tooltip="В работе" >1</button>
-                                <button class="uk-button uk-button-primary uk-text-center" style="border-color: #1e87f0; border-radius: 100px; width: 20%; height:20%; padding: 0" uk-tooltip="Сделано" >2</button>
-                                <button class="uk-button uk-button-primary uk-text-center" style="border-color: #1e87f0; border-radius: 100px; width: 20%; height:20%; padding: 0" uk-tooltip="Ожидает оплаты" >3</button>
-                                <button class="uk-button uk-button-primary uk-text-center" style="border-color: #1e87f0; border-radius: 100px; width: 20%; height:20%; padding: 0" uk-tooltip="Отказ" >4</button> 
+                                <button class="uk-badge" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="В работе" >1</button>
+                                <button class="uk-badge" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Сделано" >2</button>
+                                <button class="uk-badge" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Ожидает оплаты" >3</button>
+                                <button class="uk-badge" style="background-color: #ee395b;border-color: #ee395b; padding: 10%; margin: 2px;" uk-tooltip="Отказ" >4</button> 
                         </th>
                         <td class="uk-text-break">
                             <button name="" form="products_in_work_id" type="button"
