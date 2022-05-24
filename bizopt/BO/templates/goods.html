@@ -57,8 +57,14 @@
                 <div class="textStyleHeader textAll uk-margin-medium-bottom">
                     <p>Цена</p>
                     <div class="uk-margin-small-left">
-                        <input class="uk-input uk-margin-right" type="text" placeholder="от" style="width: 30%; border-radius: 5em; background-color: #C4C4C4; color: white">
-                        <input class="uk-input" type="text" placeholder="до" style="width: 30%; border-radius: 5em; background-color: #C4C4C4; color: white">
+                        <label for="">от</label>
+                        <br>
+                        <input class="uk-input uk-border-pill uk-margin-right" type="text" placeholder="от" style="width: 70%; background-color: #C4C4C4; color: white">
+                        <br>
+                        <br>
+                        <label for="">до</label>
+                        <br>
+                        <input class="uk-input uk-border-pill" type="text" placeholder="до" style="width: 70%; background-color: #C4C4C4; color: white">
                     </div>
                 </div>
                 <div class="textStyleHeader textAll uk-margin-medium-bottom">
@@ -108,18 +114,9 @@
 
     </div>
 
-<!--        <div class="position-relative">-->
-<!--            <div class="position-absolute top-50 start-50 translate-middle">-->
-<!--                <div>-->
-<!--                    <button class="twoBut" id="showContent1">Резюме</button>-->
-<!--                    <button class="twoBut" id="showContent2">Товар</button>-->
-<!--                    <br>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
     <br>
     <br>
-        <div id="content" class="row" style="margin-top: 50px" >
+        <div id="content" class="row" style="align-items: center;margin: 50px; width: 80%;" >
             {% include "baseProductCard.html" %}
 
         </div>

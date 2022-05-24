@@ -1,121 +1,65 @@
-
 {% for product in products %}
-<div>
-    <div class="uk-flex">
-        <img src="https://justnike.ru/image/cache/data/Nike%20M2K%20Tekno/80731_Shoes%20(146)-1200x748-700x500.jpg" width="250px" height="90px" style="margin: 2% 5% 2% 2%; border-radius: 2em">
-        <div class="uk-flex uk-flex-column">
-            <div class="uk-flex">
-                <h3 style="font-weight: bold" class="uk-margin-large-right">{{ product.product_name }}</h3>
-                <p class="" style="margin-left: 23%; margin-top: 0">Продавец</p>
-            </div>
-            <div class="uk-flex-inline">
-                <div style="width: 70%">
-                    <div class="uk-flex uk-margin-small-bottom">
-                        <span style="margin-right: 2%">Сроки</span>
-                        <span>изготовления:</span>
-                    </div>
-                    <p class="textSmallInfo">От 3х дней</p>
+<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2" style="margin: 10px auto" uk-grid>
+    <div class="uk-card-media-left uk-cover-container uk-padding">
+        <img src="https://justnike.ru/image/cache/data/Nike%20M2K%20Tekno/80731_Shoes%20(146)-1200x748-700x500.jpg"
+        width="500" height="180" >
+    </div>
+    <div>
+        <div class="uk-card-body">
+            <h3 class="uk-card-title uk-text-break">{{ product.product_name }}</h3>
+            <div class="uk-width-1-2">
+                <div class="uk-flex uk-margin-small-bottom">
+                    <span>Срок изготовления:</span>
                 </div>
-                <div class="uk-margin-medium-left">
-                    <div class="uk-flex-column-reverse">
-                        <p class="uk-margin-small-bottom">Регион:</p>
-                        <p class="textSmallInfo" style="width: 170%">Москва</p>
-                    </div>
-                </div>
-                <div class="uk-margin-large-left uk-flex">
-                    <img src="https://www.nchti.ru/wp-content/images/profile-anonymous2.png" width="50px" height="auto">
-                    <div class="uk-flex-column uk-margin-small-left">
-                        <div class="uk-flex">
-                            <span style="margin-right: 2%">Дегтярев</span>
-                            <span style="margin-right: 2%"> Евгений</span>
-                            <span> Алексеевич</span>
-                        </div>
-                        <div>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-flex textBigInfo" style="margin-left: 12%">
-                    <span style="margin-right: 2%">{{ product.cost }}</span>
-                    <span>руб</span>
-                </div>
+                <p class="textSmallInfo uk-border-rounded">От 3х дней</p>
             </div>
             <div>
-                <a class="uk-button uk-button-default" href="{{ product.id }}" style="background-color:  #2D3995; color: white; border-radius: 5px; width: 50%;margin-top: 5%; margin-left: 65%">ПОДРОБНЕЕ</a>
+                <div class="uk-flex-column-reverse uk-width-1-2">
+                    <p class="uk-margin-small-bottom">Регион:</p>
+                    <p class="textSmallInfo uk-border-rounded">Москва</p>
+                </div>
             </div>
-        </div>
+            <div class="uk-flex">
+                <img src="https://www.nchti.ru/wp-content/images/profile-anonymous2.png" alt=""
+                    class="uk-brder-circle uk-margin-right" height="40" width="40">
+                <div>
+                    <p>{{product.creator_id}}</p>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <br>
+                    <div class="price">
+                        {{ product.cost }} руб.
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
 
+            <a class="uk-button uk-button-default uk-width-1-2 uk-border-rounded" href="{{ product.id }}"
+                style="background-color:  #2D3995; color: white; ">ПОДРОБНЕЕ</a>
+        </div>
     </div>
 </div>
-
 {% endfor %}
 
 <style>
     .textSmallInfo {
-        margin: auto;
         border: 3px;
-        border-radius: 0.5em;
         background: rgba(69, 101, 232, 0.34);
         text-align: center;
         font-size: 20px;
     }
-    .textBigInfo span{
-        margin: auto;
+
+    .textBigInfo span {
         font-size: 30px;
     }
 </style>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-<!--    <div class="uk-margin-medium uk-margin-large-left uk-margin-large-right" style="width: 90%; height: 90%">-->
-<!--        <div class="uk-child-width-1-3@m " uk-grid>-->
-<!--            {%for product in products%}-->
-<!--            <div class="uk-text-center uk-border-rounded">-->
-<!--                <div class="uk-card uk-card-default">-->
-<!--                    <div class="uk-card-media-top uk-padding-small">-->
-<!--                        <img class="uk-border-rounded" style="width: 80%; " src="{{ product.picture.url }}" alt="">-->
-<!--                    </div>-->
-<!--                    <div class="uk-card-body uk-padding-small">-->
-
-<!--                        <h3 class="uk-card-title uk-text-truncate">{{ product.product_name }}</h3>-->
-
-<!--                        <div class="d-inline-block uk-margin-large-rigth uk-text-center">-->
-<!--                            <p>срок изготовления:</p>-->
-<!--                            <h4 class="uk-border-rounded uk-margin-small-top uk-padding-small"-->
-<!--                                style="background: rgba(69, 101, 232, 0.34);">5-->
-<!--                                дней</р4>-->
-<!--                        </div>-->
-<!--                        <div class="d-inline-block uk-margin-large-left uk-text-center">-->
-<!--                            <p>стоимость:</p>-->
-<!--                            <h4 class="uk-border-rounded uk-margin-small-top uk-padding-small"-->
-<!--                                style="background: rgba(69, 101, 232, 0.34);"> {{ product.cost }} ₽</р4>-->
-<!--                        </div>-->
-<!--                        <a href='{{ product.id }}'-->
-<!--                            class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-text-center uk-border-rounded uk-margin-top">Подробнее</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            {% endfor %}-->
-<!--        </div>-->
-<!--    </div>-->
-
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
-

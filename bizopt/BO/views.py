@@ -139,13 +139,16 @@ def yourTasks_page(request):
 def goods_page(request):
     context = gen_menu(request)
     products = Product_creator.objects.all()
+    creators = Creator.objects.all()
     context['products'] = [{'id': product.id,
+                            'creator_id': product.id_creator,
                             'product_name': product.product_name,
                             'cost': product.price,
                             'availability': product.availability,
-                            'picture': product.picture
+                            'picture': product.picture,
                             }
                            for product in products]
+    
     return render(request, 'goods.html', context)
 
 
