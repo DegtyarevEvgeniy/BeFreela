@@ -7,9 +7,9 @@
             <h2 class=" uk-margin-large-right">Мои задачи</h2>
             <h4 class="uk-margin-small-top">Здесь вы можете разместить или отредактировать ваши задачи</h4>
         </div>
-        <ul uk-accordion="multiple: true" style="width: 120%">
+        <ul uk-accordion="multiple: true" style=" max-width: 80%">
             {% for item in tasks %}
-                <li class="uk-open">
+                <li style="width: 100%" class="uk-open">
                     <a class="uk-accordion-title"  href="#">
                         <div style=" background-color:  rgba(69, 101, 232, 0.34);">
                             <div class="uk-flex">
@@ -54,7 +54,7 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="uk-flex-column" style="height: auto; width: 25%; background-color: #C4C4C4; margin-left:auto;">
+    <div class="uk-flex-column" style="height: auto; max-width: 50%; min-width: 20%; background-color: #C4C4C4; margin-left:auto;">
         <div style="margin-top: 10%">
             <a href="#" class="uk-button" style="background-color: #E5E5E5; display: block;  text-align:center">Мои задачи</a>
         </div>

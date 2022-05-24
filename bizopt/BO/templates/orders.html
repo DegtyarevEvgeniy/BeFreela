@@ -12,18 +12,76 @@
 <div class="placeOut uk-flex-column uk-margin-bottom">
     <h3>Заказы одобренные продавцом</h3>
         {% for product in products %}
-        <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
-            <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="150" height="50" style="border-radius: 5px">
-            <div class="uk-flex-column uk-margin-medium-left uk-margin-small-bottom uk-margin-top">
-                <h3 style="margin-bottom: 10%">{{ product.id_user_buy }}</h3>
+    <div style="background: #C4C4C4">
+        <div style="background-color: #D9D9D9" >
+            <div style="margin-left: 5%;">
+                <br>
+                <p class="uk-margin-remove" style="margin-top: 5%">Заказ: # {{ product.id }}</p>
                 <p class="uk-margin-remove">Статус: {{ product.status1 }}</p>
-            </div>
-            <div class="uk-flex-column uk-margin-top" style="margin-left: auto;">
-                <h3 style="text-align: center">{{ task.price }} 12000 руб</h3>
-                <button class="uk-button" style="background: #969696; border-radius: 5px">Отменить заказ</button>
+                <p class="uk-margin-remove">Адрес доставки: улица пушкина дом колотушкина подъезд 6</p>
+                <br>
             </div>
         </div>
+        <div class="uk-flex uk-margin-bottom uk-margin-small-left" style="background: #C4C4C4; border: 10px solid #C4C4C4">
+            <div class="uk-flex uk-margin-medium-right">
+                <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" style="border-radius: 5px; width: 200px; height: 150px">
+                <div class="uk-flex-column uk-margin-medium-left uk-margin-small-bottom uk-margin-top-remove">
+                    <h3 style="margin-bottom: 45%">{{ product.id_user_buy }}</h3>
+                    <button class="uk-button buttonStyle">Оставить отзыв</button>
+                </div>
+            </div>
+            <div style="margin-left: 10%" class="uk-margin-medium-right">
+                <p>Дата создания заказ: 22.02.22</p>
+                <div class="uk-flex-column">
+                    <h4 style="margin-bottom: 3%">Способ оплаты:</h4>
+                    <div class="uk-flex">
+                        <div>
+                            <p class="uk-margin-remove-bottom">Картой онлайн:</p>
+                            <p class="uk-margin-remove">Статус:</p>
+                        </div>
+                        <div class="uk-margin-left">
+                            <p class="uk-margin-remove-bottom">1200руб</p>
+                            <p class="uk-margin-remove">не оплачен</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-flex-column uk-margin-top uk-margin-small-bottom">
+                    <h4 style="margin-bottom: 3%">Способ получения:</h4>
+                    <div class="uk-flex">
+                        <div>
+                            <p class="uk-margin-remove-bottom">Адрес: </p>
+                            <p class="uk-margin-remove">Дата доставки: </p>
+                        </div>
+                        <div class="uk-margin-left">
+                            <p class="uk-margin-remove-bottom">адрес доставки</p>
+                            <p class="uk-margin-remove">25.03.2022</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-flex-column uk-margin-bottom">
+                    <div class="uk-margin-bottom">
+                        <a class="uk-margin-medium-top">Документы по заказу</a>
+                    </div>
+                    <div>
+                        <button class="uk-button buttonStyle">Чат с продавцом</button>
+                    </div>
+                    <div>
+                        <button class="uk-button buttonStyle" style="width: 80%">Оплатить товар</button>
+                    </div>
+                    <div>
+                        <button class="uk-button buttonStyle" style="width: 80%">Поддержка</button>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div class="uk-flex-column uk-margin-top" style="margin-left: auto;">-->
+<!--                <h3 style="text-align: center">{{ task.price }} 12000 руб</h3>-->
+<!--                <button class="uk-button" style="background: #969696; border-radius: 5px">Отменить заказ</button>-->
+<!--            </div>-->
+        </div>
+    </div>
         {% endfor %}
+
 
     <h4>Заказы ожидающие одобренния продавца</h4>
         {% for product in products %}
@@ -120,6 +178,12 @@
 
 <style>
 
+    .buttonStyle {
+        background: #969696;
+        border-radius: 5px;
+        margin-bottom: 5%;
+        color: white;
+    }
     .placeOut{
         width: 60%;
         height: auto;
