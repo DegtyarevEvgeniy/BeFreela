@@ -1,8 +1,8 @@
 {% for product in products %}
+
 <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2" style="margin: 10px auto" uk-grid>
     <div class="uk-card-media-left uk-cover-container uk-padding">
-        <img src="https://justnike.ru/image/cache/data/Nike%20M2K%20Tekno/80731_Shoes%20(146)-1200x748-700x500.jpg"
-        width="500" height="180" >
+        <img src="../../media/{{product.picture}}" width="500" height="180">
     </div>
     <div>
         <div class="uk-card-body">
@@ -19,30 +19,21 @@
                     <p class="textSmallInfo uk-border-rounded">Москва</p>
                 </div>
             </div>
-            <div class="uk-flex">
-                <img src="https://www.nchti.ru/wp-content/images/profile-anonymous2.png" alt=""
-                    class="uk-brder-circle uk-margin-right" height="40" width="40">
-                <div>
-                    <p>{{product.creator_id}}</p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <br>
-                    <div class="price">
-                        {{ product.cost }} руб.
-                    </div>
+            <div>
+                <br>
+                <div class="price">
+                    {{ product.cost }} руб.
                 </div>
             </div>
             <br>
             <br>
 
-            <a class="uk-button uk-button-default uk-width-1-2 uk-border-rounded" href="{{ product.id }}"
-                style="background-color:  #2D3995; color: white; ">ПОДРОБНЕЕ</a>
+            <button class="uk-button uk-button-default uk-width-1-2 uk-border-rounded" href="{{ product.id }}"
+                style="background-color:  #2D3995; color: white; ">ПОДРОБНЕЕ</button>
         </div>
     </div>
 </div>
+
 {% endfor %}
 
 <style>
