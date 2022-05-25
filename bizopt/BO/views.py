@@ -275,6 +275,31 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.status2 = 'in waiting'
         product.save()
         return redirect('/becomeCreator/?1')
+    if request.method == 'GET' and "decline" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['decline'])
+        product.status1 = 'end_partner'
+        product.save()
+
+    if request.method == 'GET' and "decline_work" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['decline_work'])
+        product.status1 = 'end_partner'
+        product.save()
+    if request.method == 'GET' and "in_work" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['in_work'])
+        product.status2 = 'in_work'
+        product.save()
+    if request.method == 'GET' and "2" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['2'])
+        product.status2 = 'done'
+        product.save()
+    if request.method == 'GET' and "3" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['3'])
+        product.status2 = 'payment'
+        product.save()
+    if request.method == 'GET' and "4" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['4'])
+        product.status2 = 'end_partner'
+        product.save()
 
     if request.method == "POST" and "partner" in request.POST:
         try:
