@@ -152,24 +152,45 @@
                     uk-toggle>Заказать</button>
                 <div id="modal-overflow" uk-modal>
                     <div class="uk-modal-dialog">
-
-                        <button class="uk-modal-close-default" type="button" uk-close></button>
-
+                        <div>
+                            <button class="uk-modal-close-default" type="button" uk-close></button>
+                        </div>
                         <div class="uk-modal-header">
-                            <h2 class="uk-modal-title">{{product.id_creator}}</h2>
+                            <div style="margin-top: 2%">
+                                <h3 style="text-align: center;">Заказать товар</h3>
+                            </div>
                         </div>
                         <form method="POST" action="">
-                            <div class="uk-modal-body" uk-overflow-auto>
-                                <p class="uk-text-small uk-text-break uk-text-light" for="textarea">Опишите продавцу какой
-                                    товар вы хотите. Максимально опишите его )</p>
-                                <textarea class="uk-textarea" name="message" id="" rows="10" style="width: 100%;"></textarea>
+                            <div class="uk-modal-body uk-margin-left uk-margin-right uk-margin-bottom" uk-overflow-auto style="padding: 0">
+                                <img>
+                                <h4 class="uk-margin-remove-top">Название товара</h4>
+                                <div class="uk-flex">
+                                    <p class="uk-margin-small-top">Оплата: </p>
+                                        <div class="uk-form-controls uk-margin-left">
+                                            <select class="uk-select" id="form-stacked-select">
+                                                <option>Картой онлайн</option>
+                                                <option>По номеру телефона</option>
+                                                <option>Qiwi</option>
+                                                <option>и т.д.</option>
+                                            </select>
+                                        </div>
+                                </div>
+                                <div class="uk-flex">
+                                        <p class="uk-margin-small-top">Адрес доставки:</p>
+                                        <div class="uk-margin-left" style="width: 65%">
+                                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="г.Москва, Ленинградский проезд 111, кв 101, 100102">
+                                            <p class="uk-text-meta uk-margin-remove" style="font-size: 12px">Вводите адрес в формате: "г. Город, улица, кв, почтовый индекc"</p>
+                                        </div>
+                                </div>
+                                <p for="textarea">Пожелания к товару:</p>
+                                <textarea class="uk-textarea" name="message" id="" rows="5 " style="width: 100%;"></textarea>
                             </div>
 
                             <div class="uk-modal-footer uk-text-right">
                                 <button class="uk-button uk-button-default uk-modal-close" type="button">Закрыть</button>
 
                                 {% csrf_token %}
-                                <button class="uk-button uk-button-primary" type="submit" onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Сохранить</button>
+                                <button class="uk-button uk-button-primary" type="submit" onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Перейти к оплате</button>
                              </div>
                         </form>
 
@@ -459,6 +480,125 @@
 </style>
 
 <script>
+    ymaps.ready(init);
+
+    function init() {
+        // Подключаем поисковые подсказки к полю ввода.
+        var suggestView = new ymaps.SuggestView('suggest'),
+            map,
+            placemark;
+
+        // При клике по кнопке запускаем верификацию введёных данных.
+        $('#button').bind('click', function (e) {
+            geocode();
+        });
+
+        function geocode() {
+            // Забираем запрос из поля ввода.
+            var request = $('#suggest').val();
+            // Геокодируем введённые данные.
+            ymaps.geocode(request).then(function (res) {
+                var obj = res.geoObjects.get(0),
+                    error, hint;
+
+                if (obj) {
+                    // Об оценке точности ответа геокодера можно прочитать тут: https://tech.yandex.ru/maps/doc/geocoder/desc/reference/precision-docpage/
+                    switch (obj.properties.get('metaDataProperty.GeocoderMetaData.precision')) {
+                        case 'exact':
+                            break;
+                        case 'number':
+                        case 'near':
+                        case 'range':
+                            error = 'Неточный адрес, требуется уточнение';
+                            hint = 'Уточните номер дома';
+                            break;
+                        case 'street':
+                            error = 'Неполный адрес, требуется уточнение';
+                            hint = 'Уточните номер дома';
+                            break;
+                        case 'other':
+                        default:
+                            error = 'Неточный адрес, требуется уточнение';
+                            hint = 'Уточните адрес';
+                    }
+                } else {
+                    error = 'Адрес не найден';
+                    hint = 'Уточните адрес';
+                }
+
+                // Если геокодер возвращает пустой массив или неточный результат, то показываем ошибку.
+                if (error) {
+                    showError(error);
+                    showMessage(hint);
+                } else {
+                    showResult(obj);
+                }
+            }, function (e) {
+                console.log(e)
+            })
+
+        }
+        function showResult(obj) {
+            // Удаляем сообщение об ошибке, если найденный адрес совпадает с поисковым запросом.
+            $('#suggest').removeClass('input_error');
+            $('#notice').css('display', 'none');
+
+            var mapContainer = $('#map'),
+                bounds = obj.properties.get('boundedBy'),
+                // Рассчитываем видимую область для текущего положения пользователя.
+                mapState = ymaps.util.bounds.getCenterAndZoom(
+                    bounds,
+                    [mapContainer.width(), mapContainer.height()]
+                ),
+                // Сохраняем полный адрес для сообщения под картой.
+                address = [obj.getCountry(), obj.getAddressLine()].join(', '),
+                // Сохраняем укороченный адрес для подписи метки.
+                shortAddress = [obj.getThoroughfare(), obj.getPremiseNumber(), obj.getPremise()].join(' ');
+            // Убираем контролы с карты.
+            mapState.controls = [];
+            // Создаём карту.
+            createMap(mapState, shortAddress);
+            // Выводим сообщение под картой.
+            showMessage(address);
+        }
+
+        function showError(message) {
+            $('#notice').text(message);
+            $('#suggest').addClass('input_error');
+            $('#notice').css('display', 'block');
+            // Удаляем карту.
+            if (map) {
+                map.destroy();
+                map = null;
+            }
+        }
+
+        function createMap(state, caption) {
+            // Если карта еще не была создана, то создадим ее и добавим метку с адресом.
+            if (!map) {
+                map = new ymaps.Map('map', state);
+                placemark = new ymaps.Placemark(
+                    map.getCenter(), {
+                        iconCaption: caption,
+                        balloonContent: caption
+                    }, {
+                        preset: 'islands#redDotIconWithCaption'
+                    });
+                map.geoObjects.add(placemark);
+                // Если карта есть, то выставляем новый центр карты и меняем данные и позицию метки в соответствии с найденным адресом.
+            } else {
+                map.setCenter(state.center, state.zoom);
+                placemark.geometry.setCoordinates(state.center);
+                placemark.properties.set({iconCaption: caption, balloonContent: caption});
+            }
+        }
+
+        function showMessage(message) {
+            $('#messageHeader').text('Данные получены:');
+            $('#message').text(message);
+        }
+    }
+
     var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     var alertTrigger = document.getElementById('liveAlertBtn')
 
