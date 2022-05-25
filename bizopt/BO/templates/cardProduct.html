@@ -8,7 +8,6 @@
         style="position: relative; z-index: 980; padding: 0 10%; background-color: #f8f8f8 !important; height: 4%;">
 
         <div class="uk-navbar-left">
-
             <ul class="uk-navbar-nav">
                 <li class="uk-active">
                     {% for item in submenu %}
@@ -106,7 +105,8 @@
         <div class="uk-flex uk-flex-column">
             <div>
                 <p class="uk-text-emphasis">
-                    <h2 style="display: inline;">{{product.price}}</h2> &nbsp;&nbsp;руб.
+                    <h2 style="display: inline;">{{products.price}}</h2> &nbsp;&nbsp;руб.
+
                 </p>
             </div>
             <!--  -->
@@ -116,7 +116,7 @@
                         class="uk-border-circle" style="width: 60px; height: 60px">
                 </div>
                 <div class="uk-width-expand uk-display-inline">
-                    <h3 class="uk-card-title uk-margin-remove-bottom ">{{product.id_creator}}</h3>
+                    <h3 class="uk-card-title uk-margin-remove-bottom ">{{products.id_creator}}</h3>
                     <div><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9734</span>
                     </div>
                 </div>
@@ -208,7 +208,7 @@
         <div style="padding: 5px 10%;">
             <div>
                 <h2>Описание</h2>
-                <p style="font-weight: 600; text-align: left">{{product.description}}</p>
+                <p class="uk-text-break" style="font-weight: 600; text-align: left">{{products.description}}</p>
             </div>
             <!--  -->
             <br>
@@ -218,25 +218,25 @@
                 <div class="d-flex uk-felx-around uk-text-left uk-flex-wrap-top">
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Тип</h4>
-                        <p>{{product.tags}}</p>
+                        <p>{{products.tags}}</p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Бренд</h4>
-                        {% for brend in product.brend %}
+                        {% for brend in products.brend %}
                         <p> {{brend}} </p>
                         {% endfor %}
                         <p>Сделайте пж все несделанные поля</p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Страна Производитель</h4>
-                        <p>{{product.country}}</p>
+                        <p>{{products.country}}</p>
                     </div>
                 </div>
 
                 <div class="d-flex uk-felx-around uk-text-left uk-flex-wrap-top">
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Комплект товара</h4>
-                        {% for complect in product.complect %}
+                        {% for complect in products.complect %}
                         <p> {{complect}} </p>
                         {% endfor %}
                         <p>Сделайте пж все несделанные поля</p>
@@ -246,21 +246,21 @@
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Высота</div>
                             <div>
-                                <p>{{product.width_product}} &nbsp;см</p>
+                                <p>{{products.width_products}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Длина</div>
                             <div>
-                                <p>{{product.height_product}} &nbsp;см</p>
+                                <p>{{products.height_products}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Ширина</div>
                             <div>
-                                <p>{{product.length_product}} &nbsp;см</p>
+                                <p>{{products.length_products}} &nbsp;см</p>
                             </div>
                         </div>
                     </div>
@@ -269,21 +269,21 @@
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Высота</div>
                             <div>
-                                <p>{{product.width_packaging}} &nbsp;см</p>
+                                <p>{{products.width_packaging}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Длина</div>
                             <div>
-                                <p>{{product.height_packaging}} &nbsp;см</p>
+                                <p>{{products.height_packaging}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Ширина</div>
                             <div>
-                                <p>{{product.length_packaging}} &nbsp;см</p>
+                                <p>{{products.length_packaging}} &nbsp;см</p>
                             </div>
                         </div>
                     </div>
