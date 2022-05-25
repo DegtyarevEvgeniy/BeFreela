@@ -539,7 +539,7 @@ def cardProduct_page(request, product_id):
             comment.id_creator = product.id_creator
             comment.id_product = product.id
             comment.review = request.POST['review']
-            comment.rating = request.POST.get('rating', '5')
+            comment.rating = request.POST.get('rating', '0')
             comment.save()
         context['products'] = product
         messages = Comments_product.objects.filter(id_product=product_id)
@@ -735,7 +735,15 @@ def orders_page(request):
         'id_user_buy': product.id_user_buy,
         'status1': product.status1,
     } for product in productss]
-
+    if request.method == "POST" and "comment_product" in request.POST:
+        product_id = request.POST['comment_product']
+        product = Product_creator.objects.get(id=product_id)
+        comment = Comments_product()
+        comment.id_creator = product.id_creator
+        comment.id_product = product.id
+        comment.review = request.POST['review']
+        comment.rating = request.POST.get('rating', '0')
+        comment.save()
     return render(request, 'orders.html', content)
 
 def partners_page(request):
