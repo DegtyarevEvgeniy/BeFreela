@@ -503,6 +503,8 @@ def cardProduct_page(request, product_id):
             product_buy.status1 = 'in waiting'
             product_buy.status2 = 'None'
             product_buy.message = request.POST['message']
+            product_buy.delivery_address = request.POST['address']
+            product_buy.status_pay = False
             product_buy.save()
         else:
             product = Product_creator.objects.get(id=product_id)
