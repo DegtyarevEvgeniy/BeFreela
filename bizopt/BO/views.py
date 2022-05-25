@@ -237,7 +237,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 creator.is_company = True
                 creator.company_name = request.POST['profile_company_name']
             else:
-                creator.company = False
+                creator.is_company = False
             creator.save()
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
@@ -277,38 +277,26 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         return redirect('/becomeCreator/?1')
 
     if request.method == "POST" and "partner" in request.POST:
-        partner = Partner()
-        account = Account.objects.get(email=request.user)
-
-        # TODO: сделать что-то с сохранением единажды на template13
-        #  и доделать сохранение с template12 полностью(там заглушка).
-        #  Сейчас нет возможности контролировать дублирующихся партнеров по-людски.
-        # TODO: как идентифицировать пользователя в будущем? уникальность по email?
-        if request.POST.get('INN', None):
+        try:
+            partner = Partner.objects.get(email=request.user)
             partner.inn = request.POST['INN']
-        if request.POST.get('short_name', None):
             partner.name_small = request.POST['short_name']
-        if request.POST.get('full_name', None):
-            partner.name_full = request.POST['full_name']
-        if request.POST.get('payment_account', None):
             partner.payment_account = request.POST['payment_account']
-        if request.POST.get('payment_account', None):
-            partner.payment_account = request.POST['payment_account']
-        if request.POST.get('reg_form', None):
-            partner.reg_form = request.POST.get('reg_form', None)
-        if request.POST.get('my_first_name', None):
+            partner.reg_form = request.POST['reg_form']
             partner.first_name = request.POST['my_first_name']
-        else:
-            partner.first_name = account.first_name
-        if request.POST.get('my_last_name', None):
             partner.last_name = request.POST['my_last_name']
-        else:
-            partner.last_name = account.last_name
-        if request.POST.get('my_email', None):
-            partner.email = request.POST['my_email']
-        else:
-            partner.email = account.email
-        partner.save()
+            partner.email = user.email
+            partner.save()
+        except:
+            partner = Partner()
+            partner.inn = request.POST['INN']
+            partner.name_small = request.POST['short_name']
+            partner.payment_account = request.POST['payment_account']
+            partner.reg_form = request.POST['reg_form']
+            partner.first_name = request.POST['my_first_name']
+            partner.last_name = request.POST['my_last_name']
+            partner.email = user.email
+            partner.save()
 
     if request.method == 'POST' and "products_in_work" in request.POST:
         print("products_in_work")
@@ -421,6 +409,14 @@ def becomeCreatorTemplate_page(request, name):
         except:
             creator = Creator()
             content['creator'] = creator
+
+    elif name == '1':
+        try:
+            partner = Partner.objects.get(email=request.user)
+            content['partner'] = partner
+        except:
+            partner = Partner()
+            content['partner'] = partner
     
     elif name == '6':
         form = ProductCreateForm()

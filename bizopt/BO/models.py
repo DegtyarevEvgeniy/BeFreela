@@ -103,5 +103,5 @@ class Partner(models.Model):
     inn = models.IntegerField(default='0000000000')
     name_small = models.CharField(max_length=200, default='-')
     name_full = models.CharField(max_length=200, default='-')
-    reg_form = models.CharField(max_length=200, default='-')
+    reg_form = models.CharField(max_length=200, default='Самозанятый')
     payment_account = models.CharField(max_length=200, default='-')
