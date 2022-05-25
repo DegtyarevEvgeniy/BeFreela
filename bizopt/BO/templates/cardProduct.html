@@ -190,7 +190,7 @@
                                 <button class="uk-button uk-button-default uk-modal-close" type="button">Закрыть</button>
 
                                 {% csrf_token %}
-                                <button class="uk-button uk-button-primary" type="submit" onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Перейти к оплате</button>
+                                <button class="uk-button uk-button-primary" name="buy_product" type="submit" onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Перейти к оплате</button>
                              </div>
                         </form>
 
@@ -297,41 +297,48 @@
                 <button style="color: black; background-color:darkgray"
                         class="uk-button uk-border-pill uk-margin-small-bottom" type="button" uk-toggle="target: #modal-example">Написать отзыв</button>
 
-                <div id="modal-example" uk-modal>
-                    <div class="uk-modal-dialog uk-modal-body">
-                        <h2 class="uk-modal-title">Отзыв</h2>
-                        <div class="uk-flex">
-                            <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
-                            <div class="uk-flex-column uk-margin-left">
-                                <p class="uk-margin-remove">{{ user.first_name }}</p>
-                                <p class="uk-margin-remove">{{ user.email}}</p>
+
+                    <div id="modal-example" uk-modal>
+
+                        <div class="uk-modal-dialog uk-modal-body">
+                            <h2 class="uk-modal-title">Отзыв</h2>
+                            <div class="uk-flex">
+                                <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
+                                <div class="uk-flex-column uk-margin-left">
+                                    <p class="uk-margin-remove">{{ user.first_name }}</p>
+                                    <p class="uk-margin-remove">{{ user.email }}</p>
+                                </div>
                             </div>
+                            <form method="POST" action="">
+                            <div class="uk-margin-top">
+
+                                <h3>Отзыв:</h3>
+                                <textarea class="uk-textarea" name="review" id="" rows="10" style="width: 100%;"></textarea>
+                                <div class="uk-flex" style="margin-left: 45%">
+                                    <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
+                                <div class="uk-margin-remove-right rating-area">
+                                    <input type="radio" id="star-5" name="rating" value="5">
+                                    <label for="star-5" title="Оценка «5»"></label>
+                                    <input type="radio" id="star-4" name="rating" value="4">
+                                    <label for="star-4" title="Оценка «4»"></label>
+                                    <input type="radio" id="star-3" name="rating" value="3">
+                                    <label for="star-3" title="Оценка «3»"></label>
+                                    <input type="radio" id="star-2" name="rating" value="2">
+                                    <label for="star-2" title="Оценка «2»"></label>
+                                    <input type="radio" id="star-1" name="rating" value="1">
+                                    <label for="star-1" title="Оценка «1»"></label>
+                                </div>
+                                </div>
+                            </div>
+                                {% csrf_token %}
+                            <p class="uk-text-right">
+                                <button class="uk-button uk-button-default uk-modal-close" type="button">Закрыть</button>
+                                <button name="comment_product" class="uk-button uk-button-primary" type="submit" onclick="UIkit.notification({message: 'Отзыв сохранён', status: 'success'})">Опубликовать</button>
+                            </p>
+                            </form>
                         </div>
-                        <div class="uk-margin-top">
-                            <h3>Отзыв:</h3>
-                            <textarea class="uk-textarea" name="message" id="" rows="10" style="width: 100%;"></textarea>
-                            <div class="uk-flex" style="margin-left: 45%">
-                                <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
-                            <div class="uk-margin-remove-right rating-area">
-                                <input type="radio" id="star-5" name="rating" value="5">
-                                <label for="star-5" title="Оценка «5»"></label>
-                                <input type="radio" id="star-4" name="rating" value="4">
-                                <label for="star-4" title="Оценка «4»"></label>
-                                <input type="radio" id="star-3" name="rating" value="3">
-                                <label for="star-3" title="Оценка «3»"></label>
-                                <input type="radio" id="star-2" name="rating" value="2">
-                                <label for="star-2" title="Оценка «2»"></label>
-                                <input type="radio" id="star-1" name="rating" value="1">
-                                <label for="star-1" title="Оценка «1»"></label>
-                            </div>
-                            </div>
-                        </div>
-                        <p class="uk-text-right">
-                            <button class="uk-button uk-button-default uk-modal-close" type="button">Закрыть</button>
-                            <button class="uk-button uk-button-primary" type="button">Опубликовать</button>
-                        </p>
                     </div>
-                </div>
+
 
                 </div>
 

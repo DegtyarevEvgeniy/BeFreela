@@ -510,11 +510,12 @@ def index_page(request):
 
 def cardProduct_page(request, product_id):
     context = {**gen_menu(request), **gen_submenu(request)}
+    product = Product_creator.objects.get(id=product_id)
     try:
-        if request.method == "POST":
+        if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
-            product = Product_creator.objects.get(id=product_id)
+            # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
 
@@ -529,9 +530,17 @@ def cardProduct_page(request, product_id):
             product_buy.delivery_address = request.POST['address']
             product_buy.status_pay = False
             product_buy.save()
-        else:
-            product = Product_creator.objects.get(id=product_id)
+        # else:
+            # product = Product_creator.objects.get(id=product_id)
             # creator = Creator.objects.get(email=product.id_creator)
+        if request.method == "POST" and "comment_product" in request.POST:
+            # product = Product_creator.objects.get(id=product_id)
+            comment = Comments_product()
+            comment.id_creator = product.id_creator
+            comment.id_product = product.id
+            comment.review = request.POST['review']
+            comment.rating = request.POST.get('rating', '5')
+            comment.save()
         context['products'] = product
         messages = Comments_product.objects.filter(id_product=product_id)
         context['messages'] = messages

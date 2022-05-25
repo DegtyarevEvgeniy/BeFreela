@@ -45,7 +45,7 @@ class Comments_product(models.Model):
     id_creator = models.CharField(max_length=200, default='-')
     id_product = models.CharField(max_length=200, default='-')
     review = models.CharField(max_length=200, default='-')
-    rating = models.IntegerField(default='')
+    rating = models.IntegerField(default='0')
 
 
 class Product_creator(models.Model):
