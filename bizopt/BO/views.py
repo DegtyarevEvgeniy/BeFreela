@@ -708,6 +708,11 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
+def chat_page(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    return render(request, 'messanger.html', content)
 
 
 def orders_page(request):
