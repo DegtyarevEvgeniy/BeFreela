@@ -223,10 +223,10 @@
             // если у вас не работает страница с номером темплейта, как в массиве, просто удалите его из массива
             num = num; //here is a number of page
         } else {
-            num = 1;
+            num = 2;
         }
         var xhr = new XMLHttpRequest()
-        xhr.open('GET', `becomeCreatorTemplates/${2}/`)
+        xhr.open('GET', `becomeCreatorTemplates/${num}/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
         }
