@@ -29,7 +29,10 @@ class Product_buy(models.Model):
     message = models.CharField(max_length=200, default='-')
     payed_partner = models.BooleanField(default=0)
     payed_user = models.BooleanField(default=0)
-
+    status_pay = models.BooleanField(default=0)
+    delivery_address = models.CharField(max_length=500, default='-')
+    date_add = models.DateField(max_length=50, default='2000-01-01')
+    img = models.ImageField(upload_to='images/products', default='images/default.png')
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='-')
@@ -42,7 +45,7 @@ class Comments_product(models.Model):
     id_creator = models.CharField(max_length=200, default='-')
     id_product = models.CharField(max_length=200, default='-')
     review = models.CharField(max_length=200, default='-')
-    rating = models.IntegerField(default='')
+    rating = models.IntegerField(default='0')
 
 
 class Product_creator(models.Model):
@@ -51,6 +54,9 @@ class Product_creator(models.Model):
     product_name = models.CharField('Название', max_length=500, default='-')
     country = models.CharField('Страна', max_length=30, default='-')
     brand = models.CharField('Бренд', max_length=30, default='-')
+    rating_status = models.IntegerField(default=0)
+    term_status = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
     # set = list
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
@@ -74,7 +80,7 @@ class Task(models.Model):
     select = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=500, default='-')
     price = models.IntegerField(default='')
-    time = models.DateField(max_length=50, default='-')
+    time = models.DateField(max_length=50, default='2000-01-01')
     tags = TaggableManager()
 
 
@@ -97,5 +103,5 @@ class Partner(models.Model):
     inn = models.IntegerField(default='0000000000')
     name_small = models.CharField(max_length=200, default='-')
     name_full = models.CharField(max_length=200, default='-')
-    reg_form = models.CharField(max_length=200, default='-')
+    reg_form = models.CharField(max_length=200, default='Самозанятый')
     payment_account = models.CharField(max_length=200, default='-')

@@ -237,7 +237,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 creator.is_company = True
                 creator.company_name = request.POST['profile_company_name']
             else:
-                creator.company = False
+                creator.is_company = False
             creator.save()
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
@@ -275,40 +275,55 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.status2 = 'in waiting'
         product.save()
         return redirect('/becomeCreator/?1')
+    if request.method == 'GET' and "decline" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['decline'])
+        product.status1 = 'end_partner'
+        product.save()
+
+    if request.method == 'GET' and "decline_work" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['decline_work'])
+        product.status1 = 'end_partner'
+        product.save()
+    if request.method == 'GET' and "in_work" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['in_work'])
+        product.status2 = 'in_work'
+        #
+        #
+        product.save()
+    if request.method == 'GET' and "2" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['2'])
+        product.status2 = 'done'
+        product.save()
+    if request.method == 'GET' and "3" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['3'])
+        product.status2 = 'payment'
+        product.save()
+    if request.method == 'GET' and "4" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['4'])
+        product.status2 = 'end_partner'
+        product.save()
 
     if request.method == "POST" and "partner" in request.POST:
-        partner = Partner()
-        account = Account.objects.get(email=request.user)
-
-        # TODO: сделать что-то с сохранением единажды на template13
-        #  и доделать сохранение с template12 полностью(там заглушка).
-        #  Сейчас нет возможности контролировать дублирующихся партнеров по-людски.
-        # TODO: как идентифицировать пользователя в будущем? уникальность по email?
-        if request.POST.get('INN', None):
+        try:
+            partner = Partner.objects.get(email=request.user)
             partner.inn = request.POST['INN']
-        if request.POST.get('short_name', None):
             partner.name_small = request.POST['short_name']
-        if request.POST.get('full_name', None):
-            partner.name_full = request.POST['full_name']
-        if request.POST.get('payment_account', None):
             partner.payment_account = request.POST['payment_account']
-        if request.POST.get('payment_account', None):
-            partner.payment_account = request.POST['payment_account']
-        if request.POST.get('reg_form', None):
-            partner.reg_form = request.POST.get('reg_form', None)
-        if request.POST.get('my_first_name', None):
+            partner.reg_form = request.POST['reg_form']
             partner.first_name = request.POST['my_first_name']
-        else:
-            partner.first_name = account.first_name
-        if request.POST.get('my_last_name', None):
             partner.last_name = request.POST['my_last_name']
-        else:
-            partner.last_name = account.last_name
-        if request.POST.get('my_email', None):
-            partner.email = request.POST['my_email']
-        else:
-            partner.email = account.email
-        partner.save()
+            partner.email = user.email
+            partner.save()
+        except:
+            partner = Partner()
+            partner.inn = request.POST['INN']
+            partner.name_small = request.POST['short_name']
+            partner.payment_account = request.POST['payment_account']
+            partner.reg_form = request.POST['reg_form']
+            partner.first_name = request.POST['my_first_name']
+            partner.last_name = request.POST['my_last_name']
+            partner.email = user.email
+            partner.save()
 
     if request.method == 'POST' and "products_in_work" in request.POST:
         print("products_in_work")
@@ -421,6 +436,14 @@ def becomeCreatorTemplate_page(request, name):
         except:
             creator = Creator()
             content['creator'] = creator
+
+    elif name == '1':
+        try:
+            partner = Partner.objects.get(email=request.user)
+            content['partner'] = partner
+        except:
+            partner = Partner()
+            content['partner'] = partner
     
     elif name == '6':
         form = ProductCreateForm()
@@ -487,11 +510,12 @@ def index_page(request):
 
 def cardProduct_page(request, product_id):
     context = {**gen_menu(request), **gen_submenu(request)}
+    product = Product_creator.objects.get(id=product_id)
     try:
-        if request.method == "POST":
+        if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
-            product = Product_creator.objects.get(id=product_id)
+            # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
 
@@ -503,10 +527,20 @@ def cardProduct_page(request, product_id):
             product_buy.status1 = 'in waiting'
             product_buy.status2 = 'None'
             product_buy.message = request.POST['message']
+            product_buy.delivery_address = request.POST['address']
+            product_buy.status_pay = False
             product_buy.save()
-        else:
-            product = Product_creator.objects.get(id=product_id)
+        # else:
+            # product = Product_creator.objects.get(id=product_id)
             # creator = Creator.objects.get(email=product.id_creator)
+        if request.method == "POST" and "comment_product" in request.POST:
+            # product = Product_creator.objects.get(id=product_id)
+            comment = Comments_product()
+            comment.id_creator = product.id_creator
+            comment.id_product = product.id
+            comment.review = request.POST['review']
+            comment.rating = request.POST.get('rating', '0')
+            comment.save()
         context['products'] = product
         messages = Comments_product.objects.filter(id_product=product_id)
         context['messages'] = messages
@@ -685,6 +719,11 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
+def chat_page(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    return render(request, 'messanger.html', content)
 
 
 def orders_page(request):
@@ -696,7 +735,15 @@ def orders_page(request):
         'id_user_buy': product.id_user_buy,
         'status1': product.status1,
     } for product in productss]
-
+    if request.method == "POST" and "comment_product" in request.POST:
+        product_id = request.POST['comment_product']
+        product = Product_creator.objects.get(id=product_id)
+        comment = Comments_product()
+        comment.id_creator = product.id_creator
+        comment.id_product = product.id
+        comment.review = request.POST['review']
+        comment.rating = request.POST.get('rating', '0')
+        comment.save()
     return render(request, 'orders.html', content)
 
 def partners_page(request):

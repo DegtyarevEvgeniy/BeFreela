@@ -1,6 +1,7 @@
 <div class="row d-flex justify-content-center align-items-center">
     <div class="col-md-8">
         <form id="regForm" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
             <h1 id="register">Данные продавца</h1>
             <div class="all-steps" id="all-steps">
                         <a onclick="surTab(0)" style="margin: 0 5px ;">
@@ -18,7 +19,7 @@
             <!-- start of bloc 1 -->
             <div class="tab" style="display: block;">
                 <label class="labels">ИНН</label>
-                <input type="text" class="form-control" name="INN" id="" value="{{ partner.INN }}">
+                <input type="text" class="form-control" name="INN" id="" value="{{ partner.inn }}">
                 <br>
                 <label class="labels">Краткое наиименование</label>
                 <input type="text" class="form-control" name="short_name" id="" value="{{ partner.name_small }}">
@@ -29,10 +30,10 @@
                 <label class="labels">Форма регистрации</label>
                 <div class="input-group mb-3">
                     <select name="reg_form" class="form-select" id="inputGroupSelect02">
-                      <option value="1">ИП без НДС</option>
-                      <option value="2">ИП с НДС</option>
-                      <option value="3">ИП на НПД</option>
-                      <option value="4" selected>Самозанятый</option>
+                      <option value="ИП без НДС">ИП без НДС</option>
+                      <option value="ИП с НДС">ИП с НДС</option>
+                      <option value="ИП на НПД">ИП на НПД</option>
+                      <option value="Самозанятый">Самозанятый</option>
                     </select>
                   </div>
                 <br>
@@ -43,10 +44,10 @@
             <!-- start of bloc 2 -->
             <div class="tab" >
                 <label class="labels">Имя</label>
-                <input type="text" class="form-control" name="my_first_name" id="">
+                <input type="text" class="form-control" name="my_first_name" id="" value="{{ partner.first_name }}">
                 <br>
                 <label class="labels">Фамилия</label>
-                <input type="text" class="form-control" name="my_last_name" id="">
+                <input type="text" class="form-control" name="my_last_name" id="" value="{{ partner.last_name }}">
                 <br>
                 <br>
             </div>
@@ -59,7 +60,7 @@
                     <button type="button" id="prevBtn" style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
                     </button>
-                    <button name="product_creator" type="button" id="nextBtn" style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button uk-button-primary" onclick="nextPrev(1)">
+                    <button name="partner" type="button" id="nextBtn" style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button uk-button-primary" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                     </button>
                 </div>

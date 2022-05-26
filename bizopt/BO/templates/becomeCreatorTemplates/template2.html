@@ -33,14 +33,16 @@
                         <td class="uk-text-break">{{ product.customer }}</td>
                         <td class="">2021-05-23</td>
                         <th class="">
-                                <button class="uk-badge" type="submit" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="В работе" >1</button>
-                                <button class="uk-badge" type="submit" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Сделано" >2</button>
-                                <button class="uk-badge" type="submit" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Ожидает оплаты" >3</button>
-                                <button class="uk-badge" type="submit" style="background-color: red;border-color: red; padding: 10%; margin: 2px;" uk-tooltip="Отказ" >4</button> 
+                                <button name="in_work" class="uk-badge" type="submit" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="В работе" value="{{product.id}}" >1</button>
+                                <button name="2" class="uk-badge" type="submit" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Сделано" value="{{product.id}}" >2</button>
+                                <button name="3" class="uk-badge" type="submit" style="border-color: #1e87f0; padding: 10%; margin: 2px;" uk-tooltip="Ожидает оплаты" value="{{product.id}}" >3</button>
                         </th>
                         <td class="uk-text-break">
-                            <button name="" form="products_in_work_id" type="button"
-                                class="uk-button uk-button-danger uk-border-rounded">отказаться</button>
+                            <button name="decline_work" form="goodsList" type="submit" value="{{product.id}}"
+                                            class="uk-button uk-button-danger uk-border-rounded"
+                                            style="margin:auto; padding: 0 15px!important">Отказаться</button>
+<!--                            -->
+<!--                            -->
                         </td>
 
                         <td class="uk-text-break">
@@ -141,7 +143,7 @@
                                             style="margin:auto; padding: 0 15px!important">Согласиться</button>
                                     </td>
                                     <td class="">
-                                        <button name="status" form="goodsList" type="button" value="{{product.id}}"
+                                        <button name="decline" form="goodsList" type="submit" value="{{product.id}}"
                                             class="uk-button uk-button-danger uk-border-rounded"
                                             style="margin:auto; padding: 0 15px!important">Отказаться</button>
                                     </td>
