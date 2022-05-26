@@ -12,8 +12,8 @@
 <div class="placeOut uk-flex-column uk-margin-bottom">
     <h3>Заказы одобренные продавцом</h3>
         {% for product in products %}
-    <div style="background: #C4C4C4">
-        <div style="background-color: #D9D9D9" >
+    <div style="margin-bottom: 10%">
+        <div style="background-color: #D9D9D9 " >
             <div style="margin-left: 5%;">
                 <br>
                 <p class="uk-margin-remove" style="margin-top: 5%">Заказ: # {{ product.id }}</p>
@@ -22,7 +22,7 @@
                 <br>
             </div>
         </div>
-        <div class="uk-flex uk-margin-bottom uk-margin-small-left" style="background: #C4C4C4; border: 10px solid #C4C4C4">
+        <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
             <div class="uk-flex uk-margin-medium-right">
                 <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" style="border-radius: 5px; width: 200px; height: 150px">
                 <div class="uk-flex-column uk-margin-medium-left uk-margin-small-bottom uk-margin-top-remove">
@@ -44,7 +44,7 @@
                                 <textarea class="uk-textarea" name="message" id="" rows="10" style="width: 100%;"></textarea>
                                 <div class="uk-flex" style="margin-left: 45%">
                                     <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
-                                    <div class="uk-margin-remove-right rating-area">
+                                    <div class="rating-area">
                                         <input type="radio" id="star-5" name="rating" value="5">
                                         <label for="star-5" title="Оценка «5»"></label>
                                         <input type="radio" id="star-4" name="rating" value="4">
@@ -136,7 +136,7 @@
         {% endfor %}
 
 
-    <h4>Заказы ожидающие одобренния продавца</h4>
+    <h4 style="margin-top: 10%">Заказы ожидающие одобренния продавца</h4>
         {% for product in products %}
     <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
         <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="150" height="50" style="border-radius: 5px">
@@ -149,7 +149,31 @@
         </div>
         <div class="uk-flex-column uk-margin-top" style="margin-left: auto;">
             <h3 style="text-align: center">{{ task.price }} 12000 руб</h3>
-            <button class="uk-button" style="background: #969696; border-radius: 5px;">Оплатить заказ</button>
+            <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px;" type="button" uk-toggle="target: #modal-close-default">Оплатить заказ</button>
+            <div id="modal-close-default" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body">
+                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                    <h2 class="uk-modal-title">Оплата</h2>
+                    <div>
+                        <div class="uk-flex uk-margin-bottom">
+                            <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
+                            <div class="uk-flex-column uk-margin-left">
+                                <p class="uk-margin-remove">{{ user.first_name }}</p>
+                                <p class="uk-margin-remove">{{ user.email}}</p>
+                            </div>
+                        </div>
+                        <div class="uk-flex">
+                            <p class="uk-margin-remove">Получатель:</p>
+                            <span class="uk-label" style="margin: 0 0 0 5%">BeFreela</span>
+                        </div>
+                        <div class="uk-margin-top">
+                            <p>Отсканируйте QR-код и оплатите товар</p>
+                            <img src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg">
+                        </div>
+                        <button class="uk-button uk-button-default uk-margin-small-right uk-modal-close" style="margin-left: 75%; border-radius: 5px;  " type="button">Закрыть</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
         {% endfor %}
@@ -162,6 +186,9 @@
 
 
 <style>
+    .checked {
+        color: orange;
+    }
     .rating-area {
         overflow: hidden;
         width: 265px;
