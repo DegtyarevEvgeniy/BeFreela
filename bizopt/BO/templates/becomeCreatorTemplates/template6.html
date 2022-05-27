@@ -439,13 +439,13 @@
     function addInput(el) {
         let input = el.parentElement.getElementsByTagName("input")[0];
         if (inputnum < 15 && input.value) {
-            inputnum++;
             input.removeAttribute("disabled");
             input.placeholder = "";
             var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" value="${document.getElementById('inputvalue').value}" disabled> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button></div>`;
+            `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" name="set_${inputnum}" class="form-control" value="${document.getElementById('inputvalue').value}" disabled> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button></div>`;
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             input.value = "";
+            inputnum++;
         } else if (inputnum >= 15) {
             input.value = "";
             input.setAttribute("disabled", "disabled");
@@ -478,14 +478,14 @@
     }
 
     function addKey(el) {
-        keynum++;
         let key = el.parentElement.getElementsByTagName("input")[0];
         key.placeholder = "";
         if (keynum < 15 && key.value) {
             var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control" disabled value="${document.getElementById('keyValue').value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
-            document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-            key.value = "";
+            `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" name="key_${keynum}" class="form-control" disabled value="${document.getElementById('keyValue').value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
+                document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+                key.value = "";
+                keynum++;
         } else if (keynum >= 15) {
             input.value = "";
             key.setAttribute("disabled", "disabled");
