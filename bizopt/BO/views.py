@@ -271,6 +271,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 t += ','
             else:
                 break
+                #
 
         product.set = t
         product.country = request.POST['country']
