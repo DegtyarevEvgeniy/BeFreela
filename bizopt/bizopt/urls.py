@@ -36,7 +36,10 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index_page),
     path('edit/', views.edit_profile),
-    path('chat/', views.chat_page),
+    # 
+    path('chat/<id>', views.chat_page),
+    
+    # 
     path('tasks/', views.tasks_page),
     path('partners/', views.partners_page),
     # path('employers/', views.employers_page),

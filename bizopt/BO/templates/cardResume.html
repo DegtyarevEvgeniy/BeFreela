@@ -15,17 +15,19 @@
         <div class="uk-width-3-5 uk-flex uk-flex-left">
             <div class="uk-width-4-5">
                 <div class="uk-flex uk-flex-between uk-flex-center uk-margin-remove-bottom">
-
                     <div>
                         <h3 class="uk-card-title" style="margin-bottom: 5px"> {{profile.first_name }}</h3>
                         <p style="margin-top: 5px">{{ profile.email }}</p>
                     </div>
                     <div uk-grid style="width: 150px;">
-                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
+                        <form action="POST">
+                            {% csrf_token %}
+                            <input type="text" name="room_name" value="{{link}}" style="display: none">
+                        <a class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle" href="/chat/{{link}}"
                             style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #229ED9;">
                             <i class="fab fa-telegram"></i>
-                        </button>
-
+                        </a>
+                    </form>
                         <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
                             style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #4c75a3;">
                             <i class="fab fa-vk"></i>

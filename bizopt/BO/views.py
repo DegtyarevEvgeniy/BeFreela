@@ -21,6 +21,7 @@ from account.models import Account
 import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
+from .models import Chat_room, Message
 
 
 def goodsSearch_page(request, product_name):
@@ -569,8 +570,12 @@ def cardResume_page(request):
     return render(request, 'cardResume.html', context)
 
 
+
 def sertCardResume_page(request, username):
     context = gen_menu(request)
+    useremail = request.user
+    user = Account.objects.get(email=useremail)
+
     profile = Creator.objects.get(username=username)
     context['profile'] = profile
     products = Product_creator.objects.all()
@@ -582,6 +587,7 @@ def sertCardResume_page(request, username):
                             'id_creator': product.id_creator
                             }
                            for product in products]
+    context['link'] = (user.id * profile.id) + user.id + profile.id
     return render(request, 'cardResume.html', context)
 
 
@@ -722,10 +728,18 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
-def chat_page(request):
+def chat_page(request, id):
     content = {
         'menu': gen_menu(request)
     }
+    useremail = request.user
+    user = Account.objects.get(email=useremail)
+    companion_id = (int(id) - int(user.id)) // int(user.id)
+    companion = Creator.objects.get(id=companion_id)
+    content['companion'] = companion
+    room = request.POST['room_name']
+    if room.objects.filter(name=room).exist():
+        pass
     return render(request, 'messanger.html', content)
 
 
