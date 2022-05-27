@@ -737,10 +737,17 @@ def chat_page(request, id):
     companion_id = (int(id) - int(user.id)) // int(user.id)
     companion = Creator.objects.get(id=companion_id)
     content['companion'] = companion
+    return render(request, 'messanger.html', content)
+
+def checkroom(request):
     room = request.POST['room_name']
     if room.objects.filter(name=room).exist():
-        pass
-    return render(request, 'messanger.html', content)
+        return redirect(f'/{room}/')
+    else:
+        new_room = Chat_room.objects.create(name=room)
+        new_room.save()
+        return redirect(f'/{room}/')
+
 
 
 def orders_page(request):

@@ -23,10 +23,10 @@
                         <form action="POST">
                             {% csrf_token %}
                             <input type="text" name="room_name" value="{{link}}" style="display: none">
-                        <a class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle" href="/chat/{{link}}"
+                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle" type="submit"
                             style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #229ED9;">
                             <i class="fab fa-telegram"></i>
-                        </a>
+                        </button>
                     </form>
                         <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
                             style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #4c75a3;">

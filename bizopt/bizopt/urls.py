@@ -38,7 +38,8 @@ urlpatterns = [
     path('edit/', views.edit_profile),
     # 
     path('chat/<id>', views.chat_page),
-    
+    path('checkroom', views.checkroom),
+
     # 
     path('tasks/', views.tasks_page),
     path('partners/', views.partners_page),
