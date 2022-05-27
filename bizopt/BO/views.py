@@ -26,7 +26,8 @@ from taggit.models import Tag
 def goodsSearch_page(request, product_name):
     context = gen_menu(request)
     products = Product_creator.objects.filter(
-        Q(product_name__icontains=product_name)
+        Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
+        | Q(set__icontains=product_name)
     )
     print(products)
     context['products'] = [{'id': product.id,
@@ -254,6 +255,8 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.product_name = request.POST['product_name']
         product.price = request.POST['price']
         product.description = request.POST['description']
+        product.brand = request.POST['brand']
+        product.country = request.POST['country']
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
@@ -290,12 +293,12 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         #
         #
         product.save()
-    if request.method == 'GET' and "2" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['2'])
+    if request.method == 'GET' and "done" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['done'])
         product.status2 = 'done'
         product.save()
-    if request.method == 'GET' and "3" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['3'])
+    if request.method == 'GET' and "payment" in request.GET:
+        product = Product_buy.objects.get(id=request.GET['payment'])
         product.status2 = 'payment'
         product.save()
     if request.method == 'GET' and "4" in request.GET:
