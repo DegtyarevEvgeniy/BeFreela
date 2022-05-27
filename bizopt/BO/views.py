@@ -257,6 +257,22 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.price = request.POST['price']
         product.description = request.POST['description']
         product.brand = request.POST['brand']
+        t = ''
+        print(request.POST)
+        for i in range(0, 16):
+            if request.POST.get('set_{}'.format(i), None):
+                t += request.POST.get('set_{}'.format(i), ' ')
+                t += ','
+            else:
+                break
+        for i in range(0, 16):
+            if request.POST.get('key_{}'.format(i), None):
+                t += request.POST.get('key_{}'.format(i), ' ')
+                t += ','
+            else:
+                break
+
+        product.set = t
         product.country = request.POST['country']
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
