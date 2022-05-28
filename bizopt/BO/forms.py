@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelChoiceField
 
-from django.forms import ModelForm, TextInput, Textarea, Select, CharField, IntegerField
+from django.forms import ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
 from taggit.models import Tag
 

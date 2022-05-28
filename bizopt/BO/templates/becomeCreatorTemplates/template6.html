@@ -30,7 +30,18 @@
                     <br>
                 </div>
                 <!-- template start -->
-                <div id="inputDiv" class="col-md-12"></div>
+                <div id="inputDiv" class="col-md-12">
+                    <div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary"
+                            onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button>
+                        <p name="set_${inputnum}" class="form-control" value="${value}">${value}</p>
+                    </div>
+                        <div class="uk-inline">
+                            <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus"></button>
+                            <!-- <input class="uk-input" type="text"> -->
+                            <p name="set_${inputnum}" class="form-control" value="${value}">${value}</p>
+
+                        </div>
+                    </div>
                 <br>
                 <br>
                 <!-- template end -->
@@ -134,10 +145,14 @@
 
             <div style="overflow:auto;" id="next-previous">
                 <div style="float:right;">
-                    <button type="button" id="prevBtn" style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button" onclick="nextPrev(-1)">
+                    <button type="button" id="prevBtn"
+                        style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;"
+                        class="uk-button" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
                     </button>
-                    <button name="product_creator" type="button" id="nextBtn" style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button uk-button-primary" onclick="nextPrev(1)">
+                    <button name="product_creator" type="button" id="nextBtn"
+                        style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;"
+                        class="uk-button uk-button-primary" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                     </button>
                 </div>
@@ -162,6 +177,11 @@
         keynum = 0,
         currentTab = 0;
 
+    function addComplectation(el) {
+
+        console.log("creators/goods/search/" + el.value)
+    }
+
     function addInput(el) {
         let input = el.parentElement.getElementsByTagName("input")[0];
         if (inputnum < 15 && input.value) {
@@ -169,7 +189,8 @@
             input.placeholder = "";
             let value = document.getElementById('inputvalue').value;
             var $inputGroup =
-            `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" name="set_${inputnum}" class="form-control" value="${value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button></div>`;
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <p name="set_${inputnum}" class="form-control" value="${value}">${value}</p></div>`;
+            // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             input.value = "";
             inputnum++;
@@ -196,8 +217,8 @@
         let inputPole = el.parentElement.getElementsByTagName("input")[0];
         let BtnImage = el.parentElement.getElementsByTagName("span")[0];
         inputPole.placeholder = "";
-        if (inputPole.value){
-            if (inputPole.disabled){
+        if (inputPole.value) {
+            if (inputPole.disabled) {
                 BtnImage.innerHTML = "edit_off"
             } else {
                 inputPole.value = inputPole.value
@@ -215,10 +236,11 @@
         if (keynum < 15 && key.value) {
             let value = document.getElementById('keyValue').value
             var $inputGroup =
-            `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" name="key_${keynum}" class="form-control" value="${value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
-                document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-                key.value = "";
-                keynum++;
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>`;
+            // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span>
+            document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+            key.value = "";
+            keynum++;
         } else if (keynum >= 15) {
             input.value = "";
             key.setAttribute("disabled", "disabled");
