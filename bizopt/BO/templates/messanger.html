@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+
+{% block content %}
 
 <head>
     <meta charset="UTF-8">
@@ -66,12 +67,12 @@
                                 for (var key in response.messages) {
                                     if (response.messages[key].user == id) {
                                         var temp =
-                                            '<div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid> <div class="uk-width-auto uk-flex uk-flex-right"> <div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-2-3"> <p class="uk-margin-remove uk-text-break">'
+                                            '<div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid> <div class="uk-width-auto uk-flex uk-flex-right"> <div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-1"> <p class="uk-margin-remove uk-text-break">'
                                                 + response.messages[key].value +
                                             ' </p></div></div><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{user.userImage}}"></div></div>';
                                         
                                     } else {
-                                        var temp = '<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}"></div><div class="uk-width-auto "><div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded uk-width-2-3"> <p class="uk-margin-remove uk-text-break">'
+                                        var temp = '<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}"></div><div class="uk-width-auto "><div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded uk-width-1"> <p class="uk-margin-remove uk-text-break">'
                                         + response.messages[key].value +
                                         '</p></div></div></div>';
                                     }
@@ -100,9 +101,8 @@
                             <div class="uk-padding-small uk-padding-remove-horizontal uk-flex" style="margin: 0 auto">
                                 <input type="hidden" id="username" value="{{user.id}}">
                                 <input type="hidden" id="room_id" value="{{room_id}}">
-                                <textarea class="uk-textarea uk-padding-remove uk-border-rounded uk-margin-small-right"
-                                    rows="1" placeholder="Напишите сообщение..." id="message"
-                                    style="font-size: 20px;"></textarea>
+                                <input class="uk-textarea uk-padding-remove uk-border-rounded uk-margin-small-right" placeholder="Напишите сообщение..." id="message"
+                                    style="font-size: 20px;"/>
                                 <input class="uk-button uk-button-text material-symbols-outlined" type="submit"
                                     value="send" />
                             </div>
@@ -139,3 +139,4 @@
 </script>
 
 </html>
+{% endblock %}
