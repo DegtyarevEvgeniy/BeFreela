@@ -282,21 +282,27 @@ class ProductCreateForm(ModelForm):
             }),
             'width_product': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
             'height_product': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
             'length_product': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
             'width_packaging': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
             'height_packaging': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
             'length_packaging': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
 
         }
