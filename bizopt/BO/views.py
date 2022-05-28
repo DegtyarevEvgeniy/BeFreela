@@ -272,21 +272,23 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 t += ','
             else:
                 break
-        for i in range(0, 16):
-            if request.POST.get('key_{}'.format(i), None):
-                t += request.POST.get('key_{}'.format(i), ' ')
-                t += ','
-            else:
-                break
-                #
+
+
 
         product.set = t
+
         product.country = request.POST['country']
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
+        for i in range(0, 16):
+            if request.POST.get('key_{}'.format(i), None):
+                product.tags.add(request.POST.get('key_{}'.format(i), ' '))
+                product.save()
+            else:
+                break
         return redirect('/becomeCreator/?3')
 
     if request.method == 'GET' and "product_cards" in request.GET:
