@@ -12,7 +12,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
 from .forms import *
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
@@ -21,6 +21,7 @@ from account.models import Account
 import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
+from .models import Chat_room, Message
 
 
 def goodsSearch_page(request, product_name):
@@ -263,6 +264,23 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.price = request.POST['price']
         product.description = request.POST['description']
         product.brand = request.POST['brand']
+        t = ''
+        print(request.POST)
+        for i in range(0, 16):
+            if request.POST.get('set_{}'.format(i), None):
+                t += request.POST.get('set_{}'.format(i), ' ')
+                t += ','
+            else:
+                break
+        for i in range(0, 16):
+            if request.POST.get('key_{}'.format(i), None):
+                t += request.POST.get('key_{}'.format(i), ' ')
+                t += ','
+            else:
+                break
+                #
+
+        product.set = t
         product.country = request.POST['country']
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
@@ -576,8 +594,12 @@ def cardResume_page(request):
     return render(request, 'cardResume.html', context)
 
 
+
 def sertCardResume_page(request, username):
     context = gen_menu(request)
+    useremail = request.user
+    user = Account.objects.get(email=useremail)
+
     profile = Creator.objects.get(username=username)
     context['profile'] = profile
     products = Product_creator.objects.all()
@@ -589,6 +611,7 @@ def sertCardResume_page(request, username):
                             'id_creator': product.id_creator
                             }
                            for product in products]
+    context['link'] = (user.id * profile.id) + user.id + profile.id
     return render(request, 'cardResume.html', context)
 
 
@@ -729,12 +752,36 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
-def chat_page(request):
+def chat_page(request, room_id):
     content = {
         'menu': gen_menu(request)
     }
-    return render(request, 'messanger.html', content)
+    useremail = request.user
+    user = Account.objects.get(email=useremail)
+    companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
+    print(user.id)
+    print(companion_id)
+    companion = Creator.objects.get(id=companion_id)
+    content['room_id'] = room_id
+    content['companion'] = companion
+    if not Chat_room.objects.filter(name=room_id).exists():
+        new_room = Chat_room.objects.create(name=room_id)
+        new_room.save()
+    return render(request, 'messanger.html', content)    
 
+def getMsg(request, room_id):
+    room_detales = Chat_room.objects.get(name=room_id)
+    messages = Message.objects.filter(room=room_detales.name)
+    return JsonResponse({"messages":list(messages.values())})
+
+def send(request):
+    message = request.POST['message']
+    username = request.POST['username']
+    room_id = request.POST['room_id']
+
+    new_message = Message.objects.create(value=message, user=username, room=room_id)
+    new_message.save()
+    return HttpResponse('Message sent successfully.')
 
 def orders_page(request):
     content = gen_menu(request)

@@ -1,7 +1,9 @@
+# sourcery skip: avoid-builtin-shadow
 import uuid
 from django.db import models
 from django.forms import ModelForm
 from taggit.managers import TaggableManager
+from datetime import datetime
 
 class Creator(models.Model):
     username = models.CharField(max_length=20, default='', unique=True)
@@ -105,3 +107,11 @@ class Partner(models.Model):
     name_full = models.CharField(max_length=200, default='-')
     reg_form = models.CharField(max_length=200, default='Самозанятый')
     payment_account = models.CharField(max_length=200, default='-')
+
+class Chat_room(models.Model):
+    name = models.CharField(max_length=100000)
+class Message(models.Model):
+    value = models.CharField(max_length=1000000)
+    date = models.DateTimeField(default=datetime.now, blank=True)
+    user = models.CharField(max_length=1000000)
+    room = models.CharField(max_length=1000000)

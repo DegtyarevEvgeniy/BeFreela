@@ -7,32 +7,31 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 
 </head>
 
 
 <body style="height: 100%;">
-
-
-    <form action="GET">
+    <!-- <form action="GET"> -->
     <div class="uk-card uk-card-default uk-width-2-3 uk-border-rounded uk-margin uk-position-bottom"
         style="margin: 5% auto; height: 85%; ">
         <div class="uk-card-body uk-panel uk-panel-scrollable uk-padding-small"
-            style="height: 95%; padding-bottom: 100px;">
+            style="height: 95%; padding-bottom: 100px;" id="messageDisplay">
 
 
             <!-- начало текста продавца -->
             <div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid>
+                <div class="uk-width-auto">
+                    <img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}">
+                </div>
                 <div class="uk-width-auto ">
                     <div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded uk-width-2-3">
-                        <p class="uk-margin-remove">Hey dude! Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey
-                            dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey dude!Hey
-                            dude!Hey dude!Hey dude!Hey dude!Hey</p>
+                        <p class="uk-margin-remove uk-text-break">
+                            {asdasdasdasdkhsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdfksdfhjksdfhjksdfhjksdfhjsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdf
+                        </p>
                     </div>
-                </div>
-                <div class="uk-width-auto">
-                    <img class="uk-border-circle" width="32" height="32"
-                        src="https://getuikit.com/docs/images/avatar.jpg">
                 </div>
             </div>
             <!-- конец текста продавца -->
@@ -41,49 +40,102 @@
             <div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid>
                 <div class="uk-width-auto uk-flex uk-flex-right">
                     <div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-2-3">
-                        <p class="uk-margin-remove uk-text-break">Hi brow :) Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi
-                            brow :)Hi brow
-                            :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow
-                            :)Hi
-                            brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi
-                            brow
-                            :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow
-                            :)Hi
-                            brow :)Hi brow :)Hi brow :)Hi brow :)Hi brow :)</p>
+                        <p class="uk-margin-remove uk-text-break">
+                            asdasdasdasdkhsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdfksdfhjksdfhjksdfhjksdfhjsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdfkhjsdf
+                        </p>
                     </div>
                 </div>
                 <div class="uk-width-auto">
-                    <img class="uk-border-circle" width="32" height="32"
-                        src="https://getuikit.com/docs/images/avatar.jpg">
+                    <img class="uk-border-circle" width="32" height="32" src="../../media/{{user.userImage}}">
                 </div>
             </div>
             <!-- конец моего текста -->
-        </div>
-    </form>
 
 
-        <form action="POST">
-            <div class="uk-card-footer uk-padding-remove uk-position-bottom" style="background-color: white;">
-                <div class="uk-grid-small uk-flex-middle" uk-grid>
+            <script>
+                $(document).ready(function () {
+                    var room = $('#room_id').val()
+                    var id = $('#username').val()
+                    setInterval(function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: "/getMsg/chat/" + room + "/",
+                            success: function (response) {
+                                // console.log(response);
+                                $("#messageDisplay").empty();
+                                for (var key in response.messages) {
+                                    if (response.messages[key].user == id) {
+                                        var temp =
+                                            ' <div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid><div class="uk-width-auto uk-flex uk-flex-right"><div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-1"><p class="uk-margin-remove uk-text-break">'
+                                                + response.messages[key].value +
+                                            ' </p></div></div><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{user.userImage}}"></div></div>';
+                                        
+                                    } else {
+                                        var temp = '<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}"></div><div class="uk-width-auto "><div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded uk-width-1"><p class="uk-margin-remove uk-text-break">'
+                                        + response.messages[key].value +
+                                        '</p></div></div></div>';
+                                    }
+                                    $("#messageDisplay").append(temp);
+                                    console.log(temp)
+                                    // console.log("response.messages[key].user = ", response.messages[key].user)
+                                    // console.log("response.messages[key].value = ", response.messages[key].value)
+                                    // console.log("response.messages[key].date = ", response.messages[key].date)
+                                }
+                            },
+                            error: function (response) {
+                                // alert('An error occured')
+                            }
+                        });
+                    }, 1000);
+                })
+            </script>
 
-                    <div class="uk-width-expand" style="margin: 0 3%">
-                        <div class="uk-padding-small uk-padding-remove-horizontal uk-flex" style="margin: 0 auto">
-                            <textarea class="uk-textarea uk-padding-remove uk-border-rounded uk-margin-small-right"
-                                rows="1" placeholder="Напишите сообщение..." style="font-size: 20px;"></textarea>
-                            <button href="#" class="uk-button uk-button-text material-symbols-outlined" type="submit">send</button>
+
+            <form id="post-form">
+                {% csrf_token %}
+
+                <div class="uk-card-footer uk-padding-remove uk-position-bottom" style="background-color: white;">
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-expand" style="margin: 0 3%">
+                            <div class="uk-padding-small uk-padding-remove-horizontal uk-flex" style="margin: 0 auto">
+                                <input type="hidden" id="username" value="{{user.id}}">
+                                <input type="hidden" id="room_id" value="{{room_id}}">
+                                <textarea class="uk-textarea uk-padding-remove uk-border-rounded uk-margin-small-right"
+                                    rows="1" placeholder="Напишите сообщение..." id="message"
+                                    style="font-size: 20px;"></textarea>
+                                <input class="uk-button uk-button-text material-symbols-outlined" type="submit"
+                                    value="send" />
+                            </div>
+
                         </div>
                     </div>
-                    <div class="uk-width-auto">
-                    </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
-
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
 
 </body>
+
+<script type="text/javascript">
+    $(document).on('submit', '#post-form', function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '/send',
+            data: {
+                username: $('#username').val(),
+                room_id: $('#room_id').val(),
+                message: $('#message').val(),
+                csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function (data) {
+                // alert(data)
+            }
+        });
+        document.getElementById('message').value = ''
+    });
+</script>
 
 </html>
