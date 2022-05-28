@@ -22,7 +22,7 @@
 
 
             <!-- начало текста продавца -->
-            <div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid>
+            <!-- <div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid>
                 <div class="uk-width-auto">
                     <img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}">
                 </div>
@@ -33,11 +33,11 @@
                         </p>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- конец текста продавца -->
 
             <!-- начало моего текста -->
-            <div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid>
+            <!-- <div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid>
                 <div class="uk-width-auto uk-flex uk-flex-right">
                     <div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-2-3">
                         <p class="uk-margin-remove uk-text-break">
@@ -48,10 +48,10 @@
                 <div class="uk-width-auto">
                     <img class="uk-border-circle" width="32" height="32" src="../../media/{{user.userImage}}">
                 </div>
-            </div>
+            </div> -->
             <!-- конец моего текста -->
 
-
+</div>
             <script>
                 $(document).ready(function () {
                     var room = $('#room_id').val()
@@ -66,17 +66,17 @@
                                 for (var key in response.messages) {
                                     if (response.messages[key].user == id) {
                                         var temp =
-                                            ' <div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid><div class="uk-width-auto uk-flex uk-flex-right"><div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-1"><p class="uk-margin-remove uk-text-break">'
+                                            '<div class="me uk-grid-small uk-flex-bottom uk-flex-right" uk-grid> <div class="uk-width-auto uk-flex uk-flex-right"> <div class="uk-card uk-card-body uk-card-small uk-card-primary uk-border-rounded uk-width-2-3"> <p class="uk-margin-remove uk-text-break">'
                                                 + response.messages[key].value +
                                             ' </p></div></div><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{user.userImage}}"></div></div>';
                                         
                                     } else {
-                                        var temp = '<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}"></div><div class="uk-width-auto "><div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded uk-width-1"><p class="uk-margin-remove uk-text-break">'
+                                        var temp = '<div class="guest uk-grid-small uk-flex-bottom uk-flex-left" uk-grid><div class="uk-width-auto"><img class="uk-border-circle" width="32" height="32" src="../../media/{{companion.cover}}"></div><div class="uk-width-auto "><div class="uk-card uk-card-body uk-card-small uk-card-default uk-border-rounded uk-width-2-3"> <p class="uk-margin-remove uk-text-break">'
                                         + response.messages[key].value +
                                         '</p></div></div></div>';
                                     }
                                     $("#messageDisplay").append(temp);
-                                    console.log(temp)
+                                    // console.log(temp)
                                     // console.log("response.messages[key].user = ", response.messages[key].user)
                                     // console.log("response.messages[key].value = ", response.messages[key].value)
                                     // console.log("response.messages[key].date = ", response.messages[key].date)

@@ -268,7 +268,9 @@ class ProductCreateForm(ModelForm):
             }),
             'price': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'id': 'priceInput',
+                'onchange': 'recalc(this)',
             }),
             'country': Select(attrs={
                 'class': 'input-group mt-2 mb-2',
@@ -276,6 +278,7 @@ class ProductCreateForm(ModelForm):
 
             'brand': TextInput(attrs={
                 'class': 'form-control',
+                'id': 'brand',
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
