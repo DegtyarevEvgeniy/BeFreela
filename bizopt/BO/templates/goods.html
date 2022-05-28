@@ -19,13 +19,14 @@
                     <label>Мой регион</label>
                 </div>
             </div>
+        <form method="post">
             <div>
                 <hr style="background-color: black; height: 3px; width: 80%">
                 <div class="textStyleHeader textAll uk-margin-medium-bottom">
                     <p>Рейтинг продавца</p>
                     <div class="uk-margin-small-left">
                         <div>
-                            <input type="radio" value="value1">
+                            <input name="rating" type="radio" value="1">
                             <label>от <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
@@ -33,7 +34,7 @@
                                 <span class="fa fa-star"></span></label>
                         </div>
                         <div>
-                            <input type="radio" value="value2">
+                            <input name="rating" type="radio" value="2">
                             <label>от <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -41,7 +42,7 @@
                                 <span class="fa fa-star"></span></label>
                         </div>
                         <div>
-                            <input type="radio" value="value1">
+                            <input name="rating" type="radio" value="3">
                             <label>от <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
@@ -49,7 +50,7 @@
                                 <span class="fa fa-star"></span></label>
                         </div>
                         <div>
-                            <input type="radio" value="value2">
+                            <input name="rating" type="radio" value="4">
                             <label>Не важно</label>
                         </div>
                     </div>
@@ -71,27 +72,27 @@
                     <p>Срок изготовления</p>
                     <div class="uk-margin-small-left">
                         <div>
-                            <input type="radio" value="value1">
+                            <input name="term" type="radio" value="1">
                             <label>до 1го дня</label>
                         </div>
                         <div>
-                            <input type="radio" value="value2">
+                            <input name="term" type="radio" value="2">
                             <label>до 3ех дней</label>
                         </div>
                         <div>
-                            <input type="radio" value="value1">
+                            <input name="term" type="radio" value="3">
                             <label>до 1 недели</label>
                         </div>
                         <div>
-                            <input type="radio" value="value2">
+                            <input name="term" type="radio" value="4">
                             <label>до 1 месяца</label>
                         </div>
                         <div>
-                            <input type="radio" value="value1">
+                            <input name="term" type="radio" value="5">
                             <label>до 3ех месяцев</label>
                         </div>
                         <div>
-                            <input type="radio" value="value1">
+                            <input name="term" type="radio" value="6">
                             <label>более 1го года</label>
                         </div>
                     </div>
@@ -110,8 +111,9 @@
                     </div>
                 </div>
             </div>
-        <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
-
+            {% csrf_token %}
+            <button type="submit" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
+        </form>
     </div>
 
     <br>

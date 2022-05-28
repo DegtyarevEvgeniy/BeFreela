@@ -40,29 +40,6 @@ def goodsSearch_page(request, product_name):
     return render(request, 'goodsSearch.html', context)
 
 
-def post_list(request, tag_slug=None):
-    object_list = Product_creator.objects.all()
-    tag = None
-
-    if tag_slug:
-        tag = get_object_or_404(Tag, slug=tag_slug)
-        object_list = object_list.filter(tags__in=[tag])
-    paginator = Paginator(object_list, 3)  # 3 поста на каждой странице
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        # Если страница не является целым числом, поставим первую страницу
-        posts = paginator.page(1)
-    except EmptyPage:
-        # Если страница больше максимальной, доставить последнюю страницу результатов
-        posts = paginator.page(paginator.num_pages)
-
-    return render(request,
-                  'goodsSearch.html',
-                  {'page': page,
-                   'posts': posts,
-                   'tag': tag})
 
 
 def gen_menu(request):
@@ -139,8 +116,39 @@ def yourTasks_page(request):
 
 def goods_page(request):
     context = gen_menu(request)
-    products = Product_creator.objects.all()
     creators = Creator.objects.all()
+    products = Product_creator.objects.all()
+    if request.method == "POST":
+        rating = request.POST['rating']
+        print(rating)
+
+        if rating == '1':
+            products = Product_creator.objects.filter(
+                Q(rating_status__icontains=4) | Q(
+                    rating_status__icontains=3)
+                | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
+            )
+            print("kyy")
+        elif rating == '2':
+            products = Product_creator.objects.filter(
+                Q(rating_status__icontains=5)
+                | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
+            )
+            print("kyyy")
+        elif rating == '3':
+            products = Product_creator.objects.filter(
+                Q(rating_status=5) | Q(rating_status__icontains=4)
+            )
+            print("kyyyy")
+            print(products)
+        elif rating == '4':
+            products = Product_creator.objects.filter(
+                Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
+                    rating_status__icontains=3)
+                | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
+            )
+            print("kyyyyy")
+    print(products)
     context['products'] = [{'id': product.id,
                             'creator_id': product.id_creator,
                             'product_name': product.product_name,
@@ -149,7 +157,6 @@ def goods_page(request):
                             'picture': product.picture,
                             }
                            for product in products]
-    
     return render(request, 'goods.html', context)
 
 
