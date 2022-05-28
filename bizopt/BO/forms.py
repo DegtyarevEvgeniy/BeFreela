@@ -268,6 +268,7 @@ class ProductCreateForm(ModelForm):
             }),
             'price': TextInput(attrs={
                 'class': 'form-control',
+                'type': 'number'
             }),
             'country': Select(attrs={
                 'class': 'input-group mt-2 mb-2',
