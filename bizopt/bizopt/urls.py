@@ -37,8 +37,9 @@ urlpatterns = [
     path('', views.index_page),
     path('edit/', views.edit_profile),
     # 
-    path('chat/<id>', views.chat_page),
-    path('checkroom', views.checkroom),
+    path('chat/<room_id>/', views.chat_page),
+    path('getMsg/chat/<room_id>/', views.getMsg, name='getMsg'),
+    path('send', views.send, name='send'),
 
     # 
     path('tasks/', views.tasks_page),

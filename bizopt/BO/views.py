@@ -12,7 +12,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
 from .forms import *
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
@@ -745,27 +745,36 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
-def chat_page(request, id):
+def chat_page(request, room_id):
     content = {
         'menu': gen_menu(request)
     }
     useremail = request.user
     user = Account.objects.get(email=useremail)
-    companion_id = (int(id) - int(user.id)) // int(user.id)
+    companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
+    print(user.id)
+    print(companion_id)
     companion = Creator.objects.get(id=companion_id)
+    content['room_id'] = room_id
     content['companion'] = companion
-    return render(request, 'messanger.html', content)
-
-def checkroom(request):
-    room = request.POST['room_name']
-    if room.objects.filter(name=room).exist():
-        return redirect(f'/{room}/')
-    else:
-        new_room = Chat_room.objects.create(name=room)
+    if not Chat_room.objects.filter(name=room_id).exists():
+        new_room = Chat_room.objects.create(name=room_id)
         new_room.save()
-        return redirect(f'/{room}/')
+    return render(request, 'messanger.html', content)    
 
+def getMsg(request, room_id):
+    room_detales = Chat_room.objects.get(name=room_id)
+    messages = Message.objects.filter(room=room_detales.name)
+    return JsonResponse({"messages":list(messages.values())})
 
+def send(request):
+    message = request.POST['message']
+    username = request.POST['username']
+    room_id = request.POST['room_id']
+
+    new_message = Message.objects.create(value=message, user=username, room=room_id)
+    new_message.save()
+    return HttpResponse('Message sent successfully.')
 
 def orders_page(request):
     content = gen_menu(request)
