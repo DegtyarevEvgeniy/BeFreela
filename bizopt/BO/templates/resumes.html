@@ -18,7 +18,7 @@
             <div class="uk-card uk-card-default uk-grid-collapse" uk-grid>
 
                 {% for creator in creators %}
-
+                {% if creator.id != user.id %}
                 <div>
                     <div class="uk-card">
                         <div class="uk-card-header uk-flex uk-flex-middle" style="border: none;">
@@ -109,6 +109,7 @@
                         <hr class="uk-divider-large">
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
