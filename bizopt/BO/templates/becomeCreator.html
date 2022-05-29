@@ -151,6 +151,7 @@
             margin-top: 30px;
             margin-bottom: 30px
         }
+
     </style>
 </head>
 
@@ -161,7 +162,7 @@
     <!-- Sidebar  -->
     <nav id="sidebar" style="background-color: #C4C4C4">
         <div class="sidebar-header">
-            <h3 style="color: black">BIZOPT Partners</h3>
+            <h3 style="color: black">BefFreela Partners</h3>
         </div>
 
         <ul class="list-unstyled components uk-margin-left">
@@ -226,7 +227,7 @@
             num = 2;
         }
         var xhr = new XMLHttpRequest()
-        xhr.open('GET', `becomeCreatorTemplates/${6}/`)
+        xhr.open('GET', `becomeCreatorTemplates/${num}/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
         }

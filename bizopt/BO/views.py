@@ -24,21 +24,6 @@ from taggit.models import Tag
 from .models import Chat_room, Message
 
 
-def goodsSearch_page(request, product_name):
-    context = gen_menu(request)
-    products = Product_creator.objects.filter(
-        Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
-        | Q(set__icontains=product_name)
-    )
-    print(products)
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture
-                            }
-                           for product in products]
-    return render(request, 'goodsSearch.html', context)
 
 
 
@@ -50,7 +35,7 @@ def gen_menu(request):
         context = {
             'user': Account.objects.get(email=request.user.email),
             'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
+                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
@@ -69,7 +54,7 @@ def gen_menu(request):
         context = {
 
             'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
+                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
@@ -114,6 +99,21 @@ def yourTasks_page(request):
 
     return render(request, 'yourTasks.html', content)
 
+def goodsSearch_page(request, product_name):
+    context = gen_menu(request)
+    products = Product_creator.objects.filter(
+        Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
+        | Q(set__icontains=product_name)
+    )
+    print(products)
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture
+                            }
+                           for product in products]
+    return render(request, 'goodsSearch.html', context)
 
 def goods_page(request):
     context = gen_menu(request)

@@ -30,7 +30,8 @@
                     <br>
                 </div>
                 <!-- template start -->
-                <div id="inputDiv" class="col-md-12"></div>
+                <div id="inputDiv" class="col-md-12">
+                </div>
                 <br>
                 <br>
                 <!-- template end -->
@@ -44,25 +45,27 @@
                     {{ form8.price }}
                     <span class="input-group-text ">.00</span>
                 </div>
-                <table class="table table-hover border text-left  ">
-                    <tbody>
+                <table class="uk-table uk-table-justify uk-table-divider" id="pricing">
+                    <thead>
                         <tr>
-                            <th scope="row">Премет</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th class="uk-width-auto">Комплектация</th>
+                            <th class="uk-width-auto">Бренд</th>
+                            <th class="uk-width-auto">Цена</th>
                         </tr>
-                        <tr>
+                    </thead>
+                    <tbody id="table">
+                        <!-- <tr class="tcomplectations">
+                            <th scope="row">Комплектация</th>
+                        </tr>
+                        <tr class="tbrend">
                             <th scope="row">Бренд</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
                         </tr>
-                        <tr>
+                        <tr class="tprice">
                             <th scope="row">Код</th>
                             <td>@twitter</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
+                        
                 </table>
             </div>
             <!-- end of block 2 -->
@@ -134,10 +137,14 @@
 
             <div style="overflow:auto;" id="next-previous">
                 <div style="float:right;">
-                    <button type="button" id="prevBtn" style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button" onclick="nextPrev(-1)">
+                    <button type="button" id="prevBtn"
+                        style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;"
+                        class="uk-button" onclick="nextPrev(-1)">
                         <i class="fa fa-angle-double-left"></i>
                     </button>
-                    <button name="product_creator" type="button" id="nextBtn" style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button uk-button-primary" onclick="nextPrev(1)">
+                    <button name="product_creator" type="button" id="nextBtn"
+                        style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;"
+                        class="uk-button uk-button-primary" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                     </button>
                 </div>
@@ -162,6 +169,30 @@
         keynum = 0,
         currentTab = 0;
 
+    function recalc(el){
+        let price = parseInt(document.getElementById('priceInput').value);
+        let form = document.getElementById('final_price');
+        form.innerHTML = price + price*0.1;
+    }
+    
+    function addComplectation() {
+        let arr = document.getElementsByClassName('complectations');
+        let brand = document.getElementById('brand').value;
+        let form = document.getElementById('table')
+        for (let i = 0; i < arr.length; ++i){
+            // let text = document.createTextNode(arr[i].innerHTML);
+            let table = document.getElementById('table');
+            let table_values = table.insertRow(-1).insertCell(0)
+            console.log(i)
+            let newText = document.createTextNode(arr[i].innerHTML);
+            table_values.appendChild(newText);
+            if (i == 0){
+                form.children[0].innerHTML += `<td> ${brand} </td> <td id="final_price">  </td>`;
+            }
+            document.getElementsByTagName('td')[i].className += 'uk-text-truncate'
+        }
+    }
+
     function addInput(el) {
         let input = el.parentElement.getElementsByTagName("input")[0];
         if (inputnum < 15 && input.value) {
@@ -169,7 +200,8 @@
             input.placeholder = "";
             let value = document.getElementById('inputvalue').value;
             var $inputGroup =
-            `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" name="set_${inputnum}" class="form-control" value="${value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button></div>`;
+                `<div class="uk-inline" style="display: block; margin: 2% 0"> <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus" style="border-right: 1px solid #e5e5e5;"></button> <p class="uk-input complectations" type="text" value="${value}" style="margin-left: 5px">${value}</p></div>`;
+            // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             input.value = "";
             inputnum++;
@@ -196,8 +228,8 @@
         let inputPole = el.parentElement.getElementsByTagName("input")[0];
         let BtnImage = el.parentElement.getElementsByTagName("span")[0];
         inputPole.placeholder = "";
-        if (inputPole.value){
-            if (inputPole.disabled){
+        if (inputPole.value) {
+            if (inputPole.disabled) {
                 BtnImage.innerHTML = "edit_off"
             } else {
                 inputPole.value = inputPole.value
@@ -215,10 +247,11 @@
         if (keynum < 15 && key.value) {
             let value = document.getElementById('keyValue').value
             var $inputGroup =
-            `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" name="key_${keynum}" class="form-control" value="${value}"> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
-                document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-                key.value = "";
-                keynum++;
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>`;
+            // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span>
+            document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+            key.value = "";
+            keynum++;
         } else if (keynum >= 15) {
             input.value = "";
             key.setAttribute("disabled", "disabled");
@@ -244,7 +277,11 @@
             x[n].style.display = "block";
             if (n === 0) {
                 document.getElementById("prevBtn").style.display = "none";
-            } else {
+            } else if(n === 1){
+                addComplectation()
+                document.getElementById("prevBtn").style.display = "inline";
+            } 
+            else {
                 document.getElementById("prevBtn").style.display = "inline";
             }
             fixStepIndicator(n)
