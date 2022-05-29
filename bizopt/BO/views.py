@@ -273,11 +273,15 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             else:
                 break
 
-
-
         product.set = t
 
         product.country = request.POST['country']
+        product.height_packaging = request.POST.get('height_packaging', '0')
+        product.height_product = request.POST.get('height_product', '0')
+        product.length_packaging = request.POST.get('length_packaging', '0')
+        product.length_product = request.POST.get('length_product', '0')
+        product.width_packaging = request.POST.get('width_packaging', '0')
+        product.width_product = request.POST.get('width_product', '0')
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
