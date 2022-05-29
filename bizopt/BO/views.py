@@ -35,7 +35,7 @@ def gen_menu(request):
         context = {
             'user': Account.objects.get(email=request.user.email),
             'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
+                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
@@ -54,7 +54,7 @@ def gen_menu(request):
         context = {
 
             'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeeFreela'},
+                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
