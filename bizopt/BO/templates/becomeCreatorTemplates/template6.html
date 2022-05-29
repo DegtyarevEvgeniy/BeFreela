@@ -183,8 +183,8 @@
             // let text = document.createTextNode(arr[i].innerHTML);
             let table = document.getElementById('table');
             let table_values = table.insertRow(-1).insertCell(0)
-            console.log(i)
-            let newText = document.createTextNode(arr[i].innerHTML);
+            let newText = document.createTextNode(arr[i].value);
+            console.log(newText)
             table_values.appendChild(newText);
             if (i == 0){
                 form.children[0].innerHTML += `<td> ${brand} </td> <td id="final_price">  </td>`;
@@ -200,7 +200,7 @@
             input.placeholder = "";
             let value = document.getElementById('inputvalue').value;
             var $inputGroup =
-                `<div class="uk-inline" style="display: block; margin: 2% 0"> <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus" style="border-right: 1px solid #e5e5e5;"></button> <p class="uk-input complectations" type="text" name="set_${inputnum}"" value="${value}" style="margin-left: 5px">${value}</p></div>`;
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="set_${inputnum}" value="${value}"> </div>`;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             input.value = "";
@@ -247,7 +247,7 @@
         if (keynum < 15 && key.value) {
             let value = document.getElementById('keyValue').value
             var $inputGroup =
-                `<div class="uk-inline" style="display: block; margin: 2% 0"> <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus" style="border-right: 1px solid #e5e5e5;"></button> <p class="uk-input complectations" type="text" name="key_${keynum}" value="${value}" style="margin-left: 5px">${value} </p></div>`;
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="set_${keynum}" value="${value}"> </div>`;
                 // '<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>'
                 
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span>

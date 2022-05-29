@@ -18,60 +18,18 @@
                     <a href="{{item.link}}">{{item.text}}</a>
                     {% endif %}
                     {% endfor %}
-                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-4">
-                        <div class="uk-navbar-dropdown-grid uk-child-width-1-2" uk-grid>
+                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-1">
+                        <div class="uk-navbar-dropdown-grid uk-child-width-1" uk-grid>
                             <div>
                                 <ul class="uk-nav uk-navbar-dropdown-nav">
                                     {% for item in tags %}
-                                    <a href="creators/goods/search/{{item.text}}"> {{item.text}}
-                                    </a> {% endfor %}
-                                </ul>
-                            </div>
-                            <!-- <div>
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for item in submenu %}
-                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "1" %}
-                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
-                                    {% endif %}
+                                    <a href="creators/goods/search/{{item.text}}" style="display: block;">
+                                        {{item.text}}</a>
+                                    <div class="uk-divider-small"></div>
                                     {% endfor %}
                                 </ul>
                             </div>
-                            <div>
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for item in submenu %}
-                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "2" %}
-                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for item in submenu %}
-                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "3" %}
-                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for item in submenu %}
-                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "4" %}
-                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div>
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for item in submenu %}
-                                    {% if item.xpos == 'left' and item.position == 'in' and item.link == "5" %}
-                                    <li class="uk-active"><a href="#">{{item.text}}</a></li>
-                                    {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div> -->
+
                         </div>
                     </div>
                 </li>
@@ -84,7 +42,8 @@
             <ul class="uk-navbar-nav" style="width: 100%;">
                 <form class="uk-search uk-search-default" style="width: 100%;">
                     <a class="uk-search-icon-flip" type="submit" id="searchBtn" uk-search-icon></a>
-                    <input class="uk-search-input" type="search" placeholder="Search" id="search_pole" onchange="red(this)" style="width: 100%;">
+                    <input class="uk-search-input" type="search" placeholder="Search" id="search_pole"
+                        onchange="red(this)" style="width: 100%;">
                 </form>
             </ul>
 
@@ -94,9 +53,11 @@
 
             <ul class="uk-navbar-nav">
                 {% for item in submenu %}
+                {% if item.text != "каталог" %}
                 <li class="uk-active">
                     <a href="{{item.link}}">{{item.text}}</a>
                 </li>
+                {% endif %}
                 {% endfor %}
             </ul>
 
@@ -288,11 +249,10 @@
 <!-- Footer -->
 
 <script type="text/javascript">
-    function red(el){
+    function red(el) {
         document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
-        console.log( "creators/goods/search/" + el.value)
+        console.log("creators/goods/search/" + el.value)
     }
 </script>
 
 {% endblock %}
-
