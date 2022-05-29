@@ -1,6 +1,6 @@
 {% for product in products %}
 
-<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2" style="margin: 2% auto" uk-grid>
+<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2 rating_{{ product.rating_status }}" style="margin: 2% auto" uk-grid>
     <div class="uk-card-media-left uk-cover-container uk-padding">
         <img src="../../media/{{product.picture}}" width="500" height="180">
     </div>
@@ -24,6 +24,7 @@
                 <div class="price">
                     {{ product.cost }} руб.
                 </div>
+
             </div>
             <br>
             <br>

@@ -120,7 +120,7 @@ def goods_page(request):
     creators = Creator.objects.all()
     products = Product_creator.objects.all()
     if request.method == "POST":
-        rating = request.POST['rating']
+        rating = request.POST.get('rating', '')
         print(rating)
 
         if rating == '1':
@@ -156,6 +156,8 @@ def goods_page(request):
                             'cost': product.price,
                             'availability': product.availability,
                             'picture': product.picture,
+                            'rating': product.rating,
+                            'rating_status': product.rating_status,
                             }
                            for product in products]
     return render(request, 'goods.html', context)

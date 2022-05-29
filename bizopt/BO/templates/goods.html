@@ -24,7 +24,7 @@
                 <hr style="background-color: black; height: 3px; width: 80%">
                 <div class="textStyleHeader textAll uk-margin-medium-bottom">
                     <p>Рейтинг продавца</p>
-                    <div class="uk-margin-small-left">
+                    <div class="uk-margin-small-left" id="ratings">
                         <div>
                             <input name="rating" type="radio" value="1">
                             <label>от <span class="fa fa-star checked"></span>
@@ -112,7 +112,7 @@
                 </div>
             </div>
             {% csrf_token %}
-            <button type="button" onclick="pricevalidation()" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
+            <button type="submitgit" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
         </form>
     </div>
 
