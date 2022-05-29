@@ -74,7 +74,7 @@
             <!-- sart of block 3 -->
             <div class="tab" style="display: none">
 
-                <h2>Описнание</h2>
+                <h2>Описание</h2>
 
                 {{ form8.description }}
 
@@ -200,7 +200,7 @@
             input.placeholder = "";
             let value = document.getElementById('inputvalue').value;
             var $inputGroup =
-                `<div class="uk-inline" style="display: block; margin: 2% 0"> <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus" style="border-right: 1px solid #e5e5e5;"></button> <p class="uk-input complectations" type="text" value="${value}" style="margin-left: 5px">${value}</p></div>`;
+                `<div class="uk-inline" style="display: block; margin: 2% 0"> <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus" style="border-right: 1px solid #e5e5e5;"></button> <p class="uk-input complectations" type="text" name="set_${inputnum}"" value="${value}" style="margin-left: 5px">${value}</p></div>`;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             input.value = "";
@@ -247,7 +247,9 @@
         if (keynum < 15 && key.value) {
             let value = document.getElementById('keyValue').value
             var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>`;
+                `<div class="uk-inline" style="display: block; margin: 2% 0"> <button class="uk-form-icon" onclick="removeInput(this, 1)" uk-icon="icon: minus" style="border-right: 1px solid #e5e5e5;"></button> <p class="uk-input complectations" type="text" name="key_${keynum}" value="${value}" style="margin-left: 5px">${value} </p></div>`;
+                // '<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>'
+                
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span>
             document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             key.value = "";

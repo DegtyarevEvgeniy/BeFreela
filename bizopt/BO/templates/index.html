@@ -94,9 +94,9 @@
 
             <ul class="uk-navbar-nav">
                 {% for item in submenu %}
-                {% if item.xpos == 'right' %}
-                <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-                {% endif %}
+                <li class="uk-active">
+                    <a href="{{item.link}}">{{item.text}}</a>
+                </li>
                 {% endfor %}
             </ul>
 
