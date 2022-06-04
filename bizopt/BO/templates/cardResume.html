@@ -2,69 +2,104 @@
 
 {% block content %}
 
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
-<div class="shadow-lg p-3 mb-5 bg-body rounded">
+<div class="uk-card uk-card-default" style="margin: 2% auto">
+    <div class="uk-flex uk-flex-middle uk-flex-left"
+        style="padding: 20px 5%; background-color: rgba(222, 222, 222, 0.5);">
+        <div class="uk-width-2-5 uk-text-center">
+            <img class="uk-border-circle" width="500" height="100" src="{{ profile.cover.url }}">
+        </div>
+        <div class="uk-width-3-5 uk-flex uk-flex-left">
+            <div class="uk-width-4-5">
+                <div class="uk-flex uk-flex-between uk-flex-center uk-margin-remove-bottom">
+                    <div>
+                        <h3 class="uk-card-title" style="margin-bottom: 5px"> {{profile.first_name }}</h3>
+                        <p style="margin-top: 5px">{{ profile.email }}</p>
+                    </div>
+                    <div uk-grid style="width: 150px;">
+                        <a class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
+                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #229ED9;">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
+                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #4c75a3;">
+                            <i class="fab fa-vk"></i>
+                        </button>
 
-    <div class="d-flex flex-row " style="width: 80%; margin: auto">
+                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
+                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #ac2bac;">
+                            <i class="fab fa-instagram"></i>
+                        </button>
 
-        <img class="rounded-circle mt-5" width="300px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" style="margin: auto">
-
-
-        <div>
-           <h1 style="margin-left: 5%; font-size: 50px">Дегтярев Евгений</h1>
-            <div class="" style="width: 30%; text-align: inherit; padding-top: 0%">
-                
-
-                <div style="width: 100%; height: auto; margin: auto">
-
-                    <div style="margin-left: 5%">
-                        <i class="fa-solid fa-star colorStarTrue"></i>
-                        <i class="fa-solid fa-star colorStarTrue"></i>
-                        <i class="fa-solid fa-star colorStarTrue"></i>
-                        <i class="fa-solid fa-star colorStarTrue"></i>
-                        <i class="fa-solid fa-star"></i>
+                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
+                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #25d366;">
+                            <i class="fab fa-whatsapp"></i>
+                        </button>
                     </div>
                 </div>
 
-                <div>
-                    <div class="tagOut"><p style="width:0; margin: 0; color: aliceblue">swimming</p></div>
-                </div>
+                <p class="uk-margin-remove">О себе</p>
+                <!-- <p class="uk-text-meta uk-margin-remove-top">
+                    <span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9734</span></p> -->
+                <p class="uk-text-break uk-width-1" style="margin-top: 10px">{{ profile.description }}</p>
+
+                <a type="submit" class="uk-button uk-button-default" href="/chat/{{link}}">Написать</a>
             </div>
             
-            <div class="" style="width: 30%; margin: auto">
-                <p>О себе</p>
-                <br>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa nihil atque deleniti ipsum autem eligendi expedita, ea obcaecati porro dolorem suscipit, tempore quas. Ab porro impedit atque, ipsum nesciunt vitae! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit numquam minima dicta omnis cum distinctio quae quasi magnam hic ab quia fuga, sequi voluptatem aut facilis modi nam harum. Quasi!</p>
-
-
-
-
-                <p>Компания</p>
-
-            </div>
-
         </div>
-
-
-
     </div>
-    
-    <style>
-    
-        .tagOut{
-            background-color: brown;
-            border-radius: 10px;
-            width: auto;
-            margin: 0;
-        }
-    
-    </style>
+    <div class="width-1 uk-text-center">
+        <h3>Товары продавца</h3>
+    </div>
+    <!-- uk-flex uk-flex-wrap uk-flex-wrap-around uk-flex-center uk-width-1 -->
+    <div class="uk-card-body  uk-grid-column-small uk-grid-row-large uk-flex-center uk-text-right" uk-grid
+        style="margin: 10px auto;  padding: 5px;">
+        {% for product in products %}
+        {% if profile.email == product.id_creator %}
 
+        <div class="uk-card uk-card-default uk-width-1-4" style="box-shadow: none; padding: 3px; margin: 40px;">
+            <div>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top uk-text-center" style="margin-top: 5%">
+                        <img src="{{ product.picture.url }}" width="300" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title uk-text-truncate">{{ product.product_name }}</h3>
+                        <p>
+                            <label>Наличие: </label> {{ product.availability }}
+                        </p>
+                        <div class="price">
+                            {{ product.cost }} ₽
+                        </div>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
+                            of
+                            the
+                            card's
+                            content.</p>
+                        <a href="../goods/{{ product.id }}" class="btn btn-primary">Посмотреть</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
 
 </div>
 
+
 <style>
+    .tagOut {
+        background-color: brown;
+        border-radius: 10px;
+        width: auto;
+        margin: 0;
+    }
+
     .contantM {
         width: 100%;
         height: 40%;
@@ -76,7 +111,54 @@
         font-weight: 900;
         color: #f8ce0b;
     }
-
 </style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
+<script>
+    $(function () {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'baseProductCard ')
+        xhr.onload = function () {
+
+            console.log(xhr.response)
+            $('#content').html(xhr.response)
+        }
+        xhr.send()
+    });
+
+    $('#showContent1').on('click', {
+        title: 'Заголовок 1',
+        content: 'Содержимое 1...'
+    }, function (inBody) {
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'baseResumeCard')
+        xhr.onload = function () {
+
+            console.log(xhr.response)
+            $('#content').html(xhr.response)
+        }
+        xhr.send()
+    });
+
+    $('#showContent2').on('click', {
+        title: 'Заголовок 2',
+        content: 'Содержимое 2...'
+    }, function (inBody) {
+
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', 'baseProductCard')
+        xhr.onload = function () {
+
+            console.log(xhr.response)
+            $('#content').html(xhr.response)
+        }
+        xhr.send()
+
+    });
+</script>
+
 
 {% endblock %}

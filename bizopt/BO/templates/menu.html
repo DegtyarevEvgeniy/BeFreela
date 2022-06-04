@@ -1,88 +1,102 @@
-{% if user.is_authenticated %}
-   {% for item in menu %}
-    {% if item.text != user.email %}
-
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="{{ item.link }}">{{ item.text }}</a>
-    </li>
-    {% else %}
-
-    {% if item.position == "out" %}
+<nav class="uk-navbar-container  uk-text-middle" uk-navbar style="background-color: #d3d2d2;">
     {% if user.is_authenticated %}
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
-            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="rounded-circle" width="150px" src="{{user.userImage}}">
-            {{ item.text }}
-            
-        </a>
-        {%else%}
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="accounts/login/">Войти</a>
 
-        {% endif %}
+    <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+            {% for item in menu %}
+            {% if item.xpos == 'left' %}
+            {% if item.text == 'BeFreela' %}
+            <li class="uk-active"><a href="{{item.link}}">
+                    <h1 class="uk-margin-remove">{{item.text}}</h1>
+                </a></li>
+            {% else %}
+            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
 
-        <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark color_menu"
-            aria-labelledby="dropdownMenuLink">
-            {% if item.position == "in"  %}
-            <li style="display: flex"><a class="dropdown-item"
-                    href="{{ item.link }}">{{ item.name }}</a></li>
         </ul>
     </div>
-    {% endif %}
-    {% endif %}
 
 
-    {% endif %}
-    {% endfor %}
-    
-    
-{%else%}
-  
-  
-{% for item in menu %}
-    {% if item.text != 'user.email' %}
+    <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav">
 
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="{{ item.link }}">{{ item.text }}</a>
-    </li>
-    {% else %}
+            {% for item in menu %}
+            {% if item.xpos == 'center' %}
+            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+            {% endif %}
+            {% endfor %}
 
-    {% if item.position == "out" %}
-    {% if user.is_authenticated %}
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
-            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img class="rounded-circle" width="150px" src="user.userImage">
-
-            {{ item.text }}
-            
-        </a>
-        {%else%}
-        <a class="nav-link active" aria-current="page" style="color: white;"
-            href="accounts/login/">Войти</a>
-
-        {% endif %}
-
-        <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark color_menu"
-            aria-labelledby="dropdownMenuLink">
-            {% if item.position == "in"  %}
-            <li style="display: flex"><a class="dropdown-item"
-                    href="{{ item.link }}">{{ item.name }}</a></li>
         </ul>
     </div>
+
+    <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+
+            <li class="uk-active">
+                {% for item in menu %}
+                {% if item.xpos == 'right' and item.position == 'out' %}
+                <a href="{{item.link}}">{{item.text}}</a>
+                {% endif %}
+                {% endfor %}
+                <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        {% for item in menu %}
+                        {% if item.xpos == 'right' and item.position == 'in' %}
+                        <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </li>
+
+        </ul>
+    </div>
+
+    {% else %}
+
+    <div class="uk-navbar-left">
+        <ul class="uk-navbar-nav">
+            {% for item in menu %}
+            {% if item.xpos == 'left' %}
+            {% if item.text == 'BeeFreela' %}
+            <li class="uk-active"><a href="{{item.link}}">
+                    <h1>{{item.text}}</h1>
+                </a></li>
+            {% else %}
+            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+
+
+    <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav">
+
+            {% for item in menu %}
+            {% if item.xpos == 'center' %}
+            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+            {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+
+    <div class="uk-navbar-right">
+        <ul class="uk-navbar-nav">
+
+            {% for item in menu %}
+            {% if item.xpos == 'right' %}
+            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
+            {% endif %}
+            {% endfor %}
+
+        </ul>
+    </div>
+
     {% endif %}
-    {% endif %}
-
-
-
-    {% endif %}
-    {% endfor %}
-    
-{% endif %}
-
-   
-  
- 
+</nav>

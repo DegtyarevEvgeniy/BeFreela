@@ -1,8 +1,12 @@
+# sourcery skip: avoid-builtin-shadow
 import uuid
 from django.db import models
 from django.forms import ModelForm
+from taggit.managers import TaggableManager
+from datetime import datetime
 
 class Creator(models.Model):
+    username = models.CharField(max_length=20, default='', unique=True)
     first_name = models.CharField(max_length=30, default='')
     email = models.CharField(max_length=20, default='example@example.com')
     cover = models.ImageField(upload_to='images/creator', default='images/default.png')
@@ -24,17 +28,40 @@ class Product_buy(models.Model):
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status1 = models.CharField(max_length=20, default='-') #запрос в работе
     status2 = models.CharField(max_length=20, default='-') #в ожидании в работе готово
+    message = models.CharField(max_length=200, default='-')
+    payed_partner = models.BooleanField(default=0)
+    payed_user = models.BooleanField(default=0)
+    status_pay = models.BooleanField(default=0)
+    delivery_address = models.CharField(max_length=500, default='-')
+    date_add = models.DateField(max_length=50, default='2000-01-01')
+    img = models.ImageField(upload_to='images/products', default='images/default.png')
+
+class Comments_partner(models.Model):
+    id_creator = models.CharField(max_length=200, default='-')
+    id_partner = models.CharField(max_length=200, default='-')
+    review = models.CharField(max_length=200, default='-')
+    rating = models.IntegerField(default='')
+
+
+class Comments_product(models.Model):
+    id_creator = models.CharField(max_length=200, default='-')
+    id_product = models.CharField(max_length=200, default='-')
+    review = models.CharField(max_length=200, default='-')
+    rating = models.IntegerField(default='0')
 
 
 class Product_creator(models.Model):
+    product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     id_creator = models.CharField(max_length=200, default='-') #кто создал
     product_name = models.CharField('Название', max_length=500, default='-')
     country = models.CharField('Страна', max_length=30, default='-')
     brand = models.CharField('Бренд', max_length=30, default='-')
-    # set = list
+    rating_status = models.IntegerField(default=0)
+    term_status = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
+    set = models.CharField(max_length=300, default='-')
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
-    # keywords = list
     width_product = models.FloatField('', default=0)
     height_product = models.FloatField('', default=0)
     length_product = models.FloatField('', default=0)
@@ -44,7 +71,7 @@ class Product_creator(models.Model):
     availability = models.CharField('', max_length=100, default='-')
     picture = models.ImageField('', upload_to='images/product',
                                 default='images/default.png')
-
+    tags = TaggableManager()
 
 class Task(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
@@ -55,18 +82,19 @@ class Task(models.Model):
     select = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=500, default='-')
     price = models.IntegerField(default='')
-    time = models.CharField(max_length=50, default='-')
+    time = models.DateField(max_length=50, default='2000-01-01')
+    tags = TaggableManager()
 
 
-class Tag(models.Model):
-    tag_name = models.CharField(max_length=50, default='')
+    def __unicode__(self):
+        return self.tags
 
 
 class Hashtags(models.Model):
     tag_name = models.CharField(max_length=50, default='')
 
 
-class Parter(models.Model):
+class Partner(models.Model):
     password = models.CharField(max_length=50, default='')
     last_login = models.CharField(max_length=200, default='-')
     username = models.CharField(max_length=200, default='-')
@@ -77,5 +105,13 @@ class Parter(models.Model):
     inn = models.IntegerField(default='0000000000')
     name_small = models.CharField(max_length=200, default='-')
     name_full = models.CharField(max_length=200, default='-')
-    reg_form = models.CharField(max_length=200, default='-')
+    reg_form = models.CharField(max_length=200, default='Самозанятый')
     payment_account = models.CharField(max_length=200, default='-')
+
+class Chat_room(models.Model):
+    name = models.CharField(max_length=100000)
+class Message(models.Model):
+    value = models.CharField(max_length=1000000)
+    date = models.DateTimeField(default=datetime.now, blank=True)
+    user = models.CharField(max_length=1000000)
+    room = models.CharField(max_length=1000000)

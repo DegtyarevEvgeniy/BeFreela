@@ -1,0 +1,44 @@
+image: python:latest
+
+
+before_script:
+    - python3 -V
+
+stages:
+    - hello
+    - test
+    - pylint
+
+test-job:
+    stage: test
+
+    before_script:
+        - pip install -r requirements.txt
+    
+    script:
+        - coverage run manage.py test
+        - coverage report > report.txt
+        - mkdir public
+        - mv report.txt ./public
+    artifacts:
+        paths:
+            - ./public
+
+
+pylint-job:
+    stage: pylint
+
+    before_script:
+        - pip install -r requirements.txt
+
+    script:
+        -pylint ./chat
+
+hello-job:
+    stage: hello
+
+    before_script:
+        echo "starting"
+
+    script:
+        - echo "ending"

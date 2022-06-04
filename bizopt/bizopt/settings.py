@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'BO',
     'account.apps.AccountConfig',
     "phonenumber_field",
+    'taggit',
 
 ]
 

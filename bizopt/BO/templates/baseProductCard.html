@@ -1,17 +1,57 @@
- {%for product in products%}
-<figure class="snip1418">
-    <img src="{{ product.picture.url }}" alt="sample85" />
-    <div class="add-to-cart"> <i class="ion-android-add"></i><span>Add to Cart</span></div>
-    <figcaption>
-        <h3>{{ product.product_name }}</h3>
-        <p>
-            <label>Наличие:     </label> {{ product.availability }}
-        </p>
-        <label>Цена:     </label>
-        <div class="price">
-            {{ product.cost }} ₽
+{% for product in products %}
+
+<div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2 rating_{{ product.rating_status }}" style="margin: 2% auto" uk-grid>
+    <div class="uk-card-media-left uk-cover-container uk-padding">
+        <img src="../../media/{{product.picture}}" width="500" height="180">
+    </div>
+    <div>
+        <div class="uk-card-body">
+            <h3 class="uk-card-title uk-text-break">{{ product.product_name }}</h3>
+            <div class="uk-width-1-2">
+                <div class="uk-flex uk-margin-small-bottom">
+                    <span>Срок изготовления:</span>
+                </div>
+                <p class="textSmallInfo uk-border-rounded">От 3х дней</p>
+            </div>
+            <div>
+                <div class="uk-flex-column-reverse uk-width-1-2">
+                    <p class="uk-margin-small-bottom">Регион:</p>
+                    <p class="textSmallInfo uk-border-rounded">Москва</p>
+                </div>
+            </div>
+            <div>
+                <br>
+                <div class="price">
+                    {{ product.cost }} руб.
+                </div>
+
+            </div>
+            <br>
+            <br>
+
+            <a class="uk-button uk-button-default uk-width-1-2 uk-border-rounded" href="{{ product.id }}"
+                style="background-color:  #2D3995; color: white; ">ПОДРОБНЕЕ</a>
         </div>
-    </figcaption>
-    <a href='cardProduct/{{ product.id }}'></a>
-</figure>
+    </div>
+</div>
+
 {% endfor %}
+
+<style>
+    .textSmallInfo {
+        border: 3px;
+        background: rgba(69, 101, 232, 0.34);
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .textBigInfo span {
+        font-size: 30px;
+    }
+</style>
+
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>

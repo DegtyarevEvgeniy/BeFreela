@@ -19,29 +19,42 @@
             <!--Table head-->
                <thead>
                 <tr>
-                    <th scope="row">#</th>
-                    <th class="th-lg"><a href="">Название товара</a></th>
-                    <th class="th-lg"><a href="">Бренд</a></th>
-                    <th class="th-lg"><a href="">Цена</a></th>
-                    <th class="th-lg"><a href="">Опубликован</a></th>
+                    <th scope="row" class="th-lg">Название товара</th>
+                    <th class="th-lg">Бренд</th>
+                    <th class="th-lg">Цена</th>
+                    <th class="th-lg">Опубликовано</th>
+                    <th class="th-lg">Удалить</th>
+
+
                 </tr>
             </thead>
 
             <!--Table head-->
             <!--Table body-->
-            <tbody>
-            {% for product in products %}
+            <form method="GET" id="goodsList" action="/becomeCreator/" >
+                {% csrf_token %}
+                <tbody>
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td>{{ product.product_name }}</td>
-                    <td>text</td>
-                    <td>{{ product.cost }}</td>
-                    <td>text</td>
+                    {% for product in products %}
+                    <tr>
+                        <th scope="row" class="uk-text-truncate">{{ product.product_name }}</th>
+                        <td>text</td>
+                        <td>{{ product.cost }}</td>
+                        <td>text</td>
+                        <td>
+                            <button name="delete" form="goodsList" value="{{product.id}}" href="" type="submit"
+                                 class="btn btn-outline-secondary"> X </button>
+                        </td>
+                    </tr>
 
-                </tr>
-            {% endfor %}
-            </tbody>
+                    {% endfor %}
+                </tbody>
+
+            </form>
+
+
+
+
             <!--Table body-->
 
         </table>
@@ -81,8 +94,6 @@
         <!--Bottom Table UI-->
     </div>
 </div>
-
-
 
 <style>
     .hm-gradient {
@@ -129,17 +140,15 @@
     .table.table-bordered th {
         text-align: center;
     }
-
 </style>
 
 <script>
-    $('.Btnn').on('click', {}, function(inBody) {
+    $('.Btnn').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
         xhr.open('GET', `becomeCreatorTemplates/6/`)
-        xhr.onload = function() {
+        xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
         }
         xhr.send()
     });
-
 </script>

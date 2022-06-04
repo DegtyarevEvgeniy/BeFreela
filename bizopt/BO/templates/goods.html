@@ -1,0 +1,175 @@
+{% extends "base.html" %} {% block content %}
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>BizOpt</title>
+
+</head>
+
+<body>
+<div class="uk-margin-large-left uk-margin-medium-top uk-flex">
+    <div style="width: 20%; height: 100%;">
+            <div class="uk-margin-small-left">
+                <h4 class="uk-margin-small-bottom">Электроника - Смартфоны</h4>
+                <h2 class="uk-margin-medium-bottom uk-margin-small-top">Смартфоны</h2>
+                <div class="textStyleHeaderRegion uk-margin-medium-bottom">
+                    <input type="radio" value="value2" class="uk-margin-small-right">
+                    <label>Мой регион</label>
+                </div>
+            </div>
+        <form method="post">
+            <div>
+                <hr style="background-color: black; height: 3px; width: 80%">
+                <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                    <p>Рейтинг продавца</p>
+                    <div class="uk-margin-small-left" id="ratings">
+                        <div>
+                            <input name="rating" type="radio" value="1">
+                            <label>от <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span></label>
+                        </div>
+                        <div>
+                            <input name="rating" type="radio" value="2">
+                            <label>от <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span></label>
+                        </div>
+                        <div>
+                            <input name="rating" type="radio" value="3">
+                            <label>от <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star checked"></span>
+                                <span class="fa fa-star"></span></label>
+                        </div>
+                        <div>
+                            <input name="rating" type="radio" value="4">
+                            <label>Не важно</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                    <p>Цена</p>
+                    <div class="uk-margin-small-left">
+                        <label for="">от</label>
+                        <br>
+                        <input id="from" class="uk-input uk-border-pill uk-margin-right" type="number" placeholder="от" style="width: 70%; background-color: #C4C4C4; color: white">
+                        <br>
+                        <br>
+                        <label for="">до</label>
+                        <br>
+                        <input id="to" class="uk-input uk-border-pill" type="number" placeholder="до" style="width: 70%; background-color: #C4C4C4; color: white">
+                    </div>
+                </div>
+                <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                    <p>Срок изготовления</p>
+                    <div class="uk-margin-small-left">
+                        <div>
+                            <input name="term" type="radio" value="1">
+                            <label>до 1го дня</label>
+                        </div>
+                        <div>
+                            <input name="term" type="radio" value="2">
+                            <label>до 3ех дней</label>
+                        </div>
+                        <div>
+                            <input name="term" type="radio" value="3">
+                            <label>до 1 недели</label>
+                        </div>
+                        <div>
+                            <input name="term" type="radio" value="4">
+                            <label>до 1 месяца</label>
+                        </div>
+                        <div>
+                            <input name="term" type="radio" value="5">
+                            <label>до 3ех месяцев</label>
+                        </div>
+                        <div>
+                            <input name="term" type="radio" value="6">
+                            <label>более 1го года</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="textStyleHeader textAll">
+                    <p>Исполнитель</p>
+                    <div class="uk-margin-small-left">
+                        <div>
+                            <input type="radio" value="value1">
+                            <label>ИП</label>
+                        </div>
+                        <div>
+                            <input type="radio" value="value1">
+                            <label>ООО</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% csrf_token %}
+            <button type="submitgit" class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
+        </form>
+    </div>
+
+    <br>
+    <br>
+        <div id="content" class="" style="align-items: center;margin: 50px; width: 80%;">
+            {% include "baseProductCard.html" %}
+
+        </div>
+</div>
+
+<script>
+    function pricevalidation(){
+        let p1 = parseInt(document.getElementById('from').value)
+        let p2 = parseInt(document.getElementById('to').value)
+        let top = Math.max(p1,p2)
+        let bottom = Math.min(p1,p2)
+        let goods_prices = document.getElementsByClassName('price')
+        for (let i = 0; i < goods_prices.length; ++i){
+            let str = parseInt(goods_prices[i].innerHTML.split(/(\s+)/)[2])
+            if (top < str || str < bottom){
+                goods_prices[i].parentElement.parentElement.parentElement.parentElement.style.cssText = 'display: none';
+            } else{
+                goods_prices[i].parentElement.parentElement.parentElement.parentElement.style.cssText = 'display: flex';
+            }
+        }
+    }
+</script>
+
+</body>
+
+<style>
+    .textStyleHeader p{
+        font-family: 'Inter';
+        font-size: 20px;
+        font-style: normal;
+        line-height: 15px;
+
+    }
+    .textStyleHeaderRegion label{
+        font-family: 'Inter';
+        font-size: 18px;
+        font-style: normal;
+        line-height: 15px;
+        margin-bottom: 5px;
+    }
+
+    .textAll label {
+        font-family: 'Inter';
+        font-style: normal;
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .checked {
+        color: orange;
+    }
+</style>
+<script src="js/uikit-icons.min.js"></script>
+
+{% endblock %}
