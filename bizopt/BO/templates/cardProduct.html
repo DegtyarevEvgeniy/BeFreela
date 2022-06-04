@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block content %}
+
+
+<main>
+
+
+    <div class="product-card-details-container-outer">
+        <div class="container">
+            <div class="product-card-details-container">
+
+                <div class="product-card-details row">
+                    <div class="col-md-5 p-1">
+                        <img class="product-card-details-img" src={{ product.picture.url }} />
+                    </div>
+                    <div class="col-md-7 p-1">
+
+                        <div class="product-card-details-content">
+                            <ul class="list-group list-group-flush">
+
+                                <li class="list-group-item">
+                                    <h2 class="product-card-details-product-name">
+                                        {{product.product_name}}
+                                    </h2>
+                                </li>
+
+                                <li class="list-group-item">
+                                    <h6>Описание:</h6>
+                                    <h6 class="product-card-details-product-desc">
+                                        {{product.description}}
+                                    </h6>
+
+                                </li>
+
+                                <li class="list-group-item">
+
+                                    <h6>Есть в наличии: {% if product.availability == true%}
+                                        <span class="badge bg-red"></span> {%else%}
+                                        <span class="badge bg-green">White</span> {%endif%}
+                                    </h6>
+                                </li>
+
+
+                                <li class="list-group-item">
+
+                                    <h6> Цена: </h6>
+                                    <h3>{{product.cost}}</h3>
+
+                                </li>
+
+                                <li class="list-group-item">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                      Показать
+                                    </button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Контакты</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    тут контакты для связи
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form method="post" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <button class="btn btn-dark" type="submit">Нравится</button>
+                                    </form>
+{#                                    <a href="" >Нравится</a>#}
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</main>
+
+
+
+<style>
+    main {
+        padding-top: 100px;
+    }
+    
+    @media (min-width: 768px) {
+        .product-card-details {
+            max-height: 640px;
+        }
+    }
+    
+    .product-card-details {
+        border-radius: 8px;
+        box-shadow: 0 7px 25px -10px rgba(0, 0, 0, 0.33);
+    }
+    
+    .product-card-details-img {
+        width: 100%;
+        max-height: 620px;
+        object-fit: cover;
+    }
+    
+    .product-card-details-content {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<script>
+</script>
+
+{% endblock %}

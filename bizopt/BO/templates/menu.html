@@ -1,0 +1,88 @@
+{% if user.is_authenticated %}
+   {% for item in menu %}
+    {% if item.text != user.email %}
+
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" style="color: white;"
+            href="{{ item.link }}">{{ item.text }}</a>
+    </li>
+    {% else %}
+
+    {% if item.position == "out" %}
+    {% if user.is_authenticated %}
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
+            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="rounded-circle" width="150px" src="{{user.userImage}}">
+            {{ item.text }}
+            
+        </a>
+        {%else%}
+        <a class="nav-link active" aria-current="page" style="color: white;"
+            href="accounts/login/">Войти</a>
+
+        {% endif %}
+
+        <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark color_menu"
+            aria-labelledby="dropdownMenuLink">
+            {% if item.position == "in"  %}
+            <li style="display: flex"><a class="dropdown-item"
+                    href="{{ item.link }}">{{ item.name }}</a></li>
+        </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+
+
+    {% endif %}
+    {% endfor %}
+    
+    
+{%else%}
+  
+  
+{% for item in menu %}
+    {% if item.text != 'user.email' %}
+
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" style="color: white;"
+            href="{{ item.link }}">{{ item.text }}</a>
+    </li>
+    {% else %}
+
+    {% if item.position == "out" %}
+    {% if user.is_authenticated %}
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="{{ item.link }}" role="button"
+            id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="rounded-circle" width="150px" src="user.userImage">
+
+            {{ item.text }}
+            
+        </a>
+        {%else%}
+        <a class="nav-link active" aria-current="page" style="color: white;"
+            href="accounts/login/">Войти</a>
+
+        {% endif %}
+
+        <ul style="text-align: center" class="dropdown-menu dropdown-menu-dark color_menu"
+            aria-labelledby="dropdownMenuLink">
+            {% if item.position == "in"  %}
+            <li style="display: flex"><a class="dropdown-item"
+                    href="{{ item.link }}">{{ item.name }}</a></li>
+        </ul>
+    </div>
+    {% endif %}
+    {% endif %}
+
+
+
+    {% endif %}
+    {% endfor %}
+    
+{% endif %}
+
+   
+  
+ 
