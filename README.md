@@ -1,4 +1,4 @@
-<div>
+ <div>
 <h1>For Windows:</h1>
 <ul>
 <li>python manage.py makemigrations --merge</li>
