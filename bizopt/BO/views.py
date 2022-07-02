@@ -305,14 +305,14 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.delete()
         return redirect('/becomeCreator/?3')
 
-    if request.method == 'GET' and "status" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['status'])
+    if request.method == 'POST' and "status" in request.POST:
+        product = Product_buy.objects.get(id=request.POST['status'])
         product.status1 = 'in work'
         product.status2 = 'in waiting'
         product.save()
         return redirect('/becomeCreator/?1')
-    if request.method == 'GET' and "decline" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['decline'])
+    if request.method == 'POST' and "decline" in request.POST:
+        product = Product_buy.objects.get(id=request.POST['decline'])
         product.status1 = 'end_partner'
         product.save()
 
@@ -423,6 +423,7 @@ def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
     try:
         creator = Creator.objects.get(email=request.user.email)
+        print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
         content['creator_avatar'] = creator.cover
@@ -439,18 +440,27 @@ def becomeCreatorTemplate_page(request, name):
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
                                     'status2': product.status2,
+                                    'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
+                                    # 'chat_id':Account.objects.get(email=product.id_user_buy)
+
                                     }
                                    for product in products]
             products_v = Product_buy.objects.filter(id_creator=request.user, status1="in waiting")
-            content['products_v'] = [{'id': product.id,
+            if products_v.count() > 0:
+                content['products_v'] = [{'id': product.id,
                                        'product_name': product.product_name,
                                        'customer': product.id_user_buy,
                                        'status1': product.status1,
                                        'id_user_buy': product.id_user_buy,
+                                       'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
+                                    # 'chat_id':Account.objects.get(email=product.id_user_buy).id
                                       }
                                      for product in products_v]
+            
+
+            # print(creator.id, content['products'][-1]['chat_id'], content['products_v'][-1]['chat_id'], sep=" || ")
         except Product_buy.DoesNotExist as e:
-            content['products'] = None 
+            content['products'] = None
 
     # elif name == '3':
         # form = MyProfile(request.POST)
