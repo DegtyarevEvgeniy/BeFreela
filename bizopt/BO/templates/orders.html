@@ -142,6 +142,7 @@
 
 
     <h4 style="margin-top: 10%">Заказы ожидающие одобренния продавца</h4>
+    <form method="POST">
         {% for product in products %}
             {% if product.status1 == "in waiting"%}
                 <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
@@ -158,8 +159,9 @@
                 <h3 style="text-align: center">{{ task.price }} 12000 руб</h3>
                 <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px; margin-left: 25%" type="button" uk-toggle="target: #modal-close-default">Оплатить заказ</button>
                 <div class="uk-flex" style="margin-top: 5%">
-                    <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px;" type="button">Отказаться</button>
-                    <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px;" type="button">Чат</button>
+                    {% csrf_token %}
+                    <button class="uk-button uk-button-default uk-margin-small-right" name="decline" value="{{product.id}}" style="background: #969696; border-radius: 5px;" type="submit">Отказаться</button>
+                    <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px;" type="submit">Чат</button>
                 </div>
                 <div id="modal-close-default" uk-modal>
                     <div class="uk-modal-dialog uk-modal-body">
@@ -189,6 +191,7 @@
         </div>
         {% endif %}
         {% endfor %}
+    </form>
     </div>
 </div>
 

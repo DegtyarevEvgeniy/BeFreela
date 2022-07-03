@@ -129,18 +129,18 @@ def goods_page(request):
                     rating_status__icontains=3)
                 | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
             )
-            print("kyy")
+            # print("kyy")
         elif rating == '2':
             products = Product_creator.objects.filter(
                 Q(rating_status__icontains=5)
                 | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
             )
-            print("kyyy")
+            # print("kyyy")
         elif rating == '3':
             products = Product_creator.objects.filter(
                 Q(rating_status=5) | Q(rating_status__icontains=4)
             )
-            print("kyyyy")
+            # print("kyyyy")
             print(products)
         elif rating == '4':
             products = Product_creator.objects.filter(
@@ -148,7 +148,7 @@ def goods_page(request):
                     rating_status__icontains=3)
                 | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
             )
-            print("kyyyyy")
+            # print("kyyyyy")
     print(products)
     context['products'] = [{'id': product.id,
                             'creator_id': product.id_creator,
@@ -315,7 +315,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.status1 = 'end_partner'
         product.save()
-
     if request.method == 'GET' and "decline_work" in request.GET:
         product = Product_buy.objects.get(id=request.GET['decline_work'])
         product.status1 = 'end_partner'
@@ -819,6 +818,12 @@ def orders_page(request):
         comment.review = request.POST['review']
         comment.rating = request.POST.get('rating', '0')
         comment.save()
+    if request.method == "POST" and "decline" in request.POST:
+        # print(request.POST)
+        product = Product_buy.objects.get(id=request.POST['decline'])
+        product.status1 = 'end_partner'
+        product.save()
+
     return render(request, 'orders.html', content)
 
 def partners_page(request):
