@@ -48,6 +48,7 @@ class Comments_product(models.Model):
     id_product = models.CharField(max_length=200, default='-')
     review = models.CharField(max_length=200, default='-')
     rating = models.IntegerField(default='0')
+    created_data = models.DateTimeField(auto_now_add=True)
 
 
 class Product_creator(models.Model):

@@ -5,6 +5,10 @@ from django.core import paginator
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
+from django.utils import formats
+from django.utils.dateformat import DateFormat
+from django.utils.formats import get_format
+
 from .utils import *
 from .forms import *
 from django.views.generic import CreateView
@@ -17,16 +21,12 @@ from .forms import *
 from django.contrib.auth import logout
 from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
-from account.models import Account  
+from account.models import Account
 import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
 from .models import Chat_room, Message
-
-
-
-
-
+from datetime import datetime
 
 def gen_menu(request):
     if request.user.is_authenticated:
@@ -553,47 +553,6 @@ def index_page(request):
 #     return render(request, 'cardProduct.html', context)
 
 
-def cardProduct_page(request, product_id):
-    context = {**gen_menu(request), **gen_submenu(request)}
-    product = Product_creator.objects.get(id=product_id)
-    try:
-        if request.method == "POST" and "buy_product" in request.POST:
-            product_buy = Product_buy()
-
-            # product = Product_creator.objects.get(id=product_id)
-            product_buy.id_creator = product.id_creator
-            product_buy.product_name = product.product_name
-
-            user_buy = Account.objects.get(email=request.user)
-            product_buy.id_user_buy = user_buy.email
-
-            # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
-            # product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
-            product_buy.status1 = 'in waiting'
-            product_buy.status2 = 'None'
-            product_buy.message = request.POST['message']
-            product_buy.delivery_address = request.POST['address']
-            product_buy.status_pay = False
-            product_buy.save()
-        # else:
-            # product = Product_creator.objects.get(id=product_id)
-            # creator = Creator.objects.get(email=product.id_creator)
-        if request.method == "POST" and "comment_product" in request.POST:
-            # product = Product_creator.objects.get(id=product_id)
-            comment = Comments_product()
-            comment.id_creator = product.id_creator
-            comment.id_product = product.id
-            comment.review = request.POST['review']
-            comment.rating = request.POST.get('rating', '0')
-            comment.save()
-        context['products'] = product
-        messages = Comments_product.objects.filter(id_product=product_id)
-        context['messages'] = messages
-         # context['creator'] = creator
-        return render(request, 'cardProduct.html', context)
-    except Task.DoesNotExist as e:
-        raise Http404 from e
-
 
 def cardResume_page(request):
     context = gen_menu(request)
@@ -638,6 +597,85 @@ def cardTask_page(request, task_id):
         task = Task.objects.get(id=task_id)
         context['task'] = task
         return render(request, 'cardTask.html', context)
+    except Task.DoesNotExist as e:
+        raise Http404 from e
+
+def cardProduct_page(request, product_id):
+    flag = "day"
+    dt = datetime.now()
+    df = DateFormat(dt)
+    df.format(get_format('DATE_FORMAT'))
+
+    context = {**gen_menu(request), **gen_submenu(request)}
+    product = Product_creator.objects.get(id=product_id)
+
+    try:
+        if request.method == "POST" and "buy_product" in request.POST:
+            product_buy = Product_buy()
+
+            # product = Product_creator.objects.get(id=product_id)
+            product_buy.id_creator = product.id_creator
+            product_buy.product_name = product.product_name
+
+            user_buy = Account.objects.get(email=request.user)
+            product_buy.id_user_buy = user_buy.email
+
+            # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
+            # product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
+            product_buy.status1 = 'in waiting'
+            product_buy.status2 = 'None'
+            product_buy.message = request.POST['message']
+            product_buy.delivery_address = request.POST['address']
+            product_buy.status_pay = False
+            product_buy.save()
+        # else:
+        # product = Product_creator.objects.get(id=product_id)
+        # creator = Creator.objects.get(email=product.id_creator)
+        if request.method == "POST" and "comment_product" in request.POST:
+            # product = Product_creator.objects.get(id=product_id)
+            comment = Comments_product()
+            comment.id_creator = product.id_creator
+            comment.id_product = product.id
+            comment.review = request.POST['review']
+            comment.rating = request.POST.get('rating', '0')
+            comment.save()
+        context['products'] = product
+
+        messages = Comments_product.objects.filter(id_product=product_id)
+
+        id_comment = product.id_creator
+        user_product = Account.objects.get(email=id_comment)
+        image_user_product = user_product.userImage
+        context['image_user_product'] = image_user_product
+
+        for message in messages:
+            # передача картинки пользователя, который выложил отзыв
+            id_comment = message.id_creator
+            user_comment = Account.objects.get(email=id_comment)
+            image_user = user_comment.userImage
+            message.image_user = image_user
+
+            # передача даты создания отзыва
+            df_message = DateFormat(message.created_data)
+            df_message.format(get_format('DATE_FORMAT'))
+            if (int(df_message.y()) - int(df.y()) == 0) and (int(df_message.m()) - int(df.m()) == 0):
+                message.created_data = int(df.d()) - int(df_message.d())
+                message.flag = flag
+            elif (int(df_message.y()) - int(df.y()) == 0) and (int(df_message.m()) - int(df.m()) != 0):
+                message.flag = "month"
+                message.created_data = int(df_message.m()) - int(df.m())
+                context['flag'] = flag
+
+            else:
+                message.flag = "year"
+                message.created_data = int(df_message.y()) - int(df.y())
+                print(message.created_data)
+                context['flag'] = flag
+
+
+        context['messages'] = messages
+
+        return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist as e:
         raise Http404 from e
 
