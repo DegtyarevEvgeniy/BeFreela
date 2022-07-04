@@ -11,7 +11,7 @@
             <table class="uk-table uk-table-justify uk-table-divider uk-table-large" data-spy="scroll" data-target="#spy">
                 <thead>
                     <tr class="uk-text-center">
-                        <th class="uk-text-center">ID</th>
+                        <th class="uk-text-center" style="width: 4%;">ID</th>
                         <th class="uk-text-center">Название задачи</th>
                         <th class="uk-text-center">Кол-во шт товара</th>
                         <th class="uk-text-center">Заказчик</th>
@@ -26,7 +26,7 @@
                 <tbody>
                     {% for product in products %}
                     <tr>
-                        <td class="uk-text-center">{{ product.id }}</td>
+                        <td class="uk-text-center uk-text-truncate product_id" uk-tooltip="{{ product.id }}">{{ product.id }}</td>
                         <td class="uk-text-center">{{ product.product_name }}</td>
                         <td class="uk-text-center">1</td>
                         <td class="uk-text-center">{{ product.customer }}</td>
@@ -90,7 +90,7 @@
 
                     {% for product in products_v %}
                     <tr>
-                        <td class="uk-text-center">{{ product.id }}</td>
+                        <td class="uk-text-center uk-text-truncate product_id" uk-tooltip="{{ product.id }}">{{ product.id }}</td>
                         <td class="uk-text-center"> {{ product.product_name }} </td>
                         <td class="uk-text-center">1</td>
                         <td class="uk-text-center">{{ product.id_user_buy }}</td>
@@ -235,21 +235,8 @@
     }
 </style>
 
-<script type="text/javascript">
-    function showId() {
-        for (i in "{{products_v}}") {
-            // var $inputGroup =
-            //     `   <tr>
-            //             <td class="uk-text-center"></td>
-            //             <td class="uk-text-center"></td>
-            //             <td class="uk-text-center"></td>
-            //             <td class="uk-text-center">
-            //                 <button name="status" form="goodsList" type="button" value="{{product.id}}"
-            //                     class="uk-button uk-button-primary uk-border-rounded" style="margin:auto; padding: 0 15px!important" onclick="showId()">Согласиться</button>
-            //             </td>
-            //         </tr>`;
-            console.log(i)
-        }
+<script >
 
-    }
+
 </script>
+

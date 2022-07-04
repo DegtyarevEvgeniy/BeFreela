@@ -22,7 +22,7 @@
                 </div>
                 <br>
                 <br>
-                <label>Коплектация товара</label>
+                <label>Комлектация товара</label>
                 <div class="input-group mt-2 mb-2">
                     <input type="text" id="inputvalue" class="form-control changible">
                     <button class="btn btn-outline-secondary" id="btnAdd" name="addComplect" onclick="addInput(this)"
@@ -54,18 +54,8 @@
                         </tr>
                     </thead>
                     <tbody id="table">
-                        <!-- <tr class="tcomplectations">
-                            <th scope="row">Комплектация</th>
-                        </tr>
-                        <tr class="tbrend">
-                            <th scope="row">Бренд</th>
-                        </tr>
-                        <tr class="tprice">
-                            <th scope="row">Код</th>
-                            <td>@twitter</td>
-                        </tr> -->
                     </tbody>
-                        
+
                 </table>
             </div>
             <!-- end of block 2 -->
@@ -77,6 +67,7 @@
                 <h2>Описание</h2>
 
                 {{ form8.description }}
+                <br>
 
                 <label>Ключевые слова</label>
                 <div class="input-group mt-2 mb-2">
@@ -143,7 +134,7 @@
                         <i class="fa fa-angle-double-left"></i>
                     </button>
                     <button name="product_creator" type="button" id="nextBtn"
-                        style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;"
+                        style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0; background-color: gray;"
                         class="uk-button uk-button-primary" onclick="nextPrev(1)">
                         <i class="fa fa-angle-double-right"></i>
                     </button>
@@ -152,42 +143,71 @@
         </form>
     </div>
 </div>
-<script>
-    function submitForm() {
-        var http = new XMLHttpRequest();
-        http.open("POST", "<<whereverTheFormIsGoing>>", true);
-        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        var params = "search=" + document.get; // probably use document.getElementById(...).value
-        http.send(params);
-        http.onload = function () {
-            alert(http.responseText);
-        }
-    }
-</script>
+{% comment %} <script src="sweetalert2.all.min.js"></script> {% endcomment %}
+
 <script>
     var inputnum = 0,
         keynum = 0,
         currentTab = 0;
 
-    function recalc(el){
-        let price = parseInt(document.getElementById('priceInput').value);
-        let form = document.getElementById('final_price');
-        form.innerHTML = price + price*0.1;
+    function PassChecker(n) {
+        let pname = document.getElementsByName('product_name')[0].value.length
+        let brand = document.getElementsByName('brand')[0].value.length
+        let comp = document.getElementById('inputDiv').children.length
+        let moneyInput = parseInt(document.getElementById('priceInput').value)
+
+        if (n == 1) {
+            if (pname < 3 || brand < 3 || comp == 0) {
+                document.getElementById("nextBtn").style["background-color"] = 'gray'
+                return 0
+
+            } else {
+                document.getElementById("nextBtn").style["background-color"] = 'blue'
+                return 1
+            }
+        }
+        if (n == 2) {
+            if (moneyInput <= 1 || moneyInput >= 999999999999999 || isNaN(moneyInput * moneyInput)) {
+                document.getElementById("nextBtn").style["background-color"] = 'gray'
+                return 0
+            } else {
+                document.getElementById("nextBtn").style["background-color"] = 'blue'
+                return 1
+            }
+
+        }
+
+
+
     }
-    
+
+    function recalc(el) {
+        let moneyInput = document.getElementById('priceInput')
+
+        let price = parseInt(moneyInput.value);
+        let form = document.getElementById('final_price');
+        let sum = price + price * 0.1
+        form.innerHTML = 0 ? isNaN(sum) : sum;
+        if (!isNaN(sum)) {
+            form.innerHTML = sum
+        } else {
+            form.innerHTML = 0
+        }
+    }
+
     function addComplectation() {
         let arr = document.getElementsByClassName('complectations');
         let brand = document.getElementById('brand').value;
         let form = document.getElementById('table')
-        for (let i = 0; i < arr.length; ++i){
+        for (let i = 0; i < arr.length; ++i) {
             // let text = document.createTextNode(arr[i].innerHTML);
             let table = document.getElementById('table');
             let table_values = table.insertRow(-1).insertCell(0)
             let newText = document.createTextNode(arr[i].value);
-            console.log(newText)
             table_values.appendChild(newText);
-            if (i == 0){
-                form.children[0].innerHTML += `<td> ${brand} </td> <td id="final_price">  </td>`;
+            if (i === 0) {
+                let sum = parseInt(document.getElementById('priceInput').value)
+                form.children[0].innerHTML += `<td> ${brand} </td> <td id="final_price"> ${sum + sum*0.1} </td>`;
             }
             document.getElementsByTagName('td')[i].className += 'uk-text-truncate'
         }
@@ -197,10 +217,10 @@
         let input = el.parentElement.getElementsByTagName("input")[0];
         if (inputnum < 15 && input.value) {
             input.removeAttribute("disabled");
-            input.placeholder = "";
+            input.placeholder = "Введите описание товара";
             let value = document.getElementById('inputvalue').value;
             var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="set_${inputnum}" value="${value}"> </div>`;
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="set_${inputnum}" value="${value}" readonly=> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button> </div>`;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             input.value = "";
@@ -212,6 +232,7 @@
         } else {
             input.placeholder = "Для добавления элемента необходимо заполнить это поле";
         }
+        PassChecker(1)
     }
 
     function removeInput(el, arg) {
@@ -222,20 +243,21 @@
             mainInput.placeholder = "";
         }
         el.parentElement.remove();
+        PassChecker(1)
     }
 
     function changeInput(el) {
         let inputPole = el.parentElement.getElementsByTagName("input")[0];
         let BtnImage = el.parentElement.getElementsByTagName("span")[0];
-        inputPole.placeholder = "";
+        inputPole.placeholder = "Введите ключевые слова";
         if (inputPole.value) {
-            if (inputPole.disabled) {
+            if (inputPole.readOnly) {
                 BtnImage.innerHTML = "edit_off"
             } else {
                 inputPole.value = inputPole.value
                 BtnImage.innerHTML = "mode_edit";
             }
-            inputPole.disabled ? inputPole.removeAttribute("disabled") : inputPole.setAttribute("disabled", "disabled");
+            inputPole.readOnly ? inputPole.readOnly = false : inputPole.readOnly = true;
         } else {
             inputPole.placeholder = "Заполните это поле или удалите его";
         }
@@ -247,9 +269,9 @@
         if (keynum < 15 && key.value) {
             let value = document.getElementById('keyValue').value
             var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="key_${keynum}" value="${value}"> </div>`;
-                // '<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>'
-                
+                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="key_${keynum}" value="${value}" readonly> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
+            // '<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>'
+
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span>
             document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             key.value = "";
@@ -275,15 +297,22 @@
 
     function showTab(n) {
         let x = document.getElementsByClassName("tab");
+        let len = document.getElementById('table').children.length
         try {
             x[n].style.display = "block";
             if (n === 0) {
+                for (let i = 0; i < len; i++) {
+                    document.getElementById('table').children[0].remove()
+                }
                 document.getElementById("prevBtn").style.display = "none";
-            } else if(n === 1){
+            } else if (n === 1) {
+                document.getElementById("nextBtn").style["background-color"] = 'gray'
                 addComplectation()
                 document.getElementById("prevBtn").style.display = "inline";
-            } 
-            else {
+            } else {
+                for (let i = 0; i < len; i++) {
+                    document.getElementById('table').children[0].remove()
+                }
                 document.getElementById("prevBtn").style.display = "inline";
             }
             fixStepIndicator(n)
@@ -292,15 +321,35 @@
 
     function nextPrev(n) {
         let x = document.getElementsByClassName("tab");
-        try {
+        let btn = document.getElementById("nextBtn");
+        if (n > 0 && currentTab < 2) {
+            if (PassChecker(currentTab + 1)) {
+                x[currentTab].style.display = "none";
+                currentTab = currentTab + n;
+                if (currentTab === x.length) {
+                    document.getElementById('nextBtn').type = "submit"
+                    localStorage.page = 3;
+                    document.getElementById('next-previous').classList.add("redirect");
+                }
+                showTab(currentTab);
+            } else {
+                Swal.fire({
+                    icon: 'question',
+                    title: 'Ошибка данных',
+                    text: `Проверьте введенные данные еще раз.`,
+                    footer: 'Кога все будет введено правильно, стрелочка подскажет дорогу'
+                })
+            }
+        } else {
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
             if (currentTab === x.length) {
                 document.getElementById('nextBtn').type = "submit"
+                localStorage.page = 3;
                 document.getElementById('next-previous').classList.add("redirect");
             }
             showTab(currentTab);
-        } catch {}
+        }
     }
 
     function fixStepIndicator(n) {

@@ -215,14 +215,15 @@
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 
 <script type="text/javascript">
     $(function () {
         var num = window.location.search[1];
-        if ($.isNumeric(num) && [0, 5, 8, 9].indexOf(num) == -1){
-            // если у вас не работает страница с номером темплейта, как в массиве, просто удалите его из массива
-            num = num; //here is a number of page
+        if ( localStorage.page != null ){
+            num = localStorage.page
         } else {
             num = 2;
         }
@@ -238,6 +239,7 @@
     $('.Btn').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
         var index = $(this).index() + 1
+        localStorage.page=index
         xhr.open('GET', `becomeCreatorTemplates/${index}/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)

@@ -258,13 +258,16 @@ class ProductCreateForm(ModelForm):
         widgets = {
             'product_name': TextInput(attrs={
                 'class': 'form-control',
-                'placeholder': "name",
+                'placeholder': "Введите название товара",
+                'oninput': 'PassChecker(1)',
             }),
             'price': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
                 'id': 'priceInput',
-                'onchange': 'recalc(this)',
+                'oninput': 'recalc(this)',
+                'onchange':'PassChecker(2)',
+                'placeholder': 'Введите стоимость товара'
             }),
             'country': Select(attrs={
                 'class': 'input-group mt-2 mb-2',
@@ -273,9 +276,12 @@ class ProductCreateForm(ModelForm):
             'brand': TextInput(attrs={
                 'class': 'form-control',
                 'id': 'brand',
+                'oninput': 'PassChecker(1)',
+                'placeholder': 'Введите бренд товара'
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
+                'placeholder': 'Введите описание товара'
             }),
             'width_product': TextInput(attrs={
                 'class': 'form-control',

@@ -295,7 +295,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 product.save()
             else:
                 break
-        return redirect('/becomeCreator/?3')
+        return redirect('/becomeCreator/')
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
@@ -303,14 +303,14 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'GET' and "delete" in request.GET:
         product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
-        return redirect('/becomeCreator/?3')
+        return redirect('/becomeCreator/')
 
     if request.method == 'POST' and "status" in request.POST:
         product = Product_buy.objects.get(id=request.POST['status'])
         product.status1 = 'in work'
         product.status2 = 'in waiting'
         product.save()
-        return redirect('/becomeCreator/?1')
+        return redirect('/becomeCreator/')
     if request.method == 'POST' and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.status1 = 'end_partner'
@@ -819,7 +819,6 @@ def orders_page(request):
         comment.rating = request.POST.get('rating', '0')
         comment.save()
     if request.method == "POST" and "decline" in request.POST:
-        # print(request.POST)
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.status1 = 'end_partner'
         product.save()
