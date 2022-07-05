@@ -494,21 +494,21 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
 
-    elif name in ['11', '12', '13']:
-        try:
-            partner = Partner.objects.get(email=request.user)
-            content['partner'] = {
-                'first_name': partner.first_name,
-                'last_name': partner.last_name,
-                'email': partner.email,
-                'INN': partner.inn,
-                'name_small': partner.name_small,
-                'name_full': partner.name_full,
-                'payment_account': partner.payment_account,
-                'reg_form': partner.reg_form
-            }
-        except Exception:
-            pass
+    # elif name in ['11', '12', '13']:
+    #     try:
+    #         partner = Partner.objects.get(email=request.user)
+    #         content['partner'] = {
+    #             'first_name': partner.first_name,
+    #             'last_name': partner.last_name,
+    #             'email': partner.email,
+    #             'INN': partner.inn,
+    #             'name_small': partner.name_small,
+    #             'name_full': partner.name_full,
+    #             'payment_account': partner.payment_account,
+    #             'reg_form': partner.reg_form
+    #         }
+    #     except Exception:
+    #         pass
 
     return render(request, path, content)
 
