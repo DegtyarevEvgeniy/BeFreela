@@ -58,7 +58,7 @@ def gen_menu(request):
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
                 {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'xpos': 'right', 'position': 'out', 'link': 'accounts/login/', 'text': 'Войти'},
+                {'xpos': 'right', 'position': 'out', 'link': '/accounts/login/', 'text': 'Войти'},
             ]
         }
 
