@@ -307,33 +307,32 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
     if request.method == 'POST' and "status" in request.POST:
         product = Product_buy.objects.get(id=request.POST['status'])
-        product.status1 = 'in work'
-        product.status2 = 'in waiting'
+        product.status = 'Заказ в работе'
         product.save()
         return redirect('/becomeCreator/')
     if request.method == 'POST' and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
-        product.status1 = 'end_partner'
+        product.status = 'Заказчик отказался от заказа'
         product.save()
     if request.method == 'GET' and "decline_work" in request.GET:
         product = Product_buy.objects.get(id=request.GET['decline_work'])
-        product.status1 = 'end_partner'
+        product.status = 'Заказчик отказался от заказа'
         product.save()
     if request.method == 'GET' and "in_work" in request.GET:
         product = Product_buy.objects.get(id=request.GET['in_work'])
-        product.status2 = 'in_work'
+        product.status = 'Заказ в работе'
         product.save()
     if request.method == 'GET' and "done" in request.GET:
         product = Product_buy.objects.get(id=request.GET['done'])
-        product.status2 = 'done'
+        product.status = 'Заказ готов'
         product.save()
     if request.method == 'GET' and "payment" in request.GET:
         product = Product_buy.objects.get(id=request.GET['payment'])
-        product.status2 = 'payment'
+        product.status = 'Заказ оплачен'
         product.save()
     if request.method == 'GET' and "4" in request.GET:
         product = Product_buy.objects.get(id=request.GET['4'])
-        product.status2 = 'end_partner'
+        product.status = 'Заказчик отказался от заказа'
         product.save()
 
     if request.method == "POST" and "partner" in request.POST:
@@ -365,14 +364,14 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         #  ПРОВЕРИТЬ СООТВЕТСТВИЕ СЛОВАРЯ ЗНАЧЕНИЯМ НА ФРОНТЕ!
 
         statuses = {
-            '1': 'in_process',
-            '2': 'done',
-            '3': 'awaiting_payment',
-            '4': 'end_partner_late'
+            '1': 'Заказ в работе',
+            '2': 'Заказ готов',
+            '3': 'Заказ в ожидании оплаты',
+            '4': 'Заказчик отказался от заказа'
         }
         products = Product_buy.objects.all()
         for i in range(len(products)):
-            products[i].status2 = statuses[statuses_list[i]]
+            products[i].status = statuses[statuses_list[i]]
             products[i].save()
     return render(request, 'becomeCreator.html', context)
 
@@ -432,22 +431,22 @@ def becomeCreatorTemplate_page(request, name):
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '2':
         try:
-            products = Product_buy.objects.filter(id_creator=request.user, status1="in work")
+            products = Product_buy.objects.filter(id_creator=request.user, status="Заказ в работе")
             content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
-                                    'status2': product.status2,
+                                    'status': product.status,
                                     'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
                                     # 'chat_id':Account.objects.get(email=product.id_user_buy)
 
                                     }
                                    for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user, status1="in waiting")
+            products_v = Product_buy.objects.filter(id_creator=request.user, status="Заказ принят на рассмотрение")
             if products_v.count() > 0:
                 content['products_v'] = [{'id': product.id,
                                        'product_name': product.product_name,
                                        'customer': product.id_user_buy,
-                                       'status1': product.status1,
+                                       'status': product.status,
                                        'id_user_buy': product.id_user_buy,
                                        'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
                                     # 'chat_id':Account.objects.get(email=product.id_user_buy).id
@@ -620,8 +619,7 @@ def cardProduct_page(request, product_id):
 
             # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
             # product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
-            product_buy.status1 = 'in waiting'
-            product_buy.status2 = 'None'
+            product_buy.status = 'Заказ принят на рассмотрение'
             product_buy.message = request.POST['message']
             product_buy.delivery_address = request.POST['address']
             product_buy.status_pay = False
@@ -843,7 +841,7 @@ def orders_page(request):
         'id': product.id,
         'product_name': product.product_name,
         'id_user_buy': product.id_user_buy,
-        'status1': product.status1,
+        'status': product.status,
     } for product in productss]
     if request.method == "POST" and "comment_product" in request.POST:
         product_id = request.POST['comment_product']
@@ -856,7 +854,7 @@ def orders_page(request):
         comment.save()
     if request.method == "POST" and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
-        product.status1 = 'end_partner'
+        product.status = 'Заказчик отказался от заказа'
         product.save()
 
     return render(request, 'orders.html', content)

@@ -26,8 +26,8 @@ class Product_buy(models.Model):
     id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
     product_name = models.CharField(max_length=500, default='-')
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    status1 = models.CharField(max_length=20, default='-') #запрос в работе
-    status2 = models.CharField(max_length=20, default='-') #в ожидании в работе готово
+    status = models.CharField(max_length=200, default='-')
+    # status2 = models.CharField(max_length=20, default='-')
     message = models.CharField(max_length=200, default='-')
     payed_partner = models.BooleanField(default=0)
     payed_user = models.BooleanField(default=0)
