@@ -36,7 +36,7 @@
             font-family: Raleway;
             border: 1px solid #aaaaaa;
             border-radius: 10px;
-            -webkit-appearance: none
+            -webkit-appearance: none;
         }
 
         .tab input:focus {
@@ -122,24 +122,7 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
                 <form id="regForm" method="POST">
-                    <h1 id="register">Signin Form</h1>
-                    <div class="all-steps" id="all-steps">
-                        <a onclick="surTab(0)">
-                            <span class="step">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(1)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(2)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                    </div>
+                    <h1 id="register">Регистрация</h1>
                     <div class="tab">
                         {{ form.first_name.label }}: {{ form.first_name }}
 
@@ -147,9 +130,6 @@
                         <br> {{ form.last_name.label }}: {{ form.last_name }}
                         <br>
                         <br>
-                    </div>
-
-                    <div class="tab">
                         {{ form.username.label }}: {{ form.username }}
                         <br>
                         <br> {{ form.password1.label }}: {{ form.password1 }}
@@ -157,10 +137,6 @@
                         <br> {{ form.password2.label}}: {{ form.password2}}
                         <br>
                         <br>
-
-                    </div>
-
-                    <div class="tab">
                         {{form.phone.label}} {{form.phone}}
                         <br>
                         <br> {{ form.email.label}} {{ form.email}}
@@ -168,23 +144,14 @@
                         <br> {{ form.city.label}} {{ form.city}}
                         <br>
                         <br>
-                    </div>
 
+                    </div>
                     {% csrf_token %} {% if form.errors %} {% for field in form %} {% for error in field.errors %}
                     <div class="alert alert-danger">
                         <strong>{{ error|escape }}</strong>
                     </div>
                     {% endfor %} {% endfor %} {% endif %}
-                    <div style="overflow:auto;" id="next-previous">
-                        <div style="float:right;">
-                            <button type="button" id="prevBtn" onclick="nextPrev(-1)">
-                                <i class="fa fa-angle-double-left"></i>
-                            </button>
-                            <button type="button" id="nextBtn" onclick="nextPrev(1)">
-                                <i class="fa fa-angle-double-right"></i>
-                            </button>
-                        </div>
-                    </div>
+                    <input style="background-color: #6A1B9A; color: white" type="submit" value="Зарегистрироваться">
                 </form>
             </div>
         </div>
