@@ -322,8 +322,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'GET' and "in_work" in request.GET:
         product = Product_buy.objects.get(id=request.GET['in_work'])
         product.status2 = 'in_work'
-        #
-        #
         product.save()
     if request.method == 'GET' and "done" in request.GET:
         product = Product_buy.objects.get(id=request.GET['done'])
