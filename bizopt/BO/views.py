@@ -440,12 +440,10 @@ def becomeCreatorTemplate_page(request, name):
                                     'status2': 'red' if product.status[-1] == 'о' else 'blue',
                                     'status3': 'red' if product.status[-1] == 'ы' else 'blue',
                                     'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
-                                    # 'chat_id':Account.objects.get(email=product.id_user_buy)
 
                                     }
                                    for product in products]
-            print(content['products'])
-            products_v = Product_buy.objects.filter(id_creator=request.user, status="Заказ принят на рассмотрение")
+            products_v = Product_buy.objects.filter(id_creator=request.user)
             if products_v.count() > 0:
                 content['products_v'] = [{'id': product.id,
                                        'product_name': product.product_name,
@@ -453,7 +451,6 @@ def becomeCreatorTemplate_page(request, name):
                                        'status': product.status,
                                        'id_user_buy': product.id_user_buy,
                                        'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
-                                    # 'chat_id':Account.objects.get(email=product.id_user_buy).id
                                       }
                                      for product in products_v]
             
