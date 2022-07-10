@@ -310,6 +310,18 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.status = 'Заказ в работе'
         product.save()
         return redirect('/becomeCreator/')
+    if request.method == 'GET' and "in_work" in request.POST:
+        product = Product_buy.objects.get(id=request.POST['in_work'])
+        product.status = 'Заказ в работе'
+        product.save()
+    if request.method == 'POST' and "done" in request.POST:
+        product = Product_buy.objects.get(id=request.POST['done'])
+        product.status = 'Заказ готов'
+        product.save()
+    if request.method == 'POST' and "payment" in request.POST:
+        product = Product_buy.objects.get(id=request.GET['payment'])
+        product.status = 'Заказ оплачен'
+        product.save()
     if request.method == 'POST' and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.status = 'Заказчик отказался от заказа'
@@ -317,18 +329,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'GET' and "decline_work" in request.GET:
         product = Product_buy.objects.get(id=request.GET['decline_work'])
         product.status = 'Заказчик отказался от заказа'
-        product.save()
-    if request.method == 'GET' and "in_work" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['in_work'])
-        product.status = 'Заказ в работе'
-        product.save()
-    if request.method == 'GET' and "done" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['done'])
-        product.status = 'Заказ готов'
-        product.save()
-    if request.method == 'GET' and "payment" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['payment'])
-        product.status = 'Заказ оплачен'
         product.save()
     if request.method == 'GET' and "4" in request.GET:
         product = Product_buy.objects.get(id=request.GET['4'])
@@ -431,17 +431,19 @@ def becomeCreatorTemplate_page(request, name):
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '2':
         try:
-            products = Product_buy.objects.filter(id_creator=request.user, status="Заказ в работе")
+            products = Product_buy.objects.filter(id_creator=request.user)
             content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
-                                    'status': product.status,
+                                    'st':product.status,
+                                    'status1': 'red' if product.status[-1] == 'е' else 'blue',
+                                    'status2': 'red' if product.status[-1] == 'о' else 'blue',
+                                    'status3': 'red' if product.status[-1] == 'ы' else 'blue',
                                     'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
-                                    # 'chat_id':Account.objects.get(email=product.id_user_buy)
 
                                     }
                                    for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user, status="Заказ принят на рассмотрение")
+            products_v = Product_buy.objects.filter(id_creator=request.user)
             if products_v.count() > 0:
                 content['products_v'] = [{'id': product.id,
                                        'product_name': product.product_name,
@@ -449,12 +451,10 @@ def becomeCreatorTemplate_page(request, name):
                                        'status': product.status,
                                        'id_user_buy': product.id_user_buy,
                                        'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
-                                    # 'chat_id':Account.objects.get(email=product.id_user_buy).id
                                       }
                                      for product in products_v]
             
-
-            # print(creator.id, content['products'][-1]['chat_id'], content['products_v'][-1]['chat_id'], sep=" || ")
+        
         except Product_buy.DoesNotExist as e:
             content['products'] = None
 

@@ -126,49 +126,58 @@
                     <div class="all-steps" id="all-steps">
                         <a onclick="surTab(0)">
                             <span class="step">
-                                <i class="fa fa-user"></i>
+                                <i class="fa fa-map"></i>
                             </span>
                         </a>
                         <a onclick="surTab(1)">
                             <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(2)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
+                                <i class="fa fa-user"></i>
                             </span>
                         </a>
                     </div>
                     <div class="tab">
-                        {{ form.first_name.label }}: {{ form.first_name }}
-
                         <br>
-                        <br> {{ form.last_name.label }}: {{ form.last_name }}
+                        <br>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Example select</label>
+                            <select class="form-control" id="exampleFormControlSelect1">
+                              <option value="Россия">Россия</option>
+                              <option value="Беларусь">Беларусь</option>
+                              <option value="Казахстан">Казахстан</option>
+                              <option value="Киргизия">Киргизия</option>
+                              <option value="Армения">Армения</option>
+                            </select>
+                          </div>
                         <br>
                         <br>
                     </div>
 
                     <div class="tab">
-                         {{ form.username.label }}: {{ form.username }}
-                        <br>
-                        <br> {{ form.password1.label }}: {{ form.password1 }}
-                        <br>
-                        <br> {{ form.password2.label}}: {{ form.password2}}
                         <br>
                         <br>
-
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Инн</label>
+                            <input type="email" class="form-control" placeholder="Инн">
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="exampleFormControlInput1">Наименование потсавщика</label>
+                            <input type="email" class="form-control" placeholder="Наименование потсавщика">
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="exampleFormControlInput1">ФИО руководителя</label>
+                            <input type="email" class="form-control" placeholder="ФИО руководителя">
+                          </div>
+                          <br>
+                          <div class="form-group">
+                            <label for="exampleFormControlInput1">ОГРНИП</label>
+                            <input type="email" class="form-control" placeholder="ОГРНИП">
+                          </div>
+                          <br>
+                        <br>
                     </div>
 
-                    <div class="tab">
-                        {{form.phone.label}} {{form.phone}}
-                        <br>
-                        <br> {{ form.email.label}} {{ form.email}}
-                        <br>
-                        <br> {{ form.city.label}} {{ form.city}}
-                        <br>
-                        <br>
-                    </div>
 
                     {% csrf_token %} {% if form.errors %} {% for field in form %} {% for error in field.errors %}
                     <div class="alert alert-danger">
@@ -190,7 +199,10 @@
         </div>
     </div>
 </body>
-<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js">
+
+
 </script>
 <script type='text/Javascript'>
     let currentTab = 0;
