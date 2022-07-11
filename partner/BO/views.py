@@ -28,6 +28,9 @@ from taggit.models import Tag
 from .models import Chat_room, Message
 from datetime import datetime
 
+from account.forms import CustomUserCreationForm
+
+
 def gen_menu(request):
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
@@ -395,3 +398,23 @@ def forgot_password_page(request):
 
 def partners_page(request):
     return render(request, 'showPartner.html')
+
+class SignUpView(CreateView):
+    print('работает')
+    form_class = CustomUserCreationForm
+    success_url = reverse_lazy('/')
+    template_name = 'signin.html'
+
+    def post(self, request, *args, **kwargs):
+        form = CustomUserCreationForm(request.POST)
+        print(request.POST)
+
+        if form.is_valid():
+            user = form.save(commit=True)
+            user.save()
+            print('kerr')
+            return HttpResponseRedirect("/accounts/login/")
+        else:
+            print(form.errors)
+            print("не ок")
+            return render(request, self.template_name, {'form':form})

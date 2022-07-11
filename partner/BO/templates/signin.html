@@ -121,7 +121,7 @@
     <div class="container mt-5">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
-                <form id="regForm" method="POST">
+                <form id="regForm" method="POST" action="/">
                     <h1 id="register">Signin Form</h1>
                     <div class="all-steps" id="all-steps">
                         <a onclick="surTab(0)">
@@ -157,25 +157,26 @@
                         <br>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Инн</label>
-                            <input type="email" class="form-control" placeholder="Инн">
+                            <input type="number" class="form-control" placeholder="Инн">
                           </div>
                           <br>
                           <div class="form-group">
                             <label for="exampleFormControlInput1">Наименование потсавщика</label>
-                            <input type="email" class="form-control" placeholder="Наименование потсавщика">
+                            <input type="" class="form-control" placeholder="Наименование потсавщика">
                           </div>
                           <br>
                           <div class="form-group">
                             <label for="exampleFormControlInput1">ФИО руководителя</label>
-                            <input type="email" class="form-control" placeholder="ФИО руководителя">
+                            <input type="" class="form-control" placeholder="ФИО руководителя">
                           </div>
                           <br>
                           <div class="form-group">
                             <label for="exampleFormControlInput1">ОГРНИП</label>
-                            <input type="email" class="form-control" placeholder="ОГРНИП">
+                            <input type="number" class="form-control" placeholder="ОГРНИП">
                           </div>
                           <br>
                         <br>
+                        <button type="submit">зарегистрироваться</button>
                     </div>
 
 
@@ -246,7 +247,7 @@ function surTab(n) {
 function fixStepIndicator(n) {
     let i, x = document.getElementsByClassName("step");
     for (i = 0; i <
-        x.length; i++) {
+        x.length-1; i++) {
         x[i].className = x[i].className.replace(" active", "");
     }
     x[n].className += " active";

@@ -31,7 +31,7 @@ urlpatterns = [
     path('login/', views.login_page),
     path('restorePassword/', views.forgot_password_page),
     path('', views.partners_page),
-    path('becomeCreator/', views.becomeCreator_page),
+    path('becomeCreator/', views.becomeCreator_page, name='becomeCreator'),
     path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
 
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
