@@ -25,16 +25,14 @@ def gen_menu():
     }
     return context
 
-
 class SignUpView(CreateView):
-    print('работает')
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('/')
     template_name = 'signin.html'
+    print("зашел")
 
     def post(self, request, *args, **kwargs):
         form = CustomUserCreationForm(request.POST)
-        print(request.POST)
 
         if form.is_valid():
             user = form.save(commit=True)
@@ -43,5 +41,24 @@ class SignUpView(CreateView):
             return HttpResponseRedirect("/accounts/login/")
         else:
             print(form.errors)
-            print("не ок")
             return render(request, self.template_name, {'form':form})
+
+# class SignUpView(CreateView):
+#     print('работает')
+#     form_class = CustomUserCreationForm
+#     success_url = reverse_lazy('/')
+#     template_name = 'signin.html'
+#
+#     def post(self, request, *args, **kwargs):
+#         form = CustomUserCreationForm(request.POST)
+#         print(request.POST)
+#
+#         if form.is_valid():
+#             user = form.save(commit=True)
+#             user.save()
+#             print('kerr')
+#             return HttpResponseRedirect("/accounts/login/")
+#         else:
+#             print(form.errors)
+#             print("не ок")
+#             return render(request, self.template_name, {'form':form})
