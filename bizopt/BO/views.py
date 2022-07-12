@@ -38,14 +38,14 @@ def gen_menu(request):
                 {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+                # {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'xpos': 'right', 'position': 'out', 'link': '', 'text': user.email},
-                {'xpos': 'right', 'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
+                # {'xpos': 'right', 'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
                 {'xpos': 'right', 'position': 'in', 'link': '/addTask/', 'text': 'Создать задачу'},
-                {'xpos': 'right', 'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
+                # {'xpos': 'right', 'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
                 {'xpos': 'right', 'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
                 {'xpos': 'right', 'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-                {'xpos': 'right', 'position': 'in', 'link': '/partners/', 'text': 'Сотрудничество'},
+                # {'xpos': 'right', 'position': 'in', 'link': '/partners/', 'text': 'Сотрудничество'},
                 {'xpos': 'right', 'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
 
             ]
@@ -57,7 +57,7 @@ def gen_menu(request):
                 {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
                 {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
+                # {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
                 {'xpos': 'right', 'position': 'out', 'link': '/accounts/login/', 'text': 'Войти'},
             ]
         }
@@ -68,7 +68,7 @@ def gen_submenu(request):
     tags = Tag.objects.all()
     context = {
             'submenu': [
-                {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
+                # {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
 
                 {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина' },
             ],
@@ -164,6 +164,9 @@ def goods_page(request):
 
 
 def resumes_page(request):
+    user_id = 0
+    if request.user.is_authenticated:
+        user_id = Account.objects.get(email=request.user.email).id
     context = gen_menu(request)
     creators = Creator.objects.all()
     persons = Account.objects.all()
@@ -182,6 +185,7 @@ def resumes_page(request):
                             'instagram':creator.instagram,
                             'tag':creator.tag,
                             'published':creator.published,
+                            'link': (user_id * creator.id) + user_id + creator.id
                             }
                            for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
@@ -581,9 +585,11 @@ def sertCardResume_page(request, username):
                             'cost': product.price,
                             'availability': product.availability,
                             'picture': product.picture,
-                            'id_creator': product.id_creator
+                            'id_creator': product.id_creator,
+
                             }
                            for product in products]
+
     context['link'] = (user.id * profile.id) + user.id + profile.id
     return render(request, 'cardResume.html', context)
 

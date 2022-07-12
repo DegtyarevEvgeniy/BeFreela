@@ -1,5 +1,5 @@
 {% for product in products %}
-{% if product.creator_id != user.id %}
+{% comment %} {% if product.creator_id != user.id %} {% endcomment %}
 <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2 rating_{{ product.rating_status }}" style="margin: 2% auto" uk-grid>
     <div class="uk-card-media-left uk-cover-container uk-padding">
         <img src="../../media/{{product.picture}}" width="500" height="180">
@@ -28,13 +28,17 @@
             </div>
             <br>
             <br>
-
+            {% if request.user.is_authenticated %}
             <a class="uk-button uk-button-default uk-width-1-2 uk-border-rounded" href="{{ product.id }}"
                 style="background-color:  #2D3995; color: white; ">ПОДРОБНЕЕ</a>
+            {% else %}
+            <a class="uk-button uk-button-default uk-width-1-2 uk-border-rounded" href="/accounts/login/"
+                style="background-color:  #2D3995; color: white; ">ПОДРОБНЕЕ</a>
+            {% endif %}
         </div>
     </div>
 </div>
-{% endif %}
+{% comment %} {% endif %} {% endcomment %}
 
 {% endfor %}
 
