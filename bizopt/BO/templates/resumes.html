@@ -19,7 +19,7 @@
 
                 {% for creator in creators %}
                 {% if creator.id != user.id %}
-                <div>
+                <div style="margin: 10px auto">
                     <div class="uk-card">
                         <div class="uk-card-header uk-flex uk-flex-middle" style="border: none;">
                             <div class="uk-cover-container" style="display: inline-block;">
@@ -28,31 +28,38 @@
                             </div>
                             <div class="uk-margin-left" style="display: inline-block;">
                                 <h2>{{creator.first_name}}</h2>
-                                <span>3,2 &nbsp;</span>
+                                 <span>3,2 &nbsp;</span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star checked"></span>
                                 <span class="fa fa-star"></span>
                                 <span class="fa fa-star"></span>
                                 <br>
-                                <br>
+                                <br> 
                                 <p>
-                                    <i class="fa fa-check uk-border-circle"
+                                     <i class="fa fa-check uk-border-circle"
                                         style="padding: 5px; color: white; background-color: green;"></i>
-                                    &nbsp; Проверенный пользователь</p>
+                                    &nbsp; Проверенный пользователь</p> 
                             </div>
 
                             <div class="uk-divider-vertical uk-margin-medium-left uk-margin-small-right"></div>
 
                             <div class="uk-margin-small-left">
+                                {% if request.user.is_authenticated %}
+                                <a class="uk-button uk-button-primary"href="../cardResume/{{creator.username}}">Посмотреть</a>
+                                {% else %}
                                 <a class="uk-button uk-button-primary"
-                                    href="../cardResume/{{creator.username}}">Посмотреть</a>
+                                    href="/accounts/login/">Посмотреть</a>
+                                    {% endif %}
                                 <br>
-                                <h5>доступные регионы</h5>
-                                <p class="uk-text-nowrap">Москва и Московская область Ближнее Подмосковье Украина</p>
+                                 <h5>доступные регионы</h5>
+                                <p class="uk-text-nowrap">Москва и Московская область Ближнее Подмосковье Украина</p> 
                             </div>
                         </div>
                         <div class="uk-card-body">
+                            <p class="uk-text-truncate">{{creator.description}}</p>
+                        </div>
+                         <div class="uk-card-body">
                             <div>
                                 <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
                                 <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
@@ -67,8 +74,8 @@
                             <br>
                             <br>
 
-                        </div>
-                        <div class="uk-card-footer" style="border: none;">
+                        </div> 
+                         <div class="uk-card-footer" style="border: none;">
                             <h3>Образование и опыт</h3>
                             <br>
                             <div class="uk-width-1-4" style="display: inline-block;">
@@ -105,15 +112,15 @@
                                 <p><b>Медсестра</b></p>
                                 <p>3 года</p>
                             </div>
-                        </div>
-                        <hr class="uk-divider-large">
+                        </div> 
                     </div>
+                    <hr class="uk-divider-large">
                 </div>
                 {% endif %}
                 {% endfor %}
             </div>
         </div>
-        <div style="width: 20%; height: 100%;">
+         <div style="width: 20%; height: 100%;">
             <div class="uk-margin-small-left">
             </div>
             <div>
@@ -167,7 +174,7 @@
             </div>
             <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
 
-        </div>
+        </div> 
         <!-- end of left menu -->
     </div>
 
