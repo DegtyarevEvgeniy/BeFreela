@@ -23,3 +23,4 @@ class SignUpView(CreateView):
         else:
             print(form.errors)
             return render(request, self.template_name, {'form':form})
+

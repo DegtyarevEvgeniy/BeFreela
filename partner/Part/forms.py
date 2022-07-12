@@ -1,9 +1,6 @@
 from django import forms
-from django.forms import ModelChoiceField
-
-from django.forms import ModelForm, TextInput, Textarea, Select, CharField
+from django.forms import ModelChoiceField, ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
-
 
 COUNTRY_CHOICE = [
     ('Afghanistan','Afghanistan'),
@@ -251,8 +248,107 @@ COUNTRY_CHOICE = [
     ('Zimbabwe','Zimbabwe'),
 ]
 
-class MyProfile(forms.Form):
-    select = forms.ModelChoiceField(
-        empty_label=None
-    )
 
+class ProductCreateForm(ModelForm):
+    class Meta:
+        model = Product_creator
+        fields = '__all__'
+        widgets = {
+            'product_name': TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': "Введите название товара",
+                'oninput': 'PassChecker(1)',
+            }),
+            'price': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+                'id': 'priceInput',
+                'oninput': 'recalc(this)',
+                'placeholder': 'Введите стоимость товара'
+            }),
+            'country': Select(attrs={
+                'class': 'input-group mt-2 mb-2',
+            }, choices=COUNTRY_CHOICE),
+
+            'brand': TextInput(attrs={
+                'class': 'form-control',
+                'id': 'brand',
+                'oninput': 'PassChecker(1)',
+                'placeholder': 'Введите бренд товара'
+            }),
+            'description': Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите описание товара'
+            }),
+            'width_product': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number'
+            }),
+            'height_product': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number'
+            }),
+            'length_product': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number'
+            }),
+            'width_packaging': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number'
+            }),
+            'height_packaging': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number'
+            }),
+            'length_packaging': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number'
+            }),
+
+        }
+
+class Resume(forms.Form):
+    description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.Textarea(attrs={
+        'class': "form-control",
+    }))
+    is_company = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+        'class': "form-check-input",
+        'onchange': "isCompany()",
+        'id': "isCompanyTrigger",
+    }))
+    company_name = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "Название компании",
+
+    }))
+    email = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+    }))
+    first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'value': "TROLOLO"
+    }))
+    cover = forms.ImageField(required=False)
+    telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "@tag",
+    }))
+    vk = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "https://vk.com/yourid",
+    }))
+    whatsapp = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': "+71234567890",
+    }))
+    instagram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
+        'class': "form-control",
+        'placeholder': " https://instagram.com/tag",
+    }))
+    tag = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
+        'class': "form-control",
+    }))
+    published = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
+        'class': "form-check-input",
+        'value': "1",
+    }))
