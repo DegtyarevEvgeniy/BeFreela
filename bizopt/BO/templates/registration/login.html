@@ -123,7 +123,8 @@
 		<div class="row d-flex justify-content-center align-items-center">
 			<div class="col-md-8">
 				<form method="post" id="regForm" action="{% url 'login' %}">
-					<h1 id="redistration"> Login here</h1>
+					<h1 style="font-size:30px" id="redistration">Добро пожаловть в</h1>
+					<h1>BeFreela</h1>
 					<div class="all-steps" id="all-steps">
 						<a href="">
 							<span class="step">
@@ -144,19 +145,18 @@
 						</p>
 						{% if form.errors %}
 						<div class="alert alert-danger" id="loginError" role="alert">
-							Your username and password didn't match. Please try again.	  
+							Ошибка в пароле или логин. Поробуйте еще раз.  
 						</div>					
 						{% endif %}
 					
 						{% if next %}
 						{% if user.is_authenticated %}
 						<div class="alert alert-warning" id="loginError" role="alert">
-							Your account doesn't have access to this page. To proceed,
-							please login with an account that has access.	  
+							У вашего аккаунта недостаточно прав. Что бы продолжыить, пожалуйста, войдите в акаунт с нужными правами.	  
 						</div>
 						{% else %}
 						<div class="alert alert-warning" id="loginError" role="alert">
-							Please login to see this page.	  
+							Пожалуйста войдите, что бы увидеть данную страниццу  
 						</div>
 						{% endif %}
 						{% endif %}

@@ -122,7 +122,7 @@
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-md-8">
                 <form id="regForm" method="POST">
-                    <h1 id="register">Signin Form</h1>
+                    <h1 id="register">Регистрация</h1>
                     <div class="all-steps" id="all-steps">
                         <a onclick="surTab(0)">
                             <span class="step">
@@ -175,6 +175,7 @@
                         <strong>{{ error|escape }}</strong>
                     </div>
                     {% endfor %} {% endfor %} {% endif %}
+                    <h7>Уже аккаунта? <a href="/accounts/login/">создай его</a></h7>
                     <div style="overflow:auto;" id="next-previous">
                         <div style="float:right;">
                             <button type="button" id="prevBtn" onclick="nextPrev(-1)">
