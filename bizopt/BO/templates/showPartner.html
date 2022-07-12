@@ -63,12 +63,11 @@
         </nav>
 
         <div class="uk-flex uk-flex-center uk-align-center uk-flex-column uk-margin-large-bottom">
-            <div class="uk-width-1-2@m" style="margin: 0 auto">
+            <div class="uk-width-2-3" style="margin: 0 auto">
                 <div class="uk-text-center">
                     <h2>Сотрудничество с BeFreela</h2>
                 </div>
-                <div class="uk-card uk-card-default uk-border-rounded"
-                    style="width:50%; margin: 0 auto; padding: 20px 30px 0 30px;">
+                <div class="uk-card uk-card-default uk-border-rounded" style="width:50%; margin: 0 auto; padding: 3%;">
                     <div class="uk-card-header" style="border:none; padding-bottom: 0;">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
@@ -77,16 +76,32 @@
                             </div>
                         </div>
                     </div>
-                    <div class="uk-card-body" style="padding-bottom: 0px; padding-top: 20px;">
-                        <form>
+                    <div class="uk-card-body" style="padding-bottom: 0px; padding-top: 2%;">
                             <label for="phonenumber" class="uk-text-muted">Контактный телефон</label>
-                            <input class="uk-input uk-width-1-1 uk-border-rounded" name="phonenumber" type="text"
-                                placeholder="+7 999-999-99-99">
-                            <div class="uk-flex uk-flex-center uk-align-center" style="margin-top: 20px">
-                                <button class="uk-button uk-button-primary uk-width-1-1 uk-border-rounded">Получить
-                                    код</button>
+                            <div class="uk-inline">
+                                <select class="uk-select uk-width-1-5" id="phoneCode"
+                                    style="padding: 0 0 0 4%; background-image: none;" onchange="validateCountry(this)">
+                                    <option value="+7">+7</option>
+                                    <option value="+375">+375</option>
+                                    <option value="+996">+996</option>
+                                    <option value="+374">+374</option>
+                                </select>
+
+                                <input class="uk-input uk-border-rounded" id="phoneNumber" style="width: 50%;"
+                                    name="phonenumber" type="text" placeholder="(000) 000 00 00">
+
+                                <select class="uk-select uk-width-1-5" id="Country"
+                                    style="padding: 0 0 0 5%; background-image: none;" onchange="validatePhoneCode(this)">
+                                    <option value="Россия" default>🇷🇺</option>
+                                    <option value="Казахстан">🇰🇿</option>
+                                    <option value="Беларусь">🇧🇾</option>
+                                    <option value="Киргизия">🇰🇬</option>
+                                    <option value="Армения">🇦🇲</option>
+                                </select>
                             </div>
-                        </form>
+                            <div class="uk-flex uk-flex-center uk-align-center" style="margin-top: 20px">
+                                <button class="uk-button uk-button-primary uk-width-1-1 uk-border-rounded" id="registerBtn" disabled>Получить
+                                    код</button>
                     </div>
                 </div>
             </div>
@@ -322,6 +337,97 @@
             scrollTop: $($.attr(this, 'href')).offset().top
         }, 500);
     });
+
+    function validateCountry(el) {
+        let flag = document.getElementById('Country');
+        let code = el.value;
+        if (code == "+374") {
+            flag.value = "Армения";
+        } else if (code == "+375") {
+            flag.value = "Беларусь";
+        } else if (code == "+996") {
+            flag.value = "Киргизия";
+        } else {
+            flag.value = "Россия";
+        }
+        console.log(flag.value, code)
+
+    }
+
+    function validatePhoneCode(el) {
+        let code = document.getElementById('phoneCode');
+        let flag = el.value
+        if (["Россия", "Казахстан"].includes(flag)) {
+            code.value = "+7";
+        } else if (flag == "Беларусь") {
+            code.value = "+375";
+        } else if (flag == "Киргизия") {
+            code.value = "+996";
+        } else {
+            code.value = "+374";
+        }
+        console.log(code.value, flag)
+    }
+
+
+    const isNumericInput = (event) => {
+        const key = event.keyCode;
+        return ((key >= 48 && key <= 57) || // Allow number line
+            (key >= 96 && key <= 105) // Allow number pad
+        );
+    };
+
+    const isModifierKey = (event) => {
+        const key = event.keyCode;
+        document.getElementById('registerBtn').disabled=true;
+        return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
+            (key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
+            (key > 36 && key < 41) || // Allow left, up, right, down
+            (
+                // Allow Ctrl/Command + A,C,V,X,Z
+                (event.ctrlKey === true || event.metaKey === true) &&
+                (key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+            )
+    };
+
+    const enforceFormat = (event) => {
+        // Input must be of a valid number format or a modifier key, and not longer than ten digits
+        document.getElementById('registerBtn').disabled=true;
+        if (!isNumericInput(event) && !isModifierKey(event)) {
+            event.preventDefault();
+        }
+    };
+
+    const formatToPhone = (event) => {
+        document.getElementById('registerBtn').disabled=true;
+        if (isModifierKey(event)) {
+            return;
+        }
+
+        const input = event.target.value.replace(/\D/g, '').substring(0, 10); // First ten digits of input only
+        const areaCode = input.substring(0, 3);
+        const middle = input.substring(3, 6);
+        const last1 = input.substring(6, 8);
+        const last2 = input.substring(8, 10);
+
+        if (input.length > 9){
+            document.getElementById('registerBtn').disabled=false;
+            event.target.value = `(${areaCode}) ${middle} ${last1} ${last2}`;
+        } else if (input.length > 6) {
+            event.target.value = `(${areaCode}) ${middle} ${last1} ${last2}`;
+            document.getElementById('registerBtn').disabled=true;
+        } else if (input.length > 3) {
+            document.getElementById('registerBtn').disabled=true;
+            event.target.value = `(${areaCode}) ${middle}`;
+        } else if (input.length > 0) {
+            document.getElementById('registerBtn').disabled=true;
+            event.target.value = `(${areaCode}`;
+        }
+    };
+
+    const inputElement = document.getElementById('phoneNumber');
+    inputElement.addEventListener('keydown', enforceFormat);
+    inputElement.addEventListener('keyup', formatToPhone);
 </script>
 
 </html>
