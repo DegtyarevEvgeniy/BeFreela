@@ -151,7 +151,7 @@ def goods_page(request):
             # print("kyyyyy")
     print(products)
     context['products'] = [{'id': product.id,
-                            'creator_id': product.id_creator,
+                            # 'creator_id':  Account.objects.get(email=product.id_creator).id, Раскоментировать если не надо видеть свои карточки
                             'product_name': product.product_name,
                             'cost': product.price,
                             'availability': product.availability,

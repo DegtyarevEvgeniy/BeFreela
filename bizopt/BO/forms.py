@@ -266,7 +266,6 @@ class ProductCreateForm(ModelForm):
                 'type': 'number',
                 'id': 'priceInput',
                 'oninput': 'recalc(this)',
-                'onchange':'PassChecker(2)',
                 'placeholder': 'Введите стоимость товара'
             }),
             'country': Select(attrs={
