@@ -60,9 +60,9 @@
         <ul class="uk-navbar-nav">
             {% for item in menu %}
             {% if item.xpos == 'left' %}
-            {% if item.text == 'BeeFreela' %}
+            {% if item.text == 'BeFreela' %}
             <li class="uk-active"><a href="{{item.link}}">
-                    <h1>{{item.text}}</h1>
+                    <h1 class="uk-margin-remove">{{item.text}}</h1>
                 </a></li>
             {% else %}
             <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>

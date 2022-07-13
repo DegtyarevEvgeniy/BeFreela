@@ -10,17 +10,17 @@
 <div class="uk-card uk-card-default" style="margin: 2% auto">
     <div class="uk-flex uk-flex-middle uk-flex-left"
         style="padding: 20px 5%; background-color: rgba(222, 222, 222, 0.5);">
-        <div class="uk-width-2-5 uk-text-center">
+        <div class="uk-width-1-2 uk-text-center">
             <img class="uk-border-circle" width="500" height="100" src="{{ profile.cover.url }}">
         </div>
-        <div class="uk-width-3-5 uk-flex uk-flex-left">
-            <div class="uk-width-4-5">
+        <div class="uk-width-1-2 uk-flex uk-flex-left">
+            <div>
                 <div class="uk-flex uk-flex-between uk-flex-center uk-margin-remove-bottom">
                     <div>
                         <h3 class="uk-card-title" style="margin-bottom: 5px"> {{profile.first_name }}</h3>
                         <p style="margin-top: 5px">{{ profile.email }}</p>
                     </div>
-                    <div uk-grid style="width: 150px;">
+                    {% comment %} <div uk-grid style="width: 150px;">
                         <a class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
                             style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #229ED9;">
                             <i class="fab fa-telegram"></i>
@@ -39,7 +39,7 @@
                             style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #25d366;">
                             <i class="fab fa-whatsapp"></i>
                         </button>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
 
                 <p class="uk-margin-remove">О себе</p>
@@ -47,7 +47,7 @@
                     <span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9734</span></p> -->
                 <p class="uk-text-break uk-width-1" style="margin-top: 10px">{{ profile.description }}</p>
 
-                <a type="submit" class="uk-button uk-button-default" href="/chat/{{link}}">Написать</a>
+                <a type="submit" class="uk-button uk-button-primary" href="/chat/{{link}}">Написать</a>
             </div>
             
         </div>

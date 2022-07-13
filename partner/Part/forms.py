@@ -1,9 +1,6 @@
 from django import forms
-from django.forms import ModelChoiceField
-
-from django.forms import ModelForm, TextInput, Textarea, Select, CharField
+from django.forms import ModelChoiceField, ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
-from taggit.models import Tag
 
 COUNTRY_CHOICE = [
     ('Afghanistan','Afghanistan'),
@@ -251,6 +248,7 @@ COUNTRY_CHOICE = [
     ('Zimbabwe','Zimbabwe'),
 ]
 
+
 class ProductCreateForm(ModelForm):
     class Meta:
         model = Product_creator
@@ -308,49 +306,6 @@ class ProductCreateForm(ModelForm):
             }),
 
         }
-
-    # product_name = forms.CharField(required=True)
-    # cost = forms.CharField(required=True)
-    # availability = forms.ChoiceField()
-    # description = forms.CharField()
-    # picture = forms.ImageField()
-
-
-
-class MyProfile(forms.Form):
-    select = forms.ModelChoiceField(
-        queryset=Tag.objects.all(),
-        empty_label=None
-    )
-
-
-class addTasks(forms.Form):
-    task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Название',
-        'id': "floatingInputGrid",
-    }))
-
-    select = forms.ModelChoiceField(queryset=Tag.objects.all(), widget =forms.Select(attrs = {
-        'class': "form-select",
-    }))
-
-
-    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={
-        'class': 'form-control',
-        'placeholder': 'Описание',
-        'style': "height: 100px",
-        'id': "floatingTextarea2",
-
-    }))
-    price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control'
-    }))
-    date = forms.DateField(label='Дата', widget=forms.DateInput(attrs={
-        'class': 'form-control',
-        'type': 'date'
-    }))
-
 
 class Resume(forms.Form):
     description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.Textarea(attrs={

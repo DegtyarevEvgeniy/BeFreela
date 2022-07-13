@@ -1,0 +1,125 @@
+<div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+        <form id="regForm" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h1 id="register">Данные продавца</h1>
+            <div class="all-steps" id="all-steps">
+                        <a onclick="surTab(0)" style="margin: 0 5px ;">
+                            <span class="step">
+								<i class="fa fa-user"></i>
+							</span>
+                        </a>
+                        <a onclick="surTab(1)" style="margin: 0 5px ;">
+                            <span class="step">
+								<i class="fa fa-unlock-alt"></i>
+							</span>
+                        </a>
+
+                    </div>
+
+            <!-- start of bloc 1 -->
+            <div class="tab" style="display: block;">
+                <label class="labels">ИНН</label>
+                <input type="text" class="form-control" name="INN" id="" value="{{ partner.inn }}">
+                <br>
+                <label class="labels">Краткое наиименование</label>
+                <input type="text" class="form-control" name="short_name" id="" value="{{ partner.name_small }}">
+                <br>
+                <label class="labels">Расчетный счет</label>
+                <input type="text" class="form-control" name="payment_account" id="" value="{{ partner.payment_account }}">
+                <br>
+                <label class="labels">Форма регистрации</label>
+                <div class="input-group mb-3">
+                    <select name="reg_form" class="form-select" id="inputGroupSelect02">
+                      <option value="ИП без НДС">ИП без НДС</option>
+                      <option value="ИП с НДС">ИП с НДС</option>
+                      <option value="ИП на НПД">ИП на НПД</option>
+                      <option value="Самозанятый">Самозанятый</option>
+                    </select>
+                  </div>
+                <br>
+                <br>
+            </div>
+            <!-- end of bloc 1 -->
+
+            <!-- start of bloc 2 -->
+            <div class="tab" >
+                <label class="labels">Имя</label>
+                <input type="text" class="form-control" name="my_first_name" id="" value="{{ partner.first_name }}">
+                <br>
+                <label class="labels">Фамилия</label>
+                <input type="text" class="form-control" name="my_last_name" id="" value="{{ partner.last_name }}">
+                <br>
+                <br>
+            </div>
+            <!-- end of bloc 2 -->
+            
+
+
+            <div style="overflow:auto;" id="next-previous">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button" onclick="nextPrev(-1)">
+                        <i class="fa fa-angle-double-left"></i>
+                    </button>
+                    <button name="partner" type="button" id="nextBtn" style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button uk-button-primary" onclick="nextPrev(1)">
+                        <i class="fa fa-angle-double-right"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+let currentTab = 0;
+document.addEventListener("DOMContentLoaded", function(event) {
+    showTab(currentTab);
+});
+
+function showTab(n) {
+    let x = document.getElementsByClassName("tab");
+    let header = document.getElementById('register');
+    console.log(n)
+    x[n].style.display = "block";
+    if (n === 0) {
+        document.getElementById("prevBtn").style.display = "none";
+        header.innerHTML = 'Данные продавца'
+    } else {
+        document.getElementById("prevBtn").style.display = "inline";
+        header.innerHTML = 'Мои данные'
+    }
+    if (n === (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+    } else {
+        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+    }
+    fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+    let x = document.getElementsByClassName("tab");
+    x[currentTab].style.display = "none";
+    currentTab = currentTab + n;
+    if (currentTab === x.length) {
+        document.getElementById('nextBtn').type = "submit"
+    }
+    showTab(currentTab);
+}
+
+function surTab(n) {
+    let x = document.getElementsByClassName("tab");
+    x[currentTab].style.display = "none";
+    currentTab = n;
+    showTab(currentTab);
+}
+
+function fixStepIndicator(n) {
+    let i, x = document.getElementsByClassName("step");
+    for (i = 0; i <
+        x.length; i++) {
+        x[i].className = x[i].className.replace(" active", "");
+    }
+    x[n].className += " active";
+}
+</script>
