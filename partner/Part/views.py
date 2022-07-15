@@ -1,5 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from account.models import Account
+
 
 def gen_menu(request):
     if request.user.is_authenticated:

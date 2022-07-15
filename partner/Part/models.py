@@ -108,10 +108,10 @@ class Partner(models.Model):
     payment_account = models.CharField(max_length=200, default='-')
 
 class Chat_room(models.Model):
-    name = models.CharField(max_length=100000)
+    name = models.CharField(max_length=20)
 class Message(models.Model):
-    value = models.CharField(max_length=1000000)
+    value = models.CharField(max_length=20)
     date = models.DateTimeField(default=datetime.now, blank=True)
-    user = models.CharField(max_length=1000000)
-    room = models.CharField(max_length=1000000)
+    user = models.CharField(max_length=20)
+    room = models.CharField(max_length=20)
 
