@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+{% comment %} <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
     <nav class="uk-navbar-container" uk-navbar
         style="position: relative; z-index: 980; padding: 0 10%; background-color: #f8f8f8 !important;">
 
@@ -64,10 +64,10 @@
         </div>
 
     </nav>
-</div>
+</div> {% endcomment %}
 
 <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-    uk-slideshow="min-height: 300; max-height: 600; animation: push">
+    uk-slideshow="min-height: 300; max-height: 600; animation: push" id="endstickness">
 
     <ul class="uk-slideshow-items">
         <li>
@@ -248,11 +248,18 @@
 </footer>
 <!-- Footer -->
 
-<script type="text/javascript">
-    function red(el) {
-        document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
-        console.log("creators/goods/search/" + el.value)
-    }
+<script>
+
+    // function red(el) {
+    //     document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
+    // }
+
+    document.getElementById('search_pole').addEventListener('keyup', function(event) {
+        document.getElementById('searchBtn').href = "/creators/goods/search/" + document.getElementById('search_pole').value;
+        if (event.keyCode == 13) {
+            document.getElementById('searchBtn').click();
+        }
+    });
 </script>
 
 {% endblock %}

@@ -1,102 +1,120 @@
-<nav class="uk-navbar-container  uk-text-middle" uk-navbar style="background-color: #d3d2d2;">
-    {% if user.is_authenticated %}
+<div style="margin: 0 auto; width: 80%">
+    <!-- {% if user.is_authenticated %} -->
+    <div class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%">
 
-    <div class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            {% for item in menu %}
-            {% if item.xpos == 'left' %}
-            {% if item.text == 'BeFreela' %}
-            <li class="uk-active"><a href="{{item.link}}">
-                    <h1 class="uk-margin-remove">{{item.text}}</h1>
-                </a></li>
-            {% else %}
-            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-
-        </ul>
+        <p style="margin: 0px"> Регион <b>Москва</b></p>
+        <a href="/becomeCreator" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
+            партнером</a>
     </div>
-
-
-    <div class="uk-navbar-center">
-        <ul class="uk-navbar-nav">
-
-            {% for item in menu %}
-            {% if item.xpos == 'center' %}
-            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-            {% endif %}
-            {% endfor %}
-
-        </ul>
-    </div>
-
-    <div class="uk-navbar-right">
-        <ul class="uk-navbar-nav">
-
-            <li class="uk-active">
-                {% for item in menu %}
-                {% if item.xpos == 'right' and item.position == 'out' %}
-                <a href="{{item.link}}">{{item.text}}</a>
-                {% endif %}
-                {% endfor %}
-                <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav">
-                        {% for item in menu %}
-                        {% if item.xpos == 'right' and item.position == 'in' %}
-                        <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                    </ul>
+    <div style="width: 100%; border-top: 2px solid"></div>
+    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+        <nav class="uk-navbar-container" uk-navbar style="background: rgba(255, 255, 255, 0.7); border-bottom-left-radius: 15px; border-bottom-right-radius: 15px">
+            <div class="uk-navbar-left">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a href="/">
+                            <h1 class="uk-margin-remove">BeFreela</h1>
+                        </a>
+                        <!-- <div class="sidemenu">
+                            <ul>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                                <li>asd</li>
+                            </ul>
+                        </div> -->
+                    </li>
+                    <li class="uk-active"><a href="creators/cardResume/"
+                            style="font-size: 20px; text-transform: none;">Бренды</a></li>
+                    <li class="uk-active"><a href="/tasks/"
+                            style="font-size: 20px; text-transform: none;">Мастерская</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="uk-navbar-right">
+                <div class="uk-search uk-search-default">
+                    <a type="submit" href="" id="searchBtn" uk-search-icon></a>
+                    <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
                 </div>
-            </li>
-
-        </ul>
+                <ul class="uk-navbar-nav">
+                    <li class="uk-active">
+                        <a href="/orders/" uk-icon="icon: bag"></a>
+                    </li>
+                    <li class="uk-active">
+                        <a uk-icon="icon: user"></a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li>
+                                    <p>{{user.email}}</p>
+                                </li>
+                                <li class="uk-nav-divider"></li>
+                                <li class="uk-active"><a href="/addTask/">Создать задачу</a></li>
+                                <li class="uk-active"><a href="/edit/">Настройки профиля</a></li>
+                                <li class="uk-active"><a href="/logout/"></a>Выйти</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
     </div>
+    <!-- {% else %}
+    <form class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%">
+        <p style="margin: 0px"> Регион <b>Москва</b></p>
+        <button class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
+            партнером</button>
+    </form>
+    <div style="width: 100%; border-top: 2px solid"></div>
+    <nav class="uk-navbar-container" uk-navbar="mode: click" style="background: none">
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active">
+                    <a href="#">
+                        <h1 class="uk-margin-remove">BeFreela</h1>
+                    </a>
+                </li>
+                <li class="uk-active"><a href="#" style="font-size: 20px; text-transform: none;">Бренды</a></li>
+                <li class="uk-active"><a href="#" style="font-size: 20px; text-transform: none;">Мастрерская</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <form class="uk-search uk-search-default">
+                <a href="" uk-search-icon></a>
+                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search">
+            </form>
+            <ul class="uk-navbar-nav">
+                <li class="uk-active">
+                    <a href="#" uk-icon="icon: bag"></a>
+                </li>
+                <li class="uk-active">
+                    <a href="#" uk-icon="icon: user"></a>
 
-    {% else %}
+                </li>
+            </ul>
+        </div>
+    </nav>
+    {% endif %} -->
+</div>
 
-    <div class="uk-navbar-left">
-        <ul class="uk-navbar-nav">
-            {% for item in menu %}
-            {% if item.xpos == 'left' %}
-            {% if item.text == 'BeFreela' %}
-            <li class="uk-active"><a href="{{item.link}}">
-                    <h1 class="uk-margin-remove">{{item.text}}</h1>
-                </a></li>
-            {% else %}
-            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
+<style>
 
-        </ul>
-    </div>
+    .sidemenu{
+        position: absolute;
+        height: 300px;
+        width: 400px;
+        border: 1px solid;
+        z-index: 999;
+        background-color: white;
+    }
+    .sidemenu > li{
+        list-style-type: "|";
 
+    }
 
-    <div class="uk-navbar-center">
-        <ul class="uk-navbar-nav">
-
-            {% for item in menu %}
-            {% if item.xpos == 'center' %}
-            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-            {% endif %}
-            {% endfor %}
-
-        </ul>
-    </div>
-
-    <div class="uk-navbar-right">
-        <ul class="uk-navbar-nav">
-
-            {% for item in menu %}
-            {% if item.xpos == 'right' %}
-            <li class="uk-active"><a href="{{item.link}}">{{item.text}}</a></li>
-            {% endif %}
-            {% endfor %}
-
-        </ul>
-    </div>
-
-    {% endif %}
-</nav>
+</style>

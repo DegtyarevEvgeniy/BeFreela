@@ -32,44 +32,16 @@ def gen_menu(request):
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
 
-        context = {
-            'user': Account.objects.get(email=request.user.email),
-            'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'xpos': 'right', 'position': 'out', 'link': '', 'text': user.email},
-                {'xpos': 'right', 'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
-                {'xpos': 'right', 'position': 'in', 'link': '/addTask/', 'text': 'Создать задачу'},
-                {'xpos': 'right', 'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
-                {'xpos': 'right', 'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
-                {'xpos': 'right', 'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-                {'xpos': 'right', 'position': 'in', 'link': '/partners/', 'text': 'Сотрудничество'},
-                {'xpos': 'right', 'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
+        return {'user': Account.objects.get(email=request.user.email),}
 
-            ]
-        }
     else:
-        context = {
-
-            'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'xpos': 'right', 'position': 'out', 'link': '/accounts/login/', 'text': 'Войти'},
-            ]
-        }
-
-    return context
+        return {}
 
 def gen_submenu(request):
     tags = Tag.objects.all()
     context = {
             'submenu': [
                 {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
-
                 {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина' },
             ],
             'tags': [{'text': tag}
@@ -526,7 +498,7 @@ def employers_page(request):
 
 
 def index_page(request):
-    context = {**gen_menu(request), **gen_submenu(request)}
+    context = gen_menu(request)
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
@@ -603,7 +575,7 @@ def cardProduct_page(request, product_id):
     df = DateFormat(dt)
     df.format(get_format('DATE_FORMAT'))
 
-    context = {**gen_menu(request), **gen_submenu(request)}
+    context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
 
     try:
