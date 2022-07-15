@@ -110,11 +110,11 @@
                                 <h2 class="uk-modal-title">Подтверждение</h2>
                                 <form method="POST" action="">
                                     <p>На ваш номер телефона был отправлен шестизначный код,<br> введите его в поле ниже</p>
-                                    <input maxlength="6" class="uk-input uk-border-rounded" id="my-input" style="width: 50%;"
+                                    <input maxlength="6" class="uk-input uk-border-rounded" id="codePhone" style="width: 50%;"
                                            name="code" type="text" placeholder="000000" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" >
                                     {% csrf_token %}
-                                    <p class="uk-text-right">
-                                        <button type='button' id="my-button" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
+                                    <p class="">
+                                        <button type='button' id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
                                     </p>
                                 </form>
                             </div>
@@ -341,19 +341,23 @@
                 <div>
             </div>
         </div>
+        </div>
     </section>
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
 <script>
-    var checkInput = (e) => {
-        const content = $("#my-input").val().length;
-        $('#my-button').prop('disabled', content === '');
-    };
-
-
-    $(document).on('keyup', '#my-input', checkInput);
+    $(function() {
+        $("#codePhone").on("keyup", function() {
+            if($("#codePhone").val().length === 6) {
+                $("#codeButton").prop("disabled", false);
+            } else {
+                $("#codeButton").prop("disabled", true);
+            }
+        });
+    });
 
     $(document).on('click', 'a[href^="#"]', function (event) {
         event.preventDefault();
