@@ -1,5 +1,5 @@
 <div style="margin: 0 auto; width: 80%">
-    <!-- {% if user.is_authenticated %} -->
+    {% if user.is_authenticated %}
     <div class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%">
 
         <p style="margin: 0px"> Регион <b>Москва</b></p>
@@ -30,7 +30,7 @@
                             </ul>
                         </div> -->
                     </li>
-                    <li class="uk-active"><a href="creators/cardResume/"
+                    <li class="uk-active"><a href="/creators/resumes/"
                             style="font-size: 20px; text-transform: none;">Бренды</a></li>
                     <li class="uk-active"><a href="/tasks/"
                             style="font-size: 20px; text-transform: none;">Мастерская</a>
@@ -56,7 +56,7 @@
                                 <li class="uk-nav-divider"></li>
                                 <li class="uk-active"><a href="/addTask/">Создать задачу</a></li>
                                 <li class="uk-active"><a href="/edit/">Настройки профиля</a></li>
-                                <li class="uk-active"><a href="/logout/"></a>Выйти</li>
+                                <li class="uk-active"><a href="/logout/">Выйти</a></li>
                             </ul>
                         </div>
                     </li>
@@ -64,11 +64,11 @@
             </div>
         </nav>
     </div>
-    <!-- {% else %}
+     {% else %}
     <form class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%">
         <p style="margin: 0px"> Регион <b>Москва</b></p>
-        <button class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
-            партнером</button>
+        <a class="uk-button uk-button-text" style="text-transform: none; font-size: medium;" href="/accounts/login/">Стать
+            партнером</a>
     </form>
     <div style="width: 100%; border-top: 2px solid"></div>
     <nav class="uk-navbar-container" uk-navbar="mode: click" style="background: none">
@@ -79,27 +79,27 @@
                         <h1 class="uk-margin-remove">BeFreela</h1>
                     </a>
                 </li>
-                <li class="uk-active"><a href="#" style="font-size: 20px; text-transform: none;">Бренды</a></li>
-                <li class="uk-active"><a href="#" style="font-size: 20px; text-transform: none;">Мастрерская</a></li>
+                <li class="uk-active"><a href="/creators/resumes/" style="font-size: 20px; text-transform: none;">Бренды</a></li>
+                <li class="uk-active"><a href="/accounts/login/" style="font-size: 20px; text-transform: none;">Мастрерская</a></li>
             </ul>
         </div>
         <div class="uk-navbar-right">
-            <form class="uk-search uk-search-default">
-                <a href="" uk-search-icon></a>
-                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search">
-            </form>
+            <div class="uk-search uk-search-default">
+                <a type="submit" href="" id="searchBtn" uk-search-icon></a>
+                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
+            </div>
             <ul class="uk-navbar-nav">
                 <li class="uk-active">
-                    <a href="#" uk-icon="icon: bag"></a>
+                    <a href="/accounts/login/" uk-icon="icon: bag"></a>
                 </li>
                 <li class="uk-active">
-                    <a href="#" uk-icon="icon: user"></a>
+                    <a href="/accounts/login/" uk-icon="icon: user"></a>
 
                 </li>
             </ul>
         </div>
     </nav>
-    {% endif %} -->
+    {% endif %} 
 </div>
 
 <style>
