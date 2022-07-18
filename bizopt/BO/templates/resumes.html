@@ -9,204 +9,70 @@
 </head>
 
 <body>
-    <!-- start of left menu -->
-
-    <div class="uk-margin-large-left uk-margin-medium-top uk-flex">
-        <br>
-        <br>
-        <div id="content" class="row uk-padding-large" style="margin-top: 50px; width: 80%;">
-            <div class="uk-card uk-card-default uk-grid-collapse" uk-grid>
-
-                {% for creator in creators %}
-                {% if creator.id != user.id %}
-                <div style="margin: 10px auto">
-                    <div class="uk-card">
-                        <div class="uk-card-header uk-flex uk-flex-middle" style="border: none;">
-                            <div class="uk-cover-container" style="display: inline-block;">
-                                <img src="../../media/{{creator.cover}}" alt="" uk-cover>
-                                <canvas width="200" height="200"></canvas>
-                            </div>
-                            <div class="uk-margin-left" style="display: inline-block;">
-                                <h2>{{creator.first_name}}</h2>
-                                 <span>3,2 &nbsp;</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <br>
-                                <br> 
-                                <p>
-                                     <i class="fa fa-check uk-border-circle"
-                                        style="padding: 5px; color: white; background-color: green;"></i>
-                                    &nbsp; Проверенный пользователь</p> 
-                            </div>
-
-                            <div class="uk-divider-vertical uk-margin-medium-left uk-margin-small-right"></div>
-
-                            <div class="uk-margin-small-left">
-                                {% if request.user.is_authenticated %}
-                                <a class="uk-button uk-button-primary"href="../cardResume/{{creator.username}}">Посмотреть</a>
-                                {% else %}
-                                <a class="uk-button uk-button-primary"
-                                    href="/accounts/login/">Посмотреть</a>
-                                    {% endif %}
-                                <br>
-                                 <h5>доступные регионы</h5>
-                                <p class="uk-text-nowrap">Москва и Московская область Ближнее Подмосковье Украина</p> 
-                            </div>
-                        </div>
-                        <div class="uk-card-body">
-                            <p class="uk-text-truncate">{{creator.description}}</p>
-                        </div>
-                         <div class="uk-card-body">
-                            <div>
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <br>
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                            </div>
-                            <br>
-                            <br>
-
-                        </div> 
-                         <div class="uk-card-footer" style="border: none;">
-                            <h3>Образование и опыт</h3>
-                            <br>
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-                        </div> 
-                    </div>
-                    <hr class="uk-divider-large">
+    <div style="width: 90%; margin: auto; margin-top: 3%">
+        <div style="margin-bottom: 3%">
+            <h1>Бренды</h1>
+            <h3>Здесь ты можешь найти все бренды, которые продают у нас на площадке<br>В профиле бренда ты найдешь информацию и товары бренда</h3>
+        </div>
+        <div class="uk-flex-column brandsList">
+            <div class="uk-flex brandLine">
+                <div style="width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
                 </div>
-                {% endif %}
-                {% endfor %}
+                <div style=" width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+                <div style=" width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+            </div>
+            <div class="uk-flex brandLine">
+                <div style="width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+                <div style=" width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+                <div style=" width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+            </div>
+            <div class="uk-flex brandLine">
+                <div style="width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+                <div style=" width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
+                <div style=" width: 30%">
+                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
+                </div>
             </div>
         </div>
-         <div style="width: 20%; height: 100%;">
-            <div class="uk-margin-small-left">
-            </div>
-            <div>
-                <hr style="background-color: black; height: 3px; width: 80%">
-                <div class="textStyleHeader textAll uk-margin-medium-bottom">
-                    <p>Рейтинг продавца</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span></label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value2">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span></label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span></label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value2">
-                            <label>Не важно</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="textStyleHeader textAll">
-                    <p>Исполнитель</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>ИП</label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>ООО</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
-
-        </div> 
-        <!-- end of left menu -->
     </div>
-
 </body>
 
 
+
 <style>
-    .textStyleHeader p {
-        font-family: 'Inter';
-        font-size: 20px;
-        font-style: normal;
-        line-height: 15px;
-
+    .brandLine div img:hover {
+        box-shadow: 0px 0px 150px #000000;
+        z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.2);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.2);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.2);
+        transition: all 200ms ease-in;
+        transform: scale(1.2);
     }
-
-    .textStyleHeaderRegion label {
-        font-family: 'Inter';
-        font-size: 18px;
-        font-style: normal;
-        line-height: 15px;
-        margin-bottom: 5px;
+    .brandLine div {
+        margin-right: 1%;
+        margin-left: 1%
     }
-
-    .textAll label {
-        font-family: 'Inter';
-        font-style: normal;
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-
-    .checked {
-        color: orange;
+    .brandsList .brandLine {
+        margin-bottom: 2%;
     }
 </style>
 <script src="js/uikit-icons.min.js"></script>
