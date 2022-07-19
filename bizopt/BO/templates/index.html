@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% comment %} <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+<!-- <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
     <nav class="uk-navbar-container" uk-navbar
         style="position: relative; z-index: 980; padding: 0 10%; background-color: #f8f8f8 !important;">
 
@@ -64,12 +64,12 @@
         </div>
 
     </nav>
-</div> {% endcomment %}
+</div> -->
 
-<div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1"
-    uk-slideshow="min-height: 300; max-height: 600; animation: push" id="endstickness">
+<div class="uk-position-relative uk-visible-toggle uk-light" style="width: 80%; margin: 1% auto;" tabindex="-1"
+    uk-slideshow="min-height: 300; max-height: 400; animation: push" id="endstickness">
 
-    <ul class="uk-slideshow-items">
+    <ul class="uk-slideshow-items" style="border-radius: 10px;">
         <li>
             <img src="https://avatars.mds.yandex.net/get-adfox-content/2804317/220422_market_1735978_5171730_1.a3a05e65f6b45e45941b3a3c64cbe95e.jpg/optimize.webp"
                 alt="" uk-cover>
@@ -93,61 +93,87 @@
 
 
 
-<div class="uk-section uk-section-default">
-    <div class="uk-container">
-        <h2>Скидки</h2>
-        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
-            <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-3@m uk-grid">
 
-                {%for product in products %}
 
-                <li>
-                    <div class="uk-panel" style="color: black">
-                        <a href="creators/goods/{{ product.id }}"
-                            class="uk-display-inline-block uk-card uk-card-body uk-card-hover uk-link-toggle uk-width-medium">
-                            <img src="{{ product.picture.url }}" width="1800" height="1200" alt="">
-                            <h3 class="uk-card-title uk-text-truncate">{{ product.product_name }}</h3>
-                            <p class="uk-text-truncate">{{ product.description }}</p>
-                            <p>{{ product.cost }}</p>
-                        </a>
+
+<div class="uk-section uk-section-default" style="width: 80%; margin: 0 auto;">
+    <div class="uk-container uk-flex uk-flex-around" style="margin: 10% auto">
+
+        <div class="uk-width-2-5 uk-card uk-card-hover Дизайнерска_Одежда">
+            <div class="card-link Дизайнерска_Одежда">
+                <div class="uk-card uk-card-default  Дизайнерска_Одежда">
+                    <div class="uk-card-body Дизайнерска_Одежда">
+                        <h3 class="uk-card-title">Дизайнерска Одежда</h3>
+                        <p style="margin: 2px auto">Всегда мечтали выделяться из толпы ярким луком?</p>
+                        <p style="margin: 2px auto"> Тоогда вы пришли по адресу</p>
+                        <p style="margin: 2px auto">Тут вы сможите найти любой наряд на свой вкус и цвет</p>
                     </div>
-                </li>
-
-                {% endfor %}
-
-            </ul>
-            <a class="uk-position-center-left uk-position uk-hidden-hover" href="#" uk-slidenav-previous
-                uk-slider-item="previous" style="color: black !important;"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                uk-slider-item="next" style="color: black !important;"></a>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="uk-section uk-section-default">
-    <div class="uk-container">
-
-        <h2>Рекомендации для вас</h2>
-
-        <div class="uk-grid-match uk-child-width-1-4@m" uk-grid>
-            {%for product in products %}
-
-            <div>
-                <a href="crsearcheators/goods/{{ product.id }}"
-                    class="uk-display-inline-block uk-card uk-card-body uk-card-hover uk-link-toggle uk-width-medium">
-                    <img src="{{ product.picture.url }}" width="1800" height="1200" alt="">
-                    <h3 class="uk-card-title uk-text-truncate">{{ product.product_name }}</h3>
-                    <p class="uk-text-truncate">{{ product.description }}</p>
-                    <p>{{ product.cost }}</p>
-                    <!-- <a href='{{ product.id }}'
-                                class="uk-button uk-button-primary uk-button-large uk-text-center uk-border-rounded uk-margin-top">Подробнее</a> -->
-                </a>
+                    <div class="uk-card-media-bottom Дизайнерска_Одежда">
+                        <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                            width="1800" height="1200" alt="">
+                    </div>
+                </div>
             </div>
-
-            {% endfor %}
         </div>
+
+        <div class="uk-width-2-5 uk-card uk-card-hover Сумки">
+            <div class="card-link Сумки">
+                <div class="uk-card-media-left uk-cover-container  Сумки">
+                    <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                        width="1800" height="1200" alt="">
+                </div>
+                <div class="Сумки">
+                    <div class="uk-card-body Сумки" style="height: 100%">
+                        <h3 class="uk-card-title">Сумки</h3>
+                        <p style="margin: 2px auto">Не можите подобрать нужную сумку под новый наряд?</p>
+                        <p style="margin: 2px auto">Здесь вы можите найти все, что вам захочется</p>
+                        <p style="margin: 2px auto">Дай волю фантазии и придумаю свою сумку</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="uk-container uk-flex uk-flex-around" style="margin: 10% auto">
+
+        <div class="uk-width-2-5 uk-card uk-card-hover Скульптуры">
+            <div class="card-link Скульптуры">
+                <div class="uk-card-media-left uk-cover-container  Скульптуры">
+                    <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                        width="1800" height="1200" alt="">
+                </div>
+                <div class="Скульптуры">
+                    <div class="uk-card-body Скульптуры">
+                        <h3 class="uk-card-title">Скульптуры</h3>
+                        <p style="margin: 2px auto">Всегда мечтали о собственном монумете?</p>
+                        <p style="margin: 2px auto">Тогда скорее заходите в наш раздел с нашими скульпторами и найди
+                            себе
+                            скульптуро по душе</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-width-2-5 uk-card uk-card-hover Интерьер">
+            <div class="card-link Интерьер">
+                <div class="uk-card uk-card-default  Интерьер">
+                    <div class="uk-card-body Интерьер">
+                        <h3 class="uk-card-title">Интерьер</h3>
+                        <p style="margin: 2px auto">Хочешь обустроить новую квартиру или комнату?</p>
+                        <p style="margin: 2px auto">Тогда тебе точно сюда!</p>
+                        <p style="margin: 2px auto">Найди атрибут интерьера на любой вкус и цвет</p>
+
+                    </div>
+                    <div class="uk-card-media-bottom Интерьер">
+                        <img src="https://images.ctfassets.net/hrltx12pl8hq/7yQR5uJhwEkRfjwMFJ7bUK/dc52a0913e8ff8b5c276177890eb0129/offset_comp_772626-opt.jpg?fit=fill&w=800&h=300"
+                            width="1800" height="1200" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </div>
 
@@ -249,17 +275,27 @@
 <!-- Footer -->
 
 <script>
-
     // function red(el) {
     //     document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
     // }
 
-    document.getElementById('search_pole').addEventListener('keyup', function(event) {
-        document.getElementById('searchBtn').href = "/creators/goods/search/" + document.getElementById('search_pole').value;
+    document.getElementById('search_pole').addEventListener('keyup', function (event) {
+        document.getElementById('searchBtn').href = "/creators/goods/search/" + document.getElementById(
+            'search_pole').value;
         if (event.keyCode == 13) {
             document.getElementById('searchBtn').click();
         }
     });
+
+    const cards = document.querySelectorAll('.card-link');
+
+        cards.forEach(card => {
+            card.addEventListener('click', function handleClick(event) {
+                console.log(event.target.parentNode.className)
+
+            });
+        });
 </script>
 
 {% endblock %}
+</div>
