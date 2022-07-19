@@ -1,55 +1,16 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
-def gen_menu(request):
-    if request.user.is_authenticated:
-        user = Account.objects.get(email=request.user.email)
+from account.models import Account
 
-        context = {
-            'user': Account.objects.get(email=request.user.email),
-            'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'xpos': 'right', 'position': 'out', 'link': '', 'text': user.email},
-                {'xpos': 'right', 'position': 'in', 'link': '/orders/', 'text': 'Корзина'},
-                {'xpos': 'right', 'position': 'in', 'link': '/addTask/', 'text': 'Создать задачу'},
-                {'xpos': 'right', 'position': 'in', 'link': '/yourTasks/', 'text': 'Управление задачами'},
-                {'xpos': 'right', 'position': 'in', 'link': '/becomeCreator/', 'text': 'Стать исполнителем'},
-                {'xpos': 'right', 'position': 'in', 'link': '/edit/', 'text': 'Настройки профиля'},
-                {'xpos': 'right', 'position': 'in', 'link': '/partners/', 'text': 'Сотрудничество'},
-                {'xpos': 'right', 'position': 'in', 'link': '/logout/', 'text': 'Выйти'},
 
-            ]
-        }
-    else:
-        context = {
+def login_page(request):
+    content = {
+    }
 
-            'menu': [
-                {'xpos': 'left', 'position': 'out', 'link': '/', 'text': 'BeFreela'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/resumes', 'text': 'Исполнители'},
-                {'xpos': 'center', 'position': 'out', 'link': '/creators/goods', 'text': 'Товары'},
-                {'xpos': 'center', 'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
-                {'xpos': 'right', 'position': 'out', 'link': '/accounts/login/', 'text': 'Войти'},
-            ]
-        }
-
-    return context
-
-def gen_submenu(request):
-    tags = Tag.objects.all()
-    context = {
-            'submenu': [
-                {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
-
-                {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина' },
-            ],
-            'tags': [{'text': tag}
-                     for tag in tags]
-        }
-    return context
-
+def index_page(request):
+    context = {}
+    return render(request, 'index.html', context)
 
 def logout_view(request):
     logout(request)
