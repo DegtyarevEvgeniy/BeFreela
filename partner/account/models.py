@@ -5,22 +5,22 @@ import phonenumbers
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, phone, username, password, email=None, first_name=None, last_name=None, city=''):
+    def create_user(self, email, username, password= None, first_name=None, last_name=None, phone1=1, city=''):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
             first_name=first_name,
             last_name=last_name,
-            phone=phone,
+            phone=phone1,
             city=city
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, phone, username, password, first_name, last_name, city=''):
+    def create_superuser(self, email, username, password, first_name, last_name, city=''):
         user = self.create_user(
-            phone=phone,
+            email=self.normalize_email(email),
             password=password,
             username=username,
             first_name=first_name,
@@ -39,7 +39,7 @@ class Account(AbstractBaseUser):
     email = models.EmailField(default='', unique=True)
     first_name = models.CharField(max_length=20, default='')
     last_name = models.CharField(max_length=30, default='')
-    phone = models.IntegerField(unique=True)
+    phone = models.IntegerField()
     city = models.CharField(max_length=30, default='')
     userImage = models.ImageField(upload_to='images/', default='images/default.png')
     is_admin = models.BooleanField(default=False)
@@ -52,13 +52,13 @@ class Account(AbstractBaseUser):
     payment_account = models.IntegerField(default=0)
     reg_form = models.CharField(max_length=20,default='')
 
-    USERNAME_FIELD = 'phone'
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
     objects = MyAccountManager()
 
     def __str__(self):
-        return str(self.phone)
+        return self.email
 
     def has_perm(self, perm, obj=None):
         return self.is_admin

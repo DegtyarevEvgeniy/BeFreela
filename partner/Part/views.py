@@ -1,23 +1,26 @@
+import email
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 from account.models import Account
+from Part.models import Creator, Partner, Product_buy, Product_creator
+
 
 
 def login_page(request):
     content = {
+        'menu': {}
     }
 
-def index_page(request):
-    context = {}
-    return render(request, 'index.html', context)
+    return render(request, 'login.html', content)
+
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
 
-def becomeCreatorTemplate_page(request, name):
-    content = gen_menu(request)
+def partnerTemplate_page(request, name):
+    content = {}
     try:
         creator = Creator.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
@@ -29,7 +32,7 @@ def becomeCreatorTemplate_page(request, name):
         content['first_name'] = user.first_name
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
-    path = f"template{name}.html"
+    path = f"partnerTemplates/template{name}.html"
     if name == '2':
         try:
             products = Product_buy.objects.filter(id_creator=request.user)
@@ -92,9 +95,19 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
 
-def becomeCreator_page(request):  # sourcery skip: low-code-quality
-    context = gen_menu(request)
+    return render(request, path, content)
+
+
+def index_page(request):  # sourcery skip: low-code-quality
+    context = {}
+    print('--------------------')
+
+    print(request.POST)
+
+    print('--------------------')
+
     user = Account.objects.get(email=request.user)
+    
 
     if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
         context['first_name'] = user.first_name
@@ -254,6 +267,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         for i in range(len(products)):
             products[i].status = statuses[statuses_list[i]]
             products[i].save()
-    return render(request, 'becomeCreator.html', context)
+    return render(request, 'index.html', context)
 
 
