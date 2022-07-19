@@ -86,9 +86,11 @@ DATABASES = {
         'HOST': 'degtyarev.beget.tech',
         'PORT': '3306',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1, foreign_key_checks = 0, default_storage_engine=INNODB",
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
             'charset': 'utf8mb4',
             "autocommit": True,
+            "init_command": "SET foreign_key_checks = 0;",
+
             
         }
     }
