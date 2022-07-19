@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from account.models import Account
 from Part.models import Creator, Partner, Product_buy, Product_creator
 
+def start_page(request):
+    return render(request, 'showPartner.html')
 
 
 def login_page(request):

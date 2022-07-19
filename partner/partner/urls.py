@@ -15,6 +15,7 @@ urlpatterns = [
     path('', views.index_page),
     path('partnerTemplates/<name>/', views.partnerTemplate_page),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('start/', views.start_page),
 
 
 ]
