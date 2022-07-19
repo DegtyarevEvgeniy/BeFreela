@@ -1,9 +1,15 @@
 import email
+import os
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
+from django.contrib.auth import logout
+
+
 
 from account.models import Account
 from Part.models import Creator, Partner, Product_buy, Product_creator
+from Part.forms import ProductCreateForm
 
 def start_page(request):
     return render(request, 'showPartner.html')
@@ -102,12 +108,7 @@ def partnerTemplate_page(request, name):
 
 def index_page(request):  # sourcery skip: low-code-quality
     context = {}
-    print('--------------------')
-
-    print(request.user.is_authenticated)
-
-    print('--------------------')
-    
+ 
 
     
     if request.user.is_authenticated:
@@ -276,5 +277,5 @@ def index_page(request):  # sourcery skip: low-code-quality
                 products[i].save()
         return render(request, 'index.html', context)
     else:
-        return render(request, 'login.html')
+        return redirect('accounts/login/')
 
