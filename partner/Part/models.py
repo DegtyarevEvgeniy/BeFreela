@@ -106,6 +106,14 @@ class Partner(models.Model):
     name_full = models.CharField(max_length=200, default='-')
     reg_form = models.CharField(max_length=200, default='Самозанятый')
     payment_account = models.CharField(max_length=200, default='-')
+    ogrn = models.IntegerField(default=0)
+    korr_check = models.IntegerField(default=0)
+    kpp = models.IntegerField(default=0)
+    index = models.IntegerField(default=0)
+    bik = models.IntegerField(default=0)
+    checking_account = models.IntegerField(default=0)
+    fiz_adress = models.CharField(max_length=200, default='')
+    street = models.CharField(max_length=200, default='')
 
 class Chat_room(models.Model):
     name = models.CharField(max_length=100000)
