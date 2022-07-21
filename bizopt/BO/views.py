@@ -2,6 +2,7 @@ import os
 import re
 
 from django.core import paginator
+from django.core.checks import messages
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
@@ -18,7 +19,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
 from .forms import *
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
 from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
 from account.models import Account
@@ -762,11 +763,57 @@ def edit(request):
     return render(request, 'edit.html', content)
 
 def login_page(request):
-    content = {
-        'menu': gen_menu(request)
+    form = SignUpForm(request.POST)
+    context = {
+        'form': form
     }
+    # вход
+    if request.method == 'POST' and 'btnform2' in request.POST:
+        print(request.POST)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
 
-    return render(request, 'login.html', content)
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            print( 'Try again! username or password is incorrect')
+    # регистрация
+    elif request.method == 'POST' and 'btnform1' in request.POST:
+        if form.is_valid():
+            form.save()
+
+            email = form.cleaned_data.get('email')
+            first_name = form.cleaned_data.get('first_name')
+            username = email
+            password = form.cleaned_data.get('password1')
+            user = authenticate(email=email, password=password, first_name=first_name)
+            # login(request, user)
+            return redirect('/')
+        else:
+            print(form.errors)
+
+    return render(request, 'signin.html', context)
+
+
+
+def signup(request):
+    form = SignUpForm(request.POST)
+    if form.is_valid():
+        form.save()
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return redirect('/')
+    else:
+        print(form.errors)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'signup.html', context)
 
 
 def forgot_password_page(request):

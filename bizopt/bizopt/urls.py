@@ -22,12 +22,14 @@ from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from account.views import SignUpView
+# from account.views import SignUpView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('logout/', views.logout_view),
-    path('login/', views.login_page),
+    # path('login/', views.signup, name='signup'),
+    path('login/', views.login_page, name='signup'),
+
     path('restorePassword/', views.forgot_password_page),
     path('addTask/', views.addTask_page, name='AddTask'),
     path('accounts/', include('django.contrib.auth.urls')),
@@ -38,12 +40,12 @@ urlpatterns = [
     path('getMsg/chat/<room_id>/', views.getMsg, name='getMsg'),
     path('send', views.send, name='send'),
 
-    # 
+    # zz
     path('tasks/', views.tasks_page),
     path('partners/', views.partners_page),
     # path('employers/', views.employers_page),
     path('creators/resumes/', views.resumes_page),
-    path('signin/', SignUpView.as_view(), name='signin'),
+    # path('signin/', SignUpView.as_view(), name='signin'),
     path('becomeCreator/', views.becomeCreator_page),
     path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
     path('creators/baseResumeCard/', views.goods_page),

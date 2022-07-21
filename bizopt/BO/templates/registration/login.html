@@ -21,46 +21,52 @@
 				<button id="signup" style="width: 50%; border-top: 0; border-right: 0; border-bottom: solid black 4px; border-left: solid black 2px" class="uk-button uk-button-default" type="submit">Регистрация</button>
 		</div>
 			<div id="signup-tab" style="display:none; width: 80%; margin: auto">
-				<form id="regForm" method="POST">
+				<form method="POST" action="." id="signup-form">
+            {% csrf_token %}
 				<h3 style="text-align: center; margin-top: 5%">Регистрация</h3>
 				<div class="inputs" style="width: 80%; margin:auto">
 					<div class="uk-flex-column">
 						<h5>Почта</h5>
-						<input type="text" name="login-email" class="uk-input" placeholder="email@mail.com">
+						{{form.email}}
 					</div>
 					<div class="uk-flex-column">
 						<h5>Имя</h5>
-						<input type="text" name="login-name" class="uk-input" placeholder="имя">
+						{{form.username}}
 					</div>
 					<div class="uk-flex-column">
 						<h5>Пароль</h5>
-						<input type="password" name="login-password" class="uk-input" placeholder="*******">
+						{{form.password1}}
+					</div>
+					<div class="uk-flex-column">
+						<h5>Пароль2</h5>
+						{{form.password2}}
 					</div>
 				</div>
 <!--				<div>-->
 <!--					<input type="checkbox">-->
 <!--					<label>Я согласен с <span style="border-bottom: 1px solid">...........</span></label>-->
 <!--				</div>-->
-				<button style=" margin-left: 10%; margin-bottom: 10%; margin-top: 5%; text-align: center" class="uk-button uk-button-secondary" type="submit">Зарегестрироваться</button>
+				<button style=" margin-left: 10%; margin-bottom: 10%; margin-top: 5%; text-align: center" class="uk-button uk-button-secondary" type="submit" name="btnform1" >Зарегестрироваться</button>
 					{% csrf_token %}
 		</form>
 			</div>
-		<form method="post" id="regForm" action="{% url 'login' %}">
+		<form method="POST" action="." id="signin-form">
+			{% csrf_token %}
 		<div id="signin-tab" style="width: 80%; margin: auto">
 			<h3 style="text-align: center; margin-top: 5%">Войти</h3>
 			<div style="width: 80%; margin:auto">
 				<div class="uk-flex-column inputs">
 					<h5>Почта</h5>
-					<input name="login-email" class="uk-input" type="text" placeholder="email@mail.com">
+					<input type="text" name="email" class="uk-input"  placeholder="email@mail.com">
 				</div>
 				<div class="uk-flex-column inputs">
 					<h5>Пароль</h5>
-					<input type="password" class="uk-input" name="login-password" placeholder="*******">
+<input type="password" name="password" placeholder="Password..." class="uk-input" >
 				</div>
 			</div>
-			<button style="width: 60%; margin-left: 20%; margin-bottom: 20%; margin-top: 5%" class="uk-button uk-button-secondary" type="submit">Войти</button>
+			<button style="width: 60%; margin-left: 20%; margin-bottom: 20%; margin-top: 5%" class="uk-button uk-button-secondary" type="submit" name="btnform2" >Войти</button>
 		</div>
-			{% csrf_token %}
+
 		</form>
 
 </div>
