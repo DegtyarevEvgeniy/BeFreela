@@ -8,56 +8,13 @@
 
 </head>
 
-<body>
-    <div style="width: 90%; margin: auto; margin-top: 3%">
-        <div style="margin-bottom: 3%">
-            <h1>Бренды</h1>
-            <h3>Здесь ты можешь найти все бренды, которые продают у нас на площадке<br>В профиле бренда ты найдешь информацию и товары бренда</h3>
-        </div>
-        <div class="uk-flex-column brandsList">
-            <div class="uk-flex brandLine">
-                <div style="width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-                <div style=" width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-                <div style=" width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-            </div>
-            <div class="uk-flex brandLine">
-                <div style="width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-                <div style=" width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-                <div style=" width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-            </div>
-            <div class="uk-flex brandLine">
-                <div style="width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-                <div style=" width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-                <div style=" width: 30%">
-                    <img style="border-radius: 3em; border: 5px solid black; " src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg">
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-
-
-
 <style>
-    .brandLine div img:hover {
+    * {
+        transition: 0.3s;
+    }
+/* 
+    .card-holder:hover {
         box-shadow: 0px 0px 150px #000000;
-        z-index: 2;
         -webkit-transition: all 200ms ease-in;
         -webkit-transform: scale(1.2);
         -ms-transition: all 200ms ease-in;
@@ -66,15 +23,70 @@
         -moz-transform: scale(1.2);
         transition: all 200ms ease-in;
         transform: scale(1.2);
-    }
-    .brandLine div {
-        margin-right: 1%;
-        margin-left: 1%
-    }
-    .brandsList .brandLine {
-        margin-bottom: 2%;
-    }
+    } */
 </style>
+
+<body>
+    <div style="width: 80%; margin: auto; margin-top: 3%">
+        <div style="margin-bottom: 3%">
+            <h1>Бренды</h1>
+            <h3>Здесь ты можешь найти все бренды, которые продают у нас на площадке<br>В профиле бренда ты найдешь
+                информацию и товары бренда</h3>
+            </div>
+            
+            <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+                <div>
+                    <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                        <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    </div>
+                </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-box-shadow-hover-xlarge uk-padding" style="border: 5px solid black;border-radius: 50px">
+                    <img  src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
 <script src="js/uikit-icons.min.js"></script>
 
 {% endblock %}

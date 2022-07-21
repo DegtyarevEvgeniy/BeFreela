@@ -261,17 +261,15 @@ class SignUpForm(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         self.fields['first_name'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input uk-border uk-border-rounded',
             'required': '',
             'name': 'name',
             'id': 'name',
             'type': 'text',
             'placeholder': '',
-            'maxlength': '16',
-            'minlength': '6',
         })
         self.fields['email'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input uk-border uk-border-rounded',
             'required': '',
             'name': 'email',
             'id': 'email',
@@ -279,7 +277,7 @@ class SignUpForm(UserCreationForm):
             'placeholder': '',
         })
         self.fields['password1'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input uk-border uk-border-rounded',
             'required': '',
             'name': 'password1',
             'id': 'password1',
@@ -289,7 +287,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '8'
         })
         self.fields['password2'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input uk-border uk-border-rounded',
             'required': '',
             'name': 'password1',
             'id': 'password1',

@@ -790,7 +790,7 @@ def login_page(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=password, first_name=first_name)
             # login(request, user)
-            return redirect('/')
+            return redirect('/login/')
         else:
             print(form.errors)
 
