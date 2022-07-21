@@ -7,70 +7,19 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>BizOpt</title>
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
+    <!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/css/uikit.min.css" />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
-        body {
-            background: #eee
-        }
-
         #regForm {
-            background-color: #ffffff;
             margin: 0px auto;
-            font-family: Raleway;
             padding: 40px;
-            border-radius: 10px
-        }
-
-        #register {
-            color: #6A1B9A
-        }
-
-        h1 {
-            text-align: center
-        }
-
-        input {
-            padding: 10px;
-            width: 100%;
-            font-size: 17px;
-            font-family: Raleway;
-            border: 1px solid #aaaaaa;
             border-radius: 10px;
-            -webkit-appearance: none
-        }
-
-        .tab input:focus {
-            border: 1px solid #6a1b9a !important;
-            outline: none
-        }
-
-        input.invalid {
-            border: 1px solid #e03a0666;
         }
 
         .tab {
-            display: none
-        }
-
-        button {
-            background-color: #6A1B9A;
-            color: #ffffff;
-            border: none;
-            border-radius: 50%;
-            padding: 10px 20px;
-            font-size: 17px;
-            font-family: Raleway;
-            cursor: pointer
-        }
-
-        button:hover {
-            opacity: 0.8
-        }
-
-        button:focus {
-            outline: none !important
+            display: none;
         }
 
         #prevBtn {
@@ -78,18 +27,35 @@
         }
 
         .all-steps {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 100%;
-            display: inline-flex;
-            justify-content: center
+            margin: 30px auto;
+            padding: 0px -5px;
+            width: 50%;
+            height: 5px;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            border-radius: 20px;
+        }
+
+        .all-steps::after {
+            background-color: rgb(50, 50, 255);
+            content: '\A';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: var(--width-nonstatic, 25%);
+            z-index: -1;
         }
 
         .step {
-            height: 40px;
-            width: 40px;
-            margin: 0 2px;
+            height: 20px;
+            width: 20px;
+            margin: 0px;
             background-color: #bbbbbb;
             border: none;
             border-radius: 50%;
@@ -97,106 +63,187 @@
             justify-content: center;
             align-items: center;
             font-size: 15px;
-            color: #6a1b9a;
-            opacity: 0.5
+            color: #1b3f9a;
+            opacity: 1;
         }
 
         .step.active {
-            opacity: 1
+            background-color: rgb(50, 50, 255);
         }
 
-        .step.finish {
-            color: #fff;
-            background: #6a1b9a;
-            opacity: 1
-        }
-
-        .all-steps {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px
+        .step.passed {
+            background-color: blue;
         }
     </style>
 </head>
 
-<body oncontextmenu='return false' class='snippet-body'>
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-8">
-                <form id="regForm" method="POST">
-                    <h1 id="register">Signin Form</h1>
-                    <div class="all-steps" id="all-steps">
-                        <a onclick="surTab(0)">
-                            <span class="step">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(1)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(2)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                    </div>
+<body>
+    <div>
+        <div>
+            <div>
+                <div class="all-steps" id="all-steps">
+                    <a class="step notactove" onclick="surTab(0)"></a>
+                    <a class="step notactove" onclick="surTab(1)"></a>
+                    <a class="step notactove" onclick="surTab(2)"></a>
+                    <a class="step notactove" onclick="surTab(3)"></a>
+                </div>
+                <form id="regForm" class="uk-width-3-5" method="POST">
                     <div class="tab">
-                        {{ form.first_name.label }}: {{ form.first_name }}
-
+                        <h2 class="uk-text-center">Название магазина</h2>
+                        <h4 class="uk-text-center">Выбери уникальное название магазина, который отражает твой стиль</h4>
                         <br>
-                        <br> {{ form.last_name.label }}: {{ form.last_name }}
-                        <br>
-                        <br>
+                        <div style="text-align:center">
+                            <div uk-form-custom="target: true" class="uk-width-1-2">
+                                <input class="uk-input uk-width-1" type="text" placeholder="Введит еназвание">
+                            </div>
+                            <button class="uk-button uk-button-default" style="font-size: 13px">Проверить на
+                                уникальность</button>
+                        </div>
                     </div>
 
                     <div class="tab">
-                        {{ form.username.label }}: {{ form.username }}
+                        <h2 class="uk-text-center">Юредические данные</h2>
+                        <h4 class="uk-text-center">Введите данные</h4>
                         <br>
-                        <br> {{ form.password1.label }}: {{ form.password1 }}
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-3">
+                                <label> Тип </label>
+                                <br>
+                                <select class="uk-select">
+                                    <option value="ООО">ООО</option>
+                                    <option value="ИП">ИП</option>
+                                    <option value="Самозанятый">Самозанятый</option>
+                                    <option value="Физлицо">Физлицо</option>
+                                </select>
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-3-5">
+                                <label> Название организации </label>
+                                <br>
+                                <input class="uk-input" type="text" placeholder="Введите название организзации">
+                            </div>
+                        </div>
+
                         <br>
-                        <br> {{ form.password2.label}}: {{ form.password2}}
+
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                <label> ОГРН </label>
+                                <br>
+                                <input class="uk-input" type="text" placeholder="Введите свой ОГРН">
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                <label> ИНН </label>
+                                <br>
+                                <input class="uk-input" type="text" placeholder="Введите свой ИНН">
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                <label> КПП </label>
+                                <br>
+                                <input class="uk-input" type="text" placeholder="Введите свой КПП">
+                            </div>
+                        </div>
+
                         <br>
+
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1">
+                                <label> Адрес регистрации с почтовым индексом </label>
+                                <br>
+                                <input class="uk-input" type="text"
+                                    placeholder="162390, Россия, Вологодская область, город Великий Устюг, дом Деда Мороза">
+                            </div>
+                        </div>
+
                         <br>
+
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-3-5">
+                                <label> Физический адрес </label>
+                                <br>
+                                <input class="uk-input" type="text"
+                                    placeholder="Мурманская обл., Мончегорск, Лапландский заповедник, пер.Зеленый, д.8">
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-3">
+                                <label> Индекс </label>
+                                <br>
+                                <input class="uk-input" type="text" placeholder="184506">
+                            </div>
+                        </div>
+
 
                     </div>
 
                     <div class="tab">
-                        {{form.phone.label}} {{form.phone}}
+                        <h2 class="uk-text-center">Оплата</h2>
+                        <h4 class="uk-text-center">Введите данные для оплаты</h4>
                         <br>
-                        <br> {{ form.email.label}} {{ form.email}}
-                        <br>
-                        <br> {{ form.city.label}} {{ form.city}}
-                        <br>
-                        <br>
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                <label> Расчетный счет </label>
+                                <br>
+                                <input class="uk-input" type="text">
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                <label> БИК </label>
+                                <br>
+                                <input class="uk-input" type="text">
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                <label> Корреспондентский счет </label>
+                                <br>
+                                <input class="uk-input" type="text">
+                            </div>
+                        </div>
                     </div>
 
-                    {% csrf_token %} {% if form.errors %} {% for field in form %} {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
+                    <div class="tab">
+                        <h2 class="uk-text-center">Подтвердите почту</h2>
+                        <h4 class="uk-text-center">Выбери уникальное название магазина, который отражает твой стиль</h4>
+                        <br>
+                        <div class="uk-width-1-1 uk-flex uk-flex-center">
+                            <div style="display: inline-block; margin: 0 10px; border: 1px solid; padding: 5%;"
+                                class="uk-width-4-5 uk-border-rounded">
+                                <p>Вам нужно подтвердить Вашу почту <b>{{user.email}}</b> </p>
+                                <p>перед тем как продолжить создание магазина</p>
+                                <button class="uk-button uk-button-default uk-margin-small-bottom"
+                                    style="text-transform: none;background-color: #e4e4e4">Отправить еще раз</button>
+                                <br>
+                                <button class="uk-button uk-button-text" style="text-transform: none;">Изменить
+                                    почту</button>
+                            </div>
+                        </div>
                     </div>
-                    {% endfor %} {% endfor %} {% endif %}
+
+                    {% csrf_token %}
+                    <br>
+                    <br>
                     <div style="overflow:auto;" id="next-previous">
                         <div style="float:right;">
-                            <button type="button" id="prevBtn" onclick="nextPrev(-1)">
-                                <i class="fa fa-angle-double-left"></i>
+                            <button class="uk-button uk-button-default" type="button" id="prevBtn"
+                                onclick="nextPrev(-1)">
+                                Назад
                             </button>
-                            <button type="button" id="nextBtn" onclick="nextPrev(1)">
-                                <i class="fa fa-angle-double-right"></i>
+                            <button class="uk-button uk-button-default" type="button" id="nextBtn"
+                                onclick="nextPrev(1)">
+                                Далее
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </body>
-<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
-</script>
+<!-- <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
 <script type='text/Javascript'>
     let currentTab = 0;
+    let progressBar = document.querySelector(".all-steps");
 document.addEventListener("DOMContentLoaded", function(event) {
+    progressBar.style.setProperty("--width-nonstatic", `25%`);
     showTab(currentTab);
 });
 
@@ -209,9 +256,9 @@ function showTab(n) {
         document.getElementById("prevBtn").style.display = "inline";
     }
     if (n === (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+        document.getElementById("nextBtn").innerHTML = "Далее";
     } else {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
+        document.getElementById("nextBtn").innerHTML = "Далее";
     }
     fixStepIndicator(n)
 }
@@ -235,11 +282,18 @@ function surTab(n) {
 
 function fixStepIndicator(n) {
     let i, x = document.getElementsByClassName("step");
+
+    progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 25}%`);
+    
+
     for (i = 0; i <
         x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
+        x[i].className = x[i].className.replace(" active", " passed");
     }
-    x[n].className += " active";
+    x[n].className = x[n].className.replace(" notactove", " active");
+    for (i = n + 1; i < x.length; i++){
+        x[i].className = x[i].className.replace(" passed", " notactove");
+    }
 }
 </script>
 
