@@ -45,7 +45,6 @@ class Account(AbstractBaseUser):
     nameFull = models.CharField(max_length=20,default='')
     payment_account = models.IntegerField(default=0)
     reg_form = models.CharField(max_length=20,default='')
-
     inn = models.IntegerField(default=0)
     ogrn = models.IntegerField(default=0)
     korr_check = models.IntegerField(default=0)
@@ -53,8 +52,8 @@ class Account(AbstractBaseUser):
     index = models.IntegerField(default=0)
     bik = models.IntegerField(default=0)
     checking_account = models.IntegerField(default=0)
-    fiz_adress = models.CharField(default='')
-    street = models.CharField(default='')
+    fiz_adress = models.CharField(max_length=9999, default='')
+    street = models.CharField(max_length=9999,default='')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']

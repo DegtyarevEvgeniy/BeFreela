@@ -267,6 +267,7 @@ class SignUpForm(UserCreationForm):
             'id': 'name',
             'type': 'text',
             'placeholder': '',
+            'minlength': '1'
         })
         self.fields['email'].widget.attrs.update({
             'class': 'uk-input uk-border uk-border-rounded',
@@ -275,6 +276,7 @@ class SignUpForm(UserCreationForm):
             'id': 'email',
             'type': 'email',
             'placeholder': '',
+            'minlength': '8'
         })
         self.fields['password1'].widget.attrs.update({
             'class': 'uk-input uk-border uk-border-rounded',
