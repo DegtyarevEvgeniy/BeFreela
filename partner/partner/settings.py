@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Part',
-    'account.apps.AccountConfig',
+    'partners.apps.PartnerConfig',
     "phonenumber_field",
     
 ]
@@ -70,7 +70,7 @@ TEMPLATES = [
         },
     },
 ]
-AUTH_USER_MODEL = 'account.Account'
+AUTH_USER_MODEL = 'partners.Partner'
 WSGI_APPLICATION = 'partner.wsgi.application'
 
 

@@ -7,8 +7,8 @@ from django.contrib.auth import logout
 
 
 
-from account.models import Account
-from Part.models import Creator, Partner, Product_buy, Product_creator
+from partners.models import Partner
+from Part.models import Creator, Product_buy, Product_creator
 from Part.forms import ProductCreateForm
 
 def start_page(request):
@@ -36,7 +36,7 @@ def partnerTemplate_page(request, name):
         content['email'] = creator.email
         content['creator_avatar'] = creator.cover
     except:
-        user = Account.objects.get(email=request.user.email)
+        user = Partner.objects.get(email=request.user.email)
         content['first_name'] = user.first_name
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
@@ -51,7 +51,7 @@ def partnerTemplate_page(request, name):
                                     'status1': 'red' if product.status[-1] == 'е' else 'blue',
                                     'status2': 'red' if product.status[-1] == 'о' else 'blue',
                                     'status3': 'red' if product.status[-1] == 'ы' else 'blue',
-                                    'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
+                                    'chat_id':(creator.id * Partner.objects.get(email=product.id_user_buy).id) + creator.id + Partner.objects.get(email=product.id_user_buy).id
 
                                     }
                                    for product in products]
@@ -62,7 +62,7 @@ def partnerTemplate_page(request, name):
                                        'customer': product.id_user_buy,
                                        'status': product.status,
                                        'id_user_buy': product.id_user_buy,
-                                       'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
+                                       'chat_id':(creator.id * Partner.objects.get(email=product.id_user_buy).id) + creator.id + Partner.objects.get(email=product.id_user_buy).id
                                       }
                                      for product in products_v]
             
@@ -75,7 +75,7 @@ def partnerTemplate_page(request, name):
         # content['form1'] = form
 
     elif name == '3':
-        account = Account.objects.get(email=request.user)
+        account = Partner.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price,
@@ -113,7 +113,7 @@ def index_page(request):  # sourcery skip: low-code-quality
     
     if request.user.is_authenticated:
 
-        user = Account.objects.get(email=request.user)
+        user = Partner.objects.get(email=request.user)
 
         
 
@@ -186,7 +186,7 @@ def index_page(request):  # sourcery skip: low-code-quality
             product.length_product = request.POST.get('length_product', '0')
             product.width_packaging = request.POST.get('width_packaging', '0')
             product.width_product = request.POST.get('width_product', '0')
-            account = Account.objects.get(email=request.user)
+            account = Partner.objects.get(email=request.user)
             product.id_creator = account.email
             # TODO: как будет готов фронт для "availability", сохранить ее в БД
             # product.availability = request.POST['??????']

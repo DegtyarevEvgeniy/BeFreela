@@ -34,7 +34,7 @@ class MyAccountManager(BaseUserManager):
         return user
 
 
-class Account(AbstractBaseUser):
+class Partner(AbstractBaseUser):
     username = models.CharField(max_length=20, default='', unique=True)
     email = models.EmailField(default='', unique=True)
     first_name = models.CharField(max_length=20, default='')
@@ -51,6 +51,14 @@ class Account(AbstractBaseUser):
     nameFull = models.CharField(max_length=20,default='')
     payment_account = models.IntegerField(default=0)
     reg_form = models.CharField(max_length=20,default='')
+    ogrn = models.IntegerField(default=0)
+    korr_check = models.IntegerField(default=0)
+    kpp = models.IntegerField(default=0)
+    index = models.IntegerField(default=0)
+    bik = models.IntegerField(default=0)
+    checking_account = models.IntegerField(default=0)
+    fiz_adress = models.CharField(max_length=200, default='')
+    street = models.CharField(max_length=200, default='')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'first_name', 'last_name']

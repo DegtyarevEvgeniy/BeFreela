@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from Part import views
-from account import views as partnerViews
-from account.views import SignUpView
+from partners import views as partnerViews
+from partners.views import SignUpView
 from django.conf.urls import include
 
 
