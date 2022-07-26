@@ -279,23 +279,21 @@ class SignUpForm(UserCreationForm):
             'minlength': '8'
         })
         self.fields['password1'].widget.attrs.update({
-            'class': 'uk-input uk-border uk-border-rounded',
+            'class': 'uk-input uk-border uk-border-rounded pswdChecker',
             'required': '',
             'name': 'password1',
             'id': 'password1',
             'type': 'password',
             'placeholder': '',
-            'maxlength': '22',
             'minlength': '8'
         })
         self.fields['password2'].widget.attrs.update({
-            'class': 'uk-input uk-border uk-border-rounded',
+            'class': 'uk-input uk-border uk-border-rounded pswdChecker',
             'required': '',
-            'name': 'password1',
-            'id': 'password1',
+            'name': 'password2',
+            'id': 'password2',
             'type': 'password',
             'placeholder': '',
-            'maxlength': '22',
             'minlength': '8'
         })
 

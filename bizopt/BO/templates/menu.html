@@ -1,19 +1,18 @@
-<div style="margin: 0 auto; width: 80%">
+<div style="margin: 0 auto; width: 80%; position: fixed; top: 0; left: 10%; z-index: 1000; ">
     {% if user.is_authenticated %}
-    <div class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%">
+    <div class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%; background-color:rgba(255, 255, 255, 0.9)">
 
         <p style="margin: 0px"> Регион <b>Москва</b></p>
         <a href="/becomeCreator" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
             партнером</a>
     </div>
     <div style="width: 100%; border-top: 2px solid"></div>
-    <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+    <div>
         <nav class="uk-navbar-container" uk-navbar
-            style="background: rgba(255, 255, 255, 0.7); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
+            style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
             <div class="uk-navbar-left">
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#main-menu" class="" uk-toggle
-                            uk-icon="menu"></a></li>
+                    <li class="uk-active"><a href="#main-menu" class="" uk-toggle uk-icon="menu"></a></li>
 
                     <!-- start of amin menu -->
                     <div id="main-menu" uk-offcanvas>
@@ -44,15 +43,15 @@
                     <div id="designer-clothes-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,15 +61,15 @@
                     <div id="designer-shoes-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">esigner7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -80,15 +79,15 @@
                     <div id="bags-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">bags7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -98,15 +97,15 @@
                     <div id="interior-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">interior7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -116,15 +115,15 @@
                     <div id="decorations-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">decorations7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -134,15 +133,15 @@
                     <div id="sculptures-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">sculptures7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -152,15 +151,15 @@
                     <div id="pillows-menu" uk-offcanvas>
                         <div class="uk-offcanvas-bar">
                             <ul class="uk-nav uk-nav-default">
-                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu" class="uk-button uk-button-link" uk-toggle
-                                        uk-icon="icon: reply"></a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows1</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows2</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows3</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows4</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows5</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows6</a></li>
-                                <li class="uk-active"><a href="#"  class="uk-button uk-button-text">pillows7</a></li>
+                                <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                        class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows1</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows2</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows3</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows4</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows5</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows6</a></li>
+                                <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows7</a></li>
                             </ul>
                         </div>
                     </div>
@@ -212,16 +211,167 @@
         </nav>
     </div>
     {% else %}
-    <form class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%">
+    <div class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%; background-color:rgba(255, 255, 255, 0.9)">
         <p style="margin: 0px"> Регион <b>Москва</b></p>
-        <a class="uk-button uk-button-text" style="text-transform: none; font-size: medium;"
-            href="/login/">Стать
+        <a class="uk-button uk-button-text" style="text-transform: none; font-size: medium;" href="/login/">Стать
             партнером</a>
-    </form>
+    </div>
     <div style="width: 100%; border-top: 2px solid"></div>
-    <nav class="uk-navbar-container" uk-navbar="mode: click" style="background: none">
+    <nav class="uk-navbar-container" uk-navbar
+        style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
         <div class="uk-navbar-left">
             <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#main-menu" class="" uk-toggle uk-icon="menu"></a></li>
+
+                <!-- start of amin menu -->
+                <div id="main-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active"><a href="#designer-clothes-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Дизайнерская одежда</a></li>
+                            <li class="uk-active"><a href="#designer-shoes-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Дизайнерская обувь</a></li>
+                            <li class="uk-active"><a href="#bags-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Сумки</a></li>
+                            <li class="uk-active"><a href="#interior-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Интерьер</a></li>
+                            <li class="uk-active"><a href="#decorations-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Украшщения</a></li>
+                            <li class="uk-active"><a href="#sculptures-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Скульптуры</a></li>
+                            <li class="uk-active"><a href="#pillows-menu" class="uk-button uk-button-text"
+                                    uk-toggle>Подушки</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <!-- end of main menu -->
+
+                <!-- start of designer-clothes-menu -->
+                <div id="designer-clothes-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner7</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of designer-clothes-menu -->
+
+                <!-- start of designer-shoes-menu -->
+                <div id="designer-shoes-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner7</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of designer-shoes-menu -->
+
+                <!-- start of bags-menu -->
+                <div id="bags-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags7</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of #bags-menu -->
+
+                <!-- start of interior-menu -->
+                <div id="interior-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior7</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of #interior-menu -->
+
+                <!-- start of decorations-menu -->
+                <div id="decorations-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations7</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of #decorations-menu -->
+
+                <!-- start of sculptures-menu -->
+                <div id="sculptures-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures7</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end of #sculptures-menu -->
+
+                <!-- start of pillows-menu -->
+                <div id="pillows-menu" uk-offcanvas>
+                    <div class="uk-offcanvas-bar">
+                        <ul class="uk-nav uk-nav-default">
+                            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menu"
+                                    class="uk-button uk-button-link" uk-toggle uk-icon="icon: reply"></a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows1</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows2</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows3</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows4</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows5</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows6</a></li>
+                            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows7</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <li class="uk-active">
                     <a href="#">
                         <h1 class="uk-margin-remove">BeFreela</h1>
@@ -229,8 +379,8 @@
                 </li>
                 <li class="uk-active"><a href="/creators/resumes/"
                         style="font-size: 20px; text-transform: none;">Бренды</a></li>
-                <li class="uk-active"><a href="/login/"
-                        style="font-size: 20px; text-transform: none;">Мастрерская</a></li>
+                <li class="uk-active"><a href="/login/" style="font-size: 20px; text-transform: none;">Мастрерская</a>
+                </li>
             </ul>
         </div>
         <div class="uk-navbar-right">
