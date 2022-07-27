@@ -23,7 +23,7 @@
         }
 
         #prevBtn {
-            background-color: #bbbbbb
+            background-color: #bbbbbb;
         }
 
         .all-steps {
@@ -63,16 +63,7 @@
             justify-content: center;
             align-items: center;
             font-size: 15px;
-            color: #1b3f9a;
             opacity: 1;
-        }
-
-        .step.active {
-            background-color: rgb(50, 50, 255);
-        }
-
-        .step.passed {
-            background-color: blue;
         }
     </style>
 </head>
@@ -82,17 +73,18 @@
         <div>
             <div>
                 <div class="all-steps" id="all-steps">
-                    <a class="step notactove" onclick="surTab(0)"></a>
-                    <a class="step notactove" onclick="surTab(0)"></a>
-                    <a class="step notactove" onclick="surTab(1)"></a>
-                    <a class="step notactove" onclick="surTab(2)"></a>
-                    <a class="step notactove" onclick="surTab(3)"></a>
+                    <a class="step" onclick="surTab(0)"></a>
+                    <a class="step" onclick="surTab(1)"></a>
+                    <a class="step" onclick="surTab(2)"></a>
+                    <a class="step" onclick="surTab(3)"></a>
+                    <a class="step" onclick="surTab(4)"></a>
                 </div>
                 <form id="regForm" class="uk-width-3-5" method="POST">
 
                     <div class="tab">
                         <h2 class="uk-text-center">Главная информация</h2>
-                        <h4 class="uk-text-center">Запомните введеные поля, они понадобяться вам для входа в аккаунт</h4>
+                        <h4 class="uk-text-center">Запомните введеные поля, они понадобяться вам для входа в аккаунт
+                        </h4>
                         <br>
                         <div class="uk-width-1-1 uk-flex uk-flex-between">
                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
@@ -180,7 +172,7 @@
                         <br>
                         <div class="uk-width-1-1 uk-flex uk-flex-between">
                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
-                               {{form.payment_account.label}}: {{form.payment_account}}
+                                {{form.payment_account.label}}: {{form.payment_account}}
                             </div>
                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
                                 {{form.bik.label}}: {{form.bik}}
@@ -281,16 +273,20 @@ function surTab(n) {
 function fixStepIndicator(n) {
     let i, x = document.getElementsByClassName("step");
 
-    progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 25}%`);
-    
-
-    for (i = 0; i <
-        x.length; i++) {
-        x[i].className = x[i].className.replace(" active", " passed");
+    if (n != x.length - 1) {
+        progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 20}%`);
+    } else {
+        progressBar.style.setProperty("--width-nonstatic", "100%");
     }
-    x[n].className = x[n].className.replace(" notactove", " active");
-    for (i = n + 1; i < x.length; i++){
-        x[i].className = x[i].className.replace(" passed", " notactove");
+
+    x[n].style.backgroundColor = '#ffa500'; //color for n
+
+    for (i = 0; i < n; i++) { // color for every before n
+        x[i].style.backgroundColor = '#2652bf';
+    }
+
+    for (i = n + 1; i < x.length; i++){ // color for every after n
+        x[i].style.backgroundColor = '#bbbbbb';
     }
 }
 </script>
