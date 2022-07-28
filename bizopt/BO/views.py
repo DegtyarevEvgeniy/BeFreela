@@ -822,6 +822,20 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
+def documents_page(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    return render(request, 'documents.html', content)
+
+def documentTemplates_page(request, name):
+    content = {
+        'menu': gen_menu(request)
+    }
+    path = f"documentsTemplates/template{name}.html"
+    return render(request, path, content)
+
+
 def chat_page(request, room_id):
     content = {
         'menu': gen_menu(request)

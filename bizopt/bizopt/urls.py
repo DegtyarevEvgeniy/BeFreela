@@ -43,6 +43,8 @@ urlpatterns = [
     # zz
     path('tasks/', views.tasks_page),
     path('partners/', views.partners_page),
+    path('documents/', views.documents_page),
+    path('documents/documentsTemplates/<name>/', views.documentTemplates_page),
     # path('employers/', views.employers_page),
     path('creators/resumes/', views.resumes_page),
     # path('signin/', SignUpView.as_view(), name='signin'),
