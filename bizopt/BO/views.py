@@ -30,21 +30,17 @@ from .models import Chat_room, Message
 from datetime import datetime
 
 
-def pageNotFound(request, exception):
-    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
-
-
-def pageMistakeServ(request, exception):
-    return HttpResponseNotFound('<h1>Ошибка сервера</h1>')
-
-
 def pageNotAccess(request, exception):
-    return HttpResponseNotFound('<h1>Доступ запрещен</h1>')
+    return render(request, 'errorPages/400.html')
+    
+def pageMistakeServ(request, exception):
+    return render(request, 'errorPages/403.html')
 
+def pageNotFound(request, exception):
+    return render(request, 'errorPages/404.html')
 
-def pageNotRequest(request, exception):
-    return HttpResponseNotFound('<h1>Невозможно обработать запрос</h1>')
-
+def pageNotRequest(request):
+    return render(request, 'errorPages/500.html')
 
 def gen_menu(request):
     if request.user.is_authenticated:

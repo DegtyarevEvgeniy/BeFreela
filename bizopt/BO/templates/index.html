@@ -2,71 +2,8 @@
 
 {% block content %}
 
-<!-- <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
-    <nav class="uk-navbar-container" uk-navbar
-        style="position: relative; z-index: 980; padding: 0 10%; background-color: #f8f8f8 !important;">
 
-        <div class="uk-navbar-left">
-
-            <ul class="uk-navbar-nav">
-                <li class="uk-active">
-                    {% if tag %}
-                    <h2>Posts tagged with "{{ tag.name }}"</h2>
-                    {% endif %}
-                    {% for item in submenu %}
-                    {% if item.xpos == 'left' and item.position == 'out' %}
-                    <a href="{{item.link}}">{{item.text}}</a>
-                    {% endif %}
-                    {% endfor %}
-                    <div class="uk-navbar-dropdown uk-navbar-dropdown-width-1">
-                        <div class="uk-navbar-dropdown-grid uk-child-width-1" uk-grid>
-                            <div>
-                                <ul class="uk-nav uk-navbar-dropdown-nav">
-                                    {% for item in tags %}
-                                    <a href="creators/goods/search/{{item.text}}" style="display: block;">
-                                        {{item.text}}</a>
-                                    <div class="uk-divider-small"></div>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-        </div>
-
-        <div class="uk-navbar-center" style="width: 40%; margin: 0 auto; font-size: 25px;">
-
-            <ul class="uk-navbar-nav" style="width: 100%;">
-                <form class="uk-search uk-search-default" style="width: 100%;">
-                    <a class="uk-search-icon-flip" type="submit" id="searchBtn" uk-search-icon></a>
-                    <input class="uk-search-input" type="search" placeholder="Search" id="search_pole"
-                        oninput="red(this)" style="width: 100%;">
-                </form>
-            </ul>
-
-        </div>
-
-        <div class="uk-navbar-right">
-
-            <ul class="uk-navbar-nav">
-                {% for item in submenu %}
-                {% if item.text != "каталог" %}
-                <li class="uk-active">
-                    <a href="{{item.link}}">{{item.text}}</a>
-                </li>
-                {% endif %}
-                {% endfor %}
-            </ul>
-
-        </div>
-
-    </nav>
-</div> -->
-
-<div class="uk-position-relative uk-visible-toggle uk-light" style="width: 80%; margin: 10% auto 5% auto;" tabindex="-1"
+<div class="uk-position-relative uk-visible-toggle uk-light" style="width: 80%; margin: 10% auto 2% auto;" tabindex="-1"
     uk-slideshow="min-height: 300; max-height: 400; animation: push" id="endstickness">
 
     <ul class="uk-slideshow-items" style="border-radius: 10px;">
@@ -92,12 +29,8 @@
 </div>
 
 
-
-<section id="navbarhider"></section>
-
-
 <div class="uk-section uk-section-default" style="width: 80%; margin: 0 auto;">
-    <div class="uk-container uk-flex uk-flex-around" style="margin: 10% auto">
+    <div class="uk-container uk-flex uk-flex-around" style="margin: 5% auto">
 
         <div class="uk-width-2-5 uk-card uk-card-hover Дизайнерска_Одежда">
             <div class="card-link Дизайнерска_Одежда">
@@ -176,10 +109,6 @@
 
     </div>
 </div>
-
-
-
-
 
 <footer class="text-center text-lg-start bg-light text-muted">
 
