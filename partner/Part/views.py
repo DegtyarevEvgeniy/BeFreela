@@ -1,6 +1,6 @@
 import email
 import os
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import logout
@@ -10,6 +10,23 @@ from django.contrib.auth import logout
 from partners.models import Partner
 from Part.models import Creator, Product_buy, Product_creator
 from Part.forms import ProductCreateForm
+
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+
+
+def pageMistakeServ(request, exception):
+    return HttpResponseNotFound('<h1>Ошибка сервера</h1>')
+
+
+def pageNotAccess(request, exception):
+    return HttpResponseNotFound('<h1>Доступ запрещен</h1>')
+
+
+def pageNotRequest(request, exception):
+    return HttpResponseNotFound('<h1>Невозможно обработать запрос</h1>')
+
 
 def start_page(request):
     return render(request, 'showPartner.html')

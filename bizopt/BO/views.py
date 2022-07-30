@@ -17,7 +17,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404, HttpResponseNotFound
 from .forms import *
 from django.contrib.auth import logout, authenticate, login
 from django.core.files.storage import FileSystemStorage
@@ -29,34 +29,55 @@ from taggit.models import Tag
 from .models import Chat_room, Message
 from datetime import datetime
 
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+
+
+def pageMistakeServ(request, exception):
+    return HttpResponseNotFound('<h1>Ошибка сервера</h1>')
+
+
+def pageNotAccess(request, exception):
+    return HttpResponseNotFound('<h1>Доступ запрещен</h1>')
+
+
+def pageNotRequest(request, exception):
+    return HttpResponseNotFound('<h1>Невозможно обработать запрос</h1>')
+
+
 def gen_menu(request):
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
 
-        return {'user': Account.objects.get(email=request.user.email),}
+        return {'user': Account.objects.get(email=request.user.email), }
 
     else:
         return {}
 
+
 def gen_submenu(request):
     tags = Tag.objects.all()
     context = {
-            'submenu': [
-                {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
-                {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина' },
-            ],
-            'tags': [{'text': tag}
-                     for tag in tags]
-        }
+        'submenu': [
+            {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
+            {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина'},
+        ],
+        'tags': [{'text': tag}
+                 for tag in tags]
+    }
     return context
+
 
 def creators_page(request):
     context = gen_menu(request)
     return render(request, 'creators.html', context)
 
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
+
 
 def yourTasks_page(request):
     content = gen_menu(request)
@@ -71,6 +92,7 @@ def yourTasks_page(request):
     } for task in tasks]
 
     return render(request, 'yourTasks.html', content)
+
 
 def goodsSearch_page(request, product_name):
     context = gen_menu(request)
@@ -87,6 +109,7 @@ def goodsSearch_page(request, product_name):
                             }
                            for product in products]
     return render(request, 'goodsSearch.html', context)
+
 
 def goods_page(request):
     context = gen_menu(request)
@@ -141,23 +164,24 @@ def resumes_page(request):
     creators = Creator.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
-    context['creators'] = [{'id':creator.id,
+    context['creators'] = [{'id': creator.id,
                             'username': creator.username,
-                            'first_name':creator.first_name,
-                            'email':person,
-                            'cover':creator.cover,
-                            'description':creator.description,
-                            'is_company':creator.is_company,
-                            'company_name':creator.company_name,
-                            'telegram':creator.telegram,
-                            'vk':creator.vk,
-                            'whatsapp':creator.whatsapp,
-                            'instagram':creator.instagram,
-                            'tag':creator.tag,
-                            'published':creator.published,
+                            'first_name': creator.first_name,
+                            'email': person,
+                            'cover': creator.cover,
+                            'description': creator.description,
+                            'is_company': creator.is_company,
+                            'company_name': creator.company_name,
+                            'telegram': creator.telegram,
+                            'vk': creator.vk,
+                            'whatsapp': creator.whatsapp,
+                            'instagram': creator.instagram,
+                            'tag': creator.tag,
+                            'published': creator.published,
                             }
                            for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
+
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
@@ -232,7 +256,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             fs = FileSystemStorage()
             local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
             product.picture = local_path_to_file
-        #if "product_creator_tags" in request.POST:
+        # if "product_creator_tags" in request.POST:
         #   form = MyForm(request.POST)
         #   product.tags.add(form.cleaned_data['select'])
         product.product_name = request.POST['product_name']
@@ -349,7 +373,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     return render(request, 'becomeCreator.html', context)
 
 
-
 # def edit_profile_page(request):
 #     content = {
 #         'menu': gen_menu()
@@ -408,32 +431,36 @@ def becomeCreatorTemplate_page(request, name):
             content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
-                                    'st':product.status,
+                                    'st': product.status,
                                     'status1': 'red' if product.status[-1] == 'е' else 'blue',
                                     'status2': 'red' if product.status[-1] == 'о' else 'blue',
                                     'status3': 'red' if product.status[-1] == 'ы' else 'blue',
-                                    'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
+                                    'chat_id': (creator.id * Account.objects.get(
+                                        email=product.id_user_buy).id) + creator.id + Account.objects.get(
+                                        email=product.id_user_buy).id
 
                                     }
                                    for product in products]
             products_v = Product_buy.objects.filter(id_creator=request.user)
             if products_v.count() > 0:
                 content['products_v'] = [{'id': product.id,
-                                       'product_name': product.product_name,
-                                       'customer': product.id_user_buy,
-                                       'status': product.status,
-                                       'id_user_buy': product.id_user_buy,
-                                       'chat_id':(creator.id * Account.objects.get(email=product.id_user_buy).id) + creator.id + Account.objects.get(email=product.id_user_buy).id
-                                      }
-                                     for product in products_v]
-            
-        
+                                          'product_name': product.product_name,
+                                          'customer': product.id_user_buy,
+                                          'status': product.status,
+                                          'id_user_buy': product.id_user_buy,
+                                          'chat_id': (creator.id * Account.objects.get(
+                                              email=product.id_user_buy).id) + creator.id + Account.objects.get(
+                                              email=product.id_user_buy).id
+                                          }
+                                         for product in products_v]
+
+
         except Product_buy.DoesNotExist as e:
             content['products'] = None
 
     # elif name == '3':
-        # form = MyProfile(request.POST)
-        # content['form1'] = form
+    # form = MyProfile(request.POST)
+    # content['form1'] = form
 
     elif name == '3':
         account = Account.objects.get(email=request.user)
@@ -459,7 +486,7 @@ def becomeCreatorTemplate_page(request, name):
         except:
             partner = Partner()
             content['partner'] = partner
-    
+
     elif name == '6':
         form = ProductCreateForm()
         content['form8'] = form
@@ -489,7 +516,7 @@ def tasks_page(request):
     context['task_cards'] = [{'id': task.id,
                               'name': task.name,
                               'description': task.description
-                            } for task in tasks]
+                              } for task in tasks]
     return render(request, 'tasks.html', context)
 
 
@@ -509,7 +536,7 @@ def index_page(request):
                             'description': product.description
                             }
                            for product in products]
-    
+
     return render(request, 'index.html', context)
 
 
@@ -521,7 +548,6 @@ def index_page(request):
 #                             }
 #                            for product in products]
 #     return render(request, 'cardProduct.html', context)
-
 
 
 def cardResume_page(request):
@@ -538,7 +564,6 @@ def cardResume_page(request):
                             }
                            for product in products]
     return render(request, 'cardResume.html', context)
-
 
 
 def sertCardResume_page(request, username):
@@ -569,6 +594,7 @@ def cardTask_page(request, task_id):
         return render(request, 'cardTask.html', context)
     except Task.DoesNotExist as e:
         raise Http404 from e
+
 
 def cardProduct_page(request, product_id):
     flag = "day"
@@ -641,12 +667,12 @@ def cardProduct_page(request, product_id):
                 print(message.created_data)
                 context['flag'] = flag
 
-
         context['messages'] = messages
 
         return render(request, 'cardProduct.html', context)
     except Task.DoesNotExist as e:
         raise Http404 from e
+
 
 def editTask_page(request, task_id):
     context = gen_menu(request)
@@ -672,11 +698,13 @@ def editTask_page(request, task_id):
     except Account.DoesNotExist as e:
         raise Http404 from e
 
+
 def infoTask_page(request):
     context = gen_menu(request)
     form = addTasks()
     context["form"] = form
     return render(request, 'infoTask.html', context)
+
 
 def edit_profile(request):
     context = gen_menu(request)
@@ -762,6 +790,7 @@ def edit(request):
     }
     return render(request, 'edit.html', content)
 
+
 def login_page(request):
     form = SignUpForm(request.POST)
     context = {
@@ -778,7 +807,7 @@ def login_page(request):
             login(request, user)
             return redirect('/')
         else:
-            print( 'Try again! username or password is incorrect')
+            print('Try again! username or password is incorrect')
     # регистрация
     elif request.method == 'POST' and 'btnform1' in request.POST:
         if form.is_valid():
@@ -795,7 +824,6 @@ def login_page(request):
             print(form.errors)
 
     return render(request, 'signin.html', context)
-
 
 
 def signup(request):
@@ -822,11 +850,13 @@ def forgot_password_page(request):
     }
     return render(request, 'forgotPassword.html', content)
 
+
 def documents_page(request):
     content = {
         'menu': gen_menu(request)
     }
     return render(request, 'documents.html', content)
+
 
 def documentTemplates_page(request, name):
     content = {
@@ -851,12 +881,14 @@ def chat_page(request, room_id):
     if not Chat_room.objects.filter(name=room_id).exists():
         new_room = Chat_room.objects.create(name=room_id)
         new_room.save()
-    return render(request, 'messanger.html', content)    
+    return render(request, 'messanger.html', content)
+
 
 def getMsg(request, room_id):
     room_detales = Chat_room.objects.get(name=room_id)
     messages = Message.objects.filter(room=room_detales.name)
-    return JsonResponse({"messages":list(messages.values())})
+    return JsonResponse({"messages": list(messages.values())})
+
 
 def send(request):
     message = request.POST['message']
@@ -866,6 +898,7 @@ def send(request):
     new_message = Message.objects.create(value=message, user=username, room=room_id)
     new_message.save()
     return HttpResponse('Message sent successfully.')
+
 
 def orders_page(request):
     content = gen_menu(request)
@@ -892,6 +925,6 @@ def orders_page(request):
 
     return render(request, 'orders.html', content)
 
+
 def partners_page(request):
     return render(request, 'showPartner.html')
-

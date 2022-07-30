@@ -65,3 +65,8 @@ urlpatterns = [
     path('orders/', views.orders_page),
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
+
+handler404 = views.pageNotFound
+handler403 = views.pageMistakeServ
+handler400 = views.pageNotAccess
+handler500 = views.pageNotRequest

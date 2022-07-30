@@ -16,6 +16,10 @@ urlpatterns = [
     path('partnerTemplates/<name>/', views.partnerTemplate_page),
     path('accounts/', include('django.contrib.auth.urls')),
     path('start/', views.start_page),
-
-
 ]
+
+
+handler404 = views.pageNotFound
+handler403 = views.pageMistakeServ
+handler400 = views.pageNotAccess
+handler500 = views.pageNotRequest
