@@ -5,13 +5,12 @@ import phonenumbers
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password= None, first_name=None, last_name=None, phone1=1, city=''):
+    def create_user(self, email, username, password= None, first_name=None, last_name=None,  city=''):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
             first_name=first_name,
             last_name=last_name,
-            phone=phone1,
             city=city
         )
         user.set_password(password)
@@ -37,9 +36,9 @@ class MyAccountManager(BaseUserManager):
 class Partner(AbstractBaseUser):
     username = models.CharField(max_length=20, default='', unique=True)
     email = models.EmailField(default='', unique=True)
+    phone = models.IntegerField(default=0)
     first_name = models.CharField(max_length=20, default='')
     last_name = models.CharField(max_length=30, default='')
-    phone = models.IntegerField()
     city = models.CharField(max_length=30, default='')
     userImage = models.ImageField(upload_to='images/', default='images/default.png')
     is_admin = models.BooleanField(default=False)
@@ -47,8 +46,8 @@ class Partner(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     inn = models.IntegerField(default=0)
-    name_small = models.CharField(max_length=20,default='')
-    nameFull = models.CharField(max_length=20,default='')
+    name_small = models.CharField(max_length=20, default='')
+    nameFull = models.CharField(max_length=20, default='')
     payment_account = models.IntegerField(default=0)
     reg_form = models.CharField(max_length=20,default='')
     ogrn = models.IntegerField(default=0)
