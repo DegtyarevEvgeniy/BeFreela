@@ -5,27 +5,21 @@ import phonenumbers
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password= None, first_name=None, last_name=None, phone1=1, city=''):
+    def create_user(self, email, first_name, password= None):
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
+            password=password,
             first_name=first_name,
-            last_name=last_name,
-            phone=phone1,
-            city=city
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password, first_name, last_name, city=''):
+    def create_superuser(self, email, password, first_name):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
-            username=username,
             first_name=first_name,
-            last_name=last_name,
-            city=city
         )
         user.is_admin = True
         user.is_staff = True
@@ -35,11 +29,11 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
-    username = models.CharField(max_length=20, default='', unique=True)
+    username = models.CharField(max_length=20, default='', unique=False)
     email = models.EmailField(default='', unique=True)
     first_name = models.CharField(max_length=20, default='')
     last_name = models.CharField(max_length=30, default='')
-    phone = models.IntegerField()
+    phone = models.IntegerField(default='1')
     city = models.CharField(max_length=30, default='')
     userImage = models.ImageField(upload_to='images/', default='images/default.png')
     is_admin = models.BooleanField(default=False)
@@ -51,9 +45,18 @@ class Account(AbstractBaseUser):
     nameFull = models.CharField(max_length=20,default='')
     payment_account = models.IntegerField(default=0)
     reg_form = models.CharField(max_length=20,default='')
+    inn = models.IntegerField(default=0)
+    ogrn = models.IntegerField(default=0)
+    korr_check = models.IntegerField(default=0)
+    kpp = models.IntegerField(default=0)
+    index = models.IntegerField(default=0)
+    bik = models.IntegerField(default=0)
+    checking_account = models.IntegerField(default=0)
+    fiz_adress = models.CharField(max_length=9999, default='')
+    street = models.CharField(max_length=9999,default='')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name']
 
     objects = MyAccountManager()
 

@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-(m_++8t&((4s3gz&m6m-qs2whf8tkhd%&qqvem_%^v)*kvv0p!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
+
 
 
 # Application definition
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Part',
-    'account.apps.AccountConfig',
+    'partners.apps.PartnerConfig',
     "phonenumber_field",
     
 ]
@@ -70,7 +71,7 @@ TEMPLATES = [
         },
     },
 ]
-AUTH_USER_MODEL = 'account.Account'
+AUTH_USER_MODEL = 'partners.Partner'
 WSGI_APPLICATION = 'partner.wsgi.application'
 
 
@@ -86,9 +87,11 @@ DATABASES = {
         'HOST': 'degtyarev.beget.tech',
         'PORT': '3306',
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1, foreign_key_checks = 0, default_storage_engine=INNODB",
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
             'charset': 'utf8mb4',
             "autocommit": True,
+            "init_command": "SET foreign_key_checks = 0;",
+
             
         }
     }

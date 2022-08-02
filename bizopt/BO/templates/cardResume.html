@@ -7,56 +7,81 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<div class="uk-card uk-card-default" style="margin: 2% auto">
-    <div class="uk-flex uk-flex-middle uk-flex-left"
-        style="padding: 20px 5%; background-color: rgba(222, 222, 222, 0.5);">
-        <div class="uk-width-1-2 uk-text-center">
-            <img class="uk-border-circle" width="500" height="100" src="{{ profile.cover.url }}">
-        </div>
-        <div class="uk-width-1-2 uk-flex uk-flex-left">
-            <div>
-                <div class="uk-flex uk-flex-between uk-flex-center uk-margin-remove-bottom">
-                    <div>
-                        <h3 class="uk-card-title" style="margin-bottom: 5px"> {{profile.first_name }}</h3>
-                        <p style="margin-top: 5px">{{ profile.email }}</p>
+<style>
+    #main-img {
+        height: 30em;
+        background-color: #cccccc;
+        background-image: url(https://html5css.ru/css/img_lights.jpg);
+        background-repeat: none;
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        align-items: flex-end;
+        justify-content: left;
+    }
+</style>
+
+<body style="margin: auto; margin-top: 7%">
+
+
+
+    <div id="main-img">
+        <div class="uk-width-4-5" style="margin: 0 auto; padding: 2% 0px">
+            <div class="uk-card-header" style="padding: 0px;">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <img class="" width="200" height="40"
+                            src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
                     </div>
-                    {% comment %} <div uk-grid style="width: 150px;">
-                        <a class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
-                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #229ED9;">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
-                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #4c75a3;">
-                            <i class="fab fa-vk"></i>
-                        </button>
+                    <div class="uk-width-expand uk-flex uk-flex-left uk-flex-middle">
+                        <h1 class="uk-card-title uk-margin-remove-bottom"
+                            style="color: white; font-size: 350%; text-transform:uppercase;">Name Surname</h1>
+                    </div>
 
-                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
-                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #ac2bac;">
-                            <i class="fab fa-instagram"></i>
-                        </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                        <button class="uk-button uk-flex uk-flex-center uk-flex-middle uk-border-circle"
-                            style="height: 30px; width: 30px; padding: 0; margin: 0 3px; text-align: center;color: white; background-color: #25d366;">
-                            <i class="fab fa-whatsapp"></i>
-                        </button>
-                    </div> {% endcomment %}
+    <div class="uk-section  uk-width-4-5" style="margin: 0 auto;">
+        <div class="uk-width-1-2">
+            <h2>О себе</h2>
+            <p class="uk-text-break">{{profile.description}}</p>
+        </div>
+    </div>
+    <div class="uk-section uk-width-4-5 uk-flex uk-flex-wrap uk-flex-wrap-around uk-flex-left"
+        style="margin: 0 auto;">
+        <!-- start of card -->
+        <div class="uk-card uk-card-default uk-width-1-4" style="box-shadow: none; padding: 3px; margin: 40px;">
+            <div>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top uk-text-center" style="margin-top: 5%">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Image.jpg" width="300" alt="">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title uk-text-truncate">{{ product.product_name }}</h3>
+                        <p>
+                            <label>Наличие: </label> {{ product.availability }}
+                        </p>
+                        <div class="price">
+                            {{ product.cost }} ₽
+                        </div>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="../goods/{{ product.id }}" class="btn btn-primary">Посмотреть</a>
+                    </div>
                 </div>
 
-                <p class="uk-margin-remove">О себе</p>
-                <!-- <p class="uk-text-meta uk-margin-remove-top">
-                    <span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9734</span></p> -->
-                <p class="uk-text-break uk-width-1" style="margin-top: 10px">{{ profile.description }}</p>
-
-                <a type="submit" class="uk-button uk-button-primary" href="/chat/{{link}}">Написать</a>
             </div>
-            
         </div>
+        <!-- end of card -->
+        
     </div>
-    <div class="width-1 uk-text-center">
+    <!-- <div class="width-1 uk-text-center">
         <h3>Товары продавца</h3>
     </div>
-    <!-- uk-flex uk-flex-wrap uk-flex-wrap-around uk-flex-center uk-width-1 -->
-    <div class="uk-card-body  uk-grid-column-small uk-grid-row-large uk-flex-center uk-text-right" uk-grid
+    uk-flex uk-flex-wrap uk-flex-wrap-around uk-flex-center uk-width-1 -->
+    <!-- <div class="uk-card-body  uk-grid-column-small uk-grid-row-large uk-flex-center uk-text-right" uk-grid
         style="margin: 10px auto;  padding: 5px;">
         {% for product in products %}
         {% if profile.email == product.id_creator %}
@@ -87,78 +112,10 @@
         </div>
         {% endif %}
         {% endfor %}
-    </div>
-
-</div>
-
-
-<style>
-    .tagOut {
-        background-color: brown;
-        border-radius: 10px;
-        width: auto;
-        margin: 0;
-    }
-
-    .contantM {
-        width: 100%;
-        height: 40%;
-        padding: 10px;
-    }
-
-    .colorStarTrue {
-
-        font-weight: 900;
-        color: #f8ce0b;
-    }
-</style>
-
-
+    </div>  -->
+</body>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
-<script>
-    $(function () {
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', 'baseProductCard ')
-        xhr.onload = function () {
-
-            console.log(xhr.response)
-            $('#content').html(xhr.response)
-        }
-        xhr.send()
-    });
-
-    $('#showContent1').on('click', {
-        title: 'Заголовок 1',
-        content: 'Содержимое 1...'
-    }, function (inBody) {
-
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', 'baseResumeCard')
-        xhr.onload = function () {
-
-            console.log(xhr.response)
-            $('#content').html(xhr.response)
-        }
-        xhr.send()
-    });
-
-    $('#showContent2').on('click', {
-        title: 'Заголовок 2',
-        content: 'Содержимое 2...'
-    }, function (inBody) {
-
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', 'baseProductCard')
-        xhr.onload = function () {
-
-            console.log(xhr.response)
-            $('#content').html(xhr.response)
-        }
-        xhr.send()
-
-    });
-</script>
 
 
 {% endblock %}

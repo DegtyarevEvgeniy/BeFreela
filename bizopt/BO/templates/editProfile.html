@@ -10,12 +10,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
 </head>
 
-<body>
+<body style="margin: auto">
+<div style="margin: 7% auto; width: 80%;">
 
     <div class="uk-card uk-card-default uk-grid-collapse uk-margin-medium uk-margin-medium-left uk-margin-medium-right"
-        uk-grid>
+        uk-grid style="margin: auto">
         <div class="uk-card-media-left uk-cover-container uk-width-2-5 text-center uk-padding">
-            <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" style="width: 60%; height: 60%;">
+            <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" style="width: 80%; height: 60%;">
             <p class="uk-margin-remove-bottom uk-text-emphasis">{{user.first_name}} {{user.last_name}}</p>
             <p class="uk-margin-small-top uk-text-muted">{{user.email}}</p>
         </div>
@@ -85,6 +86,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

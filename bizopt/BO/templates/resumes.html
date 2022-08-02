@@ -8,207 +8,662 @@
 
 </head>
 
-<body>
-    <!-- start of left menu -->
+<style>
+    * {
+        transition: 0.3s;
+    }
 
-    <div class="uk-margin-large-left uk-margin-medium-top uk-flex">
-        <br>
-        <br>
-        <div id="content" class="row uk-padding-large uk-width-2-3" style="margin: 0 auto">
-            <div class="uk-card uk-card-default uk-grid-collapse" uk-grid>
+    /* 
+    .card-holder:hover {
+        box-shadow: 0px 0px 150px #000000;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.2);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.2);
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.2);
+        transition: all 200ms ease-in;
+        transform: scale(1.2);
+    } */
+</style>
 
-                {% for creator in creators %}
-                {% if creator.id != user.id %}
-                <div style="margin: 10px auto">
-                    <div class="uk-card">
-                        <div class="uk-card-header uk-flex uk-flex-middle" style="border: none;">
-                            <div class="uk-cover-container" style="display: inline-block;">
-                                <img src="../../media/{{creator.cover}}" alt="" uk-cover>
-                                <canvas width="200" height="200"></canvas>
-                            </div>
-                            <div class="uk-margin-left" style="display: inline-block;">
-                                <h2>{{creator.first_name}}</h2>
-                                {% comment %} <span>3,2 &nbsp;</span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <br>
-                                <br> {% endcomment %}
-                                <p>
-                                    {% comment %} <i class="fa fa-check uk-border-circle"
-                                        style="padding: 5px; color: white; background-color: green;"></i>
-                                    &nbsp; Проверенный пользователь</p> {% endcomment %}
-                            </div>
-
-                            <div class="uk-divider-vertical uk-margin-medium-left uk-margin-small-right"></div>
-
-                            <div class="uk-margin-small-left">
-                                {% if request.user.is_authenticated %}
-                                <a class="uk-button uk-button-primary"href="../cardResume/{{creator.username}}">Посмотреть</a>
-                                {% else %}
-                                <a class="uk-button uk-button-primary"
-                                    href="/accounts/login/">Посмотреть</a>
-                                    {% endif %}
-                                <br>
-                                {% comment %} <h5>доступные регионы</h5>
-                                <p class="uk-text-nowrap">Москва и Московская область Ближнее Подмосковье Украина</p> {% endcomment %}
-                            </div>
-                        </div>
-                        <div class="uk-card-body">
-                            <p class="uk-text-truncate">{{creator.description}}</p>
-                        </div>
-                        {% comment %} <div class="uk-card-body">
-                            <div>
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <br>
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                                <img src="{{creator.email.userImage.url}}" alt="" width="120" style="margin: 2px 0;">
-                            </div>
-                            <br>
-                            <br>
-
-                        </div> {% endcomment %}
-                        {% comment %} <div class="uk-card-footer" style="border: none;">
-                            <h3>Образование и опыт</h3>
-                            <br>
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-
-                            <div class="uk-width-1-4" style="display: inline-block;">
-                                <p><b>Медсестра</b></p>
-                                <p>3 года</p>
-                            </div>
-                        </div> {% endcomment %}
-                    </div>
-                    <hr class="uk-divider-large">
-                </div>
-                {% endif %}
-                {% endfor %}
-            </div>
+<body style="width: 100%; height: 100%;">
+    <div style="width: 80%; margin: 10% auto;">
+        <div style="margin-bottom: 3%">
+            <h1>Бренды</h1>
+            <h3>Здесь ты можешь найти все бренды, которые продают у нас на площадке<br>В профиле бренда ты найдешь
+                информацию и товары бренда</h3>
         </div>
-        {% comment %} <div style="width: 20%; height: 100%;">
-            <div class="uk-margin-small-left">
-            </div>
-            <div>
-                <hr style="background-color: black; height: 3px; width: 80%">
-                <div class="textStyleHeader textAll uk-margin-medium-bottom">
-                    <p>Рейтинг продавца</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span></label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value2">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span></label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span></label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value2">
-                            <label>Не важно</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="textStyleHeader textAll">
-                    <p>Исполнитель</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>ИП</label>
-                        </div>
-                        <div>
-                            <input type="radio" value="value1">
-                            <label>ООО</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
 
-        </div> {% endcomment %}
-        <!-- end of left menu -->
+        <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+            <a href="" class="uk-text-center">
+                <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
+                    style="border: 6px solid black; border-radius: 50px" tabindex="0">
+                    <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
+                    <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
+                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        <article class="uk-article">
+
+                            <h2 class="uk-article-title">Heading</h2>
+
+                            <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                eiusmod tempor incididunt ut labore et dolore
+                                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                aliquip ex ea
+                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                dolore eu fugiat
+                                nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                                officia deserunt mollit
+                                anim id est laborum.</p>
+
+                        </article>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
     </div>
 
+
+    <footer class="text-center text-lg-start bg-light text-muted">
+
+        <!-- Section: Links  -->
+        <br>
+        <section class="">
+            <div class="container text-center text-md-start mt-5">
+                <!-- Grid row -->
+                <div class="row mt-3">
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                        <!-- Content -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            <i class="fas fa-gem me-3"></i>BeFreela
+                        </h6>
+                        <p>
+                            Here you can use rows and columns to organize your footer content. Lorem ipsum
+                            dolor sit amet, consectetur adipisicing elit.
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Для покупателей
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Angular</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">React</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Vue</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Laravel</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Для партнеров
+                        </h6>
+                        <p>
+                            <a href="#!" class="text-reset">Pricing</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Settings</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Orders</a>
+                        </p>
+                        <p>
+                            <a href="#!" class="text-reset">Help</a>
+                        </p>
+                    </div>
+                    <!-- Grid column -->
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                        <!-- Links -->
+                        <h6 class="text-uppercase fw-bold mb-4">
+                            Контакты
+                        </h6>
+                        <p><i class="fas fa-home me-3"></i> Россия, Москва</p>
+                        <p>
+                            <i class="fas fa-envelope me-3"></i>
+                            degtyarevea12@gmail.com
+                        </p>
+                        <p><i class="fas fa-phone me-3"></i> +7 925 574 1371</p>
+                        <p><i class="fas fa-print me-3"></i> +7 925 574 1371</p>
+                    </div>
+                    <!-- Grid column -->
+                </div>
+                <!-- Grid row -->
+            </div>
+        </section>
+        <!-- Section: Links  -->
+
+        <!-- Copyright -->
+        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+            © 2022:
+            <a class="text-reset fw-bold" href="">BeFreela</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
 </body>
 
 
-<style>
-    .textStyleHeader p {
-        font-family: 'Inter';
-        font-size: 20px;
-        font-style: normal;
-        line-height: 15px;
 
-    }
-
-    .textStyleHeaderRegion label {
-        font-family: 'Inter';
-        font-size: 18px;
-        font-style: normal;
-        line-height: 15px;
-        margin-bottom: 5px;
-    }
-
-    .textAll label {
-        font-family: 'Inter';
-        font-style: normal;
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-
-    .checked {
-        color: orange;
-    }
-</style>
 <script src="js/uikit-icons.min.js"></script>
 
 {% endblock %}

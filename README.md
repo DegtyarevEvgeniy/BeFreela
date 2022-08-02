@@ -9,7 +9,7 @@
 
 <hr>
 
-<div>
+ <div>
 <h1>For Linux:</h1>
 <ul>
 <li>python3 manage.py makemigrations --merge</li>

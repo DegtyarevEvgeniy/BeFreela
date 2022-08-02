@@ -93,25 +93,14 @@ class Hashtags(models.Model):
     tag_name = models.CharField(max_length=50, default='')
 
 
-class Partner(models.Model):
-    password = models.CharField(max_length=50, default='')
-    last_login = models.CharField(max_length=200, default='-')
-    username = models.CharField(max_length=200, default='-')
-    email = models.CharField(max_length=200, default='-')
-    first_name = models.CharField(max_length=200, default='-')
-    last_name = models.CharField(max_length=200, default='-')
-    country = models.CharField(max_length=200, default='-')
-    inn = models.IntegerField(default='0000000000')
-    name_small = models.CharField(max_length=200, default='-')
-    name_full = models.CharField(max_length=200, default='-')
-    reg_form = models.CharField(max_length=200, default='Самозанятый')
-    payment_account = models.CharField(max_length=200, default='-')
-
 class Chat_room(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100000)
+
+
 class Message(models.Model):
-    value = models.CharField(max_length=20)
+    value = models.CharField(max_length=1000000)
     date = models.DateTimeField(default=datetime.now, blank=True)
-    user = models.CharField(max_length=20)
-    room = models.CharField(max_length=20)
+    user = models.CharField(max_length=1000000)
+    room = models.CharField(max_length=1000000)
+
 

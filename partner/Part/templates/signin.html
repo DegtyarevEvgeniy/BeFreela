@@ -3,248 +3,316 @@
 
 <head>
 
-    <p>--------------------</p>
-    <p>Text</p>
-    <p>--------------------</p>
-
 
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>BizOpt</title>
-    <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
+    <!-- <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.15.1/dist/css/uikit.min.css" />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
-        body {
-            background: #eee
+        * {
+            transition: 0.2s;
         }
 
         #regForm {
-            background-color: #ffffff;
             margin: 0px auto;
-            font-family: Raleway;
             padding: 40px;
-            border-radius: 10px
-        }
-
-        #register {
-            color: #6A1B9A
-        }
-
-        h1 {
-            text-align: center
-        }
-
-        input {
-            padding: 10px;
-            width: 100%;
-            font-size: 17px;
-            font-family: Raleway;
-            border: 1px solid #aaaaaa;
             border-radius: 10px;
-            -webkit-appearance: none
-        }
-
-        .tab input:focus {
-            border: 1px solid #6a1b9a !important;
-            outline: none
-        }
-
-        input.invalid {
-            border: 1px solid #e03a0666;
         }
 
         .tab {
-            display: none
-        }
-
-        button {
-            background-color: #6A1B9A;
-            color: #ffffff;
-            border: none;
-            border-radius: 50%;
-            padding: 10px 20px;
-            font-size: 17px;
-            font-family: Raleway;
-            cursor: pointer
-        }
-
-        button:hover {
-            opacity: 0.8
-        }
-
-        button:focus {
-            outline: none !important
+            display: none;
         }
 
         #prevBtn {
-            background-color: #bbbbbb
+            background-color: #bbbbbb;
         }
 
         .all-steps {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 100%;
-            display: inline-flex;
-            justify-content: center
+            margin: 30px auto;
+            width: 50%;
+            height: 5px;
+            border-top: 1px solid;
+            border-bottom: 1px solid;
+            border-radius: 20px;
+        }
+
+        .all-steps::after {
+            border-radius: 200px;
+            background-color: rgb(50, 50, 255);
+            content: '\A';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: var(--width-nonstatic);
+            z-index: -1;
         }
 
         .step {
-            height: 40px;
-            width: 40px;
-            margin: 0 2px;
+            height: 20px;
+            width: 20px;
+            margin: 0px;
             background-color: #bbbbbb;
-            border: none;
+            border: 2px solid;
+            border-color: #bbbbbb;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 15px;
-            color: #6a1b9a;
-            opacity: 0.5
-        }
-
-        .step.active {
-            opacity: 1
-        }
-
-        .step.finish {
-            color: #fff;
-            background: #6a1b9a;
-            opacity: 1
-        }
-
-        .all-steps {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px
+            opacity: 1;
         }
     </style>
 </head>
 
-<body oncontextmenu='return false' class='snippet-body'>
-    <div class="container mt-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-md-8">
-                <form id="regForm" method="POST">
-                    <h1 id="register">Signin Form</h1>
-                    <div class="all-steps" id="all-steps">
-                        <a onclick="surTab(0)">
-                            <span class="step">
-                                <i class="fa fa-user"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(1)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                        <a onclick="surTab(2)">
-                            <span class="step">
-                                <i class="fa fa-unlock-alt"></i>
-                            </span>
-                        </a>
-                    </div>
-                    <div class="tab">
-                        {{ form.first_name.label }}: {{ form.first_name }}
-
-                        <br>
-                        <br> {{ form.last_name.label }}: {{ form.last_name }}
-                        <br>
-                        <br>
-                    </div>
+<body>
+    <div>
+        <div>
+            <div>
+                <div class="all-steps" id="all-steps">
+                    <a class="step" onclick="surTab(0)"></a>
+                    <a class="step" onclick="surTab(1)"></a>
+                    <a class="step" onclick="surTab(2)"></a>
+                    <a class="step" onclick="surTab(3)"></a>
+                    <a class="step" onclick="surTab(4)"></a>
+                </div>
+                <form id="regForm" class="uk-width-3-5" method="POST">
 
                     <div class="tab">
-                        {{ form.username.label }}: {{ form.username }}
+                        <h2 class="uk-text-center">Главная информация</h2>
+                        <h4 class="uk-text-center">Запомните введеные поля, они понадобяться вам для входа в аккаунт
+                        </h4>
                         <br>
-                        <br> {{ form.password1.label }}: {{ form.password1 }}
-                        <br>
-                        <br> {{ form.password2.label}}: {{ form.password2}}
-                        <br>
-                        <br>
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.username.label}}: {{form.username}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.email.label}}: {{form.email}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.first_name.label}}: {{form.first_name}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.last_name.label}}: {{form.last_name}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.password1.label}}: {{form.password1}}</div>
+                                {{form.password2.label}}: {{form.password2}}</div>
 
+                        </div>
                     </div>
 
                     <div class="tab">
-                        {{form.phone.label}} {{form.phone}}
+                        <h2 class="uk-text-center">Название магазина</h2>
+                        <h4 class="uk-text-center">Выбери уникальное название магазина, который отражает твой стиль</h4>
                         <br>
-                        <br> {{ form.email.label}} {{ form.email}}
-                        <br>
-                        <br> {{ form.city.label}} {{ form.city}}
-                        <br>
-                        <br>
+                        <div style="text-align:center">
+                            <div uk-form-custom="target: true" class="uk-width-1-2">
+                                <input class="uk-input uk-width-1" type="text" placeholder="Введит еназвание">
+                            </div>
+                            <button class="uk-button uk-button-default" style="font-size: 13px">Проверить на
+                                уникальность</button>
+                        </div>
                     </div>
 
-                    {% csrf_token %} {% if form.errors %} {% for field in form %} {% for error in field.errors %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error|escape }}</strong>
+                    <div class="tab">
+                        <h2 class="uk-text-center">Юредические данные</h2>
+                        <h4 class="uk-text-center">Введите данные</h4>
+                        <br>
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-3">
+                                <label> Тип </label>
+                                <br>
+                                <select class="uk-select">
+                                    <option value="ООО">ООО</option>
+                                    <option value="ИП">ИП</option>
+                                    <option value="Самозанятый">Самозанятый</option>
+                                    <option value="Физлицо">Физлицо</option>
+                                </select>
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.name_small.label}}: {{form.name_small}}
+                            </div>
+                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                                {{form.nameFull.label}}: {{form.nameFull}}
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.ogrn.label}}: {{form.ogrn}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.inn.label}}: {{form.inn}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.kpp.label}}: {{form.kpp}}
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1">
+                                {{form.street.label}}: {{form.street}}
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-3-5">
+                                {{form.fiz_adress.label}}: {{form.fiz_adress}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-3">
+                                {{form.index.label}}: {{form.index}}
+                            </div>
+                        </div>
+
+
                     </div>
-                    {% endfor %} {% endfor %} {% endif %}
+
+                    <div class="tab">
+                        <h2 class="uk-text-center">Оплата</h2>
+                        <h4 class="uk-text-center">Введите данные для оплаты</h4>
+                        <br>
+                        <div class="uk-width-1-1 uk-flex uk-flex-between">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.payment_account.label}}: {{form.payment_account}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.reg_form.label}}: {{form.reg_form}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.bik.label}}: {{form.bik}}
+
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                                {{form.korr_check.label}}: {{form.korr_check}}
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab">
+                        <h2 class="uk-text-center">Подтвердите почту</h2>
+                        <h4 class="uk-text-center">Выбери уникальное название магазина, который отражает твой стиль</h4>
+                        <br>
+                        <div class="uk-width-1-1 uk-flex uk-flex-center">
+                            <div style="display: inline-block; margin: 0 10px; border: 1px solid; padding: 5%;"
+                                class="uk-width-4-5 uk-border-rounded">
+                                <p>Вам нужно подтвердить Вашу почту <b>{{user.email}}</b> </p>
+                                <p>перед тем как продолжить создание магазина</p>
+                                <button class="uk-button uk-button-default uk-margin-small-bottom"
+                                    style="text-transform: none;background-color: #e4e4e4">Отправить еще раз</button>
+                                <br>
+                                <button class="uk-button uk-button-text" style="text-transform: none;">Изменить
+                                    почту</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <br>
+                    <br>
                     <div style="overflow:auto;" id="next-previous">
                         <div style="float:right;">
-                            <button type="button" id="prevBtn" onclick="nextPrev(-1)">
-                                <i class="fa fa-angle-double-left"></i>
+                            <button class="uk-button uk-button-default" type="button" id="prevBtn"
+                                onclick="nextPrev(-1)">
+                                Назад
                             </button>
-                            <button type="button" id="nextBtn" onclick="nextPrev(1)">
-                                <i class="fa fa-angle-double-right"></i>
+                            {% csrf_token %}
+                            <button class="uk-button uk-button-default" type="button" id="nextBtn"
+                                onclick="nextPrev(1)">
+                                Далее
                             </button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
     </div>
 </body>
-<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
-</script>
-<script type='text/Javascript'>
+<!-- <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
+<script>
     let currentTab = 0;
-document.addEventListener("DOMContentLoaded", function(event) {
-    showTab(currentTab);
-});
+    let progressBar = document.querySelector(".all-steps");
+    document.addEventListener("DOMContentLoaded", function (event) {
+        progressBar.style.setProperty("--width-nonstatic", '20%');
+        showTab(currentTab);
+    });
 
-function showTab(n) {
-    let x = document.getElementsByClassName("tab");
-    x[n].style.display = "block";
-    if (n === 0) {
-        document.getElementById("prevBtn").style.display = "none";
-    } else {
-        document.getElementById("prevBtn").style.display = "inline";
+    function showTab(n) {
+        let x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        if (n === 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n === (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "Далее";
+        } else {
+            document.getElementById("nextBtn").innerHTML = "Далее";
+        }
+        fixStepIndicator(n)
     }
-    if (n === (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
-    } else {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
-    }
-    fixStepIndicator(n)
-}
 
-function nextPrev(n) {
-    let x = document.getElementsByClassName("tab");
-    x[currentTab].style.display = "none";
-    currentTab = currentTab + n;
-    if (currentTab === x.length) {
-        document.getElementById('nextBtn').type = "submit"
+    function nextPrev(n) {
+        let x = document.getElementsByClassName("tab");
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+        if (currentTab === x.length) {
+            document.getElementById('nextBtn').type = "submit"
+        }
+        showTab(currentTab);
     }
-    showTab(currentTab);
-}
 
-function surTab(n) {
-    let x = document.getElementsByClassName("tab");
-    x[currentTab].style.display = "none";
-    currentTab = n;
-    showTab(currentTab);
-}
-
-function fixStepIndicator(n) {
-    let i, x = document.getElementsByClassName("step");
-    for (i = 0; i <
-        x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
+    function surTab(n) {
+        let x = document.getElementsByClassName("tab");
+        x[currentTab].style.display = "none";
+        currentTab = n;
+        showTab(currentTab);
     }
-    x[n].className += " active";
-}
+
+    function fixStepIndicator(n) {
+        let i, x = document.getElementsByClassName("step");
+
+        if (n != x.length - 1) {
+            progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 20}%`);
+        } else {
+            progressBar.style.setProperty("--width-nonstatic", "100%");
+        }
+
+        x[n].style.backgroundColor = '#ffa500';
+        x[n].style.borderColor = '#ffa500';
+        //color for n
+
+        for (i = 0; i < n; i++) { // color for every before n
+            x[i].style.backgroundColor = '#ffffff';
+            x[i].style.borderColor = '#2652bf';
+        }
+
+        for (i = n + 1; i < x.length; i++) { // color for every after n
+            x[i].style.backgroundColor = '#bbbbbb';
+            x[i].style.borderColor = '#bbbbbb';
+        }
+    }
 </script>
 
 </html>
