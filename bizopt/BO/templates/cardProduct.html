@@ -204,6 +204,7 @@
                  <button style="color: black; background-color:darkgray"
                     class="uk-button uk-border-pill uk-width-1-1 uk-margin-small-bottom">Показать коннтакты
                     продавца</button> 
+
             </div>
         </div>
     </container>
@@ -223,7 +224,8 @@
                 <div class="d-flex uk-felx-around uk-text-left uk-flex-wrap-top">
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Тип</h4>
-                         <p>{{products.tags}}</p> 
+
+                        {% comment %} <p>{{products.tags}}</p> {% endcomment %}
                         <p>Не указан</p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
@@ -395,6 +397,7 @@
                                 </div>
                                  <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a
                                         class="uk-link-muted" href="#">Reply</a></div> 
+
                             </header>
                             <div class="uk-comment-body">
                                 {{message.review}}
@@ -405,6 +408,7 @@
                 </ul>
             </div>
              <div style="width: 40%;">
+
                 <div class="uk-flex uk-flex-center uk-text-center"
                     style="background-color: rgba(196, 196, 196, 0.5); border-radius: 20px; padding: 30px 0;">
                     <div class=" uk-margin-right uk-height-small">
@@ -447,12 +451,13 @@
                     </div>
                 </div>
             </div> 
+
         </div>
     </container>
 </div>
 </div>
 </div>
-</div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>

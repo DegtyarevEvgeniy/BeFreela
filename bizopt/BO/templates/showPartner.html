@@ -107,9 +107,27 @@
                             код</button>
                         </div>
                     </div>
+
                     </div>
+
+                        <div id="modal-close-outside" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body">
+                                <button class="uk-modal-close-outside" type="button" uk-close></button>
+                                <h2 class="uk-modal-title">Подтверждение</h2>
+                                <form method="POST" action="">
+                                    <p>На ваш номер телефона был отправлен шестизначный код,<br> введите его в поле ниже</p>
+                                    <input maxlength="6" class="uk-input uk-border-rounded" id="codePhone" style="width: 50%;"
+                                           name="code" type="text" placeholder="000000" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" >
+                                    {% csrf_token %}
+                                    <p class="">
+                                        <button type='button' id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
                 </div>
             </div>
+
     </section>
     <section id="main">
         <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-3@s uk-margin"
@@ -362,10 +380,12 @@
                         <p class="uk-text-break uk-display-inline-block">Настрой на большие и успешные продажи</p>
                     </div>
                 </div>
-
+                <div>
             </div>
         </div>
+        </div>
     </section>
+
 </body>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -374,6 +394,16 @@
 <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
 <script>
+    $(function() {
+        $("#codePhone").on("keyup", function() {
+            if($("#codePhone").val().length === 6) {
+                $("#codeButton").prop("disabled", false);
+            } else {
+                $("#codeButton").prop("disabled", true);
+            }
+        });
+    });
+
     $(document).on('click', 'a[href^="#"]', function (event) {
         event.preventDefault();
 
@@ -469,6 +499,8 @@
         }
     };
 
+
+
     const inputElement = document.getElementById('phoneNumber');
     inputElement.addEventListener('keydown', enforceFormat);
     inputElement.addEventListener('keyup', formatToPhone);
@@ -483,6 +515,7 @@
             window.location.replace('/')
         });
     }
+
 </script>
 
 </html>
