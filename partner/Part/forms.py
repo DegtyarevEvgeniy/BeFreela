@@ -132,16 +132,6 @@ COUNTRY_CHOICE = [
     ('Libyan Arab Jamahiriya', 'Libyan Arab Jamahiriya'),
     ('Liechtenstein', 'Liechtenstein'),
     ('Lithuania', 'Lithuania'),
-    ('Luxembourg', 'Luxembourg'),
-    ('Macao', 'Macao'),
-    ('Macedonia, The Former', 'Macedonia, The Former'),
-    ('Yugoslav Republic of Madagascar', 'Yugoslav Republic of Madagascar'),
-    ('Malawi', 'Malawi'),
-    ('Malaysia', 'Malaysia'),
-    ('Maldives', 'Maldives'),
-    ('Mali', 'Mali'),
-    ('Malta', 'Malta'),
-    ('Marshall Islands', 'Marshall Islands'),
     ('Martinique', 'Martinique'),
     ('Mauritania', 'Mauritania'),
     ('Mauritius', 'Mauritius'),
@@ -258,7 +248,7 @@ class SignUpForm(UserCreationForm):
         super().__init__(*args, **kwargs)
 
         self.fields['name'].widget.attrs.update({
-            'class': 'uk-input uk-width-1',
+            'class': 'uk-input',
             'required': '',
             'name': 'name',
             'id': 'name',
@@ -269,7 +259,7 @@ class SignUpForm(UserCreationForm):
 
         })
         self.fields['ogrn'].widget.attrs.update({
-            'class': 'uk-width-1-4',
+            'class': 'uk-input',
             'required': '',
             'name': 'ogrn',
             'id': 'ogrn',
@@ -279,7 +269,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '13'
         })
         self.fields['inn'].widget.attrs.update({
-            'class': 'uk-width-1-4',
+            'class': 'uk-input',
             'required': '',
             'name': 'inn',
             'id': 'inn',

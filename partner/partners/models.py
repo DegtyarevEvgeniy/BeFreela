@@ -5,7 +5,7 @@ import phonenumbers
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password= None, first_name=None, last_name=None,  city=''):
+    def create_user(self, email, username, password=None, first_name=None, last_name=None,  city=''):
         user = self.model(
             email=self.normalize_email(email),
             username=username,
@@ -26,7 +26,7 @@ class MyAccountManager(BaseUserManager):
             last_name=last_name,
             city=city
         )
-        user.is_admin = True
+        user.is_admin = True 
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
