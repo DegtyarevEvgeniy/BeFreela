@@ -3,6 +3,7 @@ import re
 
 from django.core import paginator
 from django.core.checks import messages
+from django.core.mail import send_mail
 from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
@@ -806,9 +807,15 @@ def login_page(request):
             print('Try again! username or password is incorrect')
     # регистрация
     elif request.method == 'POST' and 'btnform1' in request.POST:
+        send_mail(
+            'Test',
+            'Всё робит)',
+            'korotikhin84@mail.ru',
+            ['gaamer557@gmail.com'],
+            fail_silently=False,
+        )
         if form.is_valid():
             form.save()
-
             email = form.cleaned_data.get('email')
             first_name = form.cleaned_data.get('first_name')
             username = email
