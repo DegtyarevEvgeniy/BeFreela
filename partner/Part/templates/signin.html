@@ -16,6 +16,10 @@
             transition: 0.2s;
         }
 
+        input{
+            border-radius: 5px!important;
+        }
+
         #regForm {
             margin: 0px auto;
             padding: 40px;
@@ -91,24 +95,33 @@
                         <h4 class="uk-text-center">Запомните введеные поля, они понадобяться вам для входа в аккаунт
                         </h4>
                         <br>
-                        <div class="uk-width-1-1 uk-flex uk-flex-between">
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
-                                {{form.username.label}}: {{form.username}}
+                        <div class="uk-width-1 uk-flex uk-flex-center" style="padding: 2% auto">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.username.label}}: <br> {{form.username}}
                             </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
-                                {{form.email.label}}: {{form.email}}
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.email.label}}: <br> {{form.email}}
                             </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
-                                {{form.first_name.label}}: {{form.first_name}}
-                            </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
-                                {{form.last_name.label}}: {{form.last_name}}
-                            </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
-                                {{form.password1.label}}: {{form.password1}}</div>
-                                {{form.password2.label}}: {{form.password2}}</div>
-
                         </div>
+                        <br>
+                        <div class="uk-width-1 uk-flex uk-flex-center" style="padding: 2% auto">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.first_name.label}}: <br> {{form.first_name}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.last_name.label}}: <br> {{form.last_name}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="uk-width-1 uk-flex uk-flex-center" style="padding: 2% auto">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.password1.label}}: <br> {{form.password1}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.password2.label}}: <br> {{form.password2}}
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="tab">
@@ -142,7 +155,7 @@
                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
                                 {{form.name_small.label}}: {{form.name_small}}
                             </div>
-                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2">
                                 {{form.nameFull.label}}: {{form.nameFull}}
                             </div>
                         </div>
@@ -187,18 +200,20 @@
                         <h2 class="uk-text-center">Оплата</h2>
                         <h4 class="uk-text-center">Введите данные для оплаты</h4>
                         <br>
-                        <div class="uk-width-1-1 uk-flex uk-flex-between">
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                        <div class="uk-width-1-1 uk-flex uk-flex-center">
+                            <div style="display: inline-block; margin: 10px" class="uk-width-1-4">
                                 {{form.payment_account.label}}: {{form.payment_account}}
                             </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                            <div style="display: inline-block; margin: 10px" class="uk-width-1-4">
                                 {{form.reg_form.label}}: {{form.reg_form}}
                             </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                        </div>
+                        <div class="uk-width-1-1 uk-flex uk-flex-center">
+                            <div style="display: inline-block; margin: 10px" class="uk-width-1-4">
                                 {{form.bik.label}}: {{form.bik}}
 
                             </div>
-                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-4">
+                            <div style="display: inline-block; margin: 10px" class="uk-width-1-4">
                                 {{form.korr_check.label}}: {{form.korr_check}}
 
                             </div>
@@ -212,7 +227,7 @@
                         <div class="uk-width-1-1 uk-flex uk-flex-center">
                             <div style="display: inline-block; margin: 0 10px; border: 1px solid; padding: 5%;"
                                 class="uk-width-4-5 uk-border-rounded">
-                                <p>Вам нужно подтвердить Вашу почту <b>{{user.email}}</b> </p>
+                                <p>На вашу почту <b>user.email</b> пришло письмо для подтверждения </p>
                                 <p>перед тем как продолжить создание магазина</p>
                                 <button class="uk-button uk-button-default uk-margin-small-bottom"
                                     style="text-transform: none;background-color: #e4e4e4">Отправить еще раз</button>
@@ -294,7 +309,7 @@
         let i, x = document.getElementsByClassName("step");
 
         if (n != x.length - 1) {
-            progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 20}%`);
+            progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 25}%`);
         } else {
             progressBar.style.setProperty("--width-nonstatic", "100%");
         }

@@ -14,19 +14,19 @@ from Part.forms import ProductCreateForm
 
 
 def pageNotFound(request, exception):
-    return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+    return render(request, 'errorPages/400.html')
 
 
 def pageMistakeServ(request, exception):
-    return HttpResponseNotFound('<h1>Ошибка сервера</h1>')
+    return render(request, 'errorPages/403.html')
 
 
 def pageNotAccess(request, exception):
-    return HttpResponseNotFound('<h1>Доступ запрещен</h1>')
+    return render(request, 'errorPages/404.html')
 
 
-def pageNotRequest(request, exception):
-    return HttpResponseNotFound('<h1>Невозможно обработать запрос</h1>')
+# def pageNotRequest(request):
+#     return render(request, 'errorPages/500.html')
 
 
 def start_page(request):
@@ -34,9 +34,7 @@ def start_page(request):
 
 
 def login_page(request):
-    content = {
-        'menu': {}
-    }
+    content = {}
 
     return render(request, 'login.html', content)
 
