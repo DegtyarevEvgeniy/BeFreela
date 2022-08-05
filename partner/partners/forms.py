@@ -7,6 +7,7 @@ from partners.models import Partner
 class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # tab 1
         self.fields['username'].label='Логин'
         self.fields['username'].widget.attrs.update({
             'class': 'uk-input',
@@ -38,10 +39,13 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['phone'].widget.attrs.update({
             'class': 'uk-input',
             'required': '',
+            'placeholder': '8 888 888 88 88',
             'name': 'phone',
             'id': 'phone',
-            'type': 'text',
-            'minlength': '8'
+            'type': 'number',
+            'value': '',
+            'minlength': '8',
+            'maxlength': '11'
         })
         self.fields['city'].label = 'Город'
         self.fields['city'].widget.attrs.update({
@@ -49,15 +53,6 @@ class CustomUserCreationForm(UserCreationForm):
             'required': '',
             'name': 'city',
             'id': 'city',
-            'type': 'text',
-            'minlength': '8'
-        })
-        self.fields['checking_account'].label = 'Код'
-        self.fields['checking_account'].widget.attrs.update({
-            'class': 'uk-input',
-            'required': 'none',
-            'name': 'checking_account',
-            'id': 'checking_account',
             'type': 'text',
             'minlength': '8'
         })
@@ -91,6 +86,7 @@ class CustomUserCreationForm(UserCreationForm):
             'maxlength': '22',
             'minlength': '8'
         })
+        # tab 2
         self.fields['ogrn'].label='ОГРН'
         self.fields['ogrn'].widget.attrs.update({
             'class': 'uk-input',
@@ -98,6 +94,7 @@ class CustomUserCreationForm(UserCreationForm):
             'name': 'ogrn',
             'id': 'ogrn',
             'type': 'number',
+            'value': '',
             'placeholder': 'Введите свой ОГРН',
             'maxlength': '13',
             'minlength': '13'
@@ -109,6 +106,7 @@ class CustomUserCreationForm(UserCreationForm):
             'name': 'inn',
             'id': 'inn',
             'type': 'number',
+            'value': '',
             'placeholder': 'Введите свой ИНН',
             'maxlength': '13',
             'minlength': '10'
@@ -120,6 +118,7 @@ class CustomUserCreationForm(UserCreationForm):
             'name': 'kpp',
             'id': 'kpp',
             'type': 'number',
+            'value': '',
             'placeholder': 'Введите свой КПП',
             'maxlength': '9',
             'minlength': '9'
@@ -153,31 +152,10 @@ class CustomUserCreationForm(UserCreationForm):
             'name': 'index',
             'id': 'index',
             'type': 'number',
+            'value': '',
             'placeholder': '184506',
             'maxlength': '6',
             'minlength': '6'
-        })
-        self.fields['bik'].label='БИК'
-        self.fields['bik'].widget.attrs.update({
-            'class': 'uk-input',
-            'required': '',
-            'name': 'bik',
-            'id': 'bik',
-            'type': 'number',
-            'placeholder': '',
-            'maxlength': '22',
-            'minlength': '8'
-        })
-        self.fields['korr_check'].label='Корреспондентский счет'
-        self.fields['korr_check'].widget.attrs.update({
-            'class': 'uk-input',
-            'required': '',
-            'name': 'korr_check',
-            'id': 'korr_check',
-            'type': 'number',
-            'placeholder': '',
-            'maxlength': '20',
-            'minlength': '20'
         })
         self.fields['name_small'].label='Краткое наименование'
         self.fields['name_small'].widget.attrs.update({
@@ -201,6 +179,19 @@ class CustomUserCreationForm(UserCreationForm):
             'maxlength': '20',
             'minlength': '20'
         })
+        # tab 3
+        self.fields['korr_check'].label='Корреспондентский счет'
+        self.fields['korr_check'].widget.attrs.update({
+            'class': 'uk-input',
+            'required': '',
+            'name': 'korr_check',
+            'id': 'korr_check',
+            'type': 'number',
+            'value': '',
+            'placeholder': '',
+            'maxlength': '20',
+            'minlength': '20'
+        })
         self.fields['payment_account'].label='Расчетный счет'
         self.fields['payment_account'].widget.attrs.update({
             'class': 'uk-input',
@@ -208,9 +199,22 @@ class CustomUserCreationForm(UserCreationForm):
             'name': 'payment_account',
             'id': 'payment_account',
             'type': 'number',
+            'value': '',
             'placeholder': '',
             'maxlength': '20',
             'minlength': '20'
+        })
+        self.fields['bik'].label='БИК'
+        self.fields['bik'].widget.attrs.update({
+            'class': 'uk-input',
+            'required': '',
+            'name': 'bik',
+            'id': 'bik',
+            'type': 'number',
+            'value': '',
+            'placeholder': '',
+            'maxlength': '22',
+            'minlength': '8'
         })
         self.fields['reg_form'].label='Форма регистрации'
         self.fields['reg_form'].widget.attrs.update({
@@ -222,6 +226,17 @@ class CustomUserCreationForm(UserCreationForm):
             'placeholder': '',
             'maxlength': '20',
             'minlength': '20'
+        })
+        # tab 4
+        self.fields['checking_account'].label = 'Код'
+        self.fields['checking_account'].widget.attrs.update({
+            'class': 'uk-input',
+            'required': 'none',
+            'name': 'checking_account',
+            'id': 'checking_account',
+            'type': 'number',
+            'value': '',
+            'minlength': '8'
         })
     class Meta:
         model = Partner
