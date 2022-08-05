@@ -11,10 +11,10 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('/')
     template_name = 'signin.html'
-
+    print("oooo")
     def post(self, request, *args, **kwargs):
         form = CustomUserCreationForm(request.POST)
-
+        print("yyyyy")
         if form.is_valid():
             user = form.save(commit=True)
             user.save()

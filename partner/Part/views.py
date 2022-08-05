@@ -35,7 +35,7 @@ def start_page(request):
 
 def login_page(request):
     content = {}
-
+    print(request)
     return render(request, 'login.html', content)
 
 

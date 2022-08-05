@@ -34,6 +34,33 @@ class CustomUserCreationForm(UserCreationForm):
             'type': 'password',
             'minlength': '8'
         })
+        self.fields['phone'].label = 'Телефон'
+        self.fields['phone'].widget.attrs.update({
+            'class': 'uk-input',
+            'required': '',
+            'name': 'phone',
+            'id': 'phone',
+            'type': 'text',
+            'minlength': '8'
+        })
+        self.fields['city'].label = 'Город'
+        self.fields['city'].widget.attrs.update({
+            'class': 'uk-input',
+            'required': '',
+            'name': 'city',
+            'id': 'city',
+            'type': 'text',
+            'minlength': '8'
+        })
+        self.fields['checking_account'].label = 'Код'
+        self.fields['checking_account'].widget.attrs.update({
+            'class': 'uk-input',
+            'required': 'none',
+            'name': 'checking_account',
+            'id': 'checking_account',
+            'type': 'text',
+            'minlength': '8'
+        })
         self.fields['password2'].label='Повторите пароль'
         self.fields['password2'].widget.attrs.update({
             'class': 'uk-input',
@@ -130,23 +157,12 @@ class CustomUserCreationForm(UserCreationForm):
             'maxlength': '6',
             'minlength': '6'
         })
-        self.fields['checking_account'].label='checking_account'
-        self.fields['checking_account'].widget.attrs.update({
-            'class': 'uk-input',
-            'required': '',
-            'name': 'checking_account',
-            'id': 'checking_account',
-            'type': 'number',
-            'placeholder': '',
-            'maxlength': '20',
-            'minlength': '20'
-        })
         self.fields['bik'].label='БИК'
         self.fields['bik'].widget.attrs.update({
             'class': 'uk-input',
             'required': '',
-            'name': 'checking_account',
-            'id': 'checking_account',
+            'name': 'bik',
+            'id': 'bik',
             'type': 'number',
             'placeholder': '',
             'maxlength': '22',

@@ -88,7 +88,7 @@
                     <a class="step" onclick="surTab(3)"></a>
                     <a class="step" onclick="surTab(4)"></a>
                 </div>
-                <form id="regForm" class="uk-width-3-5" method="POST">
+                <form id="regForm" action="/signin/" method="POST">
 
                     <div class="tab">
                         <h2 class="uk-text-center">Главная информация</h2>
@@ -119,6 +119,15 @@
                             </div>
                             <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
                                 {{form.password2.label}}: <br> {{form.password2}}
+                            </div>
+                        </div>
+                        <br>
+                        <div class="uk-width-1 uk-flex uk-flex-center" style="padding: 2% auto">
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.phone.label}}: <br> {{form.phone}}
+                            </div>
+                            <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                {{form.city.label}}: <br> {{form.city}}
                             </div>
                         </div>
 
@@ -234,6 +243,12 @@
                                 <br>
                                 <button class="uk-button uk-button-text" style="text-transform: none;">Изменить
                                     почту</button>
+                                <div class="uk-width-1 uk-flex uk-flex-center" style="padding: 2% auto">
+                                    <div style="display: inline-block; margin: 0 10px" class="uk-width-1-2 uk-text-center">
+                                        {{form.checking_account.label}}: <br> {{form.checking_account}}
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -252,6 +267,7 @@
                                 onclick="nextPrev(1)">
                                 Далее
                             </button>
+
                         </div>
                     </div>
 
