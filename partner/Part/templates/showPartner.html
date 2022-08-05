@@ -5,8 +5,8 @@
     <meta charset='utf-8'>
     <title>BizOpt</title>
     <link href='' rel='stylesheet'>
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
+
 </head>
 <style>
     * {
@@ -40,7 +40,7 @@
     }
 </style>
 
-<body>
+<body style="margin: auto">
     <section style="padding: 0 0 10px" clss="uk-card-body" id="header">
         <nav uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-dark"
             class="uk-navbar-container" uk-navbar style="color: black; padding: 0 5%;">
@@ -67,19 +67,21 @@
                 <div class="uk-text-center">
                     <h2>Сотрудничество с BeFreela</h2>
                 </div>
-                <div class="uk-card uk-card-default uk-border-rounded" style="width:50%; margin: 0 auto; padding: 3%;">
-                    <div class="uk-card-header" style="border:none; padding-bottom: 0;">
+                <div class="uk-card uk-card-default uk-border-rounded" style="width: 50%; margin: 0 auto; padding: 3%;">
+                    <div class="uk-card-header" style="border:none;">
                         <div class="uk-grid-small uk-flex-middle" uk-grid>
                             <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-text-bold uk-text-break uk-margin-remove-bottom">Войти или
-                                    создать профиль</h3>
+                                <h3 class="uk-card-title uk-text-center uk-text-bold uk-text-break">Добро пожаловать в партнерскую программу BeFreela</h3>
                             </div>
                         </div>
                     </div>
-                    <div class="uk-card-body" style="padding-bottom: 0px; padding-top: 2%; text-align: center">
-                        <label for="phonenumber" class="uk-text-muted">Контактный телефон</label>
+                    <div class="uk-width-1-1 uk-text-center">
+                        <br>
+                            <!-- <a href="https://befreela.partners.ru/" class="uk-width-1 uk-button uk-button-secondary uk-border-rounded" style="margin: 0 auto; font-size: large;background-color: purple">Зарегестрироваться</a> -->
+                            <div class="uk-card-body" style="padding-bottom: 0px; padding-top: 2%; text-align: center">
+                                <label for="phonenumber" class="uk-text-muted">Контактный телефон</label>
                         <div class="uk-inline uk-width-1">
-                            <select class="uk-select uk-width-1-5" id="phoneCode"
+                            <select class="uk-select uk-width-1-6@s" id="phoneCode"
                                 style="padding: 0 0 0 4%; background-image: none;" onchange="validateCountry(this)">
                                 <option value="+7">+7</option>
                                 <option value="+375">+375</option>
@@ -87,10 +89,10 @@
                                 <option value="+374">+374</option>
                             </select>
 
-                            <input class="uk-input uk-border-rounded" id="phoneNumber" style="width: 50%;"
+                            <input class="uk-input uk-border-rounded uk-width-3-5@s" id="phoneNumber"
                                 name="phonenumber" type="text" placeholder="(000) 000 00 00">
 
-                            <select class="uk-select uk-width-1-5" id="Country"
+                                <select class="uk-select uk-width-1-6@s" id="Country"
                                 style="padding: 0 0 0 5%; background-image: none;" onchange="validatePhoneCode(this)">
                                 <option value="Россия" default>🇷🇺</option>
                                 <option value="Казахстан">🇰🇿</option>
@@ -100,13 +102,32 @@
                             </select>
                         </div>
                         <div class="uk-flex uk-flex-center uk-align-center" style="margin-top: 20px">
-                            <button class="uk-button uk-button-primary uk-width-1-1 uk-border-rounded" id="registerBtn"
-                                disabled>Получить
-                                код</button>
+                            <button onclick="JSalert()" class="uk-button uk-button-primary uk-width-4-5 uk-border-rounded" id="registerBtn"
+                            disabled>Получить
+                            код</button>
                         </div>
                     </div>
+
+                    </div>
+
+                        <div id="modal-close-outside" uk-modal>
+                            <div class="uk-modal-dialog uk-modal-body">
+                                <button class="uk-modal-close-outside" type="button" uk-close></button>
+                                <h2 class="uk-modal-title">Подтверждение</h2>
+                                <form method="POST" action="">
+                                    <p>На ваш номер телефона был отправлен шестизначный код,<br> введите его в поле ниже</p>
+                                    <input maxlength="6" class="uk-input uk-border-rounded" id="codePhone" style="width: 50%;"
+                                           name="code" type="text" placeholder="000000" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" >
+                                    {% csrf_token %}
+                                    <p class="">
+                                        <button type='button' id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
                 </div>
             </div>
+
     </section>
     <section id="main">
         <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-3@s uk-margin"
@@ -191,74 +212,111 @@
             </div>
         </div>
         <div id="about_company" class="uk-padding-large">
-            <div class="uk-flex uk-flex-center">
+            <div>
 
-                <div lass="card-holder" style="width: 20%;">
-                    <div class="uk-card uk-card-default "
-                        style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: aliceblue;">
-                        <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
-                            <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
-                                src="https://media.istockphoto.com/photos/leopard-picture-id108353684?k=20&m=108353684&s=612x612&w=0&h=hDyo4LYO0Bh-cnruANNozHU2IykgKWQ3U5MSnMB9yEc=">
+                <div class="uk-flex uk-flex-center">
+                    <div class="card-holder uk-width-1-4 uk-text-center">
+                        <div class="uk-card uk-card-default "
+                            style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: aliceblue;">
+                            <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
+                                <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
+                                    src="../../images/projectCreatorsImages/яна.png">
+                            </div>
+                            <div class="uk-card-body" style="padding-top: 10px;">
+                                <h3 class="uk-card-title uk-text-center">Босякова Яна</h3>
+                                <p class="uk-text-break">СТО, TechLeader
+                                    Backend</p>
+                                <div class="uk-width-1" style="border-top: 3px dotted"></div>
+                                <p class="uk-text-break">Разработка и
+                                    поддержка продукта</p>
+                            </div>
                         </div>
-                        <div class="uk-card-body" style="padding-top: 10px;">
-                            <h3 class="uk-card-title uk-text-center">Дима</h3>
-                            <p class="uk-text-break">Full stuck на пол ставки</p>
+                    </div>
+    
+                    <div class="card-holder uk-width-1-4 uk-text-center">
+                        <div class="uk-card uk-card-default "
+                            style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: aliceblue;">
+                            <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
+                                <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
+                                    src="../../images/projectCreatorsImages/ваня.png">
+                            </div>
+                            <div class="uk-card-body" style="padding-top: 10px;">
+                                <h3 class="uk-card-title uk-text-center">Коротихин Иван</h3>
+                                <p class="uk-text-break">Backend</p>
+                                <div class="uk-width-1" style="border-top: 3px dotted"></div>
+                                <p class="uk-text-break">Разработка продукта</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="card-holder uk-width-1-4 uk-text-center">
+                        <div class="uk-card uk-card-default "
+                            style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: aliceblue;">
+                            <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
+                                <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
+                                    src="../../images/projectCreatorsImages/женя.png">
+                            </div>
+                            <div class="uk-card-body" style="padding-top: 10px;">
+                                <h3 class="uk-card-title uk-text-center">Дегтярев Евгений</h3>
+                                <p class="uk-text-break">CEO, TeamLeader</p>
+                                <div class="uk-width-1" style="border-top: 3px dotted"></div>
+                                <p class="uk-text-break">Стратегия, финансы,
+                                    организация,
+                                    разработка и
+                                    поддержка продукта</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div lass="card-holder" style="width: 20%;">
-                    <div class="uk-card uk-card-default "
-                        style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: aliceblue;">
-                        <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
-                            <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
-                                src="https://media.istockphoto.com/photos/leopard-picture-id108353684?k=20&m=108353684&s=612x612&w=0&h=hDyo4LYO0Bh-cnruANNozHU2IykgKWQ3U5MSnMB9yEc=">
-                        </div>
-                        <div class="uk-card-body" style="padding-top: 10px;">
-                            <h3 class="uk-card-title uk-text-center">Женя</h3>
-                            <p class="uk-text-break">Лучший тимли</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div lass="card-holder" style="width: 20%;">
-                    <div class="uk-card uk-card-default "
-                        style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: aliceblue;">
-                        <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
-                            <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
-                                src="https://media.istockphoto.com/photos/leopard-picture-id108353684?k=20&m=108353684&s=612x612&w=0&h=hDyo4LYO0Bh-cnruANNozHU2IykgKWQ3U5MSnMB9yEc=">
-                        </div>
-                        <div class="uk-card-body" style="padding-top: 10px;">
-                            <h3 class="uk-card-title uk-text-center">Яна</h3>
-                            <p class="uk-text-break">Работает за всех и еще успевает готовить</p>
+                <div class="uk-flex uk-flex-center">
+                    <div class="card-holder uk-width-1-4 uk-text-center">
+                        <div class="uk-card uk-card-default "
+                            style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: #f0f8ff;">
+                            <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
+                                <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
+                                    src="../../images/projectCreatorsImages/митя.png">
+                            </div>
+                            <div class="uk-card-body" style="padding-top: 10px;">
+                                <h3 class="uk-card-title uk-text-center">Коростылев Дмитрий</h3>
+                                <p class="uk-text-break">СТО, TechLeader Frontend</p>
+                                <div class="uk-width-1" style="border-top: 3px dotted"></div>
+                                <p class="uk-text-break">Разработка и поддержка продукта</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div lass="card-holder" style="width: 20%;">
-                    <div class="uk-card uk-card-default "
-                        style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: #f0f8ff;">
-                        <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
-                            <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
-                                src="https://media.istockphoto.com/photos/leopard-picture-id108353684?k=20&m=108353684&s=612x612&w=0&h=hDyo4LYO0Bh-cnruANNozHU2IykgKWQ3U5MSnMB9yEc=">
-                        </div>
-                        <div class="uk-card-body" style="padding-top: 10px;">
-                            <h3 class="uk-card-title uk-text-center">Ваня</h3>
-                            <p class="uk-text-break">на удивление сделал все и очень даже круто</p>
+    
+                    <div class="card-holder uk-width-1-4 uk-text-center">
+                        <div class="uk-card uk-card-default "
+                            style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: #f0f8ff;">
+                            <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
+                                <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
+                                    src="../../images/projectCreatorsImages/эмилия.png">
+                            </div>
+                            <div class="uk-card-body" style="padding-top: 10px;">
+                                <h3 class="uk-card-title uk-text-center">Мамедова Эмилия
+                                </h3>
+                                <p class="uk-text-break">CMO, Backend</p>
+                                <div class="uk-width-1" style="border-top: 3px dotted"></div>
+                                <p class="uk-text-break">Разработка продукта</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div lass="card-holder" style="width: 20%;">
-                    <div class="uk-card uk-card-default "
-                        style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: #f0f8ff;">
-                        <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
-                            <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
-                                src="https://media.istockphoto.com/photos/leopard-picture-id108353684?k=20&m=108353684&s=612x612&w=0&h=hDyo4LYO0Bh-cnruANNozHU2IykgKWQ3U5MSnMB9yEc=">
-                        </div>
-                        <div class="uk-card-body" style="padding-top: 10px;">
-                            <h3 class="uk-card-title uk-text-center">Ваня</h3>
-                            <p class="uk-text-break">без нег вы бы не видели с других людей</p>
+    
+                    <div class="card-holder uk-width-1-4 uk-text-center">
+                        <div class="uk-card uk-card-default "
+                            style="box-shadow: none; margin: 5px; border-radius: 5px; background-color: #f0f8ff;">
+                            <div class="uk-card-media-top uk-text-center" style="padding-top: 10%;">
+                                <img class="uk-border-circle" style="width: 50%; border: 3px solid gray;"
+                                    src="../../images/projectCreatorsImages/даша.png">
+                            </div>
+                            <div class="uk-card-body" style="padding-top: 10px;">
+                                <h3 class="uk-card-title uk-text-center">Федорова Дарья
+                                </h3>
+                                <p class="uk-text-break">Frontend</p>
+                                <div class="uk-width-1" style="border-top: 3px dotted"></div>
+                                <p class="uk-text-break"> Разработка продукта</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -279,7 +337,7 @@
                                 d="M26.05 44.925V50H5.7V44.925H12.9V25.075C12.9 24.6417 12.9083 24.2 12.925 23.75C12.9417 23.3 12.9667 22.8417 13 22.375L8.25 26.325C7.91667 26.575 7.59167 26.7333 7.275 26.8C6.95833 26.8667 6.65833 26.875 6.375 26.825C6.09167 26.7583 5.84167 26.6583 5.625 26.525C5.40833 26.375 5.24167 26.225 5.125 26.075L2.95 23.15L14.1 13.7H19.775V44.925H26.05Z"
                                 fill="#3A0078"></path>
                         </svg>
-                        <p class="uk-text-break uk-display-inline-block">мы еще не придумали((</p>
+                        <p class="uk-text-break uk-display-inline-block">регистрация в налоговых органах</p>
                     </div>
                 </div>
 
@@ -293,7 +351,7 @@
                                 d="M24.475 48.675C25.225 48.675 25.8083 48.8833 26.225 49.3C26.6583 49.7167 26.875 50.2667 26.875 50.95V55H1.725V52.75C1.725 52.3167 1.81667 51.85 2 51.35C2.18333 50.8333 2.49167 50.3667 2.925 49.95L13.675 39.175C14.5917 38.2583 15.4 37.3833 16.1 36.55C16.8 35.7 17.3833 34.875 17.85 34.075C18.3167 33.2583 18.6667 32.4333 18.9 31.6C19.1333 30.7667 19.25 29.8917 19.25 28.975C19.25 27.3583 18.8333 26.1333 18 25.3C17.1667 24.45 15.9917 24.025 14.475 24.025C13.8083 24.025 13.1917 24.125 12.625 24.325C12.075 24.5083 11.575 24.7667 11.125 25.1C10.6917 25.4333 10.3167 25.825 10 26.275C9.68333 26.725 9.45 27.2167 9.3 27.75C9 28.5833 8.59167 29.1417 8.075 29.425C7.575 29.6917 6.85833 29.75 5.925 29.6L2.275 28.95C2.54167 27.1833 3.04167 25.6333 3.775 24.3C4.50833 22.9667 5.425 21.8583 6.525 20.975C7.625 20.0917 8.88333 19.4333 10.3 19C11.7167 18.55 13.2417 18.325 14.875 18.325C16.5917 18.325 18.15 18.5833 19.55 19.1C20.9667 19.6 22.175 20.3083 23.175 21.225C24.175 22.125 24.95 23.2167 25.5 24.5C26.05 25.7833 26.325 27.2 26.325 28.75C26.325 30.0833 26.1333 31.3167 25.75 32.45C25.3667 33.5833 24.8417 34.6667 24.175 35.7C23.525 36.7167 22.7667 37.7083 21.9 38.675C21.0333 39.6417 20.1167 40.6167 19.15 41.6L11.45 49.475C12.3 49.225 13.1417 49.0333 13.975 48.9C14.8083 48.75 15.5917 48.675 16.325 48.675H24.475Z"
                                 fill="#3A0078"></path>
                         </svg>
-                        <p class="uk-text-break uk-display-inline-block">мы еще не придумали((</p>
+                        <p class="uk-text-break uk-display-inline-block">Обязуетесь соблюдать партнерские соглашения</p>
                     </div>
                 </div>
 
@@ -306,7 +364,7 @@
                                 d="M26.475 23.95C26.7417 22.1833 27.2417 20.6333 27.975 19.3C28.7083 17.9667 29.625 16.8583 30.725 15.975C31.825 15.0917 33.075 14.4333 34.475 14C35.8917 13.55 37.4167 13.325 39.05 13.325C40.7833 13.325 42.3333 13.575 43.7 14.075C45.0833 14.5583 46.25 15.225 47.2 16.075C48.15 16.925 48.875 17.9167 49.375 19.05C49.8917 20.1833 50.15 21.4 50.15 22.7C50.15 23.85 50.025 24.8667 49.775 25.75C49.5417 26.6167 49.1833 27.375 48.7 28.025C48.2333 28.675 47.65 29.225 46.95 29.675C46.2667 30.125 45.475 30.5 44.575 30.8C48.7417 32.1667 50.825 34.9417 50.825 39.125C50.825 40.975 50.4833 42.6083 49.8 44.025C49.1167 45.425 48.2 46.6 47.05 47.55C45.9 48.5 44.5583 49.2167 43.025 49.7C41.5083 50.1667 39.9167 50.4 38.25 50.4C36.4833 50.4 34.925 50.2 33.575 49.8C32.225 49.4 31.0333 48.8 30 48C28.9833 47.2 28.1083 46.2 27.375 45C26.6417 43.7833 26 42.3667 25.45 40.75L28.5 39.5C29.3 39.1667 30.0417 39.075 30.725 39.225C31.425 39.375 31.925 39.7417 32.225 40.325C32.5583 40.9583 32.9083 41.5417 33.275 42.075C33.6583 42.6083 34.0833 43.075 34.55 43.475C35.0167 43.8583 35.5417 44.1583 36.125 44.375C36.725 44.5917 37.4083 44.7 38.175 44.7C39.1417 44.7 39.9833 44.5417 40.7 44.225C41.4167 43.9083 42.0167 43.5 42.5 43C42.9833 42.4833 43.3417 41.9083 43.575 41.275C43.825 40.625 43.95 39.9833 43.95 39.35C43.95 38.5167 43.875 37.7667 43.725 37.1C43.575 36.4167 43.225 35.8417 42.675 35.375C42.1417 34.8917 41.3417 34.525 40.275 34.275C39.225 34.0083 37.7917 33.875 35.975 33.875V29.025C37.4917 29.025 38.7333 28.9 39.7 28.65C40.6667 28.4 41.425 28.05 41.975 27.6C42.525 27.15 42.9 26.6083 43.1 25.975C43.3167 25.3417 43.425 24.65 43.425 23.9C43.425 22.3167 43.0083 21.1083 42.175 20.275C41.3583 19.4417 40.1917 19.025 38.675 19.025C38.0083 19.025 37.3917 19.125 36.825 19.325C36.275 19.5083 35.775 19.7667 35.325 20.1C34.8917 20.4333 34.5167 20.825 34.2 21.275C33.8833 21.725 33.65 22.2167 33.5 22.75C33.1833 23.5833 32.775 24.1417 32.275 24.425C31.775 24.6917 31.05 24.75 30.1 24.6L26.475 23.95Z"
                                 fill="#3A0078"></path>
                         </svg>
-                        <p class="uk-text-break uk-display-inline-block">мы еще не придумали((</p>
+                        <p class="uk-text-break uk-display-inline-block">Работа в нашей экосистема</p>
                     </div>
                 </div>
 
@@ -319,18 +377,33 @@
                                 d="M36.6 37.15V26.35C36.6 25.7833 36.6167 25.1833 36.65 24.55C36.7 23.9 36.7667 23.225 36.85 22.525L26.35 37.15H36.6ZM46.8 37.15V41.05C46.8 41.4167 46.675 41.7333 46.425 42C46.1917 42.25 45.8583 42.375 45.425 42.375H42.6V51H36.6V42.375H21.625C21.1917 42.375 20.7917 42.2417 20.425 41.975C20.075 41.7083 19.8583 41.3583 19.775 40.925L19.05 37.475L36.05 14.7H42.6V37.15H46.8Z"
                                 fill="#3A0078"></path>
                         </svg>
-                        <p class="uk-text-break uk-display-inline-block">мы еще не придумали((</p>
+                        <p class="uk-text-break uk-display-inline-block">Настрой на большие и успешные продажи</p>
                     </div>
                 </div>
-
+                <div>
             </div>
         </div>
+        </div>
     </section>
+
 </body>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
 <script>
+    $(function() {
+        $("#codePhone").on("keyup", function() {
+            if($("#codePhone").val().length === 6) {
+                $("#codeButton").prop("disabled", false);
+            } else {
+                $("#codeButton").prop("disabled", true);
+            }
+        });
+    });
+
     $(document).on('click', 'a[href^="#"]', function (event) {
         event.preventDefault();
 
@@ -426,9 +499,23 @@
         }
     };
 
+
+
     const inputElement = document.getElementById('phoneNumber');
     inputElement.addEventListener('keydown', enforceFormat);
     inputElement.addEventListener('keyup', formatToPhone);
+
+    function JSalert(){
+        Swal.fire(
+            'Ваша заявки принята',
+            'Наш сотрудник свяжется с вами в ближайшее время',
+            'success'
+        )
+        document.getElementsByClassName('swal2-confirm')[0].addEventListener('click',  function(){
+            window.location.replace('/')
+        });
+    }
+
 </script>
 
 </html>
