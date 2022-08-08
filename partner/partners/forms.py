@@ -8,16 +8,7 @@ class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # tab 1
-        self.fields['username'].label='Логин'
-        self.fields['username'].widget.attrs.update({
-            'class': 'uk-input',
-            'required': '',
-            'name': 'username',
-            'id': 'username',
-            'type': 'text',
-            'maxlength': '16',
-            'minlength': '6',
-        })
+
         self.fields['email'].label='Почта'
         self.fields['email'].widget.attrs.update({
             'class': 'uk-input',
@@ -35,18 +26,7 @@ class CustomUserCreationForm(UserCreationForm):
             'type': 'password',
             'minlength': '8'
         })
-        self.fields['phone'].label = 'Телефон'
-        self.fields['phone'].widget.attrs.update({
-            'class': 'uk-input',
-            'required': '',
-            'placeholder': '8 888 888 88 88',
-            'name': 'phone',
-            'id': 'phone',
-            'type': 'number',
-            'value': '',
-            'minlength': '8',
-            'maxlength': '11'
-        })
+
         self.fields['city'].label = 'Город'
         self.fields['city'].widget.attrs.update({
             'class': 'uk-input',
@@ -240,7 +220,7 @@ class CustomUserCreationForm(UserCreationForm):
         })
     class Meta:
         model = Partner
-        fields = ('username', 'email', 'phone', 'city', 'first_name', 'last_name', 'email', 
+        fields = ('email', 'city', 'first_name', 'last_name', 'email',
         'ogrn', 'inn', 'kpp', 'street', 'fiz_adress', 'index', 'checking_account', 'bik', 
         'korr_check','name_small','nameFull', 'payment_account', 'reg_form')
 
@@ -248,4 +228,4 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = Partner
-        fields = ('username', 'email', 'phone', 'city', 'first_name', 'last_name')
+        fields = ( 'email',  'city', 'first_name', 'last_name')
