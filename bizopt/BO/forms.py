@@ -253,6 +253,15 @@ COUNTRY_CHOICE = [
     ('Zambia', 'Zambia'),
     ('Zimbabwe', 'Zimbabwe'),
 ]
+CATEGORY_CHOICE = [
+    ('Дизайнерская одежда', 'Дизайнерская одежда'),
+    ('Дизайнерская обувь', 'Дизайнерская обувь'),
+    ('Сумки', 'Сумки'),
+    ('Интерьер', 'Интерьер'),
+    ('Украшения', 'Украшения'),
+    ('Скульптуры', 'Скульптуры'),
+    ('Подушки', 'Подушки'),
+]
 User = get_user_model()
 
 
@@ -327,7 +336,14 @@ class ProductCreateForm(ModelForm):
             'country': Select(attrs={
                 'class': 'input-group mt-2 mb-2',
             }, choices=COUNTRY_CHOICE),
-
+            'category': Select(attrs={
+                'class': 'input-group mt-2 mb-2',
+            }, choices=CATEGORY_CHOICE),
+            'subcategory': TextInput(attrs={
+                'class': 'form-control',
+                'oninput': 'PassChecker(1)',
+                'placeholder': 'Пример: носки'
+            }),
             'brand': TextInput(attrs={
                 'class': 'form-control',
                 'id': 'brand',

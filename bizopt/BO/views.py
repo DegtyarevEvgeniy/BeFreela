@@ -278,6 +278,8 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.set = t
 
         product.country = request.POST['country']
+        product.category = request.POST['category']
+        product.subcategory = request.POST['subcategory']
         product.height_packaging = request.POST.get('height_packaging', '0')
         product.height_product = request.POST.get('height_product', '0')
         product.length_packaging = request.POST.get('length_packaging', '0')

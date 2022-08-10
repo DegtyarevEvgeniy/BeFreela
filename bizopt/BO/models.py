@@ -60,6 +60,8 @@ class Product_creator(models.Model):
     rating_status = models.IntegerField(default=0)
     term_status = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0)
+    category = models.CharField('Категория', max_length=50, default='-')
+    subcategory = models.CharField('Подкатегория', max_length=50, default='-')
     set = models.CharField(max_length=300, default='-')
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
