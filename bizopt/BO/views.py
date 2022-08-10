@@ -588,7 +588,7 @@ def index_page(request):
 # def cardProduct_page(request):
 #     context = gen_menu()
 #     products = Product.objects.all()
-#     context['products'] = [{'product_name': product.product_name,
+#     context['products'] = [{'produc
 #                             'cost': product.cost
 #                             }
 #                            for product in products]
