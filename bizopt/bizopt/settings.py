@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     "phonenumber_field",
     'taggit',
+    'partner'
 
 ]
 
