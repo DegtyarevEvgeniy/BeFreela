@@ -157,6 +157,42 @@ def goods_page(request):
                            for product in products]
     return render(request, 'goods.html', context)
 
+def goodsSearch_page_category(request, category):
+    context = gen_menu(request)
+    products = Product_creator.objects.filter(
+        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
+        | Q(set__icontains=category) | Q(category__icontains=category)
+    )
+
+    print(products)
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture
+                            }
+                           for product in products]
+    return render(request, 'goodsSearch.html', context)
+
+def goodsSearch_page_subcategory(request, category, subcategory):
+    context = gen_menu(request)
+    products = Product_creator.objects.filter(
+        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
+        | Q(set__icontains=category) | Q(category__icontains=category)
+    )
+    products = products.filter(
+        Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
+        | Q(set__icontains=subcategory) | Q(subcategory__icontains=subcategory)
+    )
+    print(products)
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture
+                            }
+                           for product in products]
+    return render(request, 'goodsSearch.html', context)
 
 def resumes_page(request):
     user_id = 0
