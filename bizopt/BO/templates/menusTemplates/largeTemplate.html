@@ -1,11 +1,18 @@
 {% if user.is_authenticated %}
 <div class="uk-flex uk-flex-between uk-flex-middle"
-    style="padding: 15px 10% 5px 10%; background-color:rgba(255, 255, 255, 0.9)">
-    <div class="uk-flex uk-flex-between uk-width-1-5">
-        <a href="#main-menuL" uk-icon="menu" uk-toggle></a>
+    style="padding: 2% 0; background-color:rgba(255, 255, 255, 0.9); font-size: 20px;">
+    <div class="uk-flex uk-flex-left uk-width-1-5">
+        <a href="#main-menuL" uk-toggle style="margin-right: 10%;">
+            <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="4" width="20" height="1"></rect>
+                <rect x="2" y="9" width="20" height="1"></rect>
+                <rect x="2" y="14" width="20" height="1"></rect>
+            </svg>
+        </a>
         <p style="margin: 0px"> Регион <b>Москва</b></p>
     </div>
-    <a href="http://seller.befreela.ru/start/" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
+    <a href="http://seller.befreela.ru/start/" class="uk-button uk-button-text"
+        style="text-transform: none; font-size: 20px;">Стать
         партнером</a>
 </div>
 <div style="width: 100%; border-top: 2px solid; border-radius: 20px;"></div>
@@ -15,15 +22,21 @@
         <div class="uk-navbar-left uk-width-2-5@l">
             <ul class="uk-navbar-nav">
 
-                <li class="uk-active">
-                    <a class="homeWord" href="/">
-                        <h1 class="uk-margin-remove">BeFreela</h1>
+                <li class="uk-active" style="margin: 0 5%">
+                    <a href="/">
+                        <h1 class="uk-margin-remove uk-text-uppercase" style="font-size: 40px;">BeFreela</h1>
                     </a>
                 </li>
 
-                <li class="uk-active"><a href="/creators/resumes/"
-                        style="font-size: 20px; text-transform: none;">Бренды</a></li>
-                <li class="uk-active"><a href="/tasks/" style="font-size: 20px; text-transform: none;">Мастерская</a>
+                <li class="uk-active uk-margin-left">
+                    <a href="/creators/resumes/" style="font-size: 25px; text-transform: none;">Бренды</a>
+                </li>
+                <li class="uk-flex uk-flex-middle">
+                    <div class="uk-divider-vertical uk-margin-remove"
+                        style="height: 50%; background-color: black; width: 2px"></div>
+                </li>
+                <li class="uk-active">
+                    <a href="/tasks/" style="font-size: 25px; text-transform: none;">Мастерская</a>
                 </li>
             </ul>
         </div>
@@ -58,12 +71,20 @@
     </nav>
 </div>
 {% else %}
-<div class="uk-flex uk-flex-between" style="padding: 15px 10% 5px 10%; background-color:rgba(255, 255, 255, 0.9)">
-    <div class="uk-flex uk-flex-between uk-width-1-5">
-        <a href="#main-menuL" uk-icon="menu" uk-toggle></a>
+<div class="uk-flex uk-flex-between uk-flex-middle"
+    style="padding: 2% 0; background-color:rgba(255, 255, 255, 0.9); font-size: 20px;">
+    <div class="uk-flex uk-flex-left uk-width-1-5">
+        <a href="#main-menuL" uk-toggle style="margin-right: 10%;">
+            <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <rect x="2" y="4" width="20" height="1"></rect>
+                <rect x="2" y="9" width="20" height="1"></rect>
+                <rect x="2" y="14" width="20" height="1"></rect>
+            </svg>
+        </a>
         <p style="margin: 0px"> Регион <b>Москва</b></p>
     </div>
-    <a class="uk-button uk-button-text" style="text-transform: none; font-size: medium;" href="/login/">Стать
+    <a href="/login/" class="uk-button uk-button-text"
+        style="text-transform: none; font-size: 20px;">Стать
         партнером</a>
 </div>
 <div style="width: 100%; border-top: 2px solid"></div>
@@ -72,14 +93,22 @@
     <div class="uk-navbar-left">
         <ul class="uk-navbar-nav">
 
-            <li class="uk-active"><a href="#">
-                    <h1 class="uk-margin-remove">BeFreela</h1>
-                </a></li>
-
-            <li class="uk-active"><a href="/creators/resumes/" style="font-size: 20px; text-transform: none;">Бренды</a>
+            <li class="uk-active" style="margin: 0 5%">
+                <a href="#">
+                    <h1 class="uk-margin-remove uk-text-uppercase" style="font-size: 40px;">BeFreela</h1>
+                </a>
             </li>
 
-            <li class="uk-active"><a href="/login/" style="font-size: 20px; text-transform: none;">Мастрерская</a></li>
+            <li class="uk-active uk-margin-left">
+                <a href="/creators/resumes/" style="font-size: 25px; text-transform: none;">Бренды</a>
+            </li>
+            <li class="uk-flex uk-flex-middle">
+                <div class="uk-divider-vertical uk-margin-remove"
+                    style="height: 50%; background-color: black; width: 2px"></div>
+            </li>
+            <li class="uk-active">
+                <a href="/tasks/" style="font-size: 25px; text-transform: none;">Мастерская</a>
+            </li>
 
         </ul>
     </div>
@@ -96,6 +125,9 @@
                 <a href="/login/" uk-icon="icon: cart"></a>
 
             </li>
+            <li class="uk-active">
+                <a href="/login/" uk-icon="icon: user"></a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -106,7 +138,8 @@
         <ul class="uk-nav uk-nav-default">
             <li class="uk-active"><a href="#designer-clothes-menuL" class="uk-button uk-button-text"
                     uk-toggle>Дизайнерская одежда</a></li>
-            <li class="uk-active"><a href="#designer-shoes-menuL" class="uk-button uk-button-text" uk-toggle>Дизайнерская
+            <li class="uk-active"><a href="#designer-shoes-menuL" class="uk-button uk-button-text"
+                    uk-toggle>Дизайнерская
                     обувь</a></li>
             <li class="uk-active"><a href="#bags-menuL" class="uk-button uk-button-text" uk-toggle>Сумки</a></li>
             <li class="uk-active"><a href="#interior-menuL" class="uk-button uk-button-text" uk-toggle>Интерьер</a></li>
