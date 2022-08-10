@@ -2,6 +2,37 @@
 
 {% block content %}
 
+<style>
+    #leftBottomnMenu{
+        position: relative;
+        z-index : 1;
+    }
+    #leftBottomnMenu:before {
+        content : "";
+        position: absolute;
+        float: left;
+        left    : 0;
+        bottom  : 0;
+        height  : 1px;
+        width   : 89%; 
+        border-bottom: 1px solid #0A3644;
+    }
+    #rigthBottomnMenu{
+        position: relative;
+        z-index : 1;
+    }
+    #rigthBottomnMenu:before {
+        content : "";
+        position: absolute;
+        float: left;
+        left    : 10%;
+        bottom  : 0;
+        height  : 1px;
+        width   : 90%; 
+        border-bottom: 1px solid #0A3644;
+    }
+</style>
+
 <div uk-slideshow="animation: push; ratio: 7:3; autoplay: true; pause-on-hover: true; min-height: 300; max-height: 500"
     style="margin-top: 15%">
 
@@ -66,113 +97,120 @@
 
 
 <div class="uk-section uk-section-default" style="width: 100%;">
-    <h1 style="color: #0A3644; font-size: 4em;">Заголовок блока</h1>
-    <div class="uk-container uk-flex uk-flex-column" style="margin: 5% auto">
-        <div class="uk-felx uk-flex-around">
-            <div>
-                <img src="" alt="">
+    <h1 style="color: #0A3644; font-size: 4em; width: 80%; margin: 0 auto 5% auto">Заголовок блока</h1>
+    <div class="uk-width-1 uk-flex uk-flex-column">
+
+        <!-- start of template -->
+        <div class="uk-flex-inline uk-flex-center" id="leftBottomnMenu">
+            <div class="uk-width-2-5 uk-flex uk-flex-bottom">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+                    alt="" width="500" height="800">
             </div>
-            <div>
-                <p>1</p>
-                <h3>Дизайнерская одежда</h3>
-                <p>Всегда мечтали выделяться из толпы ярким луком? Тогда вы пришли по адресу. Тут вы сможете найти любой наряд на свой вкус и цвет</p>
+            <div class="uk-width-2-5" style="border-left: 1px solid #0A3644;">
+                <h2 class="uk-flex uk-flex-center uk-flex-middle"
+                    style="width: 65px; height: 65px; color: white; background-color: #0A3644;">1</h2>
+                <div class="uk-text-left uk-width-4-5" style="margin: 0 auto">
+                    <h1>Дизайнерская одежда</h1>
+                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Всегда мечтали выделяться из толпы
+                        ярким луком? Тогда вы пришли по адресу. Тут вы сможете найти
+                        любой наряд на свой вкус и цвет</p>
+                </div>
             </div>
         </div>
+        <!-- end of template -->
+
+        <!-- start of template -->
+        <div class="uk-flex-inline uk-flex-center uk-flex-bottom" id="rigthBottomnMenu">
+            <div class="uk-width-2-5 uk-flex uk-flex-wrap uk-flex-wrap-around">
+                <div class="uk-text-left uk-width-1" style="margin: 10% auto 0 auto; padding-right: 10%">
+                    <h1>Сумки</h1>
+                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Не можете подобрать нужную сумку под
+                        новый наряд? Здесь вы можете найти все, что вам захочется.</p>
+                </div>
+                <h2 class="uk-flex uk-flex-center uk-flex-middle"
+                    style="margin-bottom: 0px;width: 65px; height: 65px; color: #0A3644; border: 1px solid #0A3644; border-bottom: none">
+                    2</h2>
+            </div>
+            <div class="uk-width-2-5" style="border-left: 1px solid #0A3644; padding-top: 5%">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+                    alt="" width="500" height="800">
+            </div>
+        </div>
+        <!-- end of template -->
+
+        <!-- start of template -->
+        <div class="uk-flex-inline uk-flex-center" id="leftBottomnMenu">
+            <div class="uk-width-2-5">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+                    alt="" width="500" height="800">
+            </div>
+            <div class="uk-width-2-5 uk-flex uk-flex-bottom" style="border-left: 1px solid #0A3644">
+                <div class="uk-text-left uk-width-4-5" style="margin: 0 auto 15% auto">
+                    <h1>Скульптуры</h1>
+                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Всегда мечтали выделяться из толпы
+                        ярким луком? Тогда вы пришли по адресу. Тут вы сможете найти любой наряд на свой вкус и цвет</p>
+                </div>
+                <h2 class="uk-flex uk-flex-center uk-flex-middle"
+                    style="margin-bottom: 0px; width: 65px; height: 65px; color: white; background-color: #0A3644;">3
+                </h2>
+            </div>
+        </div>
+        <!-- end of template -->
+
+        <!-- start of template -->
+        <div class="uk-flex-inline uk-flex-center uk-flex-bottom" id="rigthBottomnMenu">
+            <div class="uk-width-2-5 uk-flex uk-flex-wrap uk-flex-wrap-around">
+                <div class="uk-text-left uk-width-1" style="margin: 10% auto 0 auto; padding-right: 10%">
+                    <h1>Интерьер</h1>
+                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Не можете подобрать нужную сумку под
+                        новый наряд? Здесь вы можете найти все, что вам захочется. Дай воли фантазии и придумай свою
+                        сумку</p>
+                </div>
+                <h2 class="uk-flex uk-flex-center uk-flex-middle"
+                    style="margin-bottom: 0px;width: 65px; height: 65px; color: #0A3644; border: 1px solid #0A3644; border-bottom: none">
+                    4</h2>
+            </div>
+            <div class="uk-width-2-5" style="border-left: 1px solid #0A3644; padding: 5% 0 2% 0;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+                    alt="" width="500" height="800">
+            </div>
+        </div>
+        <!-- end of template -->
+
     </div>
 </div>
 
-<footer class="text-center text-lg-start bg-light text-muted">
 
-    <!-- Section: Links  -->
-    <br>
-    <section class="">
-        <div class="container text-center text-md-start mt-5">
-            <!-- Grid row -->
-            <div class="row mt-3">
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>BeFreela
-                    </h6>
-                    <p>
-                        Here you can use rows and columns to organize your footer content. Lorem ipsum
-                        dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Для покупателей
-                    </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Angular</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">React</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Vue</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Laravel</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Для партнеров
-                    </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Pricing</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Settings</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Orders</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Help</a>
-                    </p>
-                </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Контакты
-                    </h6>
-                    <p><i class="fas fa-home me-3"></i> Россия, Москва</p>
-                    <p>
-                        <i class="fas fa-envelope me-3"></i>
-                        degtyarevea12@gmail.com
-                    </p>
-                    <p><i class="fas fa-phone me-3"></i> +7 925 574 1371</p>
-                    <p><i class="fas fa-print me-3"></i> +7 925 574 1371</p>
-                </div>
-                <!-- Grid column -->
-            </div>
-            <!-- Grid row -->
+    <div class="uk-container uk-width-1 uk-flex uk-flex-around uk-flex-middle" style="color: white; background-color: #0A3644; padding: 5%">
+        <div class="uk-flex-row">
+            <h3 style="color: white">ДЛЯ ПОКУПАТЕЛЕЙ</h3>
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Pricing</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Settings</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Orders</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Help</a></li>
+            </ul>
         </div>
-    </section>
-    <!-- Section: Links  -->
-
-    <!-- Copyright -->
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        © 2022:
-        <a class="text-reset fw-bold" href="">BeFreela</a>
+        <div class="uk-flex-row">
+            <h3 style="color: white">ДЛЯ ПАРТНЕРОВ</h3>
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Pricing</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Settings</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Orders</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Help</a></li>
+            </ul>
+        </div>
+        <div class="uk-flex-row">
+            <h3 style="color: white">КОНТАКТЫ:</h3>
+            <ul class="uk-nav uk-navbar-dropdown-nav">
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link">Россия, г. Москва</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link" href="email:degtyarevea12@gmail.com">degtyarevea12@gmail.com</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link" href="tel:+7 (925) 574 13-71">+7 (925) 574 13-71</a></li>
+                <li style="font-size: 1.5em"><a calss="uk-button uk-button-link" href="">+7 (925) 574 13-71</a></li>
+            </ul>
+        </div>
     </div>
-    <!-- Copyright -->
-</footer>
-<!-- Footer -->
+
 
 <script>
     // function red(el) {
@@ -198,4 +236,3 @@
 </script>
 
 {% endblock %}
-</div>

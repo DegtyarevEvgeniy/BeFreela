@@ -109,7 +109,6 @@ def goodsSearch_page(request, product_name):
                            for product in products]
     return render(request, 'goodsSearch.html', context)
 
-
 def goods_page(request):
     context = gen_menu(request)
     creators = Creator.objects.all()
