@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "phonenumber_field",
     'taggit',
     'partner'
-
 ]
 
 MIDDLEWARE = [
