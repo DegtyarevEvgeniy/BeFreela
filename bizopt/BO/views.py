@@ -20,6 +20,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404, HttpResponseNotFound
 from .forms import *
+from partner.partners.models import Partner
 from django.contrib.auth import logout, authenticate, login
 from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
