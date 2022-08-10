@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'uetm-fy5)7xpzkxpbfgfx_l)@67#&a0x)#qxhe3=hxth(xz%1_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     "phonenumber_field",
     'taggit',
-    'partner'
+    # 'partner'
 ]
 
 MIDDLEWARE = [
