@@ -165,6 +165,10 @@ def resumes_page(request):
     creators = Creator.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
+    brands = Partner.objects.all().values('name_small')
+    print(brands)
+    context['brands'] = [{'text': brand}
+                         for brand in brands]
     context['creators'] = [{'id': creator.id,
                             'username': creator.username,
                             'first_name': creator.first_name,
