@@ -6,6 +6,9 @@ from django.shortcuts import render, redirect
 from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
 
+from django.urls import reverse_lazy
+
+
 
 from .utils import *
 from .forms import *
@@ -19,6 +22,9 @@ from .forms import ProductCreateForm
 from taggit.models import Tag
 from .models import Chat_room, Message
 from datetime import datetime
+
+from .forms import CustomUserChangeForm
+
 
 
 def pageNotAccess(request, exception):
@@ -243,41 +249,26 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
 
-    if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
-        context['first_name'] = user.first_name
-        context['email'] = user.email
-        try:
-            creator = Shop.objects.get(email=request.user)
-            creator.description = request.POST['description']
-            creator.telegram = request.POST['telegram']
-            creator.vk = request.POST['vk']
-            creator.whatsapp = request.POST['whatsapp']
-            creator.instagram = request.POST['instagram']
-            creator.username = request.user.username
-            creator.save()
-        except:
-            creator = Shop()
-            if request.FILES:
-                file = request.FILES['profile_images']
-                fs = FileSystemStorage()
-                filename = f"creator_{str(user.email)}.png"
-                local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
-                creator.cover = local_path_to_file
-            creator.first_name = user.first_name
-            creator.username = request.user.username
-            creator.description = request.POST['profile_description']
-            creator.telegram = request.POST['telegram']
-            creator.vk = request.POST['vk']
-            creator.whatsapp = request.POST['whatsapp']
-            creator.instagram = request.POST['instagram']
-            creator.published = request.POST['published']
-            creator.email = user.email
-            if 'iscompany' in request.POST:
-                creator.is_company = True
-                creator.company_name = request.POST['profile_company_name']
-            else:
-                creator.is_company = False
-            creator.save()
+    print(request.POST)
+
+    if request.method == 'POST' and "profile_saver1" in request.POST:  # для редактирования профиля
+
+        creator = Account.objects.get(email=request.user)
+        creator.name_small = request.POST['name_small']
+        creator.nameFull = request.POST['nameFull']
+        creator.ogrn = request.POST['ogrn']
+        creator.inn = request.POST['inn']
+        creator.kpp = request.POST['kpp']
+        creator.street = request.POST['street']
+        creator.fiz_adress = request.POST['fiz_adress']
+        creator.city = request.POST['city']
+        creator.index = request.POST['index']
+        creator.payment_account = request.POST['payment_account']
+        creator.reg_form = request.POST['reg_form']
+        creator.bik = request.POST['bik']
+        creator.korr_check = request.POST['korr_check']
+
+        creator.save()
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
@@ -446,6 +437,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
+
     try:
         creator = Shop.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
@@ -468,37 +460,41 @@ def becomeCreatorTemplate_page(request, name):
             content['partner'] = partner
 
     elif name == '2':
+        user = Account.objects.get(email=request.user)
+
         try:
-            products = Product_buy.objects.filter(id_creator=request.user)
-            content['products'] = [{'id': product.id,
-                                    'product_name': product.product_name,
-                                    'customer': product.id_user_buy,
-                                    'st': product.status,
-                                    'status1': 'red' if product.status[-1] == 'е' else 'blue',
-                                    'status2': 'red' if product.status[-1] == 'о' else 'blue',
-                                    'status3': 'red' if product.status[-1] == 'ы' else 'blue',
-                                    'chat_id': (creator.id * Account.objects.get(
-                                        email=product.id_user_buy).id) + creator.id + Account.objects.get(
-                                        email=product.id_user_buy).id
+              # для редактирования профиля
 
-                                    }
-                                   for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user)
-            if products_v.count() > 0:
-                content['products_v'] = [{'id': product.id,
-                                          'product_name': product.product_name,
-                                          'customer': product.id_user_buy,
-                                          'status': product.status,
-                                          'id_user_buy': product.id_user_buy,
-                                          'chat_id': (creator.id * Account.objects.get(
-                                              email=product.id_user_buy).id) + creator.id + Account.objects.get(
-                                              email=product.id_user_buy).id
-                                          }
-                                         for product in products_v]
+            creator = Account.objects.get(email=request.user)
+            content['creator'] = creator
+
+            
+
+           
+
+        except:
 
 
-        except Product_buy.DoesNotExist as e:
-            content['products'] = None
+            creator.save()
+            # except:
+                # creator = BoCreator()
+                # if request.FILES:
+                #     file = request.FILES['profile_images']
+                #     fs = FileSystemStorage()
+                #     filename = f"creator_{str(user.email)}.png"
+                #     local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
+                #     creator.cover = local_path_to_file
+                # creator.first_name = user.first_name
+
+                # creator.description = request.POST['profile_description']
+                # creator.telegram = request.POST['telegram']
+                # creator.vk = request.POST['vk']
+                # creator.whatsapp = request.POST['whatsapp']
+                # creator.instagram = request.POST['instagram']
+                # creator.published = request.POST['published']
+                # creator.email = user.email
+
+                # creator.save()
 
     elif name == '4':
         try:

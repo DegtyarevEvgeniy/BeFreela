@@ -3,8 +3,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelChoiceField
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+from account.models import Account
+
 
 from django.forms import ModelForm, TextInput, Textarea, Select, CharField
+
 
 from .models import *
 from taggit.models import Tag
@@ -476,3 +481,12 @@ class Resume(forms.Form):
         'class': "form-check-input",
         'value': "1",
     }))
+
+
+class CustomUserChangeForm(UserChangeForm):
+    
+    class Meta:
+        model = Account
+        fields = ('email', 'city', 'first_name', 'last_name', 'email',
+        'ogrn', 'inn', 'kpp', 'street', 'fiz_adress', 'index', 'checking_account', 'bik', 
+        'korr_check','name_small','nameFull', 'payment_account', 'reg_form')
