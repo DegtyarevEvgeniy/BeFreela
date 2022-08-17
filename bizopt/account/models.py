@@ -56,6 +56,9 @@ class Account(AbstractBaseUser):
     fiz_adress = models.CharField(max_length=9999, default='')
     street = models.CharField(max_length=9999,default='')
 
+    is_partner = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False)
+
 
 
     USERNAME_FIELD = 'email'

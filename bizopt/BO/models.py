@@ -4,7 +4,7 @@ from django.forms import ModelForm
 from taggit.managers import TaggableManager
 from datetime import datetime
 
-class Creator(models.Model):
+class Shop(models.Model):
     username = models.CharField(max_length=20, default='', unique=True)
     first_name = models.CharField(max_length=30, default='')
     email = models.CharField(max_length=20, default='example@example.com')

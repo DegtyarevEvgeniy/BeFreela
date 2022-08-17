@@ -101,7 +101,7 @@ def goodsSearch_page(request, product_name):
 
 def goods_page(request):
     context = gen_menu(request)
-    creators = Creator.objects.all()
+    creators = Shop.objects.all()
     products = Product_creator.objects.all()
     if request.method == "POST":
         rating = request.POST.get('rating', '')
@@ -188,7 +188,7 @@ def resumes_page(request):
     if request.user.is_authenticated:
         user_id = Account.objects.get(email=request.user.email).id
     context = gen_menu(request)
-    creators = Creator.objects.all()
+    creators = Shop.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
     brands = Partner.objects.all().values('name_small')
@@ -247,7 +247,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         context['first_name'] = user.first_name
         context['email'] = user.email
         try:
-            creator = Creator.objects.get(email=request.user)
+            creator = Shop.objects.get(email=request.user)
             creator.description = request.POST['description']
             creator.telegram = request.POST['telegram']
             creator.vk = request.POST['vk']
@@ -256,7 +256,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             creator.username = request.user.username
             creator.save()
         except:
-            creator = Creator()
+            creator = Shop()
             if request.FILES:
                 file = request.FILES['profile_images']
                 fs = FileSystemStorage()
@@ -447,7 +447,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
     try:
-        creator = Creator.objects.get(email=request.user.email)
+        creator = Shop.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
@@ -506,10 +506,10 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         try:
-            creator = Creator.objects.get(email=request.user)
+            creator = Shop.objects.get(email=request.user)
             content['creator'] = creator
         except:
-            creator = Creator()
+            creator = Shop()
             content['creator'] = creator
 
     elif name == '1':
@@ -663,7 +663,7 @@ def index_page(request):
 
 def cardResume_page(request):
     context = gen_menu(request)
-    profile = Creator.objects.get(email=request.user)
+    profile = Shop.objects.get(email=request.user)
     context['profile'] = profile
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
@@ -682,7 +682,7 @@ def sertCardResume_page(request, username):
     useremail = request.user
     user = Account.objects.get(email=useremail)
 
-    profile = Creator.objects.get(username=username)
+    profile = Shop.objects.get(username=username)
     context['profile'] = profile
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
@@ -994,7 +994,7 @@ def chat_page(request, room_id):
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
     print(user.id)
     print(companion_id)
-    companion = Creator.objects.get(id=companion_id)
+    companion = Shop.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
     if not Chat_room.objects.filter(name=room_id).exists():
