@@ -22,7 +22,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404, HttpResponseNotFound
 from .forms import *
-# from partner.partners.models import Partner
+# from partner.partners.models import BoPartner
 from django.contrib.auth import logout, authenticate, login
 from django.core.files.storage import FileSystemStorage
 from phonenumber_field.modelfields import PhoneNumberField
@@ -83,7 +83,7 @@ def logout_view(request):
 
 def yourTasks_page(request):
     content = gen_menu(request)
-    tasks = Task.objects.filter(id_creator=request.user)
+    tasks = BoTask.objects.filter(id_creator=request.user)
     content['tasks'] = [{
         'id': task.id,
         'name': task.name,
@@ -114,7 +114,7 @@ def goodsSearch_page(request, product_name):
 
 def goods_page(request):
     context = gen_menu(request)
-    creators = Creator.objects.all()
+    creators = PartCreator.objects.all()
     products = PartProductCreator.objects.all()
     if request.method == "POST":
         rating = request.POST.get('rating', '')
@@ -201,10 +201,10 @@ def resumes_page(request):
     if request.user.is_authenticated:
         user_id = Account.objects.get(email=request.user.email).id
     context = gen_menu(request)
-    creators = Creator.objects.all()
+    creators = PartCreator.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
-    brands = Partner.objects.all().values('name_small')
+    brands = BoPartner.objects.all().values('name_small')
     print(brands)
     context['brands'] = [{'text': brand}
                          for brand in brands]
@@ -234,7 +234,7 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
         form = addTasks(request.POST)
         if form.is_valid() and "addtask" in request.POST:
             print('kkk')
-            task = Task()
+            task = BoTask()
             task.name = request.POST['task_name']
             task.description = request.POST['description']
             task.price = request.POST['price']
@@ -260,7 +260,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         context['first_name'] = user.first_name
         context['email'] = user.email
         try:
-            creator = Creator.objects.get(email=request.user)
+            creator = PartCreator.objects.get(email=request.user)
             creator.description = request.POST['description']
             creator.telegram = request.POST['telegram']
             creator.vk = request.POST['vk']
@@ -269,7 +269,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             creator.username = request.user.username
             creator.save()
         except:
-            creator = Creator()
+            creator = PartCreator()
             if request.FILES:
                 file = request.FILES['profile_images']
                 fs = FileSystemStorage()
@@ -294,7 +294,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
-        product = Product_creator()
+        product = BoProductCreator()
         if request.FILES:
             file = request.FILES['product_photos']
             fs = FileSystemStorage()
@@ -344,43 +344,43 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         print("CARDS")
 
     if request.method == 'GET' and "delete" in request.GET:
-        product = Product_creator.objects.get(product_id=request.GET['delete'])
+        product = BoProductCreator.objects.get(product_id=request.GET['delete'])
         product.delete()
         return redirect('/becomeCreator/')
 
     if request.method == 'POST' and "status" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['status'])
+        product = BoProductBuy.objects.get(id=request.POST['status'])
         product.status = 'Заказ в работе'
         product.save()
         return redirect('/becomeCreator/')
     if request.method == 'GET' and "in_work" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['in_work'])
+        product = BoProductBuy.objects.get(id=request.POST['in_work'])
         product.status = 'Заказ в работе'
         product.save()
     if request.method == 'POST' and "done" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['done'])
+        product = BoProductBuy.objects.get(id=request.POST['done'])
         product.status = 'Заказ готов'
         product.save()
     if request.method == 'POST' and "payment" in request.POST:
-        product = Product_buy.objects.get(id=request.GET['payment'])
+        product = BoProductBuy.objects.get(id=request.GET['payment'])
         product.status = 'Заказ оплачен'
         product.save()
     if request.method == 'POST' and "decline" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['decline'])
+        product = BoProductBuy.objects.get(id=request.POST['decline'])
         product.status = 'Заказчик отказался от заказа'
         product.save()
     if request.method == 'GET' and "decline_work" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['decline_work'])
+        product = BoProductBuy.objects.get(id=request.GET['decline_work'])
         product.status = 'Заказчик отказался от заказа'
         product.save()
     if request.method == 'GET' and "4" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['4'])
+        product = BoProductBuy.objects.get(id=request.GET['4'])
         product.status = 'Заказчик отказался от заказа'
         product.save()
 
     if request.method == "POST" and "partner" in request.POST:
         try:
-            partner = Partner.objects.get(email=request.user)
+            partner = BoPartner.objects.get(email=request.user)
             partner.inn = request.POST['INN']
             partner.name_small = request.POST['short_name']
             partner.payment_account = request.POST['payment_account']
@@ -390,7 +390,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             partner.email = user.email
             partner.save()
         except:
-            partner = Partner()
+            partner = BoPartner()
             partner.inn = request.POST['INN']
             partner.name_small = request.POST['short_name']
             partner.payment_account = request.POST['payment_account']
@@ -412,7 +412,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             '3': 'Заказ в ожидании оплаты',
             '4': 'Заказчик отказался от заказа'
         }
-        products = Product_buy.objects.all()
+        products = BoProductBuy.objects.all()
         for i in range(len(products)):
             products[i].status = statuses[statuses_list[i]]
             products[i].save()
@@ -460,7 +460,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
     try:
-        creator = Creator.objects.get(email=request.user.email)
+        creator = PartCreator.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
@@ -473,7 +473,7 @@ def becomeCreatorTemplate_page(request, name):
     path = f"becomeCreatorTemplates/template{name}.html"
     if name == '2':
         try:
-            products = Product_buy.objects.filter(id_creator=request.user)
+            products = BoProductBuy.objects.filter(id_creator=request.user)
             content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
@@ -487,7 +487,7 @@ def becomeCreatorTemplate_page(request, name):
 
                                     }
                                    for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user)
+            products_v = BoProductBuy.objects.filter(id_creator=request.user)
             if products_v.count() > 0:
                 content['products_v'] = [{'id': product.id,
                                           'product_name': product.product_name,
@@ -501,7 +501,7 @@ def becomeCreatorTemplate_page(request, name):
                                          for product in products_v]
 
 
-        except Product_buy.DoesNotExist as e:
+        except BoProductBuy.DoesNotExist as e:
             content['products'] = None
 
     # elif name == '3':
@@ -510,7 +510,7 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '3':
         account = Account.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.email)
+        products = BoProductCreator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price,
                                 'id': product.product_id,
@@ -519,18 +519,18 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         try:
-            creator = Creator.objects.get(email=request.user)
+            creator = PartCreator.objects.get(email=request.user)
             content['creator'] = creator
         except:
-            creator = Creator()
+            creator = PartCreator()
             content['creator'] = creator
 
     elif name == '1':
         try:
-            partner = Partner.objects.get(email=request.user)
+            partner = BoPartner.objects.get(email=request.user)
             content['partner'] = partner
         except:
-            partner = Partner()
+            partner = BoPartner()
             content['partner'] = partner
 
     elif name == '6':
@@ -539,7 +539,7 @@ def becomeCreatorTemplate_page(request, name):
 
     # elif name in ['11', '12', '13']:
     #     try:
-    #         partner = Partner.objects.get(email=request.user)
+    #         partner = BoPartner.objects.get(email=request.user)
     #         content['partner'] = {
     #             'first_name': partner.first_name,
     #             'last_name': partner.last_name,
@@ -558,7 +558,7 @@ def becomeCreatorTemplate_page(request, name):
 
 def tasks_page(request):
     context = gen_menu(request)
-    tasks = Task.objects.all()
+    tasks = BoTask.objects.all()
     context['task_cards'] = [{'id': task.id,
                               'name': task.name,
                               'description': task.description
@@ -598,9 +598,9 @@ def index_page(request):
 
 def cardResume_page(request):
     context = gen_menu(request)
-    profile = Creator.objects.get(email=request.user)
+    profile = PartCreator.objects.get(email=request.user)
     context['profile'] = profile
-    products = Product_creator.objects.all()
+    products = BoProductCreator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
@@ -617,9 +617,9 @@ def sertCardResume_page(request, username):
     useremail = request.user
     user = Account.objects.get(email=useremail)
 
-    profile = Creator.objects.get(username=username)
+    profile = PartCreator.objects.get(username=username)
     context['profile'] = profile
-    products = Product_creator.objects.all()
+    products = BoProductCreator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
@@ -637,10 +637,10 @@ def sertCardResume_page(request, username):
 def cardTask_page(request, task_id):
     context = gen_menu(request)
     try:
-        task = Task.objects.get(id=task_id)
+        task = BoTask.objects.get(id=task_id)
         context['task'] = task
         return render(request, 'cardTask.html', context)
-    except Task.DoesNotExist as e:
+    except BoTask.DoesNotExist as e:
         raise Http404 from e
 
 
@@ -651,13 +651,13 @@ def cardProduct_page(request, product_id):
     df.format(get_format('DATE_FORMAT'))
 
     context = gen_menu(request)
-    product = Product_creator.objects.get(id=product_id)
+    product = BoProductCreator.objects.get(id=product_id)
 
     try:
         if request.method == "POST" and "buy_product" in request.POST:
-            product_buy = Product_buy()
+            product_buy = BoProductBuy()
 
-            # product = Product_creator.objects.get(id=product_id)
+            # product = BoProductCreator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
 
@@ -672,11 +672,11 @@ def cardProduct_page(request, product_id):
             product_buy.status_pay = False
             product_buy.save()
         # else:
-        # product = Product_creator.objects.get(id=product_id)
-        # creator = Creator.objects.get(email=product.id_creator)
+        # product = BoProductCreator.objects.get(id=product_id)
+        # creator = PartCreator.objects.get(email=product.id_creator)
         if request.method == "POST" and "comment_product" in request.POST:
-            # product = Product_creator.objects.get(id=product_id)
-            comment = Comments_product()
+            # product = BoProductCreator.objects.get(id=product_id)
+            comment = BoCommentsProduct()
             comment.id_creator = product.id_creator
             comment.id_product = product.id
             comment.review = request.POST['review']
@@ -684,7 +684,7 @@ def cardProduct_page(request, product_id):
             comment.save()
         context['products'] = product
 
-        messages = Comments_product.objects.filter(id_product=product_id)
+        messages = BoCommentsProduct.objects.filter(id_product=product_id)
 
         id_comment = product.id_creator
         user_product = Account.objects.get(email=id_comment)
@@ -718,7 +718,7 @@ def cardProduct_page(request, product_id):
         context['messages'] = messages
 
         return render(request, 'cardProduct.html', context)
-    except Task.DoesNotExist as e:
+    except BoTask.DoesNotExist as e:
         raise Http404 from e
 
 
@@ -728,7 +728,7 @@ def editTask_page(request, task_id):
         if request.method == 'POST':
             form = addTasks(request.POST)
             if form.is_valid():
-                task = Task.objects.get(id=task_id)
+                task = BoTask.objects.get(id=task_id)
                 task.name = request.POST['task_name']
                 task.description = request.POST['description']
                 task.price = request.POST['price']
@@ -929,18 +929,18 @@ def chat_page(request, room_id):
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
     print(user.id)
     print(companion_id)
-    companion = Creator.objects.get(id=companion_id)
+    companion = PartCreator.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
-    if not Chat_room.objects.filter(name=room_id).exists():
-        new_room = Chat_room.objects.create(name=room_id)
+    if not PartChatRoom.objects.filter(name=room_id).exists():
+        new_room = PartChatRoom.objects.create(name=room_id)
         new_room.save()
     return render(request, 'messanger.html', content)
 
 
 def getMsg(request, room_id):
-    room_detales = Chat_room.objects.get(name=room_id)
-    messages = Message.objects.filter(room=room_detales.name)
+    room_detales = PartChatRoom.objects.get(name=room_id)
+    messages = PartMessage.objects.filter(room=room_detales.name)
     return JsonResponse({"messages": list(messages.values())})
 
 
@@ -949,14 +949,14 @@ def send(request):
     username = request.POST['username']
     room_id = request.POST['room_id']
 
-    new_message = Message.objects.create(value=message, user=username, room=room_id)
+    new_message = PartMessage.objects.create(value=message, user=username, room=room_id)
     new_message.save()
-    return HttpResponse('Message sent successfully.')
+    return HttpResponse('PartMessage sent successfully.')
 
 
 def orders_page(request):
     content = gen_menu(request)
-    productss = Product_buy.objects.filter(id_user_buy=request.user)
+    productss = BoProductBuy.objects.filter(id_user_buy=request.user)
     content['products'] = [{
         'id': product.id,
         'product_name': product.product_name,
@@ -965,15 +965,15 @@ def orders_page(request):
     } for product in productss]
     if request.method == "POST" and "comment_product" in request.POST:
         product_id = request.POST['comment_product']
-        product = Product_creator.objects.get(id=product_id)
-        comment = Comments_product()
+        product = BoProductCreator.objects.get(id=product_id)
+        comment = BoCommentsProduct()
         comment.id_creator = product.id_creator
         comment.id_product = product.id
         comment.review = request.POST['review']
         comment.rating = request.POST.get('rating', '0')
         comment.save()
     if request.method == "POST" and "decline" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['decline'])
+        product = BoProductBuy.objects.get(id=request.POST['decline'])
         product.status = 'Заказчик отказался от заказа'
         product.save()
 
