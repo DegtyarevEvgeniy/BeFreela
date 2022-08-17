@@ -5,6 +5,8 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import logout
 
+from .models import BoProductCreator
+
 
 
 

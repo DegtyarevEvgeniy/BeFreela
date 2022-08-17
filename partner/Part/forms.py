@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelChoiceField, ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
+from .models import BoProductCreator
 
 COUNTRY_CHOICE = [
     ('Afghanistan', 'Afghanistan'),
