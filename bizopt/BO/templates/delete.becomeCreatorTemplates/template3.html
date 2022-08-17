@@ -111,7 +111,7 @@
     $('.Btnn').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
         localStorage.page=6
-        xhr.open('GET', '/partnerTemplates/6/')
+        xhr.open('GET', `becomeCreatorTemplates/6/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
         }

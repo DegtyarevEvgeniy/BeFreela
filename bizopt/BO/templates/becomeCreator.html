@@ -154,8 +154,8 @@
 </head>
 
 <body>
-    <div style="position: fixed; top: 3%; left: 3%; z-index: 1000;">
-        <a class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay" uk-icon="menu"></a>
+    <div style="position: fixed; top: 3%; left: 3%; z-index: 1000; background-color: rgba(255, 255, 255, 0.5); border: none">
+        <a class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay" uk-icon="menu" style="border: none"></a>
     </div>
 
 
@@ -296,10 +296,6 @@
         margin: 40px 0;
     }
 
-    .text-sidebar {
-        /* color: $text-sidebar; */
-    }
-
     .wrapper {
         display: flex;
         width: 100%;
@@ -344,17 +340,6 @@
         display: block;
     }
 
-    #sidebar ul li a:hover {
-        /* color: $lila; */
-        /* background: $text-sidebar-hover; */
-    }
-
-    #sidebar ul li.active>a,
-    a[aria-expanded="true"] {
-        /* color: $text-sidebar; */
-        /* background: $lila-60; */
-    }
-
     a[data-toggle="collapse"] {
         position: relative;
     }
@@ -383,17 +368,6 @@
         display: block;
         border-radius: 5px;
         margin-bottom: 5px;
-    }
-
-    a.download {
-        /* background: $text-sidebar; */
-        /* color: $lila; */
-    }
-
-    a.article,
-    a.article:hover {
-        /* background: $lila-60 !important; */
-        /* color: $text-sidebar !important; */
     }
 
     #content {

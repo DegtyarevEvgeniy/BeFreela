@@ -1,4 +1,4 @@
-<div class="row d-flex justify-content-center align-items-center">
+<div class="row d-flex justify-content-center align-items-center" style="width: 99%; margin: 0 auto;">
     <div class="col-md-8">
         <form id="regForm" method="POST" action="" enctype="multipart/form-data">
             <h1 class="mb-5">Создать товар</h1>
@@ -65,15 +65,14 @@
             <div class="tab" style="display: none">
 
                 <h2>Описание</h2>
+
                 {{ form8.description }}
                 <br>
 
-                <label>Категория</label> {{ form8.category }}
-                <br>
+                <label> Категория </label>
+                {{ form8.category }}
 
-                <label>Подкатегория</label> {{ form8.subcategory }}
                 <br>
-
                 <label>Ключевые слова</label>
                 <div class="input-group mt-2 mb-2">
                     <input type="text" id="keyValue" class="form-control changible">
@@ -160,6 +159,14 @@
         let brand = document.getElementsByName('brand')[0].value.length
         let comp = document.getElementById('inputDiv').children.length
         let moneyInput = parseInt(document.getElementById('priceInput').value)
+        let desc = document.getElementById('id_description').value.length
+        let key = document.getElementById('keyDiv').children.length
+        let height1 = document.getElementById('id_height_product').value
+        let length1 = document.getElementById('id_length_product').value
+        let width1 = document.getElementById('id_width_product').value
+        let height2 = document.getElementById('id_height_packaging').value
+        let length2 = document.getElementById('id_length_packaging').value
+        let width2 = document.getElementById('id_width_packaging').value
 
         if (n == 1) {
             if (pname < 3 || brand < 3 || comp == 0) {
@@ -177,6 +184,19 @@
                 return 0
             } else {
                 document.getElementById("nextBtn").style["background-color"] = 'blue'
+                return 1
+            }
+
+        }
+        if (n == 3) {
+            if (desc <= 0 || key == 0 || height1 <= 0 || length1 <= 0 || width1 <= 0 || height2 <= 0 || length2 <= 0 || width2 <= 0) {
+                document.getElementById("nextBtn").style["background-color"] = 'gray'
+                return 0
+            } else {
+                document.getElementById("nextBtn").style["background-color"] = 'blue'
+                document.getElementById('nextBtn').type = "submit"
+                localStorage.page = 3;
+                document.getElementById('next-previous').classList.add("redirect");
                 return 1
             }
 
@@ -331,12 +351,8 @@
         if (n > 0 && currentTab < 2) {
             if (PassChecker(currentTab + 1)) {
                 x[currentTab].style.display = "none";
-                currentTab = currentTab + n;
-                if (currentTab === x.length) {
-                    document.getElementById('nextBtn').type = "submit"
-                    localStorage.page = 3;
-                    document.getElementById('next-previous').classList.add("redirect");
-                }
+                currentTab = currentTab + n;                
+                document.getElementById("nextBtn").style["background-color"] = 'gray'
                 showTab(currentTab);
             } else {
                 Swal.fire({
@@ -351,7 +367,7 @@
             currentTab = currentTab + n;
             if (currentTab === x.length) {
                 document.getElementById('nextBtn').type = "submit"
-                localStorage.page = 3;
+                localStorage.page = 5;
                 document.getElementById('next-previous').classList.add("redirect");
             }
             showTab(currentTab);

@@ -60,7 +60,6 @@ class Product_creator(models.Model):
     term_status = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0)
     category = models.CharField('Категория', max_length=50, default='-')
-    subcategory = models.CharField('Подкатегория', max_length=50, default='-')
     set = models.CharField(max_length=300, default='-')
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
@@ -73,6 +72,7 @@ class Product_creator(models.Model):
     availability = models.CharField('', max_length=100, default='-')
     picture = models.ImageField('', upload_to='images/product',
                                 default='images/default.png')
+    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
     tags = TaggableManager()
 
 class Task(models.Model):

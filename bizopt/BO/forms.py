@@ -337,14 +337,11 @@ class ProductCreateForm(ModelForm):
             'country': Select(attrs={
                 'class': 'input-group mt-2 mb-2',
             }, choices=COUNTRY_CHOICE),
-            'category': Select(attrs={
-                'class': 'input-group mt-2 mb-2',
-            }, choices=CATEGORY_CHOICE),
-            'subcategory': TextInput(attrs={
-                'class': 'form-control',
-                'oninput': 'PassChecker(1)',
-                'placeholder': 'Пример: носки'
-            }),
+            # 'subcategory': TextInput(attrs={
+            #     'class': 'form-control',
+            #     'oninput': 'PassChecker(1)',
+            #     'placeholder': 'Пример: носки'
+            # }),
             'brand': TextInput(attrs={
                 'class': 'form-control',
                 'id': 'brand',
@@ -353,31 +350,42 @@ class ProductCreateForm(ModelForm):
             }),
             'description': Textarea(attrs={
                 'class': 'form-control',
-                'placeholder': 'Введите описание товара'
+                'placeholder': 'Введите описание товара',
+                'oninput': 'PassChecker(3)',
             }),
+            'category': Select(attrs={
+                'class': 'input-group mt-2 mb-2',
+            }, choices=CATEGORY_CHOICE),
             'width_product': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'oninput': 'PassChecker(3)',
+
             }),
             'height_product': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'oninput': 'PassChecker(3)',
             }),
             'length_product': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'oninput': 'PassChecker(3)',
             }),
             'width_packaging': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'oninput': 'PassChecker(3)',
             }),
             'height_packaging': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'oninput': 'PassChecker(3)',
             }),
             'length_packaging': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
+                'oninput': 'PassChecker(3)',
             }),
 
         }

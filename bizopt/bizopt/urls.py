@@ -56,7 +56,7 @@ urlpatterns = [
     path('addTask/', views.addTask_page),
     path('creators/goods/', views.goods_page),
     path('creators/goods/search/<product_name>', views.goodsSearch_page),
-    path('creators/goods/category/<category>/<subcategory>', views.goodsSearch_page_subcategory),
+    # path('creators/goods/category/<category>/<subcategory>', views.goodsSearch_page_subcategory),
     path('creators/goods/category/<category>', views.goodsSearch_page_category),
     path('creators/goods/<product_id>/', views.cardProduct_page),
     path('creators/cardResume/', views.cardResume_page),

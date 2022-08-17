@@ -163,25 +163,25 @@ def goodsSearch_page_category(request, category):
                            for product in products]
     return render(request, 'goodsSearch.html', context)
 
-def goodsSearch_page_subcategory(request, category, subcategory):
-    context = gen_menu(request)
-    products = Product_creator.objects.filter(
-        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
-        | Q(set__icontains=category) | Q(category__icontains=category)
-    )
-    products = products.filter(
-        Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
-        | Q(set__icontains=subcategory) | Q(subcategory__icontains=subcategory)
-    )
-    print(products)
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture
-                            }
-                           for product in products]
-    return render(request, 'goodsSearch.html', context)
+# def goodsSearch_page_subcategory(request, category, subcategory):
+#     context = gen_menu(request)
+#     products = Product_creator.objects.filter(
+#         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
+#         | Q(set__icontains=category) | Q(category__icontains=category)
+#     )
+#     products = products.filter(
+#         Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
+#         | Q(set__icontains=subcategory) | Q(subcategory__icontains=subcategory)
+#     )
+#     print(products)
+#     context['products'] = [{'id': product.id,
+#                             'product_name': product.product_name,
+#                             'cost': product.price,
+#                             'availability': product.availability,
+#                             'picture': product.picture
+#                             }
+#                            for product in products]
+#     return render(request, 'goodsSearch.html', context)
 
 def resumes_page(request):
     user_id = 0
@@ -307,7 +307,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
         product.country = request.POST['country']
         product.category = request.POST['category']
-        product.subcategory = request.POST['subcategory']
+        # product.subcategory = request.POST['subcategory']
         product.height_packaging = request.POST.get('height_packaging', '0')
         product.height_product = request.POST.get('height_product', '0')
         product.length_packaging = request.POST.get('length_packaging', '0')
@@ -458,7 +458,16 @@ def becomeCreatorTemplate_page(request, name):
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
-    if name == '2':
+
+    if name == '1':
+        try:
+            partner = Partner.objects.get(email=request.user)
+            content['partner'] = partner
+        except:
+            partner = Partner()
+            content['partner'] = partner
+
+    elif name == '2':
         try:
             products = Product_buy.objects.filter(id_creator=request.user)
             content['products'] = [{'id': product.id,
@@ -491,19 +500,6 @@ def becomeCreatorTemplate_page(request, name):
         except Product_buy.DoesNotExist as e:
             content['products'] = None
 
-    # elif name == '3':
-    # form = MyProfile(request.POST)
-    # content['form1'] = form
-
-    elif name == '3':
-        account = Account.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.email)
-        content['products'] = [{'product_name': product.product_name,
-                                'cost': product.price,
-                                'id': product.product_id,
-                                }
-                               for product in products]
-
     elif name == '4':
         try:
             creator = Shop.objects.get(email=request.user)
@@ -512,13 +508,31 @@ def becomeCreatorTemplate_page(request, name):
             creator = Shop()
             content['creator'] = creator
 
-    elif name == '1':
-        try:
-            partner = Partner.objects.get(email=request.user)
-            content['partner'] = partner
-        except:
-            partner = Partner()
-            content['partner'] = partner
+    elif name == '5':
+        account = Account.objects.get(email=request.user)
+        products = Product_creator.objects.filter(id_creator=account.email)
+        content['products'] = [{'id': product.product_id,
+                                'id_creator': product.id_creator,
+                                'product_name': product.product_name,
+                                'country': product.country,
+                                'brand': product.brand,
+                                'rating_status': product.rating_status,
+                                'term_status': product.term_status,
+                                'rating': product.rating,
+                                'category': product.category,
+                                'set': product.set,
+                                'price': product.price,
+                                'description': product.description,
+                                'width_product': product.width_product,
+                                'height_product': product.height_product,
+                                'length_product': product.length_product,
+                                'width_packaging': product.width_packaging,
+                                'height_packaging': product.height_packaging,
+                                'length_packaging': product.length_packaging,
+                                'availability': product.availability,
+                                'picture': product.picture,
+                                }
+                               for product in products]
 
     elif name == '6':
         form = ProductCreateForm()

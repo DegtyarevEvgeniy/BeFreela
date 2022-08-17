@@ -1,125 +1,61 @@
-<div class="row d-flex justify-content-center align-items-center">
-    <div class="col-md-8">
-        <form id="regForm" method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-            <h1 id="register">Данные продавца</h1>
-            <div class="all-steps" id="all-steps">
-                        <a onclick="surTab(0)" style="margin: 0 5px ;">
-                            <span class="step">
-								<i class="fa fa-user"></i>
-							</span>
-                        </a>
-                        <a onclick="surTab(1)" style="margin: 0 5px ;">
-                            <span class="step">
-								<i class="fa fa-unlock-alt"></i>
-							</span>
-                        </a>
+<div class="uk-flex" style="width: 80%; margin: auto; margin-top: 7%">
+    <div style="margin-right: 10%; width: 40%">
+      <h2>Данные</h2>
+        <div>
+          <div class="uk-margin-small-bottom">
+            <h4 style="margin-bottom: 0px">Имя</h4>
+            <input class="uk-input" type="text" placeholder="Имя">
+          </div>
 
-                    </div>
+          <div class="uk-margin-small-bottom">
+            <div>
+              <h4 style="margin-bottom: 0px">Почта</h4>
 
-            <!-- start of bloc 1 -->
-            <div class="tab" style="display: block;">
-                <label class="labels">ИНН</label>
-                <input type="text" class="form-control" name="INN" id="" value="{{ partner.inn }}">
-                <br>
-                <label class="labels">Краткое наиименование</label>
-                <input type="text" class="form-control" name="short_name" id="" value="{{ partner.name_small }}">
-                <br>
-                <label class="labels">Расчетный счет</label>
-                <input type="text" class="form-control" name="payment_account" id="" value="{{ partner.payment_account }}">
-                <br>
-                <label class="labels">Форма регистрации</label>
-                <div class="input-group mb-3">
-                    <select name="reg_form" class="form-select" id="inputGroupSelect02">
-                      <option value="ИП без НДС">ИП без НДС</option>
-                      <option value="ИП с НДС">ИП с НДС</option>
-                      <option value="ИП на НПД">ИП на НПД</option>
-                      <option value="Самозанятый">Самозанятый</option>
-                    </select>
-                  </div>
-                <br>
-                <br>
+              <div class="uk-flex">
+                <input class="uk-input" type="text" placeholder="Почта">
+                <button class="uk-button uk-button-default" style="width:70%">Отправить код</button>
+              </div>
+
+              <div class="uk-flex uk-margin-small-top">
+                <input class="uk-input" type="text" placeholder="Код">
+                <button class="uk-button uk-button-default" style="width:70%">Проверить</button>
+              </div>
             </div>
-            <!-- end of bloc 1 -->
+          </div>
 
-            <!-- start of bloc 2 -->
-            <div class="tab" >
-                <label class="labels">Имя</label>
-                <input type="text" class="form-control" name="my_first_name" id="" value="{{ partner.first_name }}">
-                <br>
-                <label class="labels">Фамилия</label>
-                <input type="text" class="form-control" name="my_last_name" id="" value="{{ partner.last_name }}">
-                <br>
-                <br>
-            </div>
-            <!-- end of bloc 2 -->
-            
+          <div>
+            <h4 style="margin-bottom: 0px">Пароль</h4>
+            <input class="uk-input" type="text" placeholder="**********">
+          </div>
 
-
-            <div style="overflow:auto;" id="next-previous">
-                <div style="float:right;">
-                    <button type="button" id="prevBtn" style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button" onclick="nextPrev(-1)">
-                        <i class="fa fa-angle-double-left"></i>
-                    </button>
-                    <button name="partner" type="button" id="nextBtn" style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;" class="uk-button uk-button-primary" onclick="nextPrev(1)">
-                        <i class="fa fa-angle-double-right"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+          <div class="uk-flex uk-margin-small-bottom uk-margin-small-top">
+            <button class="uk-button uk-button-default" style="width: 50%">Редактировать</button>
+            <button class="uk-button uk-button-default" style="width: 50%">Сохранить</button>
+          </div>
+        </div>
     </div>
-</div>
 
-<script>
+    <div>
+      <h2>Пользователи</h2>
+      <div style="border: solid grey 2px; height: 84%">
+        <div class="uk-flex-column">
+          <div class="uk-flex">
+          <div style="margin: 5%">
+            <h4>Почта</h4>
+            <div class="uk-flex-column">
+              <p><u>test1@gmail.com</u></p>
+              <p class="uk-margin-small-top"><u>test1@gmail.com</u></p>
+            </div>
+          </div>
 
-let currentTab = 0;
-document.addEventListener("DOMContentLoaded", function(event) {
-    showTab(currentTab);
-});
-
-function showTab(n) {
-    let x = document.getElementsByClassName("tab");
-    let header = document.getElementById('register');
-    console.log(n)
-    x[n].style.display = "block";
-    if (n === 0) {
-        document.getElementById("prevBtn").style.display = "none";
-        header.innerHTML = 'Данные продавца'
-    } else {
-        document.getElementById("prevBtn").style.display = "inline";
-        header.innerHTML = 'Мои данные'
-    }
-    if (n === (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
-    } else {
-        document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>';
-    }
-    fixStepIndicator(n)
-}
-
-function nextPrev(n) {
-    let x = document.getElementsByClassName("tab");
-    x[currentTab].style.display = "none";
-    currentTab = currentTab + n;
-    if (currentTab === x.length) {
-        document.getElementById('nextBtn').type = "submit"
-    }
-    showTab(currentTab);
-}
-
-function surTab(n) {
-    let x = document.getElementsByClassName("tab");
-    x[currentTab].style.display = "none";
-    currentTab = n;
-    showTab(currentTab);
-}
-
-function fixStepIndicator(n) {
-    let i, x = document.getElementsByClassName("step");
-    for (i = 0; i <
-        x.length; i++) {
-        x[i].className = x[i].className.replace(" active", "");
-    }
-    x[n].className += " active";
-}
-</script>
+          <div style="margin: 5%">
+            <h4>Пароль</h4>
+            <input class="uk-input" type="text" placeholder="************" readonly>
+            <input class="uk-input uk-margin-small-top" type="text" placeholder="************" readonly>
+          </div>
+          </div>
+          <button class="uk-button uk-button-default" style="margin-left: 70%; margin-top: 18%">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
