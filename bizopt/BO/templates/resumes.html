@@ -28,7 +28,7 @@
 </style>
 
 <body style="width: 100%; height: 100%;">
-    <div style="width: 80%; margin: 10% auto;">
+    <div style="width: 80%; margin: 0 auto;">
         <div style="margin-bottom: 3%">
             <h1>Бренды</h1>
             <h3>Здесь ты можешь найти все бренды, которые продают у нас на площадке<br>В профиле бренда ты найдешь
@@ -36,19 +36,21 @@
         </div>
 
         {% for item in brands %}
-            <a href="/{{item.text}}">{{item.text}}</a>
+        <a href="/{{item.text}}">{{item.text}}</a>
         {% endfor %}
 
-            <a href="" class="uk-text-center">
+        <div class="uk-flex uk-flex-wrap uk-flex-wrap-around">
+            
+            <a href="" class="uk-text-center uk-width-1-3" style="margin: 2% auto">
                 <div class="uk-box-shadow-hover-xlarge uk-inline-clip uk-transition-toggle"
                     style="border: 6px solid black; border-radius: 50px" tabindex="0">
                     <img src="https://cdn1.flamp.ru/e56d2de8c4cd3239c75e9cc11540442f.jpg" alt="">
                     <div class="uk-transition-fade uk-position-cover uk-position-small uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
-                        style="background-color: rgba(255, 255, 255, 0.6);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
+                        style="background-color: rgba(10, 54, 68, 0.9);height: 100%; width: 100%; margin: 0 auto; padding: 10px;">
                         <article class="uk-article">
-
+    
                             <h2 class="uk-article-title">Heading</h2>
-
+    
                             <p style="color: black">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                                 eiusmod tempor incididunt ut labore et dolore
                                 magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -58,13 +60,15 @@
                                 nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
                                 officia deserunt mollit
                                 anim id est laborum.</p>
-
+    
                         </article>
                     </div>
                 </div>
             </a>
 
         </div>
+
+    </div>
 
     </div>
 

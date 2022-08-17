@@ -1,8 +1,6 @@
 # sourcery skip: avoid-builtin-shadow
 import uuid
-from django.db import models
-from django.forms import ModelForm
-from taggit.managers import TaggableManager
+
 from datetime import datetime
 
 # This is an auto-generated Django model module.
@@ -13,17 +11,17 @@ from datetime import datetime
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from django.forms import ModelForm
+from taggit.managers import TaggableManager
+from datetime import datetime
+
 
 
 class BoChatRoom(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'BO_chat_room'
-
-
+    
 class BoCommentsPartner(models.Model):
     id = models.BigAutoField(primary_key=True)
     id_creator = models.CharField(max_length=200)
@@ -31,9 +29,7 @@ class BoCommentsPartner(models.Model):
     review = models.CharField(max_length=200)
     rating = models.IntegerField()
 
-    class Meta:
-        managed = False
-        db_table = 'BO_comments_partner'
+    
 
 
 class BoCommentsProduct(models.Model):
@@ -44,10 +40,7 @@ class BoCommentsProduct(models.Model):
     rating = models.IntegerField()
     created_data = models.DateTimeField()
 
-    class Meta:
-        managed = False
-        db_table = 'BO_comments_product'
-
+    
 
 class BoCreator(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -65,19 +58,14 @@ class BoCreator(models.Model):
     tag = models.CharField(max_length=50)
     published = models.IntegerField()
 
-    class Meta:
-        managed = False
-        db_table = 'BO_creator'
+    
 
 
 class BoHashtags(models.Model):
     id = models.BigAutoField(primary_key=True)
     tag_name = models.CharField(max_length=50)
 
-    class Meta:
-        managed = False
-        db_table = 'BO_hashtags'
-
+    
 
 class BoMessage(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -86,9 +74,7 @@ class BoMessage(models.Model):
     user = models.TextField()
     room = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'BO_message'
+   
 
 
 class BoPartner(models.Model):
@@ -106,10 +92,7 @@ class BoPartner(models.Model):
     reg_form = models.CharField(max_length=200)
     payment_account = models.CharField(max_length=200)
 
-    class Meta:
-        managed = False
-        db_table = 'BO_partner'
-
+    
 
 class BoProductBuy(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -127,7 +110,7 @@ class BoProductBuy(models.Model):
     img = models.CharField(max_length=100)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'BO_product_buy'
 
 
@@ -155,9 +138,7 @@ class BoProductCreator(models.Model):
     availability = models.CharField(max_length=100)
     picture = models.CharField(max_length=100)
 
-    class Meta:
-        managed = False
-        db_table = 'BO_product_creator'
+    
 
 
 class BoTask(models.Model):
@@ -172,18 +153,13 @@ class BoTask(models.Model):
     price = models.IntegerField()
     time = models.DateField()
 
-    class Meta:
-        managed = False
-        db_table = 'BO_task'
-
+   
 
 class PartChatRoom(models.Model):
     id = models.BigAutoField(primary_key=True)
     name = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'Part_chat_room'
+    
 
 
 class PartCommentsPartner(models.Model):
@@ -193,10 +169,7 @@ class PartCommentsPartner(models.Model):
     review = models.CharField(max_length=200)
     rating = models.IntegerField()
 
-    class Meta:
-        managed = False
-        db_table = 'Part_comments_partner'
-
+    
 
 class PartCommentsProduct(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -206,9 +179,7 @@ class PartCommentsProduct(models.Model):
     rating = models.IntegerField()
     created_data = models.DateTimeField()
 
-    class Meta:
-        managed = False
-        db_table = 'Part_comments_product'
+    
 
 
 class PartCreator(models.Model):
@@ -227,18 +198,14 @@ class PartCreator(models.Model):
     tag = models.CharField(max_length=50)
     published = models.IntegerField()
 
-    class Meta:
-        managed = False
-        db_table = 'Part_creator'
+    
 
 
 class PartHashtags(models.Model):
     id = models.BigAutoField(primary_key=True)
     tag_name = models.CharField(max_length=50)
 
-    class Meta:
-        managed = False
-        db_table = 'Part_hashtags'
+   
 
 
 class PartMessage(models.Model):
@@ -248,10 +215,7 @@ class PartMessage(models.Model):
     user = models.TextField()
     room = models.TextField()
 
-    class Meta:
-        managed = False
-        db_table = 'Part_message'
-
+   
 
 class PartProductBuy(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -268,9 +232,7 @@ class PartProductBuy(models.Model):
     date_add = models.DateField()
     img = models.CharField(max_length=100)
 
-    class Meta:
-        managed = False
-        db_table = 'Part_product_buy'
+   
 
 
 class PartProductCreator(models.Model):
@@ -295,9 +257,8 @@ class PartProductCreator(models.Model):
     availability = models.CharField(max_length=100)
     picture = models.CharField(max_length=100)
 
-    class Meta:
-        managed = False
-        db_table = 'Part_product_creator'
+  
+
 
 
 class PartTask(models.Model):
@@ -312,10 +273,7 @@ class PartTask(models.Model):
     price = models.IntegerField()
     time = models.DateField()
 
-    class Meta:
-        managed = False
-        db_table = 'Part_task'
-
+    
 
 class AccountAccount(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -346,84 +304,7 @@ class AccountAccount(models.Model):
     fiz_adress = models.CharField(max_length=9999)
     street = models.CharField(max_length=9999)
 
-    class Meta:
-        managed = False
-        db_table = 'account_account'
 
-
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=150)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-
-
-class AuthGroupPermissions(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
-
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.PositiveSmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(AccountAccount, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
-
-
-class DjangoMigrations(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_session'
 
 
 class PartnersPartner(models.Model):
@@ -453,26 +334,8 @@ class PartnersPartner(models.Model):
     fiz_adress = models.CharField(max_length=200)
     street = models.CharField(max_length=200)
 
-    class Meta:
-        managed = False
-        db_table = 'partners_partner'
 
 
-class TaggitTag(models.Model):
-    name = models.CharField(unique=True, max_length=100)
-    slug = models.CharField(unique=True, max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'taggit_tag'
 
 
-class TaggitTaggeditem(models.Model):
-    object_id = models.IntegerField()
-    content_type = models.ForeignKey(DjangoContentType, models.DO_NOTHING)
-    tag = models.ForeignKey(TaggitTag, models.DO_NOTHING)
 
-    class Meta:
-        managed = False
-        db_table = 'taggit_taggeditem'
-        unique_together = (('content_type', 'object_id', 'tag'),)
