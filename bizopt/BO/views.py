@@ -11,6 +11,8 @@ from django.utils import formats
 from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
 
+from .models import BoProductCreator
+
 from .utils import *
 from .forms import *
 from django.views.generic import CreateView
@@ -28,7 +30,7 @@ from account.models import Account
 import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
-from .models import Chat_room, Message
+from .models import BoChatRoom, BoMessage
 from datetime import datetime
 
 
@@ -96,7 +98,7 @@ def yourTasks_page(request):
 
 def goodsSearch_page(request, product_name):
     context = gen_menu(request)
-    products = Product_creator.objects.filter(
+    products = PartProductCreator.objects.filter(
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
         | Q(set__icontains=product_name)
     )
@@ -113,32 +115,32 @@ def goodsSearch_page(request, product_name):
 def goods_page(request):
     context = gen_menu(request)
     creators = Creator.objects.all()
-    products = Product_creator.objects.all()
+    products = PartProductCreator.objects.all()
     if request.method == "POST":
         rating = request.POST.get('rating', '')
         print(rating)
 
         if rating == '1':
-            products = Product_creator.objects.filter(
+            products = PartProductCreator.objects.filter(
                 Q(rating_status__icontains=4) | Q(
                     rating_status__icontains=3)
                 | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
             )
             # print("kyy")
         elif rating == '2':
-            products = Product_creator.objects.filter(
+            products = PartProductCreator.objects.filter(
                 Q(rating_status__icontains=5)
                 | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
             )
             # print("kyyy")
         elif rating == '3':
-            products = Product_creator.objects.filter(
+            products = PartProductCreator.objects.filter(
                 Q(rating_status=5) | Q(rating_status__icontains=4)
             )
             # print("kyyyy")
             print(products)
         elif rating == '4':
-            products = Product_creator.objects.filter(
+            products = PartProductCreator.objects.filter(
                 Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
                     rating_status__icontains=3)
                 | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
@@ -159,7 +161,7 @@ def goods_page(request):
 
 def goodsSearch_page_category(request, category):
     context = gen_menu(request)
-    products = Product_creator.objects.filter(
+    products = PartProductCreator.objects.filter(
         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
         | Q(set__icontains=category) | Q(category__icontains=category)
     )
@@ -176,7 +178,7 @@ def goodsSearch_page_category(request, category):
 
 def goodsSearch_page_subcategory(request, category, subcategory):
     context = gen_menu(request)
-    products = Product_creator.objects.filter(
+    products = PartProductCreator.objects.filter(
         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
         | Q(set__icontains=category) | Q(category__icontains=category)
     )
@@ -572,7 +574,7 @@ def employers_page(request):
 
 def index_page(request):
     context = gen_menu(request)
-    products = Product_creator.objects.all()
+    products = PartProductCreator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,

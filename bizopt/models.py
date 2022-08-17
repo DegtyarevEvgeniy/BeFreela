@@ -1,10 +1,3 @@
-# sourcery skip: avoid-builtin-shadow
-import uuid
-from django.db import models
-from django.forms import ModelForm
-from taggit.managers import TaggableManager
-from datetime import datetime
-
 # This is an auto-generated Django model module.
 # You'll have to do the following manually to clean this up:
 #   * Rearrange models' order
