@@ -98,7 +98,7 @@ def yourTasks_page(request):
 
 def goodsSearch_page(request, product_name):
     context = gen_menu(request)
-    products = PartProductCreator.objects.filter(
+    products = BoProductCreator.objects.filter(
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
         | Q(set__icontains=product_name)
     )
@@ -114,33 +114,33 @@ def goodsSearch_page(request, product_name):
 
 def goods_page(request):
     context = gen_menu(request)
-    creators = PartCreator.objects.all()
-    products = PartProductCreator.objects.all()
+    creators = BoCreator.objects.all()
+    products = BoProductCreator.objects.all()
     if request.method == "POST":
         rating = request.POST.get('rating', '')
         print(rating)
 
         if rating == '1':
-            products = PartProductCreator.objects.filter(
+            products = BoProductCreator.objects.filter(
                 Q(rating_status__icontains=4) | Q(
                     rating_status__icontains=3)
                 | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
             )
             # print("kyy")
         elif rating == '2':
-            products = PartProductCreator.objects.filter(
+            products = BoProductCreator.objects.filter(
                 Q(rating_status__icontains=5)
                 | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
             )
             # print("kyyy")
         elif rating == '3':
-            products = PartProductCreator.objects.filter(
+            products = BoProductCreator.objects.filter(
                 Q(rating_status=5) | Q(rating_status__icontains=4)
             )
             # print("kyyyy")
             print(products)
         elif rating == '4':
-            products = PartProductCreator.objects.filter(
+            products = BoProductCreator.objects.filter(
                 Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
                     rating_status__icontains=3)
                 | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
@@ -161,7 +161,7 @@ def goods_page(request):
 
 def goodsSearch_page_category(request, category):
     context = gen_menu(request)
-    products = PartProductCreator.objects.filter(
+    products = BoProductCreator.objects.filter(
         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
         | Q(set__icontains=category) | Q(category__icontains=category)
     )
@@ -178,7 +178,7 @@ def goodsSearch_page_category(request, category):
 
 def goodsSearch_page_subcategory(request, category, subcategory):
     context = gen_menu(request)
-    products = PartProductCreator.objects.filter(
+    products = BoProductCreator.objects.filter(
         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
         | Q(set__icontains=category) | Q(category__icontains=category)
     )
@@ -201,7 +201,7 @@ def resumes_page(request):
     if request.user.is_authenticated:
         user_id = Account.objects.get(email=request.user.email).id
     context = gen_menu(request)
-    creators = PartCreator.objects.all()
+    creators = BoCreator.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
     brands = BoPartner.objects.all().values('name_small')
@@ -260,7 +260,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         context['first_name'] = user.first_name
         context['email'] = user.email
         try:
-            creator = PartCreator.objects.get(email=request.user)
+            creator = BoCreator.objects.get(email=request.user)
             creator.description = request.POST['description']
             creator.telegram = request.POST['telegram']
             creator.vk = request.POST['vk']
@@ -269,7 +269,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             creator.username = request.user.username
             creator.save()
         except:
-            creator = PartCreator()
+            creator = BoCreator()
             if request.FILES:
                 file = request.FILES['profile_images']
                 fs = FileSystemStorage()
@@ -460,7 +460,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
     try:
-        creator = PartCreator.objects.get(email=request.user.email)
+        creator = BoCreator.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
@@ -519,10 +519,10 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         try:
-            creator = PartCreator.objects.get(email=request.user)
+            creator = BoCreator.objects.get(email=request.user)
             content['creator'] = creator
         except:
-            creator = PartCreator()
+            creator = BoCreator()
             content['creator'] = creator
 
     elif name == '1':
@@ -573,7 +573,7 @@ def employers_page(request):
 
 def index_page(request):
     context = gen_menu(request)
-    products = PartProductCreator.objects.all()
+    products = BoProductCreator.objects.all()
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
@@ -598,7 +598,7 @@ def index_page(request):
 
 def cardResume_page(request):
     context = gen_menu(request)
-    profile = PartCreator.objects.get(email=request.user)
+    profile = BoCreator.objects.get(email=request.user)
     context['profile'] = profile
     products = BoProductCreator.objects.all()
     context['products'] = [{'id': product.id,
@@ -617,7 +617,7 @@ def sertCardResume_page(request, username):
     useremail = request.user
     user = Account.objects.get(email=useremail)
 
-    profile = PartCreator.objects.get(username=username)
+    profile = BoCreator.objects.get(username=username)
     context['profile'] = profile
     products = BoProductCreator.objects.all()
     context['products'] = [{'id': product.id,
@@ -673,7 +673,7 @@ def cardProduct_page(request, product_id):
             product_buy.save()
         # else:
         # product = BoProductCreator.objects.get(id=product_id)
-        # creator = PartCreator.objects.get(email=product.id_creator)
+        # creator = BoCreator.objects.get(email=product.id_creator)
         if request.method == "POST" and "comment_product" in request.POST:
             # product = BoProductCreator.objects.get(id=product_id)
             comment = BoCommentsProduct()
@@ -929,18 +929,18 @@ def chat_page(request, room_id):
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
     print(user.id)
     print(companion_id)
-    companion = PartCreator.objects.get(id=companion_id)
+    companion = BoCreator.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
-    if not PartChatRoom.objects.filter(name=room_id).exists():
-        new_room = PartChatRoom.objects.create(name=room_id)
+    if not BoChatRoom.objects.filter(name=room_id).exists():
+        new_room = BoChatRoom.objects.create(name=room_id)
         new_room.save()
     return render(request, 'messanger.html', content)
 
 
 def getMsg(request, room_id):
-    room_detales = PartChatRoom.objects.get(name=room_id)
-    messages = PartMessage.objects.filter(room=room_detales.name)
+    room_detales = BoChatRoom.objects.get(name=room_id)
+    messages = BoMessage.objects.filter(room=room_detales.name)
     return JsonResponse({"messages": list(messages.values())})
 
 
@@ -949,9 +949,9 @@ def send(request):
     username = request.POST['username']
     room_id = request.POST['room_id']
 
-    new_message = PartMessage.objects.create(value=message, user=username, room=room_id)
+    new_message = BoMessage.objects.create(value=message, user=username, room=room_id)
     new_message.save()
-    return HttpResponse('PartMessage sent successfully.')
+    return HttpResponse('BoMessage sent successfully.')
 
 
 def orders_page(request):
