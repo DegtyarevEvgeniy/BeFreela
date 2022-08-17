@@ -1009,6 +1009,8 @@ def getMsg(request, room_id):
     return JsonResponse({"messages": list(messages.values())})
 
 
+
+
 def send(request):
     message = request.POST['message']
     username = request.POST['username']
