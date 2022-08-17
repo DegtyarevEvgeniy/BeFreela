@@ -227,7 +227,6 @@ def resumes_page(request):
                            for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
 
-
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
 

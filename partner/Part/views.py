@@ -213,7 +213,7 @@ def index_page(request):  # sourcery skip: low-code-quality
                     product.save()
                 else:
                     break
-            return redirect('/becomeCreator/')
+            return redirect('/')
 
         if request.method == 'GET' and "product_cards" in request.GET:
             print("CARDS")
@@ -221,13 +221,13 @@ def index_page(request):  # sourcery skip: low-code-quality
         if request.method == 'GET' and "delete" in request.GET:
             product = Product_creator.objects.get(product_id=request.GET['delete'])
             product.delete()
-            return redirect('/becomeCreator/')
+            return redirect('/')
 
         if request.method == 'POST' and "status" in request.POST:
             product = Product_buy.objects.get(id=request.POST['status'])
             product.status = 'Заказ в работе'
             product.save()
-            return redirect('/becomeCreator/')
+            return redirect('/')
         if request.method == 'GET' and "in_work" in request.POST:
             product = Product_buy.objects.get(id=request.POST['in_work'])
             product.status = 'Заказ в работе'
