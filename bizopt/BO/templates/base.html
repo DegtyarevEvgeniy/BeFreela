@@ -17,7 +17,6 @@
     
     
     {% block content %} {% endblock %}
-    </style> 
     
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -26,14 +25,45 @@ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+
 <script src="https://kit.fontawesome.com/6fc980010f.js" crossorigin="anonymous"></script>    
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit-icons.min.js"></script>
+<script>
+    // function red(el) {
+    //     document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
+    // }
 
-<!-- <script>
-    const homeWord = document.getElementsByClassName("homeWord");
+    document.getElementById('search_pole').addEventListener('keyup', function (event) {
+        document.getElementById('searchBtn').href = "/creators/goods/search/" + document.getElementById(
+            'search_pole').value;
+        if (event.keyCode == 13) {
+            document.getElementById('searchBtn').click();
+        }
+    });
 
-    homeWord.addEventListener("mouseenter", (event) => {
-        console.log(123);
-        UIkit.offcanvas('#main-menu').toggle();
-    }, false);
-</script> -->
+    const cards = document.querySelectorAll('.card-link');
+
+    cards.forEach(card => {
+        card.addEventListener('click', function handleClick(event) {
+            console.log(event.target.parentNode.className)
+
+        });
+    });
+
+    document.getElementById('search_pole1').addEventListener('keyup', function (event) {
+        document.getElementById('searchBtn1').href = "/creators/goods/search/" + document.getElementById(
+            'search_pole1').value;
+        if (event.keyCode == 13) {
+            document.getElementById('searchBtn1').click();
+        }
+    });
+
+    const cards1 = document.querySelectorAll('.card-link');
+
+    cards1.forEach(card => {
+        card.addEventListener('click', function handleClick(event) {
+            console.log(event.target.parentNode.className)
+
+        });
+    });
+</script>
+
 
 </html>

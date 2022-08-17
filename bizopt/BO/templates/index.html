@@ -210,28 +210,4 @@
         </div>
     </div>
 
-
-<script>
-    // function red(el) {
-    //     document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
-    // }
-
-    document.getElementById('search_pole').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn').href = "/creators/goods/search/" + document.getElementById(
-            'search_pole').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn').click();
-        }
-    });
-
-    const cards = document.querySelectorAll('.card-link');
-
-    cards.forEach(card => {
-        card.addEventListener('click', function handleClick(event) {
-            console.log(event.target.parentNode.className)
-
-        });
-    });
-</script>
-
 {% endblock %}

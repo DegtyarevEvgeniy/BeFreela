@@ -7,9 +7,9 @@
         </a>
     </div>
     <div class="uk-navbar-right uk-width-3-5">
-        <div class="uk-search uk-search-default uk-width-1">
-            <a type="submit" href="" id="searchBtn" uk-search-icon></a>
-            <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
+        <div class="uk-search uk-search-default uk-width-2-3">
+            <a type="submit" href="" id="searchBtn1" uk-search-icon></a>
+            <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole1">
         </div>
     </div>
 </nav>
@@ -34,15 +34,16 @@
                     <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
                 </div>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
-                    <a style="margin: 0 5%" uk-tooltip="Партнерка" href="http://seller.befreela.ru/"
+                    {% if user.is_partner %}
+                    <a style="margin: 0 5%" uk-tooltip="Партнерка" href="/becomeCreator/"
                         uk-icon="icon: bag"></a>
+                    {% endif %}
                     <a style="margin: 0 5%" uk-tooltip="Корзина" href="/orders/" uk-icon="icon: cart"></a>
                 </div>
                 <br>
                 <div class="uk-flex uk-flex-between uk-flex-top">
-                        <a style="color: gray" href="/becomeCreator/">Создать товар</a>
-                        <a style="color: gray" href="/edit/">Настройки профиля</a>
-                        <a style="color: gray" href="/logout/">Выйти</a>
+                    <a style="color: gray" href="/edit/">Настройки профиля</a>
+                    <a style="color: gray" href="/logout/">Выйти</a>
                 </div>
             </li>
 
@@ -65,23 +66,33 @@
 
             <li class="uk-parent">
                 <ul class="uk-nav uk-nav-default">
-                    <li class=""><a href="#designer-clothes-menuS" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерская одежда</a></li>
-                    <li class=""><a href="#designer-shoes-menuS" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерскаяобувь</a></li>
-                    <li class=""><a href="#bags-menuS" class="uk-button uk-button-text" uk-toggle>Сумки</a></li>
-                    <li class=""><a href="#interior-menuS" class="uk-button uk-button-text" uk-toggle>Интерьер</a></li>
-                    <li class=""><a href="#decorations-menuS" class="uk-button uk-button-text" uk-toggle>Украшщения</a>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Дизайнерская одежда" class="uk-button uk-button-text">Дизайнерская одежда</a>
                     </li>
-                    <li class=""><a href="#sculptures-menuS" class="uk-button uk-button-text" uk-toggle>Скульптуры</a>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Дизайнерская обувь" class="uk-button uk-button-text">Дизайнерская обувь</a>
                     </li>
-                    <li class=""><a href="#pillows-menuS" class="uk-button uk-button-text" uk-toggle>Подушки</a></li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Сумки" class="uk-button uk-button-text">Сумки</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Интерьер" class="uk-button uk-button-text">Интерьер</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Украшения" class="uk-button uk-button-text">Украшения</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Скульптуры" class="uk-button uk-button-text">Скульптуры</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Подушки" class="uk-button uk-button-text">Подушки</a>
+                    </li>
                 </ul>
             </li>
         </ul>
         <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
             <p style="margin: 0px"> Регион <b>Москва</b></p>
-            <a href="becomeCreator/" class="uk-button uk-button-text"
+            <a href="partners/" class="uk-button uk-button-text"
                 style="text-transform: none; font-size: medium;">Стать
                 партнером</a>
         </ul>
@@ -144,17 +155,27 @@
             <li class="uk-nav-divider uk-margin-medium-top"></li>
             <li class="uk-parent">
                 <ul class="uk-nav uk-nav-default">
-                    <li class=""><a href="#designer-clothes-menuS" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерская одежда</a></li>
-                    <li class=""><a href="#designer-shoes-menuS" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерскаяобувь</a></li>
-                    <li class=""><a href="#bags-menuS" class="uk-button uk-button-text" uk-toggle>Сумки</a></li>
-                    <li class=""><a href="#interior-menuS" class="uk-button uk-button-text" uk-toggle>Интерьер</a></li>
-                    <li class=""><a href="#decorations-menuS" class="uk-button uk-button-text" uk-toggle>Украшщения</a>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Дизайнерская одежда" class="uk-button uk-button-text">Дизайнерская одежда</a>
                     </li>
-                    <li class=""><a href="#sculptures-menuS" class="uk-button uk-button-text" uk-toggle>Скульптуры</a>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Дизайнерская обувь" class="uk-button uk-button-text">Дизайнерская обувь</a>
                     </li>
-                    <li class=""><a href="#pillows-menuS" class="uk-button uk-button-text" uk-toggle>Подушки</a></li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Сумки" class="uk-button uk-button-text">Сумки</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Интерьер" class="uk-button uk-button-text">Интерьер</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Украшения" class="uk-button uk-button-text">Украшения</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Скульптуры" class="uk-button uk-button-text">Скульптуры</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/search/Подушки" class="uk-button uk-button-text">Подушки</a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -167,111 +188,3 @@
 </div>
 <!-- end of navbar submenu -->
 {% endif %}
-
-
-
-<!-- start of main-menuS -->
-<div id="main-menu" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-
-    </div>
-</div>
-<!-- end of main-menuS -->
-
-<!-- start of designer-clothes-menuS -->
-<div id="designer-clothes-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Дизайнерская одежда"
-                    class="uk-button uk-button-text">Дизайнерская одежда</a></li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of designer-clothes-menuS -->
-
-<!-- start of designer-shoes-menuS -->
-<div id="designer-shoes-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Дизайнерская обувь"
-                    class="uk-button uk-button-text">Дизайнерская обувь</a></li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of designer-shoes-menuS -->
-
-<!-- start of bags-menuS -->
-<div id="bags-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Сумки" class="uk-button uk-button-text">Сумки</a>
-            </li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of #bags-menuS -->
-
-<!-- start of interior-menuS -->
-<div id="interior-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Интерьер"
-                    class="uk-button uk-button-text">Интерьер</a></li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of #interior-menuS -->
-
-<!-- start of decorations-menuS -->
-<div id="decorations-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Украшения"
-                    class="uk-button uk-button-text">Украшения</a></li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of #decorations-menuS -->
-
-<!-- start of sculptures-menuS -->
-<div id="sculptures-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Скульптуры"
-                    class="uk-button uk-button-text">Скульптуры</a></li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of #sculptures-menuS -->
-
-<!-- start of pillows-menuS -->
-<div id="pillows-menuS" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuS" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="/creators/goods/category/Подушки"
-                    class="uk-button uk-button-text">Подушки</a></li>
-
-        </ul>
-    </div>
-</div>
-<!-- end of #pillows-menuS -->

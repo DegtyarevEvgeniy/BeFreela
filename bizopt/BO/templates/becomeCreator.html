@@ -161,17 +161,17 @@
 
     <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
         <div class="uk-offcanvas-bar">
-            <div class="uk-flex-column">
+            <div class="uk-flex-column ">
                 <div style="margin: auto; width: 50%" class="uk-margin-medium-bottom">
-                    <img src="https://kirox.ru/images/avatar-default.png" style="border-radius: 5 em;">
+                    <img src="../../media/{{user.userImage}}" style="border-radius: 5 em;">
                 </div>
                 <div style="text-align: center">
-                    <p>Игорь Кузнецов</p>
-                    <p class="uk-text-muted uk-text-small">something@mail.ru</p>
+                    <p>{{user.first_name}} {{user.last_name}}</p>
+                    <p class="uk-text-muted uk-text-small">{{user.email}}</p>
                 </div>
 
             </div>
-
+            <br>
             <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
 
                 <li class="uk-active Btn">
@@ -205,7 +205,7 @@
     </div>
 
 
-    <div id="MainWindowContainer" w3-inslude-html="template.html">
+    <div id="MainWindowContainer">
     </div>
 
 
