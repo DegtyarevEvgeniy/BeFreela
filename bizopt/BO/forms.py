@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.forms import ModelChoiceField
 
 from django.forms import ModelForm, TextInput, Textarea, Select, CharField
+
+from .models import BoProductCreator
 from .models import *
 from taggit.models import Tag
 
@@ -318,7 +320,7 @@ class SignUpForm(UserCreationForm):
 
 class ProductCreateForm(ModelForm):
     class Meta:
-        model = Product_creator
+        model = PartProductCreator
         fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={
