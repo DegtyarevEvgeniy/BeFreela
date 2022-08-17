@@ -363,7 +363,7 @@ class SignUpForm(UserCreationForm):
 
 class ProductCreateForm(ModelForm):
     class Meta:
-        model = Product_creator
+        model = BoProductCreator
         fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={
