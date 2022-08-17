@@ -65,6 +65,8 @@ urlpatterns = [
     path('yourTasks/editTask/<task_id>/', views.editTask_page),
     path('yourTasks/infoTask/', views.infoTask_page),
     path('orders/', views.orders_page),
+
+    
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
 handler400 = views.pageNotAccess

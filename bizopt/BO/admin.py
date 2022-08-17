@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import BoChatRoom, BoMessage
+from .models import Chat_room, Message
 
 # Register your models here.
 
-admin.site.register(BoChatRoom)
-admin.site.register(BoMessage)
+admin.site.register(Chat_room)
+admin.site.register(Message)

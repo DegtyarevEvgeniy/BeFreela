@@ -6,7 +6,6 @@ from django.forms import ModelChoiceField
 
 from django.forms import ModelForm, TextInput, Textarea, Select, CharField
 
-from .models import BoProductCreator
 from .models import *
 from taggit.models import Tag
 
@@ -320,7 +319,7 @@ class SignUpForm(UserCreationForm):
 
 class ProductCreateForm(ModelForm):
     class Meta:
-        model = PartProductCreator
+        model = Product_creator
         fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={
