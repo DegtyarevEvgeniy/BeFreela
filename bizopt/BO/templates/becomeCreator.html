@@ -155,60 +155,44 @@
 </head>
 
 <body class='snippet-body'>
+<div style="position: fixed; top: 3%; left: 3%; z-index: 1000;">
+    <a class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay" uk-icon="menu"></a>
+</div>
 
 
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar" style="background-color: #C4C4C4">
-        <div class="sidebar-header">
-            <h3 style="color: black">BeFreela Partners</h3>
+<div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar">
+        <div class="uk-flex-column">
+            <div style="margin: auto; width: 50%" class="uk-margin-medium-bottom">
+                <img src="https://kirox.ru/images/avatar-default.png" style="border-radius: 5 em;">
+            </div>
+            <div style="text-align: center">
+                <p>Игорь Кузнецов</p>
+                <p class="uk-text-muted uk-text-small" >something@mail.ru</p>
+            </div>
+
         </div>
 
-        <ul class="list-unstyled components uk-margin-left">
+        <div class="uk-flex-column">
+            <div class="uk-flex-column uk-margin-medium-top" style="text-align:center">
+                <button class="uk-button uk-button-default uk-margin-bottom" style="background:  #0A3644; width:70%; border: solid #0A3644 2px ">Профиль</button>
+                <button class="uk-button uk-button-default uk-margin-bottom" style="background:  #0A3644; width:70%; border: solid #0A3644 2px ">Информация</button>
+            </div>
 
+            <div class="uk-flex-column uk-margin-medium-top" style="text-align:center">
+                <button class="uk-button uk-button-default uk-margin-bottom" style="background:  #B54F00; border: solid #B54F00 2px ; width:70%">Магазин</button>
+                <button class="uk-button uk-button-default uk-margin-bottom" style="background:  #B54F00; border: solid #B54F00 2px; width:70%">Кабинет</button>
+                <button class="uk-button uk-button-default uk-margin-bottom" style="background:  #B54F00; border: solid #B54F00 2px; width:70%">Товары</button>
+            </div>
 
-
-            <li class="Btn uk-text-left">
-                <p class="uk-text-lead">Профиль</p>
-                <button class="uk-button uk-button-text" style="margin: 0 auto; font-size: 20px; text-transform: lowercase;">Настройки</button>
-            </li>
-
-            <li class="Btn uk-text-left uk-margin-medium-top">
-                <p class="uk-text-lead">Маркетплейс</p>
-                <button class="uk-button uk-button-text" style="margin: 0 auto; font-size: 20px; text-transform: lowercase;">Кабинет</button>
-            </li>
-
-            <li class="Btn uk-text-left">
-                <button class="uk-button uk-button-text" style="margin: 0 auto; font-size: 20px; text-transform: lowercase;">Товар</button>
-            </li>
-            <li class="Btn uk-text-left">
-                <button class="uk-button uk-button-text" style="margin: 0 auto; font-size: 20px; text-transform: lowercase;">Резюме</button>
-            </li>
-
-            <!-- <li class="Btn uk-margin-medium-top">
-                <h4>Платформа</h4>
-                <a href="#">Кабинет</a>
-            </li>
-            <li class="Btn">
-                <a href="#">Профиль</a>
-            </li> -->
-
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-
-            <li>
-                <a href="/" class="article">Выйти</a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- Page Content  -->
-    <div id="content">
-        <div id="MainWindowContainer" class="container rounded bg-white" w3-inslude-html="template.html">
+            <div class="uk-flex-column uk-margin-medium-top" style="text-align:center">
+                <button class="uk-button uk-button-default" style="width:70%">Выйти</button>
+            </div>
         </div>
+
     </div>
 </div>
+
 
 </body>
 
