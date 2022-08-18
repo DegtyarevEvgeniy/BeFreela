@@ -18,7 +18,7 @@ class Shop(models.Model):
 class Product_buy(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
     id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
-    # price = models.CharField(max_length=200, default='-')
+    price = models.CharField(max_length=200, default='-')
     product_name = models.CharField(max_length=500, default='-')
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=200, default='-')
