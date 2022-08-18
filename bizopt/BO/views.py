@@ -1,3 +1,4 @@
+import email
 import os
 
 from django.core.mail import send_mail
@@ -1060,14 +1061,18 @@ def orders_page(request):
 
 def partners_page(request):
 
+    user = Account.objects.get(email=request.user)
+    print(user)
+
     shops = Shop.objects.all()
 
     flag = False
 
     if request.method == "POST":
 
+        
+
         for shop in shops:
-            print(shop.email, request.user.email)
             if shop.email == request.user.email:
                 flag = True
 
@@ -1077,7 +1082,7 @@ def partners_page(request):
                 shop.phone = request.POST['phonenumber']
                 shop.email = request.user.email
                 shop.save()
-
+                Account.objects.filter(email=request.user).update(is_partner=True)
 
         except:
             print("in request.")

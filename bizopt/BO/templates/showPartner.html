@@ -104,7 +104,7 @@
                             </select>
                         </div>
                         <div class="uk-flex uk-flex-center uk-align-center" style="margin-top: 20px">
-                            <button type="submit" class="uk-button uk-button-primary uk-width-4-5 uk-border-rounded" id="registerBtn"
+                            <button type="submit" onclick="JSalert()" class="uk-button uk-button-primary uk-width-4-5 uk-border-rounded" id="registerBtn"
                             disabled>Отправить заявку</button>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                                            name="code" type="text" placeholder="000000" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" >
                                     {% csrf_token %}
                                     <p class="">
-                                        <button type='button' id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
+                                        <button type='button'  id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
                                     </p>
                                 </form>
                             </div>
