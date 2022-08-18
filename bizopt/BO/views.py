@@ -1060,14 +1060,23 @@ def orders_page(request):
 
 def partners_page(request):
 
-    user = Account.objects.get(email=request.user.email)
-    shop = Shop()
+    shops = Shop.objects.all()
+
+    flag = False
+
     if request.method == "POST":
-        print (request.POST)
+
+        for shop in shops:
+            print(shop.email, request.user.email)
+            if shop.email == request.user.email:
+                flag = True
+
         try:
-            shop.phone = request.POST['phonenumber']
-            shop.email = user.email
-            shop.save()
+            if flag == False:
+                shop = Shop()
+                shop.phone = request.POST['phonenumber']
+                shop.email = request.user.email
+                shop.save()
 
 
         except:

@@ -5,14 +5,14 @@ from taggit.managers import TaggableManager
 from datetime import datetime
 
 class Shop(models.Model):
-    name = models.CharField(max_length=50, default='', unique=True)
+    name = models.CharField(max_length=50, default='')
     logoImage = models.ImageField(upload_to='images/creator', default='images/default.png')
     bgImage = models.ImageField(upload_to='images/creator', default='images/default.png')
     description = models.CharField(max_length=500, default='-')
     category = models.CharField(max_length=500, default='-')
     status = models.CharField(max_length=500, default='')
-    email = models.CharField(max_length=20, default='example@example.com', unique=True)
-    phone = models.CharField(max_length=20, default='+15-15-15-15', unique=True)
+    email = models.CharField(max_length=60, default='example@example.com')
+    phone = models.CharField(max_length=20, default='+15-15-15-15')
 
 
 class Product_buy(models.Model):
