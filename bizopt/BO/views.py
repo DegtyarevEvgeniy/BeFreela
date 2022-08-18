@@ -270,15 +270,32 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
 
         shop = Shop.objects.get(email=request.user.email)
-        print("------------")
-        print(request.POST)
 
-        print("------------")
 
         shop.name = request.POST['name']
         shop.description = request.POST['description']
         shop.status = request.POST['status']
         shop.category = request.POST['chosenCategoties']
+
+
+        # if request.FILES:
+        print(request.FILES)
+        if request.FILES:
+            file1 = request.FILES['logoImage']
+            file2 = request.FILES['bgImage']
+            fs = FileSystemStorage()
+            filename1 = f"profile_{str(shop.email)}.png"
+            filename2 = f"profile_{str(shop.email)}.png"
+
+            path_to_local_image1 = os.path.join("images/creator/logoImage", filename1)
+            fs.save(path_to_local_image1, file1)
+
+            path_to_local_image2 = os.path.join("images/creator/bgImage", filename2)
+            fs.save(path_to_local_image2, file2)
+
+            shop.userImage = path_to_local_image1
+            shop.userImage = path_to_local_image2
+
 
         shop.save()
 
@@ -788,6 +805,7 @@ def edit_profile(request):
         email = request.user
         person = Account.objects.get(email=email)
         if request.method == "POST":
+            print(request.FILES)
             if request.FILES:
                 file = request.FILES['profile_photo']
                 fs = FileSystemStorage()

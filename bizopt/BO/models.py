@@ -6,8 +6,8 @@ from datetime import datetime
 
 class Shop(models.Model):
     name = models.CharField(max_length=50, default='')
-    logoImage = models.ImageField(upload_to='images/creator', default='images/default.png')
-    bgImage = models.ImageField(upload_to='images/creator', default='images/default.png')
+    logoImage = models.ImageField(upload_to='images/creator/logoImage', default='images/default.png')
+    bgImage = models.ImageField(upload_to='images/creator/bgImage', default='images/default.png')
     description = models.CharField(max_length=500, default='-')
     category = models.CharField(max_length=500, default='-')
     status = models.CharField(max_length=500, default='')
