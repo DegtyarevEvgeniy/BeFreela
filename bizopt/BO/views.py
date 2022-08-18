@@ -293,8 +293,8 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             path_to_local_image2 = os.path.join("images/creator/bgImage", filename2)
             fs.save(path_to_local_image2, file2)
 
-            shop.userImage = path_to_local_image1
-            shop.userImage = path_to_local_image2
+            shop.logoImage = path_to_local_image1
+            shop.bgImage = path_to_local_image2
 
 
         shop.save()
@@ -700,7 +700,7 @@ def cardProduct_page(request, product_id):
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
-            product_buy.price = product.price
+            # product_buy.price = product.price
             # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
