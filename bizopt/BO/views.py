@@ -1,5 +1,6 @@
 import email
 import os
+from unicodedata import category
 
 from django.core.mail import send_mail
 from django.db.models import Q
@@ -198,25 +199,18 @@ def resumes_page(request):
     creators = Shop.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
-    brands = Partner.objects.all().values('name_small')
+    brands = Shop.objects.all().values('name')
     print(brands)
     context['brands'] = [{'text': brand}
                          for brand in brands]
-    context['creators'] = [{'id': creator.id,
-                            'username': creator.username,
-                            'first_name': creator.first_name,
-                            'email': person,
-                            'cover': creator.cover,
+    context['creators'] = [{'name': creator.name,
+                            'logoImage': creator.logoImage,
+                            'bgImage': creator.bgImage,
                             'description': creator.description,
-                            'is_company': creator.is_company,
-                            'company_name': creator.company_name,
-                            'telegram': creator.telegram,
-                            'vk': creator.vk,
-                            'whatsapp': creator.whatsapp,
-                            'instagram': creator.instagram,
-                            'tag': creator.tag,
-                            'published': creator.published,
-
+                            'category': creator.category,
+                            'status': creator.status,
+                            'email': creator.email,
+                            'phone': creator.phone,
                             }
                            for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
@@ -270,6 +264,21 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         creator.korr_check = request.POST['korr_check']
 
         creator.save()
+
+    if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
+
+        shop = Shop.objects.get(email=request.user.email)
+        print("------------")
+        print(request.POST)
+
+        print("------------")
+
+        shop.name = request.POST['name']
+        shop.description = request.POST['description']
+        shop.status = request.POST['status']
+        shop.category = request.POST['chosenCategoties']
+
+        shop.save()
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
@@ -328,35 +337,35 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.delete()
         return redirect('/becomeCreator/')
 
-    if request.method == 'POST' and "status" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['status'])
-        product.status = 'Заказ в работе'
-        product.save()
-        return redirect('/becomeCreator/')
-    if request.method == 'GET' and "in_work" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['in_work'])
-        product.status = 'Заказ в работе'
-        product.save()
-    if request.method == 'POST' and "done" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['done'])
-        product.status = 'Заказ готов'
-        product.save()
-    if request.method == 'POST' and "payment" in request.POST:
-        product = Product_buy.objects.get(id=request.GET['payment'])
-        product.status = 'Заказ оплачен'
-        product.save()
-    if request.method == 'POST' and "decline" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['decline'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
-    if request.method == 'GET' and "decline_work" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['decline_work'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
-    if request.method == 'GET' and "4" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['4'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
+    # if request.method == 'POST' and "status" in request.POST:
+    #     product = Product_buy.objects.get(id=request.POST['status'])
+    #     product.status = 'Заказ в работе'
+    #     product.save()
+    #     return redirect('/becomeCreator/')
+    # if request.method == 'GET' and "in_work" in request.POST:
+    #     product = Product_buy.objects.get(id=request.POST['in_work'])
+    #     product.status = 'Заказ в работе'
+    #     product.save()
+    # if request.method == 'POST' and "done" in request.POST:
+    #     product = Product_buy.objects.get(id=request.POST['done'])
+    #     product.status = 'Заказ готов'
+    #     product.save()
+    # if request.method == 'POST' and "payment" in request.POST:
+    #     product = Product_buy.objects.get(id=request.GET['payment'])
+    #     product.status = 'Заказ оплачен'
+    #     product.save()
+    # if request.method == 'POST' and "decline" in request.POST:
+    #     product = Product_buy.objects.get(id=request.POST['decline'])
+    #     product.status = 'Заказчик отказался от заказа'
+    #     product.save()
+    # if request.method == 'GET' and "decline_work" in request.GET:
+    #     product = Product_buy.objects.get(id=request.GET['decline_work'])
+    #     product.status = 'Заказчик отказался от заказа'
+    #     product.save()
+    # if request.method == 'GET' and "4" in request.GET:
+    #     product = Product_buy.objects.get(id=request.GET['4'])
+    #     product.status = 'Заказчик отказался от заказа'
+    #     product.save()
 
     if request.method == "POST" and "partner" in request.POST:
         try:
@@ -399,42 +408,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     return render(request, 'becomeCreator.html', context)
 
 
-# def edit_profile_page(request):
-#     content = {
-#         'menu': gen_menu()
-#     }
-#     if request.method == 'POST':
-#         if request.FILES:
-#             # получаем загруженный файл
-#             file = request.FILES['myfile']
-#             fs = FileSystemStorage()
-#             # сохраняем на файловой системе
-#             filename = fs.save(os.path.join("images", file.name), file)
-#             # TODO: Будем сохранять картинку в базу,
-#             #       когда напишется логика сохранения всего контента формы в базу
-#             #       Текущие недостатки:
-#             #           1. /edit должен быть доступен только залогиненым пользователям,
-#             #               а значит на странице сразу будут заполнены все поля(имя, ...).
-#             #               Сейчас - нет. Поэтому в базу не update, а insert
-#             #           2. Нет web-формы на /edit, значит по нажатию на кнопку ничего не случится.
-#             #              Добавил кнопку, понимающую только картинку, текстовый контент не отправляется на backend
-#             #           3. Что делать, если картинка с именем уже существует.
-#             #               а) переименовать на рандом и сохранить.
-#             #               б) игнорировать
-#             item = Account(login='default',
-#                         password=123,becomeCreator_page
-#                         email='example@example.com',
-#                         name='Name',
-#                         surname='Surname',
-#                         phone=123456789,
-#                         city='Orlando',
-#                         userImage=filename
-#                         )
-#             item.save()
-#             content['imgPath'] = filename
-#             return render(request, 'edit.html', content)
-#     # content['imgPath'] = '/images/default.png'
-#     return render(request, 'edit.html', content)
+
 
 
 def becomeCreatorTemplate_page(request, name):
@@ -470,33 +444,19 @@ def becomeCreatorTemplate_page(request, name):
             creator = Account.objects.get(email=request.user)
             content['creator'] = creator
 
-            
-
-           
-
         except:
 
-
             creator.save()
-            # except:
-                # creator = BoCreator()
-                # if request.FILES:
-                #     file = request.FILES['profile_images']
-                #     fs = FileSystemStorage()
-                #     filename = f"creator_{str(user.email)}.png"
-                #     local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
-                #     creator.cover = local_path_to_file
-                # creator.first_name = user.first_name
 
-                # creator.description = request.POST['profile_description']
-                # creator.telegram = request.POST['telegram']
-                # creator.vk = request.POST['vk']
-                # creator.whatsapp = request.POST['whatsapp']
-                # creator.instagram = request.POST['instagram']
-                # creator.published = request.POST['published']
-                # creator.email = user.email
 
-                # creator.save()
+    elif name == '3':
+        shop = Shop.objects.get(email=request.user)
+        categorys = shop.category.split(' ')
+
+
+        content['shop'] = shop
+        content['categorys'] = categorys
+
 
     elif name == '4':
         try:
