@@ -471,7 +471,6 @@ def becomeCreatorTemplate_page(request, name):
     elif name == '3':
         shop = Shop.objects.get(email=request.user)
         categorys = shop.category
-        print(f"categoryes ==== {categorys}")
         content['shop'] = shop
         content['categorys_saver'] = categorys
         
@@ -701,6 +700,7 @@ def cardProduct_page(request, product_id):
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
+            product_buy.price = product.price
             # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
