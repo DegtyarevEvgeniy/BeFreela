@@ -5,19 +5,14 @@ from taggit.managers import TaggableManager
 from datetime import datetime
 
 class Shop(models.Model):
-    username = models.CharField(max_length=20, default='', unique=True)
-    first_name = models.CharField(max_length=30, default='')
-    email = models.CharField(max_length=20, default='example@example.com')
-    cover = models.ImageField(upload_to='images/creator', default='images/default.png')
+    name = models.CharField(max_length=50, default='', unique=True)
+    logoImage = models.ImageField(upload_to='images/creator', default='images/default.png')
+    bgImage = models.ImageField(upload_to='images/creator', default='images/default.png')
     description = models.CharField(max_length=500, default='-')
-    is_company = models.BooleanField(default=0)
-    company_name = models.CharField(max_length=50, default='-')
-    telegram = models.CharField(max_length=50, default='-')
-    vk = models.CharField(max_length=50, default='-')
-    whatsapp = models.CharField(max_length=50, default='-')
-    instagram = models.CharField(max_length=50, default='-')
-    tag = models.CharField(max_length=50, default='-')
-    published = models.BooleanField(default=1)
+    category = models.CharField(max_length=500, default='-')
+    status = models.CharField(max_length=500, default='')
+    email = models.CharField(max_length=20, default='example@example.com')
+    phone = models.IntegerField(default='1151151515')
 
 
 class Product_buy(models.Model):
@@ -56,8 +51,8 @@ class Product_creator(models.Model):
     product_name = models.CharField('Название', max_length=500, default='-')
     country = models.CharField('Страна', max_length=30, default='-')
     brand = models.CharField('Бренд', max_length=30, default='-')
-    rating_status = models.IntegerField(default=0)
-    term_status = models.IntegerField(default=0)
+    rate_sum = models.IntegerField(default=0)
+    vote_sum = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0)
     category = models.CharField('Категория', max_length=50, default='-')
     set = models.CharField(max_length=300, default='-')

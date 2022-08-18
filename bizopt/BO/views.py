@@ -1058,4 +1058,17 @@ def orders_page(request):
 
 
 def partners_page(request):
+
+    user = Account.objects.get(email=request.user.email)
+    shop = Shop()
+    if request.method == "POST":
+        try:
+            if shop.email != request.POST['email']:
+                shop.phone = request.POST['phonenumber']
+                shop.email = user.email
+                shop.save()
+            
+        except:
+            print("in request.")
+
     return render(request, 'showPartner.html')
