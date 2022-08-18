@@ -278,6 +278,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             fs = FileSystemStorage()
             local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
             product.picture = local_path_to_file
+
         # if "product_creator_tags" in request.POST:
         #   form = MyForm(request.POST)
         #   product.tags.add(form.cleaned_data['select'])
@@ -1062,12 +1063,13 @@ def partners_page(request):
     user = Account.objects.get(email=request.user.email)
     shop = Shop()
     if request.method == "POST":
+        print (request.POST)
         try:
-            if shop.email != request.POST['email']:
-                shop.phone = request.POST['phonenumber']
-                shop.email = user.email
-                shop.save()
-            
+            shop.phone = request.POST['phonenumber']
+            shop.email = user.email
+            shop.save()
+
+
         except:
             print("in request.")
 

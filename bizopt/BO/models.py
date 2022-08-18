@@ -11,8 +11,8 @@ class Shop(models.Model):
     description = models.CharField(max_length=500, default='-')
     category = models.CharField(max_length=500, default='-')
     status = models.CharField(max_length=500, default='')
-    email = models.CharField(max_length=20, default='example@example.com')
-    phone = models.IntegerField(default='1151151515')
+    email = models.CharField(max_length=20, default='example@example.com', unique=True)
+    phone = models.CharField(max_length=20, default='+15-15-15-15', unique=True)
 
 
 class Product_buy(models.Model):
