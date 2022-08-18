@@ -171,19 +171,24 @@
         if (n == 1) {
             if (pname < 3 || brand < 3 || comp == 0) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
+                document.getElementById("nextBtn").disabled = true;
+
                 return 0
 
             } else {
                 document.getElementById("nextBtn").style["background-color"] = 'blue'
+                document.getElementById("nextBtn").disabled = false;
                 return 1
             }
         }
         if (n == 2) {
             if (moneyInput <= 1 || moneyInput >= 999999999999999 || isNaN(moneyInput * moneyInput)) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
+                document.getElementById("nextBtn").disabled = true;
                 return 0
             } else {
                 document.getElementById("nextBtn").style["background-color"] = 'blue'
+                document.getElementById("nextBtn").disabled = false;
                 return 1
             }
 
@@ -191,8 +196,10 @@
         if (n == 3) {
             if (desc <= 0 || key == 0 || height1 <= 0 || length1 <= 0 || width1 <= 0 || height2 <= 0 || length2 <= 0 || width2 <= 0) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
+                document.getElementById("nextBtn").disabled = true;
                 return 0
             } else {
+                document.getElementById("nextBtn").disabled = false;
                 document.getElementById("nextBtn").style["background-color"] = 'blue'
                 document.getElementById('nextBtn').type = "submit"
                 localStorage.page = 3;
@@ -335,6 +342,8 @@
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
                 addComplectation()
                 document.getElementById("prevBtn").style.display = "inline";
+            } else if (n == x.length - 1){
+                document.getElementById("nextBtn").disabled = true;
             } else {
                 for (let i = 0; i < len; i++) {
                     document.getElementById('table').children[0].remove()

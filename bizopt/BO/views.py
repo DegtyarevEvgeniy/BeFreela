@@ -115,31 +115,31 @@ def goods_page(request):
         rating = request.POST.get('rating', '')
         print(rating)
 
-        if rating == '1':
-            products = Product_creator.objects.filter(
-                Q(rating_status__icontains=4) | Q(
-                    rating_status__icontains=3)
-                | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
-            )
-            # print("kyy")
-        elif rating == '2':
-            products = Product_creator.objects.filter(
-                Q(rating_status__icontains=5)
-                | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
-            )
-            # print("kyyy")
-        elif rating == '3':
-            products = Product_creator.objects.filter(
-                Q(rating_status=5) | Q(rating_status__icontains=4)
-            )
-            # print("kyyyy")
-            print(products)
-        elif rating == '4':
-            products = Product_creator.objects.filter(
-                Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
-                    rating_status__icontains=3)
-                | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
-            )
+        # if rating == '1':
+        #     products = Product_creator.objects.filter(
+        #         Q(rating_status__icontains=4) | Q(
+        #             rating_status__icontains=3)
+        #         | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
+        #     )
+        #     # print("kyy")
+        # elif rating == '2':
+        #     products = Product_creator.objects.filter(
+        #         Q(rating_status__icontains=5)
+        #         | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
+        #     )
+        #     # print("kyyy")
+        # elif rating == '3':
+        #     products = Product_creator.objects.filter(
+        #         Q(rating_status=5) | Q(rating_status__icontains=4)
+        #     )
+        #     # print("kyyyy")
+        #     print(products)
+        # elif rating == '4':
+        #     products = Product_creator.objects.filter(
+        #         Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
+        #             rating_status__icontains=3)
+        #         | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
+        #     )
             # print("kyyyyy")
     print(products)
     context['products'] = [{'id': product.id,
@@ -149,7 +149,9 @@ def goods_page(request):
                             'availability': product.availability,
                             'picture': product.picture,
                             'rating': product.rating,
-                            'rating_status': product.rating_status,
+                            'rate_sum': product.rate_sum,
+                            'vote_sum': product.vote_sum,
+                            'country': product.country,
                             }
                            for product in products]
     return render(request, 'goods.html', context)
@@ -451,11 +453,12 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '3':
         shop = Shop.objects.get(email=request.user)
-        categorys = shop.category.split(' ')
-
-
+        categorys = shop.category
+        print(f"categoryes ==== {categorys}")
         content['shop'] = shop
-        content['categorys'] = categorys
+        content['categorys_saver'] = categorys
+        
+        content['categorys'] = categorys.strip().split(' ') if categorys.strip().split(' ') != [""] else ""
 
 
     elif name == '4':
@@ -474,9 +477,8 @@ def becomeCreatorTemplate_page(request, name):
                                 'product_name': product.product_name,
                                 'country': product.country,
                                 'brand': product.brand,
-                                'rating_status': product.rating_status,
-                                'term_status': product.term_status,
-                                'rating': product.rating,
+                                'rate_sum': product.rate_sum,
+                                'vote_sum': product.vote_sum,
                                 'category': product.category,
                                 'set': product.set,
                                 'price': product.price,
@@ -622,17 +624,6 @@ def index_page(request):
 
     return render(request, 'index.html', context)
 
-
-# def cardProduct_page(request):
-#     context = gen_menu()
-#     products = Product.objects.all()
-#     context['products'] = [{'produc
-#                             'cost': product.cost
-#                             }
-#                            for product in products]
-#     return render(request, 'cardProduct.html', context)
-
-
 def cardResume_page(request):
     context = gen_menu(request)
     profile = Shop.objects.get(email=request.user)
@@ -689,7 +680,6 @@ def cardProduct_page(request, product_id):
 
     context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
-
     try:
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
@@ -720,6 +710,7 @@ def cardProduct_page(request, product_id):
             comment.rating = request.POST.get('rating', '0')
             comment.save()
         context['products'] = product
+        context['products'].set = list(filter(None,product.set.strip().split(",")))
 
         messages = Comments_product.objects.filter(id_product=product_id)
 
@@ -995,13 +986,24 @@ def send(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    productss = Product_buy.objects.filter(id_user_buy=request.user)
+    products = Product_buy.objects.filter(id_user_buy=request.user)
     content['products'] = [{
         'id': product.id,
-        'product_name': product.product_name,
+        'id_creator': product.id_creator,
         'id_user_buy': product.id_user_buy,
+        'product_name': product.product_name,
+        'task_id': product.task_id,
         'status': product.status,
-    } for product in productss]
+        'message': product.message,
+        'payed_partner': product.payed_partner,
+        'payed_user': product.payed_user,
+        'status_pay': product.status_pay,
+        'delivery_address': product.delivery_address,
+        'date_add': product.date_add,
+        'img': product.img,
+
+        
+    } for product in products]
     if request.method == "POST" and "comment_product" in request.POST:
         product_id = request.POST['comment_product']
         product = Product_creator.objects.get(id=product_id)

@@ -108,9 +108,9 @@
 
                     </div>
                 </div>
-                 <button style="color: black; background-color:darkgray"
+                <button style="color: black; background-color:darkgray"
                     class="uk-button uk-border-pill uk-width-1-1 uk-margin-small-bottom">Показать коннтакты
-                    продавца</button> 
+                    продавца</button>
 
             </div>
         </div>
@@ -132,15 +132,12 @@
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Тип</h4>
 
-                        {% comment %} <p>{{products.tags}}</p> {% endcomment %}
+                        <!-- <p>{{products.tags}}</p> -->
                         <p>Не указан</p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Бренд</h4>
-                        {% for brend in products.brend %}
-                        <p> {{brend}} </p>
-                        {% endfor %}
-                        <p>Сделайте пж все несделанные поля</p>
+                        <p> {{products.brand}} </p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Страна Производитель</h4>
@@ -151,10 +148,12 @@
                 <div class="d-flex uk-felx-around uk-text-left uk-flex-wrap-top">
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Комплект товара</h4>
-                        {% for complect in products.complect %}
-                        <p> {{complect}} </p>
-                        {% endfor %}
-                        <p>Сделайте пж все несделанные поля</p>
+                            {% for sets in products.set %}
+                            <div class="uk-width-1-3 uk-text-left" style="display: inline-block;">
+                                <p style="margin: 2px; padding: 0; border-bottom: 1px solid;" class="uk-text-truncate" uk-tooltip="{{sets}}">{{sets}}</p>
+                            </div>
+                            {% endfor %}
+
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Размер товара</h4>
@@ -215,7 +214,8 @@
                     uk-toggle="target: #modal-example">Написать отзыв</button>
                 {% else %}
                 <a style="color: black; background-color:darkgray"
-                    class="uk-button uk-border-pill uk-margin-small-bottom" type="button" href="/accounts/login/">Написать отзыв</a>
+                    class="uk-button uk-border-pill uk-margin-small-bottom" type="button"
+                    href="/accounts/login/">Написать отзыв</a>
                 {% endif %}
 
                 <div id="modal-example" uk-modal>
@@ -302,8 +302,8 @@
                                         <p>Оценка: {{message.rating}}</p>
                                     </div>
                                 </div>
-                                 <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a
-                                        class="uk-link-muted" href="#">Reply</a></div> 
+                                <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a
+                                        class="uk-link-muted" href="#">Reply</a></div>
 
                             </header>
                             <div class="uk-comment-body">
@@ -314,7 +314,7 @@
                     {% endfor %}
                 </ul>
             </div>
-             <div style="width: 40%;">
+            <div style="width: 40%;">
 
                 <div class="uk-flex uk-flex-center uk-text-center"
                     style="background-color: rgba(196, 196, 196, 0.5); border-radius: 20px; padding: 30px 0;">
@@ -357,7 +357,7 @@
 
                     </div>
                 </div>
-            </div> 
+            </div>
 
         </div>
     </container>

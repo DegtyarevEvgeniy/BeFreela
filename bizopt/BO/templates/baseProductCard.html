@@ -1,6 +1,5 @@
 {% for product in products %}
-{% comment %} {% if product.creator_id != user.id %} {% endcomment %}
-<div class="uk-card uk-card-default uk-grid-collapse rating_{{ product.rating_status }}" uk-grid>
+<div class="uk-card uk-card-default uk-grid-collapse rating_{{ product.rating_status }} uk-margin" uk-grid>
 
     <div class="uk-card-media-left uk-cover-container uk-width-2-3 uk-padding">
         <img src="../../media/{{product.picture}}" width="500" height="180">
@@ -14,12 +13,12 @@
             <p class="textSmallInfo uk-border-rounded">От 3х дней</p>
             <div class="uk-flex-column-reverse">
                 <p class="uk-margin-small-bottom">Регион:</p>
-                <p class="textSmallInfo uk-border-rounded">Москва</p>
+                <p class="textSmallInfo uk-border-rounded">{{product.country}}</p>
             </div>
             <br>
             <div class="price">
                 <label>Цена:</label>
-                <p class="uk-width-1-2 uk-text-center" style="text-align: center; margin: 0 auto; border-bottom: 1px solid gray;">{{ product.cost }} руб.</p>
+                <p class="uk-width-1-2 uk-text-center" style="text-align: center; margin: 0 auto; border-bottom: 1px solid gray; font-size: 1.5em;">{{ product.cost }} руб.</p>
             </div>
 
             <br>
@@ -34,7 +33,6 @@
         </div>
     </div>
 </div>
-{% comment %} {% endif %} {% endcomment %}
 
 {% endfor %}
 

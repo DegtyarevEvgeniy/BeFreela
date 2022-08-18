@@ -12,150 +12,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/6fc980010f.js" crossorigin="anonymous"></script>
 
-    <style>
-        *:focus,
-        *:active,
-        *:hover {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #BA68C8
-        }
-
-        .profile-button {
-            background: rgb(99, 39, 120);
-            box-shadow: none;
-            border: none
-        }
-
-        .profile-button:hover {
-            background: #682773
-        }
-
-        .profile-button:focus {
-            background: #682773;
-            box-shadow: none
-        }
-
-        .profile-button:active {
-            background: #682773;
-            box-shadow: none
-        }
-
-        .back:hover {
-            color: #682773;
-            cursor: pointer
-        }
-
-        .labels {
-            font-size: 14px
-        }
-
-        .add-experience:hover {
-            background: #BA68C8;
-            color: #fff;
-            cursor: pointer;
-            border: solid 1px #BA68C8
-        }
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            /* display: none; <- Crashes Chrome on hover */
-            -webkit-appearance: none;
-            margin: 0;
-            /* <-- Apparently some margin are still there even though it's hidden */
-        }
-
-        input[type=number] {
-            -moz-appearance: textfield;
-            /* Firefox */
-        }
-
-        #regForm {
-            background-color: #ffffff;
-            margin: 0px auto;
-            padding: 40px;
-            border-radius: 10px
-        }
-
-        h1 {
-            text-align: center
-        }
-
-        input {
-            padding: 10px;
-            width: 100%;
-            font-size: 17px;
-            border: 1px solid #aaaaaa;
-            border-radius: 10px;
-            -webkit-appearance: none
-        }
-
-        .tab input:focus {
-            border: 1px solid #6a1b9a !important;
-            outline: none
-        }
-
-        input.invalid {
-            border: 1px solid #e03a0666
-        }
-
-        .tab {
-            display: none
-        }
-
-        #prevBtn {
-            background-color: #bbbbbb
-        }
-
-        .all-steps {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            width: 100%;
-            display: inline-flex;
-            justify-content: center
-        }
-
-        .step {
-            height: 40px;
-            width: 40px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 15px;
-            color: #6a1b9a;
-            opacity: 0.5
-        }
-
-        .step.active {
-            opacity: 1
-        }
-
-        .step.finish {
-            color: #fff;
-            background: #6a1b9a;
-            opacity: 1
-        }
-
-        .all-steps {
-            text-align: center;
-            margin-top: 30px;
-            margin-bottom: 30px
-        }
-    </style>
 </head>
 
 <body>
-    <div style="position: fixed; top: 3%; left: 3%; z-index: 1000; background-color: rgba(255, 255, 255, 0.5); border: none">
-        <a class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay" uk-icon="menu" style="border: none"></a>
+    <div
+        style="position: fixed; top: 3%; left: 3%; z-index: 1000; background-color: rgba(255, 255, 255, 0.5); border: none">
+        <a class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay" uk-icon="menu"
+            style="border: none"></a>
     </div>
 
 
@@ -180,7 +43,7 @@
                 </li>
                 <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
-                        style="background:  #0A3644; width:70%; border: solid #0A3644 2px ">Информация</button>
+                        style="background:  #0A3644; width:70%; border: solid #0A3644 2px" inclick="infoStart()">Информация</button>
                 </li>
                 <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
@@ -217,7 +80,9 @@
 
 
 
-<script type="text/javascript">
+<script>
+
+
     $(function () {
         var num = window.location.search[1];
         if (localStorage.page != null) {
@@ -244,6 +109,7 @@
         }
         xhr.send()
     });
+
 </script>
 
 
@@ -252,141 +118,3 @@
 </script>
 
 
-<style>
-    p {
-        font-family: 'Poppins', sans-serif;
-        font-size: 1.1em;
-        font-weight: 300;
-        line-height: 1.7em;
-        color: #999;
-    }
-
-    li a {
-        margin-top: 0;
-        padding: 0;
-    }
-
-    a,
-    a:hover,
-    a:focus {
-        color: black;
-        text-decoration: none;
-        transition: all 0.3s;
-    }
-
-    .navbar {
-        padding: 15px 10px;
-        background: #fff;
-        border: none;
-        border-radius: 0;
-        margin-bottom: 40px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    }
-
-    .navbar-btn {
-        box-shadow: none;
-        outline: none !important;
-        border: none;
-    }
-
-    .line {
-        width: 100%;
-        height: 1px;
-        border-bottom: 1px dashed #ddd;
-        margin: 40px 0;
-    }
-
-    .wrapper {
-        display: flex;
-        width: 100%;
-        align-items: stretch;
-    }
-
-    #sidebar {
-        min-width: 250px;
-        max-width: 250px;
-        background: #2B393B;
-        color: #BFE3F7;
-        transition: all 0.3s;
-    }
-
-    #sidebar.active {
-        margin-left: -250px;
-    }
-
-    #sidebar .sidebar-header {
-        padding: 20px;
-        /* background: $lila-60; */
-        /*#6d7fcc*/
-    }
-
-    .sidebar-header h3 {
-        color: white;
-    }
-
-    #sidebar ul.components {
-        padding: 20px 0;
-        /* border-bottom: 1px solid $lila-line; */
-    }
-
-    #sidebar ul p {
-        /* color: $text-sidebar; */
-        padding: 10px;
-    }
-
-    #sidebar ul li a {
-        padding: 5px;
-        font-size: 1.1em;
-        display: block;
-    }
-
-    a[data-toggle="collapse"] {
-        position: relative;
-    }
-
-    .dropdown-toggle::after {
-        display: block;
-        position: absolute;
-        top: 50%;
-        right: 20px;
-        transform: translateY(-50%);
-    }
-
-    ul ul a {
-        font-size: 0.9em !important;
-        padding-left: 30px !important;
-        /* background: $lila-60; */
-    }
-
-    ul.CTAs {
-        padding: 20px;
-    }
-
-    ul.CTAs a {
-        text-align: center;
-        font-size: 0.9em !important;
-        display: block;
-        border-radius: 5px;
-        margin-bottom: 5px;
-    }
-
-    #content {
-        width: 100%;
-        min-height: 100vh;
-        transition: all 0.3s;
-    }
-
-    @media (max-width: 768px) {
-        #sidebar {
-            margin-left: -250px;
-        }
-
-        #sidebar.active {
-            margin-left: 0;
-        }
-
-        #sidebarCollapse span {
-            display: none;
-        }
-    }
-</style>

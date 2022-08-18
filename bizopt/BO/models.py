@@ -21,7 +21,6 @@ class Product_buy(models.Model):
     product_name = models.CharField(max_length=500, default='-')
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=200, default='-')
-    # status2 = models.CharField(max_length=20, default='-')
     message = models.CharField(max_length=200, default='-')
     payed_partner = models.BooleanField(default=0)
     payed_user = models.BooleanField(default=0)
@@ -29,6 +28,7 @@ class Product_buy(models.Model):
     delivery_address = models.CharField(max_length=500, default='-')
     date_add = models.DateField(max_length=50, default='2000-01-01')
     img = models.ImageField(upload_to='images/products', default='images/default.png')
+    # status2 = models.CharField(max_length=20, default='-')
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='-')
@@ -67,8 +67,8 @@ class Product_creator(models.Model):
     availability = models.CharField('', max_length=100, default='-')
     picture = models.ImageField('', upload_to='images/product',
                                 default='images/default.png')
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
     tags = TaggableManager()
+    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
 
 class Task(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал

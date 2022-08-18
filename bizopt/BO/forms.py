@@ -438,7 +438,8 @@ class addTasks(forms.Form):
 
 class Resume(forms.Form):
     description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.Textarea(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
     }))
     is_company = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
         'class': "form-check-input",
@@ -446,36 +447,44 @@ class Resume(forms.Form):
         'id': "isCompanyTrigger",
     }))
     company_name = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "Название компании",
 
     }))
     email = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
     }))
     first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'value': "TROLOLO"
     }))
     cover = forms.ImageField(required=False)
     telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "@tag",
     }))
     vk = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "https://vk.com/yourid",
     }))
     whatsapp = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "+71234567890",
     }))
     instagram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': " https://instagram.com/tag",
     }))
     tag = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
     }))
     published = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
         'class': "form-check-input",
