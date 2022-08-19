@@ -1040,6 +1040,11 @@ def orders_page(request):
         comment.id_product = product.id
         comment.review = request.POST['review']
         comment.rating = request.POST.get('rating', '0')
+
+        product.rate_sum = product.rate_sum + 1
+        product.vote_sum = request.POST.get('rating', '0')
+
+        product.save()
         comment.save()
         return HttpResponseRedirect('/orders/')
     if request.method == "POST" and "decline" in request.POST:
