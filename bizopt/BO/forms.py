@@ -268,6 +268,19 @@ CATEGORY_CHOICE = [
     ('Скульптуры', 'Скульптуры'),
     ('Подушки', 'Подушки'),
 ]
+
+DURATION_CHOICE = [
+    ('1 - 2 дня', '1 - 2 дня'),
+    ('2 - 5 дней', '2 - 5 дней'),
+    ('5 - 7 дней', '5 - 7 дней'),
+    ('1 - 2 недели', '1 - 2 недели'),
+    ('2 недели - месяц', '2 недели - месяц'),
+    ('1 - 3 месяца', '1 - 3 месяца'),
+    ('3 - 6 месяцев', '3 - 6 месяцев'),
+    ('6 - 12 месяцев', '6 - 12 месяцев'),
+    ('1 - 2 года', '1 - 2 года'),
+    ('более 3-х лет', 'более 3-х лет'),
+]
 User = get_user_model()
 
 
@@ -361,11 +374,13 @@ class ProductCreateForm(ModelForm):
             'category': Select(attrs={
                 'class': 'input-group mt-2 mb-2',
             }, choices=CATEGORY_CHOICE),
+            'duration': Select(attrs={
+                'class': 'input-group mt-2 mb-2',
+            }, choices=DURATION_CHOICE),
             'width_product': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
                 'oninput': 'PassChecker(3)',
-
             }),
             'height_product': TextInput(attrs={
                 'class': 'form-control',

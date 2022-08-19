@@ -2,20 +2,19 @@
 {% block content %}
 
 <body>
-<div style="width: 80%; margin: 0 auto;">
-<div class="placeOut uk-flex-column">
-    <h1>Корзина</h1>
-    <p>Здесь вы можете отследить статус текущих заказов</p>
-</div>
+    <div class="uk-flex uk-flex-between uk-flex-middle uk-width-4-5" style="margin: 0 auto">
+        <h1>Корзина</h1>
+        <h3 class="uk-text-center uk-width-2-3">Здесь вы можете отследить статус текущих заказов</h3>
+    </div>
 
 
 
-<div class="placeOut uk-flex-column uk-margin-bottom">
-    <h3>Заказы одобренные продавцом</h3>
+    <div class="uk-width-4-5 uk-flex-column uk-margin-bottom" style="margin: 2% auto">
+        <h3>Заказы одобренные продавцом</h3>
         {% for product in products %}
         {% if product.status == "Заказ в работе"%}
         <div style="margin-bottom: 10%">
-            <div style="background-color: #D9D9D9 " >
+            <div style="background-color: #D9D9D9 ">
                 <div style="margin-left: 5%;">
                     <br>
                     <p class="uk-margin-remove" style="margin-top: 5%">Заказ: # {{ product.id }}</p>
@@ -26,46 +25,53 @@
             </div>
             <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
                 <div class="uk-flex uk-margin-medium-right">
-                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" style="border-radius: 5px; width: 200px; height: 150px">
+                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt=""
+                        style="border-radius: 5px; width: 200px; height: 150px">
                     <div class="uk-flex-column uk-margin-medium-left uk-margin-small-bottom uk-margin-top-remove">
                         <h3 style="margin-bottom: 45%">{{ product.id_user_buy }}</h3>
-                        <button class="uk-button buttonStyle uk-border-pill uk-margin-small-bottom" type="button" uk-toggle="target: #modal-example">Написать отзыв</button>
+                        <button class="uk-button  uk-border-pill uk-margin-small-bottom" type="button"
+                            uk-toggle="target: #modal-example">Написать отзыв</button>
 
                         <div id="modal-example" uk-modal>
                             <div class="uk-modal-dialog uk-modal-body">
                                 <h2 class="uk-modal-title">Отзыв</h2>
                                 <div class="uk-flex">
-                                    <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
+                                    <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50"
+                                        height="80" alt="">
                                     <div class="uk-flex-column uk-margin-left">
                                         <p class="uk-margin-remove">{{ user.first_name }}</p>
                                         <p class="uk-margin-remove">{{ user.email}}</p>
                                     </div>
                                 </div>
                                 <form method="POST" action="">
-                                <div class="uk-margin-top">
-                                    <h3>Отзыв:</h3>
-                                    <textarea class="uk-textarea" name="review" id="" rows="10" style="width: 100%;"></textarea>
-                                    <div class="uk-flex" style="margin-left: 45%">
-                                        <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
-                                        <div class="rating-area">
-                                            <input type="radio" id="star-5" name="rating" value="5">
-                                            <label for="star-5" title="Оценка «5»"></label>
-                                            <input type="radio" id="star-4" name="rating" value="4">
-                                            <label for="star-4" title="Оценка «4»"></label>
-                                            <input type="radio" id="star-3" name="rating" value="3">
-                                            <label for="star-3" title="Оценка «3»"></label>
-                                            <input type="radio" id="star-2" name="rating" value="2">
-                                            <label for="star-2" title="Оценка «2»"></label>
-                                            <input type="radio" id="star-1" name="rating" value="1">
-                                            <label for="star-1" title="Оценка «1»"></label>
+                                    <div class="uk-margin-top">
+                                        <h3>Отзыв:</h3>
+                                        <textarea class="uk-textarea" name="review" id="" rows="10"
+                                            style="width: 100%;"></textarea>
+                                        <div class="uk-flex" style="margin-left: 45%">
+                                            <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
+                                            <div class="rating-area">
+                                                <input type="radio" id="star-5" name="rating" value="5">
+                                                <label for="star-5" title="Оценка «5»"></label>
+                                                <input type="radio" id="star-4" name="rating" value="4">
+                                                <label for="star-4" title="Оценка «4»"></label>
+                                                <input type="radio" id="star-3" name="rating" value="3">
+                                                <label for="star-3" title="Оценка «3»"></label>
+                                                <input type="radio" id="star-2" name="rating" value="2">
+                                                <label for="star-2" title="Оценка «2»"></label>
+                                                <input type="radio" id="star-1" name="rating" value="1">
+                                                <label for="star-1" title="Оценка «1»"></label>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                     {% csrf_token %}
-                                <p class="uk-text-right">
-                                    <button class="uk-button uk-button-default uk-modal-close" type="button">Закрыть</button>
-                                    <button name="comment_product" class="uk-button uk-button-primary" type="submit" onclick="UIkit.notification({message: 'Отзыв сохранён', status: 'success'})" value="{{ product.id }}">Опубликовать</button>
-                                </p>
+                                    <p class="uk-text-right">
+                                        <button class="uk-button uk-button-default uk-modal-close"
+                                            type="button">Закрыть</button>
+                                        <button name="comment_product" class="uk-button uk-button-primary" type="submit"
+                                            onclick="UIkit.notification({message: 'Отзыв сохранён', status: 'success'})"
+                                            value="{{ product.id }}">Опубликовать</button>
+                                    </p>
                                 </form>
                             </div>
                         </div>
@@ -104,9 +110,10 @@
                             <a class="uk-margin-medium-top">Документы по заказу</a>
                         </div>
                         <div>
-                            <button class="uk-button buttonStyle">Чат с продавцом</button>
+                            <button class="uk-button ">Чат с продавцом</button>
                         </div>
-                        <div><a class="uk-button buttonStyle uk-border-pill uk-margin-small-bottom" href="#modal-sections" uk-toggle style="width: 80%">Доставка</a>
+                        <div><a class="uk-button  uk-border-pill uk-margin-small-bottom" href="#modal-sections"
+                                uk-toggle style="width: 80%">Доставка</a>
                             <div id="modal-sections" uk-modal>
                                 <div class="uk-modal-dialog">
                                     <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -129,94 +136,76 @@
                                             </div>
                                         </div>
                                     </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button class="uk-button buttonStyle" style="width: 80%">Поддержка</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-        {% endfor %}
-
-
-    <h4 style="margin-top: 10%">Заказы ожидающие одобренния продавца</h4>
-    <form method="POST">
-        {% for product in products %}
-            {% if product.status == "Заказ принят на рассмотрение"%}
-                <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
-            <img src="https://cdn130.picsart.com/356259745047201.jpg" alt="" width="200px" style="border-radius: 5px">
-            <div class="uk-flex-column uk-margin-medium-left uk-margin-small-bottom uk-margin-top">
-                <h3 style="margin-bottom: 10%">{{ product.id_user_buy }}</h3>
-                <div class="uk-flex uk-margin-remove" >
-                    <p class="uk-margin-remove">Статус: {{ product.status }}</p>
-                    <p class="uk-margin-remove-top uk-margin-remove-bottom  uk-margin-left">Оплата: не оплачен</p>
-                </div>
-
-            </div>
-            <div class="uk-flex-column uk-margin-top" style="margin-left: auto;">
-                <h3 style="text-align: center">{{ product.price }} 12000 руб</h3>
-                <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px; margin-left: 25%" type="button" uk-toggle="target: #modal-close-default">Оплатить заказ</button>
-                <div class="uk-flex" style="margin-top: 5%">
-                    {% csrf_token %}
-                    <button class="uk-button uk-button-default uk-margin-small-right" name="decline" value="{{product.id}}" style="background: #969696; border-radius: 5px;" type="submit">Отказаться</button>
-                    <button class="uk-button uk-button-default uk-margin-small-right" style="background: #969696; border-radius: 5px;" type="button">Чат</button>
-                </div>
-                <div id="modal-close-default" uk-modal>
-                    <div class="uk-modal-dialog uk-modal-body">
-                        <button class="uk-modal-close-default" type="button" uk-close></button>
-                        <h2 class="uk-modal-title">Оплата</h2>
-                        <div>
-                            <div class="uk-flex uk-margin-bottom">
-                                <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
-                                <div class="uk-flex-column uk-margin-left">
-                                    <p class="uk-margin-remove">{{ user.first_name }}</p>
-                                    <p class="uk-margin-remove">{{ user.email}}</p>
                                 </div>
                             </div>
-                            <div class="uk-flex">
-                                <p class="uk-margin-remove">Получатель:</p>
-                                <span class="uk-label" style="margin: 0 0 0 5%">BeFreela</span>
+                            <div>
+                                <button class="uk-button " style="width: 80%">Поддержка</button>
                             </div>
-                            <div class="uk-margin-top">
-                                <p>Отсканируйте QR-код и оплатите товар</p>
-                                <img src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg">
-                            </div>
-                            <button class="uk-button uk-button-default uk-margin-small-right uk-modal-close" style="margin-left: 75%; border-radius: 5px;  " type="button">Закрыть</button>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
+            {% endfor %}
+
+
+            <h4 style="margin-top: 10%">Заказы ожидающие одобренния продавца</h4>
+            <form method="POST" class="uk-width-1">
+                {% for product in products %}
+                {% if product.status == "Заказ принят на рассмотрение"%}
+                <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
+                    style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
+                    <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
+                        <div><img src="../../media/{{product.img}}" alt="" width="200px" style="border-radius: 5px">
+                        </div>
+                        <div class="uk-flex-row">
+                            <h2 class="uk-text-break">{{ product.id_user_buy }}</h2>
+                            <p style="font-size: 1.3em;" class="uk-text-break">Статус: <br> {{ product.status }}</p>
+                        </div>
+                    </div>
+                    <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5">
+                        <div class="uk-width-2-5">
+                            <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
+                            <p class="uk-text-break">Адрес: <br>{{product.delivery_address}}</p>
+                        </div>
+                        <div class="uk-width-2-5">
+                            <button class="uk-button uk-button-primary uk-border-rounded uk-width-1"
+                                style="margin: 0 1%" type="button">Оплатить заказ</button>
+                            <div class="uk-flex" style="margin-top: 5%">
+                                {% csrf_token %}
+                                <button class="uk-button uk-button-danger uk-border-rounded uk-width-3-5"
+                                    style="margin: 0 1%" name="decline" value="{{product.id}}"
+                                    type="submit">Отказаться</button>
+                                <a class="uk-button uk-button-primary uk-border-rounded uk-width-2-5"
+                                    style="margin: 0 1%" href="/chat/{{product.chat}}/" type="button">Чат</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </form>
         </div>
-        {% endif %}
-        {% endfor %}
-    </form>
     </div>
-</div>
-</div>
 </body>
-
-
-
-
-
 
 
 <style>
     .checked {
         color: orange;
     }
+
     .rating-area {
         overflow: hidden;
         width: 265px;
         margin: 0 auto;
     }
-    .rating-area:not(:checked) > input {
+
+    .rating-area:not(:checked)>input {
         display: none;
     }
-    .rating-area:not(:checked) > label {
+
+    .rating-area:not(:checked)>label {
         float: right;
         width: 42px;
         padding: 0;
@@ -226,48 +215,33 @@
         color: lightgrey;
         text-shadow: 1px 1px #bbb;
     }
-    .rating-area:not(:checked) > label:before {
+
+    .rating-area:not(:checked)>label:before {
         content: '★';
     }
-    .rating-area > input:checked ~ label {
+
+    .rating-area>input:checked~label {
         color: gold;
         text-shadow: 1px 1px #c60;
     }
-    .rating-area:not(:checked) > label:hover,
-    .rating-area:not(:checked) > label:hover ~ label {
+
+    .rating-area:not(:checked)>label:hover,
+    .rating-area:not(:checked)>label:hover~label {
         color: gold;
     }
-    .rating-area > input:checked + label:hover,
-    .rating-area > input:checked + label:hover ~ label,
-    .rating-area > input:checked ~ label:hover,
-    .rating-area > input:checked ~ label:hover ~ label,
-    .rating-area > label:hover ~ input:checked ~ label {
+
+    .rating-area>input:checked+label:hover,
+    .rating-area>input:checked+label:hover~label,
+    .rating-area>input:checked~label:hover,
+    .rating-area>input:checked~label:hover~label,
+    .rating-area>label:hover~input:checked~label {
         color: gold;
         text-shadow: 1px 1px goldenrod;
     }
-    .rate-area > label:active {
+
+    .rate-area>label:active {
         position: relative;
     }
-    .buttonStyle {
-        background: #969696;
-        border-radius: 5px;
-        margin-bottom: 5%;
-        color: white;
-    }
-    .placeOut{
-        width: 60%;
-        height: auto;
-        margin: auto;
-        margin-top: 5%;
-    }
-
-    .price {
-        font-weight: 500;
-        font-size: 1.5em;
-        line-height: 48px;
-        letter-spacing: 1px;
-    }
-
 </style>
 
 

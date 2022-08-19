@@ -271,8 +271,8 @@
         <br>
         <br>
 
-        <div class="uk-flex uk-flex-center">
-            <div style="width: 50%;">
+        <div class="uk-flex uk-flex-around">
+            <div class="uk-width-2-5">
                 <ul class="uk-comment-list">
                     {% for message in messages %}
                     <li>
@@ -302,8 +302,8 @@
                                         <p>Оценка: {{message.rating}}</p>
                                     </div>
                                 </div>
-                                <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a
-                                        class="uk-link-muted" href="#">Reply</a></div>
+                                <!-- <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a -->
+                                        <!-- class="uk-link-muted" href="#">Reply</a></div> -->
 
                             </header>
                             <div class="uk-comment-body">
@@ -314,7 +314,7 @@
                     {% endfor %}
                 </ul>
             </div>
-            <div style="width: 40%;">
+            <div class="uk-width-2-5">
 
                 <div class="uk-flex uk-flex-center uk-text-center"
                     style="background-color: rgba(196, 196, 196, 0.5); border-radius: 20px; padding: 30px 0;">

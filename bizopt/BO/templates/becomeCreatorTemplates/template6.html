@@ -24,7 +24,7 @@
                 <br>
                 <label>Комлектация товара</label>
                 <div class="input-group mt-2 mb-2">
-                    <input type="text" id="inputvalue" class="form-control changible">
+                    <input type="text" id="inputvalue" maxlength="40" class="form-control changible">
                     <button class="btn btn-outline-secondary" id="btnAdd" name="addComplect" onclick="addInput(this)"
                         type="button"><i class="fa fa-plus"></i></button>
                     <br>
@@ -71,11 +71,14 @@
 
                 <label> Категория </label>
                 {{ form8.category }}
+                <br>
+                <label> Срок получения товара </label>
+                {{ form8.duration }}
 
                 <br>
                 <label>Ключевые слова</label>
                 <div class="input-group mt-2 mb-2">
-                    <input type="text" id="keyValue" class="form-control changible">
+                    <input type="text" id="keyValue" maxlength="40" class="form-control changible">
                     <button class="btn btn-outline-secondary" id="btnAddkey" name="addkey" onclick="addKey(this)"
                         type="button"><i class="fa fa-plus"></i></button>
                 </div>
@@ -171,7 +174,6 @@
         if (n == 1) {
             if (pname < 3 || brand < 3 || comp == 0) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
-                document.getElementById("nextBtn").disabled = true;
 
                 return 0
 
@@ -184,7 +186,6 @@
         if (n == 2) {
             if (moneyInput <= 1 || moneyInput >= 999999999999999 || isNaN(moneyInput * moneyInput)) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
-                document.getElementById("nextBtn").disabled = true;
                 return 0
             } else {
                 document.getElementById("nextBtn").style["background-color"] = 'blue'
@@ -334,6 +335,7 @@
         try {
             x[n].style.display = "block";
             if (n === 0) {
+                PassChecker(1)
                 for (let i = 0; i < len; i++) {
                     document.getElementById('table').children[0].remove()
                 }
@@ -342,8 +344,10 @@
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
                 addComplectation()
                 document.getElementById("prevBtn").style.display = "inline";
+                PassChecker(2)
             } else if (n == x.length - 1){
                 document.getElementById("nextBtn").disabled = true;
+                PassChecker(3)
             } else {
                 for (let i = 0; i < len; i++) {
                     document.getElementById('table').children[0].remove()
@@ -365,8 +369,8 @@
                 showTab(currentTab);
             } else {
                 Swal.fire({
-                    icon: 'question',
-                    title: 'Ошибка данных',
+                    icon: 'error',
+                    title: 'Недостаточно данных',
                     text: `Проверьте введенные данные еще раз.`,
                     footer: 'Кога все будет введено правильно, стрелочка подскажет дорогу'
                 })

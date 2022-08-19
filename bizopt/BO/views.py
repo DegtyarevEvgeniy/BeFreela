@@ -328,6 +328,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
         product.country = request.POST['country']
         product.category = request.POST['category']
+        product.duration = request.POST['duration']
         # product.subcategory = request.POST['subcategory']
         product.height_packaging = request.POST.get('height_packaging', '0')
         product.height_product = request.POST.get('height_product', '0')
@@ -715,6 +716,7 @@ def cardProduct_page(request, product_id):
             product_buy.delivery_address = request.POST['address']
             product_buy.status_pay = False
             product_buy.save()
+            return HttpResponseRedirect(f'/creators/goods/{product_id}/')
         # else:
         # product = Product_creator.objects.get(id=product_id)
         # creator = Creator.objects.get(email=product.id_creator)
@@ -726,6 +728,7 @@ def cardProduct_page(request, product_id):
             comment.review = request.POST['review']
             comment.rating = request.POST.get('rating', '0')
             comment.save()
+            return HttpResponseRedirect(f'/creators/goods/{product_id}/')
         context['products'] = product
         context['products'].set = list(filter(None,product.set.strip().split(",")))
 
@@ -975,7 +978,7 @@ def chat_page(request, room_id):
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
     print(user.id)
     print(companion_id)
-    companion = Shop.objects.get(id=companion_id)
+    companion = Account.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
     if not Chat_room.objects.filter(name=room_id).exists():
@@ -1005,23 +1008,25 @@ def send(request):
 def orders_page(request):
     content = gen_menu(request)
     products = Product_buy.objects.filter(id_user_buy=request.user)
-    content['products'] = [{
-        'id': product.id,
-        'id_creator': product.id_creator,
-        'id_user_buy': product.id_user_buy,
-        'product_name': product.product_name,
-        'task_id': product.task_id,
-        'status': product.status,
-        'message': product.message,
-        'payed_partner': product.payed_partner,
-        'payed_user': product.payed_user,
-        'status_pay': product.status_pay,
-        'delivery_address': product.delivery_address,
-        'date_add': product.date_add,
-        'img': product.img,
+    content['products'] = [{'id': product.id,
+                        'id_creator': product.id_creator,
+                        'id_user_buy': product.id_user_buy,
+                        'price': product.price,
+                        'product_name': product.product_name,
+                        'task_id': product.task_id,
+                        'status': product.status,
+                        'message': product.message,
+                        'payed_partner': product.payed_partner,
+                        'payed_user': product.payed_user,
+                        'status_pay': product.status_pay,
+                        'delivery_address': product.delivery_address,
+                        'date_add': product.date_add,
+                        'img': product.img,
+                        'chat': (Account.objects.get(email=product.id_creator).id * Account.objects.get(email=product.id_user_buy).id) + Account.objects.get(email=product.id_creator).id + Account.objects.get(email=product.id_user_buy).id,
+                        } for product in products]
+    
 
-        
-    } for product in products]
+
     if request.method == "POST" and "comment_product" in request.POST:
         product_id = request.POST['comment_product']
         product = Product_creator.objects.get(id=product_id)
@@ -1031,10 +1036,12 @@ def orders_page(request):
         comment.review = request.POST['review']
         comment.rating = request.POST.get('rating', '0')
         comment.save()
+        return HttpResponseRedirect('/orders/')
     if request.method == "POST" and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.status = 'Заказчик отказался от заказа'
         product.save()
+        return HttpResponseRedirect('/orders/')
 
     return render(request, 'orders.html', content)
 

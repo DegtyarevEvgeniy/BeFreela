@@ -56,6 +56,7 @@ class Product_creator(models.Model):
     vote_sum = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0)
     category = models.CharField('Категория', max_length=50, default='-')
+    duration = models.CharField('Срок получения товара', max_length=50, default='-')
     set = models.CharField(max_length=300, default='-')
     price = models.IntegerField('Цена', default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
