@@ -747,7 +747,7 @@ def cardProduct_page(request, product_id):
 
         for message in messages:
             # передача картинки пользователя, который выложил отзыв
-            id_comment = message.id_creator
+            id_comment = message.comentator_email
             user_comment = Account.objects.get(email=id_comment)
             image_user = user_comment.userImage
             message.image_user = image_user
