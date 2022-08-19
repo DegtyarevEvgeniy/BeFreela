@@ -864,10 +864,17 @@ def edit_profile(request):
             if request.FILES:
                 file = request.FILES['profile_photo']
                 fs = FileSystemStorage()
-                filename = f"profile_{str(person.username)}.png"
+                filename = f"profile_{str(person.email)}.png"
                 path_to_local_image = os.path.join("images/profile", filename)
-                fs.save(path_to_local_image, file)
-                person.userImage = path_to_local_image
+
+                if os.path.isfile("media/"+path_to_local_image):
+                    os.remove("media/"+path_to_local_image)
+                    fs.save(path_to_local_image, file)
+                    person.userImage = path_to_local_image
+                else:
+                    fs.save(path_to_local_image, file)
+                    person.userImage = path_to_local_image
+
             if request.POST.get('first_name', None):
                 print(request.POST['first_name'])
                 person.first_name = request.POST['first_name']
@@ -878,7 +885,7 @@ def edit_profile(request):
             if request.POST.get('city', None):
                 person.city = request.POST['city']
             person.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/edit/")
         else:
             context['user'] = person
             return render(request, "editProfile.html", context)
