@@ -699,7 +699,6 @@ def cardProduct_page(request, product_id):
     dt = datetime.now()
     df = DateFormat(dt)
     df.format(get_format('DATE_FORMAT'))
-    
     context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
     try:
@@ -730,7 +729,7 @@ def cardProduct_page(request, product_id):
             # product = Product_creator.objects.get(id=product_id)
             comment = Comments_product()
             comment.id_creator = product.id_creator
-            comment.comentator = product.user_buy.email
+            comment.comentator_email = request.user
             comment.id_product = product.id
             comment.review = request.POST['review']
             comment.rating = request.POST.get('rating', '0')
