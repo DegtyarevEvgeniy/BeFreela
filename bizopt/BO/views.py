@@ -702,6 +702,7 @@ def cardProduct_page(request, product_id):
             product_buy = Product_buy()
 
             product_buy.price = product.price
+            product_buy.duration = product.duration
             # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
