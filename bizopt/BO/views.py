@@ -218,6 +218,27 @@ def resumes_page(request):
                            for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
 
+def sertCardResume_page(request, shopnmae):
+    context = gen_menu(request)
+    useremail = request.user
+    user = Account.objects.get(email=useremail)
+
+    profile = Shop.objects.get(username=shopnmae)
+    context['profile'] = profile
+    products = Product_creator.objects.all()
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture,
+                            'id_creator': product.id_creator,
+
+                            }
+                           for product in products]
+
+    context['link'] = (user.id * profile.id) + user.id + profile.id
+    return render(request, 'cardResume.html', context)
+
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
 
@@ -645,43 +666,6 @@ def index_page(request):
                            for product in products]
 
     return render(request, 'index.html', context)
-
-def cardResume_page(request):
-    context = gen_menu(request)
-    profile = Shop.objects.get(email=request.user)
-    context['profile'] = profile
-    products = Product_creator.objects.all()
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture,
-                            'id_creator': product.id_creator
-                            }
-                           for product in products]
-    return render(request, 'cardResume.html', context)
-
-
-def sertCardResume_page(request, username):
-    context = gen_menu(request)
-    useremail = request.user
-    user = Account.objects.get(email=useremail)
-
-    profile = Shop.objects.get(username=username)
-    context['profile'] = profile
-    products = Product_creator.objects.all()
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture,
-                            'id_creator': product.id_creator,
-
-                            }
-                           for product in products]
-
-    context['link'] = (user.id * profile.id) + user.id + profile.id
-    return render(request, 'cardResume.html', context)
 
 
 def cardTask_page(request, task_id):
