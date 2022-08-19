@@ -956,6 +956,7 @@ def chat_page(request, room_id):
     content = {
         'menu': gen_menu(request)
     }
+
     useremail = request.user
     user = Account.objects.get(email=useremail)
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
@@ -967,14 +968,16 @@ def chat_page(request, room_id):
     if not Chat_room.objects.filter(name=room_id).exists():
         new_room = Chat_room.objects.create(name=room_id, user1 = user.id, user2 = companion_id)
         new_room.save()
-    return render(request, 'chatRoom.html', content)
+    return render(request, 'messanger.html', content)
 
 def chat_page_list(request):
     content = {
         'menu': gen_menu(request)
     }
-    path = f"chatRooms/list.html"
-    return render(request, path, content)
+    
+    content['chats'] = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
+
+    return render(request, 'chatRoom.html', content)
 
 
 def getMsg(request, room_id):
