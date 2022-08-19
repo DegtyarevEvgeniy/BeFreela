@@ -736,6 +736,7 @@ def cardProduct_page(request, product_id):
 
             product.rate_sum = product.rate_sum + 1
             product.vote_sum = product.vote_sum + int(request.POST.get('rating', '0'))
+            product.rating = (product.vote_sum + int(request.POST.get('rating', '0')))/(product.rate_sum + 1)
 
             product.save()
             comment.save()
