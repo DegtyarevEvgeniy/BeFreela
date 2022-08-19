@@ -66,6 +66,9 @@
                             <li class="uk-nav-divider"></li>
                             <li class="uk-active"><a href="/edit/">Настройки профиля</a></li>
                             <li class="uk-active"><a href="/logout/">Выйти</a></li>
+                            {% for chat in chats %}
+                                <li class="uk-active"><a href="/chat/{{chat}}">чат</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </li>

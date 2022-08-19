@@ -711,6 +711,7 @@ def employers_page(request):
 def index_page(request):
     context = gen_menu(request)
     products = Product_creator.objects.all()
+    context['chats'] = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
