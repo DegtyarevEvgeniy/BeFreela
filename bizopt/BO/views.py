@@ -202,10 +202,17 @@ def resumes_page(request):
     creators = Shop.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
-    brands = Shop.objects.all().values('name')
-    print(brands)
-    context['brands'] = [{'text': brand}
-                         for brand in brands]
+    brands = Shop.objects.all()
+    context['brands'] = [{
+        'name': brand.name,
+        'logoImage': brand.logoImage,
+        'bgImage': brand.bgImage,
+        'description': brand.description,
+        'category': brand.category,
+        'status': brand.status,
+        'email': brand.email,
+        'phone': brand.phone,
+    }for brand in brands]
     context['creators'] = [{'name': creator.name,
                             'logoImage': creator.logoImage,
                             'bgImage': creator.bgImage,
@@ -223,7 +230,7 @@ def sertCardResume_page(request, shopnmae):
     useremail = request.user
     user = Account.objects.get(email=useremail)
 
-    profile = Shop.objects.get(username=shopnmae)
+    profile = Shop.objects.get(name=shopnmae)
     context['profile'] = profile
     products = Product_creator.objects.all()
     context['products'] = [{'id': product.id,
@@ -232,7 +239,6 @@ def sertCardResume_page(request, shopnmae):
                             'availability': product.availability,
                             'picture': product.picture,
                             'id_creator': product.id_creator,
-
                             }
                            for product in products]
 
