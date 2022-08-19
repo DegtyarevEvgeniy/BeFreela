@@ -984,7 +984,7 @@ def chat_page(request, room_id):
     content['room_id'] = room_id
     content['companion'] = companion
     if not Chat_room.objects.filter(name=room_id).exists():
-        new_room = Chat_room.objects.create(name=room_id)
+        new_room = Chat_room.objects.create(name=room_id, user1 = user.id, user2 = companion_id)
         new_room.save()
     return render(request, 'messanger.html', content)
 

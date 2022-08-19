@@ -111,6 +111,8 @@ class Partner(models.Model):
 
 class Chat_room(models.Model):
     name = models.CharField(max_length=100000)
+    user1 = models.TextField(max_length=5000)
+    user2 = models.TextField(max_length=5000)
 class Message(models.Model):
     value = models.CharField(max_length=1000000)
     date = models.DateTimeField(default=datetime.now, blank=True)

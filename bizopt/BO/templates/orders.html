@@ -9,150 +9,10 @@
 
 
 
-    <div class="uk-width-4-5 uk-flex-column uk-margin-bottom" style="margin: 2% auto">
-        <h3>Заказы одобренные продавцом</h3>
-        {% for product in products %}
-        {% if product.status == "Заказ в работе"%}
-        <div style="margin-bottom: 10%">
-            <div style="background-color: #D9D9D9 ">
-                <div style="margin-left: 5%;">
-                    <br>
-                    <p class="uk-margin-remove" style="margin-top: 5%">Заказ: # {{ product.id }}</p>
-                    <p class="uk-margin-remove">Статус: {{ product.status }}</p>
-                    <p class="uk-margin-remove">Адрес доставки: улица пушкина дом колотушкина подъезд 6</p>
-                    <br>
-                </div>
-            </div>
-            <div class="uk-flex uk-margin-bottom" style="background: #C4C4C4; border: 10px solid #C4C4C4">
-                <div class="uk-flex uk-margin-medium-right">
-                    <img src="https://cdn130.picsart.com/356259745047201.jpg" alt=""
-                        style="border-radius: 5px; width: 200px; height: 150px">
-                    <div class="uk-flex-column uk-margin-medium-left uk-margin-small-bottom uk-margin-top-remove">
-                        <h3 style="margin-bottom: 45%">{{ product.id_user_buy }}</h3>
-                        <button class="uk-button  uk-border-pill uk-margin-small-bottom" type="button"
-                            uk-toggle="target: #modal-example">Написать отзыв</button>
+    <div class="uk-width-4-5 uk-flex-column uk-margin-bottom" style="margin: 2% auto">        
 
-                        <div id="modal-example" uk-modal>
-                            <div class="uk-modal-dialog uk-modal-body">
-                                <h2 class="uk-modal-title">Отзыв</h2>
-                                <div class="uk-flex">
-                                    <img src="{{user.userImage.url}}" alt="" class="uk-border-rounded" width="50"
-                                        height="80" alt="">
-                                    <div class="uk-flex-column uk-margin-left">
-                                        <p class="uk-margin-remove">{{ user.first_name }}</p>
-                                        <p class="uk-margin-remove">{{ user.email}}</p>
-                                    </div>
-                                </div>
-                                <form method="POST" action="">
-                                    <div class="uk-margin-top">
-                                        <h3>Отзыв:</h3>
-                                        <textarea class="uk-textarea" name="review" id="" rows="10"
-                                            style="width: 100%;"></textarea>
-                                        <div class="uk-flex" style="margin-left: 45%">
-                                            <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
-                                            <div class="rating-area">
-                                                <input type="radio" id="star-5" name="rating" value="5">
-                                                <label for="star-5" title="Оценка «5»"></label>
-                                                <input type="radio" id="star-4" name="rating" value="4">
-                                                <label for="star-4" title="Оценка «4»"></label>
-                                                <input type="radio" id="star-3" name="rating" value="3">
-                                                <label for="star-3" title="Оценка «3»"></label>
-                                                <input type="radio" id="star-2" name="rating" value="2">
-                                                <label for="star-2" title="Оценка «2»"></label>
-                                                <input type="radio" id="star-1" name="rating" value="1">
-                                                <label for="star-1" title="Оценка «1»"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {% csrf_token %}
-                                    <p class="uk-text-right">
-                                        <button class="uk-button uk-button-default uk-modal-close"
-                                            type="button">Закрыть</button>
-                                        <button name="comment_product" class="uk-button uk-button-primary" type="submit"
-                                            onclick="UIkit.notification({message: 'Отзыв сохранён', status: 'success'})"
-                                            value="{{ product.id }}">Опубликовать</button>
-                                    </p>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-left: 10%" class="uk-margin-medium-right">
-                    <p>Дата создания заказ: 22.02.22</p>
-                    <div class="uk-flex-column">
-                        <h4 style="margin-bottom: 3%">Способ оплаты:</h4>
-                        <div class="uk-flex">
-                            <div>
-                                <p class="uk-margin-remove-bottom">Картой онлайн:</p>
-                                <p class="uk-margin-remove">Статус: {{ product.status }}</p>
-                            </div>
-                            <div class="uk-margin-left">
-                                <p class="uk-margin-remove-bottom">{{ product.price }}</p>
-                                <p class="uk-margin-remove">не оплачен</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="uk-flex-column uk-margin-top uk-margin-small-bottom">
-                        <h4 style="margin-bottom: 3%">Способ получения:</h4>
-                        <div class="uk-flex">
-                            <div>
-                                <p class="uk-margin-remove-bottom">Адрес: </p>
-                                <p class="uk-margin-remove">Дата доставки: </p>
-                            </div>
-                            <div class="uk-margin-left">
-                                <p class="uk-margin-remove-bottom">{{ product_buy.delivery_address }}</p>
-                                <p class="uk-margin-remove">25.03.2022</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="uk-flex-column uk-margin-bottom">
-                        <div class="uk-margin-bottom">
-                            <a class="uk-margin-medium-top">Документы по заказу</a>
-                        </div>
-                        <div>
-                            <button class="uk-button ">Чат с продавцом</button>
-                        </div>
-                        <div><a class="uk-button  uk-border-pill uk-margin-small-bottom" href="#modal-sections"
-                                uk-toggle style="width: 80%">Доставка</a>
-                            <div id="modal-sections" uk-modal>
-                                <div class="uk-modal-dialog">
-                                    <button class="uk-modal-close-default" type="button" uk-close></button>
-                                    <div class="uk-modal-header">
-                                        <h2 class="uk-modal-title">Информация о доставке</h2>
-                                    </div>
-                                    <div class="uk-modal-body">
-                                        <div class="">
-                                            <div class="uk-flex uk-margin-bottom">
-                                                <p class="uk-margin-remove">Продавец:</p>
-                                                <p style="margin: 0 0 0 5%">продавец_нэйм</p>
-                                            </div>
-                                            <div class="uk-flex uk-margin-bottom">
-                                                <p class="uk-margin-remove">Почта:</p>
-                                                <p style="margin: 0 0 0 5%">почта_продавца</p>
-                                            </div>
-                                            <div class="uk-flex">
-                                                <p class="uk-margin-remove">Доставка по адресу:</p>
-                                                <p style="margin: 0 0 0 5%">улица Пушкина дом Колотушкина</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <button class="uk-button " style="width: 80%">Поддержка</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-
-
-            <h4 style="margin-top: 10%">Заказы ожидающие одобренния продавца</h4>
             <form method="POST" class="uk-width-1">
                 {% for product in products %}
-                {% if product.status == "Заказ принят на рассмотрение"%}
                 <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
                     style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
                     <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
@@ -182,7 +42,6 @@
                         </div>
                     </div>
                 </div>
-                {% endif %}
                 {% endfor %}
             </form>
         </div>
