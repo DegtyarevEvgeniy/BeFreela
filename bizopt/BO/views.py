@@ -726,13 +726,18 @@ def cardProduct_page(request, product_id):
         # product = Product_creator.objects.get(id=product_id)
         # creator = Creator.objects.get(email=product.id_creator)
         if request.method == "POST" and "comment_product" in request.POST:
-            # product = Product_creator.objects.get(id=product_id)
+            product = Product_creator.objects.get(id=product_id)
             comment = Comments_product()
             comment.id_creator = product.id_creator
             comment.comentator_email = request.user
             comment.id_product = product.id
             comment.review = request.POST['review']
             comment.rating = request.POST.get('rating', '0')
+
+            product.rate_sum = product.rate_sum + 1
+            product.vote_sum = product.vote_sum + int(request.POST.get('rating', '0'))
+
+            product.save()
             comment.save()
             return HttpResponseRedirect(f'/creators/goods/{product_id}/')
         context['products'] = product
