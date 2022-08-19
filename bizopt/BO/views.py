@@ -152,6 +152,7 @@ def goods_page(request):
                             'rate_sum': product.rate_sum,
                             'vote_sum': product.vote_sum,
                             'country': product.country,
+                            'duration': product.duration,
                             }
                            for product in products]
     return render(request, 'goods.html', context)
@@ -266,6 +267,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         creator.korr_check = request.POST['korr_check']
 
         creator.save()
+        return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
 
@@ -298,6 +300,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
 
         shop.save()
+        return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         print("PRODUCT_CREATOR")
@@ -341,13 +344,14 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
+        
         for i in range(0, 16):
             if request.POST.get('key_{}'.format(i), None):
                 product.tags.add(request.POST.get('key_{}'.format(i), ' '))
                 product.save()
             else:
                 break
-        return redirect('/becomeCreator/')
+        return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
@@ -355,7 +359,8 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'GET' and "delete" in request.GET:
         product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
-        return redirect('/becomeCreator/')
+        return HttpResponseRedirect("/becomeCreator/")
+
 
     # if request.method == 'POST' and "status" in request.POST:
     #     product = Product_buy.objects.get(id=request.POST['status'])
@@ -694,7 +699,7 @@ def cardProduct_page(request, product_id):
     dt = datetime.now()
     df = DateFormat(dt)
     df.format(get_format('DATE_FORMAT'))
-
+    
     context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
     try:
@@ -725,6 +730,7 @@ def cardProduct_page(request, product_id):
             # product = Product_creator.objects.get(id=product_id)
             comment = Comments_product()
             comment.id_creator = product.id_creator
+            comment.comentator = product.user_buy.email
             comment.id_product = product.id
             comment.review = request.POST['review']
             comment.rating = request.POST.get('rating', '0')
@@ -1026,7 +1032,6 @@ def orders_page(request):
                         'chat': (Account.objects.get(email=product.id_creator).id * Account.objects.get(email=product.id_user_buy).id) + Account.objects.get(email=product.id_creator).id + Account.objects.get(email=product.id_user_buy).id,
                         } for product in products]
     
-
 
     if request.method == "POST" and "comment_product" in request.POST:
         product_id = request.POST['comment_product']

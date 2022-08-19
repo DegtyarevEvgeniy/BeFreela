@@ -341,41 +341,41 @@ class ProductCreateForm(ModelForm):
         fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'uk-form uk-input',
                 'placeholder': "Введите название товара",
                 'oninput': 'PassChecker(1)',
             }),
             'price': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'uk-form uk-input uk-width-4-5',
                 'type': 'number',
                 'id': 'priceInput',
                 'oninput': 'recalc(this)',
                 'placeholder': 'Введите стоимость товара'
             }),
             'country': Select(attrs={
-                'class': 'input-group mt-2 mb-2',
+                'class': 'uk-form uk-width-1',
             }, choices=COUNTRY_CHOICE),
             # 'subcategory': TextInput(attrs={
-            #     'class': 'form-control',
+            #     'class': 'uk-form uk-input',
             #     'oninput': 'PassChecker(1)',
             #     'placeholder': 'Пример: носки'
             # }),
             'brand': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'uk-form uk-input',
                 'id': 'brand',
                 'oninput': 'PassChecker(1)',
                 'placeholder': 'Введите бренд товара'
             }),
             'description': Textarea(attrs={
-                'class': 'form-control',
+                'class': 'uk-form uk-textarea',
                 'placeholder': 'Введите описание товара',
                 'oninput': 'PassChecker(3)',
             }),
             'category': Select(attrs={
-                'class': 'input-group mt-2 mb-2',
+                'class': 'uk-form uk-select',
             }, choices=CATEGORY_CHOICE),
             'duration': Select(attrs={
-                'class': 'input-group mt-2 mb-2',
+                'class': 'uk-form uk-select',
             }, choices=DURATION_CHOICE),
             'width_product': TextInput(attrs={
                 'class': 'form-control',
@@ -426,7 +426,7 @@ class MyProfile(forms.Form):
 
 class addTasks(forms.Form):
     task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control',
+        'class': 'uk-form uk-input',
         'placeholder': 'Название',
         'id': "floatingInputGrid",
     }))
@@ -436,17 +436,17 @@ class addTasks(forms.Form):
     }))
 
     description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={
-        'class': 'form-control',
+        'class': 'uk-form uk-input',
         'placeholder': 'Описание',
         'style': "height: 100px",
         'id': "floatingTextarea2",
 
     }))
     price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control'
+        'class': 'uk-form uk-input'
     }))
     date = forms.DateField(label='Дата', widget=forms.DateInput(attrs={
-        'class': 'form-control',
+        'class': 'uk-form uk-input',
         'type': 'date'
     }))
 
