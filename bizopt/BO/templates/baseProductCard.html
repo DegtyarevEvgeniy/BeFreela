@@ -1,53 +1,101 @@
 {% for product in products %}
-<div class="uk-card uk-card-default uk-grid-collapse rating_{{ product.rating_status }} uk-margin" uk-grid>
 
-    <div class="uk-card-media-left uk-cover-container uk-width-2-3 uk-padding">
-        <img src="../../media/{{product.picture}}" width="500" height="180">
-    </div>
-    <div class="uk-width-1-3">
-        <div class="uk-card-body uk-flex-row">
-            <h3 class="uk-card-title uk-text-break">{{ product.product_name }}</h3>
-            <div class="uk-flex-row uk-margin-medium-bottom ukwidth-1">
-                <label style="margin: 0">Срок полученгиея:</label>
-                <p class="textSmallInfo uk-border-rounded">{{product.duration}}</p>
-            </div>
-            <div class="uk-flex-row">
-                <lavel>Регион:</lavel>
-                <p class="textSmallInfo uk-border-rounded">{{product.country}}</p>
-            </div>
-            <br>
-            <div class="price">
-                <label style="margin: 0">Цена:</label>
-                <p class="uk-width-1-2 uk-text-center" style="text-align: center; margin: 0 auto; border-bottom: 1px solid gray; font-size: 1.5em;">{{ product.cost }} руб.</p>
-            </div>
 
-            <br>
-            <br>
-            {% if request.user.is_authenticated %}
-            <a class="uk-button uk-button-default uk-width-1 uk-border-rounded" href="/creators/goods/{{ product.id }}"
-                style="background-color:  #2D3995; color: white;">ПОДРОБНЕЕ</a>
-            {% else %}
-            <a class="uk-button uk-button-default uk-width-1 uk-border-rounded" href="/accounts/login/"
-                style="background-color:  #2D3995; color: white;">ПОДРОБНЕЕ</a>
-            {% endif %}
+        <div class="box-footer">
+            <div style="width:238px;height:443px; margin: auto;">
+            <img src="../../media/{{product.picture}}" width="238px" height="343px" alt="" >
+            
+            <div class="box-down">
+                    <h3 style="font-size:25px; font-weight:bold; margin: 0;">{{product.price}} ₽</h3>
+                    <p class="star">
+						<strong>&star;</strong>
+						<strong>&star;</strong>
+						<strong>&star;</strong>
+						<strong>&star;</strong>
+						<strong>&star;</strong>
+					</p>
+                    
+                    <p style="font-size:15px; margin: 0;">{{product.product_name}}</p>
+            </div>
+            <div class="box-down-drop">
+                <div style="margin: auto;" class="box-down-drop-img">
+                    <p style="margin: 0;" class="">{{product.brand}}</p>
+                </div>
+                <div style="margin: auto;" class="box-down-drop-img">
+                    <img src="http://127.0.0.1:8000/media/images/default.png" width="30px" height="30px" alt="">
+                </div>
+            </div>
+            </div>
+            
         </div>
-    </div>
-</div>
 
 {% endfor %}
 
 <style>
-    .textSmallInfo {
-        border: 3px;
-        background: rgba(69, 101, 232, 0.34);
-        text-align: center;
-        font-size: 20px;
-        margin: 1% auto; 
+    
+    .box-down-drop {
+        width: 238px;
+        height: 35px;
+        display: flex;
+        transition: 0.8s;
+        
     }
 
-    .textBigInfo span {
-        font-size: 30px;
+    .box-down-drop-img {
+        visibility: hidden;
+        transition: 0.2s;
     }
+
+    .box-footer:hover .box-down-drop-img {
+        visibility: visible;
+        transition: 0.8s;
+        transform: translateY(-100%);
+        animation: ani 1s forwards;
+    }
+
+    @keyframes ani {
+        0% {transform: translateY(-150%);}
+        100% {transform: translateY(0);}
+    }
+
+    .box-footer:hover .box-down-drop {
+        width: 238px;
+        height: 35px;
+        display: flex;
+        background-color: rgba(204, 204, 204, 0.151);
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        transition: 0.8s;
+
+
+    }
+    .box-down {
+        width: 238px;
+        height: 100px;
+        padding: 5px;
+    }
+
+    .box-footer {
+        transition: 0.8s;
+        width: 250px;
+        height: 443px;
+        border-radius: 2%;
+    }
+
+    .box-footer:hover {
+        transition: 0.8s;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);;
+        width: 250px;
+        height: 484px;
+        border-radius: 2%;
+        
+    }
+    p.star{
+        width: 100%;
+        font-size: 20px;
+        color: #808080;
+        margin: 0;
+		}
+
 </style>
 
 

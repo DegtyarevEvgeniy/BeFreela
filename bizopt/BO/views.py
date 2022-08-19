@@ -109,52 +109,9 @@ def goodsSearch_page(request, product_name):
 
 def goods_page(request):
     context = gen_menu(request)
-    creators = Shop.objects.all()
     products = Product_creator.objects.all()
-    if request.method == "POST":
-        rating = request.POST.get('rating', '')
-        print(rating)
-
-        # if rating == '1':
-        #     products = Product_creator.objects.filter(
-        #         Q(rating_status__icontains=4) | Q(
-        #             rating_status__icontains=3)
-        #         | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
-        #     )
-        #     # print("kyy")
-        # elif rating == '2':
-        #     products = Product_creator.objects.filter(
-        #         Q(rating_status__icontains=5)
-        #         | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
-        #     )
-        #     # print("kyyy")
-        # elif rating == '3':
-        #     products = Product_creator.objects.filter(
-        #         Q(rating_status=5) | Q(rating_status__icontains=4)
-        #     )
-        #     # print("kyyyy")
-        #     print(products)
-        # elif rating == '4':
-        #     products = Product_creator.objects.filter(
-        #         Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
-        #             rating_status__icontains=3)
-        #         | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
-        #     )
-            # print("kyyyyy")
-    print(products)
-    context['products'] = [{'id': product.id,
-                            # 'creator_id':  Account.objects.get(email=product.id_creator).id, Раскоментировать если не надо видеть свои карточки
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture,
-                            'rating': product.rating,
-                            'rate_sum': product.rate_sum,
-                            'vote_sum': product.vote_sum,
-                            'country': product.country,
-                            'duration': product.duration,
-                            }
-                           for product in products]
+    context['products'] = products
+    
     return render(request, 'goods.html', context)
 
 def goodsSearch_page_category(request, category):
@@ -307,10 +264,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         shop.category = request.POST['chosenCategoties']
 
 
-        # if request.FILES:
-        print("---------------------")
-        print(request.FILES)
-        print("---------------------")
+
         if request.FILES:
             try:
                 file1 = request.FILES['logoImage']
@@ -319,10 +273,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
 
                 path_to_local_image1 = os.path.join("images/creator/logoImage", filename1)
-
-                # print("---------------------")
-                # print(os.path.isfile("media/"+path_to_local_image1), path_to_local_image1)
-                # print("---------------------")
 
                 if os.path.isfile("media/"+path_to_local_image1):
                     os.remove("media/"+path_to_local_image1)
@@ -354,9 +304,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             except:
                 pass
 
-
-            
-            
 
         shop.save()
         return HttpResponseRedirect("/becomeCreator/")
@@ -892,29 +839,6 @@ def edit_profile(request):
 
     except Account.DoesNotExist as e:
         raise Http404 from e
-
-
-#
-# def register(request):
-#     context = gen_menu()
-#     if request.method == 'POST':
-#
-#         user = Account.objects.create_user(request.POST.get("username"),
-#                                         request.POST.get("email"),
-#                                         request.POST.get("password"))
-#
-#         user.first_name = request.POST.get("name")
-#         user.last_name = request.POST.get("surname")
-#         user.phone = request.POST.get("phone")
-#         user.city = request.POST.get("city")
-#         user.save()
-#         return HttpResponseRedirect("/accounts/login/")
-#     else:
-#         print('ky')
-#         user_form = UserRegistrationForm()
-#         context['user_form'] = user_form
-#     return render(request, 'signin.html', context)
-#
 
 
 def profile(request, name):

@@ -29,7 +29,7 @@ class Product_buy(models.Model):
     status_pay = models.BooleanField(default=0)
     delivery_address = models.CharField(max_length=500, default='-')
     date_add = models.DateField(max_length=50, default='2000-01-01')
-    img = models.ImageField(upload_to='images/products', default='images/default.png')
+    img = models.ImageField(upload_to='images/products', default='images/default.webp')
     # status2 = models.CharField(max_length=20, default='-')
 
 class Comments_partner(models.Model):
@@ -70,7 +70,7 @@ class Product_creator(models.Model):
     length_packaging = models.FloatField('', default=0)
     availability = models.CharField('', max_length=100, default='-')
     picture = models.ImageField('', upload_to='images/product',
-                                default='images/default.png')
+                                default='images/default.webp')
     tags = TaggableManager()
     # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
 
