@@ -967,7 +967,14 @@ def chat_page(request, room_id):
     if not Chat_room.objects.filter(name=room_id).exists():
         new_room = Chat_room.objects.create(name=room_id, user1 = user.id, user2 = companion_id)
         new_room.save()
-    return render(request, 'messanger.html', content)
+    return render(request, 'chatRoom.html', content)
+
+def chat_page_list(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    path = f"chatRooms/list.html"
+    return render(request, path, content)
 
 
 def getMsg(request, room_id):
