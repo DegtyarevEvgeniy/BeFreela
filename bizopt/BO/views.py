@@ -308,23 +308,55 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
 
         # if request.FILES:
+        print("---------------------")
         print(request.FILES)
+        print("---------------------")
         if request.FILES:
-            file1 = request.FILES['logoImage']
-            file2 = request.FILES['bgImage']
-            fs = FileSystemStorage()
-            filename1 = f"profile_{str(shop.email)}.png"
-            filename2 = f"profile_{str(shop.email)}.png"
+            try:
+                file1 = request.FILES['logoImage']
+                fs = FileSystemStorage()
+                filename1 = f"profile_{str(shop.email)}.png"
 
-            path_to_local_image1 = os.path.join("images/creator/logoImage", filename1)
-            fs.save(path_to_local_image1, file1)
 
-            path_to_local_image2 = os.path.join("images/creator/bgImage", filename2)
-            fs.save(path_to_local_image2, file2)
+                path_to_local_image1 = os.path.join("images/creator/logoImage", filename1)
 
-            shop.logoImage = path_to_local_image1
-            shop.bgImage = path_to_local_image2
+                # print("---------------------")
+                # print(os.path.isfile("media/"+path_to_local_image1), path_to_local_image1)
+                # print("---------------------")
 
+                if os.path.isfile("media/"+path_to_local_image1):
+                    os.remove("media/"+path_to_local_image1)
+                    fs.save(path_to_local_image1, file1)
+                    shop.logoImage = path_to_local_image1
+                else:
+                    fs.save(path_to_local_image1, file1)
+                    shop.logoImage = path_to_local_image1
+
+            except:
+                pass
+                        
+            try:
+                
+                file2 = request.FILES['bgImage']
+                filename2 = f"profile_{str(shop.email)}.png"
+
+                fs = FileSystemStorage()
+                path_to_local_image2 = os.path.join("images/creator/bgImage", filename2)
+
+                if os.path.isfile("media/"+path_to_local_image2):
+                    os.remove("media/"+path_to_local_image2)
+                    fs.save(path_to_local_image2, file2)
+                    shop.bgImage = path_to_local_image2
+
+                else:
+                    fs.save(path_to_local_image2, file2)
+                    shop.bgImage = path_to_local_image2
+            except:
+                pass
+
+
+            
+            
 
         shop.save()
         return HttpResponseRedirect("/becomeCreator/")
@@ -511,12 +543,29 @@ def becomeCreatorTemplate_page(request, name):
 
 
     elif name == '4':
-        try:
-            creator = Shop.objects.get(email=request.user)
-            content['creator'] = creator
-        except:
-            creator = Shop()
-            content['creator'] = creator
+        account = Account.objects.get(email=request.user)
+        products = Product_creator.objects.filter(id_creator=account.email)
+        content['products'] = [{'id': product.product_id,
+                                'id_creator': product.id_creator,
+                                'product_name': product.product_name,
+                                'country': product.country,
+                                'brand': product.brand,
+                                'rate_sum': product.rate_sum,
+                                'vote_sum': product.vote_sum,
+                                'category': product.category,
+                                'set': product.set,
+                                'price': product.price,
+                                'description': product.description,
+                                'width_product': product.width_product,
+                                'height_product': product.height_product,
+                                'length_product': product.length_product,
+                                'width_packaging': product.width_packaging,
+                                'height_packaging': product.height_packaging,
+                                'length_packaging': product.length_packaging,
+                                'availability': product.availability,
+                                'picture': product.picture,
+                                }
+                            for product in products]
 
     elif name == '5':
         account = Account.objects.get(email=request.user)
