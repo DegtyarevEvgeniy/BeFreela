@@ -30,72 +30,7 @@
 
 {% endfor %}
 
-<style>
-    
-    .box-down-drop {
-        width: 238px;
-        height: 35px;
-        display: flex;
-        transition: 0.8s;
-        
-    }
 
-    .box-down-drop-img {
-        visibility: hidden;
-        transition: 0.2s;
-    }
-
-    .box-footer:hover .box-down-drop-img {
-        visibility: visible;
-        transition: 0.8s;
-        transform: translateY(-100%);
-        animation: ani 1s forwards;
-    }
-
-    @keyframes ani {
-        0% {transform: translateY(-150%);}
-        100% {transform: translateY(0);}
-    }
-
-    .box-footer:hover .box-down-drop {
-        width: 238px;
-        height: 35px;
-        display: flex;
-        background-color: rgba(204, 204, 204, 0.151);
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
-        transition: 0.8s;
-
-
-    }
-    .box-down {
-        width: 238px;
-        height: 100px;
-        padding: 5px;
-    }
-
-    .box-footer {
-        transition: 0.8s;
-        width: 250px;
-        height: 443px;
-        border-radius: 2%;
-    }
-
-    .box-footer:hover {
-        transition: 0.8s;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);;
-        width: 250px;
-        height: 484px;
-        border-radius: 2%;
-        
-    }
-    p.star{
-        width: 100%;
-        font-size: 20px;
-        color: #808080;
-        margin: 0;
-		}
-
-</style>
 
 
 </body>

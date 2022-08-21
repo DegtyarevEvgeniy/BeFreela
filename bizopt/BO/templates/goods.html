@@ -9,7 +9,7 @@
 </head>
 
 <body style="margin: auto;">
-<div class="uk-margin-large-left uk-margin-medium-top uk-flex" style="width: 80%; margin: auto;">
+<div class="uk-margin-large-left uk-margin-medium-top uk-flex" style="width: 90%; margin: auto; ">
     <div style="width: 20%; height: 100%;">
             <div class="uk-margin-small-left">
                 <h4 class="uk-margin-small-bottom">Электроника - Смартфоны</h4>
@@ -118,7 +118,8 @@
 
     <br>
     <br>
-        <div id="content" class="uk-width-4-5 uk-flex-wrap" style="margin-left: 15% ;">
+    <div class="content" class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid style="margin: auto;" >
+
             {% include "baseProductCard.html" %}
 
         </div>
@@ -170,6 +171,83 @@
         color: orange;
     }
 </style>
+
+
+<!-- CARD PRODUCT CSS -->
+<style>
+    
+    .box-down-drop {
+        width: 238px;
+        height: 35px;
+        display: flex;
+        transition: 0.8s;
+        
+    }
+
+    .box-down-drop-img {
+        visibility: hidden;
+        transition: 0.2s;
+    }
+
+    .box-footer:hover .box-down-drop-img {
+        visibility: visible;
+        transition: 0.8s;
+        transform: translateY(-100%);
+        animation: ani 1s forwards;
+    }
+
+    @keyframes ani {
+        0% {transform: translateY(-150%);}
+        100% {transform: translateY(0);}
+    }
+
+    .box-footer:hover .box-down-drop {
+        width: 238px;
+        height: 35px;
+        display: flex;
+        background-color: rgba(204, 204, 204, 0.151);
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        transition: 0.8s;
+
+
+    }
+    .box-down {
+        width: 238px;
+        height: 100px;
+        padding: 5px;
+    }
+
+    .box-footer {
+        transition: 0.8s;
+        width: 250px;
+        height: 443px;
+        border-radius: 2%;
+        padding: 0;
+        margin: auto;
+    }
+
+    .box-footer:hover {
+        transition: 0.8s;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);;
+        width: 250px;
+        height: 484px;
+        border-radius: 2%;
+        
+    }
+    p.star{
+        width: 100%;
+        font-size: 20px;
+        color: #808080;
+        margin: 0;
+		}
+
+    .content{
+    }
+</style>
+
+<!-- END CARD PRODUCT CSS -->
+
+
 <script src="js/uikit-icons.min.js"></script>
 
 {% endblock %}
