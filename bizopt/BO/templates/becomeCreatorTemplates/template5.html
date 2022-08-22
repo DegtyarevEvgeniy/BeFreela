@@ -12,52 +12,45 @@
         </div>
         <!-- Grid row -->
         <!--Table-->
-        <table class="uk-table uk-table-divider uk-width-4-5" style="margin: 2% auto;">
-            <!--Table head-->
-            <thead>
-                <tr>
-                    <th class="uk-text-center uk-width-1-5">Название товара</th>
-                    <th class="uk-text-center uk-width-1-5">Бренд</th>
-                    <th class="uk-text-center uk-width-1-5">Цена</th>
-                    <th class="uk-text-center uk-width-1-5">Опубликовано</th>
-                    <th class="uk-text-center uk-width-1-6">Удалить</th>
-
-
-                </tr>
-            </thead>
-            <!--Table head-->
-            <!--Table body-->
-            <form method="GET" id="goodsList" action="/becomeCreator/">
-
-
-                {% csrf_token %}
-                <tbody>
-
-                    {% for product in products %}
-
+            <table class="uk-table uk-table-divider uk-width-4-5" style="margin: 2% auto;">
+                <!--Table head-->
+                <thead>
                     <tr>
-                        <td class="uk-text-truncate uk-text-center">{{ product.product_name }}</td>
-                        <td class="uk-text-truncate uk-text-center">{{product.brand}}</td>
-                        <td class="uk-text-truncate uk-text-center">{{ product.price }}</td>
-                        <td class="uk-text-truncate uk-text-center">text</td>
-                        <td class="uk-text-center">
-                            <button name="delete" form="goodsList" value="{{product.id}}" href="" type="submit"
-                                class="uk-button uk-button-danger uk-border-rounded uk-text-large"> X </button>
-                        </td>
+                        <th class="uk-text-center uk-width-1-5">Название товара</th>
+                        <th class="uk-text-center uk-width-1-5">Бренд</th>
+                        <th class="uk-text-center uk-width-1-5">Цена</th>
+                        <th class="uk-text-center uk-width-1-5">Опубликовано</th>
+                        <th class="uk-text-center uk-width-1-6">Удалить</th>
+    
+    
                     </tr>
-
-                    {% endfor %}
-                </tbody>
-            </form>
-        </table>
-
-
-
-
-        <!--Table body-->
-
-        </table>
-    </div>
+                </thead>
+                <!--Table head-->
+                <!--Table body-->
+                <form method="GET" id="goodsList" action="/becomeCreator/">
+    
+    
+                    {% csrf_token %}
+                    <tbody>
+    
+                        {% for product in products %}
+    
+                        <tr>
+                            <td class="uk-text-truncate uk-text-center">{{ product.product_name }}</td>
+                            <td class="uk-text-truncate uk-text-center">{{product.brand}}</td>
+                            <td class="uk-text-truncate uk-text-center">{{ product.price }}</td>
+                            <td class="uk-text-truncate uk-text-center">text</td>
+                            <td class="uk-text-center">
+                                <button name="delete" form="goodsList" value="{{product.id}}" href="" type="submit"
+                                    class="uk-button uk-button-danger uk-border-rounded uk-text-large"> X </button>
+                            </td>
+                        </tr>
+    
+                        {% endfor %}
+                    </tbody>
+                </form>
+            </table>
+        </div>
 </div>
 
 <style>

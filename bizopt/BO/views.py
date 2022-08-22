@@ -97,14 +97,7 @@ def goodsSearch_page(request, product_name):
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
         | Q(set__icontains=product_name)
     )
-    print(products)
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture
-                            }
-                           for product in products]
+    context['products'] = products
     return render(request, 'goodsSearch.html', context)
 
 def goods_page(request):
@@ -121,14 +114,8 @@ def goodsSearch_page_category(request, category):
         | Q(set__icontains=category) | Q(category__icontains=category)
     )
 
-    print(products)
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture
-                            }
-                           for product in products]
+    context['category'] = category
+    context['products'] = products
     return render(request, 'goodsSearch.html', context)
 
 # def goodsSearch_page_subcategory(request, category, subcategory):
@@ -960,8 +947,6 @@ def chat_page(request, room_id):
     useremail = request.user
     user = Account.objects.get(email=useremail)
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
-    # print(user.id)
-    # print(companion_id)
     companion = Account.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
@@ -977,11 +962,11 @@ def chat_page_list(request):
     
     chats = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
     components = [ Account.objects.get(id=((int(i) - request.user.id) // request.user.id))  for i in chats ]
-    # print(components, chats)
+    print(components, chats)
     content['chats'] = [ {'chat_room': chat,
                           'first_name': component.first_name,
                           'last_name': component.last_name,
-                          'img': component.userImage
+                          'img': component.userImage.url
                           }  for chat, component in zip(chats, components)]
     print(content['chats'])
     return render(request, 'chatRoom.html', content)

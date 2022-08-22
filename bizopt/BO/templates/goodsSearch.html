@@ -8,126 +8,141 @@
 
 </head>
 
-<body>
-<div class="uk-margin-large-left uk-flex">
-    <div style="width: 20%">
+<body style="margin: 0 auto;">
+    <div class="uk-margin-medium-top uk-flex uk-width-1@m uk-width-4-5" style="margin: 0 auto; ">
+        <div class="uk-width-1-5" style="height: 100%; font-size: 1.2em;">
             <div class="uk-margin-small-left">
-                <h4 class="uk-margin-small-bottom">Электроника - Смартфоны</h4>
+                <ul class="uk-breadcrumb">
+                    <li><a href="/creators/goods/">Все товары</a></li>
+                    <li><a href="/creators/goods/category/{{category}}">{{category}}</a></li>
+                    <li><span></span></li>
+                </ul>
                 <h2 class="uk-margin-medium-bottom uk-margin-small-top">Смартфоны</h2>
                 <div class="textStyleHeaderRegion uk-margin-medium-bottom">
-                    <input type="checkbox" value="value2" class="uk-margin-small-right">
+                    <input type="radio" value="value2" class="uk-margin-small-right">
                     <label>Мой регион</label>
                 </div>
             </div>
-            <div>
-                <hr style="background-color: black; height: 3px; width: 80%">
-                <div class="textStyleHeader textAll uk-margin-medium-bottom">
-                    <p>Рейтинг продавца</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span></label>
+            <form method="post">
+                <div>
+                    <hr style="background-color: black; height: 3px; width: 80%">
+                    <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                        <p>Рейтинг продавца</p>
+                        <div class="uk-margin-small-left" id="ratings">
+                            <div>
+                                <input name="rating" type="radio" value="1">
+                                <label>от <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span></label>
+                            </div>
+                            <div>
+                                <input name="rating" type="radio" value="2">
+                                <label>от <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span>
+                                    <span class="fa fa-star"></span></label>
+                            </div>
+                            <div>
+                                <input name="rating" type="radio" value="3">
+                                <label>от <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star checked"></span>
+                                    <span class="fa fa-star"></span></label>
+                            </div>
+                            <div>
+                                <input name="rating" type="radio" value="4">
+                                <label>Не важно</label>
+                            </div>
                         </div>
-                        <div>
-                            <input type="checkbox" value="value2">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span></label>
+                    </div>
+                    <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                        <p>Цена</p>
+                        <div class="uk-margin-small-left">
+                            <label for="">от</label>
+                            <br>
+                            <input id="from" class="uk-input uk-border-rounded uk-margin-right" type="number"
+                                placeholder="от" style="color: white">
+                            <br>
+                            <br>
+                            <label for="">до</label>
+                            <br>
+                            <input id="to" class="uk-input uk-border-rounded" type="number" placeholder="до"
+                                style="color: white">
                         </div>
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>от <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span></label>
+                    </div>
+                    <div class="textStyleHeader textAll uk-margin-medium-bottom">
+                        <p>Срок изготовления</p>
+                        <div class="uk-margin-small-left">
+                            <div>
+                                <input name="term" type="radio" value="1">
+                                <label>до 1го дня</label>
+                            </div>
+                            <div>
+                                <input name="term" type="radio" value="2">
+                                <label>до 3ех дней</label>
+                            </div>
+                            <div>
+                                <input name="term" type="radio" value="3">
+                                <label>до 1 недели</label>
+                            </div>
+                            <div>
+                                <input name="term" type="radio" value="4">
+                                <label>до 1 месяца</label>
+                            </div>
+                            <div>
+                                <input name="term" type="radio" value="5">
+                                <label>до 3ех месяцев</label>
+                            </div>
+                            <div>
+                                <input name="term" type="radio" value="6">
+                                <label>более 1го года</label>
+                            </div>
                         </div>
-                        <div>
-                            <input type="checkbox" value="value2">
-                            <label>Не важно</label>
+                    </div>
+                    <div class="textStyleHeader textAll">
+                        <p>Исполнитель</p>
+                        <div class="uk-margin-small-left">
+                            <div>
+                                <input type="radio" value="value1">
+                                <label>ИП</label>
+                            </div>
+                            <div>
+                                <input type="radio" value="value1">
+                                <label>ООО</label>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="textStyleHeader textAll uk-margin-medium-bottom">
-                    <p>Цена</p>
-                    <div class="uk-margin-small-left">
-                        <input class="uk-input uk-margin-right" type="text" placeholder="от" style="width: 30%; border-radius: 5em; background-color: #C4C4C4; color: white">
-                        <input class="uk-input" type="text" placeholder="до" style="width: 30%; border-radius: 5em; background-color: #C4C4C4; color: white">
-                    </div>
-                </div>
-                <div class="textStyleHeader textAll uk-margin-medium-bottom">
-                    <p>Срок изготовления</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>до 1го дня</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="value2">
-                            <label>до 3ех дней</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>до 1 недели</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="value2">
-                            <label>до 1 месяца</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>до 3ех месяцев</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>более 1го года</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="textStyleHeader textAll">
-                    <p>Исполнитель</p>
-                    <div class="uk-margin-small-left">
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>ИП</label>
-                        </div>
-                        <div>
-                            <input type="checkbox" value="value1">
-                            <label>ООО</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <button class="uk-button uk-button-default uk-width-1-1 uk-margin-small-bottom">Применить</button>
+                {% csrf_token %}
+                <button type="submitgit"
+                    class="uk-button uk-button-default uk-width-auto uk-margin-small-bottom">Применить</button>
+            </form>
+        </div>
 
-    </div>
+        <div class="uk-flex uk-flex-left uk-flex-middle uk-width-4-5" uk-grid style="margin: auto;">
 
-
-    <br>
-    <br>
-        <div id="content" class="uk-width-3-4" style="margin: 5% auto 0 auto" >
             {% include "baseProductCard.html" %}
 
         </div>
-</div>
+
+    </div>
 
 </body>
 
 <style>
-    .textStyleHeader p{
+    .textStyleHeader p {
         font-family: 'Inter';
         font-size: 20px;
         font-style: normal;
         line-height: 15px;
 
     }
-    .textStyleHeaderRegion label{
+
+    .textStyleHeaderRegion label {
         font-family: 'Inter';
         font-size: 18px;
         font-style: normal;
@@ -141,11 +156,11 @@
         font-size: 18px;
         margin-bottom: 5px;
     }
+
     .checked {
         color: orange;
     }
 </style>
-<script src="js/uikit-icons.min.js"></script>
 
 
 

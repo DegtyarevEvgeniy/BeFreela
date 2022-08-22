@@ -1,103 +1,28 @@
 {% for product in products %}
-
-
-<div class="box-footer">
-    <div style="width:238px;height:443px; margin: auto;">
-        <img src="../../media/{{product.picture}}" width="238px" height="343px" alt="">
-
-        <div class="box-down">
-            <h3 style="font-size:25px; font-weight:bold; margin: 0;">{{product.price}} ₽</h3>
-            <p class="star">
+<a href="/creators/goods/{{product.id}}" class="uk-link-reset">
+    <div class="uk-card uk-card-hover" style="padding: 0; margin:1%">
+        <img src="{{product.picture.url}}" width="238px" height="343px" alt="">
+        <ul style="font-size: 1.2em; padding: 0 2% 1%" class="uk-nav">
+            <li class="uk-active uk-flex uk-flex-between uk-text-truncate">
+                <div>{{product.price}} ₽ </div>
+                <div>{{product.brand}}</div>
+            </li>
+            <li class="uk-active uk-text-truncate">{{product.product_name}}</li>
+            <li class="star">
                 <strong>&star;</strong>
                 <strong>&star;</strong>
                 <strong>&star;</strong>
                 <strong>&star;</strong>
                 <strong>&star;</strong>
-            </p>
-            <p style="font-size:15px; margin: 0;">{{product.product_name}}</p>
-        </div>
-        <div class="box-down-drop">
-            <div style="margin: auto;" class="box-down-drop-img">
-                <p style="margin: 0;" class="">{{product.brand}}</p>
-            </div>
-            <div style="margin: auto;" class="box-down-drop-img">
-                <img src="http://127.0.0.1:8000/media/images/default.png" width="30px" height="30px" alt="">
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
-
-</div>
-
+</a>
 {% endfor %}
 
-<<<<<<< HEAD
 
-=======
+
 <style>
-    .box-down-drop {
-        width: 238px;
-        height: 35px;
-        display: flex;
-        transition: 0.2s;
-
-    }
-
-    .box-down-drop-img {
-        visibility: hidden;
-        transition: 0.2s;
-    }
-
-    .box-footer:hover .box-down-drop-img {
-        visibility: visible;
-        transition: 0.2s;
-        transform: translateY(-100%);
-        animation: ani 1s forwards;
-    }
-
-    @keyframes ani {
-        0% {
-            transform: translateY(-150%);
-        }
-
-        100% {
-            transform: translateY(0);
-        }
-    }
-
-    .box-footer:hover .box-down-drop {
-        width: 238px;
-        height: 35px;
-        display: flex;
-        background-color: rgba(204, 204, 204, 0.151);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        transition: 0.2s;
-
-
-    }
-
-    .box-down {
-        width: 238px;
-        height: 100px;
-        padding: 5px;
-    }
-
-    .box-footer {
-        transition: 0.2s;
-        width: 250px;
-        height: 443px;
-        border-radius: 2%;
-    }
-
-    .box-footer:hover {
-        transition: 0.2s;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-        ;
-        width: 250px;
-        height: 484px;
-        border-radius: 2%;
-
-    }
-
     p.star {
         width: 100%;
         font-size: 20px;
@@ -105,10 +30,8 @@
         margin: 0;
     }
 </style>
->>>>>>> 6d71c0a (daily commit)
-
-
 </body>
+
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
