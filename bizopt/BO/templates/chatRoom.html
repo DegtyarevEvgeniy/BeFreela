@@ -14,70 +14,40 @@
 </head>
 
 
-<body>
 
 <body>
-    
-    <div class="overview-page">
-        <div id="MainWindowContainer" style="width: 100px; height: 100px;"></div>
-        <div class="container12">
 
-            {% for chat in chats %}
-            <button type="button"class="Btn">Чат</button>
-            {% endfor %}
-
-            <!-- <a href="/chat/{{chat}}">чат</a> -->
-
-        </div>
+    <div class="uk-flex-row" id="chatlist" style="height: 100%; width: 10%">
+        {% if chats %}
+        {% for chat in chats %}
+        <button type="button" class="uk-width-1 uk-button Btn {{chat.chat_room}}">{{chat.component}}</button>
+        {% endfor %}
+        {% else %}
+        <h2>У вас пока нет начатых бесед</h2>
+        {% endif %}
+    </div>
+    <!-- <div id="MainWindowContainer" style="width: 100px; height: 100px;"></div> -->
+    {% include "messanger.html" %}
     </div>
 
 </body>
 
 <script>
-
-
-    $(function () {
-        var num = window.location.search[1];
-        if (localStorage.page != null) {
-            num = localStorage.page
-        } else {
-            num = 5;
-        }
-        var xhr = new XMLHttpRequest()
-        xhr.open('GET', `chat/${num}/`)
-        xhr.onload = function () {
-            $('#MainWindowContainer').html(xhr.response)
-        }
-        xhr.send()
-
-    });
+    var link = 0
 
     $('.Btn').on('click', {}, function (inBody) {
-        var xhr = new XMLHttpRequest()
-        // var index = $(this).index() + 1
-        var index = 5
-        localStorage.page = index
-        xhr.open('GET', `chat/${index}/`)
-        xhr.onload = function () {
-            $('#MainWindowContainer').html(xhr.response)
-        }
-        xhr.send()
+        // var xhr = new XMLHttpRequest()
+        classes = $(this).attr('class').split(/\s+/)
+        link = classes[classes.length - 1]
+        console.log(link)
+        localStorage.activeChat = link
+        // xhr.open('GET', `/chat/${link}/`)
+        // xhr.onload = function () {
+        //     $('#MainWindowContainer').html(xhr.response)
+        // }
+        // xhr.send()
     });
-
 </script>
 
-<style>
-
-    .container12 {
-        width: 500px;
-        width: 300px;
-        background-color: #ccc;
-    }
-
-    .overview-page {
-        display: flex;
-    }
-
-</style>
 
 {% endblock %}

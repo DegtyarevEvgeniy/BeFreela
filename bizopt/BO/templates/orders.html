@@ -36,8 +36,8 @@
                                 <button class="uk-button uk-button-danger uk-border-rounded uk-width-3-5"
                                     style="margin: 0 1%" name="decline" value="{{product.id}}"
                                     type="submit">Отказаться</button>
-                                <a class="uk-button uk-button-primary uk-border-rounded uk-width-2-5"
-                                    style="margin: 0 1%" href="/chat/{{product.chat}}/" type="button">Чат</a>
+                                <a class="uk-button uk-button-primary uk-border-rounded uk-width-2-5 {{product.chat}}" id="cahtBtn"
+                                    style="margin: 0 1%"  type="button">Чат</a>
                             </div>
                         </div>
                     </div>
@@ -48,6 +48,14 @@
     </div>
 </body>
 
+<script>
+    const chatBtn = document.getElementById('cahtBtn')
+
+    chatBtn.addEventListener('click', function()  {
+        window.location.replace('/chats/')
+        localStorage.setItem('activeChat', chatBtn.classList[chatBtn.classList.length - 1])
+    })
+</script>
 
 <style>
     .checked {

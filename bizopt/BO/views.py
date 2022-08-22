@@ -960,8 +960,8 @@ def chat_page(request, room_id):
     useremail = request.user
     user = Account.objects.get(email=useremail)
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
-    print(user.id)
-    print(companion_id)
+    # print(user.id)
+    # print(companion_id)
     companion = Account.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
@@ -975,8 +975,15 @@ def chat_page_list(request):
         'menu': gen_menu(request)
     }
     
-    content['chats'] = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
-
+    chats = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
+    components = [ Account.objects.get(id=((int(i) - request.user.id) // request.user.id))  for i in chats ]
+    # print(components, chats)
+    content['chats'] = [ {'chat_room': chat,
+                          'first_name': component.first_name,
+                          'last_name': component.last_name,
+                          'img': component.userImage
+                          }  for chat, component in zip(chats, components)]
+    print(content['chats'])
     return render(request, 'chatRoom.html', content)
 
 
@@ -984,9 +991,6 @@ def getMsg(request, room_id):
     room_detales = Chat_room.objects.get(name=room_id)
     messages = Message.objects.filter(room=room_detales.name)
     return JsonResponse({"messages": list(messages.values())})
-
-
-
 
 def send(request):
     message = request.POST['message']
