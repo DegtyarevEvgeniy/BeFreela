@@ -354,37 +354,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.delete()
         return HttpResponseRedirect("/becomeCreator/")
 
-
-    # if request.method == 'POST' and "status" in request.POST:
-    #     product = Product_buy.objects.get(id=request.POST['status'])
-    #     product.status = 'Заказ в работе'
-    #     product.save()
-    #     return redirect('/becomeCreator/')
-    # if request.method == 'GET' and "in_work" in request.POST:
-    #     product = Product_buy.objects.get(id=request.POST['in_work'])
-    #     product.status = 'Заказ в работе'
-    #     product.save()
-    # if request.method == 'POST' and "done" in request.POST:
-    #     product = Product_buy.objects.get(id=request.POST['done'])
-    #     product.status = 'Заказ готов'
-    #     product.save()
-    # if request.method == 'POST' and "payment" in request.POST:
-    #     product = Product_buy.objects.get(id=request.GET['payment'])
-    #     product.status = 'Заказ оплачен'
-    #     product.save()
-    # if request.method == 'POST' and "decline" in request.POST:
-    #     product = Product_buy.objects.get(id=request.POST['decline'])
-    #     product.status = 'Заказчик отказался от заказа'
-    #     product.save()
-    # if request.method == 'GET' and "decline_work" in request.GET:
-    #     product = Product_buy.objects.get(id=request.GET['decline_work'])
-    #     product.status = 'Заказчик отказался от заказа'
-    #     product.save()
-    # if request.method == 'GET' and "4" in request.GET:
-    #     product = Product_buy.objects.get(id=request.GET['4'])
-    #     product.status = 'Заказчик отказался от заказа'
-    #     product.save()
-
     if request.method == "POST" and "partner" in request.POST:
         try:
             partner = Partner.objects.get(email=request.user)
@@ -530,102 +499,7 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
 
-    # elif name in ['11', '12', '13']:
-    #     try:
-    #         partner = Partner.objects.get(email=request.user)
-    #         content['partner'] = {
-    #             'first_name': partner.first_name,
-    #             'last_name': partner.last_name,
-    #             'email': partner.email,
-    #             'INN': partner.inn,
-    #             'name_small': partner.name_small,
-    #             'name_full': partner.name_full,
-    #             'payment_account': partner.payment_account,
-    #             'reg_form': partner.reg_form
-    #         }
-    #     except Exception:
-    #         pass
-
     return render(request, path, content)
-
-# def partnerTemplate_page(request, name):
-#     content = {}
-#     try:
-#         creator = Creator.objects.get(email=request.user.email)
-#         print(request.user.email, creator.id)
-#         content['first_name'] = creator.first_name
-#         content['email'] = creator.email
-#         content['creator_avatar'] = creator.cover
-#     except:
-#         user = Partner.objects.get(email=request.user.email)
-#         content['first_name'] = user.first_name
-#         content['email'] = user.email
-#         content['creator_avatar'] = user.userImage
-#     path = f"partnerTemplates/template{name}.html"
-#     if name == '2':
-#         try:
-#             products = Product_buy.objects.filter(id_creator=request.user)
-#             content['products'] = [{'id': product.id,
-#                                     'product_name': product.product_name,
-#                                     'customer': product.id_user_buy,
-#                                     'st':product.status,
-#                                     'status1': 'red' if product.status[-1] == 'е' else 'blue',
-#                                     'status2': 'red' if product.status[-1] == 'о' else 'blue',
-#                                     'status3': 'red' if product.status[-1] == 'ы' else 'blue',
-#                                     'chat_id':(creator.id * Partner.objects.get(email=product.id_user_buy).id) + creator.id + Partner.objects.get(email=product.id_user_buy).id
-
-#                                     }
-#                                    for product in products]
-#             products_v = Product_buy.objects.filter(id_creator=request.user)
-#             if products_v.count() > 0:
-#                 content['products_v'] = [{'id': product.id,
-#                                        'product_name': product.product_name,
-#                                        'customer': product.id_user_buy,
-#                                        'status': product.status,
-#                                        'id_user_buy': product.id_user_buy,
-#                                        'chat_id':(creator.id * Partner.objects.get(email=product.id_user_buy).id) + creator.id + Partner.objects.get(email=product.id_user_buy).id
-#                                       }
-#                                      for product in products_v]
-            
-        
-#         except Product_buy.DoesNotExist as e:
-#             content['products'] = None
-
-#     # elif name == '3':
-#         # form = MyProfile(request.POST)
-#         # content['form1'] = form
-
-#     elif name == '3':
-#         account = Partner.objects.get(email=request.user)
-#         products = Product_creator.objects.filter(id_creator=account.email)
-#         content['products'] = [{'product_name': product.product_name,
-#                                 'cost': product.price,
-#                                 'id': product.product_id,
-#                                 }
-#                                for product in products]
-
-#     elif name == '4':
-#         try:
-#             creator = Creator.objects.get(email=request.user)
-#             content['creator'] = creator
-#         except:
-#             creator = Creator()
-#             content['creator'] = creator
-
-#     elif name == '1':
-#         try:
-#             partner = Partner.objects.get(email=request.user)
-#             content['partner'] = partner
-#         except:
-#             partner = Partner()
-#             content['partner'] = partner
-    
-#     elif name == '6':
-#         form = ProductCreateForm()
-#         content['form8'] = form
-
-#     return render(request, path, content)
-
 
 def tasks_page(request):
     context = gen_menu(request)

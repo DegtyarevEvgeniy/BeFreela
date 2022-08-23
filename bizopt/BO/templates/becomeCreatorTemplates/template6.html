@@ -1,155 +1,110 @@
-<div class="row d-flex justify-content-center align-items-center" style="width: 99%; margin: 0 auto;">
-    <div class="col-md-8">
+<div class="uk-flex uk-flex-top uk-flex-center" style="margin: 5% auto;">
+    <div class="uk-width-3-5" style="margin: 0 auto">
         <form id="regForm" method="POST" action="">
             <h1 class="mb-5">Создать товар</h1>
 
-            <!-- start of bloc 1 -->
-            <div class="tab" style="display: block;">
-                <label>Название товара <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
-                <div class="input-group mt-2 mb-2">
-                    {{ form8.product_name }}
-                </div>
-                <br>
-                <br>
-                <label>Страна производитель <i uk-tooltip="В какой стране был произведенвашь товар?"
-                        uk-icon="question"></i></label> {{ form8.country }}
-                <div class="input-group mt-2 mb-2">
-                </div>
-                <br>
-                <br>
-                <label>Бренд <i uk-tooltip="Тут нужно указать назвение бренда товара" uk-icon="question"></i></label>
-                <div class="input-group mt-2 mb-2">
-                    {{ form8.brand }}
-                </div>
-                <br>
-                <br>
-                <label>Комлектация товара <i
-                        uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
-                        uk-icon="question"></i></label>
-                <div class="input-group mt-2 mb-2">
-                    <input type="text" id="inputvalue" maxlength="40" class="form-control changible">
-                    <button class="btn btn-outline-secondary" id="btnAdd" name="addComplect" onclick="addInput(this)"
-                        type="button"><i class="fa fa-plus"></i></button>
-                    <br>
-                </div>
-                <!-- template start -->
-                <div id="inputDiv" class="col-md-12">
-                </div>
-                <br>
-                <br>
-                <!-- template end -->
-            </div>
-            <!-- end of bloc 1 -->
 
-            <!-- sart of block 2 -->
-            <div class="tab" style="display: none">
-                <label>Цена <i uk-tooltip="Укажите цену вашего товара" uk-icon="question"></i></label>
-                <div class=" input-group mb-3 ">
-                    {{ form8.price }}
-                    <span class="input-group-text ">.00</span>
+            <div class="tab" style="margin-bottom: 5% ">
+                <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
+                    <div class="uk-width-2-5">
+                        <label>Название товара <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
+                        <div>
+                            {{ form8.product_name }}
+                        </div>
+                    </div>
+                    <div class="uk-width-2-5">
+                        <label>Бренд <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
+                        <div>
+                            {{ form8.brand }}
+                        </div>
+                    </div>
                 </div>
+                <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
+                    <div class="uk-width-2-5 uk-flex-row">
+                        <label> Фотография товара <i
+                                uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
+                                uk-icon="question"></i></label>
+                        <div class="uk-width-1 uk-margin-medium-bottom" uk-form-custom="target: true">
+                            <input type="file">
+                            <input class="uk-input" name="product_photos" type="text" placeholder="Выбрать файл"
+                                disabled>
+                        </div>
+                        <div class="uk-width-1 uk-margin-medium-bottom">
+                            <label> Срок получения товара <i
+                                    uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
+                                    uk-icon="question"></i></label>
+                            {{ form8.duration }}
+                        </div>
+                        <div class="uk-width-1 uk-margin-medium-bottom">
+                            <label> Категория <i uk-tooltip="К какой категории вы относите свой товар?"
+                                    uk-icon="question"></i></label>
+                            {{ form8.category }}
+                        </div>
+                    </div>
+                    <div class="uk-width-2-5 uk-margin-medium-bottom">
+                        <label>Описание <i
+                                uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                                uk-icon="question"></i></label>
+                        {{ form8.description }}
+                    </div>
+                </div>
+
+
+                <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
+                    <div class="uk-width-2-5">
+                        <label>Комлектация товара <i
+                                uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
+                                uk-icon="question"></i></label>
+                        <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
+                            <input type="text" id="compNmae" maxlength="40" class="uk-input uk-width-3-6">
+                            <div class="uk-inline uk-width-1-4">
+                                <input type="number" oninput="PercentageChecker(this)" id="compPercentage" min="0"
+                                    max="100" style="border-left: none; border-right: none;" class="uk-input">
+                                <span class="uk-form-icon uk-form-icon-flip">%</span>
+                            </div>
+                            <button class="uk-button uk-button-default uk-width-1-6" style="padding:0" id="btnAdd"
+                                name="addComplect" onclick="addInput(this)" type="button"><i
+                                    class="fa fa-plus"></i></button>
+                        </div>
+                        <!-- template start -->
+                        <div id="inputDiv" class="uk-width-1 uk-grid" uk-grid>
+                        </div>
+                        <!-- template end -->
+                    </div>
+                    <div class="uk-width-2-5">
+                        <label> Размерный ряд <i
+                                uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
+                                uk-icon="question"></i></label>
+                        <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
+                            <input type="text" id="size" maxlength="10" class="uk-input uk-width-3-6">
+                            <button class="uk-button uk-button-default uk-width-1-6" style="padding:0" id="btnAdd"
+                                name="addComplect" onclick="addSize(this)" type="button"><i
+                                    class="fa fa-plus"></i></button>
+                        </div>
+                        <!-- template start -->
+                        <div id="sizeInput" class="uk-width-1">
+                        </div>
+                        <!-- template end -->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab" style="display: none;">
                 <table class="uk-table uk-table-justify uk-table-divider" id="pricing">
                     <thead>
                         <tr>
-                            <th class="uk-width-auto">Комплектация</th>
-                            <th class="uk-width-auto">Бренд</th>
+                            <th class="uk-width-auto">название</th>
+                            <th class="uk-width-auto">Размер</th>
                             <th class="uk-width-auto">Цена</th>
+                            <th class="uk-width-auto">Итоговая стоимость</th>
                         </tr>
                     </thead>
                     <tbody id="table">
-                    </tbody>
 
+                    </tbody>
                 </table>
             </div>
-            <!-- end of block 2 -->
-
-
-            <!-- sart of block 3 -->
-            <div class="tab" style="display: none">
-                <label>Описание <i
-                        uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
-                        uk-icon="question"></i></label>
-
-                {{ form8.description }}
-                <br>
-                <div class="uk-flex uk-flex-middle uk-flex-between">
-                    <div class="uk-width-1-2">
-                        <label> Категория <i uk-tooltip="К какой категории вы относите свой товар?"
-                                uk-icon="question"></i></label>
-                        {{ form8.category }}
-                    </div>
-                    <br>
-                    <div class="uk-width-1-2">
-                        <label> Срок получения товара <i
-                                uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
-                                uk-icon="question"></i></label>
-                        {{ form8.duration }}
-                    </div>
-                </div>
-
-                <br>
-                <label>Ключевые слова <i
-                        uk-tooltip="Укажите ключевые слова, которые относятся к вашему товару. Так покупателя будет проще найти его"
-                        uk-icon="question"></i></label>
-                <div class="input-group mt-2 mb-2">
-                    <input type="text" id="keyValue" maxlength="40" class="form-control changible">
-                    <button class="btn btn-outline-secondary" id="btnAddkey" name="addkey" onclick="addKey(this)"
-                        type="button"><i class="fa fa-plus"></i></button>
-                </div>
-                <div id="keyDiv"></div>
-                <br>
-                <!--         IMAGE       -->
-
-                <div class="row mt-3 mb-3">
-                    <div class="col-md-8">
-                        <label class="labels">Загрузить фото <i
-                                uk-tooltip="Загрузите фото товара, что бы все видели, какой он красивый"
-                                uk-icon="question"></i></label>
-                        <input id="fileupload" class="form-control" name="product_photos" type="file" />
-                    </div>
-                </div>
-                <br>
-                <!--         IMAGE END      -->
-
-
-
-                <div>
-                    <label>Размер товара <b>(см)</b> <i uk-tooltip="Тут надо указать размеры товара"
-                            uk-icon="question"></i></label>
-                    <div class="input-group mt-2 mb-2">
-                        <span class="input-group-text">высота</span>
-                        {{ form8.height_product }}
-                        <span class="input-group-text">длина</span>
-                        {{ form8.length_product }}
-                        <span class="input-group-text">ширина</span>
-                        {{ form8.width_product }}
-                        <br>
-                    </div>
-                    <label>Размер упаковки <b>(см)</b> <i
-                            uk-tooltip="Тут надо указать размеры упаковки(если ее нет, просто оставь поля нулевыми)."
-                            uk-icon="question"></i></label>
-                    <div class="input-group mt-2 mb-2">
-                        <span class="input-group-text">высота</span>
-                        {{ form8.height_packaging }}
-                        <span class="input-group-text">длина</span>
-                        {{ form8.length_packaging }}
-                        <span class="input-group-text">ширина</span>
-                        {{ form8.width_packaging }}
-                        <br>
-                    </div>
-                </div>
-            </div>
-            <!-- end of block 3 -->
-
-            <!-- sart of block 4 -->
-            <div class="tab uk-flex uk-flex-center uk-flex-middle"
-                style="height: 100%; width: 100%; margin: 20%; display: none">
-                <div class="uk-flex-row">
-                    <h1>Загрузка товара</h1>
-                    <p>Пожалуйста подождите...</p>
-                </div>
-            </div>
-            <!-- end of block 4 -->
 
             {% csrf_token %}
 
@@ -173,175 +128,159 @@
         </form>
     </div>
 </div>
-{% comment %} <script src="sweetalert2.all.min.js"></script> {% endcomment %}
 
 <script>
     var inputnum = 0,
-        keynum = 0,
+        sizeInput = 0,
         currentTab = 0;
 
     function PassChecker(n) {
-        let pname = document.getElementsByName('product_name')[0].value.length
-        let brand = document.getElementsByName('brand')[0].value.length
-        let comp = document.getElementById('inputDiv').children.length
-        let moneyInput = parseInt(document.getElementById('priceInput').value)
-        let desc = document.getElementById('id_description').value.length
-        let key = document.getElementById('keyDiv').children.length
-
-        if (n == 1) {
-            if (pname < 3 || brand < 3 || comp == 0) {
-                document.getElementById("nextBtn").style["background-color"] = 'gray'
-
-                return 0
-
-            } else {
-                document.getElementById("nextBtn").style["background-color"] = 'blue'
-                document.getElementById("nextBtn").disabled = false;
+        let product_name = document.getElementById("product_name").value.length;
+        let brand = document.getElementById("brand").value.length;
+        let description = document.getElementById("description").value.length;
+        let comps = document.getElementById('inputDiv').children.length
+        let sizes = document.getElementById('sizeInput').children.length
+        let btn = document.getElementById('nextBtn')
+        if (n == 1 && product_name > 0 && brand > 0 && description > 0 && comps > 0 && sizes > 0) {
+            btn.style["background-color"] = 'blue'
+            btn.disabled = false;
+            return 1
+        } else if (n == 2) {
+            let poles = document.getElementsByClassName("price")
+            let checker = false
+            for (let i = 0; i < poles.length; i++) {
+                if (poles[i].value.length > 0) {
+                    checker = true
+                }
+            }
+            if (checker) {
+                btn.style["background-color"] = 'blue'
+                btn.disabled = false;
                 return 1
+            } else{
+                btn.style["background-color"] = 'gray'
+                btn.disabled = true;
+                return 0
             }
         }
-        if (n == 2) {
-            if (moneyInput <= 1 || moneyInput >= 999999999999999 || isNaN(moneyInput * moneyInput)) {
-                document.getElementById("nextBtn").style["background-color"] = 'gray'
-                return 0
-            } else {
-                document.getElementById("nextBtn").style["background-color"] = 'blue'
-                document.getElementById("nextBtn").disabled = false;
-                return 1
-            }
-
-        }
-        if (n == 3) {
-            if (desc <= 0 || key == 0) {
-                document.getElementById("nextBtn").style["background-color"] = 'gray'
-                document.getElementById("nextBtn").disabled = true;
-                return 0
-            } else {
-                document.getElementById("nextBtn").disabled = false;
-                document.getElementById("nextBtn").style["background-color"] = 'blue'
-                document.getElementById('nextBtn').type = "submit"
-                localStorage.page = 3;
-                document.getElementById('next-previous').classList.add("redirect");
-                return 1
-            }
-
-        }
-
-
 
     }
 
     function recalc(el) {
-        let moneyInput = document.getElementById('priceInput')
-
-        let price = parseInt(moneyInput.value);
-        let form = document.getElementById('final_price');
+        let price = parseInt(el.value)
+        let form = el.parentElement.parentElement.getElementsByClassName('final_price')[0];
         let sum = price + price * 0.1
-        form.innerHTML = 0 ? isNaN(sum) : sum;
-        if (!isNaN(sum)) {
-            form.innerHTML = sum
-        } else {
-            form.innerHTML = 0
+        if (price >= 10000000) {
+            el.value = 10000000
+            sum = 10000000
         }
+        form.innerHTML = sum + "₽"
         PassChecker(2)
     }
 
     function addComplectation() {
-        let arr = document.getElementsByClassName('complectations');
-        let brand = document.getElementById('brand').value;
-        let form = document.getElementById('table')
-        for (let i = 0; i < arr.length; ++i) {
-            // let text = document.createTextNode(arr[i].innerHTML);
-            let table = document.getElementById('table');
-            let table_values = table.insertRow(-1).insertCell(0)
-            let newText = document.createTextNode(arr[i].value);
-            table_values.appendChild(newText);
-            if (i === 0) {
-                let sum = parseInt(document.getElementById('priceInput').value)
-                form.children[0].innerHTML += `<td> ${brand} </td> <td id="final_price"> ${sum + sum*0.1} </td>`;
-            }
-            document.getElementsByTagName('td')[i].className += 'uk-text-truncate'
+        let name = document.getElementById('product_name').value;
+        let sizes = document.getElementById('sizeInput').children
+        table = document.getElementById('table')
+        for (let i = 0; i < sizes.length; i++) {
+            let size = sizes[i].getElementsByClassName('complectations_size')[0].value
+            table.innerHTML +=
+                `<tr> <td>${name}</td> <td class="uk-width-1-4">${size}</td> <td class="uk-width-1-4"><input class="uk-input price" type="number" oninput="recalc(this)"></td> <td class="uk-width-1-4"><p class="final_price uk-input"></p></td> </tr>`;
         }
     }
 
     function addInput(el) {
-        let input = el.parentElement.getElementsByTagName("input")[0];
-        if (inputnum < 15 && input.value) {
-            input.removeAttribute("disabled");
-            input.placeholder = "Введите описание товара";
-            let value = document.getElementById('inputvalue').value;
+        // let input = el.parentElement.getElementsByTagName("input")[0];
+        let name = document.getElementById('compNmae');
+        let percentage = document.getElementById('compPercentage');
+        if (inputnum < 15 && name.value && percentage.value) {
+            name.removeAttribute("disabled");
+            percentage.removeAttribute("disabled");
+            name.placeholder = "Введите состав товара";
             var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 1)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="set_${inputnum}" value="${value}" readonly=> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button> </div>`;
+                `<div class="uk-flex uk-flex-center uk-flex-middle"> <input type="text" class="uk-input uk-width-3-6 complectations_name" name="compName_${name.value}" value="${name.value}" readonly> <div class="uk-inline uk-width-1-4"> <input type="number" oninput="PercentageChecker(this)" class="uk-input complectations_percent" name="compPercentage_${percentage.value}" value="${percentage.value}" readonly> <span class="uk-form-icon uk-form-icon-flip">%</span> </div> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="changeInput(this)" type="button"> <i uk-icon="pencil" id="editon"></i> <i uk-icon="check" id="editoff" style="display: none"></i>  </button> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="removeComp(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-            input.value = "";
+            name.value = "";
+            percentage.value = "";
             inputnum++;
         } else if (inputnum >= 15) {
-            input.value = "";
-            input.setAttribute("disabled", "disabled");
-            input.placeholder = "Простите, но вы ввели максимальное количество комплектаций";
+            name.value = "";
+            percentage.value = "";
+            name.setAttribute("disabled", "disabled");
+            percentage.setAttribute("disabled", "disabled");
+            name.placeholder = "Вы ввели максимальное количество составляющих товара";
         } else {
-            input.placeholder = "Для добавления элемента необходимо заполнить это поле";
+            name.placeholder = "Для добавления элемента необходимо заполнить эти поля";
         }
         PassChecker(1)
     }
 
-    function removeInput(el, arg) {
-        let mainInput = el.parentElement.parentElement.parentElement.getElementsByClassName("changible")[0];
-        arg ? inputnum-- : keynum--;
-        if (inputnum < 15 || keynum < 15) {
-            mainInput.removeAttribute("disabled");
-            mainInput.placeholder = "";
+    function addSize(el) {
+        let size = document.getElementById('size');
+        if (inputnum < 15 && size.value) {
+            size.removeAttribute("disabled");
+            size.placeholder = "Введите состав товара";
+            var $inputGroup =
+                `<div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-3"> <input type="text" class="uk-input uk-width-3-5 complectations_size" size="compName_${size.value}" value="${size.value}" readonly> <button class="uk-button uk-button-default uk-width-1-5" style="padding: 0" onclick="removeComp(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
+            // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
+            document.getElementById("sizeInput").insertAdjacentHTML("afterbegin", $inputGroup);
+            size.value = "";
+            inputnum++;
+        } else if (inputnum >= 15) {
+            size.value = "";
+            size.setAttribute("disabled", "disabled");
+            size.placeholder = "Вы ввели максимальное количество составляющих товара";
+        } else {
+            size.placeholder = "Для добавления элемента необходимо заполнить эти поля";
+        }
+        PassChecker(1)
+    }
+
+    function removeComp(el) {
+        let compNmae = document.getElementById('compNmae');
+        let compPercentage = document.getElementById('compPercentage');
+        inputnum--;
+        if (inputnum < 15) {
+            compNmae.removeAttribute("disabled");
+            compNmae.placeholder = "";
+            compPercentage.removeAttribute("disabled");
+            compPercentage.placeholder = "";
         }
         el.parentElement.remove();
         PassChecker(1)
-        PassChecker(3)
     }
 
     function changeInput(el) {
-        let inputPole = el.parentElement.getElementsByTagName("input")[0];
-        let BtnImage = el.parentElement.getElementsByTagName("span")[0];
-        inputPole.placeholder = "Введите ключевые слова";
-        if (inputPole.value) {
-            if (inputPole.readOnly) {
-                BtnImage.innerHTML = "edit_off"
+        let inputPoleName = el.parentElement.getElementsByTagName("input")[0];
+        let inputPolePercantage = el.parentElement.getElementsByTagName("input")[1];
+        let editon = el.parentElement.getElementsByTagName("i")[0];
+        let editoff = el.parentElement.getElementsByTagName("i")[1];
+        inputPoleName.placeholder = "Введите состав товара";
+        if (inputPoleName.value && inputPolePercantage.value) {
+            if (inputPoleName.readOnly && inputPolePercantage.readOnly) {
+                editon.style.display = "none";
+                editoff.style.display = "inline-block";
             } else {
-                inputPole.value = inputPole.value
-                BtnImage.innerHTML = "mode_edit";
+                inputPoleName.value = inputPoleName.value
+                inputPolePercantage.value = inputPolePercantage.value
+                editon.style.display = "inline-block";
+                editoff.style.display = "none";
             }
-            inputPole.readOnly ? inputPole.readOnly = false : inputPole.readOnly = true;
+            inputPoleName.readOnly ? inputPoleName.readOnly = false : inputPoleName.readOnly = true;
+            inputPolePercantage.readOnly ? inputPolePercantage.readOnly = false : inputPolePercantage.readOnly = true;
         } else {
-            inputPole.placeholder = "Заполните это поле или удалите его";
+            inputPoleName.placeholder = "Заполните это поле или удалите его";
         }
+        PassChecker(1)
     }
 
-    function addKey(el) {
-        let key = el.parentElement.getElementsByTagName("input")[0];
-        key.placeholder = "";
-        if (keynum < 15 && key.value) {
-            let value = document.getElementById('keyValue').value
-            var $inputGroup =
-                `<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <input type="text" class="form-control complectations" name="key_${keynum}" value="${value}" readonly> <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span> </div>`;
-            // '<div class="input-group mt-2 mb-2 w-75"> <button class="btn btn-outline-secondary" onclick="removeInput(this, 0)" type="button"><i class="fa fa-minus"></i></button> <p name="key_${keynum}" class="form-control" value="${value}"></p> </div>'
-
-            // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span>
-            document.getElementById("keyDiv").insertAdjacentHTML("afterbegin", $inputGroup);
-            key.value = "";
-            keynum++;
-        } else if (keynum >= 15) {
-            input.value = "";
-            key.setAttribute("disabled", "disabled");
-            key.placeholder = "Простите, но вы ввели максимальное количество ключевых слов";
-        } else {
-            key.placeholder = "Для добавления элемента необходимо заполнить это поле";
+    function PercentageChecker(el) {
+        if (el.value > 100) {
+            el.value = 100;
+        } else if (el.value < 0) {
+            el.value = 0;
         }
-        PassChecker(3)
-    }
-
-    function showExtraInputs() {
-        let extrInput = document.getElementById('extraInputs');
-        extrInput.className == "d-none" ? extrInput.className = "" : extrInput.className = "d-none";
-
     }
 
     document.addEventListener("DOMContentLoaded", function (event) {
@@ -364,9 +303,6 @@
                 addComplectation()
                 document.getElementById("prevBtn").style.display = "inline";
                 PassChecker(2)
-            } else if (n == x.length - 2) {
-                document.getElementById("nextBtn").disabled = true;
-                PassChecker(3)
             } else if (n == x.length - 1) {
                 document.getElementById("prevBtn").style.display = "none";
                 document.getElementById("nextBtn").style.display = "none";

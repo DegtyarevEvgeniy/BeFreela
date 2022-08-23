@@ -343,33 +343,23 @@ class ProductCreateForm(ModelForm):
             'product_name': TextInput(attrs={
                 'class': 'uk-form uk-input',
                 'placeholder': "Введите название товара",
+                'id': 'product_name',
                 'oninput': 'PassChecker(1)',
-            }),
-            'price': TextInput(attrs={
-                'class': 'uk-form uk-input uk-width-4-5',
-                'type': 'number',
-                'id': 'priceInput',
-                'oninput': 'recalc(this)',
-                'placeholder': 'Введите стоимость товара'
             }),
             'country': Select(attrs={
                 'class': 'uk-form uk-width-1',
             }, choices=COUNTRY_CHOICE),
-            # 'subcategory': TextInput(attrs={
-            #     'class': 'uk-form uk-input',
-            #     'oninput': 'PassChecker(1)',
-            #     'placeholder': 'Пример: носки'
-            # }),
             'brand': TextInput(attrs={
                 'class': 'uk-form uk-input',
                 'id': 'brand',
+                'placeholder': 'Введите бренд товара',
                 'oninput': 'PassChecker(1)',
-                'placeholder': 'Введите бренд товара'
             }),
             'description': Textarea(attrs={
                 'class': 'uk-form uk-textarea',
+                'id': 'description',
                 'placeholder': 'Введите описание товара',
-                'oninput': 'PassChecker(3)',
+                'oninput': 'PassChecker(1)',
             }),
             'category': Select(attrs={
                 'class': 'uk-form uk-select',
@@ -377,35 +367,36 @@ class ProductCreateForm(ModelForm):
             'duration': Select(attrs={
                 'class': 'uk-form uk-select',
             }, choices=DURATION_CHOICE),
+            'price': TextInput(attrs={
+                'class': 'uk-form uk-input uk-width-4-5',
+                'type': 'number',
+                'id': 'priceInput',
+                'oninput': 'recalc(this)',
+                'placeholder': 'Введите стоимость товара'
+            }),
             'width_product': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
-                'oninput': 'PassChecker(3)',
             }),
             'height_product': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
-                'oninput': 'PassChecker(3)',
             }),
             'length_product': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
-                'oninput': 'PassChecker(3)',
             }),
             'width_packaging': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
-                'oninput': 'PassChecker(3)',
             }),
             'height_packaging': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
-                'oninput': 'PassChecker(3)',
             }),
             'length_packaging': TextInput(attrs={
                 'class': 'form-control',
                 'type': 'number',
-                'oninput': 'PassChecker(3)',
             }),
 
         }
