@@ -14,12 +14,42 @@ class Shop(models.Model):
     email = models.CharField(max_length=60, default='example@example.com')
     phone = models.CharField(max_length=20, default='+15-15-15-15')
 
+class Product_creator(models.Model):
+    product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    id_creator = models.CharField(max_length=200, default='-') #кто создал
+    product_name = models.CharField('Название', max_length=500, default='-')
+    country = models.CharField('Страна', max_length=30, default='-')
+    brand = models.CharField('Бренд', max_length=30, default='-')
+    rate_sum = models.IntegerField(default=0)
+    vote_sum = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
+    category = models.CharField('Категория', max_length=50, default='-')
+    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
+    compound = models.CharField('Срок получения товара', max_length=50, default='-')
+    size = models.CharField(max_length=300, default='-')
+    duration = models.CharField(max_length=300, default='-')
+    price = models.CharField(max_length=300, default=0)
+    show_price = models.CharField(max_length=300, default=0)
+    description = models.CharField('Описание', max_length=1000, default='-')
+    availability = models.CharField('', max_length=100, default='-')
+    picture = models.ImageField('', upload_to='images/product',
+                                default='images/default.webp')
+    tags = TaggableManager()
+        # width_product = models.FloatField('', default=0)
+    # height_product = models.FloatField('', default=0)
+    # length_product = models.FloatField('', default=0)
+    # width_packaging = models.FloatField('', default=0)
+    # height_packaging = models.FloatField('', default=0)
+    # length_packaging = models.FloatField('', default=0)
+    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
 
 class Product_buy(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
     id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
     price = models.CharField(max_length=200, default='-')
     duration = models.CharField(max_length=200, default='-')
+    compound = models.CharField('Срок получения товара', max_length=50, default='-')
+    size = models.CharField(max_length=300, default='-')
     product_name = models.CharField(max_length=500, default='-')
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=200, default='-')
@@ -46,34 +76,6 @@ class Comments_product(models.Model):
     review = models.CharField(max_length=200, default='-')
     rating = models.IntegerField(default='0')
     created_data = models.DateTimeField(auto_now_add=True)
-
-
-class Product_creator(models.Model):
-    product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    id_creator = models.CharField(max_length=200, default='-') #кто создал
-    product_name = models.CharField('Название', max_length=500, default='-')
-    country = models.CharField('Страна', max_length=30, default='-')
-    brand = models.CharField('Бренд', max_length=30, default='-')
-    rate_sum = models.IntegerField(default=0)
-    vote_sum = models.IntegerField(default=0)
-    rating = models.FloatField(default=0.0)
-    category = models.CharField('Категория', max_length=50, default='-')
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
-    duration = models.CharField('Срок получения товара', max_length=50, default='-')
-    set = models.CharField(max_length=300, default='-')
-    price = models.IntegerField('Цена', default=0)
-    description = models.CharField('Описание', max_length=1000, default='-')
-    width_product = models.FloatField('', default=0)
-    height_product = models.FloatField('', default=0)
-    length_product = models.FloatField('', default=0)
-    width_packaging = models.FloatField('', default=0)
-    height_packaging = models.FloatField('', default=0)
-    length_packaging = models.FloatField('', default=0)
-    availability = models.CharField('', max_length=100, default='-')
-    picture = models.ImageField('', upload_to='images/product',
-                                default='images/default.webp')
-    tags = TaggableManager()
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
 
 class Task(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал

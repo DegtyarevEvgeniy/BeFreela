@@ -95,7 +95,6 @@ def goodsSearch_page(request, product_name):
     context = gen_menu(request)
     products = Product_creator.objects.filter(
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
-        | Q(set__icontains=product_name)
     )
     context['products'] = products
     return render(request, 'goodsSearch.html', context)
@@ -104,6 +103,8 @@ def goods_page(request):
     context = gen_menu(request)
     products = Product_creator.objects.all()
     context['products'] = products
+    print(context)
+    # context['products'].show_price = list(filter(None, products.price.split(",")))[0]
     
     return render(request, 'goods.html', context)
 
@@ -133,7 +134,6 @@ def goodsSearch_page_category(request, category):
 #                             'product_name': product.product_name,
 #                             'cost': product.price,
 #                             'availability': product.availability,
-#                             'picture': product.picture
 #                             }
 #                            for product in products]
 #     return render(request, 'goodsSearch.html', context)
@@ -296,7 +296,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
-        print("PRODUCT_CREATOR")
         product = Product_creator()
         if request.FILES:
             file = request.FILES['product_photos']
@@ -308,42 +307,49 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         #   form = MyForm(request.POST)
         #   product.tags.add(form.cleaned_data['select'])
         product.product_name = request.POST['product_name']
-        product.price = request.POST['price']
+        # product.price = request.POST['price']
         product.description = request.POST['description']
         product.brand = request.POST['brand']
-        t = ''
-        print(request.POST)
+        size = ''
+        compound_name = ''
+        compound_percentage = ''
+        compound = ''
+        price = ''
         for i in range(0, 16):
-            if request.POST.get('set_{}'.format(i), None):
-                t += request.POST.get('set_{}'.format(i), ' ')
-                t += ','
+            if request.POST.get(f'size_{i}'):
+                size += request.POST.get(f'size_{i}')
+                size += ','
             else:
                 break
-
-        product.set = t
-
+            if request.POST.get(f'compName_{i}'):
+                compound_name += request.POST.get(f'compName_{i}')
+            if request.POST.get(f'compPercentage_{i}'):
+                compound_percentage += request.POST.get(f'compPercentage_{i}')
+            if request.POST.get(f'price_{i}'):
+                price += request.POST.get(f'price_{i}')
+                price += ','
+        for name, percentage in zip(compound_name, compound_percentage):
+            compound += f"{name} {percentage},"
+        compound = list(filter(None, compound.split(",")))
+        product.size = size
+        product.compound = compound
+        product.price = price
+        product.show_price = price.split(',')[0]
         product.country = request.POST['country']
         product.category = request.POST['category']
         product.duration = request.POST['duration']
         # product.subcategory = request.POST['subcategory']
-        product.height_packaging = request.POST.get('height_packaging', '0')
-        product.height_product = request.POST.get('height_product', '0')
-        product.length_packaging = request.POST.get('length_packaging', '0')
-        product.length_product = request.POST.get('length_product', '0')
-        product.width_packaging = request.POST.get('width_packaging', '0')
-        product.width_product = request.POST.get('width_product', '0')
+        # product.height_packaging = request.POST.get('height_packaging', '0')
+        # product.height_product = request.POST.get('height_product', '0')
+        # product.length_packaging = request.POST.get('length_packaging', '0')
+        # product.length_product = request.POST.get('length_product', '0')
+        # product.width_packaging = request.POST.get('width_packaging', '0')
+        # product.width_product = request.POST.get('width_product', '0')
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
-        
-        for i in range(0, 16):
-            if request.POST.get('key_{}'.format(i), None):
-                product.tags.add(request.POST.get('key_{}'.format(i), ' '))
-                product.save()
-            else:
-                break
         return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'GET' and "product_cards" in request.GET:
@@ -447,29 +453,15 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         account = Account.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.email)
-        content['products'] = [{'id': product.product_id,
+        products = Product_buy.objects.filter(id_creator=account.email)
+        content['products'] = [{'id': product.id,
                                 'id_creator': product.id_creator,
+                                'customer': product.id_user_buy,
                                 'product_name': product.product_name,
-                                'country': product.country,
-                                'brand': product.brand,
-                                'rate_sum': product.rate_sum,
-                                'vote_sum': product.vote_sum,
-                                'category': product.category,
-                                'set': product.set,
                                 'price': product.price,
-                                'description': product.description,
-                                'width_product': product.width_product,
-                                'height_product': product.height_product,
-                                'length_product': product.length_product,
-                                'width_packaging': product.width_packaging,
-                                'height_packaging': product.height_packaging,
-                                'length_packaging': product.length_packaging,
-                                'availability': product.availability,
-                                'picture': product.picture,
+                                'picture': product.img,
                                 }
                             for product in products]
-
     elif name == '5':
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
@@ -481,15 +473,15 @@ def becomeCreatorTemplate_page(request, name):
                                 'rate_sum': product.rate_sum,
                                 'vote_sum': product.vote_sum,
                                 'category': product.category,
-                                'set': product.set,
-                                'price': product.price,
+                                'set': product.size,
+                                'price': product.price.split(",")[0],
                                 'description': product.description,
-                                'width_product': product.width_product,
-                                'height_product': product.height_product,
-                                'length_product': product.length_product,
-                                'width_packaging': product.width_packaging,
-                                'height_packaging': product.height_packaging,
-                                'length_packaging': product.length_packaging,
+                                # 'width_product': product.width_product,
+                                # 'height_product': product.height_product,
+                                # 'length_product': product.length_product,
+                                # 'width_packaging': product.width_packaging,
+                                # 'height_packaging': product.height_packaging,
+                                # 'length_packaging': product.length_packaging,
                                 'availability': product.availability,
                                 'picture': product.picture,
                                 }
@@ -553,7 +545,7 @@ def cardProduct_page(request, product_id):
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
-            product_buy.price = product.price
+            product_buy.price = product.show_price
             product_buy.duration = product.duration
             # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
@@ -589,8 +581,14 @@ def cardProduct_page(request, product_id):
             product.save()
             comment.save()
             return HttpResponseRedirect(f'/creators/goods/{product_id}/')
-        context['products'] = product
-        context['products'].set = list(filter(None,product.set.strip().split(",")))
+        context['product'] = product
+        context['product'].show_price = list(filter(None, product.price.split(",")))[0]
+        context['product'].sizes = list(filter(None, product.size.split(",")))
+        context['product'].prices = list(filter(None, product.price.split(",")))
+        context['product'].compounds = list(filter(None, product.compound.split(",")))
+
+        print(product.price)
+
 
         messages = Comments_product.objects.filter(id_product=product_id)
 

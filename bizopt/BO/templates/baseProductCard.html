@@ -1,11 +1,11 @@
 {% for product in products %}
 <a href="/creators/goods/{{product.id}}" class="uk-link-reset">
-    <div class="uk-card uk-card-hover" style="padding: 0; margin:1%">
-        <img src="{{product.picture.url}}" width="238px" height="343px" alt="">
-        <ul style="font-size: 1.2em; padding: 0 2% 1%" class="uk-nav">
-            <li class="uk-active uk-flex uk-flex-between uk-text-truncate">
-                <div>{{product.price}} ₽ </div>
-                <div>{{product.brand}}</div>
+    <div class="uk-card uk-card-hover" style="height:400px; width: 220px; margin: 2%; padding: 0 5% 10% 5%">
+        <img src="{{product.picture.url}}" width="238px" height="343px" alt="" style="margin-bottom: 2%;">
+        <ul style="font-size: 1.2em; padding: 0 2%;" class="uk-nav">
+            <li class="uk-active uk-flex uk-flex-between uk-text-truncate uk-width-1">
+                <div><p>{{product.show_price}} ₽ </p></div>
+                <div class="uk-width-1-2" ><p class="uk-text-truncate" uk-tooltip="{{product.brand}}" >{{product.brand}}</p></div>
             </li>
             <li class="uk-active uk-text-truncate">{{product.product_name}}</li>
             <li class="star">

@@ -4,14 +4,14 @@
 
 
 <div class="uk-card uk-card-default uk-card-body uk-width-4-5" style="margin: 0  auto">
-    <container class="container uk-flex uk-flex-around">
-        <div class="uk-display-inline-block">
-            <img src="{{products.picture.url}}" alt="" width="500">
+    <container class="container uk-flex uk-flex-center uk-flex-top uk-width-1">
+        <div class="uk-display-inline-block uk-width-1-2 uk-text-center">
+            <img src="{{product.picture.url}}" alt="" width="500">
         </div>
-        <div class="uk-flex uk-flex-column">
+        <div class="uk-flex uk-flex-column uk-width-1-2">
             <div>
                 <p class="uk-text-emphasis">
-                    <h2 style="display: inline;">{{products.price}}</h2> &nbsp;&nbsp;руб.
+                    <h2 style="display: inline;" id="price">{{product.show_price}}</h2> &nbsp;&nbsp;руб.
 
                 </p>
             </div>
@@ -21,7 +21,7 @@
                     <img src="{{image_user_product.url}}" class="uk-border-circle" style="width: 60px; height: 60px">
                 </div>
                 <div class="uk-width-expand uk-display-inline">
-                    <h3 class="uk-card-title uk-margin-remove-bottom ">{{products.id_creator}}
+                    <h3 class="uk-card-title uk-margin-remove-bottom ">{{product.id_creator}}
                     </h3>
                     <div><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9734</span>
                     </div>
@@ -54,12 +54,10 @@
             <!--  -->
             <div>
                 {% if request.user.is_authenticated %}
-                <button style="color: black; background-color:darkgray"
-                    class="uk-button uk-border-pill uk-width-1-1 uk-margin-small-bottom" href="#modal-overflow"
-                    uk-toggle>Заказать</button>
+                <button class="uk-button uk-button-default uk-border-pill uk-width-auto uk-margin-small-bottom"
+                    href="#modal-overflow" style="background-color: rgb(163, 163, 163);" uk-toggle>Заказать</button>
                 {% else %}
-                <a style="color: black; background-color:darkgray"
-                    class="uk-button uk-border-pill uk-width-1-1 uk-margin-small-bottom"
+                <a style="color: black;" class="uk-button uk-border-pill uk-width-auto uk-margin-small-bottom"
                     href="/accounts/login/">Заказать</a>
                 {% endif %}
                 <div id="modal-overflow" uk-modal>
@@ -109,10 +107,20 @@
                     </div>
                 </div>
                 <button style="color: black; background-color:darkgray"
-                    class="uk-button uk-border-pill uk-width-1-1 uk-margin-small-bottom">Показать контакты
+                    class="uk-button uk-button-default uk-border-pill uk-width-auto uk-margin-small-bottom">Показать
+                    контакты
                     продавца</button>
-
             </div>
+            <div class="uk-margin-medium-top uk-width-1">
+                <h3 class="uk-width-1">Размеры:</h3>
+                <div  class="uk-grid uk-grid-small uk-grid-match uk-width-4-5" id="sizelist" uk-grid>
+                    {% for size in product.sizes %}
+                    <button class="uk-button uk-button-link size">{{size}}</button>
+                    {% endfor %}
+                </div>
+                
+            </div>
+
         </div>
     </container>
     <br>
@@ -121,7 +129,7 @@
         <div style="padding: 5px 10%;">
             <div>
                 <h2>Описание</h2>
-                <p class="uk-text-break" style="font-weight: 600; text-align: left">{{products.description}}</p>
+                <p class="uk-text-break" style="font-weight: 600; text-align: left">{{product.description}}</p>
             </div>
             <!--  -->
             <br>
@@ -132,23 +140,23 @@
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Тип</h4>
 
-                        <!-- <p>{{products.tags}}</p> -->
+                        <!-- <p>{{product.tags}}</p> -->
                         <p>Не указан</p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Бренд</h4>
-                        <p> {{products.brand}} </p>
+                        <p> {{product.brand}} </p>
                     </div>
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Страна Производитель</h4>
-                        <p>{{products.country}}</p>
+                        <p>{{product.country}}</p>
                     </div>
                 </div>
 
-                <div class="d-flex uk-felx-around uk-text-left uk-flex-wrap-top">
+                <!-- <div class="d-flex uk-felx-around uk-text-left uk-flex-wrap-top">
                     <div class="uk-width-1-3" style="margin: 5px 25px">
                         <h4>Комплект товара</h4>
-                            {% for sets in products.set %}
+                            {% for sets in product.set %}
                             <div class="uk-width-1-3 uk-text-left" style="display: inline-block;">
                                 <p style="margin: 2px; padding: 0; border-bottom: 1px solid;" class="uk-text-truncate" uk-tooltip="{{sets}}">{{sets}}</p>
                             </div>
@@ -160,21 +168,21 @@
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Высота</div>
                             <div>
-                                <p>{{products.width_product}} &nbsp;см</p>
+                                <p>{{product.width_product}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Длина</div>
                             <div>
-                                <p>{{products.height_product}} &nbsp;см</p>
+                                <p>{{product.height_product}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Ширина</div>
                             <div>
-                                <p>{{products.length_product}} &nbsp;см</p>
+                                <p>{{product.length_product}} &nbsp;см</p>
                             </div>
                         </div>
                     </div>
@@ -183,25 +191,25 @@
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Высота</div>
                             <div>
-                                <p>{{products.width_packaging}} &nbsp;см</p>
+                                <p>{{product.width_packaging}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Длина</div>
                             <div>
-                                <p>{{products.height_packaging}} &nbsp;см</p>
+                                <p>{{product.height_packaging}} &nbsp;см</p>
                             </div>
                         </div>
 
                         <div class="uk-grid-small" uk-grid>
                             <div class="uk-width-expand" uk-leader="fill:_">Ширина</div>
                             <div>
-                                <p>{{products.length_packaging}} &nbsp;см</p>
+                                <p>{{product.length_packaging}} &nbsp;см</p>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!--  -->
             <br>
@@ -256,7 +264,8 @@
                             <p class="uk-text-right">
                                 <button class="uk-button uk-button-default uk-modal-close"
                                     type="button">Закрыть</button>
-                                <button name="comment_product" class="uk-button uk-button-primary" type="submit">Опубликовать</button>
+                                <button name="comment_product" class="uk-button uk-button-primary"
+                                    type="submit">Опубликовать</button>
                             </p>
                         </form>
                     </div>
@@ -302,7 +311,7 @@
                                     </div>
                                 </div>
                                 <!-- <div class="uk-position-top-right uk-position-small uk-hidden-hover"><a -->
-                                        <!-- class="uk-link-muted" href="#">Reply</a></div> -->
+                                <!-- class="uk-link-muted" href="#">Reply</a></div> -->
 
                             </header>
                             <div class="uk-comment-body">
@@ -318,8 +327,8 @@
                 <div class="uk-flex uk-flex-center uk-text-center"
                     style="background-color: rgba(196, 196, 196, 0.5); border-radius: 20px; padding: 30px 0;">
                     <div class=" uk-margin-right uk-height-small">
-                        <h3>{{products.rating}}</h3>
-                        <p>На основании <br>{{products.rate_sum}} отзывов</p>
+                        <h3>{{product.rating}}</h3>
+                        <p>На основании <br>{{product.rate_sum}} отзывов</p>
                         <div>
                             <span>&#9733</span>
                             <span>&#9733</span>
@@ -421,6 +430,7 @@
         position: relative;
     }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     var alertPlaceholder = document.getElementById('liveAlertPlaceholder')
@@ -439,6 +449,16 @@
             alert('Nice, you triggered this alert message!', 'success')
         })
     }
+
+    var BtnList = Array.prototype.slice.call( document.getElementById('sizelist').children );
+    const sizeBtn = document.querySelectorAll('.size');
+
+    sizeBtn.forEach(el => el.addEventListener('click', event => {
+        let prices = "{{product.price}}".split(',')
+        let index = BtnList.indexOf(el)
+        document.getElementById('price').innerHTML = prices[index]
+        console.log(prices[index])
+    }));
 </script>
 
 

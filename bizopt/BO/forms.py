@@ -344,6 +344,7 @@ class ProductCreateForm(ModelForm):
                 'class': 'uk-form uk-input',
                 'placeholder': "Введите название товара",
                 'id': 'product_name',
+                'max_length': '100',
                 'oninput': 'PassChecker(1)',
             }),
             'country': Select(attrs={
@@ -353,6 +354,7 @@ class ProductCreateForm(ModelForm):
                 'class': 'uk-form uk-input',
                 'id': 'brand',
                 'placeholder': 'Введите бренд товара',
+                'max_length': '100',
                 'oninput': 'PassChecker(1)',
             }),
             'description': Textarea(attrs={

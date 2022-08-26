@@ -24,24 +24,30 @@
                         <label> Фотография товара <i
                                 uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
                                 uk-icon="question"></i></label>
-                        <div class="uk-width-1 uk-margin-medium-bottom" uk-form-custom="target: true">
+                        <div class="uk-width-1 uk-margin-small-bottom" uk-form-custom="target: true">
                             <input type="file">
                             <input class="uk-input" name="product_photos" type="text" placeholder="Выбрать файл"
                                 disabled>
                         </div>
-                        <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="uk-width-1 uk-margin-small-bottom">
                             <label> Срок получения товара <i
                                     uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
                                     uk-icon="question"></i></label>
                             {{ form8.duration }}
                         </div>
-                        <div class="uk-width-1 uk-margin-medium-bottom">
+                        <div class="uk-width-1 uk-margin-small-bottom">
                             <label> Категория <i uk-tooltip="К какой категории вы относите свой товар?"
                                     uk-icon="question"></i></label>
                             {{ form8.category }}
                         </div>
+                        <div class="uk-width-1 uk-margin-small-bottom">
+                            <label>Трана произваодетель <i
+                                    uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                                    uk-icon="question"></i></label>
+                            {{ form8.country }}
+                        </div>
                     </div>
-                    <div class="uk-width-2-5 uk-margin-medium-bottom">
+                    <div class="uk-width-2-5 uk-margin-small-bottom">
                         <label>Описание <i
                                 uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
                                 uk-icon="question"></i></label>
@@ -56,7 +62,7 @@
                                 uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
                                 uk-icon="question"></i></label>
                         <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
-                            <input type="text" id="compNmae" maxlength="40" class="uk-input uk-width-3-6">
+                            <input type="text" id="compNmae" maxlength="40" class="changeble uk-input uk-width-3-6">
                             <div class="uk-inline uk-width-1-4">
                                 <input type="number" oninput="PercentageChecker(this)" id="compPercentage" min="0"
                                     max="100" style="border-left: none; border-right: none;" class="uk-input">
@@ -67,7 +73,7 @@
                                     class="fa fa-plus"></i></button>
                         </div>
                         <!-- template start -->
-                        <div id="inputDiv" class="uk-width-1 uk-grid" uk-grid>
+                        <div id="inputDiv" class="uk-width-1 uk-flex-row">
                         </div>
                         <!-- template end -->
                     </div>
@@ -76,7 +82,7 @@
                                 uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
                                 uk-icon="question"></i></label>
                         <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
-                            <input type="text" id="size" maxlength="10" class="uk-input uk-width-3-6">
+                            <input type="text" id="size" maxlength="10" class="changeble uk-input uk-width-3-6">
                             <button class="uk-button uk-button-default uk-width-1-6" style="padding:0" id="btnAdd"
                                 name="addComplect" onclick="addSize(this)" type="button"><i
                                     class="fa fa-plus"></i></button>
@@ -97,7 +103,7 @@
                             <th class="uk-width-auto">название</th>
                             <th class="uk-width-auto">Размер</th>
                             <th class="uk-width-auto">Цена</th>
-                            <th class="uk-width-auto">Итоговая стоимость</th>
+                            <th class="uk-width-auto uk-text-center">Итоговая стоимость</th>
                         </tr>
                     </thead>
                     <tbody id="table">
@@ -156,8 +162,10 @@
             if (checker) {
                 btn.style["background-color"] = 'blue'
                 btn.disabled = false;
+                localStorage.page = 5;
+                btn.type = "submit"
                 return 1
-            } else{
+            } else {
                 btn.style["background-color"] = 'gray'
                 btn.disabled = true;
                 return 0
@@ -185,7 +193,7 @@
         for (let i = 0; i < sizes.length; i++) {
             let size = sizes[i].getElementsByClassName('complectations_size')[0].value
             table.innerHTML +=
-                `<tr> <td>${name}</td> <td class="uk-width-1-4">${size}</td> <td class="uk-width-1-4"><input class="uk-input price" type="number" oninput="recalc(this)"></td> <td class="uk-width-1-4"><p class="final_price uk-input"></p></td> </tr>`;
+                `<tr> <td class="uk-text-truncate">${name}</td> <td class="uk-width-1-4">${size}</td> <td class="uk-width-1-4"><input class="uk-input price" type="number" name="price_${i}" oninput="recalc(this)" required></td> <td class="uk-width-1-4 uk-text-center"><p class="final_price"></p></td> </tr>`;
         }
     }
 
@@ -198,7 +206,7 @@
             percentage.removeAttribute("disabled");
             name.placeholder = "Введите состав товара";
             var $inputGroup =
-                `<div class="uk-flex uk-flex-center uk-flex-middle"> <input type="text" class="uk-input uk-width-3-6 complectations_name" name="compName_${name.value}" value="${name.value}" readonly> <div class="uk-inline uk-width-1-4"> <input type="number" oninput="PercentageChecker(this)" class="uk-input complectations_percent" name="compPercentage_${percentage.value}" value="${percentage.value}" readonly> <span class="uk-form-icon uk-form-icon-flip">%</span> </div> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="changeInput(this)" type="button"> <i uk-icon="pencil" id="editon"></i> <i uk-icon="check" id="editoff" style="display: none"></i>  </button> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="removeComp(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
+                `<div class="uk-flex uk-flex-center uk-flex-middle"> <input type="text" class="uk-input uk-width-3-6 complectations_name" name="compName_${inputnum}" value="${name.value}" readonly> <div class="uk-inline uk-width-1-4"> <input type="number" oninput="PercentageChecker(this)" class="uk-input complectations_percent" name="compPercentage_${inputnum}" value="${percentage.value}" readonly> <span class="uk-form-icon uk-form-icon-flip">%</span> </div> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="changeInput(this)" type="button"> <i uk-icon="pencil" id="editon"></i> <i uk-icon="check" id="editoff" style="display: none"></i>  </button> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="removeEl(this, 0)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
             name.value = "";
@@ -208,7 +216,6 @@
             name.value = "";
             percentage.value = "";
             name.setAttribute("disabled", "disabled");
-            percentage.setAttribute("disabled", "disabled");
             name.placeholder = "Вы ввели максимальное количество составляющих товара";
         } else {
             name.placeholder = "Для добавления элемента необходимо заполнить эти поля";
@@ -218,16 +225,16 @@
 
     function addSize(el) {
         let size = document.getElementById('size');
-        if (inputnum < 15 && size.value) {
+        if (sizeInput < 15 && size.value) {
             size.removeAttribute("disabled");
             size.placeholder = "Введите состав товара";
             var $inputGroup =
-                `<div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-3"> <input type="text" class="uk-input uk-width-3-5 complectations_size" size="compName_${size.value}" value="${size.value}" readonly> <button class="uk-button uk-button-default uk-width-1-5" style="padding: 0" onclick="removeComp(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
+                `<div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-3"> <input type="text" class="uk-input uk-width-3-5 complectations_size" name="size_${sizeInput}" value="${size.value}" readonly> <button class="uk-button uk-button-default uk-width-1-5" style="padding: 0" onclick="removeEl(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("sizeInput").insertAdjacentHTML("afterbegin", $inputGroup);
             size.value = "";
-            inputnum++;
-        } else if (inputnum >= 15) {
+            sizeInput++;
+        } else if (sizeInput >= 15) {
             size.value = "";
             size.setAttribute("disabled", "disabled");
             size.placeholder = "Вы ввели максимальное количество составляющих товара";
@@ -237,15 +244,12 @@
         PassChecker(1)
     }
 
-    function removeComp(el) {
-        let compNmae = document.getElementById('compNmae');
-        let compPercentage = document.getElementById('compPercentage');
-        inputnum--;
-        if (inputnum < 15) {
-            compNmae.removeAttribute("disabled");
-            compNmae.placeholder = "";
-            compPercentage.removeAttribute("disabled");
-            compPercentage.placeholder = "";
+    function removeEl(el, arg) {
+        let mainInput = el.parentElement.parentElement.parentElement.getElementsByClassName("changeble")[0];
+        arg ? sizeInput-- : inputnum--;
+        if (inputnum < 15 || sizeInput < 15) {
+            mainInput.removeAttribute("disabled");
+            mainInput.placeholder = "";
         }
         el.parentElement.remove();
         PassChecker(1)
@@ -339,7 +343,6 @@
             currentTab = currentTab + n;
             if (currentTab === x.length - 1) {
                 document.getElementById('nextBtn').type = "submit"
-                localStorage.page = 5;
                 document.getElementById('next-previous').classList.add("redirect");
             }
             showTab(currentTab);
