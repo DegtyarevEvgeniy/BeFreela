@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
-
+import math
 from django.urls import reverse_lazy
 
 
@@ -97,13 +97,14 @@ def goodsSearch_page(request, product_name):
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
     )
     context['products'] = products
-    return render(request, 'goodsSearch.html', context)
+    return render(request, 'goods.html', context)
 
 def goods_page(request):
     context = gen_menu(request)
     products = Product_creator.objects.all()
     context['products'] = products
-    print(context)
+    for element in context['products']:
+        element.flooredrating = math.floor(element.rating)
     # context['products'].show_price = list(filter(None, products.price.split(",")))[0]
     
     return render(request, 'goods.html', context)
@@ -111,19 +112,17 @@ def goods_page(request):
 def goodsSearch_page_category(request, category):
     context = gen_menu(request)
     products = Product_creator.objects.filter(
-        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
-        | Q(set__icontains=category) | Q(category__icontains=category)
+        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category) | Q(category__icontains=category)
     )
 
     context['category'] = category
     context['products'] = products
-    return render(request, 'goodsSearch.html', context)
+    return render(request, 'goods.html', context)
 
 # def goodsSearch_page_subcategory(request, category, subcategory):
 #     context = gen_menu(request)
 #     products = Product_creator.objects.filter(
-#         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category)
-#         | Q(set__icontains=category) | Q(category__icontains=category)
+#         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category) | Q(category__icontains=category)
 #     )
 #     products = products.filter(
 #         Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
@@ -586,6 +585,8 @@ def cardProduct_page(request, product_id):
         context['product'].sizes = list(filter(None, product.size.split(",")))
         context['product'].prices = list(filter(None, product.price.split(",")))
         context['product'].compounds = list(filter(None, product.compound.split(",")))
+        context['product'].rating = round(product.rating, 1)
+        context['product'].flooredrating = math.floor(product.rating)
 
         print(product.price)
 

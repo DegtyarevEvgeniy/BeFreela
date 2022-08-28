@@ -1,37 +1,34 @@
 {% for product in products %}
-<a href="/creators/goods/{{product.id}}" class="uk-link-reset">
-    <div class="uk-card uk-card-hover" style="height:400px; width: 220px; margin: 2%; padding: 0 5% 10% 5%">
-        <img src="{{product.picture.url}}" width="238px" height="343px" alt="" style="margin-bottom: 2%;">
-        <ul style="font-size: 1.2em; padding: 0 2%;" class="uk-nav">
-            <li class="uk-active uk-flex uk-flex-between uk-text-truncate uk-width-1">
-                <div><p>{{product.show_price}} ₽ </p></div>
-                <div class="uk-width-1-2" ><p class="uk-text-truncate" uk-tooltip="{{product.brand}}" >{{product.brand}}</p></div>
-            </li>
-            <li class="uk-active uk-text-truncate">{{product.product_name}}</li>
-            <li class="star">
-                <strong>&star;</strong>
-                <strong>&star;</strong>
-                <strong>&star;</strong>
-                <strong>&star;</strong>
-                <strong>&star;</strong>
-            </li>
-        </ul>
-    </div>
-</a>
+<li data-sex="{{product.sex}}" data-rating="{{product.flooredrating}}" data-duration="{{product.duration}}" data-price="{{product.id}}">
+    <a href="/creators/goods/{{product.id}}" class="uk-text-secondary uk-link-reset">
+        <div class="uk-card uk-card-hover" style="height:400px; width: 220px; margin: 2%; padding: 0 5% 10% 5%">
+            <img src="{{product.picture.url}}" width="238px" height="343px" alt="" style="margin-bottom: 2%;">
+            <ul style="font-size: 1.2em; padding: 0 2%;" class="uk-nav">
+                <li class="uk-active uk-flex uk-flex-between uk-text-truncate uk-width-1">
+                    <p style="margin: 0">{{product.show_price}} ₽ </p>
+                </li>
+                <li class="uk-active">
+                    <p class="uk-text-truncate" style="margin: 0">{{product.brand}}</p>
+                </li>
+                <li class="uk-active uk-text-truncate">{{product.product_name}}</li>
+
+                <li class="star">
+                    {% if product.flooredrating == 5 %}
+                    &starf;&starf;&starf;&starf;&starf;
+                    {% elif product.flooredrating == 4 %}
+                    &starf;&starf;&starf;&starf;&star;
+                    {% elif product.flooredrating == 3 %}
+                    &starf;&starf;&starf;&star;&star;
+                    {% elif product.flooredrating == 2 %}
+                    &starf;&starf;&star;&star;&star;
+                    {% elif product.flooredrating == 1 %}
+                    &starf;&star;&star;&star;&star;
+                    {% elif product.flooredrating == 0 %}
+                    &star;&star;&star;&star;&star;
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </a>
+</li>
 {% endfor %}
-
-
-
-<style>
-    p.star {
-        width: 100%;
-        font-size: 20px;
-        color: #808080;
-        margin: 0;
-    }
-</style>
-</body>
-
-
-<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>

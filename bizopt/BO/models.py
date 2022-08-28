@@ -24,6 +24,7 @@ class Product_creator(models.Model):
     vote_sum = models.IntegerField(default=0)
     rating = models.FloatField(default=0.0)
     category = models.CharField('Категория', max_length=50, default='-')
+    sex = models.CharField('Категория', max_length=50, default='-')
     # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
     compound = models.CharField('Срок получения товара', max_length=50, default='-')
     size = models.CharField(max_length=300, default='-')

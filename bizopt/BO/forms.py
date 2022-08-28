@@ -281,6 +281,12 @@ DURATION_CHOICE = [
     ('1 - 2 года', '1 - 2 года'),
     ('более 3-х лет', 'более 3-х лет'),
 ]
+
+SEX_CHOICE = [
+    ('women', 'женское'),
+    ('men', 'мужское'),
+    ('unisex', 'унисекс'),
+]
 User = get_user_model()
 
 
@@ -348,7 +354,7 @@ class ProductCreateForm(ModelForm):
                 'oninput': 'PassChecker(1)',
             }),
             'country': Select(attrs={
-                'class': 'uk-form uk-width-1',
+                'class': 'uk-form uk-select',
             }, choices=COUNTRY_CHOICE),
             'brand': TextInput(attrs={
                 'class': 'uk-form uk-input',
@@ -369,6 +375,9 @@ class ProductCreateForm(ModelForm):
             'duration': Select(attrs={
                 'class': 'uk-form uk-select',
             }, choices=DURATION_CHOICE),
+            'sex': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=SEX_CHOICE),
             'price': TextInput(attrs={
                 'class': 'uk-form uk-input uk-width-4-5',
                 'type': 'number',

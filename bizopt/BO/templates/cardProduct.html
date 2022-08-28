@@ -113,12 +113,12 @@
             </div>
             <div class="uk-margin-medium-top uk-width-1">
                 <h3 class="uk-width-1">Размеры:</h3>
-                <div  class="uk-grid uk-grid-small uk-grid-match uk-width-4-5" id="sizelist" uk-grid>
+                <div class="uk-grid uk-grid-small uk-grid-match uk-width-4-5" id="sizelist" uk-grid>
                     {% for size in product.sizes %}
                     <button class="uk-button uk-button-link size">{{size}}</button>
                     {% endfor %}
                 </div>
-                
+
             </div>
 
         </div>
@@ -330,11 +330,19 @@
                         <h3>{{product.rating}}</h3>
                         <p>На основании <br>{{product.rate_sum}} отзывов</p>
                         <div>
-                            <span>&#9733</span>
-                            <span>&#9733</span>
-                            <span>&#9733</span>
-                            <span>&#9733</span>
-                            <span>&#9734</span>
+                            {% if product.flooredrating == 5 %}
+                            &starf;&starf;&starf;&starf;&starf;
+                            {% elif product.flooredrating == 4 %}
+                            &starf;&starf;&starf;&starf;&star;
+                            {% elif product.flooredrating == 3 %}
+                            &starf;&starf;&starf;&star;&star;
+                            {% elif product.flooredrating == 2 %}
+                            &starf;&starf;&star;&star;&star;
+                            {% elif product.flooredrating == 1 %}
+                            &starf;&star;&star;&star;&star;
+                            {% elif product.flooredrating == 0 %}
+                            &star;&star;&star;&star;&star;
+                            {% endif %}
                         </div>
                     </div>
                     <!-- <div class="uk-margin-left uk-height-small" style="width: 40%;text-align: left">
@@ -450,7 +458,7 @@
         })
     }
 
-    var BtnList = Array.prototype.slice.call( document.getElementById('sizelist').children );
+    var BtnList = Array.prototype.slice.call(document.getElementById('sizelist').children);
     const sizeBtn = document.querySelectorAll('.size');
 
     sizeBtn.forEach(el => el.addEventListener('click', event => {
