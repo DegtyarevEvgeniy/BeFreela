@@ -750,13 +750,13 @@ def login_page(request):
             print('Try again! username or password is incorrect')
     # регистрация
     elif request.method == 'POST' and 'btnform1' in request.POST:
-        send_mail(
-            'Test',
-            'Всё робит)',
-            'korotikhin84@mail.ru',
-            ['gaamer557@gmail.com'],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     'Test',
+        #     'Всё робит)',
+        #     'korotikhin84@mail.ru',
+        #     ['gaamer557@gmail.com'],
+        #     fail_silently=False,
+        # )
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email')

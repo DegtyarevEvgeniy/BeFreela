@@ -41,13 +41,13 @@
                 </li>
             </ul>
         </div>
-        <div class="uk-navbar-right uk-width-2-5">
-            <div class="uk-search uk-search-default uk-width-2-3">
+        <div class="uk-navbar-right uk-flex uk-flex-middle uk-flex-right uk-width-2-5">
+            <div class="uk-search uk-search-default uk-width-expand">
                 <a type="submit" href="" id="searchBtn" uk-search-icon></a>
                 <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
             </div>
 
-            <ul class="uk-navbar-nav uk-width-1-3">
+            <ul class="uk-navbar-nav uk-width-auto">
                 {% if user.is_partner %}
                 <li class="uk-active">
                     <a href="/becomeCreator/" uk-icon="icon: bag"></a>
@@ -65,8 +65,8 @@
                             </li>
                             <li class="uk-nav-divider"></li>
                             <li class="uk-active"><a href="/edit/">Настройки профиля</a></li>
-                            <li class="uk-active"><a href="/logout/">Выйти</a></li>
                             <li class="uk-active"><a href="/chats">Чаты</a></li>
+                            <li class="uk-active"><a href="/logout/">Выйти</a></li>
                         </ul>
                     </div>
                 </li>
@@ -115,12 +115,12 @@
 
         </ul>
     </div>
-    <div class="uk-navbar-right uk-flex uk-flex-right uk-width-3-5@l">
-        <div class="uk-search uk-search-default">
+    <div class="uk-navbar-right uk-flex uk-flex-middle uk-flex-right uk-width-2-5">
+        <div class="uk-search uk-search-default uk-width-expand">
             <a type="submit" href="" id="searchBtn" uk-search-icon></a>
             <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
         </div>
-        <ul class="uk-navbar-nav">
+        <ul class="uk-navbar-nav uk-width-auto">
             <li class="uk-active">
                 <a href="/login/" uk-icon="icon: cart"></a>
 
