@@ -3,7 +3,7 @@
 
 <head>
     <meta charset='utf-8'>
-    <title>BizOpt</title>
+    <title>BeFreela</title>
     <link href='' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
 
@@ -41,7 +41,7 @@
 </style>
 
 <body style="margin: auto">
-    <section style="padding: 0 0 10px" clss="uk-card-body" id="header">
+    <section style="padding: 0 10px" clss="uk-card-body" id="header">
         <nav uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-dark"
             class="uk-navbar-container" uk-navbar style="color: black; padding: 0 5%;">
             <div class="uk-navbar-left">
@@ -77,6 +77,8 @@
                     </div>
                     <div class="uk-width-1-1 uk-text-center">
                         <br>
+                        <form method="POST">
+                            {% csrf_token %}
                             <!-- <a href="https://befreela.partners.ru/" class="uk-width-1 uk-button uk-button-secondary uk-border-rounded" style="margin: 0 auto; font-size: large;background-color: purple">Зарегестрироваться</a> -->
                             <div class="uk-card-body" style="padding-bottom: 0px; padding-top: 2%; text-align: center">
                                 <label for="phonenumber" class="uk-text-muted">Контактный телефон</label>
@@ -102,11 +104,12 @@
                             </select>
                         </div>
                         <div class="uk-flex uk-flex-center uk-align-center" style="margin-top: 20px">
-                            <button onclick="JSalert()" class="uk-button uk-button-primary uk-width-4-5 uk-border-rounded" id="registerBtn"
-                            disabled>Получить
-                            код</button>
+                            <button type="submit" onclick="JSalert()" class="uk-button uk-button-primary uk-width-4-5 uk-border-rounded" id="registerBtn"
+                            disabled>Отправить заявку</button>
                         </div>
                     </div>
+
+                </form>
 
                     </div>
 
@@ -120,7 +123,7 @@
                                            name="code" type="text" placeholder="000000" onkeyup="this.value = this.value.replace(/[^\d]/g,'');" >
                                     {% csrf_token %}
                                     <p class="">
-                                        <button type='button' id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
+                                        <button type='button'  id="codeButton" class="uk-button uk-button-primary uk-border-rounded" disabled >Отправить код</button>
                                     </p>
                                 </form>
                             </div>

@@ -5,11 +5,13 @@ from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from django.contrib.auth import logout
 
+from .models import BoProductCreator
+
 
 
 
 from partners.models import Partner
-from Part.models import Creator, Product_buy, Product_creator
+from Part.models import *
 from Part.forms import ProductCreateForm
 
 
@@ -46,7 +48,7 @@ def logout_view(request):
 def partnerTemplate_page(request, name):
     content = {}
     try:
-        creator = Creator.objects.get(email=request.user.email)
+        creator = BoCreator.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
@@ -59,7 +61,7 @@ def partnerTemplate_page(request, name):
     path = f"partnerTemplates/template{name}.html"
     if name == '2':
         try:
-            products = Product_buy.objects.filter(id_creator=request.user)
+            products = BoProductBuy.objects.filter(id_creator=request.user)
             content['products'] = [{'id': product.id,
                                     'product_name': product.product_name,
                                     'customer': product.id_user_buy,
@@ -71,7 +73,7 @@ def partnerTemplate_page(request, name):
 
                                     }
                                    for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user)
+            products_v = BoProductBuy.objects.filter(id_creator=request.user)
             if products_v.count() > 0:
                 content['products_v'] = [{'id': product.id,
                                        'product_name': product.product_name,
@@ -83,7 +85,7 @@ def partnerTemplate_page(request, name):
                                      for product in products_v]
             
         
-        except Product_buy.DoesNotExist as e:
+        except BoProductBuy.DoesNotExist as e:
             content['products'] = None
 
     # elif name == '3':
@@ -92,7 +94,7 @@ def partnerTemplate_page(request, name):
 
     elif name == '3':
         account = Partner.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.email)
+        products = BoProductCreator.objects.filter(id_creator=account.email)
         content['products'] = [{'product_name': product.product_name,
                                 'cost': product.price,
                                 'id': product.product_id,
@@ -101,10 +103,10 @@ def partnerTemplate_page(request, name):
 
     elif name == '4':
         try:
-            creator = Creator.objects.get(email=request.user)
+            creator = BoCreator.objects.get(email=request.user)
             content['creator'] = creator
         except:
-            creator = Creator()
+            creator = BoCreator()
             content['creator'] = creator
 
     elif name == '1':
@@ -137,16 +139,16 @@ def index_page(request):  # sourcery skip: low-code-quality
             context['first_name'] = user.first_name
             context['email'] = user.email
             try:
-                creator = Creator.objects.get(email=request.user)
+                creator = BoCreator.objects.get(email=request.user)
                 creator.description = request.POST['description']
                 creator.telegram = request.POST['telegram']
                 creator.vk = request.POST['vk']
                 creator.whatsapp = request.POST['whatsapp']
                 creator.instagram = request.POST['instagram']
-                creator.username = request.user.username
+
                 creator.save()
             except:
-                creator = Creator()
+                creator = BoCreator()
                 if request.FILES:
                     file = request.FILES['profile_images']
                     fs = FileSystemStorage()
@@ -154,7 +156,7 @@ def index_page(request):  # sourcery skip: low-code-quality
                     local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
                     creator.cover = local_path_to_file
                 creator.first_name = user.first_name
-                creator.username = request.user.username
+
                 creator.description = request.POST['profile_description']
                 creator.telegram = request.POST['telegram']
                 creator.vk = request.POST['vk']
@@ -169,15 +171,15 @@ def index_page(request):  # sourcery skip: low-code-quality
                     creator.is_company = False
                 creator.save()
 
-        if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
-            print("PRODUCT_CREATOR")
-            product = Product_creator()
+        if request.method == 'POST' and "BoProductCreator" in request.POST:  # для создания собственного продукта
+            print("BoProductCreator")
+            product = BoProductCreator()
             if request.FILES:
                 file = request.FILES['product_photos']
                 fs = FileSystemStorage()
                 local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
                 product.picture = local_path_to_file
-            #if "product_creator_tags" in request.POST:
+            #if "BoProductCreator_tags" in request.POST:
             #   form = MyForm(request.POST)
             #   product.tags.add(form.cleaned_data['select'])
             product.product_name = request.POST['product_name']
@@ -213,43 +215,43 @@ def index_page(request):  # sourcery skip: low-code-quality
                     product.save()
                 else:
                     break
-            return redirect('/becomeCreator/')
+            return redirect('/')
 
         if request.method == 'GET' and "product_cards" in request.GET:
             print("CARDS")
 
         if request.method == 'GET' and "delete" in request.GET:
-            product = Product_creator.objects.get(product_id=request.GET['delete'])
+            product = BoProductCreator.objects.get(product_id=request.GET['delete'])
             product.delete()
-            return redirect('/becomeCreator/')
+            return redirect('/')
 
         if request.method == 'POST' and "status" in request.POST:
-            product = Product_buy.objects.get(id=request.POST['status'])
+            product = BoProductBuy.objects.get(id=request.POST['status'])
             product.status = 'Заказ в работе'
             product.save()
-            return redirect('/becomeCreator/')
+            return redirect('/')
         if request.method == 'GET' and "in_work" in request.POST:
-            product = Product_buy.objects.get(id=request.POST['in_work'])
+            product = BoProductBuy.objects.get(id=request.POST['in_work'])
             product.status = 'Заказ в работе'
             product.save()
         if request.method == 'POST' and "done" in request.POST:
-            product = Product_buy.objects.get(id=request.POST['done'])
+            product = BoProductBuy.objects.get(id=request.POST['done'])
             product.status = 'Заказ готов'
             product.save()
         if request.method == 'POST' and "payment" in request.POST:
-            product = Product_buy.objects.get(id=request.GET['payment'])
+            product = BoProductBuy.objects.get(id=request.GET['payment'])
             product.status = 'Заказ оплачен'
             product.save()
         if request.method == 'POST' and "decline" in request.POST:
-            product = Product_buy.objects.get(id=request.POST['decline'])
+            product = BoProductBuy.objects.get(id=request.POST['decline'])
             product.status = 'Заказчик отказался от заказа'
             product.save()
         if request.method == 'GET' and "decline_work" in request.GET:
-            product = Product_buy.objects.get(id=request.GET['decline_work'])
+            product = BoProductBuy.objects.get(id=request.GET['decline_work'])
             product.status = 'Заказчик отказался от заказа'
             product.save()
         if request.method == 'GET' and "4" in request.GET:
-            product = Product_buy.objects.get(id=request.GET['4'])
+            product = BoProductBuy.objects.get(id=request.GET['4'])
             product.status = 'Заказчик отказался от заказа'
             product.save()
 
@@ -287,7 +289,7 @@ def index_page(request):  # sourcery skip: low-code-quality
                 '3': 'Заказ в ожидании оплаты',
                 '4': 'Заказчик отказался от заказа'
             }
-            products = Product_buy.objects.all()
+            products = BoProductBuy.objects.all()
             for i in range(len(products)):
                 products[i].status = statuses[statuses_list[i]]
                 products[i].save()

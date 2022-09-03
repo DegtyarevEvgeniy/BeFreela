@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelChoiceField, ModelForm, TextInput, Textarea, Select, CharField
 from .models import *
+from .models import BoProductCreator
 
 COUNTRY_CHOICE = [
     ('Afghanistan', 'Afghanistan'),
@@ -289,7 +290,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '9'
         })
         self.fields['street'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input',
             'required': '',
             'name': 'street',
             'id': 'street',
@@ -299,7 +300,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '8'
         })
         self.fields['fiz_adress'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input',
             'required': '',
             'name': 'fiz_adress',
             'id': 'fiz_adress',
@@ -309,7 +310,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '10'
         })
         self.fields['index'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input',
             'required': '',
             'name': 'index',
             'id': 'index',
@@ -319,7 +320,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '6'
         })
         self.fields['checking_account'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input',
             'required': '',
             'name': 'checking_account',
             'id': 'checking_account',
@@ -329,7 +330,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '20'
         })
         self.fields['bik'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input',
             'required': '',
             'name': 'checking_account',
             'id': 'checking_account',
@@ -339,7 +340,7 @@ class SignUpForm(UserCreationForm):
             'minlength': '8'
         })
         self.fields['korr_check'].widget.attrs.update({
-            'class': 'form-input',
+            'class': 'uk-input',
             'required': '',
             'name': 'korr_check',
             'id': 'korr_check',
@@ -363,7 +364,7 @@ class SignUpForm(UserCreationForm):
 
 class ProductCreateForm(ModelForm):
     class Meta:
-        model = Product_creator
+        model = BoProductCreator
         fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={

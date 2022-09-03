@@ -1,52 +1,23 @@
 {% if user.is_authenticated %}
-<div>
-    <nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
-        style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#main-menuM" uk-icon="menu" uk-toggle></a></li>
-                <li class="uk-active">
-                    <a class="homeWord" href="/">
-                        <h2 class="uk-margin-remove uk-text-bold">BeFreela</h2>
-                    </a>
-                </li>
-                <!--  -->
-            </ul>
+<nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
+    style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
+    <div class="uk-navbar-left">
+        <a class="homeWord" href="/">
+            <h2 class="uk-margin-remove uk-text-bold uk-button uk-button-link" style="font-size: 1.5rem;">BeFreela</h2>
+        </a>
+    </div>
+    <div class="uk-navbar-right uk-width-3-5">
+        <div class="uk-search uk-search-default uk-width-2-3">
+            <a type="submit" href="" id="searchBtn1" uk-search-icon></a>
+            <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole1">
         </div>
-        <div class="uk-nav-center " style="margin: 0 auto;">
-            <div class="uk-search uk-search-default">
-                <a type="submit" href="" id="searchBtn" uk-search-icon></a>
-                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
-            </div>
-        </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li class="uk-active">
-                    <a href="/partners/" uk-icon="icon: bag"></a>
-                </li>
-                <li class="uk-active">
-                    <a href="/orders/" uk-icon="icon: cart"></a>
-                </li>
-                <li class="uk-active">
-                    <a uk-icon="icon: user"></a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li>
-                                <p>{{user.email}}</p>
-                            </li>
-                            <li class="uk-nav-divider"></li>
-                            <li class="uk-active"><a href="/addTask/">Создать задачу</a></li>
-                            <li class="uk-active"><a href="/edit/">Настройки профиля</a></li>
-                            <li class="uk-active"><a href="/logout/">Выйти</a></li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    </div>
+</nav>
+<div style="position: fixed; top: 3%; left: 3%; z-index: 1000;">
+    <a class="uk-botton uk-button-link" href="#main-menuS" uk-icon="menu" uk-toggle></a>
 </div>
 <!-- start of navbar submenu -->
-<div id="main-menuM" uk-offcanvas="overlay: true">
+<div id="main-menuS" uk-offcanvas="overlay: true">
     <div class="uk-offcanvas-bar uk-flex uk-flex-column">
 
         <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
@@ -54,34 +25,75 @@
                     <h1 class="uk-button uk-button-default uk-position-top"
                         style="font-size: 2rem; border: none; margin-top: 5%;">BeFreela</h1>
                 </a>
-            <li class="uk-active"><a href="/creators/resumes/">
+            </li>
+
+            <li>
+                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
+                    <img src="https://www.visitdubai.com/-/media/gathercontent/article/t/top-rides-at-img-worlds-of-adventure/media/top-rides-at-img-worlds-of-adventure-predator-5.jpg?rev=f1bb54a15add49a09c912eac851f4ff7&cx=0.56&cy=0.4&cw=397&ch=397"
+                        width=60 height=60 class="uk-border-circle">
+                    <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
+                </div>
+                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
+                    {% if user.is_partner %}
+                    <a style="margin: 0 5%" uk-tooltip="Партнерка" href="/becomeCreator/"
+                        uk-icon="icon: bag"></a>
+                    {% endif %}
+                    <a style="margin: 0 5%" uk-tooltip="Корзина" href="/orders/" uk-icon="icon: cart"></a>
+                </div>
+                <br>
+                <div class="uk-flex uk-flex-between uk-flex-top">
+                    <a style="color: gray" href="/edit/">Настройки профиля</a>
+                    <a style="color: gray" href="/logout/">Выйти</a>
+
+                </div>
+            </li>
+
+            <li class="uk-nav-divider uk-margin-medium-top uk-margin-medium-bottom"></li>
+
+            <li class="uk-active">
+                <a href="/creators/resumes/">
                     <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Бренды</h3>
                 </a>
             </li>
-            <li class="uk-active"><a href="/tasks/">
-                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Мастерская</h3>
+
+            <li class="uk-active">
+                <a href="/creators/goods/">
+                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Магазин</h3>
                 </a>
             </li>
+
+
             <li class="uk-nav-divider uk-margin-medium-top"></li>
+
             <li class="uk-parent">
                 <ul class="uk-nav uk-nav-default">
-                    <li class=""><a href="#designer-clothes-menuM" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерская одежда</a></li>
-                    <li class=""><a href="#designer-shoes-menuM" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерскаяобувь</a></li>
-                    <li class=""><a href="#bags-menuM" class="uk-button uk-button-text" uk-toggle>Сумки</a></li>
-                    <li class=""><a href="#interior-menuM" class="uk-button uk-button-text" uk-toggle>Интерьер</a></li>
-                    <li class=""><a href="#decorations-menuM" class="uk-button uk-button-text" uk-toggle>Украшщения</a>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Дизайнерская одежда" class="uk-button uk-button-text">Дизайнерская одежда</a>
                     </li>
-                    <li class=""><a href="#sculptures-menuM" class="uk-button uk-button-text" uk-toggle>Скульптуры</a>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Дизайнерская обувь" class="uk-button uk-button-text">Дизайнерская обувь</a>
                     </li>
-                    <li class=""><a href="#pillows-menuM" class="uk-button uk-button-text" uk-toggle>Подушки</a></li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Сумки" class="uk-button uk-button-text">Сумки</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Интерьер" class="uk-button uk-button-text">Интерьер</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Украшения" class="uk-button uk-button-text">Украшения</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Скульптуры" class="uk-button uk-button-text">Скульптуры</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/creators/goods/category/Подушки" class="uk-button uk-button-text">Подушки</a>
+                    </li>
                 </ul>
             </li>
         </ul>
         <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
             <p style="margin: 0px"> Регион <b>Москва</b></p>
-            <a href="/becomeCreator" class="uk-button uk-button-text"
+            <a href="partners/" class="uk-button uk-button-text"
                 style="text-transform: none; font-size: medium;">Стать
                 партнером</a>
         </ul>
@@ -89,218 +101,90 @@
 </div>
 <!-- end of navbar submenu -->
 {% else %}
-<div>
-    <nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
-        style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#main-menuM" uk-icon="menu" uk-toggle></a></li>
-                <li class="uk-active">
-                    <a class="homeWord" href="/">
-                        <h2 class="uk-margin-remove uk-text-bold">BeFreela</h2>
-                    </a>
-                </li>
-                <!--  -->
-            </ul>
+
+<nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
+    style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
+    <div class="uk-navbar-left">
+        <a class="homeWord" href="/">
+            <h2 class="uk-margin-remove uk-text-bold uk-button uk-button-link" style="font-size: 1.5rem;">BeFreela</h2>
+        </a>
+    </div>
+    <div class="uk-navbar-right uk-width-3-5">
+        <div class="uk-search uk-search-default uk-width-1">
+            <a type="submit" href="" id="searchBtn" uk-search-icon></a>
+            <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
         </div>
-        <div class="uk-nav-center " style="margin: 0 auto;">
-            <div class="uk-search uk-search-default">
-                <a type="submit" href="" id="searchBtn" uk-search-icon></a>
-                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
-            </div>
-        </div>
-        <div class="uk-navbar-right">
-            <ul class="uk-navbar-nav">
-                <li class="uk-active">
-                    <a  href="/login/" uk-icon="icon: bag"></a>
-                </li>
-                <li class="uk-active">
-                    <a  href="/login/" uk-icon="icon: cart"></a>
-                </li>
-                <li class="uk-active">
-                    <a href="/login/" uk-icon="icon: user"></a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    </div>
+</nav>
+<div style="position: fixed; top: 3%; left: 3%; z-index: 1000;">
+    <a class="uk-botton uk-button-link" href="#main-menuS" uk-icon="menu" uk-toggle></a>
 </div>
+
 <!-- start of navbar submenu -->
-<div id="main-menuM" uk-offcanvas="overlay: true">
+<div id="main-menuS" uk-offcanvas="overlay: true">
     <div class="uk-offcanvas-bar uk-flex uk-flex-column">
 
         <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
-            <li class="uk-active"><a href="/">
+            <li class="uk-active">
+                <a href="/">
                     <h1 class="uk-button uk-button-default uk-position-top"
                         style="font-size: 2rem; border: none; margin-top: 5%;">BeFreela</h1>
                 </a>
+            </li>
+            <li>
+                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
+                    <img src="https://www.visitdubai.com/-/media/gathercontent/article/t/top-rides-at-img-worlds-of-adventure/media/top-rides-at-img-worlds-of-adventure-predator-5.jpg?rev=f1bb54a15add49a09c912eac851f4ff7&cx=0.56&cy=0.4&cw=397&ch=397"
+                        width=60 height=60 class="uk-border-circle">
+                    <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
+                </div>
+                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
+                    <a style="margin: 0 5%" uk-tooltip="Корзина" href="/login/" uk-icon="icon: cart"></a>
+                </div>
+            </li>
+
+            <li class="uk-nav-divider uk-margin-medium-top uk-margin-medium-bottom"></li>
+
             <li class="uk-active"><a href="/creators/resumes/">
                     <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Бренды</h3>
                 </a>
             </li>
-            <li class="uk-active"><a href="/tasks/">
-                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Мастерская</h3>
+            <li class="uk-active"><a href="/creators/goods/">
+                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Магазин</h3>
                 </a>
             </li>
             <li class="uk-nav-divider uk-margin-medium-top"></li>
             <li class="uk-parent">
                 <ul class="uk-nav uk-nav-default">
-                    <li class=""><a href="#designer-clothes-menuM" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерская одежда</a></li>
-                    <li class=""><a href="#designer-shoes-menuM" class="uk-button uk-button-text" uk-toggle>
-                            Дизайнерскаяобувь</a></li>
-                    <li class=""><a href="#bags-menuM" class="uk-button uk-button-text" uk-toggle>Сумки</a></li>
-                    <li class=""><a href="#interior-menuM" class="uk-button uk-button-text" uk-toggle>Интерьер</a></li>
-                    <li class=""><a href="#decorations-menuM" class="uk-button uk-button-text" uk-toggle>Украшщения</a>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Дизайнерская одежда" class="uk-button uk-button-text">Дизайнерская одежда</a>
                     </li>
-                    <li class=""><a href="#sculptures-menuM" class="uk-button uk-button-text" uk-toggle>Скульптуры</a>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Дизайнерская обувь" class="uk-button uk-button-text">Дизайнерская обувь</a>
                     </li>
-                    <li class=""><a href="#pillows-menuM" class="uk-button uk-button-text" uk-toggle>Подушки</a></li>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Сумки" class="uk-button uk-button-text">Сумки</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Интерьер" class="uk-button uk-button-text">Интерьер</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Украшения" class="uk-button uk-button-text">Украшения</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Скульптуры" class="uk-button uk-button-text">Скульптуры</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="creators/goods/category/Подушки" class="uk-button uk-button-text">Подушки</a>
+                    </li>
                 </ul>
             </li>
         </ul>
         <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
             <p style="margin: 0px"> Регион <b>Москва</b></p>
-            <a href="/login" class="uk-button uk-button-text"
-                style="text-transform: none; font-size: medium;">Стать
+            <a href="/login" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
                 партнером</a>
         </ul>
     </div>
 </div>
 <!-- end of navbar submenu -->
 {% endif %}
-
-
-
-<!-- start of main-menuM -->
-<div id="main-menu" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-
-    </div>
-</div>
-<!-- end of main-menuM -->
-
-<!-- start of designer-clothes-menuM -->
-<div id="designer-clothes-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of designer-clothes-menuM -->
-
-<!-- start of designer-shoes-menuM -->
-<div id="designer-shoes-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">esigner7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of designer-shoes-menuM -->
-
-<!-- start of bags-menuM -->
-<div id="bags-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">bags7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of #bags-menuM -->
-
-<!-- start of interior-menuM -->
-<div id="interior-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">interior7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of #interior-menuM -->
-
-<!-- start of decorations-menuM -->
-<div id="decorations-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">decorations7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of #decorations-menuM -->
-
-<!-- start of sculptures-menuM -->
-<div id="sculptures-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">sculptures7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of #sculptures-menuM -->
-
-<!-- start of pillows-menuM -->
-<div id="pillows-menuM" uk-offcanvas>
-    <div class="uk-offcanvas-bar">
-        <ul class="uk-nav uk-nav-default">
-            <li class="uk-active" style="padding-left: 90%;"><a href="#main-menuM" class="uk-button uk-button-link"
-                    uk-toggle uk-icon="icon: reply"></a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows1</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows2</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows3</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows4</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows5</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows6</a></li>
-            <li class="uk-active"><a href="#" class="uk-button uk-button-text">pillows7</a></li>
-        </ul>
-    </div>
-</div>
-<!-- end of #pillows-menuM -->

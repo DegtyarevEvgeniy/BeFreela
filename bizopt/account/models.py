@@ -29,6 +29,7 @@ class MyAccountManager(BaseUserManager):
 
 
 class Account(AbstractBaseUser):
+
     username = models.CharField(max_length=20, default='', unique=False)
     email = models.EmailField(default='', unique=True)
     first_name = models.CharField(max_length=20, default='')
@@ -54,6 +55,11 @@ class Account(AbstractBaseUser):
     checking_account = models.IntegerField(default=0)
     fiz_adress = models.CharField(max_length=9999, default='')
     street = models.CharField(max_length=9999,default='')
+
+    is_partner = models.BooleanField(default=False)
+    confirmed = models.BooleanField(default=False)
+
+
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name']

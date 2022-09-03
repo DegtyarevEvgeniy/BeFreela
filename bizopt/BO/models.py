@@ -1,40 +1,67 @@
-# sourcery skip: avoid-builtin-shadow
 import uuid
 from django.db import models
 from django.forms import ModelForm
 from taggit.managers import TaggableManager
 from datetime import datetime
 
-class Creator(models.Model):
-    username = models.CharField(max_length=20, default='', unique=True)
-    first_name = models.CharField(max_length=30, default='')
-    email = models.CharField(max_length=20, default='example@example.com')
-    cover = models.ImageField(upload_to='images/creator', default='images/default.png')
+class Shop(models.Model):
+    name = models.CharField(max_length=50, default='')
+    logoImage = models.ImageField(upload_to='images/creator/logoImage', default='images/default.png')
+    bgImage = models.ImageField(upload_to='images/creator/bgImage', default='images/default.png')
     description = models.CharField(max_length=500, default='-')
-    is_company = models.BooleanField(default=0)
-    company_name = models.CharField(max_length=50, default='-')
-    telegram = models.CharField(max_length=50, default='-')
-    vk = models.CharField(max_length=50, default='-')
-    whatsapp = models.CharField(max_length=50, default='-')
-    instagram = models.CharField(max_length=50, default='-')
-    tag = models.CharField(max_length=50, default='-')
-    published = models.BooleanField(default=1)
+    category = models.CharField(max_length=500, default='-')
+    status = models.CharField(max_length=500, default='')
+    email = models.CharField(max_length=60, default='example@example.com')
+    phone = models.CharField(max_length=20, default='+15-15-15-15')
 
+class Product_creator(models.Model):
+    product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    id_creator = models.CharField(max_length=200, default='-') #кто создал
+    product_name = models.CharField('Название', max_length=500, default='-')
+    country = models.CharField('Страна', max_length=30, default='-')
+    brand = models.CharField('Бренд', max_length=30, default='-')
+    rate_sum = models.IntegerField(default=0)
+    vote_sum = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
+    category = models.CharField('Категория', max_length=50, default='-')
+    sex = models.CharField('Категория', max_length=50, default='-')
+    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
+    compound = models.CharField('Срок получения товара', max_length=50, default='-')
+    size = models.CharField(max_length=300, default='-')
+    duration = models.CharField(max_length=300, default='-')
+    price = models.CharField(max_length=300, default=0)
+    show_price = models.CharField(max_length=300, default=0)
+    description = models.CharField('Описание', max_length=1000, default='-')
+    availability = models.CharField('', max_length=100, default='-')
+    picture = models.ImageField('', upload_to='images/product',
+                                default='images/default.webp')
+    tags = TaggableManager()
+        # width_product = models.FloatField('', default=0)
+    # height_product = models.FloatField('', default=0)
+    # length_product = models.FloatField('', default=0)
+    # width_packaging = models.FloatField('', default=0)
+    # height_packaging = models.FloatField('', default=0)
+    # length_packaging = models.FloatField('', default=0)
+    # subcategory = models.CharField('Подкатегория', max_length=50, default='-')
 
 class Product_buy(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
     id_user_buy = models.CharField(max_length=200, default='-') #кто покупает
+    price = models.CharField(max_length=200, default='-')
+    duration = models.CharField(max_length=200, default='-')
+    compound = models.CharField('Срок получения товара', max_length=50, default='-')
+    size = models.CharField(max_length=300, default='-')
     product_name = models.CharField(max_length=500, default='-')
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=200, default='-')
-    # status2 = models.CharField(max_length=20, default='-')
     message = models.CharField(max_length=200, default='-')
     payed_partner = models.BooleanField(default=0)
     payed_user = models.BooleanField(default=0)
     status_pay = models.BooleanField(default=0)
     delivery_address = models.CharField(max_length=500, default='-')
     date_add = models.DateField(max_length=50, default='2000-01-01')
-    img = models.ImageField(upload_to='images/products', default='images/default.png')
+    img = models.ImageField(upload_to='images/products', default='images/default.webp')
+    # status2 = models.CharField(max_length=20, default='-')
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='-')
@@ -45,34 +72,11 @@ class Comments_partner(models.Model):
 
 class Comments_product(models.Model):
     id_creator = models.CharField(max_length=200, default='-')
+    comentator_email = models.CharField(max_length=200, default='-')
     id_product = models.CharField(max_length=200, default='-')
     review = models.CharField(max_length=200, default='-')
     rating = models.IntegerField(default='0')
     created_data = models.DateTimeField(auto_now_add=True)
-
-
-class Product_creator(models.Model):
-    product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    id_creator = models.CharField(max_length=200, default='-') #кто создал
-    product_name = models.CharField('Название', max_length=500, default='-')
-    country = models.CharField('Страна', max_length=30, default='-')
-    brand = models.CharField('Бренд', max_length=30, default='-')
-    rating_status = models.IntegerField(default=0)
-    term_status = models.IntegerField(default=0)
-    rating = models.FloatField(default=0.0)
-    set = models.CharField(max_length=300, default='-')
-    price = models.IntegerField('Цена', default=0)
-    description = models.CharField('Описание', max_length=1000, default='-')
-    width_product = models.FloatField('', default=0)
-    height_product = models.FloatField('', default=0)
-    length_product = models.FloatField('', default=0)
-    width_packaging = models.FloatField('', default=0)
-    height_packaging = models.FloatField('', default=0)
-    length_packaging = models.FloatField('', default=0)
-    availability = models.CharField('', max_length=100, default='-')
-    picture = models.ImageField('', upload_to='images/product',
-                                default='images/default.png')
-    tags = TaggableManager()
 
 class Task(models.Model):
     id_creator = models.CharField(max_length=200, default='-') #кто создал
@@ -111,6 +115,9 @@ class Partner(models.Model):
 
 class Chat_room(models.Model):
     name = models.CharField(max_length=100000)
+    user1 = models.IntegerField()
+    user2 = models.IntegerField()
+
 class Message(models.Model):
     value = models.CharField(max_length=1000000)
     date = models.DateTimeField(default=datetime.now, blank=True)

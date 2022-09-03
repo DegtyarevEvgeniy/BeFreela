@@ -35,7 +35,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('', views.index_page),
     path('edit/', views.edit_profile),
-    # 
+
+    path('chats/', views.chat_page_list),
     path('chat/<room_id>/', views.chat_page),
     path('getMsg/chat/<room_id>/', views.getMsg, name='getMsg'),
     path('send', views.send, name='send'),
@@ -47,22 +48,23 @@ urlpatterns = [
     path('documents/documentsTemplates/<name>/', views.documentTemplates_page),
     # path('employers/', views.employers_page),
     path('creators/resumes/', views.resumes_page),
+    path('creators/resumes/<shopnmae>', views.sertCardResume_page),
     # path('signin/', SignUpView.as_view(), name='signin'),
     path('becomeCreator/', views.becomeCreator_page),
     path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
-    path('creators/baseResumeCard/', views.goods_page),
-    path('creators/baseResumeCard/<id>', views.goods_page),
     path('yourTasks/', views.yourTasks_page),
     path('addTask/', views.addTask_page),
+    # path('creators/goods/category/<category>/<subcategory>', views.goodsSearch_page_subcategory),
     path('creators/goods/', views.goods_page),
-    path('creators/goods/search/<product_name>', views.goodsSearch_page),
     path('creators/goods/<product_id>/', views.cardProduct_page),
-    path('creators/cardResume/', views.cardResume_page),
-    path('creators/cardResume/<username>', views.sertCardResume_page),
+    path('creators/goods/category/<category>', views.goodsSearch_page_category),
+    path('creators/goods/search/<product_name>', views.goodsSearch_page),
     path('tasks/cardTask/<task_id>/', views.cardTask_page),
     path('yourTasks/editTask/<task_id>/', views.editTask_page),
     path('yourTasks/infoTask/', views.infoTask_page),
     path('orders/', views.orders_page),
+
+    
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
 handler400 = views.pageNotAccess

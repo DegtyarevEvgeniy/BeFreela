@@ -1,34 +1,32 @@
+import email
 import os
-import re
+from unicodedata import category
 
-from django.core import paginator
-from django.core.checks import messages
 from django.core.mail import send_mail
-from django.core.paginator import PageNotAnInteger, EmptyPage, Paginator
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
-from django.utils import formats
+from django.shortcuts import render, redirect
 from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
+import math
+from django.urls import reverse_lazy
+
+
 
 from .utils import *
 from .forms import *
-from django.views.generic import CreateView
-from django.contrib.auth.views import LoginView
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.forms import UserCreationForm
-from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse, Http404
 from .forms import *
+# from partner.partners.models import Partner
 from django.contrib.auth import logout, authenticate, login
 from django.core.files.storage import FileSystemStorage
-from phonenumber_field.modelfields import PhoneNumberField
 from account.models import Account
-import phonenumbers
 from .forms import ProductCreateForm
 from taggit.models import Tag
 from .models import Chat_room, Message
 from datetime import datetime
+
+from .forms import CustomUserChangeForm
+
 
 
 def pageNotAccess(request, exception):
@@ -97,94 +95,98 @@ def goodsSearch_page(request, product_name):
     context = gen_menu(request)
     products = Product_creator.objects.filter(
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
-        | Q(set__icontains=product_name)
     )
-    print(products)
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture
-                            }
-                           for product in products]
-    return render(request, 'goodsSearch.html', context)
-
+    context['products'] = products
+    return render(request, 'goods.html', context)
 
 def goods_page(request):
     context = gen_menu(request)
-    creators = Creator.objects.all()
     products = Product_creator.objects.all()
-    if request.method == "POST":
-        rating = request.POST.get('rating', '')
-        print(rating)
-
-        if rating == '1':
-            products = Product_creator.objects.filter(
-                Q(rating_status__icontains=4) | Q(
-                    rating_status__icontains=3)
-                | Q(rating_status__icontains=2) | Q(rating_status__icontains=5)
-            )
-            # print("kyy")
-        elif rating == '2':
-            products = Product_creator.objects.filter(
-                Q(rating_status__icontains=5)
-                | Q(rating_status__icontains=4) | Q(rating_status__icontains=3)
-            )
-            # print("kyyy")
-        elif rating == '3':
-            products = Product_creator.objects.filter(
-                Q(rating_status=5) | Q(rating_status__icontains=4)
-            )
-            # print("kyyyy")
-            print(products)
-        elif rating == '4':
-            products = Product_creator.objects.filter(
-                Q(rating_status__icontains=5) | Q(rating_status__icontains=4) | Q(
-                    rating_status__icontains=3)
-                | Q(rating_status__icontains=2) | Q(rating_status__icontains=1)
-            )
-            # print("kyyyyy")
-    print(products)
-    context['products'] = [{'id': product.id,
-                            # 'creator_id':  Account.objects.get(email=product.id_creator).id, Раскоментировать если не надо видеть свои карточки
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture,
-                            'rating': product.rating,
-                            'rating_status': product.rating_status,
-                            }
-                           for product in products]
+    context['products'] = products
+    for element in context['products']:
+        element.flooredrating = math.floor(element.rating)
+    # context['products'].show_price = list(filter(None, products.price.split(",")))[0]
+    
     return render(request, 'goods.html', context)
 
+def goodsSearch_page_category(request, category):
+    context = gen_menu(request)
+    products = Product_creator.objects.filter(
+        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category) | Q(category__icontains=category)
+    )
+
+    context['category'] = category
+    context['products'] = products
+    return render(request, 'goods.html', context)
+
+# def goodsSearch_page_subcategory(request, category, subcategory):
+#     context = gen_menu(request)
+#     products = Product_creator.objects.filter(
+#         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category) | Q(category__icontains=category)
+#     )
+#     products = products.filter(
+#         Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
+#         | Q(set__icontains=subcategory) | Q(subcategory__icontains=subcategory)
+#     )
+#     print(products)
+#     context['products'] = [{'id': product.id,
+#                             'product_name': product.product_name,
+#                             'cost': product.price,
+#                             'availability': product.availability,
+#                             }
+#                            for product in products]
+#     return render(request, 'goodsSearch.html', context)
 
 def resumes_page(request):
     user_id = 0
     if request.user.is_authenticated:
         user_id = Account.objects.get(email=request.user.email).id
     context = gen_menu(request)
-    creators = Creator.objects.all()
+    creators = Shop.objects.all()
     persons = Account.objects.all()
     # context['persons'] = persons
-    context['creators'] = [{'id': creator.id,
-                            'username': creator.username,
-                            'first_name': creator.first_name,
-                            'email': person,
-                            'cover': creator.cover,
+    brands = Shop.objects.all()
+    context['brands'] = [{
+        'name': brand.name,
+        'logoImage': brand.logoImage,
+        'bgImage': brand.bgImage,
+        'description': brand.description,
+        'category': brand.category,
+        'status': brand.status,
+        'email': brand.email,
+        'phone': brand.phone,
+    }for brand in brands]
+    context['creators'] = [{'name': creator.name,
+                            'logoImage': creator.logoImage,
+                            'bgImage': creator.bgImage,
                             'description': creator.description,
-                            'is_company': creator.is_company,
-                            'company_name': creator.company_name,
-                            'telegram': creator.telegram,
-                            'vk': creator.vk,
-                            'whatsapp': creator.whatsapp,
-                            'instagram': creator.instagram,
-                            'tag': creator.tag,
-                            'published': creator.published,
-
+                            'category': creator.category,
+                            'status': creator.status,
+                            'email': creator.email,
+                            'phone': creator.phone,
                             }
                            for creator, person in zip(creators, persons)]
     return render(request, 'resumes.html', context)
 
+def sertCardResume_page(request, shopnmae):
+    context = gen_menu(request)
+    useremail = request.user
+    user = Account.objects.get(email=useremail)
+
+    profile = Shop.objects.get(name=shopnmae)
+    context['profile'] = profile
+    products = Product_creator.objects.all()
+    context['products'] = [{'id': product.id,
+                            'product_name': product.product_name,
+                            'cost': product.price,
+                            'availability': product.availability,
+                            'picture': product.picture,
+                            'id_creator': product.id_creator,
+                            }
+                           for product in products]
+
+    context['link'] = (user.id * profile.id) + user.id + profile.id
+    return render(request, 'cardResume.html', context)
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
@@ -215,87 +217,139 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
 
-    if request.method == 'POST' and "profile_saver" in request.POST:  # для редактирования профиля
-        context['first_name'] = user.first_name
-        context['email'] = user.email
-        try:
-            creator = Creator.objects.get(email=request.user)
-            creator.description = request.POST['description']
-            creator.telegram = request.POST['telegram']
-            creator.vk = request.POST['vk']
-            creator.whatsapp = request.POST['whatsapp']
-            creator.instagram = request.POST['instagram']
-            creator.username = request.user.username
-            creator.save()
-        except:
-            creator = Creator()
-            if request.FILES:
-                file = request.FILES['profile_images']
+    print(request.POST)
+
+    if request.method == 'POST' and "profile_saver1" in request.POST:  # для редактирования профиля
+
+        creator = Account.objects.get(email=request.user)
+        creator.name_small = request.POST['name_small']
+        creator.nameFull = request.POST['nameFull']
+        creator.ogrn = request.POST['ogrn']
+        creator.inn = request.POST['inn']
+        creator.kpp = request.POST['kpp']
+        creator.street = request.POST['street']
+        creator.fiz_adress = request.POST['fiz_adress']
+        creator.city = request.POST['city']
+        creator.index = request.POST['index']
+        creator.payment_account = request.POST['payment_account']
+        creator.reg_form = request.POST['reg_form']
+        creator.bik = request.POST['bik']
+        creator.korr_check = request.POST['korr_check']
+
+        creator.save()
+        return HttpResponseRedirect("/becomeCreator/")
+
+    if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
+
+        shop = Shop.objects.get(email=request.user.email)
+
+
+        shop.name = request.POST['name']
+        shop.description = request.POST['description']
+        shop.status = request.POST['status']
+        shop.category = request.POST['chosenCategoties']
+
+
+
+        if request.FILES:
+            try:
+                file1 = request.FILES['logoImage']
                 fs = FileSystemStorage()
-                filename = f"creator_{str(user.email)}.png"
-                local_path_to_file = fs.save(os.path.join("images/creator", filename), file)
-                creator.cover = local_path_to_file
-            creator.first_name = user.first_name
-            creator.username = request.user.username
-            creator.description = request.POST['profile_description']
-            creator.telegram = request.POST['telegram']
-            creator.vk = request.POST['vk']
-            creator.whatsapp = request.POST['whatsapp']
-            creator.instagram = request.POST['instagram']
-            creator.published = request.POST['published']
-            creator.email = user.email
-            if 'iscompany' in request.POST:
-                creator.is_company = True
-                creator.company_name = request.POST['profile_company_name']
-            else:
-                creator.is_company = False
-            creator.save()
+                filename1 = f"profile_{str(shop.email)}.png"
+
+
+                path_to_local_image1 = os.path.join("images/creator/logoImage", filename1)
+
+                if os.path.isfile("media/"+path_to_local_image1):
+                    os.remove("media/"+path_to_local_image1)
+                    fs.save(path_to_local_image1, file1)
+                    shop.logoImage = path_to_local_image1
+                else:
+                    fs.save(path_to_local_image1, file1)
+                    shop.logoImage = path_to_local_image1
+
+            except:
+                pass
+                        
+            try:
+                
+                file2 = request.FILES['bgImage']
+                filename2 = f"profile_{str(shop.email)}.png"
+
+                fs = FileSystemStorage()
+                path_to_local_image2 = os.path.join("images/creator/bgImage", filename2)
+
+                if os.path.isfile("media/"+path_to_local_image2):
+                    os.remove("media/"+path_to_local_image2)
+                    fs.save(path_to_local_image2, file2)
+                    shop.bgImage = path_to_local_image2
+
+                else:
+                    fs.save(path_to_local_image2, file2)
+                    shop.bgImage = path_to_local_image2
+            except:
+                pass
+
+
+        shop.save()
+        return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
-        print("PRODUCT_CREATOR")
         product = Product_creator()
         if request.FILES:
             file = request.FILES['product_photos']
             fs = FileSystemStorage()
             local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
             product.picture = local_path_to_file
+
         # if "product_creator_tags" in request.POST:
         #   form = MyForm(request.POST)
         #   product.tags.add(form.cleaned_data['select'])
         product.product_name = request.POST['product_name']
-        product.price = request.POST['price']
+        # product.price = request.POST['price']
         product.description = request.POST['description']
         product.brand = request.POST['brand']
-        t = ''
-        print(request.POST)
+        size = ''
+        compound_name = ''
+        compound_percentage = ''
+        compound = ''
+        price = ''
         for i in range(0, 16):
-            if request.POST.get('set_{}'.format(i), None):
-                t += request.POST.get('set_{}'.format(i), ' ')
-                t += ','
+            if request.POST.get(f'size_{i}'):
+                size += request.POST.get(f'size_{i}')
+                size += ','
             else:
                 break
-
-        product.set = t
-
+            if request.POST.get(f'compName_{i}'):
+                compound_name += request.POST.get(f'compName_{i}')
+            if request.POST.get(f'compPercentage_{i}'):
+                compound_percentage += request.POST.get(f'compPercentage_{i}')
+            if request.POST.get(f'price_{i}'):
+                price += request.POST.get(f'price_{i}')
+                price += ','
+        for name, percentage in zip(compound_name, compound_percentage):
+            compound += f"{name} {percentage},"
+        compound = list(filter(None, compound.split(",")))
+        product.size = size
+        product.compound = compound
+        product.price = price
+        product.show_price = price.split(',')[0]
         product.country = request.POST['country']
-        product.height_packaging = request.POST.get('height_packaging', '0')
-        product.height_product = request.POST.get('height_product', '0')
-        product.length_packaging = request.POST.get('length_packaging', '0')
-        product.length_product = request.POST.get('length_product', '0')
-        product.width_packaging = request.POST.get('width_packaging', '0')
-        product.width_product = request.POST.get('width_product', '0')
+        product.category = request.POST['category']
+        product.duration = request.POST['duration']
+        # product.subcategory = request.POST['subcategory']
+        # product.height_packaging = request.POST.get('height_packaging', '0')
+        # product.height_product = request.POST.get('height_product', '0')
+        # product.length_packaging = request.POST.get('length_packaging', '0')
+        # product.length_product = request.POST.get('length_product', '0')
+        # product.width_packaging = request.POST.get('width_packaging', '0')
+        # product.width_product = request.POST.get('width_product', '0')
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
         # TODO: как будет готов фронт для "availability", сохранить ее в БД
         # product.availability = request.POST['??????']
         product.save()
-        for i in range(0, 16):
-            if request.POST.get('key_{}'.format(i), None):
-                product.tags.add(request.POST.get('key_{}'.format(i), ' '))
-                product.save()
-            else:
-                break
-        return redirect('/becomeCreator/')
+        return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
@@ -303,37 +357,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'GET' and "delete" in request.GET:
         product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
-        return redirect('/becomeCreator/')
-
-    if request.method == 'POST' and "status" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['status'])
-        product.status = 'Заказ в работе'
-        product.save()
-        return redirect('/becomeCreator/')
-    if request.method == 'GET' and "in_work" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['in_work'])
-        product.status = 'Заказ в работе'
-        product.save()
-    if request.method == 'POST' and "done" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['done'])
-        product.status = 'Заказ готов'
-        product.save()
-    if request.method == 'POST' and "payment" in request.POST:
-        product = Product_buy.objects.get(id=request.GET['payment'])
-        product.status = 'Заказ оплачен'
-        product.save()
-    if request.method == 'POST' and "decline" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['decline'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
-    if request.method == 'GET' and "decline_work" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['decline_work'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
-    if request.method == 'GET' and "4" in request.GET:
-        product = Product_buy.objects.get(id=request.GET['4'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
+        return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == "POST" and "partner" in request.POST:
         try:
@@ -376,48 +400,14 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     return render(request, 'becomeCreator.html', context)
 
 
-# def edit_profile_page(request):
-#     content = {
-#         'menu': gen_menu()
-#     }
-#     if request.method == 'POST':
-#         if request.FILES:
-#             # получаем загруженный файл
-#             file = request.FILES['myfile']
-#             fs = FileSystemStorage()
-#             # сохраняем на файловой системе
-#             filename = fs.save(os.path.join("images", file.name), file)
-#             # TODO: Будем сохранять картинку в базу,
-#             #       когда напишется логика сохранения всего контента формы в базу
-#             #       Текущие недостатки:
-#             #           1. /edit должен быть доступен только залогиненым пользователям,
-#             #               а значит на странице сразу будут заполнены все поля(имя, ...).
-#             #               Сейчас - нет. Поэтому в базу не update, а insert
-#             #           2. Нет web-формы на /edit, значит по нажатию на кнопку ничего не случится.
-#             #              Добавил кнопку, понимающую только картинку, текстовый контент не отправляется на backend
-#             #           3. Что делать, если картинка с именем уже существует.
-#             #               а) переименовать на рандом и сохранить.
-#             #               б) игнорировать
-#             item = Account(login='default',
-#                         password=123,becomeCreator_page
-#                         email='example@example.com',
-#                         name='Name',
-#                         surname='Surname',
-#                         phone=123456789,
-#                         city='Orlando',
-#                         userImage=filename
-#                         )
-#             item.save()
-#             content['imgPath'] = filename
-#             return render(request, 'edit.html', content)
-#     # content['imgPath'] = '/images/default.png'
-#     return render(request, 'edit.html', content)
+
 
 
 def becomeCreatorTemplate_page(request, name):
     content = gen_menu(request)
+
     try:
-        creator = Creator.objects.get(email=request.user.email)
+        creator = Shop.objects.get(email=request.user.email)
         print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
@@ -428,61 +418,8 @@ def becomeCreatorTemplate_page(request, name):
         content['email'] = user.email
         content['creator_avatar'] = user.userImage
     path = f"becomeCreatorTemplates/template{name}.html"
-    if name == '2':
-        try:
-            products = Product_buy.objects.filter(id_creator=request.user)
-            content['products'] = [{'id': product.id,
-                                    'product_name': product.product_name,
-                                    'customer': product.id_user_buy,
-                                    'st': product.status,
-                                    'status1': 'red' if product.status[-1] == 'е' else 'blue',
-                                    'status2': 'red' if product.status[-1] == 'о' else 'blue',
-                                    'status3': 'red' if product.status[-1] == 'ы' else 'blue',
-                                    'chat_id': (creator.id * Account.objects.get(
-                                        email=product.id_user_buy).id) + creator.id + Account.objects.get(
-                                        email=product.id_user_buy).id
 
-                                    }
-                                   for product in products]
-            products_v = Product_buy.objects.filter(id_creator=request.user)
-            if products_v.count() > 0:
-                content['products_v'] = [{'id': product.id,
-                                          'product_name': product.product_name,
-                                          'customer': product.id_user_buy,
-                                          'status': product.status,
-                                          'id_user_buy': product.id_user_buy,
-                                          'chat_id': (creator.id * Account.objects.get(
-                                              email=product.id_user_buy).id) + creator.id + Account.objects.get(
-                                              email=product.id_user_buy).id
-                                          }
-                                         for product in products_v]
-
-
-        except Product_buy.DoesNotExist as e:
-            content['products'] = None
-
-    # elif name == '3':
-    # form = MyProfile(request.POST)
-    # content['form1'] = form
-
-    elif name == '3':
-        account = Account.objects.get(email=request.user)
-        products = Product_creator.objects.filter(id_creator=account.email)
-        content['products'] = [{'product_name': product.product_name,
-                                'cost': product.price,
-                                'id': product.product_id,
-                                }
-                               for product in products]
-
-    elif name == '4':
-        try:
-            creator = Creator.objects.get(email=request.user)
-            content['creator'] = creator
-        except:
-            creator = Creator()
-            content['creator'] = creator
-
-    elif name == '1':
+    if name == '1':
         try:
             partner = Partner.objects.get(email=request.user)
             content['partner'] = partner
@@ -490,28 +427,70 @@ def becomeCreatorTemplate_page(request, name):
             partner = Partner()
             content['partner'] = partner
 
+    elif name == '2':
+        user = Account.objects.get(email=request.user)
+
+        try:
+              # для редактирования профиля
+
+            creator = Account.objects.get(email=request.user)
+            content['creator'] = creator
+
+        except:
+
+            creator.save()
+
+
+    elif name == '3':
+        shop = Shop.objects.get(email=request.user)
+        categorys = shop.category
+        content['shop'] = shop
+        content['categorys_saver'] = categorys
+        
+        content['categorys'] = categorys.strip().split(' ') if categorys.strip().split(' ') != [""] else ""
+
+
+    elif name == '4':
+        account = Account.objects.get(email=request.user)
+        products = Product_buy.objects.filter(id_creator=account.email)
+        content['products'] = [{'id': product.id,
+                                'id_creator': product.id_creator,
+                                'customer': product.id_user_buy,
+                                'product_name': product.product_name,
+                                'price': product.price,
+                                'picture': product.img,
+                                }
+                            for product in products]
+    elif name == '5':
+        account = Account.objects.get(email=request.user)
+        products = Product_creator.objects.filter(id_creator=account.email)
+        content['products'] = [{'id': product.product_id,
+                                'id_creator': product.id_creator,
+                                'product_name': product.product_name,
+                                'country': product.country,
+                                'brand': product.brand,
+                                'rate_sum': product.rate_sum,
+                                'vote_sum': product.vote_sum,
+                                'category': product.category,
+                                'set': product.size,
+                                'price': product.price.split(",")[0],
+                                'description': product.description,
+                                # 'width_product': product.width_product,
+                                # 'height_product': product.height_product,
+                                # 'length_product': product.length_product,
+                                # 'width_packaging': product.width_packaging,
+                                # 'height_packaging': product.height_packaging,
+                                # 'length_packaging': product.length_packaging,
+                                'availability': product.availability,
+                                'picture': product.picture,
+                                }
+                               for product in products]
+
     elif name == '6':
         form = ProductCreateForm()
         content['form8'] = form
 
-    # elif name in ['11', '12', '13']:
-    #     try:
-    #         partner = Partner.objects.get(email=request.user)
-    #         content['partner'] = {
-    #             'first_name': partner.first_name,
-    #             'last_name': partner.last_name,
-    #             'email': partner.email,
-    #             'INN': partner.inn,
-    #             'name_small': partner.name_small,
-    #             'name_full': partner.name_full,
-    #             'payment_account': partner.payment_account,
-    #             'reg_form': partner.reg_form
-    #         }
-    #     except Exception:
-    #         pass
-
     return render(request, path, content)
-
 
 def tasks_page(request):
     context = gen_menu(request)
@@ -531,6 +510,7 @@ def employers_page(request):
 def index_page(request):
     context = gen_menu(request)
     products = Product_creator.objects.all()
+    context['chats'] = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
     context['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
@@ -541,54 +521,6 @@ def index_page(request):
                            for product in products]
 
     return render(request, 'index.html', context)
-
-
-# def cardProduct_page(request):
-#     context = gen_menu()
-#     products = Product.objects.all()
-#     context['products'] = [{'product_name': product.product_name,
-#                             'cost': product.cost
-#                             }
-#                            for product in products]
-#     return render(request, 'cardProduct.html', context)
-
-
-def cardResume_page(request):
-    context = gen_menu(request)
-    profile = Creator.objects.get(email=request.user)
-    context['profile'] = profile
-    products = Product_creator.objects.all()
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture,
-                            'id_creator': product.id_creator
-                            }
-                           for product in products]
-    return render(request, 'cardResume.html', context)
-
-
-def sertCardResume_page(request, username):
-    context = gen_menu(request)
-    useremail = request.user
-    user = Account.objects.get(email=useremail)
-
-    profile = Creator.objects.get(username=username)
-    context['profile'] = profile
-    products = Product_creator.objects.all()
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture': product.picture,
-                            'id_creator': product.id_creator,
-
-                            }
-                           for product in products]
-
-    context['link'] = (user.id * profile.id) + user.id + profile.id
-    return render(request, 'cardResume.html', context)
 
 
 def cardTask_page(request, task_id):
@@ -606,14 +538,14 @@ def cardProduct_page(request, product_id):
     dt = datetime.now()
     df = DateFormat(dt)
     df.format(get_format('DATE_FORMAT'))
-
     context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
-
     try:
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
+            product_buy.price = product.show_price
+            product_buy.duration = product.duration
             # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
             product_buy.product_name = product.product_name
@@ -628,18 +560,36 @@ def cardProduct_page(request, product_id):
             product_buy.delivery_address = request.POST['address']
             product_buy.status_pay = False
             product_buy.save()
+            return HttpResponseRedirect(f'/creators/goods/{product_id}/')
         # else:
         # product = Product_creator.objects.get(id=product_id)
         # creator = Creator.objects.get(email=product.id_creator)
         if request.method == "POST" and "comment_product" in request.POST:
-            # product = Product_creator.objects.get(id=product_id)
+            product = Product_creator.objects.get(id=product_id)
             comment = Comments_product()
             comment.id_creator = product.id_creator
+            comment.comentator_email = request.user
             comment.id_product = product.id
             comment.review = request.POST['review']
             comment.rating = request.POST.get('rating', '0')
+
+            product.rate_sum = product.rate_sum + 1
+            product.vote_sum = product.vote_sum + int(request.POST.get('rating', '0'))
+            product.rating = (product.vote_sum + int(request.POST.get('rating', '0')))/(product.rate_sum + 1)
+
+            product.save()
             comment.save()
-        context['products'] = product
+            return HttpResponseRedirect(f'/creators/goods/{product_id}/')
+        context['product'] = product
+        context['product'].show_price = list(filter(None, product.price.split(",")))[0]
+        context['product'].sizes = list(filter(None, product.size.split(",")))
+        context['product'].prices = list(filter(None, product.price.split(",")))
+        context['product'].compounds = list(filter(None, product.compound.split(",")))
+        context['product'].rating = round(product.rating, 1)
+        context['product'].flooredrating = math.floor(product.rating)
+
+        print(product.price)
+
 
         messages = Comments_product.objects.filter(id_product=product_id)
 
@@ -650,7 +600,7 @@ def cardProduct_page(request, product_id):
 
         for message in messages:
             # передача картинки пользователя, который выложил отзыв
-            id_comment = message.id_creator
+            id_comment = message.comentator_email
             user_comment = Account.objects.get(email=id_comment)
             image_user = user_comment.userImage
             message.image_user = image_user
@@ -717,13 +667,21 @@ def edit_profile(request):
         email = request.user
         person = Account.objects.get(email=email)
         if request.method == "POST":
+            print(request.FILES)
             if request.FILES:
                 file = request.FILES['profile_photo']
                 fs = FileSystemStorage()
-                filename = f"profile_{str(person.username)}.png"
+                filename = f"profile_{str(person.email)}.png"
                 path_to_local_image = os.path.join("images/profile", filename)
-                fs.save(path_to_local_image, file)
-                person.userImage = path_to_local_image
+
+                if os.path.isfile("media/"+path_to_local_image):
+                    os.remove("media/"+path_to_local_image)
+                    fs.save(path_to_local_image, file)
+                    person.userImage = path_to_local_image
+                else:
+                    fs.save(path_to_local_image, file)
+                    person.userImage = path_to_local_image
+
             if request.POST.get('first_name', None):
                 print(request.POST['first_name'])
                 person.first_name = request.POST['first_name']
@@ -734,36 +692,13 @@ def edit_profile(request):
             if request.POST.get('city', None):
                 person.city = request.POST['city']
             person.save()
-            return HttpResponseRedirect("/")
+            return HttpResponseRedirect("/edit/")
         else:
             context['user'] = person
             return render(request, "editProfile.html", context)
 
     except Account.DoesNotExist as e:
         raise Http404 from e
-
-
-#
-# def register(request):
-#     context = gen_menu()
-#     if request.method == 'POST':
-#
-#         user = Account.objects.create_user(request.POST.get("username"),
-#                                         request.POST.get("email"),
-#                                         request.POST.get("password"))
-#
-#         user.first_name = request.POST.get("name")
-#         user.last_name = request.POST.get("surname")
-#         user.phone = request.POST.get("phone")
-#         user.city = request.POST.get("city")
-#         user.save()
-#         return HttpResponseRedirect("/accounts/login/")
-#     else:
-#         print('ky')
-#         user_form = UserRegistrationForm()
-#         context['user_form'] = user_form
-#     return render(request, 'signin.html', context)
-#
 
 
 def profile(request, name):
@@ -815,13 +750,13 @@ def login_page(request):
             print('Try again! username or password is incorrect')
     # регистрация
     elif request.method == 'POST' and 'btnform1' in request.POST:
-        send_mail(
-            'Test',
-            'Всё робит)',
-            'korotikhin84@mail.ru',
-            ['gaamer557@gmail.com'],
-            fail_silently=False,
-        )
+        # send_mail(
+        #     'Test',
+        #     'Всё робит)',
+        #     'korotikhin84@mail.ru',
+        #     ['gaamer557@gmail.com'],
+        #     fail_silently=False,
+        # )
         if form.is_valid():
             form.save()
             email = form.cleaned_data.get('email')
@@ -881,25 +816,39 @@ def chat_page(request, room_id):
     content = {
         'menu': gen_menu(request)
     }
+
     useremail = request.user
     user = Account.objects.get(email=useremail)
     companion_id = (int(room_id) - int(user.id)) // (int(user.id) + 1)
-    print(user.id)
-    print(companion_id)
-    companion = Creator.objects.get(id=companion_id)
+    companion = Account.objects.get(id=companion_id)
     content['room_id'] = room_id
     content['companion'] = companion
     if not Chat_room.objects.filter(name=room_id).exists():
-        new_room = Chat_room.objects.create(name=room_id)
+        new_room = Chat_room.objects.create(name=room_id, user1 = user.id, user2 = companion_id)
         new_room.save()
     return render(request, 'messanger.html', content)
+
+def chat_page_list(request):
+    content = {
+        'menu': gen_menu(request)
+    }
+    
+    chats = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
+    components = [ Account.objects.get(id=((int(i) - request.user.id) // request.user.id))  for i in chats ]
+    print(components, chats)
+    content['chats'] = [ {'chat_room': chat,
+                          'first_name': component.first_name,
+                          'last_name': component.last_name,
+                          'img': component.userImage.url
+                          }  for chat, component in zip(chats, components)]
+    print(content['chats'])
+    return render(request, 'chatRoom.html', content)
 
 
 def getMsg(request, room_id):
     room_detales = Chat_room.objects.get(name=room_id)
     messages = Message.objects.filter(room=room_detales.name)
     return JsonResponse({"messages": list(messages.values())})
-
 
 def send(request):
     message = request.POST['message']
@@ -913,13 +862,25 @@ def send(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    productss = Product_buy.objects.filter(id_user_buy=request.user)
-    content['products'] = [{
-        'id': product.id,
-        'product_name': product.product_name,
-        'id_user_buy': product.id_user_buy,
-        'status': product.status,
-    } for product in productss]
+    products = Product_buy.objects.filter(id_user_buy=request.user)
+    content['products'] = [{'id': product.id,
+                        'id_creator': product.id_creator,
+                        'id_user_buy': product.id_user_buy,
+                        'price': product.price,
+                        'product_name': product.product_name,
+                        'task_id': product.task_id,
+                        'status': product.status,
+                        'message': product.message,
+                        'payed_partner': product.payed_partner,
+                        'payed_user': product.payed_user,
+                        'status_pay': product.status_pay,
+                        'delivery_address': product.delivery_address,
+                        'date_add': product.date_add,
+                        'img': product.img,
+                        'chat': (Account.objects.get(email=product.id_creator).id * Account.objects.get(email=product.id_user_buy).id) + Account.objects.get(email=product.id_creator).id + Account.objects.get(email=product.id_user_buy).id,
+                        } for product in products]
+    
+
     if request.method == "POST" and "comment_product" in request.POST:
         product_id = request.POST['comment_product']
         product = Product_creator.objects.get(id=product_id)
@@ -928,14 +889,48 @@ def orders_page(request):
         comment.id_product = product.id
         comment.review = request.POST['review']
         comment.rating = request.POST.get('rating', '0')
+
+        product.rate_sum = product.rate_sum + 1
+        product.vote_sum = request.POST.get('rating', '0')
+
+        product.save()
         comment.save()
+        return HttpResponseRedirect('/orders/')
     if request.method == "POST" and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.status = 'Заказчик отказался от заказа'
         product.save()
+        return HttpResponseRedirect('/orders/')
 
     return render(request, 'orders.html', content)
 
 
 def partners_page(request):
+
+    user = Account.objects.get(email=request.user)
+    print(user)
+
+    shops = Shop.objects.all()
+
+    flag = False
+
+    if request.method == "POST":
+
+        
+
+        for shop in shops:
+            if shop.email == request.user.email:
+                flag = True
+
+        try:
+            if flag == False:
+                shop = Shop()
+                shop.phone = request.POST['phonenumber']
+                shop.email = request.user.email
+                shop.save()
+                Account.objects.filter(email=request.user).update(is_partner=True)
+
+        except:
+            print("in request.")
+
     return render(request, 'showPartner.html')

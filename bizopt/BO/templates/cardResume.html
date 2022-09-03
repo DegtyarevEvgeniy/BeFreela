@@ -11,7 +11,7 @@
     #main-img {
         height: 30em;
         background-color: #cccccc;
-        background-image: url(https://html5css.ru/css/img_lights.jpg);
+        background-image: url({{profile.bgImage.url}});
         background-repeat: none;
         background-position: center;
         background-size: cover;
@@ -21,7 +21,7 @@
     }
 </style>
 
-<body style="margin: auto; margin-top: 7%">
+<body style="margin: 0 auto;">
 
 
 
@@ -31,11 +31,11 @@
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                     <div class="uk-width-auto">
                         <img class="" width="200" height="40"
-                            src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8cGhvdG9ncmFwaGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80">
+                            src="{{profile.logoImage.url}}">
                     </div>
                     <div class="uk-width-expand uk-flex uk-flex-left uk-flex-middle">
                         <h1 class="uk-card-title uk-margin-remove-bottom"
-                            style="color: white; font-size: 350%; text-transform:uppercase;">Name Surname</h1>
+                            style="color: white; font-size: 5em; text-transform:uppercase;">{{profile.name}}</h1>
                     </div>
 
                 </div>
@@ -45,35 +45,37 @@
 
     <div class="uk-section  uk-width-4-5" style="margin: 0 auto;">
         <div class="uk-width-1-2">
-            <h2>О себе</h2>
+            <h2>О бренде</h2>
             <p class="uk-text-break">{{profile.description}}</p>
         </div>
     </div>
     <div class="uk-section uk-width-4-5 uk-flex uk-flex-wrap uk-flex-wrap-around uk-flex-left"
         style="margin: 0 auto;">
         <!-- start of card -->
+        {% for item in products %}
         <div class="uk-card uk-card-default uk-width-1-4" style="box-shadow: none; padding: 3px; margin: 40px;">
             <div>
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top uk-text-center" style="margin-top: 5%">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Image.jpg" width="300" alt="">
+                        <img src="{{item.picture.url}}" width="300" alt="">
                     </div>
                     <div class="uk-card-body">
-                        <h3 class="uk-card-title uk-text-truncate">{{ product.product_name }}</h3>
+                        <h3 class="uk-card-title uk-text-truncate">{{ item.item_name }}</h3>
                         <p>
-                            <label>Наличие: </label> {{ product.availability }}
+                            <label>Наличие: </label> {{ item.availability }}
                         </p>
                         <div class="price">
-                            {{ product.cost }} ₽
+                            {{ item.cost }} ₽
                         </div>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's content.</p>
-                        <a href="../goods/{{ product.id }}" class="btn btn-primary">Посмотреть</a>
+                        <a href="../goods/{{ item.id }}" class="btn btn-primary">Посмотреть</a>
                     </div>
                 </div>
 
             </div>
         </div>
+        {% endfor %}
         <!-- end of card -->
         
     </div>

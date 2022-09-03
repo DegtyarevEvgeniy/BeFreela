@@ -3,8 +3,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelChoiceField
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+from account.models import Account
+
 
 from django.forms import ModelForm, TextInput, Textarea, Select, CharField
+
+
 from .models import *
 from taggit.models import Tag
 
@@ -253,6 +259,34 @@ COUNTRY_CHOICE = [
     ('Zambia', 'Zambia'),
     ('Zimbabwe', 'Zimbabwe'),
 ]
+CATEGORY_CHOICE = [
+    ('Дизайнерская одежда', 'Дизайнерская одежда'),
+    ('Дизайнерская обувь', 'Дизайнерская обувь'),
+    ('Сумки', 'Сумки'),
+    ('Интерьер', 'Интерьер'),
+    ('Украшения', 'Украшения'),
+    ('Скульптуры', 'Скульптуры'),
+    ('Подушки', 'Подушки'),
+]
+
+DURATION_CHOICE = [
+    ('1 - 2 дня', '1 - 2 дня'),
+    ('2 - 5 дней', '2 - 5 дней'),
+    ('5 - 7 дней', '5 - 7 дней'),
+    ('1 - 2 недели', '1 - 2 недели'),
+    ('2 недели - месяц', '2 недели - месяц'),
+    ('1 - 3 месяца', '1 - 3 месяца'),
+    ('3 - 6 месяцев', '3 - 6 месяцев'),
+    ('6 - 12 месяцев', '6 - 12 месяцев'),
+    ('1 - 2 года', '1 - 2 года'),
+    ('более 3-х лет', 'более 3-х лет'),
+]
+
+SEX_CHOICE = [
+    ('women', 'женское'),
+    ('men', 'мужское'),
+    ('unisex', 'унисекс'),
+]
 User = get_user_model()
 
 
@@ -313,54 +347,67 @@ class ProductCreateForm(ModelForm):
         fields = '__all__'
         widgets = {
             'product_name': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'uk-form uk-input',
                 'placeholder': "Введите название товара",
+                'id': 'product_name',
+                'max_length': '100',
                 'oninput': 'PassChecker(1)',
             }),
+            'country': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=COUNTRY_CHOICE),
+            'brand': TextInput(attrs={
+                'class': 'uk-form uk-input',
+                'id': 'brand',
+                'placeholder': 'Введите бренд товара',
+                'max_length': '100',
+                'oninput': 'PassChecker(1)',
+            }),
+            'description': Textarea(attrs={
+                'class': 'uk-form uk-textarea',
+                'id': 'description',
+                'placeholder': 'Введите описание товара',
+                'oninput': 'PassChecker(1)',
+            }),
+            'category': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=CATEGORY_CHOICE),
+            'duration': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=DURATION_CHOICE),
+            'sex': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=SEX_CHOICE),
             'price': TextInput(attrs={
-                'class': 'form-control',
+                'class': 'uk-form uk-input uk-width-4-5',
                 'type': 'number',
                 'id': 'priceInput',
                 'oninput': 'recalc(this)',
                 'placeholder': 'Введите стоимость товара'
             }),
-            'country': Select(attrs={
-                'class': 'input-group mt-2 mb-2',
-            }, choices=COUNTRY_CHOICE),
-
-            'brand': TextInput(attrs={
-                'class': 'form-control',
-                'id': 'brand',
-                'oninput': 'PassChecker(1)',
-                'placeholder': 'Введите бренд товара'
-            }),
-            'description': Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите описание товара'
-            }),
             'width_product': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
             }),
             'height_product': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
             }),
             'length_product': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
             }),
             'width_packaging': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
             }),
             'height_packaging': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
             }),
             'length_packaging': TextInput(attrs={
                 'class': 'form-control',
-                'type': 'number'
+                'type': 'number',
             }),
 
         }
@@ -381,7 +428,7 @@ class MyProfile(forms.Form):
 
 class addTasks(forms.Form):
     task_name = forms.CharField(label='Название', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control',
+        'class': 'uk-form uk-input',
         'placeholder': 'Название',
         'id': "floatingInputGrid",
     }))
@@ -391,24 +438,25 @@ class addTasks(forms.Form):
     }))
 
     description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={
-        'class': 'form-control',
+        'class': 'uk-form uk-input',
         'placeholder': 'Описание',
         'style': "height: 100px",
         'id': "floatingTextarea2",
 
     }))
     price = forms.IntegerField(label='Цена', required=True, widget=forms.TextInput(attrs={
-        'class': 'form-control'
+        'class': 'uk-form uk-input'
     }))
     date = forms.DateField(label='Дата', widget=forms.DateInput(attrs={
-        'class': 'form-control',
+        'class': 'uk-form uk-input',
         'type': 'date'
     }))
 
 
 class Resume(forms.Form):
     description = forms.CharField(label='Расскажите о себе', required=True, widget=forms.Textarea(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
     }))
     is_company = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
         'class': "form-check-input",
@@ -416,38 +464,55 @@ class Resume(forms.Form):
         'id': "isCompanyTrigger",
     }))
     company_name = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "Название компании",
 
     }))
     email = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
     }))
     first_name = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'value': "TROLOLO"
     }))
     cover = forms.ImageField(required=False)
     telegram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "@tag",
     }))
     vk = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "https://vk.com/yourid",
     }))
     whatsapp = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': "+71234567890",
     }))
     instagram = forms.CharField(label='Расскажите о себе', required=False, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
         'placeholder': " https://instagram.com/tag",
     }))
     tag = forms.CharField(label='Расскажите о себе', required=True, widget=forms.TextInput(attrs={
-        'class': "form-control",
+        'class': "uk-input uk-width-1-3",
+        'value': "",
     }))
     published = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={
         'class': "form-check-input",
         'value': "1",
     }))
+
+
+class CustomUserChangeForm(UserChangeForm):
+    
+    class Meta:
+        model = Account
+        fields = ('email', 'city', 'first_name', 'last_name', 'email',
+        'ogrn', 'inn', 'kpp', 'street', 'fiz_adress', 'index', 'checking_account', 'bik', 
+        'korr_check','name_small','nameFull', 'payment_account', 'reg_form')

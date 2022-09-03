@@ -5,10 +5,9 @@ import phonenumbers
 
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, email, username, password=None, first_name=None, last_name=None,  city=''):
+    def create_user(self, email,  password=None, first_name=None, last_name=None,  city=''):
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
             first_name=first_name,
             last_name=last_name,
             city=city
@@ -17,11 +16,10 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, username, password, first_name, last_name, city=''):
+    def create_superuser(self, email, password, first_name, last_name, city=''):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password,
-            username=username,
             first_name=first_name,
             last_name=last_name,
             city=city
@@ -34,9 +32,7 @@ class MyAccountManager(BaseUserManager):
 
 
 class Partner(AbstractBaseUser):
-    username = models.CharField(max_length=20, default='', unique=True)
     email = models.EmailField(default='', unique=True)
-    phone = models.IntegerField(default=0)
     first_name = models.CharField(max_length=20, default='')
     last_name = models.CharField(max_length=30, default='')
     city = models.CharField(max_length=30, default='')
@@ -60,7 +56,7 @@ class Partner(AbstractBaseUser):
     street = models.CharField(max_length=200, default='')
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     objects = MyAccountManager()
 

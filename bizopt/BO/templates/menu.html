@@ -1,19 +1,19 @@
-<div class="uk-visible@l uk-hiddem@l" id="topmenu" style="width: 80%; position: fixed; top: 0; left: 10%; z-index: 1000;">
+<div class="uk-visible@l uk-hiddem@l" id="topmenu" style="width: 80%; position: absolute; top: 0; left: 10%; z-index: 1000;">
     {% include "menusTemplates/largeTemplate.html" %}
 </div>
 
-<div class="uk-visible@m uk-hidden@l" id="topmenu" style="width: 80%; position: fixed; top: 0; left: 10%; z-index: 1000;">
+<div class="uk-hidden@l" id="topmenu" style="width: 80%; position: absolute; top: 2%; left: 10%; z-index: 1000;">
     {% include "menusTemplates/mediumTemplate.html" %}
 </div>
 
-<div class="uk-hidden@m" id="topmenu" style="width: 80%; position: absolute; top: 2%; left: 10%; z-index: 1000;">
-    {% include "menusTemplates/smallTemplate.html" %}
-</div>
 
 <style>
+    *{
+        font-family: 'Montserrat'!important;
+    }
     svg{
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
     }
 </style>
 
