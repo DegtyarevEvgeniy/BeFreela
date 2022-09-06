@@ -9,7 +9,8 @@ from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
 import math
 from django.urls import reverse_lazy
-
+import base64
+import requests
 
 
 from .utils import *
@@ -49,6 +50,19 @@ def gen_menu(request):
 
     else:
         return {}
+
+def upload_image(image, name):
+    with open(image, "rb") as file:
+        url = "https://api.imgbb.com/1/upload"
+        payload = {
+            "key": '792f875de829eb7c21a45bac0420e83a',
+            "image": base64.b64encode(file.read()),
+            "name": name
+    }
+    res = requests.post(url, payload)
+    link = res.text.split('thumb')[-1].split("delete")[0][3:-3].split(",")[-1].split('":"')[-1][:-1].replace('\\', '') 
+    name = res.text.split('name":"')[-1].split('"')[0]
+    return {link, name}
 
 
 
@@ -216,7 +230,6 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
 def becomeCreator_page(request):  # sourcery skip: low-code-quality
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
-
     print(request.POST)
 
     if request.method == 'POST' and "profile_saver1" in request.POST:  # для редактирования профиля
@@ -242,6 +255,8 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
 
         shop = Shop.objects.get(email=request.user.email)
+        prevlogo = shop.prevLogoImage
+        prevbg = shop.prevBgImage
 
 
         shop.name = request.POST['name']
@@ -253,40 +268,34 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
         if request.FILES:
             try:
-                file1 = request.FILES['logoImage']
-                fs = FileSystemStorage()
-                filename1 = f"profile_{str(shop.email)}.png"
-
-
-                path_to_local_image1 = os.path.join("images/creator/logoImage", filename1)
-
-                if os.path.isfile("media/"+path_to_local_image1):
-                    os.remove("media/"+path_to_local_image1)
-                    fs.save(path_to_local_image1, file1)
-                    shop.logoImage = path_to_local_image1
+                if prevlogo:
+                    file = request.FILES['logoImage']
+                    prevlogo = f"{prevlogo.split('_')[0]}_{int(prevlogo.split('_')[-1]) + 1}"
+                    logoImageData = upload_image(file, prevlogo)
+                    shop.logoImage = logoImageData[0]
+                    shop.prevLogoImage = logoImageData[-1]
                 else:
-                    fs.save(path_to_local_image1, file1)
-                    shop.logoImage = path_to_local_image1
-
+                    file = request.FILES['logoImage']
+                    prevlogo = f"logo-{request.POST['name']}_0"
+                    logoImageData = upload_image(file, prevlogo)
+                    shop.logoImage = logoImageData[0]
+                    shop.prevLogoImage = logoImageData[-1]
             except:
                 pass
-                        
-            try:
-                
-                file2 = request.FILES['bgImage']
-                filename2 = f"profile_{str(shop.email)}.png"
 
-                fs = FileSystemStorage()
-                path_to_local_image2 = os.path.join("images/creator/bgImage", filename2)
-
-                if os.path.isfile("media/"+path_to_local_image2):
-                    os.remove("media/"+path_to_local_image2)
-                    fs.save(path_to_local_image2, file2)
-                    shop.bgImage = path_to_local_image2
-
-                else:
-                    fs.save(path_to_local_image2, file2)
-                    shop.bgImage = path_to_local_image2
+            try:    
+                if prevbg:
+                    file = request.FILES['bgImage']
+                    prevbg = f"{prevbg.split('_')[0]}_{int(prevbg.split('_')[-1]) + 1}"
+                    bgImageData = upload_image(file, prevbg)
+                    shop.bgImage = bgImageData[0]
+                    shop.prevBgImage = bgImageData[-1]
+                else:                        
+                    file = request.FILES['bgImage']
+                    prevbg = f"bg-{request.POST['name']}_0"
+                    bgImageData = upload_image(file, prevbg)
+                    shop.bgImage = bgImageData[0]
+                    shop.prevBgImage = bgImageData[-1]
             except:
                 pass
 

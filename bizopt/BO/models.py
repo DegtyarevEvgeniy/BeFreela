@@ -6,8 +6,10 @@ from datetime import datetime
 
 class Shop(models.Model):
     name = models.CharField(max_length=50, default='')
-    logoImage = models.ImageField(upload_to='images/creator/logoImage', default='images/default.png')
-    bgImage = models.ImageField(upload_to='images/creator/bgImage', default='images/default.png')
+    logoImage = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png')
+    prevLogoImage = models.ImageField(default='')
+    bgImage = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png')
+    prevBgImage = models.ImageField(default='')
     description = models.CharField(max_length=500, default='-')
     category = models.CharField(max_length=500, default='-')
     status = models.CharField(max_length=500, default='')
@@ -33,8 +35,9 @@ class Product_creator(models.Model):
     show_price = models.CharField(max_length=300, default=0)
     description = models.CharField('Описание', max_length=1000, default='-')
     availability = models.CharField('', max_length=100, default='-')
-    picture = models.ImageField('', upload_to='images/product',
-                                default='images/default.webp')
+    picture = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png') 
+    prevPicture = models.ImageField(default='')
+
     tags = TaggableManager()
         # width_product = models.FloatField('', default=0)
     # height_product = models.FloatField('', default=0)
@@ -59,8 +62,9 @@ class Product_buy(models.Model):
     payed_user = models.BooleanField(default=0)
     status_pay = models.BooleanField(default=0)
     delivery_address = models.CharField(max_length=500, default='-')
-    date_add = models.DateField(max_length=50, default='2000-01-01')
-    img = models.ImageField(upload_to='images/products', default='images/default.webp')
+    date_add = models.DateField(max_length=50, default='2000-01-01') 
+    img = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png')
+    prevImg = models.ImageField(default='')
     # status2 = models.CharField(max_length=20, default='-')
 
 class Comments_partner(models.Model):
