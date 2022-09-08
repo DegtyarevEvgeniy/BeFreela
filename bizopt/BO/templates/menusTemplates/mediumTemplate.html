@@ -33,7 +33,7 @@
                         width=60 height=60 class="uk-border-circle">
                     <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
                 </div>
-                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
+                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-left uk-margin-medium-top">
                     {% if user.is_partner %}
                     <a style="margin: 0 5%" uk-tooltip="Партнерка" href="/becomeCreator/"
                         uk-icon="icon: bag"></a>
@@ -41,9 +41,9 @@
                     <a style="margin: 0 5%" uk-tooltip="Корзина" href="/orders/" uk-icon="icon: cart"></a>
                 </div>
                 <br>
-                <div class="uk-flex uk-flex-between uk-flex-top">
-                    <a style="color: gray" href="/edit/">Настройки профиля</a>
-                    <a style="color: gray" href="/logout/">Выйти</a>
+                <div class="uk-flex uk-flex-between uk-flex-buttom">
+                    <a href="/edit/">Настройки профиля</a>
+                    <a href="/logout/">Выйти</a>
 
                 </div>
             </li>
