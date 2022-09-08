@@ -13,7 +13,7 @@
         </div>
     </div>
 </nav>
-<div style="position: fixed; top: 3%; left: 3%; z-index: 1000;">
+<div style="position: fixed; top: 2.3%; left: 3%; z-index: 1000;">
     <a class="uk-botton uk-button-link" href="#main-menuS" uk-icon="menu" uk-toggle></a>
 </div>
 <!-- start of navbar submenu -->
@@ -29,7 +29,7 @@
 
             <li>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
-                    <img src="https://www.visitdubai.com/-/media/gathercontent/article/t/top-rides-at-img-worlds-of-adventure/media/top-rides-at-img-worlds-of-adventure-predator-5.jpg?rev=f1bb54a15add49a09c912eac851f4ff7&cx=0.56&cy=0.4&cw=397&ch=397"
+                    <img src="{{user.userImage}}"
                         width=60 height=60 class="uk-border-circle">
                     <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
                 </div>
@@ -116,7 +116,7 @@
         </div>
     </div>
 </nav>
-<div style="position: fixed; top: 3%; left: 3%; z-index: 1000;">
+<div style="position: fixed; top: 2%; left: 3%; z-index: 1000;">
     <a class="uk-botton uk-button-link" href="#main-menuS" uk-icon="menu" uk-toggle></a>
 </div>
 
@@ -126,19 +126,10 @@
 
         <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
             <li class="uk-active">
-                <a href="/">
-                    <h1 class="uk-button uk-button-default uk-position-top"
-                        style="font-size: 2rem; border: none; margin-top: 5%;">BeFreela</h1>
-                </a>
             </li>
             <li>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
-                    <img src="https://www.visitdubai.com/-/media/gathercontent/article/t/top-rides-at-img-worlds-of-adventure/media/top-rides-at-img-worlds-of-adventure-predator-5.jpg?rev=f1bb54a15add49a09c912eac851f4ff7&cx=0.56&cy=0.4&cw=397&ch=397"
-                        width=60 height=60 class="uk-border-circle">
-                    <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
-                </div>
-                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
-                    <a style="margin: 0 5%" uk-tooltip="Корзина" href="/login/" uk-icon="icon: cart"></a>
+                    <h1> <a href="/" class="uk-text-truncate">BeFreela</a></h1>
                 </div>
             </li>
 
