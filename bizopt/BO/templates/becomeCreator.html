@@ -49,10 +49,10 @@
             <br>
             <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
 
-                <li class="uk-active Btn">
+                <!-- <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
                         style="background:  #0A3644; width:70%; border: solid #0A3644 2px ">Профиль</button>
-                </li>
+                </li> -->
                 <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
                         style="background:  #0A3644; width:70%; border: solid #0A3644 2px" inclick="infoStart()">Информация</button>
@@ -113,7 +113,7 @@
 
     $('.Btn').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
-        var index = $(this).index() + 1
+        var index = $(this).index() + 2
         localStorage.page = index
         xhr.open('GET', `becomeCreatorTemplates/${index}/`)
         xhr.onload = function () {

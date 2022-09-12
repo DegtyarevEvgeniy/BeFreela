@@ -323,6 +323,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         compound_percentage = ''
         compound = ''
         price = ''
+        amount = ''
         for i in range(0, 16):
             if request.POST.get(f'size_{i}'):
                 size += request.POST.get(f'size_{i}')
@@ -336,27 +337,22 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             if request.POST.get(f'price_{i}'):
                 price += request.POST.get(f'price_{i}')
                 price += ','
+            if request.POST.get(f'amount_{i}'):
+                amount += request.POST.get(f'amount_{i}')
+                amount += ','
         for name, percentage in zip(compound_name, compound_percentage):
             compound += f"{name} {percentage},"
         compound = list(filter(None, compound.split(",")))
         product.size = size
         product.compound = compound
         product.price = price
+        product.amount = amount
         product.show_price = price.split(',')[0]
         product.country = request.POST['country']
         product.category = request.POST['category']
         product.duration = request.POST['duration']
-        # product.subcategory = request.POST['subcategory']
-        # product.height_packaging = request.POST.get('height_packaging', '0')
-        # product.height_product = request.POST.get('height_product', '0')
-        # product.length_packaging = request.POST.get('length_packaging', '0')
-        # product.length_product = request.POST.get('length_product', '0')
-        # product.width_packaging = request.POST.get('width_packaging', '0')
-        # product.width_product = request.POST.get('width_product', '0')
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
-        # TODO: как будет готов фронт для "availability", сохранить ее в БД
-        # product.availability = request.POST['??????']
         product.save()
         return HttpResponseRedirect("/becomeCreator/")
 
@@ -549,6 +545,7 @@ def cardProduct_page(request, product_id):
     df.format(get_format('DATE_FORMAT'))
     context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
+    shop = Shop.objects.get(email=product.id_creator)
     try:
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
@@ -596,6 +593,7 @@ def cardProduct_page(request, product_id):
         context['product'].compounds = list(filter(None, product.compound.split(",")))
         context['product'].rating = round(product.rating, 1)
         context['product'].flooredrating = math.floor(product.rating)
+        context['shop'] = shop
 
         print(product.price)
 
@@ -938,6 +936,7 @@ def partners_page(request):
                 shop.email = request.user.email
                 shop.save()
                 Account.objects.filter(email=request.user).update(is_partner=True)
+                Account.objects.filter(email=request.user).update(is_inwaiting=True)
 
         except:
             print("in request.")

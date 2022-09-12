@@ -1,11 +1,11 @@
-<div class="d-flex flex-row">
+<div class="uk-flex uk-flex-center uk-flex-buttom" style="margin-top: 3%">
     <h1 style="margin: auto">Заказы в работе</h1>
 
     <!-- <a class="btn btn-primary Btnn" role="button" style="margin: auto">Создать задачу</a> -->
 </div>
 <div class="center">
 
-    <form method="POST" id="products_in_work_id" style="background-color: rgba(204, 204, 204, 0.2); margin: 5% 0; padding: 0 10px; width: 100%;" enctype="multipart/form-data">
+    <form method="POST" id="products_in_work_id" style="background-color: rgba(204, 204, 204, 0.2); margin: 1% 0; padding: 0 10px; width: 100%;" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="uk-overflow-auto" style="margin: 0 auto">
             <table class="uk-table uk-table-justify uk-table-divider uk-table-large" data-spy="scroll" data-target="#spy">

@@ -7,13 +7,13 @@
             <div class="tab" style="margin-bottom: 5% ">
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5">
-                        <label>Название товара <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
+                        <label>Название товара <i uk-tooltip="Введите название товара" uk-icon="question"></i></label>
                         <div>
                             {{ form8.product_name }}
                         </div>
                     </div>
                     <div class="uk-width-2-5">
-                        <label>Бренд <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
+                        <label>Бренд <i uk-tooltip="Введите название бренда" uk-icon="question"></i></label>
                         <div>
                             {{ form8.brand }}
                         </div>
@@ -22,7 +22,7 @@
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5 uk-flex-row">
                         <label> Фотография товара <i
-                                uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
+                                uk-tooltip="Выберите фотографию товара "
                                 uk-icon="question"></i></label>
                         <div class="uk-width-1 uk-margin-small-bottom" uk-form-custom="target: true">
                             <input type="file">
@@ -31,31 +31,31 @@
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
                             <label> Срок получения товара <i
-                                    uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
+                                    uk-tooltip="Выберите, через сколько покупатель сможет получить свой товар после покупки"
                                     uk-icon="question"></i></label>
                             {{ form8.duration }}
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
-                            <label> Категория <i uk-tooltip="К какой категории вы относите свой товар?"
+                            <label> Категория <i uk-tooltip="Выберите категорию, к которой относится товар"
                                     uk-icon="question"></i></label>
                             {{ form8.category }}
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
-                            <label>Трана произваодетель <i
-                                    uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                            <label>Страна произваодетеля <i
+                                    uk-tooltip="Выберите страну, в которой товар был изготовлен"
                                     uk-icon="question"></i></label>
                             {{ form8.country }}
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
                             <label> Пол <i
-                                    uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                                    uk-tooltip="Выберите подходящий пол для иовара"
                                     uk-icon="question"></i></label>
                             {{ form8.sex }}
                         </div>
                     </div>
                     <div class="uk-width-2-5 uk-margin-small-bottom">
                         <label>Описание <i
-                                uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                                uk-tooltip="Введите описание своему товару. Так покупателям будет легче понять, что они покупают"
                                 uk-icon="question"></i></label>
                         {{ form8.description }}
                     </div>
@@ -64,8 +64,8 @@
 
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5">
-                        <label>Комлектация товара <i
-                                uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
+                        <label>Состав товара <i
+                                uk-tooltip="Введите из чего состоит товар и сколько это в процентах. Не забудьте нажать на плюс, чтобы добавить комплект к товару"
                                 uk-icon="question"></i></label>
                         <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
                             <input type="text" id="compNmae" maxlength="40" class="changeble uk-input uk-width-3-6">
@@ -85,7 +85,7 @@
                     </div>
                     <div class="uk-width-2-5">
                         <label> Размерный ряд <i
-                                uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
+                                uk-tooltip="Введите размеры Вашего товара. Не забудьте нажать на плюс, чтобы добавить размер товару"
                                 uk-icon="question"></i></label>
                         <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
                             <input type="text" id="size" maxlength="10" class="changeble uk-input uk-width-3-6">
@@ -94,7 +94,7 @@
                                     class="fa fa-plus"></i></button>
                         </div>
                         <!-- template start -->
-                        <div id="sizeInput" class="uk-width-1">
+                        <div id="sizeInput" class="uk-width-1 uk-grid" uk-grid>
                         </div>
                         <!-- template end -->
                     </div>
@@ -108,8 +108,9 @@
                         <tr>
                             <th class="uk-width-auto">название</th>
                             <th class="uk-width-auto">Размер</th>
-                            <th class="uk-width-auto">Цена</th>
-                            <th class="uk-width-auto uk-text-center">Итоговая стоимость</th>
+                            <th class="uk-width-auto">Кол-во</th>
+                            <th class="uk-width-auto">Цена <i uk-tooltip="Эту цену будут видеть покупатели"uk-icon="question"></i></th>
+                            <th class="uk-width-auto uk-text-center">Итоговая стоимость <i uk-tooltip="Чистая прибль с учетом комиссии"uk-icon="question"></i></th>
                         </tr>
                     </thead>
                     <tbody id="table">
@@ -183,7 +184,7 @@
     function recalc(el) {
         let price = parseInt(el.value)
         let form = el.parentElement.parentElement.getElementsByClassName('final_price')[0];
-        let sum = price + price * 0.1
+        let sum = price - price * 0.1
         if (price >= 10000000) {
             el.value = 10000000
             sum = 10000000
@@ -199,7 +200,7 @@
         for (let i = 0; i < sizes.length; i++) {
             let size = sizes[i].getElementsByClassName('complectations_size')[0].value
             table.innerHTML +=
-                `<tr> <td class="uk-text-truncate">${name}</td> <td class="uk-width-1-4">${size}</td> <td class="uk-width-1-4"><input class="uk-input price" type="number" name="price_${i}" oninput="recalc(this)" required></td> <td class="uk-width-1-4 uk-text-center"><p class="final_price"></p></td> </tr>`;
+                `<tr> <td class="uk-text-truncate">${name}</td> <td class="uk-width-1-5">${size}</td> <td class="uk-width-1-5"><input class="uk-input amount" type="number" max="1000000" name="amount_${i}" required></td> <td class="uk-width-1-5"><input class="uk-input price" type="number" name="price_${i}" oninput="recalc(this)" required></td> <td class="uk-width-1-5 uk-text-center"><p class="final_price"></p></td> </tr>`;
         }
     }
 
