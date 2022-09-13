@@ -351,6 +351,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.country = request.POST['country']
         product.category = request.POST['category']
         product.duration = request.POST['duration']
+        product.sex = request.POST['sex']
         account = Account.objects.get(email=request.user)
         product.id_creator = account.email
         product.save()
@@ -361,6 +362,11 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
     if request.method == 'GET' and "delete" in request.GET:
         product = Product_creator.objects.get(product_id=request.GET['delete'])
+        product.delete()
+        return HttpResponseRedirect("/becomeCreator/")
+
+    if request.method == 'POST' and "decline" in request.POST:
+        product = Product_buy.objects.get(id=request.POST['decline'])
         product.delete()
         return HttpResponseRedirect("/becomeCreator/")
 

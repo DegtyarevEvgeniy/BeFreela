@@ -34,12 +34,12 @@
                         </th>
                         <td class="uk-text-center">
                             {% if product.status1 == "red" %}
-                            <button name="decline" form="products_in_work_id" type="submit" value="{{product.id}}" class="uk-button uk-button-danger uk-width-1 uk-text-center uk-border-rounded">Отказаться</button>
+                            <button name="decline" form="products_in_work_id" type="submit" value="{{product.id}}" class="uk-button uk-button-danger uk-width-auto uk-text-center uk-border-rounded">Отказаться</button>
                             {% elif product.status2 == "red" %}
-                            <button style="background-color: #faa05a" class="uk-button uk-width-1 uk-text-center uk-border-rounded" disabled>Доставить</button>
+                            <button style="background-color: #faa05a" class="uk-button uk-width-auto uk-text-center uk-border-rounded" disabled>Доставить</button>
                             {% else %}
                             <!-- <button name="send" form="products_in_work_id" type="submit" value="{{product.id}}" style="background-color: #faa05a" class="uk-button uk-width-1 uk-text-center uk-border-rounded">Доставить</button> -->
-                            <button name="decline" form="products_in_work_id" type="submit" value="{{product.id}}" class="uk-button uk-button-danger uk-width-1 uk-text-center uk-border-rounded">Отказаться</button>
+                            <button name="decline" form="products_in_work_id" type="submit" value="{{product.id}}" class="uk-button uk-button-danger uk-width-auto uk-text-center uk-border-rounded">Отказаться</button>
                             
                             {% endif %}
                             {{product.st}}

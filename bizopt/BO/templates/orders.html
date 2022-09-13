@@ -28,15 +28,15 @@
                             <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
                             <p class="uk-text-break">Адрес: <br>{{product.delivery_address}}</p>
                         </div>
-                        <div class="uk-width-2-5">
+                        <div class="uk-width-auto">
                             <button class="uk-button uk-button-primary uk-border-rounded uk-width-1"
                                 style="margin: 0 1%" type="button">Оплатить заказ</button>
                             <div class="uk-flex" style="margin-top: 5%">
                                 {% csrf_token %}
-                                <button class="uk-button uk-button-danger uk-border-rounded uk-width-3-5"
+                                <button class="uk-button uk-button-danger uk-border-rounded uk-width-auto"
                                     style="margin: 0 1%" name="decline" value="{{product.id}}"
                                     type="submit">Отказаться</button>
-                                <a class="uk-button uk-button-primary uk-border-rounded uk-width-2-5 {{product.chat}}" id="cahtBtn"
+                                <a class="uk-button uk-button-primary uk-border-rounded uk-width-auto {{product.chat}}" id="cahtBtn"
                                     style="margin: 0 1%"  type="button">Чат</a>
                             </div>
                         </div>
