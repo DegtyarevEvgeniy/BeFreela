@@ -597,7 +597,7 @@ def cardProduct_page(request, product_id):
         context['product'].sizes = list(filter(None, product.size.split(",")))
         context['product'].prices = list(filter(None, product.price.split(",")))
         context['product'].compounds = list(filter(None, product.compound.split(",")))
-        context['product'].rating = round(product.rating, 1)
+        context['product'].rating = float(str(product.rating)[0:4])
         context['product'].flooredrating = math.floor(product.rating)
         context['shop'] = shop
 
