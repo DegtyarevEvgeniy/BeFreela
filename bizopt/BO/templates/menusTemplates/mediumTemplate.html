@@ -2,8 +2,9 @@
 <nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
     style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
     <div class="uk-navbar-left">
-        <a class="homeWord" href="/">
-            <h2 class="uk-margin-remove uk-text-bold uk-button uk-button-link" style="font-size: 1.5rem;">BeFreela</h2>
+        <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-flex-middle">
+            <img src="../../../media/logoImage/logo.svg" alt="" width="40">
+            <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-small uk-margin-small-left">
         </a>
     </div>
     <div class="uk-navbar-right uk-width-3-5">
@@ -20,23 +21,22 @@
 <div id="main-menuS" uk-offcanvas="overlay: true">
     <div class="uk-offcanvas-bar uk-flex uk-flex-column">
 
-        <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
-            <li class="uk-active"><a href="/">
-                    <h1 class="uk-button uk-button-default uk-position-top"
-                        style="font-size: 2rem; border: none; margin-top: 5%;">BeFreela</h1>
+        <ul class="uk-nav uk-nav-primary uk-nav-left ">
+            <li class="uk-active">
+                <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-margin-medium-bottom">
+                    <img src="../../../media/logoImage/logo.svg" alt="" class="uk-width-1-5" height="100">
+                    <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-4-5" height="100">
                 </a>
             </li>
 
             <li>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
-                    <img src="{{user.userImage}}"
-                        width=60 height=60 class="uk-border-circle">
+                    <img src="{{user.userImage}}" width=60 height=60 class="uk-border-circle">
                     <p class="uk-text-truncate" uk-tooltip="{{user.email}}">{{user.email}}</p>
                 </div>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-left uk-margin-medium-top">
                     {% if user.is_partner %}
-                    <a style="margin: 0 5%" uk-tooltip="Партнерка" href="/becomeCreator/"
-                        uk-icon="icon: bag"></a>
+                    <a style="margin: 0 5%" uk-tooltip="Партнерка" href="/becomeCreator/" uk-icon="icon: bag"></a>
                     {% endif %}
                     <a style="margin: 0 5%" uk-tooltip="Корзина" href="/orders/" uk-icon="icon: cart"></a>
                 </div>
@@ -87,8 +87,7 @@
         </ul>
         <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
             <p style="margin: 0px"> Регион <b>Москва</b></p>
-            <a href="partners/" class="uk-button uk-button-text"
-                style="text-transform: none; font-size: medium;">Стать
+            <a href="partners/" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
                 партнером</a>
         </ul>
     </div>
@@ -99,8 +98,9 @@
 <nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
     style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
     <div class="uk-navbar-left">
-        <a class="homeWord" href="/">
-            <h2 class="uk-margin-remove uk-text-bold uk-button uk-button-link" style="font-size: 1.5rem;">BeFreela</h2>
+        <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-flex-middle">
+            <img src="../../../media/logoImage/logo.svg" alt="" width="40">
+            <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-small uk-margin-small-left">
         </a>
     </div>
     <div class="uk-navbar-right uk-width-3-5">
@@ -141,10 +141,12 @@
             <li class="uk-parent">
                 <ul class="uk-nav uk-nav-default">
                     <li class="uk-active">
-                        <a href="creators/goods/category/Дизайнерская одежда" class="uk-button uk-button-text">Дизайнерская одежда</a>
+                        <a href="creators/goods/category/Дизайнерская одежда"
+                            class="uk-button uk-button-text">Дизайнерская одежда</a>
                     </li>
                     <li class="uk-active">
-                        <a href="creators/goods/category/Дизайнерская обувь" class="uk-button uk-button-text">Дизайнерская обувь</a>
+                        <a href="creators/goods/category/Дизайнерская обувь"
+                            class="uk-button uk-button-text">Дизайнерская обувь</a>
                     </li>
                     <li class="uk-active">
                         <a href="creators/goods/category/Сумки" class="uk-button uk-button-text">Сумки</a>

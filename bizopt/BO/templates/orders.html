@@ -9,41 +9,68 @@
 
 
 
-    <div class="uk-width-4-5 uk-flex-column uk-margin-bottom" style="margin: 2% auto">        
+    <div class="uk-width-4-5 uk-flex-column uk-margin-bottom" style="margin: 2% auto">
 
-            <form method="POST" class="uk-width-1">
-                {% for product in products %}
-                <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
-                    style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
-                    <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
-                        <div><img src="{{product.img}}" alt="" width="200px" style="border-radius: 5px">
-                        </div>
-                        <div class="uk-flex-row">
-                            <h2 class="uk-text-break">{{ product.id_user_buy }}</h2>
-                            <p style="font-size: 1.3em;" class="uk-text-break">Статус: <br> {{ product.status }}</p>
-                        </div>
+        <form method="POST" class="uk-width-1">
+            {% for product in products %}
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
+                style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
+                <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
+                    <div><img src="{{product.img}}" alt="" width="200px" style="border-radius: 5px">
                     </div>
-                    <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5">
-                        <div class="uk-width-2-5">
-                            <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
-                            <p class="uk-text-break">Адрес: <br>{{product.delivery_address}}</p>
-                        </div>
-                        <div class="uk-width-auto">
-                            <button class="uk-button uk-button-primary uk-border-rounded uk-width-1"
-                                style="margin: 0 1%" type="button">Оплатить заказ</button>
-                            <div class="uk-flex" style="margin-top: 5%">
-                                {% csrf_token %}
-                                <button class="uk-button uk-button-danger uk-border-rounded uk-width-auto"
-                                    style="margin: 0 1%" name="decline" value="{{product.id}}"
-                                    type="submit">Отказаться</button>
-                                <a class="uk-button uk-button-primary uk-border-rounded uk-width-auto {{product.chat}}" id="cahtBtn"
-                                    style="margin: 0 1%"  type="button">Чат</a>
-                            </div>
+                    <div class="uk-flex-row">
+                        <h2 class="uk-text-break">{{ product.id_user_buy }}</h2>
+                        <p style="font-size: 1.3em;" class="uk-text-break">Статус: <br> {{ product.status }}</p>
+                    </div>
+                </div>
+                <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5">
+                    <div class="uk-width-2-5">
+                        <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
+                        <p class="uk-text-break uk-text-truncate">Адрес: <br>{{product.delivery_address}}</p>
+                    </div>
+                    <div class="uk-width-auto">
+                        <button class="uk-button uk-button-primary uk-border-rounded uk-width-1" style="margin: 0 1%"
+                            type="button" uk-toggle="target: #modal-close-default">Оплатить заказ</button>
+                        <div class="uk-flex" style="margin-top: 5%">
+                            {% csrf_token %}
+                            <button class="uk-button uk-button-danger uk-border-rounded uk-width-auto"
+                                style="margin: 0 1%" name="decline" value="{{product.id}}"
+                                type="submit">Отказаться</button>
+                            <a class="uk-button uk-button-primary uk-border-rounded uk-width-auto {{product.chat}}"
+                                id="cahtBtn" style="margin: 0 1%" type="button">Чат</a>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
-            </form>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    </div>
+
+    <div id="modal-close-default" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <h2 class="uk-modal-title">Оплата</h2>
+            <div>
+                <div class="uk-flex uk-margin-bottom">
+                    <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
+                    <div class="uk-flex-column uk-margin-left">
+                        <p class="uk-margin-remove">{{ user.first_name }}</p>
+                        <p class="uk-margin-remove">{{ user.email}}</p>
+                    </div>
+                </div>
+                <div class="uk-flex">
+                    <p class="uk-margin-remove">Получатель:</p>
+                    <span class="uk-label" style="margin: 0 0 0 5%">{{user.first_name}} {{user.last_name}}</span>
+                </div>
+                <div class="uk-margin-top">
+                    <p>Отсканируйте QR-код и оплатите товар</p>
+                    <img
+                        src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg">
+                </div>
+                <button class="uk-button uk-button-default uk-margin-small-right uk-modal-close"
+                    style="margin-left: 75%; border-radius: 5px;  " type="button">Закрыть</button>
+            </div>
         </div>
     </div>
 </body>
@@ -51,7 +78,7 @@
 <script>
     const chatBtn = document.getElementById('cahtBtn')
 
-    chatBtn.addEventListener('click', function()  {
+    chatBtn.addEventListener('click', function () {
         window.location.replace('/chats/')
         localStorage.setItem('activeChat', chatBtn.classList[chatBtn.classList.length - 1])
     })
