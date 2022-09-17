@@ -6,10 +6,10 @@ from datetime import datetime
 
 class Shop(models.Model):
     name = models.CharField(max_length=50, default='')
-    logoImage = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png')
-    prevLogoImage = models.ImageField(default='')
-    bgImage = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png')
-    prevBgImage = models.ImageField(default='')
+    logoImage = models.CharField(max_length=500, default='https://i.ibb.co/s3QmZrw/default.png')
+    prevLogoImage = models.CharField(max_length=500, default='')
+    bgImage = models.CharField(max_length=500, default='https://i.ibb.co/s3QmZrw/default.png')
+    prevBgImage = models.CharField(max_length=500, default='')
     description = models.CharField(max_length=500, default='')
     category = models.CharField(max_length=500, default='')
     status = models.CharField(max_length=500, default='')

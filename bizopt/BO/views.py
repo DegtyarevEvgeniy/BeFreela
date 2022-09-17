@@ -55,14 +55,15 @@ def upload_image(image, name):
     with open(image, "rb") as file:
         url = "https://api.imgbb.com/1/upload"
         payload = {
-            "key": '792f875de829eb7c21a45bac0420e83a',
+            "key": '4d8bfed1807797ed805abf76382f3ed9',
             "image": base64.b64encode(file.read()),
             "name": name
     }
+
     res = requests.post(url, payload)
     link = res.text.split('thumb')[-1].split("delete")[0][3:-3].split(",")[-1].split('":"')[-1][:-1].replace('\\', '') 
     name = res.text.split('name":"')[-1].split('"')[0]
-    return {link, name}
+    return [link, name]
 
 
 
@@ -255,8 +256,11 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
 
         shop = Shop.objects.get(email=request.user.email)
-        prevlogo = shop.prevLogoImage
-        prevbg = shop.prevBgImage
+        # prevlogo = shop.prevLogoImage
+        # prevbg = shop.prevBgImage
+
+        link_logo = ''
+        link_bg = ''
 
 
         shop.name = request.POST['name']
@@ -265,37 +269,55 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         shop.category = request.POST['chosenCategoties']
 
 
-
+        print(request.POST)
         if request.FILES:
+
             try:
-                if prevlogo:
+                if request.FILES['logoImage']:
+
                     file = request.FILES['logoImage']
-                    prevlogo = f"{prevlogo.split('_')[0]}_{int(prevlogo.split('_')[-1]) + 1}"
-                    logoImageData = upload_image(file, prevlogo)
+                    fs = FileSystemStorage()
+                    filename = f"prof_{str(shop.email)}"
+
+                    path_to_local_image = os.path.join("", filename)
+
+                    fs.save(path_to_local_image, file)
+
+                    logoImageData = upload_image("media/"+path_to_local_image, filename)
+
+
+                    os.remove("media/"+path_to_local_image)
+
                     shop.logoImage = logoImageData[0]
-                    shop.prevLogoImage = logoImageData[-1]
+                    # shop.prevLogoImage = logoImageData[-1]
+
                 else:
-                    file = request.FILES['logoImage']
-                    prevlogo = f"logo-{request.POST['name']}_0"
-                    logoImageData = upload_image(file, prevlogo)
-                    shop.logoImage = logoImageData[0]
-                    shop.prevLogoImage = logoImageData[-1]
+                    pass
             except:
                 pass
 
-            try:    
-                if prevbg:
+            try:
+                    
+                if request.FILES['bgImage']:
+
                     file = request.FILES['bgImage']
-                    prevbg = f"{prevbg.split('_')[0]}_{int(prevbg.split('_')[-1]) + 1}"
-                    bgImageData = upload_image(file, prevbg)
-                    shop.bgImage = bgImageData[0]
-                    shop.prevBgImage = bgImageData[-1]
+                    fs = FileSystemStorage()
+                    filename = f"bg_{str(shop.email)}"
+
+                    path_to_local_image = os.path.join("", filename)
+
+                    fs.save(path_to_local_image, file)
+
+                    logoImageData = upload_image("media/"+path_to_local_image, filename)
+
+                    os.remove("media/"+path_to_local_image)
+
+                    shop.bgImage = logoImageData[0]
+                    # shop.prevLogoImage = logoImageData[-1]
+
+
                 else:                        
-                    file = request.FILES['bgImage']
-                    prevbg = f"bg-{request.POST['name']}_0"
-                    bgImageData = upload_image(file, prevbg)
-                    shop.bgImage = bgImageData[0]
-                    shop.prevBgImage = bgImageData[-1]
+                    pass
             except:
                 pass
 
@@ -442,8 +464,7 @@ def becomeCreatorTemplate_page(request, name):
         user = Account.objects.get(email=request.user)
 
         try:
-              # для редактирования профиля
-
+             
             creator = Account.objects.get(email=request.user)
             content['creator'] = creator
 
