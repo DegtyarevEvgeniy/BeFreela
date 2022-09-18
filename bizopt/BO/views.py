@@ -52,12 +52,12 @@ def gen_menu(request):
         return {}
 
 def upload_image(image, name):
-    with open(image, "rb") as file:
-        url = "https://api.imgbb.com/1/upload"
-        payload = {
-            "key": '4d8bfed1807797ed805abf76382f3ed9',
-            "image": base64.b64encode(file.read()),
-            "name": name
+
+    url = "https://api.imgbb.com/1/upload"
+    payload = {
+        "key": '4d8bfed1807797ed805abf76382f3ed9',
+        "image": base64.b64encode(image.read()),
+        "name": name
     }
 
     res = requests.post(url, payload)
@@ -276,18 +276,9 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 if request.FILES['logoImage']:
 
                     file = request.FILES['logoImage']
-                    fs = FileSystemStorage()
                     filename = f"prof_{str(shop.email)}"
 
-                    path_to_local_image = os.path.join("", filename)
-
-                    fs.save(path_to_local_image, file)
-
-                    logoImageData = upload_image("media/"+path_to_local_image, filename)
-
-
-                    os.remove("media/"+path_to_local_image)
-
+                    logoImageData = upload_image(file, filename)
                     shop.logoImage = logoImageData[0]
                     # shop.prevLogoImage = logoImageData[-1]
 
@@ -301,17 +292,9 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                 if request.FILES['bgImage']:
 
                     file = request.FILES['bgImage']
-                    fs = FileSystemStorage()
                     filename = f"bg_{str(shop.email)}"
 
-                    path_to_local_image = os.path.join("", filename)
-
-                    fs.save(path_to_local_image, file)
-
-                    logoImageData = upload_image("media/"+path_to_local_image, filename)
-
-                    os.remove("media/"+path_to_local_image)
-
+                    logoImageData = upload_image(file, filename)
                     shop.bgImage = logoImageData[0]
                     # shop.prevLogoImage = logoImageData[-1]
 
