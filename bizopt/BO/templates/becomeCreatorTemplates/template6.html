@@ -1,6 +1,18 @@
+<style>
+    #result {
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .thumbnail {
+        height: 192px;
+    }
+</style>
+
 <div class="uk-flex uk-flex-top uk-flex-center" style="margin: 0 auto;">
     <div class="uk-width-3-5" style="margin: 0 auto">
-        <form id="regForm" method="POST" action="">
+        <form id="regForm" method="POST" action="" enctype="multipart/form-data">
             <h1 class="mb-5">Создать товар</h1>
 
 
@@ -21,14 +33,7 @@
                 </div>
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5 uk-flex-row">
-                        <label> Фотография товара <i
-                                uk-tooltip="Выберите фотографию товара "
-                                uk-icon="question"></i></label>
-                        <div class="uk-width-1 uk-margin-small-bottom" uk-form-custom="target: true">
-                            <input type="file">
-                            <input class="uk-input" name="product_photos" type="text" placeholder="Выбрать файл"
-                                disabled>
-                        </div>
+                        
                         <div class="uk-width-1 uk-margin-small-bottom">
                             <label> Срок получения товара <i
                                     uk-tooltip="Выберите, через сколько покупатель сможет получить свой товар после покупки"
@@ -78,10 +83,8 @@
                                 name="addComplect" onclick="addInput(this)" type="button"><i
                                     class="fa fa-plus"></i></button>
                         </div>
-                        <!-- template start -->
                         <div id="inputDiv" class="uk-width-1 uk-flex-row">
                         </div>
-                        <!-- template end -->
                     </div>
                     <div class="uk-width-2-5">
                         <label> Размерный ряд <i
@@ -93,10 +96,8 @@
                                 name="addComplect" onclick="addSize(this)" type="button"><i
                                     class="fa fa-plus"></i></button>
                         </div>
-                        <!-- template start -->
                         <div id="sizeInput" class="uk-width-1 uk-grid" uk-grid>
                         </div>
-                        <!-- template end -->
                     </div>
                 </div>
 
@@ -106,7 +107,7 @@
                 <table class="uk-table uk-table-justify uk-table-divider" id="pricing">
                     <thead>
                         <tr>
-                            <th class="uk-width-auto">название</th>
+                            <th class="uk-width-auto">Название</th>
                             <th class="uk-width-auto">Размер</th>
                             <th class="uk-width-auto">Кол-во</th>
                             <th class="uk-width-auto">Цена <i uk-tooltip="Эту цену будут видеть покупатели"uk-icon="question"></i></th>
@@ -118,6 +119,92 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="tab" style="display: none;">
+
+                <article class="uk-article">
+
+                    <h1 class="uk-article-title" ><a class="uk-link-reset" href="">Загрузите изображения товара</a></h1>
+
+                    <p class="uk-article-meta" style="width:80%">Загрузите товары в соответствии с описанием. В случае не соответсвия требованиям, картинка может быть удалена</p>
+
+                    <br>
+                    <br>
+                
+                    <p class="uk-text-lead">Как выглядит товар спереди</p>
+                
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+                
+                    
+                
+                </article>
+
+                <div class="uk-margin uk-card uk-card-default uk-card-body">
+
+                    <div class="js-upload1 uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Загрузи изображение</span>
+                        <div uk-form-custom>
+                            <input type="file" id="files1" accept="image/jpeg, image/png, image/jpg" name="product_photo1"> 
+                            <span class="uk-link">Выбери одно</span>
+                        </div>
+                    </div>
+                    
+                    <progress id="js-progressbar1" class="uk-progress" value="1" max="100" hidden></progress>
+                    
+
+                    <div id="result1"></div>
+
+                </div>
+
+                <br>
+                    <br>
+                
+                    <p class="uk-text-lead">Как выглядит товар сзади</p>
+
+                <div class="uk-margin uk-card uk-card-default uk-card-body">
+
+                    <div class="js-upload2 uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Загрузи изображение</span>
+                        <div uk-form-custom>
+                            <input type="file" id="files2" accept="image/jpeg, image/png, image/jpg" name="product_photo2"> 
+                            <span class="uk-link">Выбери одно</span>
+                        </div>
+                    </div>
+                    
+                    <progress id="js-progressbar2" class="uk-progress" value="2" max="100" hidden></progress>
+                    
+
+                    <div id="result2"></div>
+
+                </div>
+
+                <br>
+                    <br>
+                
+                    <p class="uk-text-lead">Как выглядит шов товара</p>
+
+                <div class="uk-margin uk-card uk-card-default uk-card-body">
+
+                    <div class="js-upload3 uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Загрузи изображение</span>
+                        <div uk-form-custom>
+                            <input type="file" id="files3" accept="image/jpeg, image/png, image/jpg" name="product_photo3"> 
+                            <span class="uk-link">Выбери одно</span>
+                        </div>
+                    </div>
+                    
+                    <progress id="js-progressbar3" class="uk-progress" value="3" max="100" hidden></progress>
+                    
+
+                    <div id="result3"></div>
+
+                </div>
+
+            </div>
+
 
             {% csrf_token %}
 
@@ -141,6 +228,142 @@
         </form>
     </div>
 </div>
+
+<script>
+
+document.querySelector("#files1").addEventListener("change", (e) => { 
+  if (window.File && window.FileReader && window.FileList && window.Blob) { 
+    const files = e.target.files; 
+    const output = document.querySelector("#result1");
+    output.innerHTML = "";
+    for (let i = 0; i < files.length; i++) { 
+        if (!files[i].type.match("image")) continue; 
+        const picReader = new FileReader(); 
+        picReader.addEventListener("load", function (event) { 
+          const picFile = event.target;
+          const div = document.createElement("div");
+          div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+          output.appendChild(div);
+        });
+        picReader.readAsDataURL(files[i]); 
+    }
+  } else {
+    alert("Your browser does not support File API");
+  }
+});
+
+document.querySelector("#files2").addEventListener("change", (e) => { 
+  if (window.File && window.FileReader && window.FileList && window.Blob) { 
+    const files = e.target.files; 
+    const output = document.querySelector("#result2");
+    output.innerHTML = "";
+    for (let i = 0; i < files.length; i++) { 
+        if (!files[i].type.match("image")) continue; 
+        const picReader = new FileReader(); 
+        picReader.addEventListener("load", function (event) { 
+          const picFile = event.target;
+          const div = document.createElement("div");
+          div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+          output.appendChild(div);
+        });
+        picReader.readAsDataURL(files[i]); 
+    }
+  } else {
+    alert("Your browser does not support File API");
+  }
+});
+
+document.querySelector("#files3").addEventListener("change", (e) => { 
+  if (window.File && window.FileReader && window.FileList && window.Blob) { 
+    const files = e.target.files; 
+    const output = document.querySelector("#result3");
+    output.innerHTML = "";
+    for (let i = 0; i < files.length; i++) { 
+        if (!files[i].type.match("image")) continue; 
+        const picReader = new FileReader(); 
+        picReader.addEventListener("load", function (event) { 
+          const picFile = event.target;
+          const div = document.createElement("div");
+          div.innerHTML = `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+          output.appendChild(div);
+        });
+        picReader.readAsDataURL(files[i]); 
+    }
+  } else {
+    alert("Your browser does not support File API");
+  }
+});
+
+</script>
+
+<script>
+
+    
+    var getEl = 'js-progressbar1';
+    var inEl = '.js-upload1';
+
+    console.log(num);
+                
+    var bar = document.getElementById(getEl);
+
+    UIkit.upload(inEl, {
+
+        url: '',
+        multiple: true,
+
+        beforeSend: function () {
+            console.log('beforeSend', arguments);
+        },
+        beforeAll: function () {
+            console.log('beforeAll', arguments);
+        },
+        load: function () {
+            console.log('load', arguments);
+        },
+        error: function () {
+            console.log('error', arguments);
+        },
+        complete: function () {
+            console.log('complete', arguments);
+        },
+
+        loadStart: function (e) {
+            console.log('loadStart', arguments);
+
+            bar.removeAttribute('hidden');
+            bar.max = e.total;
+            bar.value = e.loaded;
+        },
+
+        progress: function (e) {
+            console.log('progress', arguments);
+
+            bar.max = e.total;
+            bar.value = e.loaded;
+        },
+
+        loadEnd: function (e) {
+            console.log('loadEnd', arguments);
+
+            bar.max = e.total;
+            bar.value = e.loaded;
+        },
+
+        completeAll: function () {
+            console.log('completeAll', arguments);
+
+            setTimeout(function () {
+                bar.setAttribute('hidden', 'hidden');
+            }, 1000);
+
+            alert('Upload Completed');
+        }
+
+    });
+
+
+
+</script>
 
 <script>
     var inputnum = 0,
@@ -170,6 +393,25 @@
                 btn.style["background-color"] = 'blue'
                 btn.disabled = false;
                 localStorage.page = 5;
+                
+                return 1
+            } else {
+                btn.style["background-color"] = 'gray'
+                btn.disabled = true;
+                return 0
+            }
+        }
+        else if (n == 3) {
+
+            let poles = document.getElementsByClassName("price")
+            let checker = true
+
+            // ТУТ УСЛОВИЕ ЗАГРУЗКИ КАРТИНОК ---- checker = true
+
+            if (checker) {
+                btn.style["background-color"] = 'blue'
+                btn.disabled = false;
+                localStorage.page = 5;
                 btn.type = "submit"
                 return 1
             } else {
@@ -177,6 +419,7 @@
                 btn.disabled = true;
                 return 0
             }
+
         }
 
     }
@@ -316,7 +559,7 @@
                 PassChecker(2)
             } else if (n == x.length - 1) {
                 document.getElementById("prevBtn").style.display = "none";
-                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("nextBtn").style.display = "inline";
 
             } else {
                 for (let i = 0; i < len; i++) {
@@ -348,7 +591,7 @@
         } else {
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-            if (currentTab === x.length - 1) {
+            if (currentTab === 3) {
                 document.getElementById('nextBtn').type = "submit"
                 document.getElementById('next-previous').classList.add("redirect");
             }

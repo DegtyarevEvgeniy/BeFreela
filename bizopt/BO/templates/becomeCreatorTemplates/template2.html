@@ -272,7 +272,7 @@
         let x = document.getElementsByClassName("tab");
         x[currentTab].style.display = "none";
         currentTab = currentTab + n;
-        if (currentTab === x.length - 1) {
+        if (currentTab === x.length) {
             document.getElementById('nextBtn').type = "submit"
         }
         showTab(currentTab);
@@ -288,7 +288,11 @@
     function fixStepIndicator(n) {
         let i, x = document.getElementsByClassName("step");
 
-        progressBar.style.setProperty("--width-nonstatic", "100%");
+        if (n != x.length - 1) {
+            progressBar.style.setProperty("--width-nonstatic", `${(n+1) * 40}%`);
+        } else {
+            progressBar.style.setProperty("--width-nonstatic", "100%");
+        }
 
         x[n].style.backgroundColor = '#2652bf';
         x[n].style.borderColor = '#2652bf';

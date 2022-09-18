@@ -296,6 +296,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
                     logoImageData = upload_image(file, filename)
                     shop.bgImage = logoImageData[0]
+
                     # shop.prevLogoImage = logoImageData[-1]
 
                 else:                        
@@ -309,11 +310,25 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
     if request.method == 'POST' and "product_creator" in request.POST:  # для создания собственного продукта
         product = Product_creator()
+
         if request.FILES:
-            file = request.FILES['product_photos']
-            fs = FileSystemStorage()
-            local_path_to_file = fs.save(os.path.join("images/products", file.name), file)
-            product.picture = local_path_to_file
+            print(request.FILES)
+
+            file1 = request.FILES['product_photo1']
+            file2 = request.FILES['product_photo2']
+            file3 = request.FILES['product_photo3']
+
+            filename1 = f'product_photo1_{str(request.user.email)}'
+            filename2 = f'product_photo2_{str(request.user.email)}'
+            filename3 = f'product_photo3_{str(request.user.email)}'
+
+            logoImageData1 = upload_image(file1, filename1)
+            logoImageData2 = upload_image(file2, filename2)
+            logoImageData3 = upload_image(file3, filename3)
+    
+            product.picture1 = logoImageData1[0]
+            product.picture2 = logoImageData2[0]
+            product.picture3 = logoImageData3[0]
 
         # if "product_creator_tags" in request.POST:
         #   form = MyForm(request.POST)
@@ -496,7 +511,9 @@ def becomeCreatorTemplate_page(request, name):
                                 # 'height_packaging': product.height_packaging,
                                 # 'length_packaging': product.length_packaging,
                                 'availability': product.availability,
-                                'picture': product.picture,
+                                'picture1': product.picture1,
+                                'picture2': product.picture2,
+                                'picture3': product.picture3,
                                 }
                                for product in products]
 

@@ -6,9 +6,9 @@ from datetime import datetime
 
 class Shop(models.Model):
     name = models.CharField(max_length=50, default='')
-    logoImage = models.CharField(max_length=500, default='https://i.ibb.co/s3QmZrw/default.png')
+    logoImage = models.CharField(max_length=500, default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
     prevLogoImage = models.CharField(max_length=500, default='')
-    bgImage = models.CharField(max_length=500, default='https://i.ibb.co/s3QmZrw/default.png')
+    bgImage = models.CharField(max_length=500, default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
     prevBgImage = models.CharField(max_length=500, default='')
     description = models.CharField(max_length=500, default='')
     category = models.CharField(max_length=500, default='')
@@ -36,7 +36,9 @@ class Product_creator(models.Model):
     description = models.CharField('Описание', max_length=1000, default='')
     availability = models.CharField('', max_length=100, default='')
     amount = models.CharField(max_length=100, default='')
-    picture = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png') 
+    picture1 = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png') 
+    picture2 = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png') 
+    picture3 = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png') 
     prevPicture = models.ImageField(default='')
 
     tags = TaggableManager()
@@ -64,7 +66,7 @@ class Product_buy(models.Model):
     status_pay = models.BooleanField(default=0)
     delivery_address = models.CharField(max_length=500, default='')
     date_add = models.DateField(max_length=50, default='2000-01-01') 
-    img = models.ImageField(default='https://i.ibb.co/s3QmZrw/default.png')
+    img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
     prevImg = models.ImageField(default='')
     # status2 = models.CharField(max_length=20, default='')
 
