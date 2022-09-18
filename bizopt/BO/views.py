@@ -298,7 +298,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
                     shop.bgImage = logoImageData[0]
                     # shop.prevLogoImage = logoImageData[-1]
 
-
                 else:                        
                     pass
             except:
@@ -686,19 +685,16 @@ def edit_profile(request):
         if request.method == "POST":
             print(request.FILES)
             if request.FILES:
+
+
                 file = request.FILES['profile_photo']
-                fs = FileSystemStorage()
-                filename = f"profile_{str(person.email)}.png"
-                path_to_local_image = os.path.join("images/profile", filename)
+                filename = f"profile_{str(person.email)}"
 
-                if os.path.isfile("media/"+path_to_local_image):
-                    os.remove("media/"+path_to_local_image)
-                    fs.save(path_to_local_image, file)
-                    person.userImage = path_to_local_image
-                else:
-                    fs.save(path_to_local_image, file)
-                    person.userImage = path_to_local_image
+                logoImageData = upload_image(file, filename)
+                person.userImage = logoImageData[0]
+                # shop.prevLogoImage = logoImageData[-1]
 
+             
             if request.POST.get('first_name', None):
                 print(request.POST['first_name'])
                 person.first_name = request.POST['first_name']
