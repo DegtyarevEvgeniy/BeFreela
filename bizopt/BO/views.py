@@ -546,7 +546,9 @@ def index_page(request):
                             'product_name': product.product_name,
                             'cost': product.price,
                             'availability': product.availability,
-                            'picture': product.picture,
+                            'picture1': product.picture1,
+                            'picture2': product.picture2,
+                            'picture3': product.picture3,
                             'description': product.description
                             }
                            for product in products]
