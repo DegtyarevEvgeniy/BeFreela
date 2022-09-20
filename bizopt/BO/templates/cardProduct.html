@@ -4,33 +4,40 @@
 
 
 <div class="uk-card uk-card-default uk-card-body uk-width-4-5" style="margin: 0  auto">
-    <container class="container uk-flex uk-flex-center uk-flex-top uk-width-1">
-        <div class="uk-display-inline-block uk-width-1-2 uk-text-center">
-            <div class="uk-position-relative" uk-slideshow="animation: fade">
+    <container class="container uk-flex uk-flex-around uk-flex-top uk-width-1">
+        <div class="uk-width-1-2 uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
 
-                <ul class="uk-slideshow-items">
-                    <li>
-                        <img src="{{product.picture1}}" alt="" uk-cover>
-                    </li>
-                    <li>
-                        <img src="{{product.picture2}}" alt="" uk-cover>
-                    </li>
-                    <li>
-                        <img src="{{product.picture3}}" alt="" uk-cover>
-                    </li>
-                </ul>
-            
-                <div class="uk-position-bottom-center uk-position-small">
-                    <ul class="uk-thumbnav">
-                        <li uk-slideshow-item="0"><a href="#"><img src="{{product.picture1}}" width="100" height="67" alt=""></a></li>
-                        <li uk-slideshow-item="1"><a href="#"><img src="{{product.picture2}}" width="100" height="67" alt=""></a></li>
-                        <li uk-slideshow-item="2"><a href="#"><img src="{{product.picture3}}" width="100" height="67" alt=""></a></li>
-                    </ul>
-                </div>
-            
-            </div>
+            <ul class="uk-slider-items uk-grid">
+                <li class="uk-width-4-5">
+                    <div class="uk-panel">
+                        <img src="{{product.picture1}}" width="1800" height="1200" alt="">
+                        <div class="uk-position-center uk-text-center">
+                        </div>
+                    </div>
+                </li>
+                <li class="uk-width-4-5">
+                    <div class="uk-panel">
+                        <img src="{{product.picture2}}" width="1800" height="1200" alt="">
+                        <div class="uk-position-center uk-text-center">
+                        </div>
+                    </div>
+                </li>
+                <li class="uk-width-4-5">
+                    <div class="uk-panel">
+                        <img src="{{product.picture3}}" width="1800" height="1200" alt="">
+                        <div class="uk-position-center uk-text-center">
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                uk-slider-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                uk-slider-item="next"></a>
+
         </div>
-        <div class="uk-flex uk-flex-column uk-width-1-2">
+        <div class="uk-flex uk-flex-column uk-width-1-2" style="padding-left: 10%">
             <div>
                 <p class="uk-text-emphasis">
                     <h2 style="display: inline;" id="price">{{product.show_price}}</h2> &nbsp;&nbsp;руб.
@@ -121,7 +128,8 @@
 
                                 {% csrf_token %}
                                 <button class="uk-button uk-button-primary" name="buy_product" type="submit"
-                                    onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Заказать товар</button>
+                                    onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Заказать
+                                    товар</button>
                             </div>
                         </form>
 

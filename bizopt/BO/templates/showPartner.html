@@ -423,11 +423,12 @@
         if (el == "True") {
             Swal.fire(
                 'Ваша заявки принята',
-                'Наш сотрудник свяжется с вами в ближайшее время',
+                'Поздравляю! Вы успешно стали партнером BeFreela. Теперь Вы можете публиковать свои товары',
                 'success'
             )
             document.getElementsByClassName('swal2-confirm')[0].addEventListener('click', function () {
-                window.location.replace('/')
+                localStorage.page = 3
+                window.location.replace('/becomeCreator')
             });
         }
     }

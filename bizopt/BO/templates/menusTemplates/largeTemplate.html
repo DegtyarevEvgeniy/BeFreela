@@ -12,8 +12,13 @@
         <p style="margin: 0px"> Регион <b>Москва</b></p>
     </div>
 
+    {% if user.is_partner %}
+    <a href="/partners/" class="uk-button uk-button-text" style="text-transform: none; font-size: 20px;">Вы уже
+        партнер</a>
+    {% else %}
     <a href="/partners/" class="uk-button uk-button-text" style="text-transform: none; font-size: 20px;">Стать
         партнером</a>
+    {% endif %}
 </div>
 <div style="width: 100%; border-top: 2px solid; border-radius: 20px;"></div>
 <div>
@@ -21,21 +26,21 @@
         style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
         <div class="uk-navbar-left uk-width-3-5">
             <ul class="uk-navbar-nav uk-width-1 uk-flex uk-flex-between">
-    
+
                 <li class="uk-active uk-width-1-4 uk-margin-small-left uk-margin-small-top">
                     <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-flex-middle">
                         <img src="../../../media/logoImage/logo.svg" alt="" class="uk-width-1-5" height="100">
                         <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-4-5" height="100">
                     </a>
                 </li>
-    
+
                 <li class="uk-active uk-flex uk-flex-middle uk-flex-center uk-width-3-4">
                     <a href="/creators/resumes/" style="font-size: 25px; text-transform: none;">Бренды</a>
                     <div class="uk-divider-vertical uk-margin-remove"
                         style="height: 50%; background-color: black; width: 2px"></div>
                     <a href="/creators/goods/" style="font-size: 25px; text-transform: none;">Магазин</a>
                 </li>
-    
+
             </ul>
         </div>
         <div class="uk-navbar-right uk-flex uk-flex-middle uk-flex-right uk-width-2-5">
@@ -47,7 +52,7 @@
             <ul class="uk-navbar-nav uk-width-auto">
                 {% if user.is_partner %}
                 <li class="uk-active">
-                    <a href="/becomeCreator/" uk-icon="icon: bag"></a>
+                    <a href="/becomeCreator/" uk-icon="icon: database"></a>
                 </li>
                 {% endif %}
                 <li class="uk-active">
