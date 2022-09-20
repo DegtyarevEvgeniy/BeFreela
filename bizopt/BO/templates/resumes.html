@@ -31,8 +31,9 @@
         <div class="uk-flex uk-flex-wrap uk-flex-wrap-middle uk-width-1" style="justify-content: center;">
 
             {% for shop in brands %}
-            <a href="{{shop.name}}" class="uk-text-center uk-width-2-5" style="margin: 2%;">
-                <div data-src="{{cardResume.logoImage}}"
+            {% if shop.name %}
+            <a href="/creators/resumes/{{shop.name}}" class="uk-text-center uk-width-2-5" style="margin: 2%;">
+                <div data-src="{{shop.logoImage}}"
                     class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-inline-clip uk-transition-toggle"
                     style="border: 3px solid black;" tabindex="0" uk-img>
 
@@ -48,6 +49,7 @@
                     </div>
                 </div>
             </a>
+            {% endif %}
             {% endfor %}
 
         </div>
