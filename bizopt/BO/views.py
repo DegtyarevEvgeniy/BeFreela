@@ -185,8 +185,7 @@ def resumes_page(request):
 
 def sertCardResume_page(request, shopnmae):
     context = gen_menu(request)
-    useremail = request.user
-    user = Account.objects.get(email=useremail)
+    user = Account.objects.get(email=request.user.email)
 
     profile = Shop.objects.get(name=shopnmae)
     context['profile'] = profile
