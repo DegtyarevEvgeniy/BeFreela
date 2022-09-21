@@ -311,11 +311,14 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product = Product_creator()
 
         if request.FILES:
-            print(request.FILES)
+            print("-----------------------------")
+            print(request.FILES['product_photo1'][0])
+            print(request.FILES['product_photo2'][0])
+            print(request.FILES['product_photo3'][0])
 
-            file1 = request.FILES['product_photo1']
-            file2 = request.FILES['product_photo2']
-            file3 = request.FILES['product_photo3']
+            file1 = request.FILES['product_photo1'][0]
+            file2 = request.FILES['product_photo2'][0]
+            file3 = request.FILES['product_photo3'][0]
 
             filename1 = f'product_photo1_{str(request.user.email)}'
             filename2 = f'product_photo2_{str(request.user.email)}'
