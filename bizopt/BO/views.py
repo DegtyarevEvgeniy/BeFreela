@@ -194,7 +194,9 @@ def sertCardResume_page(request, shopnmae):
                             'product_name': product.product_name,
                             'cost': product.price,
                             'availability': product.availability,
-                            'picture': product.picture,
+                            'picture1': product.picture1,
+                            'picture2': product.picture2,
+                            'picture3': product.picture3,
                             'id_creator': product.id_creator,
                             }
                            for product in products]
