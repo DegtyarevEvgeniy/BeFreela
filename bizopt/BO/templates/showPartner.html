@@ -8,14 +8,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/css/uikit.min.css" />
 
 </head>
+
+
 <style>
+    body {
+        background-color: #fff;
+    }
+
     * {
         transition: 0.5s;
     }
 
+    /* https://raw.githubusercontent.com/hudsonmarinho/header-and-footer-parallax-effect/master/assets/images/bg-header.jpg */
+
     #header {
-        background-image: url("https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg");
+        background-image: url("https://i.ibb.co/tLr9MmH/profile-2-test-com.jpg");
         background-position: cover;
+        background-size: cover;
+        background-attachment: fixed;
+        /* width: 100vw; */
+        height: 100vh;
+        z-index: -12;
+
     }
 
     #main {
@@ -38,95 +52,119 @@
     #about_company {
         background-color: white;
     }
+
+    .textM {
+
+        text-transform: uppercase;
+        font-family: Helvetica;
+        font-size: 150px;
+        color: #fff;
+        font-weight: 700;
+    }
+    .textS {
+
+        text-transform: uppercase;
+        font-family: Helvetica;
+        font-size: 30px;
+        color: #fff;
+    }
+
+    img {
+        height: inherit;
+    }
+/* TO AUTO SCROLL
+
+    section {
+        scroll-snap-align: start;
+    }
+
+    .container{
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+        height: 100vh;
+    } */
+
+    .ml14 {
+    font-weight: 200;
+    font-size: 3.2em;
+    }
+
+    .ml14 .text-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-top: 0.1em;
+    padding-right: 0.05em;
+    padding-bottom: 0.15em;
+    }
+
+    .ml14 .line {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: rgb(10, 10, 10);
+    transform-origin: 100% 100%;
+    bottom: 0;
+    }
+
+    .ml14 .letter {
+    display: inline-block;
+    line-height: 1em;
+    }
+    
 </style>
 
-<body style="margin: auto" onload="showNotification('{{user.is_inwaiting}}')">
-    <section style="padding: 0 10px" clss="uk-card-body" id="header">
-        <nav uk-sticky="start: 200; animation: uk-animation-slide-top; sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; cls-inactive: uk-navbar-transparent uk-dark"
-            class="uk-navbar-container" uk-navbar style="color: black; padding: 0 5%; border-bottom-left-radius: 10px; border-bottom-left-radius: 10px">
-            <div class="uk-navbar-left">
+<body style="margin: auto" >
+    <div class="container">
 
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="/">
-                            <h1 class="uk-margin-remove">BeFreela</h1>
-                        </a></li>
-                </ul>
 
-            </div>
-            <div class="uk-navbar-right">
-                <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#about_company">О компании</a></li>
-                    <li class="uk-active"><a href="#about_service">О сервисе</a></li>
-                    <li class="uk-active"><a href="#collab">Сотрудничество</a></li>
-                </ul>
-            </div>
-        </nav>
+    <section>
 
-        <div class="uk-flex uk-flex-center uk-align-center uk-flex-column uk-margin-large-bottom">
-            <div class="uk-width-2-3" style="margin: 0 auto">
-                <div class="uk-text-center">
-                    <h2>Сотрудничество с BeFreela</h2>
-                </div>
-                <div class="uk-card uk-card-default uk-border-rounded" style="width: 50%; margin: 0 auto; padding: 3%;">
-                    <div class="uk-card-header" style="border:none;">
-                        <div class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-expand">
-                                <h3 class="uk-card-title uk-text-center uk-text-bold uk-text-break">Добро пожаловать в
-                                    партнерскую программу BeFreela</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="uk-width-1-1 uk-text-center">
-                        <br>
-                        
-                                <div class="uk-flex uk-flex-center uk-align-center" style="margin-top: 20px">
-                                    <button type="submit" onclick="showNotification(true)"
-                                        class="uk-button uk-button-primary uk-width-4-5 uk-border-rounded"
-                                        id="registerBtn" disabled>Заполнить заявку</button>
-                                </div>
-                            
-                    </div>
+        <div class="uk-inline" style="height: 100vh; width: 100vw;">
+        
+            <img src="https://raw.githubusercontent.com/hudsonmarinho/header-and-footer-parallax-effect/master/assets/images/bg-header.jpg " width="100%" height="100%" alt="">
 
-                    <div id="modal-close-outside" uk-modal>
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <button class="uk-modal-close-outside" type="button" uk-close></button>
-                            <h2 class="uk-modal-title">Подтверждение</h2>
-                            <form method="POST" action="">
-                                <p>На ваш номер телефона был отправлен шестизначный код,<br> введите его в поле ниже</p>
-                                <input maxlength="6" class="uk-input uk-border-rounded" id="codePhone"
-                                    style="width: 50%;" name="code" type="text" placeholder="000000"
-                                    onkeyup="this.value = this.value.replace(/[^\d]/g,'');">
-                                {% csrf_token %}
-                                <p class="">
-                                    <button type='button' id="codeButton"
-                                        class="uk-button uk-button-primary uk-border-rounded" disabled>Отправить
-                                        код</button>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="uk-position-center"><p class="textM">BeFreela</p></div>
+
+            <div class="uk-position-bottom-center"> <p class="textS">Маркетплейс российских брендов</p> </div>
+        
+        </div>
 
     </section>
 
-    <section id="main">
-        <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-3@s uk-margin"
-            style="background: transparent; " uk-grid>
-            <div class="uk-card-media-left uk-cover-container uk-width-2-3">
-                <img src="https://mstatic.wbstatic.net/passport-front/v2.9.54/login/static/apps-de0ea29e3499d45f4dd73dc90130c271.webp "
-                    alt="" uk-cover>
-                <canvas width="800" height="500"></canvas>
+    <section>
+        <div class="uk-inline" style="height: 100vh; width: 100vw;" onclick="animationLetters();">
+        
+            <div class="uk-position-center" id="secondDiv">
+    
+
+                <h1 class="ml14">
+                    <span class="text-wrapper" >
+                        <span class="letters">Вы ведете бизнес так,
+                        как удобно вам!</span>
+                        <span class="line"></span>
+                    </span>
+                </h1>
+
             </div>
-            <div>
-                <div class="uk-card-body uk-flex uk-flex-center uk-flex-column" style="padding-top: 30%;">
-                    <p class="uk-card-title uk-text-bold uk-text-break" style="font-size: 40px;">Вы ведете бизнес так,
-                        как удобно вам!</p>
-                    <p>Вы можете управлять продажами, публиковать товары и проводить сделки с мобильного телефона или
-                        планшета</p>
-                </div>
-            </div>
+
+            
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+        
         </div>
+        
+
+    </section>
+
+
+    <section>
+        <div class="uk-inline" style="height: 100vh; width: 100vw;" onclick="animationLetters();">
+    
+
+    
+
+
         <div id="about_service">
             <div class="uk-child-width-1-2@s" uk-grid>
                 <div>
@@ -191,7 +229,14 @@
                 </div>
             </div>
         </div>
-        <div id="about_company" class="uk-padding-large">
+
+                </div>
+                
+                
+                </section>
+
+
+        <!-- <div id="about_company" class="uk-padding-large">
             <div>
     
     
@@ -207,7 +252,11 @@
     
     
             </div>
-        </div>
+        </div> -->
+
+        <section>
+            <div class="uk-inline" style="height: 100vh; width: 100vw;" onclick="animationLetters();">
+
         <div id="collab" class="uk-background-default uk-padding-large">
             <h1 class="uk-text-center">Условия Сотрудничества</h1>
             <div class="uk-flex uk-flex-wrap uk-flex-wrap-center uk-height-medium"
@@ -272,6 +321,7 @@
                 </div>
             </div>
         </div>
+        
     </section>
 
     <section>
@@ -390,6 +440,7 @@
 
 
 {% include "footer.html" %}
+    </div>
 
 </body>
 
@@ -399,131 +450,42 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 
 <script>
-    // $(function () {
-    //     $("#codePhone").on("keyup", function () {
-    //         if ($("#codePhone").val().length === 6) {
-    //             $("#codeButton").prop("disabled", false);
-    //         } else {
-    //             $("#codeButton").prop("disabled", true);
-    //         }
-    //     });
-    // });
 
-    // $(document).on('click', 'a[href^="#"]', function (event) {
-    //     event.preventDefault();
+   function animationLetters() {
 
-    //     $('html, body').animate({
-    //         scrollTop: $($.attr(this, 'href')).offset().top
-    //     }, 500);
-    // });
+        var textWrapper = document.querySelector('.ml14 .letters');
+        textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-    // function validateCountry(el) {
-    //     let flag = document.getElementById('Country');
-    //     let code = el.value;
-    //     if (code == "+374") {
-    //         flag.value = "Армения";
-    //     } else if (code == "+375") {
-    //         flag.value = "Беларусь";
-    //     } else if (code == "+996") {
-    //         flag.value = "Киргизия";
-    //     } else {
-    //         flag.value = "Россия";
-    //     }
-    //     console.log(flag.value, code)
+        anime.timeline({ loop: true })
+            .add({
+                targets: '.ml14 .line',
+                scaleX: [0, 1],
+                opacity: [0.5, 1],
+                easing: "easeInOutExpo",
+                duration: 900
+            }).add({
+                targets: '.ml14 .letter',
+                opacity: [0, 1],
+                translateX: [40, 0],
+                translateZ: 0,
+                scaleX: [0.3, 1],
+                easing: "easeOutExpo",
+                duration: 800,
+                offset: '-=600',
+                delay: (el, i) => 150 + 25 * i
+            }).add({
+                targets: '.ml14',
+                opacity: 0,
+                duration: 1000,
+                easing: "easeOutExpo",
+                delay: 1000
+            });
 
-    // }
+        };
+    
+    animationLetters();
 
-    // function validatePhoneCode(el) {
-    //     let code = document.getElementById('phoneCode');
-    //     let flag = el.value
-    //     if (["Россия", "Казахстан"].includes(flag)) {
-    //         code.value = "+7";
-    //     } else if (flag == "Беларусь") {
-    //         code.value = "+375";
-    //     } else if (flag == "Киргизия") {
-    //         code.value = "+996";
-    //     } else {
-    //         code.value = "+374";
-    //     }
-    //     console.log(code.value, flag)
-    // }
-
-
-    // const isNumericInput = (event) => {
-    //     const key = event.keyCode;
-    //     return ((key >= 48 && key <= 57) || // Allow number line
-    //         (key >= 96 && key <= 105) // Allow number pad
-    //     );
-    // };
-
-    // const isModifierKey = (event) => {
-    //     const key = event.keyCode;
-    //     document.getElementById('registerBtn').disabled = true;
-    //     return (event.shiftKey === true || key === 35 || key === 36) || // Allow Shift, Home, End
-    //         (key === 8 || key === 9 || key === 13 || key === 46) || // Allow Backspace, Tab, Enter, Delete
-    //         (key > 36 && key < 41) || // Allow left, up, right, down
-    //         (
-    //             // Allow Ctrl/Command + A,C,V,X,Z
-    //             (event.ctrlKey === true || event.metaKey === true) &&
-    //             (key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
-    //         )
-    // };
-
-    // const enforceFormat = (event) => {
-    //     // Input must be of a valid number format or a modifier key, and not longer than ten digits
-    //     document.getElementById('registerBtn').disabled = true;
-    //     if (!isNumericInput(event) && !isModifierKey(event)) {
-    //         event.preventDefault();
-    //     }
-    // };
-
-    // const formatToPhone = (event) => {
-    //     document.getElementById('registerBtn').disabled = true;
-    //     if (isModifierKey(event)) {
-    //         return;
-    //     }
-
-    //     const input = event.target.value.replace(/\D/g, '').substring(0, 10); // First ten digits of input only
-    //     const areaCode = input.substring(0, 3);
-    //     const middle = input.substring(3, 6);
-    //     const last1 = input.substring(6, 8);
-    //     const last2 = input.substring(8, 10);
-
-    //     if (input.length > 9) {
-    //         document.getElementById('registerBtn').disabled = false;
-    //         event.target.value = `(${areaCode}) ${middle} ${last1} ${last2}`;
-    //     } else if (input.length > 6) {
-    //         event.target.value = `(${areaCode}) ${middle} ${last1} ${last2}`;
-    //         document.getElementById('registerBtn').disabled = true;
-    //     } else if (input.length > 3) {
-    //         document.getElementById('registerBtn').disabled = true;
-    //         event.target.value = `(${areaCode}) ${middle}`;
-    //     } else if (input.length > 0) {
-    //         document.getElementById('registerBtn').disabled = true;
-    //         event.target.value = `(${areaCode}`;
-    //     }
-    // };
-
-
-    // function showNotification(el) {
-    //     console.log(el)
-    //     if (el == "True") {
-    //         Swal.fire(
-    //             'Ваша заявки принята',
-    //             'Поздравляю! Вы успешно стали партнером BeFreela. Теперь Вы можете публиковать свои товары',
-    //             'success'
-    //         )
-    //         document.getElementsByClassName('swal2-confirm')[0].addEventListener('click', function () {
-    //             localStorage.page = 3
-    //             window.location.replace('/becomeCreator')
-    //         });
-    //     }
-    // }
-
-
-    // const inputElement = document.getElementById('phoneNumber');
-    // inputElement.addEventListener('keydown', enforceFormat);
-    // inputElement.addEventListener('keyup', formatToPhone);
 </script>
+
 
 </html>
