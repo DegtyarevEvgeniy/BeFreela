@@ -314,12 +314,13 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
         if request.FILES:
             print("-----------------------------")
-            print(request.FILES)
+            print(request.FILES['product_photo1'][0])
+            print(request.FILES['product_photo2'][0])
+            print(request.FILES['product_photo3'][0])
 
-
-            file1 = request.FILES['product_photo1']
-            file2 = request.FILES['product_photo2']
-            file3 = request.FILES['product_photo3']
+            file1 = request.FILES['product_photo1'][0]
+            file2 = request.FILES['product_photo2'][0]
+            file3 = request.FILES['product_photo3'][0]
 
             filename1 = f'product_photo1_{str(request.user.email)}'
             filename2 = f'product_photo2_{str(request.user.email)}'
@@ -329,9 +330,9 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             logoImageData2 = upload_image(file2, filename2)
             logoImageData3 = upload_image(file3, filename3)
     
-            product.picture1 = logoImageData1s
-            product.picture2 = logoImageData2
-            product.picture3 = logoImageData3
+            product.picture1 = logoImageData1[0]
+            product.picture2 = logoImageData2[0]
+            product.picture3 = logoImageData3[0]
 
         # if "product_creator_tags" in request.POST:
         #   form = MyForm(request.POST)
