@@ -37,15 +37,12 @@
                 uk-slider-item="next"></a>
 
         </div>
-        <div class="uk-flex uk-flex-column uk-width-1-2" style="padding-left: 10%">
+        <div class="uk-flex uk-flex-column uk-width-1-2 uk-text-center" style="padding-left: 5%">
             <div>
-                <p class="uk-text-emphasis">
-                    <h2 style="display: inline;" id="price">{{product.show_price}}</h2> &nbsp;&nbsp;руб.
-
-                </p>
+                <h2 class="uk-text-truncate uk-width-1-2">{{product.product_name}}</h2>
             </div>
             <!--  -->
-            <div class="uk-flex">
+            <!-- <div class="uk-flex">
                 <div class="uk-width-auto uk-display-inline uk-margin-small-right">
                     <img src="{{shop.logoImage}}" class="uk-border-circle" style="width: 60px; height: 60px">
                 </div>
@@ -55,38 +52,29 @@
                     <div><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9733</span><span>&#9734</span>
                     </div>
                 </div>
-            </div>
-            <br>
+            </div> -->
             <!--  -->
-            <div style="margin-left: 10%">
-                <div class="uk-flex">
-                    <div class="uk-width-auto">
-                        <img class="uk-border-circle" width="40" height="40"
-                            src="https://free-png.ru/wp-content/webp-express/webp-images/uploads/2022/04/free-png.ru-146-329x340.png.webp">
-                    </div>
-
-                    <p class="uk-margin-left" style="margin-top: auto; margin-bottom: auto;">Провернный продавец</p>
-
-                </div>
-
-                <div class="uk-flex">
-                    <div class="uk-width-auto">
-                        <img class="uk-border-circle" width="40" height="40"
-                            src="https://www.const-foto.ru/f/delivery.png">
-                    </div>
-
-                    <p class="uk-margin-left" style="margin-top: auto; margin-bottom: auto;">Доставка от поставщика</p>
-
-                </div>
+            <div class="uk-card uk-card-default uk-width-3-5@m uk-text-center uk-margin-small-bottom"
+                style="padding: 2% 0">
+                <p class="uk-margin-left uk-width-2-3@m" style="margin: 0;"> <i class="fa-regular fa-shield-check"></i>
+                    Провернный продавец</p>
             </div>
-            <br>
+
+            <div class="uk-card uk-card-default uk-width-3-5@m uk-text-center uk-margin-small-top"
+                style="padding: 2% 0">
+                <p class="uk-margin-left uk-width-2-3@m" style="margin: 0;"> <i class="fa-regular fa-shield-check"></i>
+                    Доставка от поставщика</p>
+            </div>
+
+            <h1 id="price" class="uk-width-1 uk-text-left">{{product.show_price}} руб.</h1>
             <!--  -->
-            <div>
+            <div class="uk-text-left">
                 {% if request.user.is_authenticated %}
-                <button class="uk-button uk-button-default uk-border-pill uk-width-1-2 uk-margin-small-bottom"
-                    href="#modal-overflow" style="background-color: rgb(163, 163, 163);" uk-toggle>Заказать</button>
+                <button class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
+                    href="#modal-overflow" style="background-color: #B54F00;" uk-toggle>Заказать</button>
+
                 {% else %}
-                <a style="color: black;" class="uk-button uk-border-pill uk-width-auto uk-margin-small-bottom"
+                <a class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
                     href="/accounts/login/">Заказать</a>
                 {% endif %}
                 <div id="modal-overflow" uk-modal>
@@ -151,101 +139,35 @@
     <br>
     <br>
     <container>
-        <div style="padding: 5px 10%;">
-            <div>
-                <h2>Описание</h2>
-                <p class="uk-text-break" style="font-weight: 600; text-align: left">{{product.description}}</p>
+        <div class="uk-flex uk-flex-top uk-width-1">
+            <h2 class="uk-width-1-2 uk-text-center">Информация</h2>
+            <div class="uk-width-1-2" style="padding: 5px 10%;">
+                <ul class="uk-nav-default" uk-nav>
+                    <li class="uk-active"><a href="#">Active</a></li>
+                    <li class="uk-parent">
+                        <a href="#">Parent <span uk-nav-parent-icon></span></a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="#">Sub item</a></li>
+                            <li>
+                                <a href="#">Sub item</a>
+                                <ul>
+                                    <li><a href="#">Sub item</a></li>
+                                    <li><a href="#">Sub item</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="#">Parent <span uk-nav-parent-icon></span></a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="#">Sub item</a></li>
+                            <li><a href="#">Sub item</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <!--  -->
-            <br>
-            <!--  -->
-            <div>
-                <h2>Харрактиристики</h2>
-                <div class="uk-grid uk-text-left ul-width-4-5" style="margin: 0 auto" uk-grid>
-                    <div class="uk-width-1-4" style="padding: 0;">
-                        <h4>Тип</h4>
-                        <p>{{product.category}}</p>
-                    </div>
-                    <div class="uk-width-1-4" style="padding: 0;">
-                        <h4>Количество</h4>
-                        <p id="amount"></p>
-                    </div>
-                    <div class="uk-width-1-4" style="padding: 0;">
-                        <h4>Бренд</h4>
-                        <p> {{product.brand}} </p>
-                    </div>
-                    <div class="uk-width-1-4" style="padding: 0;">
-                        <h4>Страна Производитель</h4>
-                        <p>{{product.country}}</p>
-                    </div>
-                </div>
-
-            </div>
-            <!--  -->
-            <br>
-            <!--  -->
-            <div>
-                <h2>Отзывы</h2>
-                {% if request.user.is_authenticated %}
-                <button style="color: black; background-color:darkgray"
-                    class="uk-button uk-border-pill uk-margin-small-bottom" type="button"
-                    uk-toggle="target: #modal-example">Написать отзыв</button>
-                {% else %}
-                <a style="color: black; background-color:darkgray"
-                    class="uk-button uk-border-pill uk-margin-small-bottom" type="button"
-                    href="/accounts/login/">Написать отзыв</a>
-                {% endif %}
-
-                <div id="modal-example" uk-modal>
-
-                    <div class="uk-modal-dialog uk-modal-body">
-                        <h2 class="uk-modal-title">Отзыв</h2>
-                        <div class="uk-flex">
-                            <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="50" height="80"
-                                alt="">
-                            <div class="uk-flex-column uk-margin-left">
-                                <p class="uk-margin-remove">{{ user.first_name }}</p>
-                                <p class="uk-margin-remove">{{ user.email }}</p>
-                            </div>
-                        </div>
-                        <form method="POST" action="">
-                            <div class="uk-margin-top">
-
-                                <h3>Отзыв:</h3>
-                                <textarea class="uk-textarea" name="review" id="" rows="10"
-                                    style="width: 100%;"></textarea>
-                                <div class="uk-flex" style="margin-left: 45%">
-                                    <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
-                                    <div class="uk-margin-remove-right rating-area">
-                                        <input type="radio" id="star-5" name="rating" value="5">
-                                        <label for="star-5" title="Оценка «5»"></label>
-                                        <input type="radio" id="star-4" name="rating" value="4">
-                                        <label for="star-4" title="Оценка «4»"></label>
-                                        <input type="radio" id="star-3" name="rating" value="3">
-                                        <label for="star-3" title="Оценка «3»"></label>
-                                        <input type="radio" id="star-2" name="rating" value="2">
-                                        <label for="star-2" title="Оценка «2»"></label>
-                                        <input type="radio" id="star-1" name="rating" value="1">
-                                        <label for="star-1" title="Оценка «1»"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            {% csrf_token %}
-                            <p class="uk-text-right">
-                                <button class="uk-button uk-button-default uk-modal-close"
-                                    type="button">Закрыть</button>
-                                <button name="comment_product" class="uk-button uk-button-primary"
-                                    type="submit">Опубликовать</button>
-                            </p>
-                        </form>
-                    </div>
-                </div>
-
-
-            </div>
-
-
         </div>
+
         <br>
         <br>
 
