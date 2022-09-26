@@ -81,7 +81,7 @@ class Comments_product(models.Model):
     id_creator = models.CharField(max_length=200, default='')
     comentator_email = models.CharField(max_length=200, default='')
     id_product = models.CharField(max_length=200, default='')
-    review = models.CharField(max_length=200, default='')
+    review = models.CharField(max_length=2000, default='')
     rating = models.IntegerField(default='0')
     created_data = models.DateTimeField(auto_now_add=True)
 

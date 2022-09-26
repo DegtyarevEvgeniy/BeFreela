@@ -143,7 +143,6 @@ def goodsSearch_page_category(request, category):
 #         Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
 #         | Q(set__icontains=subcategory) | Q(subcategory__icontains=subcategory)
 #     )
-#     print(products)
 #     context['products'] = [{'id': product.id,
 #                             'product_name': product.product_name,
 #                             'cost': product.price,
@@ -210,7 +209,6 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     if request.method == 'POST':
         form = addTasks(request.POST)
         if form.is_valid() and "addtask" in request.POST:
-            print('kkk')
             task = Task()
             task.name = request.POST['task_name']
             task.description = request.POST['description']
@@ -232,7 +230,6 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
 def becomeCreator_page(request):  # sourcery skip: low-code-quality
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
-    print(request.POST)
 
     if request.method == 'POST' and "profile_saver1" in request.POST:  # для редактирования профиля
 
@@ -270,7 +267,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         shop.category = request.POST['chosenCategoties']
 
 
-        print(request.POST)
         if request.FILES:
 
             try:
@@ -313,10 +309,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product = Product_creator()
 
         if request.FILES:
-            print("-----------------------------")
-            print(request.FILES['product_photo1'][0])
-            print(request.FILES['product_photo2'][0])
-            print(request.FILES['product_photo3'][0])
 
             file1 = request.FILES['product_photo1'][0]
             file2 = request.FILES['product_photo2'][0]
@@ -416,7 +408,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             partner.save()
 
     if request.method == 'POST' and "products_in_work" in request.POST:
-        print("products_in_work")
         statuses_list = request.POST.getlist('services')
         # TODO: БЕЗ ЭТОГО СЛОВАРЯ ВОЗМОЖНЫХ ЗНАЧЕНИЙ СТАТУСА ВСЕ СЛОМАЕТСЯ!!!!!
         #  ПРОВЕРИТЬ СООТВЕТСТВИЕ СЛОВАРЯ ЗНАЧЕНИЯМ НА ФРОНТЕ!
@@ -442,7 +433,6 @@ def becomeCreatorTemplate_page(request, name):
 
     try:
         creator = Shop.objects.get(email=request.user.email)
-        print(request.user.email, creator.id)
         content['first_name'] = creator.first_name
         content['email'] = creator.email
         content['creator_avatar'] = creator.cover
@@ -616,6 +606,7 @@ def cardProduct_page(request, product_id):
             product.rating = (product.vote_sum + int(request.POST.get('rating', '0')))/(product.rate_sum + 1)
 
             comment.save()
+            product.save()
             return HttpResponseRedirect(f'/creators/goods/{product_id}/')
         context['product'] = product
         context['product'].show_price = list(filter(None, product.price.split(",")))[0]
@@ -626,7 +617,6 @@ def cardProduct_page(request, product_id):
         context['product'].flooredrating = math.floor(product.rating)
         context['shop'] = shop
 
-        print(product.price)
 
 
         messages = Comments_product.objects.filter(id_product=product_id)
@@ -657,7 +647,6 @@ def cardProduct_page(request, product_id):
             else:
                 message.flag = "year"
                 message.created_data = int(df_message.y()) - int(df.y())
-                print(message.created_data)
                 context['flag'] = flag
 
         context['messages'] = messages
@@ -705,7 +694,6 @@ def edit_profile(request):
         email = request.user
         person = Account.objects.get(email=email)
         if request.method == "POST":
-            print(request.FILES)
             if request.FILES:
 
 
@@ -718,7 +706,6 @@ def edit_profile(request):
 
              
             if request.POST.get('first_name', None):
-                print(request.POST['first_name'])
                 person.first_name = request.POST['first_name']
             if request.POST.get('last_name', None):
                 person.last_name = request.POST['last_name']
@@ -773,7 +760,6 @@ def login_page(request):
     }
     # вход
     if request.method == 'POST' and 'btnform2' in request.POST:
-        print(request.POST)
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
@@ -943,7 +929,6 @@ def orders_page(request):
 def partners_page(request):
 
     user = Account.objects.get(email=request.user)
-    print(user)
 
     shops = Shop.objects.all()
 
