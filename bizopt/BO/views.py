@@ -11,7 +11,7 @@ import email
 import math
 import base64
 import requests
-from random import randint
+import random
 
 
 from .utils import *
@@ -535,30 +535,23 @@ def employers_page(request):
     return render(request, 'employers.html', context)
 
 # get rundom amount of ids from sertain DB element
-def random_amount(segment, amount):
-    max = len(eval('segment.objects.all()')) - 1
-    size = amount if amount <= max else max
-    return [ randint(0, max) for i in range(size) ] 
+def random_DB_id(segment, amount):
+    ev_id = [i.id for i in eval('segment.objects.all()')]
+    size = amount if amount <= len(ev_id) else len(ev_id)
+    id_arr, ret_arr = [], []
+    while len(id_arr) != min(len(ev_id), amount):
+        id_arr = [*set([ random.choice(ev_id) for i in range(size) ])]  
+    for i in range(len(id_arr)):
+        ret_arr.append(eval('segment.objects.filter(id = id_arr[i])'))
+    return ret_arr
+
 
 
 def index_page(request):
     context = gen_menu(request)
-    products = Product_creator.objects.all()
-    context['chats'] = [ chat.name for chat in Chat_room.objects.filter( Q(user1=request.user.id) | Q(user2=request.user.id))]
-    context['products'] = [{'id': product.id,
-                            'product_name': product.product_name,
-                            'cost': product.price,
-                            'availability': product.availability,
-                            'picture1': product.picture1,
-                            'picture2': product.picture2,
-                            'picture3': product.picture3,
-                            'description': product.description
-                            }
-                           for product in products]
     if request.user.is_authenticated:
-        print(*[ f'i = {i}' for i in random_amount(Product_creator, 10)])
-        # context['prom_shops'] = [ Shop.objects.get(id=i) for i in  random_amount(Shop, 10) ]
-        
+        context['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
+        context['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
         return render(request, 'main.html', context)
     else:
         return render(request, 'index.html', context)
