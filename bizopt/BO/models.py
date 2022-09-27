@@ -130,3 +130,11 @@ class Message(models.Model):
     date = models.DateTimeField(default=datetime.now, blank=True)
     user = models.CharField(max_length=1000000)
     room = models.CharField(max_length=1000000)
+
+class BePartner(models.Model):
+    brand_name = models.CharField(max_length=1000000)
+    name = models.CharField(max_length=1000000)
+    phone = models.CharField(max_length=1000000)
+    city = models.CharField(max_length=1000000)
+    link = models.CharField(max_length=1000000)
+    info = models.CharField(max_length=1000000)

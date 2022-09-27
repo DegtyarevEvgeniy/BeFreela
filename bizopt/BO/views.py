@@ -936,30 +936,19 @@ def orders_page(request):
 
 def partners_page(request):
 
-    user = Account.objects.get(email=request.user)
 
-    shops = Shop.objects.all()
-
-    flag = False
 
     if request.method == "POST":
-
         
+        mail = BePartner.objects.create()
 
-        for shop in shops:
-            if shop.email == request.user.email:
-                flag = True
-
-        try:
-            if flag == False:
-                shop = Shop()
-                shop.phone = request.POST['phonenumber']
-                shop.email = request.user.email
-                shop.save()
-                Account.objects.filter(email=request.user).update(is_partner=True)
-                Account.objects.filter(email=request.user).update(is_inwaiting=True)
-
-        except:
-            print("in request.")
+        mail.brand_name = request.POST['brand_name']
+        mail.name = request.POST['name']
+        mail.phone = request.POST['phone']
+        mail.city = request.POST['city']
+        mail.link = request.POST['link']
+        mail.info = request.POST['info']
+        mail.save()
+        
 
     return render(request, 'showPartner.html')
