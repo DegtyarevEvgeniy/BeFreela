@@ -1,4 +1,3 @@
-import email
 import os
 from unicodedata import category
 
@@ -7,10 +6,12 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.utils.dateformat import DateFormat
 from django.utils.formats import get_format
-import math
 from django.urls import reverse_lazy
+import email
+import math
 import base64
 import requests
+from random import randint
 
 
 from .utils import *
@@ -533,6 +534,12 @@ def employers_page(request):
     context = gen_menu(request)
     return render(request, 'employers.html', context)
 
+# get rundom amount of ids from sertain DB element
+def random_amount(segment, amount):
+    max = len(eval('segment.objects.all()')) - 1
+    size = amount if amount <= max else max
+    return [ randint(0, max) for i in range(size) ] 
+
 
 def index_page(request):
     context = gen_menu(request)
@@ -548,8 +555,14 @@ def index_page(request):
                             'description': product.description
                             }
                            for product in products]
+    if request.user.is_authenticated:
+        print(*[ f'i = {i}' for i in random_amount(Product_creator, 10)])
+        # context['prom_shops'] = [ Shop.objects.get(id=i) for i in  random_amount(Shop, 10) ]
+        
+        return render(request, 'main.html', context)
+    else:
+        return render(request, 'index.html', context)
 
-    return render(request, 'index.html', context)
 
 
 def cardTask_page(request, task_id):

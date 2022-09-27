@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div style="margin:auto; width: 100%">
+
+    <div uk-slideshow="animation: push; ratio: 7:3; autoplay: true; pause-on-hover: true; min-height: 300; max-height: 500">
+
+        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+            <ul class="uk-slideshow-items">
+                <li>
+                    <img src="../../../media/media/main_baner3.png"
+                        alt="" uk-cover>
+                        
+                </li>
+                <li>
+                    <img src="../../../media/media/main_baner2.png"
+                        alt="" uk-cover>
+                </li>
+                <li>
+                    <img src="../../../media/media/main_baner1.png"
+                        alt="" uk-cover>
+                </li>
+            </ul>
+
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+                uk-slideshow-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+                uk-slideshow-item="next"></a>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="uk-section uk-section-default uk-width-4-5" style="margin: 0 auto">
+    {% for item in prom_items %}
+        <div class="uk-grid" uk-grid>
+            <div class="uk-card uk-border-rounded">
+                <div class="uk-card-title">
+                    {{item.name}}
+                </div>
+                <div class="uk-body">
+                    
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+{% include "footer.html" %}
+
+
+{% endblock %}
