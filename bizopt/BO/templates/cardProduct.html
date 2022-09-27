@@ -31,10 +31,11 @@
                 </li>
             </ul>
 
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" style="color: black; transition: 0.5s" href="#" uk-slidenav-previous
                 uk-slider-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" style="color: black; transition: 0.5s" href="#" uk-slidenav-next
                 uk-slider-item="next"></a>
+
 
         </div>
         <div class="uk-flex uk-flex-column uk-width-1-2 uk-text-center" style="padding-left: 5%">
@@ -181,7 +182,8 @@
 
             <div class="uk-width-2-5">
 
-                <div class="uk-flex uk-flex-center uk-text-center  uk-card uk-card-default" style="border-radius: 20px; padding: 30px 0;">
+                <div class="uk-flex uk-flex-center uk-text-center  uk-card uk-card-default"
+                    style="border-radius: 20px; padding: 30px 0;">
                     <div class="uk-margin-right uk-height-small">
                         <h3>{{product.rating}}</h3>
                         <p>На основании <br>{{product.rate_sum}} отзывов</p>
@@ -204,13 +206,11 @@
                 </div>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center uk-margin-small-top">
                     {% if request.user.is_authenticated %}
-                    <button style="color: white; background-color:#0A3644"
-                        class="uk-button uk-margin-small-bottom" type="button"
-                        uk-toggle="target: #modal-example">Написать отзыв</button>
+                    <button style="color: white; background-color:#0A3644" class="uk-button uk-margin-small-bottom"
+                        type="button" uk-toggle="target: #modal-example">Написать отзыв</button>
                     {% else %}
-                    <a style="color: white; background-color:#0A3644"
-                        class="uk-button uk-margin-small-bottom" type="button"
-                        href="/login">Написать отзыв</a>
+                    <a style="color: white; background-color:#0A3644" class="uk-button uk-margin-small-bottom"
+                        type="button" href="/login">Написать отзыв</a>
                     {% endif %}
 
                     <div id="modal-example" uk-modal>
@@ -229,8 +229,8 @@
                                 <div class="uk-margin-top">
 
                                     <h3>Отзыв:</h3>
-                                    <textarea class="uk-textarea" name="review" id="" rows="10"
-                                        style="width: 100%;" maxlength="1500"></textarea>
+                                    <textarea class="uk-textarea" name="review" id="" rows="10" style="width: 100%;"
+                                        maxlength="1500"></textarea>
                                     <div class="uk-flex" style="margin-left: 45%">
                                         <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
                                         <div class="uk-margin-remove-right rating-area">
@@ -266,8 +266,9 @@
                 <ul class="uk-comment-list">
                     {% for message in messages %}
                     <li>
-                        
-                        <article class="uk-comment uk-comment-primary uk-visible-toggle uk-border-rounded" tabindex="-1">
+
+                        <article class="uk-comment uk-comment-primary uk-visible-toggle uk-border-rounded"
+                            tabindex="-1">
                             <header class="uk-comment-header uk-position-relative">
 
                                 <div class="uk-grid-medium uk-flex-middle" uk-grid>
@@ -277,23 +278,25 @@
                                             height="80" alt="">
                                     </div>
                                     <div class="uk-width-expand">
-                                        <h4 class="uk-comment-title uk-margin-remove"><p>{{message.comentator_email}}</p></h4>
+                                        <h4 class="uk-comment-title uk-margin-remove">
+                                            <p>{{message.comentator_email}}</p>
+                                        </h4>
                                         <ul class="uk-comment-meta uk-subnav uk-subnav-divider">
                                             <li>
                                                 {% if message.flag == "day" %}
-                                            <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
-                                                    href="#">{{message.created_data}}</a>&nbsp;days ago.</p>
-                                            {% elif message.flag  == "month" %}
-                                            <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
-                                                    href="#">{{message.created_data}}</a>&nbsp;month ago.</p>
-                                            {% else %}
-                                            <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
-                                                    href="#">{{message.created_data}}</a>&nbsp;year ago.</p>
-                                            {% endif %}
+                                                <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
+                                                        href="#">{{message.created_data}}</a>&nbsp;days ago.</p>
+                                                {% elif message.flag  == "month" %}
+                                                <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
+                                                        href="#">{{message.created_data}}</a>&nbsp;month ago.</p>
+                                                {% else %}
+                                                <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
+                                                        href="#">{{message.created_data}}</a>&nbsp;year ago.</p>
+                                                {% endif %}
                                             </li>
                                             <li>
-                                            <p style="margin: 0">Оценка: {{message.rating}}</p>
-                                        </li>
+                                                <p style="margin: 0">Оценка: {{message.rating}}</p>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

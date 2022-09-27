@@ -37,7 +37,7 @@
     <div class="uk-grid uk-width-1 uk-felx uk-flex-center" uk-grid>
         {% for items in prom_items %}
         {% for item in items %}
-        <a href="" class="uk-width-1-4 uk-link-reset">
+        <a href="/creators/goods/{{item.id}}" class="uk-width-1-4 uk-link-reset">
             <div class="uk-card uk-card-default uk-border-rounded uk-padding-small">
                 <div class="uk-card-title ">
                     <h3 class="uk-text-truncate">{{item.product_name}}</h3>
