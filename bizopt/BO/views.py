@@ -325,9 +325,9 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             logoImageData2 = upload_image(file2, filename2)
             logoImageData3 = upload_image(file3, filename3)
     
-            product.picture1 = logoImageData1
-            product.picture2 = logoImageData2
-            product.picture3 = logoImageData3
+            product.picture1 = logoImageData1[0]
+            product.picture2 = logoImageData2[0]
+            product.picture3 = logoImageData3[0]
 
         # if "product_creator_tags" in request.POST:
         #   form = MyForm(request.POST)
