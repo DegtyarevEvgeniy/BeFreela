@@ -34,11 +34,11 @@
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit-icons.min.js"></script>
 <script>
     // function red(el) {
-    //     document.getElementById('searchBtn').href = "creators/goods/search/" + el.value;
+    //     document.getElementById('searchBtn').href = "goods/search/" + el.value;
     // }
 
     document.getElementById('search_pole').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn').href = "/creators/goods/search/" + document.getElementById(
+        document.getElementById('searchBtn').href = "/goods/search/" + document.getElementById(
             'search_pole').value;
         if (event.keyCode == 13) {
             document.getElementById('searchBtn').click();
@@ -55,7 +55,7 @@
     });
 
     document.getElementById('search_pole1').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn1').href = "/creators/goods/search/" + document.getElementById(
+        document.getElementById('searchBtn1').href = "/goods/search/" + document.getElementById(
             'search_pole1').value;
         if (event.keyCode == 13) {
             document.getElementById('searchBtn1').click();

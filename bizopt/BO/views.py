@@ -158,7 +158,7 @@ def goodsSearch_page_category(request, category):
 #                            for product in products]
 #     return render(request, 'goodsSearch.html', context)
 
-def resumes_page(request):
+def brands_page(request):
     user_id = 0
     if request.user.is_authenticated:
         user_id = Account.objects.get(email=request.user.email).id
@@ -187,9 +187,9 @@ def resumes_page(request):
                             'phone': creator.phone,
                             }
                            for creator, person in zip(creators, persons)]
-    return render(request, 'resumes.html', context)
+    return render(request, 'brands.html', context)
 
-def sertCardResume_page(request, shopnmae):
+def sertCardBrend_page(request, shopnmae):
     context = gen_menu(request)
     profile = Shop.objects.get(name=shopnmae)
     context['profile'] = profile
@@ -207,7 +207,7 @@ def sertCardResume_page(request, shopnmae):
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
         context['link'] = (user.id * profile.id) + user.id + profile.id
-    return render(request, 'cardResume.html', context)
+    return render(request, 'cardBrand.html', context)
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
     context = gen_menu(request)
@@ -601,7 +601,7 @@ def cardProduct_page(request, product_id):
             product_buy.delivery_address = request.POST['address']
             product_buy.status_pay = False
             product_buy.save()
-            return HttpResponseRedirect(f'/creators/goods/{product_id}/')
+            return HttpResponseRedirect(f'/goods/{product_id}/')
         # else:
         # product = Product_creator.objects.get(id=product_id)
         # creator = Creator.objects.get(email=product.id_creator)
@@ -620,7 +620,7 @@ def cardProduct_page(request, product_id):
 
             comment.save()
             product.save()
-            return HttpResponseRedirect(f'/creators/goods/{product_id}/')
+            return HttpResponseRedirect(f'/goods/{product_id}/')
         context['product'] = product
         context['product'].show_price = list(filter(None, product.price.split(",")))[0]
         context['product'].sizes = list(filter(None, product.size.split(",")))
