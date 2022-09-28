@@ -984,11 +984,6 @@ def admin_page(request):
             part.delete()
             return HttpResponseRedirect('/admin')
 
-    if request.method == "POST":
-
-        
-        
-    
         return render(request, 'admin.html', content)
     else:
         return HttpResponseRedirect('/')
