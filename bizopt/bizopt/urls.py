@@ -25,7 +25,8 @@ from django.conf.urls.static import static
 # from account.views import SignUpView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
+    path('admin/', views.admin_page),
     path('logout/', views.logout_view),
     # path('login/', views.signup, name='signup'),
     path('login/', views.login_page, name='signup'),

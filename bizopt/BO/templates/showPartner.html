@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,605 +13,545 @@
 </head>
 
 <style>
-
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
-body {
-    background-color: #ffffff;
-    color: black;
-    font-family: 'Roboto', sans-serif;
-    padding: 0;
-    margin: 0;
-}
+    body {
+        background-color: #ffffff;
+        color: black;
+        font-family: 'Roboto', sans-serif;
+        padding: 0;
+        margin: 0;
+    }
 
-section {
-    display: grid;
-    place-items: center;
-    align-items: center;
-    place-content: center;
-    min-height: 100vh;
-}
+    section {
+        display: grid;
+        place-items: center;
+        align-items: center;
+        place-content: center;
+        min-height: 100vh;
+    }
 
-.section2 {
-    display: grid;
-    place-items: center;
-    align-items: center;
-    place-content: center;
-    min-height: 200vh;
-}
+    .section2 {
+        display: grid;
+        place-items: center;
+        align-items: center;
+        place-content: center;
+        min-height: 200vh;
+    }
 
-.hidden {
-    opacity: 0;
-    filter: blur(5px);
-    transform: translateX(-100%);
-    transition: all 1s;
-} 
+    .hidden {
+        opacity: 0;
+        filter: blur(5px);
+        transform: translateX(-100%);
+        transition: all 1s;
+    }
 
-/* @media(prefers-reduced-motion) {
+    /* @media(prefers-reduced-motion) {
     .hidden {
         transition: none;
     }
 } */
 
-.show {
-    opacity: 1;
-    filter: blur(0);
-    transform: translateX(0);
-}
+    .show {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0);
+    }
 
- #logo{
-    animation: fill 0.5s ease forwards 4.1s;
-} 
+    #logo {
+        animation: fill 0.5s ease forwards 4.1s;
+    }
 
-  #logo mask{
-    animation: fill 0.5s ease forwards 4.0s;
-}  
+    #logo mask {
+        animation: fill 0.5s ease forwards 4.0s;
+    }
 
- /* #logo mask rect{
+    /* #logo mask rect{
     animation: fill_black 0.5s ease forwards 3.3s;
 }   */
 
- .logos {
-    width: 80vw;
-    height: 50vh;
-    display: flex;
-}
-
-.logo:nth-child(2) {
-    transition-delay: 400ms;
-}
-
-.container1 {
-  color: white;
-    background-color: #688e9b;
-    width:40%;
-    height:40%;
-    margin: auto;
-    /* border: 1px solid black; */
-    box-shadow: 0px 5px 15px 2px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-  }
-
-.container2 {
-    background-color: rgb(101, 59, 59);
-    width:40%;
-    height:40%;
-    margin: auto;
-    border: 2px solid black;
-    box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
-}
-
-
-/* MAIN PAGE DESIGN ANIMATION */
-
-
-
-
-#logo path:nth-child(2){
-
-    stroke-dasharray: 800;
-    stroke-dashoffset: 0;
-    animation: line-anim 2s ease forwards;
-
-}
-
-#logo path:nth-child(3){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 0.3s;
-}
-
-#logo path:nth-child(4){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 0.6s;
-
-}
-
-#logo path:nth-child(5){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 0.9s;
-}
-
-#logo path:nth-child(6){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 1.2s;
-}
-
-#logo path:nth-child(7){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 1.5s;
-}
-
-#logo path:nth-child(8){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 1.8s;
-}
-
-#logo path:nth-child(9){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 2.1s;
-}
-
-#logo path:nth-child(10){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 2.4s;
-}
-
-#logo path:nth-child(11){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 2.7s;
-}
-
-#logo path:nth-child(12){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 3.0s;
-}
-
-#logo path:nth-child(13){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 3.3s;
-}
-#logo path:nth-child(14){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 3.6s;
-}
-#logo path:nth-child(15){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 3.9s;
-}
-#logo path:nth-child(16){
-    stroke-dasharray: 800;
-    stroke-dashoffset: 800;
-    animation: line-anim 2s ease forwards 4.1s;
-}  
-
-
-
-@keyframes line-anim {
-    to {
-        stroke-dasharray: 0;
+    .logos {
+        width: 80vw;
+        height: 50vh;
+        display: flex;
     }
 
-}
-
-@keyframes fill{
-    from {
-        /* fill: transparent; */
+    .logo:nth-child(2) {
+        transition-delay: 400ms;
     }
-    to{
-        fill: white;
+
+    .container1 {
+        color: white;
+        background-color: #688e9b;
+        width: 40%;
+        height: 40%;
+        margin: auto;
+        /* border: 1px solid black; */
+        box-shadow: 0px 5px 15px 2px rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
     }
-} 
 
-@keyframes fill_black{
-    from {
-        /* fill: transparent; */
+    .container2 {
+        background-color: rgb(101, 59, 59);
+        width: 40%;
+        height: 40%;
+        margin: auto;
+        border: 2px solid black;
+        box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
     }
-    to{
-        fill: black;
+
+
+    /* MAIN PAGE DESIGN ANIMATION */
+
+
+
+
+    #logo path:nth-child(2) {
+
+        stroke-dasharray: 800;
+        stroke-dashoffset: 0;
+        animation: line-anim 2s ease forwards;
+
     }
-} 
 
-.line-container{
-    position: fixed;
-    top: 0;
-    left: 5%;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+    #logo path:nth-child(3) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 0.3s;
+    }
 
-#svg1 {
-    display: inline-block;
-    height: 100%;
-}
+    #logo path:nth-child(4) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 0.6s;
 
-.textM {
-    color: white;
+    }
 
-}
+    #logo path:nth-child(5) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 0.9s;
+    }
 
-@keyframes colorChange {
-  0%   {background-image: linear-gradient(to bottom, rgb(196, 47, 47), rgb(196, 47, 47), rgb(196, 47, 47), rgb(196, 47, 47));}
-  25%  {background-image: linear-gradient(to bottom, yellow, yellow, yellow, yellow, yellow);}
-  50%  {background-image: linear-gradient(to bottom, blue, blue, blue, blue, blue);}
-  100% {background-image: linear-gradient(to bottom, green, green, green, green, green);}
-}
+    #logo path:nth-child(6) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 1.2s;
+    }
 
+    #logo path:nth-child(7) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 1.5s;
+    }
 
-/* The element to apply the animation to */
-.one {
-    background-image: linear-gradient(to bottom, #ac866a, #787752, #46654d, #1c4e4c, #0a3644);
-    animation: colorChange 2s ease;
-    animation-duration: 4s;
+    #logo path:nth-child(8) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 1.8s;
+    }
 
+    #logo path:nth-child(9) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 2.1s;
+    }
 
-}
+    #logo path:nth-child(10) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 2.4s;
+    }
 
-.container {
-  margin-left: 75%;
-  overflow: hidden;
-  width: 500px;
-  height: 700px;
-}
+    #logo path:nth-child(11) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 2.7s;
+    }
 
-.bar {
-  position: absolute;
-  height: 85%;
-  width: 3px;
-  left: 7%;
-  top: 7.5%;
-  background: black;
-}
+    #logo path:nth-child(12) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 3.0s;
+    }
 
-.circle {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  border-radius: 50%;
-  left: -5px;
-  border: 1px solid black;
-  box-shadow: 0px 0px 7px rgba(black, 100%);
-}
+    #logo path:nth-child(13) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 3.3s;
+    }
 
+    #logo path:nth-child(14) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 3.6s;
+    }
 
+    #logo path:nth-child(15) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 3.9s;
+    }
 
-.bold {
-  color: black;
-  position: absolute;
-  top: -7%;
-  left: -17px;
-}
-
-.creamy {
-  color: black;
-  position: absolute;
-  bottom: -7%;
-  left: -27px;
-}
-
-.info {
-  width: 55%;
-  height: 100%;
-  position: absolute;
-  left: 43%;
-}
-
-
-.coffee-cups {
-  width: 40%;
-  height: 100%;
-  position: absolute;
-  left: 10%;
-  top: 3%;
-}
-
-.handle {
-  position: absolute;
-  height: 20px;
-  width: 15px;
-  background: transparent;
-  border-radius: 50% 30%;
-  left: 95%;
-  top: 10%;
-  z-index: -1;
-  border: 2px solid black;
-}
-
-.cup {
-  position: absolute;
-  width: 70px;
-  height: 55px;
-  background: #B54F00;
-  border: 2px solid black;
-  border-radius: 0 0 5rem 5rem;
-  left: 20%;
-}
-
-.cup-small {
-  position: absolute;
-  width: 55px;
-  height: 40px;
-  background: #B54F00;
-  border: 2px solid black;
-  border-radius: 0 0 5rem 5rem;
-  left: 23%;
-}
-
-.cup-long {
-  position: absolute;
-  width: 60px;
-  height: 70px;
-  background: #B54F00;
-  border: 2px solid black;
-  border-radius: 10% 10% 50% 50%;
-  left: 22%;
-}
-
-.doppio {
-  top: 5%;
-  background: linear-gradient(to bottom, #ccc 40%, $brown 40%, $coffee 70%);
-}
-
-.americano {
-  top: 18.5%;
-  background: linear-gradient(to bottom, #ccc 13%, $water 13%, $water 50%, $coffee 50%);
-}
-
-.macchiato {
-  top: 35%;
-   background: linear-gradient(to bottom, #ccc 20%, #ffffff 20%, #ffffff 40%, $coffee 40%);
-}
-
-.flatwhite {
-  top: 50%;
-  background: linear-gradient(to bottom, #ccc 10%, #ffffff 10%, $tan 60%, $coffee 65%, $brown 90%);
-}
-
-.cappuccino {
-  top: 64%;
-  background: linear-gradient(to bottom, #ffffff 50%, $tan 50%, $tan 55%, $coffee 60%);
-}
-
-.latte {
-  top: 81%;
-  background: linear-gradient(to bottom, #ccc 5%, #ffffff 5%, #ffffff 30%, $tan 30%, $tan 70%, $coffee 70%);
-}
+    #logo path:nth-child(16) {
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: line-anim 2s ease forwards 4.1s;
+    }
 
 
 
+    @keyframes line-anim {
+        to {
+            stroke-dasharray: 0;
+        }
 
-.small {
-  margin-left: 20px;
-  margin-top: -1px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
+    }
 
-.key {
-  position: relative;
-  margin: auto;
-  width: 500px;
-  height: 200px;
-}
+    @keyframes fill {
+        from {
+            /* fill: transparent; */
+        }
 
-.espresso {
-  position: absolute;
-  left: 17%;
-}
+        to {
+            fill: white;
+        }
+    }
 
-.milk {
-  position: absolute;
-  left: 40%;
-}
+    @keyframes fill_black {
+        from {
+            /* fill: transparent; */
+        }
 
-.foam {
-  background: #ffffff;
-  position: absolute;
-  left: 63%;
-}
+        to {
+            fill: black;
+        }
+    }
 
- .textName {
-    width: 60vw;
-    margin-left: 60%;
-    font-size: 650%;
- }
+    .line-container {
+        position: fixed;
+        top: 0;
+        left: 5%;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    #svg1 {
+        display: inline-block;
+        height: 100%;
+    }
+
+    .textM {
+        color: white;
+
+    }
+
+    @keyframes colorChange {
+        0% {
+            background-image: linear-gradient(to bottom, rgb(196, 47, 47), rgb(196, 47, 47), rgb(196, 47, 47), rgb(196, 47, 47));
+        }
+
+        25% {
+            background-image: linear-gradient(to bottom, yellow, yellow, yellow, yellow, yellow);
+        }
+
+        50% {
+            background-image: linear-gradient(to bottom, blue, blue, blue, blue, blue);
+        }
+
+        100% {
+            background-image: linear-gradient(to bottom, green, green, green, green, green);
+        }
+    }
 
 
-.shape1 {
-    width: 40vw;
-    position: absolute;
-    right: 10%;
-    top: 10%;
-    z-index: -10;
-}
+    /* The element to apply the animation to */
+    .one {
+        background-image: linear-gradient(to bottom, #ac866a, #787752, #46654d, #1c4e4c, #0a3644);
+        animation: colorChange 2s ease;
+        animation-duration: 4s;
 
-.textIn1 {
 
-    position: absolute;
-    right: 10%;
-    top: 40%;
-    font-size: 160%;
-    width: 70%;
-    color: white;
-}
+    }
 
-.shape2 {
-    width: 40vw;
-    position: absolute;
-    right: 50%;
-    top: 40%;
-}
+    .container {
+        margin-left: 75%;
+        overflow: hidden;
+        width: 500px;
+        height: 700px;
+    }
 
-.textIn2 {
+    .bar {
+        position: absolute;
+        height: 85%;
+        width: 3px;
+        left: 7%;
+        top: 7.5%;
+        background: black;
+    }
 
-    position: absolute;
-    right: 10%;
-    top: 40%;
-    font-size: 160%;
-    width: 70%;
-    color: white;
-}
-
-.shape3 {
-    width: 40vw;
-    position: absolute;
-    right: 10%;
-    top: 80%;
-}
-
-.textIn3 {
-
-    position: absolute;
-    right: 10%;
-    top: 40%;
-    font-size: 160%;
-    width: 70%;
-    color: white;
-}
-
- .interText1 {
-    font-size: 650%;
-    position: absolute;
-    left: 30%;
-    top: 10%;
-
- }
-
- .interText2 {
-    font-size: 650%;
-    position: absolute;
-    left: 65%;
-    top: 45%;
-
- }
-
-.interText3 {
-    font-size: 650%;
-    position: absolute;
-    left: 30%;
-    top: 80%;
-
- }
-
- .inpF{
-    border-radius: 20px;
- }
+    .circle {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        border-radius: 50%;
+        left: -5px;
+        border: 1px solid black;
+        box-shadow: 0px 0px 7px rgba(black, 100%);
+    }
 
 
 
+    .bold {
+        color: black;
+        position: absolute;
+        top: -7%;
+        left: -17px;
+    }
+
+    .creamy {
+        color: black;
+        position: absolute;
+        bottom: -7%;
+        left: -27px;
+    }
+
+    .info {
+        width: 55%;
+        height: 100%;
+        position: absolute;
+        left: 43%;
+    }
 
 
+    .coffee-cups {
+        width: 40%;
+        height: 100%;
+        position: absolute;
+        left: 10%;
+        top: 3%;
+    }
+
+    .handle {
+        position: absolute;
+        height: 20px;
+        width: 15px;
+        background: transparent;
+        border-radius: 50% 30%;
+        left: 95%;
+        top: 10%;
+        z-index: -1;
+        border: 2px solid black;
+    }
+
+    .cup {
+        position: absolute;
+        width: 70px;
+        height: 55px;
+        background: #B54F00;
+        border: 2px solid black;
+        border-radius: 0 0 5rem 5rem;
+        left: 20%;
+    }
+
+    .cup-small {
+        position: absolute;
+        width: 55px;
+        height: 40px;
+        background: #B54F00;
+        border: 2px solid black;
+        border-radius: 0 0 5rem 5rem;
+        left: 23%;
+    }
+
+    .cup-long {
+        position: absolute;
+        width: 60px;
+        height: 70px;
+        background: #B54F00;
+        border: 2px solid black;
+        border-radius: 10% 10% 50% 50%;
+        left: 22%;
+    }
+
+    .doppio {
+        top: 5%;
+        background: linear-gradient(to bottom, #ccc 40%, $brown 40%, $coffee 70%);
+    }
+
+    .americano {
+        top: 18.5%;
+        background: linear-gradient(to bottom, #ccc 13%, $water 13%, $water 50%, $coffee 50%);
+    }
+
+    .macchiato {
+        top: 35%;
+        background: linear-gradient(to bottom, #ccc 20%, #ffffff 20%, #ffffff 40%, $coffee 40%);
+    }
+
+    .flatwhite {
+        top: 50%;
+        background: linear-gradient(to bottom, #ccc 10%, #ffffff 10%, $tan 60%, $coffee 65%, $brown 90%);
+    }
+
+    .cappuccino {
+        top: 64%;
+        background: linear-gradient(to bottom, #ffffff 50%, $tan 50%, $tan 55%, $coffee 60%);
+    }
+
+    .latte {
+        top: 81%;
+        background: linear-gradient(to bottom, #ccc 5%, #ffffff 5%, #ffffff 30%, $tan 30%, $tan 70%, $coffee 70%);
+    }
+
+
+
+
+    .small {
+        margin-left: 20px;
+        margin-top: -1px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .key {
+        position: relative;
+        margin: auto;
+        width: 500px;
+        height: 200px;
+    }
+
+    .espresso {
+        position: absolute;
+        left: 17%;
+    }
+
+    .milk {
+        position: absolute;
+        left: 40%;
+    }
+
+    .foam {
+        background: #ffffff;
+        position: absolute;
+        left: 63%;
+    }
+
+    .textName {
+        width: 60vw;
+        margin-left: 60%;
+        font-size: 650%;
+    }
+
+
+    .shape1 {
+        width: 40vw;
+        position: absolute;
+        right: 10%;
+        top: 10%;
+        z-index: -10;
+    }
+
+    .textIn1 {
+
+        position: absolute;
+        right: 10%;
+        top: 40%;
+        font-size: 160%;
+        width: 70%;
+        color: white;
+    }
+
+    .shape2 {
+        width: 40vw;
+        position: absolute;
+        right: 50%;
+        top: 40%;
+    }
+
+    .textIn2 {
+
+        position: absolute;
+        right: 10%;
+        top: 40%;
+        font-size: 160%;
+        width: 70%;
+        color: white;
+    }
+
+    .shape3 {
+        width: 40vw;
+        position: absolute;
+        right: 10%;
+        top: 80%;
+    }
+
+    .textIn3 {
+
+        position: absolute;
+        right: 10%;
+        top: 40%;
+        font-size: 160%;
+        width: 70%;
+        color: white;
+    }
+
+    .interText1 {
+        font-size: 650%;
+        position: absolute;
+        left: 30%;
+        top: 10%;
+
+    }
+
+    .interText2 {
+        font-size: 650%;
+        position: absolute;
+        left: 65%;
+        top: 45%;
+
+    }
+
+    .interText3 {
+        font-size: 650%;
+        position: absolute;
+        left: 30%;
+        top: 80%;
+
+    }
 </style>
 
 <body>
 
     <div class="line-container">
-        <!-- <svg viewBox="0 0 133 1748" fill="none" preserveAspectRatio="xMidYMax meet" id="svg1">
-            <path d="M77.499 0.499942L75.0113 1623M75.0113 1623L4.499 1682.5L63.5 1743.5L129 1682.5L75.0113 1623Z"
-                stroke="#FF0000" stroke-width="5" class="path" stroke-dasharray="0"/>
-        </svg> -->
 
         <svg viewBox="0 0 6 2091" fill="none" xmlns="http://www.w3.org/2000/svg" id="svg1">
-        <path d="M3 0.5V2092.5" stroke="#B54F00" stroke-width="5"/>
+            <path d="M3 0.5V2092.5" stroke="#B54F00" stroke-width="5" />
         </svg>
-
-
-
-
-        <!-- <svg viewBox="0 0 805 2111" fill="none"  id="svg1">
-            <path
-                d="M624.104 3.22693C624.104 17.5551 624.751 31.5446 626.08 45.8319C627.41 60.1255 632.611 73.8418 635.963 87.7781C638.313 97.5494 642.545 111.488 648.261 119.842C667.984 148.668 686.693 185.761 695.259 219.546C699.348 235.679 703.991 253.375 700.2 270.057C696.508 286.304 691.779 300.306 685.376 315.956C678.213 333.466 666.324 342.991 654.63 357.024C640.752 373.678 623.358 389.735 608.292 405.339C600.391 413.521 592.537 422.862 586.55 432.571C580.415 442.52 571.297 449.456 566.346 460.242C561.391 471.037 548.996 484.442 548.996 496.369C548.996 517.128 562.865 538.802 578.754 551.711C599.644 568.685 622.063 583.477 645.846 596.183C675.3 611.919 707.213 627.432 729.848 652.514C752.39 677.493 774.528 706.531 788.594 737.175C793.499 747.861 799.336 757.903 800.014 770.117C801.206 791.563 805.051 813.719 798.477 834.903C792.242 854.992 780.808 881.581 761.362 892.222C737.346 905.363 717.089 924.817 693.282 938.121C669.884 951.196 652.498 971.791 637.83 993.793C621.204 1018.73 610.268 1047.06 610.268 1076.48C610.268 1093.5 630.604 1104.72 641.453 1115.57C646.119 1120.23 651.734 1123.64 656.716 1127.98C660.405 1131.18 670.988 1137.31 673.407 1140.93C681.333 1152.82 689.909 1165.04 697.674 1177.72C712.151 1201.36 724.096 1229.71 733.361 1255.79C739.157 1272.11 745.398 1289.73 749.503 1306.52C754.852 1328.4 756.531 1351.6 756.531 1374.05C756.531 1393.18 747.427 1412.09 742.695 1430.27C735.358 1458.46 724.845 1485.35 716.232 1513.18C706.992 1543.03 700.382 1576.54 695.259 1607.28C689.992 1638.88 688.014 1673.95 689.439 1706C691.285 1747.54 712.107 1788.07 723.918 1827.45C736.354 1868.9 753.355 1909.42 762.46 1952.08C770.313 1988.86 770.602 2029.11 768.39 2066.71C768.201 2069.93 767.166 2080.38 765.425 2083.51C764.85 2084.55 760.983 2098.93 760.484 2090.43C760.059 2083.21 755.534 2074.35 752.468 2067.7C746.828 2055.48 736.501 2039.46 727.322 2029.6C696.702 1996.71 634.681 1994.48 593.797 2004.34C568.93 2010.35 541.297 2024.77 535.27 2051.89C534.101 2057.15 531.957 2070.22 528.792 2074.18C526.561 2076.97 524.805 2092.73 521.325 2080.55C518.38 2070.24 504.513 2060.91 495.63 2056.39C468.286 2042.47 438.128 2036.39 407.785 2034.98C369.419 2033.2 328.423 2031.28 299.515 2061.22C297.485 2063.33 286.567 2082.31 285.131 2082.31C284.895 2082.31 279.147 2071.73 277.334 2070.23C267.862 2062.38 261.389 2050.6 252.518 2041.9C233.802 2023.53 204.686 2016.37 179.387 2015.43C148.795 2014.3 114.909 2012.53 84.7335 2018.4C59.313 2023.34 38.5204 2043.56 26.2065 2065.73C18.1055 2080.31 14.7843 2094.09 3.47656 2108.22"
-                stroke="#FF0000" stroke-width="5" stroke-linecap="round" />
-        </svg> -->  
-
 
     </div>
 
-    <!-- <svg viewBox="0 0 340 333">
-    
-        <path class="path" fill="white" stroke="black" stroke-width="4" d="M66.039,133.545c0,0-21-57,18-67s49-4,65,8
-      s30,41,53,27s66,4,58,32s-5,44,18,57s22,46,0,45s-54-40-68-16s-40,88-83,48s11-61-11-80s-79-7-70-41
-      C46.039,146.545,53.039,128.545,66.039,133.545z" pathLength="1" />
-    
-    </svg> -->
 
 
     <section class="one ">
         <div class=" scroll">
 
-
-
-
-            <!-- <svg width="645" height="123" viewBox="0 0 645 123" fill="none" xmlns="http://www.w3.org/2000/svg" id="logo">
-                <mask id="path-1-outside-1_626_6" maskUnits="userSpaceOnUse" x="0.101562" y="0.699951" width="645" height="123"
-                    fill="black">
-                    <rect fill="white" x="0.101562" y="0.699951" width="645" height="123" />
-                    <path
-                        d="M5.10156 117V12H50.4016C62.1016 12 71.1516 14.35 77.5516 19.0499C84.0516 23.75 87.3016 30.4 87.3016 39C87.3016 44.7 85.9516 49.5 83.2516 53.4C80.6516 57.3 77.0516 60.25 72.4516 62.25C67.9516 64.25 63.0016 65.25 57.6016 65.25L60.1516 61.65C66.8516 61.65 72.6016 62.7 77.4016 64.8C82.3016 66.8 86.1016 69.85 88.8016 73.95C91.5016 77.95 92.8516 82.95 92.8516 88.95C92.8516 97.85 89.5516 104.75 82.9516 109.65C76.4516 114.55 66.6016 117 53.4016 117H5.10156ZM16.2016 107.85H53.2516C62.4516 107.85 69.5016 106.3 74.4016 103.2C79.3016 100 81.7516 94.95 81.7516 88.05C81.7516 81.25 79.3016 76.3 74.4016 73.2C69.5016 70 62.4516 68.4 53.2516 68.4H15.0016V59.25H49.6516C58.0516 59.25 64.5516 57.65 69.1516 54.45C73.8516 51.25 76.2016 46.5 76.2016 40.2C76.2016 33.8 73.8516 29.05 69.1516 25.95C64.5516 22.75 58.0516 21.1499 49.6516 21.1499H16.2016V107.85Z" />
-                    <path
-                        d="M149.387 117.75C141.187 117.75 133.987 116.05 127.787 112.65C121.587 109.15 116.738 104.4 113.238 98.4C109.738 92.3 107.988 85.35 107.988 77.55C107.988 69.75 109.638 62.85 112.938 56.85C116.338 50.85 120.937 46.15 126.737 42.75C132.637 39.25 139.237 37.5 146.537 37.5C153.937 37.5 160.487 39.2 166.188 42.6C171.987 45.9 176.537 50.6 179.837 56.7C183.137 62.7 184.787 69.65 184.787 77.55C184.787 78.05 184.737 78.5999 184.637 79.2C184.637 79.7 184.637 80.25 184.637 80.85H116.088V72.9H178.938L174.738 76.05C174.738 70.35 173.488 65.3 170.988 60.9C168.588 56.4 165.287 52.9 161.087 50.4C156.887 47.9 152.037 46.65 146.537 46.65C141.137 46.65 136.288 47.9 131.988 50.4C127.688 52.9 124.338 56.4 121.938 60.9C119.538 65.4 118.338 70.55 118.338 76.35V78C118.338 84 119.637 89.3 122.237 93.9C124.937 98.4 128.637 101.95 133.337 104.55C138.137 107.05 143.588 108.3 149.688 108.3C154.488 108.3 158.937 107.45 163.037 105.75C167.237 104.05 170.837 101.45 173.837 97.95L179.837 104.85C176.337 109.05 171.937 112.25 166.637 114.45C161.437 116.65 155.687 117.75 149.387 117.75Z" />
-                    <path d="M218.615 62.85H274.115V72.45H218.615V62.85ZM219.815 117H208.715V12H280.715V21.6H219.815V117Z" />
-                    <path
-                        d="M299.922 117V38.25H310.122V59.7L309.072 55.95C311.272 49.95 314.972 45.4 320.172 42.3C325.372 39.1 331.822 37.5 339.522 37.5V47.85C339.122 47.85 338.722 47.85 338.322 47.85C337.922 47.75 337.522 47.7 337.122 47.7C328.822 47.7 322.322 50.25 317.622 55.35C312.922 60.35 310.572 67.5 310.572 76.8V117H299.922Z" />
-                    <path
-                        d="M391.673 117.75C383.473 117.75 376.273 116.05 370.073 112.65C363.873 109.15 359.023 104.4 355.523 98.4C352.023 92.3 350.273 85.35 350.273 77.55C350.273 69.75 351.923 62.85 355.223 56.85C358.623 50.85 363.223 46.15 369.023 42.75C374.923 39.25 381.523 37.5 388.823 37.5C396.223 37.5 402.773 39.2 408.473 42.6C414.273 45.9 418.823 50.6 422.123 56.7C425.423 62.7 427.073 69.65 427.073 77.55C427.073 78.05 427.023 78.5999 426.923 79.2C426.923 79.7 426.923 80.25 426.923 80.85H358.373V72.9H421.223L417.023 76.05C417.023 70.35 415.773 65.3 413.273 60.9C410.873 56.4 407.573 52.9 403.373 50.4C399.173 47.9 394.323 46.65 388.823 46.65C383.423 46.65 378.573 47.9 374.273 50.4C369.973 52.9 366.623 56.4 364.223 60.9C361.823 65.4 360.623 70.55 360.623 76.35V78C360.623 84 361.923 89.3 364.523 93.9C367.223 98.4 370.923 101.95 375.623 104.55C380.423 107.05 385.873 108.3 391.973 108.3C396.773 108.3 401.223 107.45 405.323 105.75C409.523 104.05 413.123 101.45 416.123 97.95L422.123 104.85C418.623 109.05 414.223 112.25 408.923 114.45C403.723 116.65 397.973 117.75 391.673 117.75Z" />
-                    <path
-                        d="M482.2 117.75C474 117.75 466.8 116.05 460.6 112.65C454.4 109.15 449.55 104.4 446.05 98.4C442.55 92.3 440.8 85.35 440.8 77.55C440.8 69.75 442.45 62.85 445.75 56.85C449.15 50.85 453.75 46.15 459.55 42.75C465.45 39.25 472.05 37.5 479.35 37.5C486.75 37.5 493.3 39.2 499 42.6C504.8 45.9 509.35 50.6 512.65 56.7C515.95 62.7 517.6 69.65 517.6 77.55C517.6 78.05 517.55 78.5999 517.45 79.2C517.45 79.7 517.45 80.25 517.45 80.85H448.9V72.9H511.75L507.55 76.05C507.55 70.35 506.3 65.3 503.8 60.9C501.4 56.4 498.1 52.9 493.9 50.4C489.7 47.9 484.85 46.65 479.35 46.65C473.95 46.65 469.1 47.9 464.8 50.4C460.5 52.9 457.15 56.4 454.75 60.9C452.35 65.4 451.15 70.55 451.15 76.35V78C451.15 84 452.45 89.3 455.05 93.9C457.75 98.4 461.45 101.95 466.15 104.55C470.95 107.05 476.4 108.3 482.5 108.3C487.3 108.3 491.75 107.45 495.85 105.75C500.05 104.05 503.65 101.45 506.65 97.95L512.65 104.85C509.15 109.05 504.75 112.25 499.45 114.45C494.25 116.65 488.5 117.75 482.2 117.75Z" />
-                    <path d="M539.277 117V5.69995H549.927V117H539.277Z" />
-                    <path
-                        d="M628.911 117V99.6L628.461 96.75V67.65C628.461 60.95 626.561 55.8 622.761 52.2C619.061 48.6 613.511 46.8 606.111 46.8C601.011 46.8 596.161 47.65 591.561 49.35C586.961 51.05 583.061 53.3 579.861 56.1L575.061 48.15C579.061 44.75 583.861 42.1499 589.461 40.3499C595.061 38.4499 600.961 37.5 607.161 37.5C617.361 37.5 625.211 40.05 630.711 45.15C636.311 50.15 639.111 57.8 639.111 68.1V117H628.911ZM601.761 117.75C595.861 117.75 590.711 116.8 586.311 114.9C582.011 112.9 578.711 110.2 576.411 106.8C574.111 103.3 572.961 99.3 572.961 94.8C572.961 90.7 573.911 87 575.811 83.7C577.811 80.3 581.011 77.6 585.411 75.6C589.911 73.5 595.911 72.45 603.411 72.45H630.561V80.3999H603.711C596.111 80.3999 590.811 81.75 587.811 84.45C584.911 87.15 583.461 90.5 583.461 94.5C583.461 99 585.211 102.6 588.711 105.3C592.211 108 597.111 109.35 603.411 109.35C609.411 109.35 614.561 108 618.861 105.3C623.261 102.5 626.461 98.5 628.461 93.3L630.861 100.65C628.861 105.85 625.361 110 620.361 113.1C615.461 116.2 609.261 117.75 601.761 117.75Z" />
-                </mask>
-                <path
-                    d="M5.10156 117V12H50.4016C62.1016 12 71.1516 14.35 77.5516 19.0499C84.0516 23.75 87.3016 30.4 87.3016 39C87.3016 44.7 85.9516 49.5 83.2516 53.4C80.6516 57.3 77.0516 60.25 72.4516 62.25C67.9516 64.25 63.0016 65.25 57.6016 65.25L60.1516 61.65C66.8516 61.65 72.6016 62.7 77.4016 64.8C82.3016 66.8 86.1016 69.85 88.8016 73.95C91.5016 77.95 92.8516 82.95 92.8516 88.95C92.8516 97.85 89.5516 104.75 82.9516 109.65C76.4516 114.55 66.6016 117 53.4016 117H5.10156ZM16.2016 107.85H53.2516C62.4516 107.85 69.5016 106.3 74.4016 103.2C79.3016 100 81.7516 94.95 81.7516 88.05C81.7516 81.25 79.3016 76.3 74.4016 73.2C69.5016 70 62.4516 68.4 53.2516 68.4H15.0016V59.25H49.6516C58.0516 59.25 64.5516 57.65 69.1516 54.45C73.8516 51.25 76.2016 46.5 76.2016 40.2C76.2016 33.8 73.8516 29.05 69.1516 25.95C64.5516 22.75 58.0516 21.1499 49.6516 21.1499H16.2016V107.85Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-                <path
-                    d="M149.387 117.75C141.187 117.75 133.987 116.05 127.787 112.65C121.587 109.15 116.738 104.4 113.238 98.4C109.738 92.3 107.988 85.35 107.988 77.55C107.988 69.75 109.638 62.85 112.938 56.85C116.338 50.85 120.937 46.15 126.737 42.75C132.637 39.25 139.237 37.5 146.537 37.5C153.937 37.5 160.487 39.2 166.188 42.6C171.987 45.9 176.537 50.6 179.837 56.7C183.137 62.7 184.787 69.65 184.787 77.55C184.787 78.05 184.737 78.5999 184.637 79.2C184.637 79.7 184.637 80.25 184.637 80.85H116.088V72.9H178.938L174.738 76.05C174.738 70.35 173.488 65.3 170.988 60.9C168.588 56.4 165.287 52.9 161.087 50.4C156.887 47.9 152.037 46.65 146.537 46.65C141.137 46.65 136.288 47.9 131.988 50.4C127.688 52.9 124.338 56.4 121.938 60.9C119.538 65.4 118.338 70.55 118.338 76.35V78C118.338 84 119.637 89.3 122.237 93.9C124.937 98.4 128.637 101.95 133.337 104.55C138.137 107.05 143.588 108.3 149.688 108.3C154.488 108.3 158.937 107.45 163.037 105.75C167.237 104.05 170.837 101.45 173.837 97.95L179.837 104.85C176.337 109.05 171.937 112.25 166.637 114.45C161.437 116.65 155.687 117.75 149.387 117.75Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-                <path d="M218.615 62.85H274.115V72.45H218.615V62.85ZM219.815 117H208.715V12H280.715V21.6H219.815V117Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-                <path
-                    d="M299.922 117V38.25H310.122V59.7L309.072 55.95C311.272 49.95 314.972 45.4 320.172 42.3C325.372 39.1 331.822 37.5 339.522 37.5V47.85C339.122 47.85 338.722 47.85 338.322 47.85C337.922 47.75 337.522 47.7 337.122 47.7C328.822 47.7 322.322 50.25 317.622 55.35C312.922 60.35 310.572 67.5 310.572 76.8V117H299.922Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-                <path
-                    d="M391.673 117.75C383.473 117.75 376.273 116.05 370.073 112.65C363.873 109.15 359.023 104.4 355.523 98.4C352.023 92.3 350.273 85.35 350.273 77.55C350.273 69.75 351.923 62.85 355.223 56.85C358.623 50.85 363.223 46.15 369.023 42.75C374.923 39.25 381.523 37.5 388.823 37.5C396.223 37.5 402.773 39.2 408.473 42.6C414.273 45.9 418.823 50.6 422.123 56.7C425.423 62.7 427.073 69.65 427.073 77.55C427.073 78.05 427.023 78.5999 426.923 79.2C426.923 79.7 426.923 80.25 426.923 80.85H358.373V72.9H421.223L417.023 76.05C417.023 70.35 415.773 65.3 413.273 60.9C410.873 56.4 407.573 52.9 403.373 50.4C399.173 47.9 394.323 46.65 388.823 46.65C383.423 46.65 378.573 47.9 374.273 50.4C369.973 52.9 366.623 56.4 364.223 60.9C361.823 65.4 360.623 70.55 360.623 76.35V78C360.623 84 361.923 89.3 364.523 93.9C367.223 98.4 370.923 101.95 375.623 104.55C380.423 107.05 385.873 108.3 391.973 108.3C396.773 108.3 401.223 107.45 405.323 105.75C409.523 104.05 413.123 101.45 416.123 97.95L422.123 104.85C418.623 109.05 414.223 112.25 408.923 114.45C403.723 116.65 397.973 117.75 391.673 117.75Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-                <path
-                    d="M482.2 117.75C474 117.75 466.8 116.05 460.6 112.65C454.4 109.15 449.55 104.4 446.05 98.4C442.55 92.3 440.8 85.35 440.8 77.55C440.8 69.75 442.45 62.85 445.75 56.85C449.15 50.85 453.75 46.15 459.55 42.75C465.45 39.25 472.05 37.5 479.35 37.5C486.75 37.5 493.3 39.2 499 42.6C504.8 45.9 509.35 50.6 512.65 56.7C515.95 62.7 517.6 69.65 517.6 77.55C517.6 78.05 517.55 78.5999 517.45 79.2C517.45 79.7 517.45 80.25 517.45 80.85H448.9V72.9H511.75L507.55 76.05C507.55 70.35 506.3 65.3 503.8 60.9C501.4 56.4 498.1 52.9 493.9 50.4C489.7 47.9 484.85 46.65 479.35 46.65C473.95 46.65 469.1 47.9 464.8 50.4C460.5 52.9 457.15 56.4 454.75 60.9C452.35 65.4 451.15 70.55 451.15 76.35V78C451.15 84 452.45 89.3 455.05 93.9C457.75 98.4 461.45 101.95 466.15 104.55C470.95 107.05 476.4 108.3 482.5 108.3C487.3 108.3 491.75 107.45 495.85 105.75C500.05 104.05 503.65 101.45 506.65 97.95L512.65 104.85C509.15 109.05 504.75 112.25 499.45 114.45C494.25 116.65 488.5 117.75 482.2 117.75Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-                <path d="M539.277 117V5.69995H549.927V117H539.277Z" stroke="white" stroke-width="10"
-                    mask="url(#path-1-outside-1_626_6)" />
-                <path
-                    d="M628.911 117V99.6L628.461 96.75V67.65C628.461 60.95 626.561 55.8 622.761 52.2C619.061 48.6 613.511 46.8 606.111 46.8C601.011 46.8 596.161 47.65 591.561 49.35C586.961 51.05 583.061 53.3 579.861 56.1L575.061 48.15C579.061 44.75 583.861 42.1499 589.461 40.3499C595.061 38.4499 600.961 37.5 607.161 37.5C617.361 37.5 625.211 40.05 630.711 45.15C636.311 50.15 639.111 57.8 639.111 68.1V117H628.911ZM601.761 117.75C595.861 117.75 590.711 116.8 586.311 114.9C582.011 112.9 578.711 110.2 576.411 106.8C574.111 103.3 572.961 99.3 572.961 94.8C572.961 90.7 573.911 87 575.811 83.7C577.811 80.3 581.011 77.6 585.411 75.6C589.911 73.5 595.911 72.45 603.411 72.45H630.561V80.3999H603.711C596.111 80.3999 590.811 81.75 587.811 84.45C584.911 87.15 583.461 90.5 583.461 94.5C583.461 99 585.211 102.6 588.711 105.3C592.211 108 597.111 109.35 603.411 109.35C609.411 109.35 614.561 108 618.861 105.3C623.261 102.5 626.461 98.5 628.461 93.3L630.861 100.65C628.861 105.85 625.361 110 620.361 113.1C615.461 116.2 609.261 117.75 601.761 117.75Z"
-                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_626_6)" />
-            </svg> -->
-
-
-            
-            <svg width="977" height="119" viewBox="0 0 977 119" fill="none" xmlns="http://www.w3.org/2000/svg" id="logo">
-                <mask id="path-1-outside-1_628_11" maskUnits="userSpaceOnUse" x="0.101562" y="0" width="977" height="119"
-                    fill="black">
+            <svg width="977" height="119" viewBox="0 0 977 119" fill="none" xmlns="http://www.w3.org/2000/svg"
+                id="logo">
+                <mask id="path-1-outside-1_628_11" maskUnits="userSpaceOnUse" x="0.101562" y="0" width="977"
+                    height="119" fill="black">
                     <rect fill="white" x="0.101562" width="977" height="119" />
                     <path
                         d="M5.10156 114V9H50.4016C62.1016 9 71.1516 11.35 77.5516 16.05C84.0516 20.75 87.3016 27.4 87.3016 36C87.3016 41.7 85.9516 46.5 83.2516 50.4C80.6516 54.3 77.0516 57.25 72.4516 59.25C67.9516 61.25 63.0016 62.25 57.6016 62.25L60.1516 58.65C66.8516 58.65 72.6016 59.7 77.4016 61.8C82.3016 63.8 86.1016 66.85 88.8016 70.95C91.5016 74.95 92.8516 79.95 92.8516 85.95C92.8516 94.85 89.5516 101.75 82.9516 106.65C76.4516 111.55 66.6016 114 53.4016 114H5.10156ZM16.2016 104.85H53.2516C62.4516 104.85 69.5016 103.3 74.4016 100.2C79.3016 97 81.7516 91.95 81.7516 85.05C81.7516 78.25 79.3016 73.3 74.4016 70.2C69.5016 67 62.4516 65.4 53.2516 65.4H15.0016V56.25H49.6516C58.0516 56.25 64.5516 54.65 69.1516 51.45C73.8516 48.25 76.2016 43.5 76.2016 37.2C76.2016 30.8 73.8516 26.05 69.1516 22.95C64.5516 19.75 58.0516 18.15 49.6516 18.15H16.2016V104.85Z" />
                     <path
                         d="M152.087 55.95H207.587V65.4H152.087V55.95ZM153.287 104.4H216.438V114H142.188V9H214.188V18.6H153.287V104.4Z" />
-                    <path d="M276.429 59.85H331.929V69.45H276.429V59.85ZM277.629 114H266.529V9H338.529V18.6H277.629V114Z" />
+                    <path
+                        d="M276.429 59.85H331.929V69.45H276.429V59.85ZM277.629 114H266.529V9H338.529V18.6H277.629V114Z" />
                     <path
                         d="M385.451 114V9H424.751C433.651 9 441.301 10.45 447.701 13.35C454.101 16.15 459.001 20.25 462.401 25.65C465.901 30.95 467.651 37.4 467.651 45C467.651 52.4 465.901 58.8 462.401 64.2C459.001 69.5 454.101 73.6 447.701 76.5C441.301 79.3 433.651 80.7 424.751 80.7H391.601L396.551 75.6V114H385.451ZM457.151 114L430.151 75.9H442.151L469.301 114H457.151ZM396.551 76.5L391.601 71.25H424.451C434.951 71.25 442.901 68.95 448.301 64.35C453.801 59.75 456.551 53.3 456.551 45C456.551 36.6 453.801 30.1 448.301 25.5C442.901 20.9 434.951 18.6 424.451 18.6H391.601L396.551 13.35V76.5Z" />
-                    <path d="M527.75 55.95H583.25V65.4H527.75V55.95ZM528.95 104.4H592.1V114H517.85V9H589.85V18.6H528.95V104.4Z" />
+                    <path
+                        d="M527.75 55.95H583.25V65.4H527.75V55.95ZM528.95 104.4H592.1V114H517.85V9H589.85V18.6H528.95V104.4Z" />
                     <path
                         d="M652.091 55.95H707.591V65.4H652.091V55.95ZM653.291 104.4H716.441V114H642.191V9H714.191V18.6H653.291V104.4Z" />
                     <path d="M766.533 114V9H777.633V104.4H836.433V114H766.533Z" />
@@ -620,16 +561,19 @@ section {
                 <path
                     d="M5.10156 114V9H50.4016C62.1016 9 71.1516 11.35 77.5516 16.05C84.0516 20.75 87.3016 27.4 87.3016 36C87.3016 41.7 85.9516 46.5 83.2516 50.4C80.6516 54.3 77.0516 57.25 72.4516 59.25C67.9516 61.25 63.0016 62.25 57.6016 62.25L60.1516 58.65C66.8516 58.65 72.6016 59.7 77.4016 61.8C82.3016 63.8 86.1016 66.85 88.8016 70.95C91.5016 74.95 92.8516 79.95 92.8516 85.95C92.8516 94.85 89.5516 101.75 82.9516 106.65C76.4516 111.55 66.6016 114 53.4016 114H5.10156ZM16.2016 104.85H53.2516C62.4516 104.85 69.5016 103.3 74.4016 100.2C79.3016 97 81.7516 91.95 81.7516 85.05C81.7516 78.25 79.3016 73.3 74.4016 70.2C69.5016 67 62.4516 65.4 53.2516 65.4H15.0016V56.25H49.6516C58.0516 56.25 64.5516 54.65 69.1516 51.45C73.8516 48.25 76.2016 43.5 76.2016 37.2C76.2016 30.8 73.8516 26.05 69.1516 22.95C64.5516 19.75 58.0516 18.15 49.6516 18.15H16.2016V104.85Z"
                     stroke="white" stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
-                <path d="M152.087 55.95H207.587V65.4H152.087V55.95ZM153.287 104.4H216.438V114H142.188V9H214.188V18.6H153.287V104.4Z"
+                <path
+                    d="M152.087 55.95H207.587V65.4H152.087V55.95ZM153.287 104.4H216.438V114H142.188V9H214.188V18.6H153.287V104.4Z"
                     stroke="white" stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
-                <path d="M276.429 59.85H331.929V69.45H276.429V59.85ZM277.629 114H266.529V9H338.529V18.6H277.629V114Z" stroke="white"
-                    stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
+                <path d="M276.429 59.85H331.929V69.45H276.429V59.85ZM277.629 114H266.529V9H338.529V18.6H277.629V114Z"
+                    stroke="white" stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
                 <path
                     d="M385.451 114V9H424.751C433.651 9 441.301 10.45 447.701 13.35C454.101 16.15 459.001 20.25 462.401 25.65C465.901 30.95 467.651 37.4 467.651 45C467.651 52.4 465.901 58.8 462.401 64.2C459.001 69.5 454.101 73.6 447.701 76.5C441.301 79.3 433.651 80.7 424.751 80.7H391.601L396.551 75.6V114H385.451ZM457.151 114L430.151 75.9H442.151L469.301 114H457.151ZM396.551 76.5L391.601 71.25H424.451C434.951 71.25 442.901 68.95 448.301 64.35C453.801 59.75 456.551 53.3 456.551 45C456.551 36.6 453.801 30.1 448.301 25.5C442.901 20.9 434.951 18.6 424.451 18.6H391.601L396.551 13.35V76.5Z"
                     stroke="white" stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
-                <path d="M527.75 55.95H583.25V65.4H527.75V55.95ZM528.95 104.4H592.1V114H517.85V9H589.85V18.6H528.95V104.4Z"
+                <path
+                    d="M527.75 55.95H583.25V65.4H527.75V55.95ZM528.95 104.4H592.1V114H517.85V9H589.85V18.6H528.95V104.4Z"
                     stroke="white" stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
-                <path d="M652.091 55.95H707.591V65.4H652.091V55.95ZM653.291 104.4H716.441V114H642.191V9H714.191V18.6H653.291V104.4Z"
+                <path
+                    d="M652.091 55.95H707.591V65.4H652.091V55.95ZM653.291 104.4H716.441V114H642.191V9H714.191V18.6H653.291V104.4Z"
                     stroke="white" stroke-width="10" mask="url(#path-1-outside-1_628_11)" />
                 <path d="M766.533 114V9H777.633V104.4H836.433V114H766.533Z" stroke="white" stroke-width="10"
                     mask="url(#path-1-outside-1_628_11)" />
@@ -639,14 +583,14 @@ section {
             </svg>
 
 
-            </div>
-            <br>
-            <br>
+        </div>
+        <br>
+        <br>
 
 
-            <div class="">
-                <p class="textM">Маркетплейс российских брендов</p>
-            </div>
+        <div class="">
+            <p class="textM">Маркетплейс российских брендов</p>
+        </div>
 
 
     </section>
@@ -676,12 +620,13 @@ section {
                     stroke="#000000" stroke-width="0" />
             </svg>
 
-            <p class="textIn2">Бренду нужно лишь подтвердить заказ в личном кабинете и передать его в курьерскую службу для доставки покупателю.</p>
-        
+            <p class="textIn2">Бренду нужно лишь подтвердить заказ в личном кабинете и передать его в курьерскую службу
+                для доставки покупателю.</p>
+
         </div>
 
         <p class="interText3">03</p>
-        
+
         <div class="shape3">
             <svg viewBox="0 0 863 605" fill="#0A3644" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -690,7 +635,7 @@ section {
             </svg>
 
             <p class="textIn3">Мы обеспечиваем полный цикл взаимодействия между покупателем и брендом.</p>
-        
+
         </div>
 
 
@@ -702,8 +647,8 @@ section {
 
     <section class="hidden" style="margin-top: 20vh">
 
-    <h1 class="textName">Условия сотрудничества</h1>
-    
+        <h1 class="textName">Условия сотрудничества</h1>
+
         <div class="container">
 
             <div class="bar">
@@ -756,12 +701,12 @@ section {
                 </div>
                 <div class="third">
                     <h1>3. Кол-во подписчиков в соц сетях</h1>
-                    <p> 
-                        <b>Inst</b> - от 1млн <br>
-                        или <br>
-                        <b>VK</b> - от 1млн <br>
-                        или <br>
-                        <b>TenChat</b> - от 1млн <br>
+                    <p>
+                        <b>Inst</b> - от 1млн
+                        /
+                        <b>VK</b> - от 1млн
+                        /
+                        <b>TenChat</b> - от 1млн
                     </p>
                 </div>
                 <div class="fourth">
@@ -779,14 +724,14 @@ section {
                         Требуемыое качество - HD
                     </p>
                 </div>
-                
-        
+
+
             </div>
         </div>
-        
 
-        
-    
+
+
+
 
 
     </section>
@@ -796,98 +741,40 @@ section {
         <h1>Торгуйте без взносов</h1>
 
         <div class="logos">
-                <div style="margin: auto;">
+            <div style="margin: auto;">
 
-                    <h1 style="
+                <h1 style="
                         text-transform: lowercase;
                         font-size: 610%;
                         margin: auto;
-                        text-align: center;"  class="logo hidden" style="margin: auto;">Комиссия</h1>
-
-                        <p>
-                            Вы платите комиссию с каждой продажи. <br>
-                            Вам нужен только товар. Не требуется никаких взносов.
-                        </p>
-                </div>
-
-                <h1 style="
-                    text-transform: lowercase;
-                    font-size: 300%;
-                    margin: auto;
-                    text-align: center;" class="logo hidden" style="margin: auto;">Или</h1>
-
-                <div style="margin: auto;">
-
-                    <h1 style="
-                        text-transform: lowercase;
-                        font-size: 610%;
-                        margin: auto;
-                        text-align: center;"  class="logo hidden" style="margin: auto;">Подписка</h1>
-
-                         <p>
-                            Вы не платите комиссию. <br>
-                            Подписка = Комиссия 0%.
-                        </p>
-                </div>
-
-
-<!-- 
-            <div class="logo hidden container1">
-
-                <h1 style="
-                text-transform: lowercase;
-                font-size: 610%;
-                margin: auto;
-                text-align: center;">Комиссия</h1>
+                        text-align: center;" class="logo hidden" style="margin: auto;">Комиссия</h1>
 
                 <p>
                     Вы платите комиссию с каждой продажи. <br>
                     Вам нужен только товар. Не требуется никаких взносов.
                 </p>
-
             </div>
 
+            <h1 style="
+                    text-transform: lowercase;
+                    font-size: 300%;
+                    margin: auto;
+                    text-align: center;" class="logo hidden" style="margin: auto;">Или</h1>
 
-            <h1 class="logo hidden" style="margin: auto;">Или</h1>
+            <div style="margin: auto;">
 
-
-            <div class="logo hidden container1">
-
-                <h1>Подписка</h1>
+                <h1 style="
+                        text-transform: lowercase;
+                        font-size: 610%;
+                        margin: auto;
+                        text-align: center;" class="logo hidden" style="margin: auto;">Подписка</h1>
 
                 <p>
                     Вы не платите комиссию. <br>
                     Подписка = Комиссия 0%.
                 </p>
-
-            </div> -->
-
-
-
-
-            <!-- <div class="logo hidden container2">
-
-               
-                <h1>TExt</h1>
-
-
-            </div> -->
-
-            
-
-            <!-- <div class="logo hidden">
-
-                <img src="1.png" alt="" width="100px" height="100px">
             </div>
-            <div class="logo hidden">
-                <img src="1.png" alt="" width="100px" height="100px">
-            </div>
-            <div class="logo hidden">
-                <img src="1.png" alt="" width="100px" height="100px">
-            </div>
-            <div class="logo hidden">
-                <img src="1.png" alt="" width="100px" height="100px">
-            </div> -->
+
 
         </div>
 
@@ -900,32 +787,22 @@ section {
 
 
 
-   <section class="hidden">
+    <section class="hidden">
 
         <h1 style="font-size: 450%;">Станьте нашим партнером</h1>
         <h2></h2>
 
         <br>
         <br>
-        <div style="
-         padding-top: 10%;
-        padding-bottom: 10%;
-        width: 80vw;
-        border-radius: 100px;
-        background-image: linear-gradient(to left bottom,
-         #88aebb, #688e9b, 
-         #4a6f7d, #2b5260, 
-         #0a3644);">
+        <div
+            style="padding: 10% 0; width: 80vw; border-radius: 100px; background-image: linear-gradient(to left bottom, #88aebb, #688e9b,#4a6f7d, #2b5260, #0a3644);">
 
 
-            <div class="uk-width-1" style="margin: 0 auto; display: flex; ">
+            <div class="uk-width-1 uk-flex uk-flex-center uk-flex-around" style="margin: 0 auto; display: flex; ">
 
-                <div class="uk-width-1-3@s" style="width: 60%; height:40vh;
-                background-image: url(../../../media/logoImage/logo.svg);
-                background-repeat: no-repeat;
-                background-size: 100% 100%;
-                ">
-                    
+                <div class="uk-width-1-3@s"
+                    style=" height:40vh; background-image: url(../../../media/logoImage/logo.svg); background-repeat: no-repeat; background-size: 100% 100%;">
+
                 </div>
 
                 <div class="uk-width-2-3@s" style="width: 40%;">
@@ -933,53 +810,56 @@ section {
                     <form class="uk-form-horizontal uk-margin-large" method="post">
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Название бренда</label>
+                            <label class="uk-form-label uk-text-bold" for="form-horizontal-text">Название бренда</label>
                             <div class="uk-form-controls">
                                 <!-- uk-form-blank -->
-                                <input name="brand_name" class="uk-input uk-form-width-large inpF" id="form-horizontal-text" type="text" placeholder=".................................." style="box-shadow: 1px;">
+                                <input maxlength="100" name="brand_name" class="uk-input uk-form-width-large uk-border-rounded"
+                                    id="form-horizontal-text" type="text" placeholder="Супер-пупер бренд"
+                                    style="box-shadow: 1px;">
                             </div>
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Имя</label>
+                            <label class="uk-form-label uk-text-bold" for="form-horizontal-text">Имя</label>
                             <div class="uk-form-controls">
-                                <input name="name" class="uk-input uk-form-width-large inpF" id="form-horizontal-text" type="text" placeholder=".................................." style="box-shadow: 1px;">
+                                <input maxlength="100" name="name" class="uk-input uk-form-width-large uk-border-rounded"
+                                    id="form-horizontal-text" type="text" style="box-shadow: 1px;"
+                                    placeholder="Евгений">
                             </div>
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Телефон</label>
+                            <label class="uk-form-label uk-text-bold" for="form-horizontal-text">Телефон</label>
                             <div class="uk-form-controls">
-                                <input name="phone" class="uk-input uk-form-width-large inpF" id="form-horizontal-text" type="text" placeholder=".................................." style="box-shadow: 1px;">
+                                <input maxlength="15" name="phone" class="uk-input uk-form-width-large uk-border-rounded"
+                                    id="form-horizontal-text" type="tel" pattern="+[0-9]{1}[0-9]{3}[0-9]{3}[0-9]{4}"
+                                    placeholder="+12345678900" style="box-shadow: 1px;" id="phoneNumber">
                             </div>
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Город</label>
+                            <label class="uk-form-label uk-text-bold" for="form-horizontal-text">Город</label>
                             <div class="uk-form-controls">
-                                <input name="city" class="uk-input uk-form-width-large inpF" id="form-horizontal-text" type="text" placeholder=".................................." style="box-shadow: 1px;">
+                                <input maxlength="50" name="city" class="uk-input uk-form-width-large uk-border-rounded"
+                                    id="form-horizontal-text" type="text" style="box-shadow: 1px;" placeholder="Москва">
                             </div>
                         </div>
 
                         <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Ссылки на соц сети</label>
+                            <label class="uk-form-label uk-text-bold" for="form-horizontal-text">Ссылки на соц сети</label>
                             <div class="uk-form-controls">
-                                <input name="link" class="uk-input uk-form-width-large inpF" id="form-horizontal-text" type="text" placeholder=".................................." style="box-shadow: 1px;">
-                            </div>
-                        </div>
-
-                        <div class="uk-margin">
-                            <label class="uk-form-label" for="form-horizontal-text">Расскажите о бренде и его создателях</label>
-                            <div class="uk-form-controls">
-                                <input name="info" class="uk-input uk-form-width-large inpF" id="form-horizontal-text" type="text" placeholder=".................................." style="box-shadow: 1px;">
+                                <input maxlength="50" name="link" class="uk-input uk-form-width-large uk-border-rounded"
+                                    id="form-horizontal-text" type="text" style="box-shadow: 1px;"
+                                    placeholder="@befreela">
                             </div>
                         </div>
 
                         <br>
                         <br>
-
-                        <button class="uk-button uk-button-secondary uk-width-1-2" type="submit">Отправить</button>
-                    
+                        <div class="uk-width-1 uk-flex uk-flex-center uk-flex-middle">
+                            <button class="uk-button uk-button-secondary uk-width-3-5" name="partRegBtn"
+                                style="margin: 0 auto" type="submit">Отправить</button>
+                        </div>
                         {% csrf_token %}
 
                     </form>
@@ -994,65 +874,65 @@ section {
     <br>
     {% include "footer.html" %}
 
-    
-    
+
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.15.10/dist/js/uikit-icons.min.js"></script>
 
 <script>
-
     // Pop scroll elements
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) =>{
-        console.log(entry)
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        } else {
-            entry.target.classList.remove('show');
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            // console.log(entry)
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            } else {
+                entry.target.classList.remove('show');
+            }
+        });
+
     });
 
-});
-
-const hiddenElements = document.querySelectorAll('.hidden');
-hiddenElements.forEach((el) => observer.observe(el));
+    const hiddenElements = document.querySelectorAll('.hidden');
+    hiddenElements.forEach((el) => observer.observe(el));
 
 
-// Logo animation
+    // Logo animation
 
-const logo = document.querySelectorAll('#logo path');
+    const logo = document.querySelectorAll('#logo path');
 
-for (let i = 0; i<logo.length; i++){
-    console.log(`Letter ${i} is ${logo[i].getTotalLength()}`);
-}
+    // for (let i = 0; i < logo.length; i++) {
+    // console.log(`Letter ${i} is ${logo[i].getTotalLength()}`);
+    // }
 
-// Line animation
-
-
-let path = document.querySelector('#svg1 path')
-let pathLength = path.getTotalLength();
+    // Line animation
 
 
-path.style.strokeDasharray = pathLength + ' ' + pathLength;
-
-path.style.strokeDashoffset = pathLength;
-
-window.addEventListener('scroll', () => { 
-
-    var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.clientHeight);
-
-    var drawLength = pathLength * scrollPercentage;
-    console.log(document.documentElement.scrollTop + document.body.scrollTop);
-    console.log(document.documentElement.clientHeight);
+    let path = document.querySelector('#svg1 path')
+    let pathLength = path.getTotalLength();
 
 
+    path.style.strokeDasharray = pathLength + ' ' + pathLength;
 
-    path.style.strokeDashoffset = pathLength - drawLength;
+    path.style.strokeDashoffset = pathLength;
 
-});
+    window.addEventListener('scroll', () => {
 
+        var scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document
+            .documentElement.clientHeight);
+
+        var drawLength = pathLength * scrollPercentage;
+        // console.log(document.documentElement.scrollTop + document.body.scrollTop);
+        // console.log(document.documentElement.clientHeight);
+
+
+
+        path.style.strokeDashoffset = pathLength - drawLength;
+
+    });
 </script>
+
 </html>
