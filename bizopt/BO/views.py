@@ -191,8 +191,6 @@ def resumes_page(request):
 
 def sertCardResume_page(request, shopnmae):
     context = gen_menu(request)
-    user = Account.objects.get(email=request.user.email)
-
     profile = Shop.objects.get(name=shopnmae)
     context['profile'] = profile
     products = Product_creator.objects.all()
@@ -206,8 +204,9 @@ def sertCardResume_page(request, shopnmae):
                             'id_creator': product.id_creator,
                             }
                            for product in products]
-
-    context['link'] = (user.id * profile.id) + user.id + profile.id
+    if request.user.is_authenticated:
+        user = Account.objects.get(email=request.user.email)
+        context['link'] = (user.id * profile.id) + user.id + profile.id
     return render(request, 'cardResume.html', context)
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
