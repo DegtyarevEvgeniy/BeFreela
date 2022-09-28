@@ -9,7 +9,7 @@
 </head>
 
 <body style="margin: 0 auto;">
-    <div class="uk-margin-medium-top uk-flex uk-width-1@m uk-width-4-5" uk-filter="target: .js-filter"
+    <div class="uk-margin-medium-top uk-margin-xlarg uk-flex uk-width-1@m uk-width-4-5" uk-filter="target: .js-filter"
         style="margin: 0 auto; ">
         <div class="uk-width-1-5" style="height: 100%; font-size: 1.2em;">
             <div class="uk-margin-small-left">
@@ -96,34 +96,35 @@
             </ul>
         </div>
 
-        <ul class="js-filter uk-grid uk-grid-medium uk-width-4-5" uk-grid style="height: 100%; margin: auto;" uk-grid>
+        <ul class="js-filter uk-grid uk-grid-medium uk-width-4-5" uk-grid style="height: 100%; margin: auto; border-left: 1px solid" uk-grid>
 
             {% include "baseProductCard.html" %}
 
         </ul>
     </div>
-
-    <script>
-        function pricevalidation() {
-            let p1 = parseInt(document.getElementById('from').value)
-            let p2 = parseInt(document.getElementById('to').value)
-            let top = Math.max(p1, p2)
-            let bottom = Math.min(p1, p2)
-            let goods_prices = document.getElementsByClassName('price')
-            for (let i = 0; i < goods_prices.length; ++i) {
-                let str = parseInt(goods_prices[i].innerHTML.split(/(\s+)/)[2])
-                if (top < str || str < bottom) {
-                    goods_prices[i].parentElement.parentElement.parentElement.parentElement.style.cssText =
-                        'display: none';
-                } else {
-                    goods_prices[i].parentElement.parentElement.parentElement.parentElement.style.cssText =
-                        'display: flex';
-                }
-            }
-        }
-    </script>
+    {% include "footer.html" %}
 
 </body>
+
+<script>
+    function pricevalidation() {
+        let p1 = parseInt(document.getElementById('from').value)
+        let p2 = parseInt(document.getElementById('to').value)
+        let top = Math.max(p1, p2)
+        let bottom = Math.min(p1, p2)
+        let goods_prices = document.getElementsByClassName('price')
+        for (let i = 0; i < goods_prices.length; ++i) {
+            let str = parseInt(goods_prices[i].innerHTML.split(/(\s+)/)[2])
+            if (top < str || str < bottom) {
+                goods_prices[i].parentElement.parentElement.parentElement.parentElement.style.cssText =
+                    'display: none';
+            } else {
+                goods_prices[i].parentElement.parentElement.parentElement.parentElement.style.cssText =
+                    'display: flex';
+            }
+        }
+    }
+</script>
 
 <style>
     .textStyleHeader p {

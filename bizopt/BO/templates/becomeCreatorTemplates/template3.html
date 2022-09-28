@@ -44,29 +44,36 @@
             <div class="uk-width-2-5 uk-flex uk-flex-row">
                 <div class="uk-width-4-5 uk-flex uk-flex-row">
                     <div class="uk-flex uk-flex-column uk-width-1" uk-width-auto">
-                        <div data-src="../../media/{{shop.logoImage}}"
+                        <div data-src="{{shop.logoImage}}"
                             class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover" uk-img>
 
                         </div>
                         <br>
-                        <div uk-form-custom class="uk-width-3-5">
-                            <input name="logoImage" type="file" id="logoImage">
-                            <button class="uk-button uk-width-1" type="button" tabindex="-1">Изменить
-                                фото</button>
+                        <div class="uk-flex uk-flex-middle uk-flex-left">
+                            <div uk-form-custom class="uk-width-3-5 uk-margin-medium-right">
+                                <input name="logoImage" type="file" accept="image/*" id="logoImage">
+                                <button class="uk-button uk-width-1" type="button" tabindex="-1">Изменить
+                                    фото</button>
+                            </div>
+                            <i uk-tooltip="Выберите логотип магазина" uk-icon="question"></i>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="uk-width-3-5 uk-flex uk-flex-row">
                 <div class="uk-flex uk-flex-column uk-width-1" uk-width-auto>
-                    <div data-src="../../media/{{shop.bgImage}}"
+                    <div data-src="{{shop.bgImage}}"
                         class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover" uk-img>
                     </div>
                     <br>
-                    <div uk-form-custom class="uk-width-2-5">
-                        <input name="bgImage" type="file" id="bgImage">
-                        <button class="uk-button uk-width-1" type="button" tabindex="-1">Изменить
-                            фото</button>
+                    <div class="uk-flex uk-flex-middle uk-flex-left">
+                        <div uk-form-custom class="uk-width-2-5 uk-margin-medium-right">
+                            <input name="bgImage" type="file" accept="image/*" id="bgImage">
+                            <button class="uk-button uk-width-1" type="button" tabindex="-1">Изменить
+                                фото</button>
+                        </div>
+                        <i uk-tooltip="Выберите фон для профиля магазина" uk-icon="question"></i>
+
                     </div>
                 </div>
 
@@ -98,31 +105,31 @@
                             <label> Статус магазина </label>
                             <br>
                             {% if shop.status == 'work' %}
-        
+
                             <select class="uk-select" name="status">
                                 <option value="work">Работает</option>
                                 <option value="freez">Заморожен</option>
                                 <option value="not-work">Не работает</option>
                             </select>
-        
+
                             {% elif shop.status == 'freez' %}
-        
+
                             <select class="uk-select" name="status">
                                 <option value="freez">Заморожен</option>
                                 <option value="work">Работает</option>
                                 <option value="not-work">Не работает</option>
                             </select>
-        
+
                             {% else %}
-        
+
                             <select class="uk-select" name="status">
                                 <option value="not-work">Не работает</option>
                                 <option value="work">Работает</option>
                                 <option value="freez">Заморожен</option>
                             </select>
-        
+
                             {% endif %}
-        
+
                         </div>
                     </div>
                     <div class="uk-width-2-5">
@@ -135,16 +142,15 @@
                             <a class="uk-button uk-text-bold uk-button-link category"
                                 onclick="selectCategory(this)">Обувь</a>
                             <a class="uk-button uk-text-bold uk-button-link category"
-                                onclick="selectCategory(this)">Косметика</a>
-                            <a class="uk-button uk-text-bold uk-button-link category"
-                                onclick="selectCategory(this)">Украшения</a>
+                                onclick="selectCategory(this)">сумки</a>
                             <a class="uk-button uk-text-bold uk-button-link category"
                                 onclick="selectCategory(this)">Интерьер</a>
                             <a class="uk-button uk-text-bold uk-button-link category"
                                 onclick="selectCategory(this)">Аксессуары</a>
                         </div>
                         <input type="text" name="chosenCategoties" id="chosenCategoties"
-                            placeholder="{{categorys_saver}}" value="{{categorys_saver}}" style="display: none;" readonly>
+                            placeholder="{{categorys_saver}}" value="{{categorys_saver}}" style="display: none;"
+                            readonly>
                         <br>
                         <br>
                         {% if categorys %}
@@ -155,14 +161,15 @@
 
                             {% for category in categorys %}
 
-                            <a class="uk-button uk-text-bold uk-button-link category chosen" onclick="removeNewElement(this)">{{category}}</a>
+                            <a class="uk-button uk-text-bold uk-button-link category chosen"
+                                onclick="removeNewElement(this)">{{category}}</a>
 
                             {% endfor %}
 
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="uk-width-1 uk-text-right uk-margin-medium-top">
                     <button class="uk-button uk-button-primary" type="submit" name="profile_saver2">Сохранить</button>
                 </div>
@@ -174,24 +181,24 @@
 <script>
     function selectCategory(el) {
         let classes = el.className.split(' ')
-        if (classes[classes.length - 1] == 'category' && !document.getElementById("chosenCategoties").value.includes(el.innerHTML)){
+        if (classes[classes.length - 1] == 'category' && !document.getElementById("chosenCategoties").value.includes(el
+                .innerHTML)) {
             addElement(el);
-        } else if ( classes[classes.length - 1] == 'chosen'){
+        } else if (classes[classes.length - 1] == 'chosen') {
             removeElement(el)
-        }
-        else {
+        } else {
             Swal.fire({
-                    icon: 'warning',
-                    title: 'Упс',
-                    text: `Похоже что вы уже выбрали эту категорию`,
-                })
+                icon: 'warning',
+                title: 'Упс',
+                text: `Похоже что вы уже выбрали эту категорию`,
+            })
         }
     }
 
     function addElement(el) {
         el.classList.add("chosen");
         document.getElementById("chosenCategoties").value
-        if (!document.getElementById("chosenCategoties").value.includes(el.innerHTML)){
+        if (!document.getElementById("chosenCategoties").value.includes(el.innerHTML)) {
             document.getElementById("chosenCategoties").value += `${el.innerHTML} `;
         }
 
@@ -202,7 +209,7 @@
         el.classList.remove("chosen");
         input.value = input.value.replace(`${el.innerHTML} `, '')
     }
-    
+
     function removeNewElement(el) {
         let input = document.getElementById("chosenCategoties")
         el.classList.remove("chosen");

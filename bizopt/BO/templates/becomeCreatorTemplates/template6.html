@@ -1,19 +1,33 @@
+<style>
+    #result {
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .thumbnail {
+        height: 192px;
+    }
+</style>
+
 <div class="uk-flex uk-flex-top uk-flex-center" style="margin: 0 auto;">
     <div class="uk-width-3-5" style="margin: 0 auto">
-        <form id="regForm" method="POST" action="">
+        <form id="regForm" method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
             <h1 class="mb-5">Создать товар</h1>
 
 
             <div class="tab" style="margin-bottom: 5% ">
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5">
-                        <label>Название товара <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
+                        <label>Название товара <i uk-tooltip="Введите название товара" uk-icon="question"></i></label>
                         <div>
                             {{ form8.product_name }}
                         </div>
                     </div>
                     <div class="uk-width-2-5">
-                        <label>Бренд <i uk-tooltip="ВВедите название товара" uk-icon="question"></i></label>
+                        <label>Бренд <i uk-tooltip="Введите название бренда" uk-icon="question"></i></label>
                         <div>
                             {{ form8.brand }}
                         </div>
@@ -21,41 +35,32 @@
                 </div>
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5 uk-flex-row">
-                        <label> Фотография товара <i
-                                uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
-                                uk-icon="question"></i></label>
-                        <div class="uk-width-1 uk-margin-small-bottom" uk-form-custom="target: true">
-                            <input type="file">
-                            <input class="uk-input" name="product_photos" type="text" placeholder="Выбрать файл"
-                                disabled>
-                        </div>
+
                         <div class="uk-width-1 uk-margin-small-bottom">
                             <label> Срок получения товара <i
-                                    uk-tooltip="Укажите, через сколько покупатель сможет получить свой товар после покупки"
+                                    uk-tooltip="Выберите, через сколько покупатель сможет получить свой товар после покупки"
                                     uk-icon="question"></i></label>
                             {{ form8.duration }}
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
-                            <label> Категория <i uk-tooltip="К какой категории вы относите свой товар?"
+                            <label> Категория <i uk-tooltip="Выберите категорию, к которой относится товар"
                                     uk-icon="question"></i></label>
                             {{ form8.category }}
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
-                            <label>Трана произваодетель <i
-                                    uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                            <label>Страна произваодетель <i uk-tooltip="Выберите страну, в которой товар был изготовлен"
                                     uk-icon="question"></i></label>
                             {{ form8.country }}
                         </div>
                         <div class="uk-width-1 uk-margin-small-bottom">
-                            <label> Пол <i
-                                    uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                            <label> Пол <i uk-tooltip="Выберите подходящий пол для товара"
                                     uk-icon="question"></i></label>
                             {{ form8.sex }}
                         </div>
                     </div>
                     <div class="uk-width-2-5 uk-margin-small-bottom">
                         <label>Описание <i
-                                uk-tooltip="Опишите свой товар. Так покупателям будет легче понять, что они точно хотят его купить"
+                                uk-tooltip="Введите описание своему товару. Так покупателям будет легче понять, что они покупают"
                                 uk-icon="question"></i></label>
                         {{ form8.description }}
                     </div>
@@ -64,8 +69,8 @@
 
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom">
                     <div class="uk-width-2-5">
-                        <label>Комлектация товара <i
-                                uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
+                        <label>Состав товара <i
+                                uk-tooltip="Введите из чего состоит товар и сколько это в процентах. Не забудьте нажать на плюс, чтобы добавить комплект к товару"
                                 uk-icon="question"></i></label>
                         <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
                             <input type="text" id="compNmae" maxlength="40" class="changeble uk-input uk-width-3-6">
@@ -78,14 +83,12 @@
                                 name="addComplect" onclick="addInput(this)" type="button"><i
                                     class="fa fa-plus"></i></button>
                         </div>
-                        <!-- template start -->
                         <div id="inputDiv" class="uk-width-1 uk-flex-row">
                         </div>
-                        <!-- template end -->
                     </div>
                     <div class="uk-width-2-5">
                         <label> Размерный ряд <i
-                                uk-tooltip="Введите все, что идет в комплекте с товаром. Не забудьте нажать на плючик, что бы добавить комплект к товару"
+                                uk-tooltip="Введите размеры Вашего товара. Не забудьте нажать на плюс, чтобы добавить размер товару"
                                 uk-icon="question"></i></label>
                         <div class="uk-flex uk-flex-left uk-flex-middle uk-width-1 uk-margin-medium-bottom">
                             <input type="text" id="size" maxlength="10" class="changeble uk-input uk-width-3-6">
@@ -93,10 +96,8 @@
                                 name="addComplect" onclick="addSize(this)" type="button"><i
                                     class="fa fa-plus"></i></button>
                         </div>
-                        <!-- template start -->
-                        <div id="sizeInput" class="uk-width-1">
+                        <div id="sizeInput" class="uk-width-1 uk-grid" uk-grid>
                         </div>
-                        <!-- template end -->
                     </div>
                 </div>
 
@@ -106,10 +107,13 @@
                 <table class="uk-table uk-table-justify uk-table-divider" id="pricing">
                     <thead>
                         <tr>
-                            <th class="uk-width-auto">название</th>
+                            <th class="uk-width-auto">Название</th>
                             <th class="uk-width-auto">Размер</th>
-                            <th class="uk-width-auto">Цена</th>
-                            <th class="uk-width-auto uk-text-center">Итоговая стоимость</th>
+                            <th class="uk-width-auto">Кол-во</th>
+                            <th class="uk-width-auto">Цена <i uk-tooltip="Эту цену будут видеть покупатели"
+                                    uk-icon="question"></i></th>
+                            <th class="uk-width-auto uk-text-center">Итоговая стоимость <i
+                                    uk-tooltip="Чистая прибль с учетом комиссии" uk-icon="question"></i></th>
                         </tr>
                     </thead>
                     <tbody id="table">
@@ -117,6 +121,100 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="tab" style="display: none;">
+
+                <article class="uk-article">
+
+                    <h1 class="uk-article-title"><a class="uk-link-reset" href="">Загрузите изображения товара</a></h1>
+
+                    <p class="uk-article-meta" style="width:80%">Загрузите товары в соответствии с описанием. В случае
+                        не соответсвия требованиям, картинка может быть удалена</p>
+
+                    <br>
+                    <br>
+
+                    <p class="uk-text-lead">Как выглядит товар спереди</p>
+
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+
+
+
+                </article>
+
+                <div class="uk-margin uk-card uk-card-default uk-card-body">
+
+                    <div class="js-upload1 uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Загрузи изображение</span>
+                        <div uk-form-custom>
+                            <input type="file" accept="image/*" id="files1" accept="image/jpeg, image/png, image/jpg"
+                                name="product_photo1">
+                            <span class="uk-link">Выбери одно</span>
+                        </div>
+                    </div>
+
+                    <progress id="js-progressbar1" class="uk-progress" value="1" max="100" hidden></progress>
+
+
+                    <div id="result1"></div>
+
+                </div>
+
+                <br>
+                <br>
+
+                <p class="uk-text-lead">Как выглядит товар сзади</p>
+
+                <div class="uk-margin uk-card uk-card-default uk-card-body">
+
+                    <div class="js-upload2 uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Загрузи изображение</span>
+                        <div uk-form-custom>
+                            <input type="file" accept="image/*" id="files2" accept="image/jpeg, image/png, image/jpg"
+                                name="product_photo2">
+                            <span class="uk-link">Выбери одно</span>
+                        </div>
+                    </div>
+
+                    <progress id="js-progressbar2" class="uk-progress" value="2" max="100" hidden></progress>
+
+
+                    <div id="result2"></div>
+
+                </div>
+
+                <br>
+                <br>
+
+                <p class="uk-text-lead">Как выглядит шов товара</p>
+
+                <div class="uk-margin uk-card uk-card-default uk-card-body">
+
+                    <div class="js-upload3 uk-placeholder uk-text-center">
+                        <span uk-icon="icon: cloud-upload"></span>
+                        <span class="uk-text-middle">Загрузи изображение</span>
+                        <div uk-form-custom>
+                            <input type="file" accept="image/*" id="files3" accept="image/jpeg, image/png, image/jpg"
+                                name="product_photo3">
+                            <span class="uk-link">Выбери одно</span>
+                        </div>
+                    </div>
+
+                    <progress id="js-progressbar3" class="uk-progress" value="3" max="100" hidden></progress>
+
+
+                    <div id="result3"></div>
+
+                </div>
+
+            </div>
+
+            <div class="tab" style="display: none;">
+                <h1>please wait</h1>
+            </div>
+
 
             {% csrf_token %}
 
@@ -142,11 +240,142 @@
 </div>
 
 <script>
+    document.querySelector("#files1").addEventListener("change", (e) => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            const files = e.target.files;
+            const output = document.querySelector("#result1");
+            output.innerHTML = "";
+            for (let i = 0; i < files.length; i++) {
+                if (!files[i].type.match("image")) continue;
+                const picReader = new FileReader();
+                picReader.addEventListener("load", function (event) {
+                    const picFile = event.target;
+                    const div = document.createElement("div");
+                    div.innerHTML =
+                        `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                    output.appendChild(div);
+                });
+                picReader.readAsDataURL(files[i]);
+            }
+        } else {
+            alert("Your browser does not support File API");
+        }
+    });
+
+    document.querySelector("#files2").addEventListener("change", (e) => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            const files = e.target.files;
+            const output = document.querySelector("#result2");
+            output.innerHTML = "";
+            for (let i = 0; i < files.length; i++) {
+                if (!files[i].type.match("image")) continue;
+                const picReader = new FileReader();
+                picReader.addEventListener("load", function (event) {
+                    const picFile = event.target;
+                    const div = document.createElement("div");
+                    div.innerHTML =
+                        `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                    output.appendChild(div);
+                });
+                picReader.readAsDataURL(files[i]);
+            }
+        } else {
+            alert("Your browser does not support File API");
+        }
+    });
+
+    document.querySelector("#files3").addEventListener("change", (e) => {
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            const files = e.target.files;
+            const output = document.querySelector("#result3");
+            output.innerHTML = "";
+            for (let i = 0; i < files.length; i++) {
+                if (!files[i].type.match("image")) continue;
+                const picReader = new FileReader();
+                picReader.addEventListener("load", function (event) {
+                    const picFile = event.target;
+                    const div = document.createElement("div");
+                    div.innerHTML =
+                        `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                    output.appendChild(div);
+                });
+                picReader.readAsDataURL(files[i]);
+            }
+        } else {
+            alert("Your browser does not support File API");
+        }
+    });
+
+
+
+    // var getEl = 'js-progressbar1';
+    // var inEl = '.js-upload1';
+
+    // var bar = document.getElementById(getEl);
+
+    // UIkit.upload(inEl, {
+
+    //     url: '',
+    //     multiple: true,
+
+    //     beforeSend: function () {
+    //         console.log('beforeSend', arguments);
+    //     },
+    //     beforeAll: function () {
+    //         console.log('beforeAll', arguments);
+    //     },
+    //     load: function () {
+    //         console.log('load', arguments);
+    //     },
+    //     error: function () {
+    //         console.log('error', arguments);
+    //     },
+    //     complete: function () {
+    //         console.log('complete', arguments);
+    //     },
+
+    //     loadStart: function (e) {
+    //         console.log('loadStart', arguments);
+
+    //         bar.removeAttribute('hidden');
+    //         bar.max = e.total;
+    //         bar.value = e.loaded;
+    //     },
+
+    //     progress: function (e) {
+    //         console.log('progress', arguments);
+
+    //         bar.max = e.total;
+    //         bar.value = e.loaded;
+    //     },
+
+    //     loadEnd: function (e) {
+    //         console.log('loadEnd', arguments);
+
+    //         bar.max = e.total;
+    //         bar.value = e.loaded;
+    //     },
+
+    //     completeAll: function () {
+    //         console.log('completeAll', arguments);
+
+    //         setTimeout(function () {
+    //             bar.setAttribute('hidden', 'hidden');
+    //         }, 1000);
+
+    //         alert('Upload Completed');
+    //     }
+
+    // });
+</script>
+
+<script>
     var inputnum = 0,
         sizeInput = 0,
         currentTab = 0;
 
     function PassChecker(n) {
+        console.log("PassChecker = " + n)
         let product_name = document.getElementById("product_name").value.length;
         let brand = document.getElementById("brand").value.length;
         let description = document.getElementById("description").value.length;
@@ -158,24 +387,41 @@
             btn.disabled = false;
             return 1
         } else if (n == 2) {
-            let poles = document.getElementsByClassName("price")
-            let checker = false
-            for (let i = 0; i < poles.length; i++) {
-                if (poles[i].value.length > 0) {
-                    checker = true
+            let prices = document.getElementsByClassName("price")
+            let amount = document.getElementsByClassName("price")
+            let checker1 = false
+            let checker2 = false
+            for (let i = 0; i < prices.length; i++) {
+                if (prices[i].value.length > 0) {
+                    checker1 = true
                 }
             }
-            if (checker) {
+            for (let i = 0; i < amount.length; i++) {
+                if (amount[i].value.length > 0) {
+                    checker2 = true
+                }
+            }
+            if (checker1 && checker2) {
                 btn.style["background-color"] = 'blue'
                 btn.disabled = false;
                 localStorage.page = 5;
-                btn.type = "submit"
+
                 return 1
             } else {
                 btn.style["background-color"] = 'gray'
                 btn.disabled = true;
                 return 0
             }
+        } else if (n == 3) {
+            btn.style["background-color"] = 'blue'
+            localStorage.page = 5;
+            btn.disabled = false;
+            return 1
+
+        } else if (n == 4){
+            localStorage.page = 5;
+            btn.type = "submit"
+            return 1
         }
 
     }
@@ -183,7 +429,7 @@
     function recalc(el) {
         let price = parseInt(el.value)
         let form = el.parentElement.parentElement.getElementsByClassName('final_price')[0];
-        let sum = price + price * 0.1
+        let sum = price - price * 0.1
         if (price >= 10000000) {
             el.value = 10000000
             sum = 10000000
@@ -199,7 +445,7 @@
         for (let i = 0; i < sizes.length; i++) {
             let size = sizes[i].getElementsByClassName('complectations_size')[0].value
             table.innerHTML +=
-                `<tr> <td class="uk-text-truncate">${name}</td> <td class="uk-width-1-4">${size}</td> <td class="uk-width-1-4"><input class="uk-input price" type="number" name="price_${i}" oninput="recalc(this)" required></td> <td class="uk-width-1-4 uk-text-center"><p class="final_price"></p></td> </tr>`;
+                `<tr> <td class="uk-text-truncate">${name}</td> <td class="uk-width-1-5">${size}</td> <td class="uk-width-1-5"><input class="uk-input amount" type="number" max="1000000" name="amount_${i}" oninput="PassChecker(2)" required></td> <td class="uk-width-1-5"><input class="uk-input price" type="number" name="price_${i}" oninput="recalc(this)" required></td> <td class="uk-width-1-5 uk-text-center"><p class="final_price"></p></td> </tr>`;
         }
     }
 
@@ -313,9 +559,14 @@
                 addComplectation()
                 document.getElementById("prevBtn").style.display = "inline";
                 PassChecker(2)
+            } else if (n === 2) {
+                document.getElementById("nextBtn").style["background-color"] = 'gray'
+                document.getElementById("prevBtn").style.display = "inline";
+                PassChecker(3)
             } else if (n == x.length - 1) {
+                PassChecker(4)
                 document.getElementById("prevBtn").style.display = "none";
-                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("nextBtn").style.display = "inline";
 
             } else {
                 for (let i = 0; i < len; i++) {
@@ -330,7 +581,7 @@
     function nextPrev(n) {
         let x = document.getElementsByClassName("tab");
         let btn = document.getElementById("nextBtn");
-        if (n > 0 && currentTab < 2) {
+        if (n > 0 && currentTab < 3) {
             if (PassChecker(currentTab + 1)) {
                 x[currentTab].style.display = "none";
                 currentTab = currentTab + n;
@@ -347,8 +598,8 @@
         } else {
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-            if (currentTab === x.length - 1) {
-                document.getElementById('nextBtn').type = "submit"
+            if (currentTab === 4) {
+                PassChecker(4)
                 document.getElementById('next-previous').classList.add("redirect");
             }
             showTab(currentTab);

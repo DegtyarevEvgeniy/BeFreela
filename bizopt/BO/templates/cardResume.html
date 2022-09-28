@@ -11,7 +11,7 @@
     #main-img {
         height: 30em;
         background-color: #cccccc;
-        background-image: url({{profile.bgImage.url}});
+        background-image: url({{profile.bgImage}});
         background-repeat: none;
         background-position: center;
         background-size: cover;
@@ -29,9 +29,9 @@
         <div class="uk-width-4-5" style="margin: 0 auto; padding: 2% 0px">
             <div class="uk-card-header" style="padding: 0px;">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
-                    <div class="uk-width-auto">
+                    <div class="uk-flex uk-flex-center uk-flex-middle" style="padding: 1%;background-color: rgba(125, 125, 125, 0.5);">
                         <img class="" width="200" height="40"
-                            src="{{profile.logoImage.url}}">
+                            src="{{profile.logoImage}}">
                     </div>
                     <div class="uk-width-expand uk-flex uk-flex-left uk-flex-middle">
                         <h1 class="uk-card-title uk-margin-remove-bottom"
@@ -53,11 +53,11 @@
         style="margin: 0 auto;">
         <!-- start of card -->
         {% for item in products %}
-        <div class="uk-card uk-card-default uk-width-1-4" style="box-shadow: none; padding: 3px; margin: 40px;">
+        <div class="uk-card uk-card-default uk-width-1-4@l uk-width-1-3" style="box-shadow: none; padding: 3px; margin: 40px;">
             <div>
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top uk-text-center" style="margin-top: 5%">
-                        <img src="{{item.picture.url}}" width="300" alt="">
+                        <img src="{{item.picture}}" width="200" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title uk-text-truncate">{{ item.item_name }}</h3>

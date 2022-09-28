@@ -38,7 +38,7 @@ class SignUpView(CreateView):
             user = form.save(commit=True)
             user.save()
             print('kerr')
-            return HttpResponseRedirect("/accounts/login/")
+            return HttpResponseRedirect("/login")
         else:
             print(form.errors)
             return render(request, self.template_name, {'form':form})

@@ -11,68 +11,72 @@
 	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
 <style>
-	*{
-		trasform: 0.5s;	
+	* {
+		trasform: 0.5s;
 	}
 </style>
-<body style="width: 80%; margin: 0 auto;">
+
+<body style="margin: 0 auto;">
 	<div class="container" style="margin-top: 5%">
 		<h1 style="font-size:30px; text-align: center; ">Добро пожаловать в</h1>
 		<h1 style="text-align: center; margin-top: 2%">BeFreela</h1>
-		<div style="width: 50%; margin:auto; border: solid black 2px; border-radius: 10px">
-			<div class="uk-flex" style="width: 100%">
+		<div style="margin:auto; border: solid black 2px; border-radius: 10px" class="uk-width-3-5@m">
+			<div class="uk-flex">
 				<button id="signin"
-					style="width: 50%; border-top: 0; border-left: 0; border-bottom: solid black 2px; border-right: solid black 1px; outline: none;"
-					class="uk-button uk-button-default" type="button">Вход</button>
-				<button id="signup"
-					style="width: 50%; border-top: 0; border-right: 0; border-bottom: solid black 2px; border-left: solid black 1px; outline: none;"
-					class="uk-button uk-button-default" type="button">Регистрация</button>
+					style="border-bottom: solid black 2px; border-right: solid black 1px; border-top-left-radius: 10px; outline: none;"
+					class="uk-button uk-button-default uk-width-1-2 uk-margin-remove" type="button">Вход</button>
+				<button id="signup" style="border-bottom: solid black 2px; border-left: solid black 1px; border-top-right-radius: 10px;outline: none;"
+					class="uk-button uk-button-default uk-width-1-2 uk-margin-remove" type="button">Регистрация</button>
 			</div>
-				<form method="POST" action="." id="signup-form" style="display: none; text-align: center;">
-					{% csrf_token %}
-					<h3 style="text-align: center; margin-top: 5%">Регистрация</h3>
-					<div class="inputs" style="width: 80%; margin: 0 auto">
-						<div class="uk-flex uk-flex-center uk-text-center">
-							<div class="uk-width-1-2" style="margin: 0 1%">
-								<label>Почта</label>
-								{{form.email}}
-							</div>
-
-							<div class="uk-width-1-2" style="margin: 0 1%">
-								<label>Имя</label>
-								{{form.first_name}}
-							</div>
-						</div>
-						<br>
-						<div class="uk-flex uk-flex-center uk-text-center">
-							<div class="uk-width-1-2" style="margin: 0 1%">
-								<label>Пароль</label>
-							{{form.password1}}
-							</div>
-							<div class="uk-width-1-2" style="margin: 0 1%">
-								<label>Повторите пароль</label>
-								{{form.password2}}
-							</div>
-						</div>
-					</div>
-					
-					<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" id="signinbtn" type="submit" name="btnform1">Зарегестрироваться</button>
-				</form>
-			<form method="POST" action="." id="signin-form" class="uk-text-center">
+			<form method="POST" id="signup-form" style="display: none; text-align: center; margin: 0 auto" class="uk-widht-4-5@m">
 				{% csrf_token %}
-					<h3 style="text-align: center; margin-top: 5%">Войти</h3>
-					<div style="width: 80%; margin:auto">
-						<div class="uk-flex-column inputs uk-margin-medium-bottom">
+				<h3 style="text-align: center; margin-top: 5%">Регистрация</h3>
+				<div class="inputs" style="margin: 0 auto">
+					<div class="uk-flex uk-flex-center uk-text-center">
+						<div class="uk-width-1-2" style="margin: 0 1%">
 							<label>Почта</label>
-							<input type="text" name="email" class="uk-input uk-border uk-border-rounded" placeholder="email@mail.com">
+							{{form.email}}
 						</div>
-						<div class="uk-flex-column inputs">
-							<label>Пароль</label>
-							<input type="password" name="password" placeholder="Password..." class="uk-input uk-border uk-border-rounded">
+
+						<div class="uk-width-1-2" style="margin: 0 1%">
+							<label>Имя</label>
+							{{form.first_name}}
 						</div>
 					</div>
 					<br>
-					<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit" name="btnform2">Войти</button>
+					<div class="uk-flex uk-flex-center uk-text-center">
+						<div class="uk-width-1-2" style="margin: 0 1%">
+							<label>Пароль</label>
+							{{form.password1}}
+						</div>
+						<div class="uk-width-1-2" style="margin: 0 1%">
+							<label>Повторите пароль</label>
+							{{form.password2}}
+						</div>
+					</div>
+				</div>
+
+				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" id="signinbtn" type="submit"
+					name="btnform1">Зарегестрироваться</button>
+			</form>
+			<form method="POST" id="signin-form" class="uk-text-center uk-width-4-5" style="margin: 0 auto">
+				{% csrf_token %}
+				<h3 style="text-align: center; margin-top: 5%">Войти</h3>
+				<div style="margin:auto">
+					<div class="uk-flex-column inputs uk-margin-medium-bottom">
+						<label>Почта</label>
+						<input type="text" name="email" class="uk-input uk-border uk-border-rounded"
+							placeholder="email@mail.com">
+					</div>
+					<div class="uk-flex-column inputs">
+						<label>Пароль</label>
+						<input type="password" name="password" placeholder="Password..."
+							class="uk-input uk-border uk-border-rounded">
+					</div>
+				</div>
+				<br>
+				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit"
+					name="btnform2">Войти</button>
 
 			</form>
 
@@ -86,8 +90,7 @@
 <script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
 </script>
 <script>
-	
-	$('.pswdChecker').on('input', function(event) {
+	$('.pswdChecker').on('input', function (event) {
 		pswd1 = $('#password1');
 		pswd2 = $('#password2');
 		if ((pswd1.val() != pswd2.val()) && (pswd1.length < 8 || pswd2.length < 8)) {

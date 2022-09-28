@@ -26,19 +26,48 @@
         -moz-appearance: textfield;
     }
 </style>
+
 <body>
-    <div
-        style="position: fixed; top: 3%; left: 3%; z-index: 1000; background-color: rgba(255, 255, 255, 0.5); border: none">
-        <a class="uk-button uk-button-default" type="button" uk-toggle="target: #offcanvas-overlay" uk-icon="menu"
-            style="border: none"></a>
+    <div class="uk-flex uk-flex-middle uk-flex-center"
+        style="width: 100px; position: fixed; top: 3%; left: 0; z-index: 1000; border: none">
+        <a class="uk-button uk-button-secondary uk-width-1" type="button" uk-toggle="target: #offcanvas-overlay"
+            uk-icon="menu" style="border: none"></a>
     </div>
 
+    <div class="uk-flex uk-flex-wrap"
+        style="z-index: 1; position: fixed; top: 0; height: 100%; background-color: #252525; width: 100px; padding-bottom: 5%;">
+        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical uk-width-1">
 
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+            <li class="uk-active Btn uk-margin-large-bottom">
+                <button class="uk-button uk-button-default uk-border-circle uk-margin-bottom"
+                    style="background:  #0A3644; border: solid #0A3644 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: user" inclick="infoStart()"></button>
+            </li>
+            <li class="uk-active Btn">
+                <button class="uk-button uk-button-default uk-border-circle uk-margin-bottom uk-width-auto"
+                    style="background:  #B54F00; border: solid #B54F00 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: cog"></button>
+            </li>
+            <li class="uk-active Btn">
+                <button class="uk-button uk-button-default uk-border-circle uk-margin-bottom uk-width-auto"
+                    style="background:  #B54F00; border: solid #B54F00 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: bag"></button>
+            </li>
+            <li class="uk-active Btn">
+                <button class="uk-button uk-button-default uk-border-circle uk-margin-bottom uk-width-auto"
+                    style="background:  #B54F00; border: solid #B54F00 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: plus"></button>
+            </li>
+
+            <li class="uk-active uk-flex uk-flex-middle uk-flex-center" style="position: fixed; top: 80%; width: 100px">
+                <a href="/" class="uk-button uk-button-default uk-border-circle uk-margin-bottom uk-width-auto"
+                    style="background:  #B54F00; border: solid #B54F00 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: home"></a>
+            </li>
+
+        </ul>
+    </div>
+
+    <div id="offcanvas-overlay" style="z-index: 1000;" uk-offcanvas="overlay: true">
         <div class="uk-offcanvas-bar">
             <div class="uk-flex-column ">
                 <div style="margin: auto; width: 50%" class="uk-margin-medium-bottom">
-                    <img src="../../media/{{user.userImage}}" style="border-radius: 5 em;">
+                    <img src="{{user.userImage}}" style="border-radius: 5 em;">
                 </div>
                 <div style="text-align: center">
                     <p>{{user.first_name}} {{user.last_name}}</p>
@@ -49,13 +78,14 @@
             <br>
             <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical">
 
-                <li class="uk-active Btn">
+                <!-- <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
                         style="background:  #0A3644; width:70%; border: solid #0A3644 2px ">Профиль</button>
-                </li>
+                </li> -->
                 <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
-                        style="background:  #0A3644; width:70%; border: solid #0A3644 2px" inclick="infoStart()">Информация</button>
+                        style="background:  #0A3644; width:70%; border: solid #0A3644 2px"
+                        inclick="infoStart()">Аккаунт</button>
                 </li>
                 <li class="uk-active Btn">
                     <button class="uk-button uk-button-default uk-margin-bottom"
@@ -80,7 +110,7 @@
     </div>
 
 
-    <div id="MainWindowContainer">
+    <div id="MainWindowContainer" style="width: 95%; margin-left: 5%">
     </div>
 
 
@@ -93,8 +123,6 @@
 
 
 <script>
-
-
     $(function () {
         var num = window.location.search[1];
         if (localStorage.page != null) {
@@ -113,7 +141,7 @@
 
     $('.Btn').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
-        var index = $(this).index() + 1
+        var index = $(this).index() + 2
         localStorage.page = index
         xhr.open('GET', `becomeCreatorTemplates/${index}/`)
         xhr.onload = function () {
@@ -121,7 +149,6 @@
         }
         xhr.send()
     });
-
 </script>
 
 
@@ -130,7 +157,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
     integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
 </script>
-
-
-
-
