@@ -11,7 +11,7 @@ def gen_menu():
     context = {
         'menu': [
             {'position': 'out', 'link': '/', 'text': 'Главная'},
-            {'position': 'out', 'link': '/creators/', 'text': 'Создатели'},
+            {'position': 'out', 'link': '/', 'text': 'Создатели'},
             # {'position': 'out', 'link': '/employers/', 'text': 'Предприниматели'},
             # {'position': 'mid', 'link': 'accounts/login/', 'text': 'Войти'},
             {'position': 'out', 'link': '/tasks/', 'text': 'Задачи'},
