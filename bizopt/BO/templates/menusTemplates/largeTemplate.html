@@ -26,8 +26,22 @@
         </div>
         <div class="uk-navbar-right uk-flex uk-flex-middle uk-flex-right uk-width-2-5">
             <div class="uk-search uk-search-default uk-width-expand">
-                <p>{{user.email}}</p>
+
+            {% if user.is_partner %}
+                           
+                <a href="/partners/" class="uk-button uk-button-link" style="text-transform: none;">Вы
+                уже
+                партнер</a>
+
+                {% else %}
+
+            <a href="/partners/" class="uk-button uk-button-link uk-text-normal"
+                style="text-transform: none;">Стать партнером</a>
+
+                {% endif %}
+
             </div>
+
 
             <ul class="uk-navbar-nav uk-width-auto">
                 {% if user.is_partner %}

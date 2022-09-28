@@ -864,10 +864,15 @@
                         </div>
                         <br>
                         <div class="uk-width-1 uk-flex uk-flex-center uk-flex-middle">
+                            {% if user.is_authenticated %}
                             <button class="uk-button uk-button-secondary uk-width-3-5" name="partRegBtn"
                                 style="margin: 0 auto" type="submit" onclick="UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Message with an icon'})">Отправить</button>
                                 <!-- <button class="uk-button uk-button-default demo" type="button" onclick="UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Message with an icon'})">With icon</button> -->
-
+                                {% else %}
+                                <button class="uk-button uk-button-secondary uk-width-3-5" name="partRegBtn"
+                                style="margin: 0 auto" type="button">Отправить</button>
+                                
+                                {% endif %}
                         </div>
                         {% csrf_token %}
 
