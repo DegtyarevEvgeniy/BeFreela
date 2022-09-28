@@ -86,15 +86,14 @@ DATABASES = {
         'NAME': 'u1788843_befreela',
         'USER': 'u1788843_deg',
         'PASSWORD': 'DEa.63636363',
-        'HOST': 'localhost',
-#        'PORT': '3306',
-#        'OPTIONS': {
-#            'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
-#            'charset': 'utf8mb4',
-#            "autocommit": True,
-#            "init_command": "SET foreign_key_checks = 0;",
-#
-#        }
+        'HOST': '31.31.196.26',
+        'PORT': '3306',
+    #    'OPTIONS': {
+    #        'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
+    #        'charset': 'utf8mb4',
+    #        "autocommit": True,
+    #        "init_command": "SET foreign_key_checks = 0;",
+    #    }
     }
 }
 
