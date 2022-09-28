@@ -137,4 +137,4 @@ class BePartner(models.Model):
     phone = models.CharField(max_length=1000000)
     city = models.CharField(max_length=1000000)
     link = models.CharField(max_length=1000000)
-    info = models.CharField(max_length=1000000)
+    email = models.CharField(max_length=1000000)

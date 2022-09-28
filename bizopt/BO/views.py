@@ -127,11 +127,17 @@ def goods_page(request):
 
 def goodsSearch_page_category(request, category):
     context = gen_menu(request)
-    products = Product_creator.objects.filter(
-        Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category) | Q(category__icontains=category)
-    )
+    cat = {
+        'Clothing':'Одежда',
+        'Shoes':'Обувь',
+        'Bags':'Сумки',
+        'Interior':'Интерьер',
+        'Accessories':'Аксессуары',
+    }
+    print(category)
+    products = Product_creator.objects.filter( Q(category__icontains=cat[category]) )
 
-    context['category'] = category
+    context['category'] = cat[category]
     context['products'] = products
     return render(request, 'goods.html', context)
 
@@ -936,19 +942,53 @@ def orders_page(request):
 
 def partners_page(request):
 
+    if request.user.is_authenticated:
+
+        if request.method == "POST":
+            
+            mail = BePartner.objects.create()
+            mail.brand_name = request.POST['brand_name']
+            mail.name = request.POST['name']
+            mail.phone = request.POST['phone']
+            mail.city = request.POST['city']
+            mail.link = request.POST['link']
+            mail.email = request.user.email
+            mail.save()
+            return HttpResponseRedirect('/')
+
+            
+    
+        return render(request, 'showPartner.html')
+    else:
+        return HttpResponseRedirect('/')
+
+def admin_page(request):
+    content = gen_menu(request)
+    if request.user.is_authenticated and request.user.is_admin and request.user.is_staff and request.user.is_superuser :
+
+        content['partners'] = BePartner.objects.all()
+        if request.method == 'POST' and "deletePaartner" in request.POST:
+            BePartner.objects.get(id=request.POST['deletePaartner']).delete()
+            return HttpResponseRedirect('/admin')
+        if request.method == 'POST' and "submitPaartner" in request.POST:
+            part = BePartner.objects.get(id=request.POST['submitPaartner'])
+            shop = Shop.objects.create()
+            user = User.objects.get(email=part.email)
+            shop.email = part.email
+            shop.phone = part.phone
+            shop.name = part.brand_name
+            shop.save()
+
+            user.is_partner = 1
+            user.save()
+            part.delete()
+            return HttpResponseRedirect('/admin')
 
 
-    if request.method == "POST":
         
-        mail = BePartner.objects.create()
-
-        mail.brand_name = request.POST['brand_name']
-        mail.name = request.POST['name']
-        mail.phone = request.POST['phone']
-        mail.city = request.POST['city']
-        mail.link = request.POST['link']
-        mail.info = request.POST['info']
-        mail.save()
         
+    
+        return render(request, 'admin.html', content)
+    else:
+        return HttpResponseRedirect('/')
 
-    return render(request, 'showPartner.html')
