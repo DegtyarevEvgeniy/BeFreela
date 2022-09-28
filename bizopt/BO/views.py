@@ -937,7 +937,6 @@ def orders_page(request):
 def partners_page(request):
 
 
-
     if request.method == "POST":
         
         mail = BePartner.objects.create()
