@@ -57,7 +57,10 @@
 						</div>
 					</div>
 				</div>
-
+				<br>
+				<label><input onclick="check(this)" class="uk-checkbox" type="checkbox"> При регистрации вы соглашаетесь
+					со всеми пунктами <a href="/documents">документов</a> «Оферта» и «Политика конфиденциальности».
+				</label>
 				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" id="signinbtn" type="submit"
 					name="btnform1">Зарегестрироваться</button>
 			</form>
@@ -77,9 +80,6 @@
 					</div>
 				</div>
 				<br>
-				<label><input onclick="check(this)" class="uk-checkbox" type="checkbox"> При регистрации вы соглашаетесь
-					со всеми пунктами <a href="/documents">документов</a> «Оферта» и «Политика конфиденциальности».
-				</label>
 
 				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit" name="btnform2" id="btnform2"
 					disabled>Войти</button>
@@ -98,9 +98,9 @@
 <script>
 	function check(el) {
 		if (el.checked) {
-			document.getElementById('btnform2').removeAttribute("disabled");
+			document.getElementById('btnform1').removeAttribute("disabled");
 		} else {
-			document.getElementById('btnform2').setAttribute("disabled", "disabled");
+			document.getElementById('btnform1').setAttribute("disabled", "disabled");
 		}
 	}
 
