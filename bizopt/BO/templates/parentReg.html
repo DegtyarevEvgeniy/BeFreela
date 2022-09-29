@@ -7,7 +7,7 @@
     <title>BeFreela</title>
     <link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script  src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <style>
         body {
             background: #eee
@@ -165,8 +165,8 @@
         </div>
     </div>
 </body>
-<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
-<script type='text/Javascript'>
+<script  src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'></script>
+<script >
     let currentTab = 0; document.addEventListener("DOMContentLoaded", function(event) { showTab(currentTab); }); function showTab(n) { let x = document.getElementsByClassName("tab"); x[n].style.display = "block"; if (n === 0) { document.getElementById("prevBtn").style.display
     = "none"; } else { document.getElementById("prevBtn").style.display = "inline"; } if (n === (x.length - 1)) { document.getElementById("nextBtn").innerHTML = '<i class="fa fa-angle-double-right"></i>'; } else { document.getElementById("nextBtn").innerHTML
     = '<i class="fa fa-angle-double-right"></i>'; } fixStepIndicator(n) } function nextPrev(n) { let x = document.getElementsByClassName("tab"); x[currentTab].style.display = "none"; currentTab = currentTab + n; if (currentTab === x.length) { document.getElementById('nextBtn').type
