@@ -8,7 +8,7 @@
 	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css' rel='stylesheet'>
 	<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/css/uikit.min.css" />
-	<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
 </head>
 <style>
 	* {
@@ -25,10 +25,12 @@
 				<button id="signin"
 					style="border-bottom: solid black 2px; border-right: solid black 1px; border-top-left-radius: 10px; outline: none;"
 					class="uk-button uk-button-default uk-width-1-2 uk-margin-remove" type="button">Вход</button>
-				<button id="signup" style="border-bottom: solid black 2px; border-left: solid black 1px; border-top-right-radius: 10px;outline: none;"
+				<button id="signup"
+					style="border-bottom: solid black 2px; border-left: solid black 1px; border-top-right-radius: 10px;outline: none;"
 					class="uk-button uk-button-default uk-width-1-2 uk-margin-remove" type="button">Регистрация</button>
 			</div>
-			<form method="POST" id="signup-form" style="display: none; text-align: center; margin: 0 auto" class="uk-widht-4-5@m">
+			<form method="POST" id="signup-form" style="display: none; text-align: center; margin: 0 auto"
+				class="uk-widht-4-5@m">
 				{% csrf_token %}
 				<h3 style="text-align: center; margin-top: 5%">Регистрация</h3>
 				<div class="inputs" style="margin: 0 auto">
@@ -75,8 +77,12 @@
 					</div>
 				</div>
 				<br>
-				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit"
-					name="btnform2">Войти</button>
+				<label><input onclick="check(this)" class="uk-checkbox" type="checkbox"> При регистрации вы соглашаетесь
+					со всеми пунктами <a href="/documents">документов</a> «Оферта» и «Политика конфиденциальности».
+				</label>
+
+				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit" name="btnform2" id="btnform2"
+					disabled>Войти</button>
 
 			</form>
 
@@ -87,9 +93,17 @@
 
 </body>
 
-<script type='text/javascript' src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
+<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
 </script>
 <script>
+	function check(el) {
+		if (el.checked) {
+			document.getElementById('btnform2').removeAttribute("disabled");
+		} else {
+			document.getElementById('btnform2').setAttribute("disabled", "disabled");
+		}
+	}
+
 	$('.pswdChecker').on('input', function (event) {
 		pswd1 = $('#password1');
 		pswd2 = $('#password2');
