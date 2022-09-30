@@ -98,13 +98,18 @@
 
 	function passchecker(pswd1, pswd2, chbox){
 		console.log(pswd1.val(), pswd2.val(), chbox)
-		if (pswd1.val() == pswd2.val() && chbox){
+		if (pswd1.val() == pswd2.val() && pswd2.val().length > 0){
+			pswd1.css('border-color', 'green')
+			pswd2.css('border-color', 'green')
+		} 
+		if(chbox == false && pswd1.val() == pswd2.val() && pswd2.val().length > 0){
+			$('#signinbtn').attr('disabled', 'disabled')
+		} 
+		if (chbox && pswd1.val() == pswd2.val() && pswd2.val().length > 0){
 			pswd1.css('border-color', 'green')
 			pswd2.css('border-color', 'green')
 			$('#signinbtn').attr('disabled', false)
-		} else if(chbox == false && pswd1.val() == pswd2.val()){
-			$('#signinbtn').attr('disabled', 'disabled')
-		} else{
+		}else{
 			pswd1.css('border-color', 'red')
 			pswd2.css('border-color', 'red')
 			$('#signinbtn').attr('disabled', 'disabled')
