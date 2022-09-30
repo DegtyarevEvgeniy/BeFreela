@@ -58,11 +58,11 @@
 					</div>
 				</div>
 				<br>
-				<label><input onclick="check(this)" class="uk-checkbox" type="checkbox"> При регистрации вы соглашаетесь
+				<label><input id="dock-read-check" class="uk-checkbox" type="checkbox"> При регистрации вы соглашаетесь
 					со всеми пунктами <a href="/documents">документов</a> «Оферта» и «Политика конфиденциальности».
 				</label>
 				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" id="signinbtn" type="submit"
-					name="btnform1">Зарегестрироваться</button>
+					name="btnform1" disabled>Зарегестрироваться</button>
 			</form>
 			<form method="POST" id="signin-form" class="uk-text-center uk-width-4-5" style="margin: 0 auto">
 				{% csrf_token %}
@@ -81,8 +81,7 @@
 				</div>
 				<br>
 
-				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit" name="btnform2" id="btnform2"
-					disabled>Войти</button>
+				<button class="uk-button uk-button-secondary uk-width-1-2 uk-margin" type="submit" name="btnform2" id="btnform2">Войти</button>
 
 			</form>
 
@@ -96,26 +95,28 @@
 <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js'>
 </script>
 <script>
-	function check(el) {
-		if (el.checked) {
-			document.getElementById('btnform1').removeAttribute("disabled");
-		} else {
-			document.getElementById('btnform1').setAttribute("disabled", "disabled");
-		}
-	}
 
-	$('.pswdChecker').on('input', function (event) {
-		pswd1 = $('#password1');
-		pswd2 = $('#password2');
-		if ((pswd1.val() != pswd2.val()) && (pswd1.length < 8 || pswd2.length < 8)) {
-			pswd1.css('border-color', 'red')
-			pswd2.css('border-color', 'red')
-			$('#signinbtn').attr('disabled', 'disabled')
-		} else {
+	function passchecker(pswd1, pswd2, chbox){
+		console.log(pswd1.val(), pswd2.val(), chbox)
+		if (pswd1.val() == pswd2.val() && chbox){
 			pswd1.css('border-color', 'green')
 			pswd2.css('border-color', 'green')
 			$('#signinbtn').attr('disabled', false)
+		} else if(chbox == false && pswd1.val() == pswd2.val()){
+			$('#signinbtn').attr('disabled', 'disabled')
+		} else{
+			pswd1.css('border-color', 'red')
+			pswd2.css('border-color', 'red')
+			$('#signinbtn').attr('disabled', 'disabled')
 		}
+	}
+
+	$('#dock-read-check').on('click', function(){
+		passchecker($('#password1'), $('#password2'), $('#dock-read-check').is(':checked'))
+	})
+
+	$('.pswdChecker').on('input', function (event) {
+		passchecker($('#password1'), $('#password2'), $('#dock-read-check').is(':checked'))
 	})
 
 	$(document).ready(function () {
