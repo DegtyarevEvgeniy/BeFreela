@@ -744,7 +744,6 @@
             <div style="margin: auto;">
 
                 <h1 style="
-                        text-transform: lowercase;
                         font-size: 610%;
                         margin: auto;
                         text-align: center;" class="logo hidden" style="margin: auto;">Комиссия</h1>
@@ -764,7 +763,6 @@
             <div style="margin: auto;">
 
                 <h1 style="
-                        text-transform: lowercase;
                         font-size: 610%;
                         margin: auto;
                         text-align: center;" class="logo hidden" style="margin: auto;">Подписка</h1>
@@ -795,7 +793,7 @@
         <br>
         <br>
         <div
-            style="padding: 10% 0; width: 80vw; border-radius: 100px; background-image: linear-gradient(to left bottom, #88aebb, #688e9b,#4a6f7d, #2b5260, #0a3644);">
+            style="padding-top: 10%; padding-bottom: 5%; width: 80vw; border-radius: 100px; background-image: linear-gradient(to left bottom, #88aebb, #688e9b,#4a6f7d, #2b5260, #0a3644);">
 
 
             <div class="uk-width-1 uk-flex uk-flex-center uk-flex-around" style="margin: 0 auto; display: flex; ">
@@ -854,11 +852,27 @@
                             </div>
                         </div>
 
-                        <br>
+                        <div class="uk-margin">
+                           <label class="uk-form-label uk-text-bold" for="form-horizontal-text">Расскажите о себе</label>
+                              <div class="uk-form-controls">
+                              <!--  <textarea name="info" class="uk-input uk-form-width-large uk-border-rounded"
+                                    id="form-horizontal-text" type="text" style="box-shadow: 1px;"
+                                    placeholder="info"> -->
+                                    <textarea class="uk-textarea" rows="5" placeholder="Info"
+                                    name="info" style="border-radius: 5px; box-shadow: 1px;" ></textarea>
+                            </div> 
+                        </div>
                         <br>
                         <div class="uk-width-1 uk-flex uk-flex-center uk-flex-middle">
+                            {% if user.is_authenticated %}
                             <button class="uk-button uk-button-secondary uk-width-3-5" name="partRegBtn"
-                                style="margin: 0 auto" type="submit">Отправить</button>
+                                style="margin: 0 auto" type="submit" onclick="UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Message with an icon'})">Отправить</button>
+                                <!-- <button class="uk-button uk-button-default demo" type="button" onclick="UIkit.notification({message: '<span uk-icon=\'icon: check\'></span> Message with an icon'})">With icon</button> -->
+                                {% else %}
+                                <button class="uk-button uk-button-secondary uk-width-3-5" name="partRegBtn"
+                                style="margin: 0 auto" type="button">Отправить</button>
+                                
+                                {% endif %}
                         </div>
                         {% csrf_token %}
 
