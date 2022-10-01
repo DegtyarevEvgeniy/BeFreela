@@ -1,7 +1,7 @@
     {% for product in products %}
     <!-- <li data-sex="{{product.sex}}" data-rating="{{product.flooredrating}}" data-duration="{{product.duration}}"
         data-price="{{product.id}}" style="border-top: 1px solid; border-right: 1px solid; padding: 0; margin: 0">
-        <a href="/goods/{{product.id}}" class="uk-text-secondary uk-link-reset">
+        <a href="/creators/goods/{{product.id}}" class="uk-text-secondary uk-link-reset">
             <div class="uk-card uk-card-hover" style=" width: 333px; border-collapse: collapse;">
                 <div class="uk-card-header">
                     <img src="{{product.picture1}}" width="300px" alt="" style="margin-bottom: 2%;">
@@ -12,7 +12,6 @@
                 </div>
                 <div class="uk-card-footer uk-flex uk-flex-middle" style="border-top: 1px solid #929292">
                     <p class="uk-text-truncate" style="margin: 0">{{product.show_price}} ₽ </p>
-
                     <ul style="font-size: 1.2em; padding: 0 2%;" class="uk-nav">
                         <li class="star">
                             {% if product.flooredrating == 5 %}
@@ -34,12 +33,12 @@
             </div>
         </a>
     </li> -->
-    <!-- <li data-sex="{{product.sex}}" data-rating="{{product.flooredrating}}" data-duration="{{product.duration}}"
+    <li data-sex="{{product.sex}}" data-rating="{{product.flooredrating}}" data-duration="{{product.duration}}"
         data-price="{{product.id}}">
-        <a href="/goods/{{product.id}}" class="uk-text-secondary uk-link-reset">
+        <a href="/creators/goods/{{product.id}}" class="uk-text-secondary uk-link-reset">
             <div class="box-footer">
                 <div style="width:238px;height:443px; margin: auto;">
-                    <img src="{{product.picture1}}" width="238px" height="343px" alt="">
+                    <img src="{{product.picture1}}" width="200px" height="400px " alt="">
 
                     <div class="box-down">
                         <h3 style="font-size:25px; font-weight:bold; margin: 0;">{{product.show_price}} ₽</h3>
@@ -61,31 +60,10 @@
 
             </div>
         </a>
-    </li> -->
-     <div class="box-footer">
-            <div style="width:238px;height:443px; margin: auto;">
-            <img src="{{product.picture1}}" width="238px" height="343px" alt="" >
-            
-            <div class="box-down">
-                    <h3 style="font-size:25px; font-weight:bold; margin: 0;">{{product.price}} ₽</h3>
-                    <p class="star">
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-						<strong>&star;</strong>
-					</p>
-                    <p style="font-size:15px; margin: 0;">{{product.product_name}}</p>
-            </div>
-            <div class="box-down-drop">
-                <div style="margin: auto;" class="box-down-drop-img">
-                    <p style="margin: 0;" class="">{{product.brand}}</p>
-                </div>
-                <div style="margin: auto;" class="box-down-drop-img">
-                    <img src="{{product.picture1}}" width="30px" height="30px" alt="">
-                </div>
-            </div>
-            </div>
-            
-        </div>
+    </li>
+
+    <style>
+        
+    </style>
+
     {% endfor %}
