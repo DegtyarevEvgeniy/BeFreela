@@ -982,13 +982,9 @@ def admin_page(request):
             user.save()
             part.delete()
             return HttpResponseRedirect('/admin')
+        return render(request, 'admin.html', content)
 
-    # if request.method == "POST":
-
-        
-        
-    
-    #     return render(request, 'admin.html', content)
+            
     else:
         return HttpResponseRedirect('/')
 
