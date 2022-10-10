@@ -27,16 +27,10 @@
         <div class="uk-navbar-right uk-flex uk-flex-middle uk-flex-right uk-width-2-5">
             <div class="uk-search uk-search-default uk-width-expand">
 
-            {% if user.is_partner %}
-                           
-                <a href="/partners/" class="uk-button uk-button-link" style="text-transform: none;">Вы
-                уже
-                партнер</a>
+                {% if user.is_partner == false %}
 
-                {% else %}
-
-            <a href="/partners/" class="uk-button uk-button-link uk-text-normal"
-                style="text-transform: none;">Стать партнером</a>
+                <a href="/partners/" class="uk-button uk-button-link uk-text-normal" style="text-transform: none;">Стать
+                    партнером</a>
 
                 {% endif %}
 
