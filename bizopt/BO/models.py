@@ -57,6 +57,7 @@ class Product_buy(models.Model):
     duration = models.CharField(max_length=200, default='')
     compound = models.CharField('Срок получения товара', max_length=50, default='')
     size = models.CharField(max_length=300, default='')
+    amount = models.IntegerField()
     product_name = models.CharField(max_length=500, default='')
     task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     status = models.CharField(max_length=200, default='')

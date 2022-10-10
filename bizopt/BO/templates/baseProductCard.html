@@ -12,7 +12,6 @@
                 </div>
                 <div class="uk-card-footer uk-flex uk-flex-middle" style="border-top: 1px solid #929292">
                     <p class="uk-text-truncate" style="margin: 0">{{product.show_price}} ₽ </p>
-
                     <ul style="font-size: 1.2em; padding: 0 2%;" class="uk-nav">
                         <li class="star">
                             {% if product.flooredrating == 5 %}
@@ -39,7 +38,7 @@
         <a href="/goods/{{product.id}}" class="uk-text-secondary uk-link-reset">
             <div class="box-footer">
                 <div style="width:238px;height:443px; margin: auto;">
-                    <img src="{{product.picture1}}" width="238px" height="343px" alt="">
+                    <img src="{{product.picture1}}" width="200px" height="400px " alt="">
 
                     <div class="box-down">
                         <h3 style="font-size:25px; font-weight:bold; margin: 0;">{{product.show_price}} ₽</h3>
@@ -62,4 +61,9 @@
             </div>
         </a>
     </li>
+
+    <style>
+        
+    </style>
+
     {% endfor %}

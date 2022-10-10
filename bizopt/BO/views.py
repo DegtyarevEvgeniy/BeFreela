@@ -599,6 +599,7 @@ def cardProduct_page(request, product_id):
             product_buy.status = 'Заказ принят на рассмотрение'
             product_buy.message = request.POST['message']
             product_buy.delivery_address = request.POST['address']
+            product_buy.amount = request.POST['amount']
             product_buy.status_pay = False
             product_buy.save()
             return HttpResponseRedirect(f'/goods/{product_id}/')
@@ -909,31 +910,15 @@ def orders_page(request):
                         'payed_user': product.payed_user,
                         'status_pay': product.status_pay,
                         'delivery_address': product.delivery_address,
+                        'delivery_address': product.delivery_address,
                         'date_add': product.date_add,
                         'img': product.img,
                         'chat': (Account.objects.get(email=product.id_creator).id * Account.objects.get(email=product.id_user_buy).id) + Account.objects.get(email=product.id_creator).id + Account.objects.get(email=product.id_user_buy).id,
                         } for product in products]
     
 
-    if request.method == "POST" and "comment_product" in request.POST:
-        product_id = request.POST['comment_product']
-        product = Product_creator.objects.get(id=product_id)
-        comment = Comments_product()
-        comment.id_creator = product.id_creator
-        comment.id_product = product.id
-        comment.review = request.POST['review']
-        comment.rating = request.POST.get('rating', '0')
-
-        product.rate_sum = product.rate_sum + 1
-        product.vote_sum = request.POST.get('rating', '0')
-
-        product.save()
-        comment.save()
-        return HttpResponseRedirect('/orders/')
     if request.method == "POST" and "decline" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['decline'])
-        product.status = 'Заказчик отказался от заказа'
-        product.save()
+        Product_buy.objects.get(id=request.POST['decline']).delete()
         return HttpResponseRedirect('/orders/')
 
     return render(request, 'orders.html', content)
@@ -982,13 +967,9 @@ def admin_page(request):
             user.save()
             part.delete()
             return HttpResponseRedirect('/admin')
+        return render(request, 'admin.html', content)
 
-    # if request.method == "POST":
-
-        
-        
-    
-    #     return render(request, 'admin.html', content)
+            
     else:
         return HttpResponseRedirect('/')
 
