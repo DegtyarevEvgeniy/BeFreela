@@ -236,32 +236,28 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
 def becomeCreator_page(request):  # sourcery skip: low-code-quality
     context = gen_menu(request)
     user = Account.objects.get(email=request.user)
+    shop = Shop.objects.get(email=request.user.email)
 
     if request.method == 'POST' and "profile_saver1" in request.POST:  # для редактирования профиля
 
-        creator = Account.objects.get(email=request.user)
-        creator.name_small = request.POST['name_small']
-        creator.nameFull = request.POST['nameFull']
-        creator.ogrn = request.POST['ogrn']
-        creator.inn = request.POST['inn']
-        creator.kpp = request.POST['kpp']
-        creator.street = request.POST['street']
-        creator.fiz_adress = request.POST['fiz_adress']
-        creator.city = request.POST['city']
-        creator.index = request.POST['index']
-        creator.payment_account = request.POST['payment_account']
-        creator.reg_form = request.POST['reg_form']
-        creator.bik = request.POST['bik']
-        creator.korr_check = request.POST['korr_check']
-
-        creator.save()
+        
+        user.name_small = request.POST['name_small']
+        user.nameFull = request.POST['nameFull']
+        user.ogrn = request.POST['ogrn']
+        user.inn = request.POST['inn']
+        user.kpp = request.POST['kpp']
+        user.street = request.POST['street']
+        user.fiz_adress = request.POST['fiz_adress']
+        user.city = request.POST['city']
+        user.index = request.POST['index']
+        user.payment_account = request.POST['payment_account']
+        user.reg_form = request.POST['reg_form']
+        user.bik = request.POST['bik']
+        user.korr_check = request.POST['korr_check']
+        user.save()
         return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "profile_saver2" in request.POST:  # для редактирования профиля
-
-        shop = Shop.objects.get(email=request.user.email)
-        # prevlogo = shop.prevLogoImage
-        # prevbg = shop.prevBgImage
 
         link_logo = ''
         link_bg = ''
@@ -340,7 +336,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.product_name = request.POST['product_name']
         # product.price = request.POST['price']
         product.description = request.POST['description']
-        product.brand = request.POST['brand']
+        product.brand = shop.name
         size = ''
         compound_name = ''
         compound_percentage = ''
@@ -522,6 +518,7 @@ def becomeCreatorTemplate_page(request, name):
     elif name == '6':
         form = ProductCreateForm()
         content['form8'] = form
+        content['shop'] = Shop.objects.get(email=request.user.email)
 
     return render(request, path, content)
 
