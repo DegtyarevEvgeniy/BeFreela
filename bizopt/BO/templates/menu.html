@@ -22,10 +22,15 @@
                 <li class="uk-active">
                     <a href="#" class="uk-margin-small-left" uk-icon="icon: user; ratio: 2"></a>
                     <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav" style="font-size: 1.5em;">
-                            <li class="uk-active"><a href="#">Active</a></li>
-                            <li><a href="#">Item</a></li>
-                            <li><a href="#">Item</a></li>
+                        <ul class="uk-nav uk-navbar-dropdown-nav" style="font-size: 1em;">
+                            {% if user.is_partner %}
+                            <li class="uk-active"><a href="/becomeCreator/">Магазин</a></li>
+                            {% endif %}
+                            {% if user.is_admin and user.is_superuser and user.is_staff %}
+                            <li class="uk-active"><a href="/admin/">Админка</a></li>
+                            {% endif %}
+                            <li><a href="/edit/">Настройки</a></li>
+                            <li><a href="/logout">Выйти</a></li>
                         </ul>
                     </div>
                 </li>
