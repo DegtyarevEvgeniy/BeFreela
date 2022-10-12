@@ -778,8 +778,9 @@ def login_page(request):
         if user is not None:
             login(request, user)
             return redirect('/')
-        else:
+        elif request.POST.get('password') != '':
             print('Try again! username or password is incorrect')
+            context['errors'] = 'Try again! username or password is incorrect'
     # регистрация
     elif request.method == 'POST' and 'btnform1' in request.POST:
         # send_mail(
