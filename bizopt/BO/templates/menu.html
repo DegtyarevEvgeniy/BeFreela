@@ -1,19 +1,114 @@
-<div class="uk-visible@l uk-hiddem@l" id="topmenu" style="width: 80%; position: absolute; top: 0; left: 10%; z-index: 1000;">
-    {% include "menusTemplates/largeTemplate.html" %}
+<div style="width: 90%; padding: 2% 0; margin: 0 auto">
+    {% if user.is_authenticated %}
+
+    <div style="background-color: white;" class="uk-navbar-container" uk-navbar>
+
+        <div class="uk-navbar-left">
+            <a class="" href="#main-menuS" uk-icon="icon: menu; ratio: 2" uk-toggle></a>
+        </div>
+
+        <div class="uk-navbar-center">
+            <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle">
+                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-1-4" style="margin: 0 auto">
+            </a>
+        </div>
+
+
+        <div class="uk-navbar-right uk-search uk-search-default uk-flex uk-flex-right uk-flex-middle"
+            style="font-size: 2em">
+
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="" class="uk-margin-medium-right" uk-icon="icon: cart; ratio: 2"></a></li>
+                <li class="uk-active">
+                    <a href="#" class="uk-margin-small-left" uk-icon="icon: user; ratio: 2"></a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav" style="font-size: 1.5em;">
+                            <li class="uk-active"><a href="#">Active</a></li>
+                            <li><a href="#">Item</a></li>
+                            <li><a href="#">Item</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+    {% else %}
+
+    <nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
+        style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
+        <div class="uk-navbar-left">
+            <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-flex-middle">
+                <img src="../../../media/logoImage/logo.svg" alt="" width="40">
+                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-small uk-margin-small-left">
+            </a>
+        </div>
+        <div class="uk-navbar-right uk-width-3-5">
+            <div class="uk-search uk-search-default uk-width-1">
+                <a type="submit" href="" id="searchBtn" uk-search-icon></a>
+                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
+            </div>
+        </div>
+    </nav>
+    <div style="position: fixed; top: 2%; left: 3%; z-index: 1000;">
+        <a class="uk-botton uk-button-link" href="#main-menuS" uk-icon="menu" uk-toggle></a>
+    </div>
+
+    {% endif %}
 </div>
 
-<div class="uk-hidden@l" id="topmenu" style="width: 80%; position: absolute; top: 2%; left: 10%; z-index: 1000;">
-    {% include "menusTemplates/mediumTemplate.html" %}
+<!-- start of navbar submenu -->
+<div id="main-menuS" uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+
+        <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
+            <li class="uk-active">
+            </li>
+            <li>
+                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
+                    <h1> <a href="/" class="uk-text-truncate">BeFreela</a></h1>
+                </div>
+            </li>
+
+            <li class="uk-nav-divider uk-margin-medium-top uk-margin-medium-bottom"></li>
+
+            <li class="uk-active"><a href="/brands/">
+                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Бренды</h3>
+                </a>
+            </li>
+            <li class="uk-active"><a href="/goods/">
+                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Магазин</h3>
+                </a>
+            </li>
+            <li class="uk-nav-divider uk-margin-medium-top"></li>
+            <li class="uk-parent">
+                <ul class="uk-nav uk-nav-default">
+                    <li class="uk-active">
+                        <a href="/goods/category/Clothing" class="uk-button uk-button-text">Одежда </a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/goods/category/Shoes" class="uk-button uk-button-text">Обувь</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/goods/category/Bags" class="uk-button uk-button-text">Сумки</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/goods/category/Interior" class="uk-button uk-button-text">Интерьер</a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/goods/category/Accessories" class="uk-button uk-button-text">Аксессуары</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
+            <p style="margin: 0px"> Регион <b>Москва</b></p>
+            <a href="/login" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
+                партнером</a>
+        </ul>
+    </div>
 </div>
-
-
-<style>
-    *{
-        font-family: 'Montserrat'!important;
-    }
-    svg{
-        width: 30px;
-        height: 30px;
-    }
-</style>
-
+<!-- end of navbar submenu -->
