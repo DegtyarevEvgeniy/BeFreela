@@ -80,11 +80,11 @@
 
     <div style="margin: auto; width: 56%" class="uk-margin-top">
             <a class="uk-button uk-button-default" href="/goods/">Одежда</a>
-            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/">Обувь</a>
-            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/">Аксессуары</a>
-            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/">Для дома</a>
-            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/">Одежда</a>
-            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/">Обувь</a>
+            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/category/Clothing">Одежда</a>
+            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/category/Shoes">Обувь</a>
+            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/category/Bags">Сумки</a>
+            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/category/Interior">Интерьер</a>
+            <a class="uk-button uk-button-default uk-margin-small-left" href="/goods/category/Accessories">Аксессуары</a>
     </div>
 
     <div class="uk-flex uk-margin-large-top">
@@ -278,6 +278,23 @@
 
 </div>
 
+<script>
+     document.getElementById('search_pole').addEventListener('keyup', function (event) {
+        document.getElementById('searchBtn').href = "/goods/search/" + document.getElementById(
+            'search_pole').value;
+        if (event.keyCode == 13) {
+            document.getElementById('searchBtn').click();
+        }
+    });
+
+      document.getElementById('search_pole1').addEventListener('keyup', function (event) {
+        document.getElementById('searchBtn1').href = "/goods/search/" + document.getElementById(
+            'search_pole1').value;
+        if (event.keyCode == 13) {
+            document.getElementById('searchBtn1').click();
+        }
+    });
+</script>
 
 {% include "footer.html" %}
 

@@ -59,14 +59,7 @@
     //     document.getElementById('searchBtn').href = "goods/search/" + el.value;
     // }
 
-    document.getElementById('search_pole').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn').href = "/goods/search/" + document.getElementById(
-            'search_pole').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn').click();
-        }
-    });
-
+   
     const cards = document.querySelectorAll('.card-link');
 
     cards.forEach(card => {
@@ -74,14 +67,6 @@
             console.log(event.target.parentNode.className)
 
         });
-    });
-
-    document.getElementById('search_pole1').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn1').href = "/goods/search/" + document.getElementById(
-            'search_pole1').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn1').click();
-        }
     });
 
     const cards1 = document.querySelectorAll('.card-link');
