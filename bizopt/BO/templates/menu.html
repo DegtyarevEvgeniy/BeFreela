@@ -6,7 +6,7 @@
                 <span style="color: black" uk-icon="menu"></span>
             </a>
         </div>
-        <div class="uk-navbar-center">
+        <div class="uk-navbar-center uk-margin-right">
 
             <ul class="uk-navbar-nav">
                 <li>
@@ -24,7 +24,7 @@
             <ul class="uk-navbar-nav">
                 <li>
                 <li class="uk-flex uk-flex-middle">
-                    <div class="uk-search uk-search-default uk-width-4-5">
+                    <div class="uk-search uk-search-default" style="width: 30vh; margin: auto">
                         <a type="submit" href="" id="searchBtn" uk-search-icon></a>
                         <input class="uk-search-input" type="search" placeholder="Search" id="search_pole"
                             style="font-size: 25px; padding: 2% auto">
@@ -37,7 +37,10 @@
                     </li>
                     {% endif %}
                     <li class="uk-active">
-                        <a href="/orders/" uk-icon="icon: cart"></a>
+                        <a href="/cart/" uk-icon="icon: cart"></a>
+                    </li>
+                    <li class="uk-active">
+                        <a href="/orders/" uk-icon="icon: bag"></a>
                     </li>
                     <li class="uk-active">
                         <a uk-icon="icon: user"></a>

@@ -877,6 +877,9 @@ def chat_page_list(request):
     print(content['chats'])
     return render(request, 'chatRoom.html', content)
 
+def cart_page(request):
+    return render(request, 'cart.html')
+
 
 def getMsg(request, room_id):
     room_detales = Chat_room.objects.get(name=room_id)
@@ -921,6 +924,7 @@ def orders_page(request):
 
     return render(request, 'orders.html', content)
 
+    
 
 def partners_page(request):
 
