@@ -3,13 +3,13 @@
 
     <div style="background-color: white;" class="uk-navbar-container" uk-navbar>
 
-        <div class="uk-navbar-left">
-            <a class="" href="#main-menuS" uk-icon="icon: menu; ratio: 2" uk-toggle></a>
+        <div class="uk-navbar-left uk-flex uk-flex-middle">
+            <a class="" href="#main-menu" uk-icon="icon: menu; ratio: 2.5" uk-toggle></a>
         </div>
 
         <div class="uk-navbar-center">
             <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle">
-                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-1-4" style="margin: 0 auto">
+                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-2-5" style="margin: 0 auto">
             </a>
         </div>
 
@@ -18,10 +18,12 @@
             style="font-size: 2em">
 
             <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="" class="uk-margin-medium-right" uk-icon="icon: cart; ratio: 2"></a></li>
                 <li class="uk-active">
-                    <a href="#" class="uk-margin-small-left" uk-icon="icon: user; ratio: 2"></a>
-                    <div class="uk-navbar-dropdown">
+                    <a href="/orders/" class="uk-margin-medium-right" style="padding: 0" uk-icon="icon: cart; ratio: 2.5"></a>
+                </li>
+                <li class="uk-active uk-flex uk-flex-middle">
+                    <button type="button" class="uk-margin-small-left uk-button uk-border-circle" style="padding: 5px; border: 3px solid" uk-icon="icon: user; ratio: 2.5"></button>
+                    <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
                         <ul class="uk-nav uk-navbar-dropdown-nav" style="font-size: 1em;">
                             {% if user.is_partner %}
                             <li class="uk-active"><a href="/becomeCreator/">Магазин</a></li>
@@ -43,30 +45,37 @@
 
     {% else %}
 
-    <nav class="uk-navbar-container uk-flex uk-flex-middle" uk-navbar
-        style="background: rgba(255, 255, 255, 0.9); border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
-        <div class="uk-navbar-left">
-            <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-flex-middle">
-                <img src="../../../media/logoImage/logo.svg" alt="" width="40">
-                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-small uk-margin-small-left">
+    <div style="background-color: white;" class="uk-navbar-container" uk-navbar>
+
+        <div class="uk-navbar-left uk-flex uk-flex-middle">
+            <a class="" href="#main-menu" uk-icon="icon: menu; ratio: 2.5" uk-toggle></a>
+        </div>
+
+        <div class="uk-navbar-center">
+            <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle">
+                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-2-5" style="margin: 0 auto">
             </a>
         </div>
-        <div class="uk-navbar-right uk-width-3-5">
-            <div class="uk-search uk-search-default uk-width-1">
-                <a type="submit" href="" id="searchBtn" uk-search-icon></a>
-                <input class="uk-search-input uk-border-rounded" type="search" placeholder="Search" id="search_pole">
-            </div>
+
+
+        <div class="uk-navbar-right uk-search uk-search-default uk-flex uk-flex-right uk-flex-middle"
+            style="font-size: 2em">
+
+            <ul class="uk-navbar-nav">
+                <li class="uk-active uk-flex uk-flex-middle">
+                    <a href="/login/" type="button" class="uk-margin-small-left uk-button uk-border-circle" style="padding: 0 10px; border: 3px solid" uk-icon="icon: user; ratio: 2.5"></a>
+                </li>
+            </ul>
+
         </div>
-    </nav>
-    <div style="position: fixed; top: 2%; left: 3%; z-index: 1000;">
-        <a class="uk-botton uk-button-link" href="#main-menuS" uk-icon="menu" uk-toggle></a>
+
     </div>
 
     {% endif %}
 </div>
 
 <!-- start of navbar submenu -->
-<div id="main-menuS" uk-offcanvas="overlay: true">
+<div id="main-menu" uk-offcanvas="overlay: true">
     <div class="uk-offcanvas-bar uk-flex uk-flex-column">
 
         <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">

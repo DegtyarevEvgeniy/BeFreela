@@ -73,9 +73,9 @@
 
             {% for shops in prom_shops %}
             {% for shop in shops %}
-            <a href="/brands/{{shop.name}}" class="uk-text-center uk-width-2-5">
+            <a href="/brands/{{shop.name}}" class="uk-text-center uk-width-3-5">
                 <div data-src="{{shop.logoImage}}"
-                    class="uk-height-medium uk-flex uk-flex-center uk-flex-top uk-background-cover uk-inline-clip uk-transition-toggle"
+                    class="uk-height-medium uk-flex uk-flex-center uk-flex-bottom uk-background-cover uk-inline-clip uk-transition-toggle"
                     style="border: 3px solid black;" tabindex="0" uk-img>
 
 
@@ -89,6 +89,7 @@
             </a>
             {% endfor %}
             {% endfor %}
+
         </ul>
     </div>
 </div>

@@ -295,6 +295,7 @@ class SignUpForm(UserCreationForm):
         self.fields['first_name'].widget.attrs.update({
             'class': 'uk-input uk-border uk-border-rounded',
             'required': '',
+            'style': 'font-size: 2em; text-align: center; height: 1.5em',
             'name': 'name',
             'id': 'name',
             'type': 'text',
@@ -304,6 +305,7 @@ class SignUpForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({
             'class': 'uk-input uk-border uk-border-rounded',
             'required': '',
+            'style': 'font-size: 2em; text-align: center; height: 1.5em',
             'name': 'email',
             'id': 'email',
             'type': 'email',
@@ -313,6 +315,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password1'].widget.attrs.update({
             'class': 'uk-input uk-border uk-border-rounded pswdChecker',
             'required': '',
+            'style': 'font-size: 2em; text-align: center; height: 1.5em',
             'name': 'password1',
             'id': 'password1',
             'type': 'password',
@@ -322,6 +325,7 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs.update({
             'class': 'uk-input uk-border uk-border-rounded pswdChecker',
             'required': '',
+            'style': 'font-size: 2em; text-align: center; height: 1.5em',
             'name': 'password2',
             'id': 'password2',
             'type': 'password',
