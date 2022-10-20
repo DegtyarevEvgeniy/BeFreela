@@ -14,23 +14,24 @@
 
         <form method="POST" class="uk-width-1">
             {% for product in products %}
-            <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
-                style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
-                <div class="uk-flex uk-flex-between uk-flex-middle uk-width-3-5">
-                    <div>
-                        <img src="{{product.img}}" alt="" width="200px" style="border-radius: 5px">
+            <a href="#" class="uk-link-reset" uk-toggle="target: #item_{{product.id}}">
+                <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
+                    style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
+                    <div class="uk-flex uk-flex-between uk-flex-middle uk-width-3-5">
+                        <div>
+                            <img src="{{product.img}}" alt="" width="200px" style="border-radius: 5px">
+                        </div>
+                        <div class="uk-flex-row" style="font-size: 1.3em">
+                            <h2 class="uk-text-break">{{ product.id_user_buy }}</h2>
+                            <p style="font-size: 1.3em;" class="uk-text-break">Статус: <br> {{ product.status }}</p>
+                        </div>
                     </div>
-                    <div class="uk-flex-row" style="font-size: 1.3em">
-                        <h2 class="uk-text-break">{{ product.id_user_buy }}</h2>
-                        <p style="font-size: 1.3em;" class="uk-text-break">Статус: <br> {{ product.status }}</p>
-                    </div>
-                </div>
-                <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5" style="font-size: 1.5em">
-                    <div class="uk-width-2-5">
-                        <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
-                        <p class="uk-text-break uk-text-truncate">Адрес: <br>{{product.delivery_address}}</p>
-                    </div>
-                    <div class="uk-width-3-5">
+                    <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5" style="font-size: 1.5em">
+                        <div class="uk-width-2-5">
+                            <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
+                            <p class="uk-text-break uk-text-truncate">Адрес: <br>{{product.delivery_address}}</p>
+                        </div>
+                        <div class="uk-width-3-5">
 
                             <button class="uk-button uk-button-primary uk-border-rounded uk-width-1-2"
                                 style="margin: 0 1%; font-size: 1.2em; padding: 1% 0" type="button"
@@ -40,36 +41,75 @@
                                 <button class="uk-button uk-button-danger uk-border-rounded uk-width-1-2"
                                     style="margin: 0 1%; font-size: 1.2em; padding: 1% 0" name="decline"
                                     value="{{product.id}}" type="submit" uk-icon="icon: trash; ratio: 2"></button>
-                                <!-- <a class="uk-button uk-button-primary uk-border-rounded uk-width-auto {{product.chat}}" -->
-                                <!-- id="cahtBtn" style="margin: 0 1%" type="button">Чат</a> -->
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- start of item toggle card -->
+            <div id="item_{{product.id}}" uk-modal>
+                <div class="uk-modal-dialog uk-modal-body">
+                    <button class="uk-modal-close-default" type="button" uk-close ></button>
+                    <h2 style="font-size: 4.3em;">карта товара</h2>
+                    <div>
+                        <div class="uk-flex uk-flex-middle uk-flex-between">
+                            <h3 style="font-size: 2em;">название:</h3>
+                            <p class="uk-text-truncate uk-width-2-5" style="font-size: 2em;">{{product.product_name}}</p>
+                        </div>
+                        <br>
+                        <div class="uk-flex uk-flex-middle uk-flex-between">
+                            <h3 style="font-size: 2em;">количество:</h3>
+                            <p class="uk-text-truncate uk-width-2-5" style="font-size: 2em;">{{product.amount}}</p>
+                        </div>
+                        <br>
+                        <div class="uk-flex uk-flex-middle uk-flex-between">
+                            <h3 style="font-size: 2em;">адрес доставки:</h3>
+                            <p class="uk-text-truncate uk-width-2-5" style="font-size: 2em;">{{product.delivery_address}}</p>
+                        </div>
+                        <br>
+                        <div class="uk-flex uk-flex-middle uk-flex-between">
+                            <h3 style="font-size: 2em;">цена:</h3>
+                            <p class="uk-text-truncate uk-width-2-5" style="font-size: 2em;">{{product.price}}</p>
+                        </div>
+                        <br>
+                        <div class="uk-flex uk-flex-middle uk-flex-between">
+                            <h3 style="font-size: 2em;">магазин:</h3>
+                            <p class="uk-text-truncate uk-width-2-5" style="font-size: 2em;">{{product.id_creator}}</p>
+                        </div>
                     </div>
                 </div>
             </div>
+            <!-- end of item toggle card -->
+
             {% endfor %}
         </form>
     </div>
     </div>
 
+
+
     <div id="modal-close-default" uk-modal>
         <div class="uk-modal-dialog uk-modal-body">
             <button class="uk-modal-close-default" type="button" uk-close></button>
-            <h2 class="uk-modal-title">Оплата</h2>
+            <h2 style="font-size: 4.3em;">карта товара</h2>
             <div>
                 <div class="uk-flex uk-margin-bottom">
-                    <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
+                    <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="120"
+                        alt="">
                     <div class="uk-flex-column uk-margin-left">
-                        <p class="uk-margin-remove">{{ user.first_name }}</p>
-                        <p class="uk-margin-remove">{{ user.email}}</p>
+                        <p class="uk-margin-remove uk-text-truncate" style="font-size: 3em;">{{ user.first_name }}</p>
+                        <p class="uk-margin-remove uk-text-truncate" style="font-size: 3em;">{{ user.email}}</p>
                     </div>
                 </div>
                 <div class="uk-flex">
-                    <p class="uk-margin-remove">Получатель:</p>
-                    <span class="uk-label" style="margin: 0 0 0 5%">{{user.first_name}} {{user.last_name}}</span>
+                    <p class="uk-margin-remove" style="font-size: 2.5em;">Получатель:</p>
+                    <span class="uk-label" style="margin: 0 0 0 5%; font-size: 2.5em;">{{user.first_name}}
+                        {{user.last_name}}</span>
                 </div>
                 <div class="uk-margin-top">
-                    <p>Отсканируйте QR-код и оплатите товар</p>
+                    <p style="font-size: 2.5em;">Отсканируйте QR-код и оплатите товар</p>
                     <img
                         src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg">
                 </div>
@@ -80,68 +120,16 @@
     </div>
 </body>
 
-<script>
+<!-- <script>
     const chatBtn = document.getElementById('cahtBtn')
 
     chatBtn.addEventListener('click', function () {
         window.location.replace('/chats/')
         localStorage.setItem('activeChat', chatBtn.classList[chatBtn.classList.length - 1])
     })
-</script>
+</script> -->
 
-<style>
-    .checked {
-        color: orange;
-    }
 
-    .rating-area {
-        overflow: hidden;
-        width: 265px;
-        margin: 0 auto;
-    }
-
-    .rating-area:not(:checked)>input {
-        display: none;
-    }
-
-    .rating-area:not(:checked)>label {
-        float: right;
-        width: 42px;
-        padding: 0;
-        cursor: pointer;
-        font-size: 32px;
-        line-height: 32px;
-        color: lightgrey;
-        text-shadow: 1px 1px #bbb;
-    }
-
-    .rating-area:not(:checked)>label:before {
-        content: '★';
-    }
-
-    .rating-area>input:checked~label {
-        color: gold;
-        text-shadow: 1px 1px #c60;
-    }
-
-    .rating-area:not(:checked)>label:hover,
-    .rating-area:not(:checked)>label:hover~label {
-        color: gold;
-    }
-
-    .rating-area>input:checked+label:hover,
-    .rating-area>input:checked+label:hover~label,
-    .rating-area>input:checked~label:hover,
-    .rating-area>input:checked~label:hover~label,
-    .rating-area>label:hover~input:checked~label {
-        color: gold;
-        text-shadow: 1px 1px goldenrod;
-    }
-
-    .rate-area>label:active {
-        position: relative;
-    }
-</style>
 
 
 {% endblock %}

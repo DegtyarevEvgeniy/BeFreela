@@ -1,28 +1,28 @@
-<div style="width: 90%; padding: 2% 0; margin: 0 auto">
-    {% if user.is_authenticated %}
+    <div style="width: 90%; padding: 2% 0; margin: 0 auto" class="uk-navbar-container" uk-navbar>
+        {% if user.is_authenticated %}
 
-    <div style="background-color: white;" class="uk-navbar-container" uk-navbar>
 
         <div class="uk-navbar-left uk-flex uk-flex-middle">
             <a class="" href="#main-menu" uk-icon="icon: menu; ratio: 2.5" uk-toggle></a>
         </div>
 
         <div class="uk-navbar-center">
-            <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle">
-                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-2-5" style="margin: 0 auto">
+            <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle uk-width-auto">
+                <img src="../../../media/logoImage/logo_text.svg" width="500" alt="" class="" style="margin: 0 auto">
             </a>
         </div>
 
 
-        <div class="uk-navbar-right uk-search uk-search-default uk-flex uk-flex-right uk-flex-middle"
-            style="font-size: 2em">
+        <div class="uk-navbar-right uk-flex uk-flex-right uk-flex-middle" style="font-size: 2em">
 
             <ul class="uk-navbar-nav">
                 <li class="uk-active">
-                    <a href="/orders/" class="uk-margin-medium-right" style="padding: 0" uk-icon="icon: cart; ratio: 2.5"></a>
+                    <a href="/orders/" class="uk-margin-medium-right" style="padding: 0"
+                        uk-icon="icon: cart; ratio: 2.5"></a>
                 </li>
                 <li class="uk-active uk-flex uk-flex-middle">
-                    <button type="button" class="uk-margin-small-left uk-button uk-border-circle" style="padding: 5px; border: 3px solid" uk-icon="icon: user; ratio: 2.5"></button>
+                    <button type="button" class="uk-margin-small-left uk-button uk-border-circle"
+                        style="padding: 5px; border: 3px solid" uk-icon="icon: user; ratio: 2.5"></button>
                     <div class="uk-navbar-dropdown" uk-dropdown="mode: click">
                         <ul class="uk-nav uk-navbar-dropdown-nav" style="font-size: 1em;">
                             {% if user.is_partner %}
@@ -40,89 +40,81 @@
 
         </div>
 
-    </div>
 
 
-    {% else %}
-
-    <div style="background-color: white;" class="uk-navbar-container" uk-navbar>
+        {% else %}
 
         <div class="uk-navbar-left uk-flex uk-flex-middle">
             <a class="" href="#main-menu" uk-icon="icon: menu; ratio: 2.5" uk-toggle></a>
         </div>
 
         <div class="uk-navbar-center">
-            <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle">
-                <img src="../../../media/logoImage/logo_text.svg" alt="" class="uk-width-2-5" style="margin: 0 auto">
+            <a href="/" class=" uk-padding-remove uk-flex uk-flex-middle uk-width-auto">
+                <img src="../../../media/logoImage/logo_text.svg" width="500" alt="" class="" style="margin: 0 auto">
             </a>
         </div>
 
 
-        <div class="uk-navbar-right uk-search uk-search-default uk-flex uk-flex-right uk-flex-middle"
-            style="font-size: 2em">
+        <div class="uk-navbar-right uk-flex uk-flex-right uk-flex-middle" style="font-size: 2em">
 
             <ul class="uk-navbar-nav">
                 <li class="uk-active uk-flex uk-flex-middle">
-                    <a href="/login/" type="button" class="uk-margin-small-left uk-button uk-border-circle" style="padding: 0 10px; border: 3px solid" uk-icon="icon: user; ratio: 2.5"></a>
+                    <a href="/login/" type="button" class="uk-margin-small-left uk-button uk-border-circle"
+                        style="padding: 0 10px; border: 3px solid" uk-icon="icon: user; ratio: 2.5"></a>
                 </li>
             </ul>
 
         </div>
 
+        {% endif %}
     </div>
+    <!-- start of navbar submenu -->
+    <div id="main-menu" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar uk-flex uk-flex-column">
 
-    {% endif %}
-</div>
+            <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
+                <li>
+                    <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
+                        <h1> <a href="/" class="uk-text-truncate" style="font-size: 1.5em;">BEFREELA</a></h1>
+                    </div>
+                </li>
 
-<!-- start of navbar submenu -->
-<div id="main-menu" uk-offcanvas="overlay: true">
-    <div class="uk-offcanvas-bar uk-flex uk-flex-column">
+                <li class="uk-nav-divider uk-margin-medium-top uk-margin-medium-bottom"></li>
 
-        <ul class="uk-nav uk-nav-primary uk-nav-left uk-margin-auto-vertical">
-            <li class="uk-active">
-            </li>
-            <li>
-                <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-between">
-                    <h1> <a href="/" class="uk-text-truncate">BeFreela</a></h1>
-                </div>
-            </li>
-
-            <li class="uk-nav-divider uk-margin-medium-top uk-margin-medium-bottom"></li>
-
-            <li class="uk-active"><a href="/brands/">
-                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Бренды</h3>
-                </a>
-            </li>
-            <li class="uk-active"><a href="/goods/">
-                    <h3 class="uk-button uk-button-link" style="font-size: 1.5rem;">Магазин</h3>
-                </a>
-            </li>
-            <li class="uk-nav-divider uk-margin-medium-top"></li>
-            <li class="uk-parent">
-                <ul class="uk-nav uk-nav-default">
-                    <li class="uk-active">
-                        <a href="/goods/category/Clothing" class="uk-button uk-button-text">Одежда </a>
-                    </li>
-                    <li class="uk-active">
-                        <a href="/goods/category/Shoes" class="uk-button uk-button-text">Обувь</a>
-                    </li>
-                    <li class="uk-active">
-                        <a href="/goods/category/Bags" class="uk-button uk-button-text">Сумки</a>
-                    </li>
-                    <li class="uk-active">
-                        <a href="/goods/category/Interior" class="uk-button uk-button-text">Интерьер</a>
-                    </li>
-                    <li class="uk-active">
-                        <a href="/goods/category/Accessories" class="uk-button uk-button-text">Аксессуары</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
-            <p style="margin: 0px"> Регион <b>Москва</b></p>
-            <a href="/login" class="uk-button uk-button-text" style="text-transform: none; font-size: medium;">Стать
-                партнером</a>
-        </ul>
+                <li class="uk-active"><a href="/brands/">
+                        <h3 class="uk-button uk-button-link" style="font-size: 1.8em;">Бренды</h3>
+                    </a>
+                </li>
+                <li class="uk-active"><a href="/goods/">
+                        <h3 class="uk-button uk-button-link" style="font-size: 1.8em;">Магазин</h3>
+                    </a>
+                </li>
+                <li class="uk-nav-divider uk-margin-medium-top"></li>
+                <li class="uk-parent">
+                    <ul class="uk-nav uk-nav-default">
+                        <li class="uk-active">
+                            <a href="/goods/category/Clothing" class="uk-button uk-button-text" style="font-size: 2em">Одежда </a>
+                        </li>
+                        <li class="uk-active">
+                            <a href="/goods/category/Shoes" class="uk-button uk-button-text" style="font-size: 2em">Обувь</a>
+                        </li>
+                        <li class="uk-active">
+                            <a href="/goods/category/Bags" class="uk-button uk-button-text" style="font-size: 2em">Сумки</a>
+                        </li>
+                        <li class="uk-active">
+                            <a href="/goods/category/Interior" class="uk-button uk-button-text" style="font-size: 2em">Интерьер</a>
+                        </li>
+                        <li class="uk-active">
+                            <a href="/goods/category/Accessories" class="uk-button uk-button-text" style="font-size: 2em">Аксессуары</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="uk-nav uk-nav-secondary uk-nav-left uk-margin-auto-vertical">
+                <p style="margin: 0px; font-size: 2em"> Регион <b>Москва</b></p>
+                <a href="/login" class="uk-button uk-button-text" style="text-transform: none; font-size: 2em;">Стать
+                    партнером</a>
+            </ul>
+        </div>
     </div>
-</div>
-<!-- end of navbar submenu -->
+    <!-- end of navbar submenu -->

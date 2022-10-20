@@ -582,7 +582,7 @@ def cardProduct_page(request, product_id):
         if request.method == "POST" and "buy_product" in request.POST:
             product_buy = Product_buy()
 
-            product_buy.price = product.show_price
+            product_buy.price = int(product.show_price) * int(request.POST['amount'])
             product_buy.duration = product.duration
             # product = Product_creator.objects.get(id=product_id)
             product_buy.id_creator = product.id_creator
@@ -899,6 +899,7 @@ def orders_page(request):
                         'id_creator': product.id_creator,
                         'id_user_buy': product.id_user_buy,
                         'price': product.price,
+                        'amount': product.amount,
                         'product_name': product.product_name,
                         'task_id': product.task_id,
                         'status': product.status,
