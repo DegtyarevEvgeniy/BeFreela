@@ -554,7 +554,7 @@ def index_page(request):
     if request.user.is_authenticated:
         context['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
         context['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
-        return render(request, 'main.html', context)
+        return render(request, 'index.html', context)
     else:
         return render(request, 'index.html', context)
 
