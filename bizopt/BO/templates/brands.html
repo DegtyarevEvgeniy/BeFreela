@@ -12,47 +12,43 @@
     }
 </style>
 
-<body style="width: 100%; height: 100%;">
-    <div style="width: 80%; margin: 0 auto;">
-        <div class="uk-flex uk-flex-between uk-flex-middle uk-margin-medium-bottom">
-            <h1 style="border-top: 1px solid #0a3644e6; padding: 5% 0;">Бренды</h1>
-            <h3 class="uk-text-left uk-width-2-3 uk-text-light">Здесь ты можешь найти все бренды, которые продают у нас
-                на площадке. В
-                профиле бренда ты найдешь информацию и товары бренда</h3>
-        </div>
+<div>
+    <div class="uk-flex uk-flex-around uk-flex-middle uk-margin-medium-bottom">
+        <h1 style="border-top: 1px solid #0a3644e6; padding: 5% 0; font-size: 4em;">Бренды</h1>
+        <h3 class="uk-text-right uk-width-2-3 uk-text-light" style="font-size: 1.8em;">Здесь ты можешь найти все бренды,
+            которые продают у нас
+            на площадке. В
+            профиле бренда ты найдешь информацию и товары бренда</h3>
+    </div>
 
 
-        <div class="uk-flex uk-flex-wrap uk-flex-wrap-middle uk-width-1" style="justify-content: center;">
+    <div class="uk-flex uk-flex-wrap uk-flex-wrap-middle uk-width-1" style="justify-content: center;">
 
-            {% for shop in brands %}
-            {% if shop.name %}
-            <a href="/brands/{{shop.name}}" class="uk-text-center uk-width-2-5" style="margin: 2%;">
-                <div data-src="{{shop.logoImage}}"
-                    class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-inline-clip uk-transition-toggle"
-                    style="border: 3px solid black;" tabindex="0" uk-img>
+        {% for shop in brands %}
+        {% if shop.name %}
+        <a href="/brands/{{shop.name}}" class="uk-text-center uk-link-revert uk-width-2-5" style="margin: 2%;">
+            <div data-src="{{shop.logoImage}}"
+                class="uk-height-medium uk-flex uk-flex-center uk-flex-bottom uk-background-cover uk-inline-clip uk-transition-toggle"
+                style="border: 3px solid black;" tabindex="0" uk-img>
 
-                    <div class="uk-transition-fade uk-position-cover uk-overlay uk-overlay-default uk-flex uk-flex-center uk-flex-middle"
-                        style="background-color: #0a3644e6;height: 100%; width: 100%; margin: 0 auto; padding: 10%;">
 
-                        <div class="uk-width-1" style="padding: 1%;">
-                            <h1 style="color: white;" class="uk-article-title">{{shop.name}}</h1>
 
-                            <p style="color: white; font-size: 1.2em;" class="uk-text-center uk-text-break">{{shop.category}}</p>
-                        </div>
-
-                    </div>
+                <div class="uk-width-1" style="padding: 1%; background: rgb(10,54,68);
+                background: linear-gradient(0deg, rgba(10,54,68,1) 30%, rgba(255,255,255,1) 94%);">
+                    <h1 style="color: white;" class="uk-article-title">{{shop.name}}</h1>
                 </div>
-            </a>
-            {% endif %}
-            {% endfor %}
 
-        </div>
+            </div>
+        </a>
+        {% endif %}
+        {% endfor %}
 
     </div>
-    {% include "footer.html" %}
+
+</div>
+{% include "footer.html" %}
 
 
-</body>
 
 
 

@@ -119,7 +119,7 @@
                     style="background-color: #B54F00; font-size: 2em; padding: 1%" href="/login">Заказать</a>
                 {% endif %}
                 <div id="modal-overflow" uk-modal>
-                    <div class="uk-modal-dialog">
+                    <div class="uk-modal-dialog" style="width: 90%">
                         <div>
                             <button class="uk-modal-close-default" type="button" uk-close></button>
                         </div>
@@ -131,9 +131,10 @@
                         <form method="POST" action="">
                             <div class="uk-modal-body uk-margin-left uk-margin-right uk-margin-bottom" uk-overflow-auto
                                 style="padding: 0">
-                                <img>
-                                <h4 class="uk-margin-remove-top" style="font-size: 2em">Название товара:</h4>
-                                <p class="uk-text-truncate" style="font-size: 2em">{{product.product_name}}</p>
+                                <div class="uk-flex uk-flex-middle">
+                                    <h4 class="uk-margin-remove-top" style="font-size: 2em">Название товара:</h4>
+                                    <p class="uk-text-truncate" style="font-size: 2em">{{product.product_name}}</p>
+                                </div>
                                 <div class="uk-flex">
                                     <p style="font-size: 2em" class="uk-margin-small-top">Оплата: </p>
                                     <p style="font-size: 2em" class="uk-margin-left uk-margin-small-top"> картой онлайн
@@ -146,7 +147,7 @@
                                         <a class="uk-button uk-button-link amount-changer" id="minusBtn"
                                             uk-icon="icon: minus; ratio: 2"></a>
                                         <input type="number" name="amount" min="1" max="1000" id="amount" value="1"
-                                            style="margin:0 2%; font-size: 2em" class="uk-input uk-width-2-5">
+                                            style="margin:0 2%; font-size: 2em" class="uk-input uk-width-1-5">
                                         <a class="uk-button uk-button-link amount-changer" id="plusBtn"
                                             uk-icon="icon: plus; ratio: 2"></a>
                                         <!-- <button type="button" class="uk-width-auto uk-heading-xsmall uk-button uk-button-primary" style="padding: 0 20%"><span uk-icon="icon: minus; ratio: 4"></span></button> -->
@@ -164,12 +165,13 @@
                             </div>
 
                             <div class="uk-modal-footer uk-text-right">
-                                <button class="uk-button uk-button-default uk-modal-close"
-                                    type="button" style="font-size: 2em; padding: 2%;">Закрыть</button>
+                                <button class="uk-button uk-button-default uk-modal-close" type="button"
+                                    style="font-size: 2em; padding: 2%;">Закрыть</button>
 
                                 {% csrf_token %}
-                                <button class="uk-button uk-button-primary" style="background-color: #B54F00; font-size: 2em; padding: 2%"
-                                    name="buy_product" type="submit"
+                                <button class="uk-button uk-button-primary"
+                                    style="background-color: #B54F00; font-size: 2em; padding: 2%" name="buy_product"
+                                    type="submit"
                                     onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Заказать
                                     товар</button>
                             </div>
@@ -195,7 +197,7 @@
     <container>
         <div class="uk-flex uk-flex-top uk-width-1">
             <h2 class="uk-width-1-3 uk-text-center" style="font-size: 3em">Информация</h2>
-            <div class="uk-width-2-3" style="padding: 5px 10%;">
+            <div class="uk-width-2-3" style="padding: 5px 5%; border-left: 2px solid">
                 <ul class="uk-nav-default" uk-nav>
                     <li class="uk-parent">
                         <a href="# " class="uk-text-muted uk-flex uk-flex-middle uk-flex-between"
@@ -213,7 +215,8 @@
                     <li class="uk-parent">
                         <a class="uk-text-muted uk-flex uk-flex-middle uk-flex-between"
                             style="border-bottom: 1px solid">
-                            <h2 class="uk-text-muted uk-margin-small-bottom" style="font-size: 3.5em">Харрактиристики</h2>
+                            <h2 class="uk-text-muted uk-margin-small-bottom" style="font-size: 3.2em">Харрактиристики
+                            </h2>
                             <span uk-icon="icon: menu; ratio: 2"></span>
                         </a>
                         <ul class="uk-nav-sub uk-width-1">
@@ -235,12 +238,12 @@
 
             <div class="uk-width-2-5">
 
-                <div class="uk-flex uk-flex-center uk-text-center  uk-card uk-card-default"
-                    style="border-radius: 20px; padding: 30px 0;">
-                    <div class="uk-margin-right uk-height-small">
-                        <h3>{{product.rating}}</h3>
-                        <p>На основании <br>{{product.rate_sum}} отзывов</p>
-                        <div>
+                <div class="uk-flex uk-flex-center uk-text-center uk-card uk-card-default"
+                    style="border-radius: 20px; padding: 20px 0;">
+                    <div class="uk-margin-right">
+                        <h3 style="font-size: 3.5em;">{{product.rating}}</h3>
+                        <p style="font-size: 2em;">На основании <br>{{product.rate_sum}} отзывов</p>
+                        <p style="font-size: 1.8em;">
                             {% if product.flooredrating == 5 %}
                             &starf;&starf;&starf;&starf;&starf;
                             {% elif product.flooredrating == 4 %}
@@ -254,58 +257,65 @@
                             {% elif product.flooredrating == 0 %}
                             &star;&star;&star;&star;&star;
                             {% endif %}
-                        </div>
+                        </p>
                     </div>
                 </div>
                 <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center uk-margin-small-top">
                     {% if request.user.is_authenticated %}
-                    <button style="color: white; background-color:#0A3644" class="uk-button uk-margin-small-bottom"
-                        type="button" uk-toggle="target: #modal-example">Написать отзыв</button>
+                    <button
+                        style="color: white; background-color:#0A3644; font-size: 2em; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; padding: 2%"
+                        class="uk-button uk-margin-small-bottom uk-width-1-1" type="button"
+                        uk-toggle="target: #modal-example">Написать отзыв</button>
                     {% else %}
-                    <a style="color: white; background-color:#0A3644" class="uk-button uk-margin-small-bottom"
-                        type="button" href="/login">Написать отзыв</a>
+                    <a style="color: white; background-color:#0A3644; font-size: 1.8em; padding: 2%; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;"
+                        class="uk-button uk-margin-small-bottom uk-width-1-1" type="button" href="/login">Написать отзыв</a>
                     {% endif %}
 
                     <div id="modal-example" uk-modal>
 
-                        <div class="uk-modal-dialog uk-modal-body">
-                            <h2 class="uk-modal-title">Отзыв</h2>
+                        <div class="uk-modal-dialog uk-modal-body" style="width: 100%!important">
+                            <h2 class="uk-modal-title" style="font-size: 2em;">Отзыв</h2>
                             <div class="uk-flex">
-                                <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="50" height="80"
-                                    alt="">
+                                <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="120" alt="">
                                 <div class="uk-flex-column uk-margin-left">
-                                    <p class="uk-margin-remove">{{ user.first_name }}</p>
-                                    <p class="uk-margin-remove">{{ user.email }}</p>
+                                    <p style="font-size: 2em;" class="uk-margin-remove">{{ user.first_name }}</p>
+                                    <p style="font-size: 2em;" class="uk-margin-remove">{{ user.email }}</p>
                                 </div>
                             </div>
                             <form method="POST" action="">
                                 <div class="uk-margin-top">
 
-                                    <h3>Отзыв:</h3>
-                                    <textarea class="uk-textarea" name="review" id="" rows="10" style="width: 100%;"
-                                        maxlength="1500"></textarea>
-                                    <div class="uk-flex" style="margin-left: 45%">
-                                        <p class="uk-margin-small-top uk-margin-small-right">Оценка: </p>
+                                    <h3 style="font-size: 2em;">Отзыв:</h3>
+                                    <textarea class="uk-textarea" name="review" id="" rows="10"
+                                        style="width: 100%; font-size: 2em;" maxlength="2000"></textarea>
+                                    <div class="uk-flex uk-flex-middle uk-width-4-5" style="margin: 0 auto">
+                                        <p style="font-size: 2em;" class="uk-margin-small-top uk-margin-small-right">
+                                            Оценка: </p>
                                         <div class="uk-margin-remove-right rating-area">
-                                            <input type="radio" id="star-5" name="rating" value="5">
-                                            <label for="star-5" title="Оценка «5»"></label>
-                                            <input type="radio" id="star-4" name="rating" value="4">
-                                            <label for="star-4" title="Оценка «4»"></label>
-                                            <input type="radio" id="star-3" name="rating" value="3">
-                                            <label for="star-3" title="Оценка «3»"></label>
-                                            <input type="radio" id="star-2" name="rating" value="2">
-                                            <label for="star-2" title="Оценка «2»"></label>
-                                            <input type="radio" id="star-1" name="rating" value="1">
-                                            <label for="star-1" title="Оценка «1»"></label>
+                                            <input style="font-size: 2em;" type="radio" id="star-5" name="rating"
+                                                value="5">
+                                            <label style="font-size: 2em;" for="star-5" title="Оценка «5»"></label>
+                                            <input style="font-size: 2em;" type="radio" id="star-4" name="rating"
+                                                value="4">
+                                            <label style="font-size: 2em;" for="star-4" title="Оценка «4»"></label>
+                                            <input style="font-size: 2em;" type="radio" id="star-3" name="rating"
+                                                value="3">
+                                            <label style="font-size: 2em;" for="star-3" title="Оценка «3»"></label>
+                                            <input style="font-size: 2em;" type="radio" id="star-2" name="rating"
+                                                value="2">
+                                            <label style="font-size: 2em;" for="star-2" title="Оценка «2»"></label>
+                                            <input style="font-size: 2em;" type="radio" id="star-1" name="rating"
+                                                value="1">
+                                            <label style="font-size: 2em;" for="star-1" title="Оценка «1»"></label>
                                         </div>
                                     </div>
                                 </div>
                                 {% csrf_token %}
                                 <p class="uk-text-right">
-                                    <button class="uk-button uk-button-default uk-modal-close"
-                                        type="button">Закрыть</button>
-                                    <button name="comment_product" class="uk-button uk-button-primary"
-                                        type="submit">Опубликовать</button>
+                                    <button class="uk-button uk-button-default uk-modal-close" type="button"
+                                        style="font-size: 1.8em; padding:2%;">Закрыть</button>
+                                    <button name="comment_product" class="uk-button uk-button-primary" type="submit"
+                                        style="font-size: 1.8em; padding:2%;">Опубликовать</button>
                                 </p>
                             </form>
                         </div>
@@ -316,49 +326,48 @@
 
             </div>
             <div class="uk-width-3-5">
-                <ul class="uk-comment-list">
+                <ul class="uk-nav-default" uk-nav>
                     {% for message in messages %}
-                    <li>
 
-                        <article class="uk-comment uk-comment-primary uk-visible-toggle uk-border-rounded"
-                            tabindex="-1">
-                            <header class="uk-comment-header uk-position-relative">
+                    <li class="uk-parent" style="background-color: #f8f8f8; margin-bottom: 5%; padding: 5%">
+                        <a href="# " class="uk-text-muted uk-flex uk-flex-middle uk-flex-between">
 
-                                <div class="uk-grid-medium uk-flex-middle" uk-grid>
-                                    <div class="uk-width-auto">
-
-                                        <img class="uk-comment-avatar" src="{{message.image_user}}" width="80"
-                                            height="80" alt="">
-                                    </div>
-                                    <div class="uk-width-expand">
-                                        <h4 class="uk-comment-title uk-margin-remove">
-                                            <p>{{message.comentator_email}}</p>
-                                        </h4>
-                                        <ul class="uk-comment-meta uk-subnav uk-subnav-divider">
-                                            <li>
-                                                {% if message.flag == "day" %}
-                                                <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
-                                                        href="#">{{message.created_data}}</a>&nbsp;days ago.</p>
-                                                {% elif message.flag  == "month" %}
-                                                <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
-                                                        href="#">{{message.created_data}}</a>&nbsp;month ago.</p>
-                                                {% else %}
-                                                <p class="uk-comment-meta" style="margin: 0"><a class="uk-link-reset"
-                                                        href="#">{{message.created_data}}</a>&nbsp;year ago.</p>
-                                                {% endif %}
-                                            </li>
-                                            <li>
-                                                <p style="margin: 0">Оценка: {{message.rating}}</p>
-                                            </li>
-                                        </ul>
-                                    </div>
+                            <div class="uk-width-auto uk-flex">
+                                <img class="uk-comment-avatar" src="{{message.image_user}}" width="120" alt="">
+                                <div class="uk-width-expand uk-flex-row" style="margin-left: 5%">
+                                    <h4 style="font-size: 2em;" class="uk-margin-remove"> {{message.comentator_email}}
+                                    </h4>
+                                    <ul class="uk-comment-meta uk-subnav uk-subnav-divider" uk-nav>
+                                        <li>
+                                            {% if message.flag == "day" %}
+                                            <p class="uk-comment-meta" style="margin: 0 auto; font-size: 1.5em;">
+                                                {{message.created_data}} &nbsp;days ago.
+                                            </p>
+                                            {% elif message.flag  == "month" %}
+                                            <p class="uk-comment-meta" style="margin: 0 auto; font-size: 1.5em;">
+                                                {{message.created_data}} &nbsp;month ago.</p>
+                                            {% else %}
+                                            <p class="uk-comment-meta" style="margin: 0 auto; font-size: 1.5em;">
+                                                {{message.created_data}} &nbsp;year ago.
+                                            </p>
+                                            {% endif %}
+                                        </li>
+                                        <li>
+                                            <p style="margin: 0 auto; font-size: 2em;">Оценка:
+                                                {{message.rating}}</p>
+                                        </li>
+                                    </ul>
                                 </div>
-
-                            </header>
-                            <div class="uk-comment-body">
-                                {{message.review}}
                             </div>
-                        </article>
+
+
+
+                        </a>
+                        <ul class="uk-nav-sub uk-width-1">
+                            <li class="uk-width-1">
+                                <p class="uk-text-break" style="font-size: 2em">{{message.review}}</p>
+                            </li>
+                        </ul>
                     </li>
                     {% endfor %}
                 </ul>
@@ -366,7 +375,6 @@
         </div>
     </container>
 </div>
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
@@ -400,9 +408,8 @@
         let prices = "{{product.price}}".split(',')
         let amount = "{{product.amount}}".split(',')
         let index = BtnList.indexOf(el)
-        document.getElementById('price').innerHTML = prices[index]
+        document.getElementById('price').innerHTML = prices[index] + " руб."
         document.getElementById('amount').innerHTML = amount[index]
-        console.log(amount)
     }));
 
     $('.amount-changer').on('click', function () {

@@ -202,6 +202,9 @@ def sertCardBrend_page(request, shopnmae):
                             'picture2': product.picture2,
                             'picture3': product.picture3,
                             'id_creator': product.id_creator,
+                            'show_price': product.show_price,
+                            'description': product.description if len(product.description) < 30 else product.description[0: 30] + "...",
+                            'amount': product.amount.split(",")[0],
                             }
                            for product in products]
     if request.user.is_authenticated:
