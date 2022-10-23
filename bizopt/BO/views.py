@@ -312,8 +312,6 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
         if request.FILES:
 
-            
-
             file1 = request.FILES['product_photo1']
             file2 = request.FILES['product_photo2']
             file3 = request.FILES['product_photo3']
@@ -376,12 +374,18 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.save()
         return HttpResponseRedirect("/becomeCreator/")
 
+     
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
 
     if request.method == 'GET' and "delete" in request.GET:
         product = Product_creator.objects.get(product_id=request.GET['delete'])
         product.delete()
+        return HttpResponseRedirect("/becomeCreator/")
+
+    if request.method == 'GET' and "edit" in request.GET:
+        product = Product_creator.objects.get(product_id=request.GET['edit'])
+        print(product.product_name)
         return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "decline" in request.POST:
@@ -428,7 +432,44 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             products[i].save()
     return render(request, 'becomeCreator.html', context)
 
+def editProduct_page(request, product_id):
+    content = gen_menu(request)
+    print('AAAAAAAAAAAAAAAAAAAAA')
 
+    try:
+        product = Product_creator.objects.get(product_id=product_id)
+
+
+    # data = {
+    #     'product_name': 'AAAAAAA',
+    #     'country':'AAAAAAA',
+    #     'brand':'AAAAAAA',
+    #     'description': 'AAAAAAA',
+    #     'category': 'AAAAAAA',
+    #     'duration': 'AAAAAAA',
+    #     'sex':'AAAAAAA',
+    #     'price':'AAAAAAA',
+    #     'width_product':'AAAAAAA',
+    #     'height_product':'AAAAAAA',
+    #     'length_product': 'AAAAAAA',
+    #     'width_packaging':'AAAAAAA',
+    #     'height_packaging': 'AAAAAAA',
+    #     'length_packaging': 'AAAAAAA',
+
+    # } initial = data
+    except:
+        pass
+    form = ProductEditForm()
+    content['form8'] = form
+    
+    # content['shop'] = Shop.objects.get(email=request.user.email)
+
+    print("AAAAAAAAAAAAAAAAAA")
+
+    # form8.save()
+
+
+    return render(request, '/becomeCreatorTemplates/7/edit/', content)
 
 
 
@@ -519,6 +560,34 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
         content['shop'] = Shop.objects.get(email=request.user.email)
+
+    # elif name == '7':
+
+    #     products = Product_creator.objects.filter()
+
+    #     # data = {
+    #     #     'product_name': 'AAAAAAA',
+    #     #     'country':'AAAAAAA',
+    #     #     'brand':'AAAAAAA',
+    #     #     'description': 'AAAAAAA',
+    #     #     'category': 'AAAAAAA',
+    #     #     'duration': 'AAAAAAA',
+    #     #     'sex':'AAAAAAA',
+    #     #     'price':'AAAAAAA',
+    #     #     'width_product':'AAAAAAA',
+    #     #     'height_product':'AAAAAAA',
+    #     #     'length_product': 'AAAAAAA',
+    #     #     'width_packaging':'AAAAAAA',
+    #     #     'height_packaging': 'AAAAAAA',
+    #     #     'length_packaging': 'AAAAAAA',
+
+    #     # } initial = data
+    #     form = ProductEditForm()
+    #     content['form8'] = form
+        
+    #     content['shop'] = Shop.objects.get(email=request.user.email)
+    
+
 
     return render(request, path, content)
 

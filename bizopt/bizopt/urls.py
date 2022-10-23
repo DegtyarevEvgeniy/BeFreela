@@ -51,8 +51,12 @@ urlpatterns = [
     path('brands/', views.brands_page),
     path('brands/<shopnmae>', views.sertCardBrend_page),
     # path('signin/', SignUpView.as_view(), name='signin'),
+
     path('becomeCreator/', views.becomeCreator_page),
+    # <name>/edit/<product_id>/32b2287d-e27c-4a15-ade0-ea14d3791cc9
+    path('becomeCreator/becomeCreatorTemplates/7/edit/<product_id>/', views.editProduct_page),
     path('becomeCreator/becomeCreatorTemplates/<name>/', views.becomeCreatorTemplate_page),
+
     path('yourTasks/', views.yourTasks_page),
     path('addTask/', views.addTask_page),
     # path('goods/category/<category>/<subcategory>', views.goodsSearch_page_subcategory),
