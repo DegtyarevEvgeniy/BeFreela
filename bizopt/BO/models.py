@@ -27,7 +27,6 @@ class Product_creator(models.Model):
     rating = models.FloatField(default=0.0)
     category = models.CharField('Категория', max_length=50, default='')
     sex = models.CharField('Категория', max_length=50, default='')
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='')
     compound = models.CharField('Срок получения товара', max_length=50, default='')
     size = models.CharField(max_length=300, default='')
     duration = models.CharField(max_length=300, default='')
@@ -42,13 +41,7 @@ class Product_creator(models.Model):
     prevPicture = models.ImageField(default='')
 
     tags = TaggableManager()
-        # width_product = models.FloatField('', default=0)
-    # height_product = models.FloatField('', default=0)
-    # length_product = models.FloatField('', default=0)
-    # width_packaging = models.FloatField('', default=0)
-    # height_packaging = models.FloatField('', default=0)
-    # length_packaging = models.FloatField('', default=0)
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='')
+   
 
 class Product_buy(models.Model):
     id_creator = models.CharField(max_length=200, default='') #кто создал
@@ -70,6 +63,32 @@ class Product_buy(models.Model):
     img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
     prevImg = models.ImageField(default='')
     # status2 = models.CharField(max_length=20, default='')
+
+class Cart(models.Model):
+    id_creator = models.CharField(max_length=200, default='')
+    id_buyer = models.CharField(max_length=200, default='')
+    product_name = models.CharField('Название', max_length=500, default='')
+    country = models.CharField('Страна', max_length=30, default='')
+    brand = models.CharField('Бренд', max_length=30, default='')
+    rate_sum = models.IntegerField(default=0)
+    vote_sum = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
+    category = models.CharField('Категория', max_length=50, default='')
+    sex = models.CharField('Категория', max_length=50, default='')
+    compound = models.CharField('Срок получения товара', max_length=50, default='')
+    size = models.CharField(max_length=300, default='')
+    duration = models.CharField(max_length=300, default='')
+    price = models.CharField(max_length=300, default=0)
+    show_price = models.CharField(max_length=300, default=0)
+    description = models.CharField('Описание', max_length=1000, default='')
+    availability = models.CharField('', max_length=100, default='')
+    amount = models.CharField(max_length=100, default='')
+    picture1 = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png') 
+    picture2 = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png') 
+    picture3 = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png') 
+    prevPicture = models.ImageField(default='')
+
+    tags = TaggableManager()
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='')

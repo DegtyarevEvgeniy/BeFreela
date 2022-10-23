@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+
+<body>
+    <div class="uk-flex uk-flex-between uk-flex-middle uk-width-4-5" style="margin: 0 auto">
+        <h1>Корзина</h1>
+        <h3 class="uk-text-center uk-width-2-3">Здесь вы можете посмотреть какие товары вы выбрали и подкорректировать заказ</h3>
+    </div>
+
+
+
+    <div class="uk-width-4-5 uk-flex-column uk-margin-bottom" style="margin: 2% auto">
+
+        <form method="POST" class="uk-width-1">
+            <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
+                <button class="uk-button uk-button-primary uk-border-rounded uk-width-3-5" style="margin: 0 auto; font-size: 1.5em; "
+            type="button" uk-toggle="target: #modal-close-default">Оплатить заказ</button>
+            </div>
+            {% for product in items %}
+            <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
+                style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
+                <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
+                    <div><img src="{{product.picture1}}" alt="" width="200px" style="border-radius: 5px">
+                    </div>
+                    <div class="uk-flex-row">
+                        <h2 class="uk-text-break">{{ product.product_name }}</h2>
+                    </div>
+                </div>
+                <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5">
+                    <div class="uk-width-2-5">
+                        <h3 class="uk-text-break" style="text-align: center">{{ product.show_price }} руб.</h3>
+                    </div>
+                    <div class="uk-width-auto">
+                        <div class="uk-flex" style="margin-top: 5%">
+                            {% csrf_token %}
+                            <button class="uk-button uk-button-danger uk-border-rounded uk-width-1" style="margin: 0 1%"
+                                name="decline" value="{{product.id}}" type="submit">Отказаться</button>
+                            <!-- <a class="uk-button uk-button-primary uk-border-rounded uk-width-auto {{product.chat}}" -->
+                            <!-- id="cahtBtn" style="margin: 0 1%" type="button">Чат</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+    </div>
+
+    <div id="modal-close-default" uk-modal>
+        <div class="uk-modal-dialog uk-modal-body">
+            <button class="uk-modal-close-default" type="button" uk-close></button>
+            <h2 class="uk-modal-title">Оплата</h2>
+            <div>
+                <div class="uk-flex uk-margin-bottom">
+                    <img src="{{user.userImage}}" alt="" class="uk-border-rounded" width="50" height="80" alt="">
+                    <div class="uk-flex-column uk-margin-left">
+                        <p class="uk-margin-remove">{{ user.first_name }}</p>
+                        <p class="uk-margin-remove">{{ user.email}}</p>
+                    </div>
+                </div>
+                <div class="uk-flex">
+                    <p class="uk-margin-remove">Получатель:</p>
+                    <span class="uk-label" style="margin: 0 0 0 5%">{{user.first_name}} {{user.last_name}}</span>
+                </div>
+                <div class="uk-margin-top">
+                    <p>Отсканируйте QR-код и оплатите товар</p>
+                    <img
+                        src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg">
+                </div>
+                <button class="uk-button uk-button-default uk-margin-small-right uk-modal-close"
+                    style="margin-left: 75%; border-radius: 5px;  " type="button">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const chatBtn = document.getElementById('cahtBtn')
+
+    chatBtn.addEventListener('click', function () {
+        window.location.replace('/chats/')
+        localStorage.setItem('activeChat', chatBtn.classList[chatBtn.classList.length - 1])
+    })
+</script>
+
+<style>
+    .checked {
+        color: orange;
+    }
+
+    .rating-area {
+        overflow: hidden;
+        width: 265px;
+        margin: 0 auto;
+    }
+
+    .rating-area:not(:checked)>input {
+        display: none;
+    }
+
+    .rating-area:not(:checked)>label {
+        float: right;
+        width: 42px;
+        padding: 0;
+        cursor: pointer;
+        font-size: 32px;
+        line-height: 32px;
+        color: lightgrey;
+        text-shadow: 1px 1px #bbb;
+    }
+
+    .rating-area:not(:checked)>label:before {
+        content: '★';
+    }
+
+    .rating-area>input:checked~label {
+        color: gold;
+        text-shadow: 1px 1px #c60;
+    }
+
+    .rating-area:not(:checked)>label:hover,
+    .rating-area:not(:checked)>label:hover~label {
+        color: gold;
+    }
+
+    .rating-area>input:checked+label:hover,
+    .rating-area>input:checked+label:hover~label,
+    .rating-area>input:checked~label:hover,
+    .rating-area>input:checked~label:hover~label,
+    .rating-area>label:hover~input:checked~label {
+        color: gold;
+        text-shadow: 1px 1px goldenrod;
+    }
+
+    .rate-area>label:active {
+        position: relative;
+    }
+</style>
+
+
+{% endblock %}

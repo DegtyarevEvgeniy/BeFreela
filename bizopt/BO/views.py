@@ -578,27 +578,35 @@ def cardProduct_page(request, product_id):
     context = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
     shop = Shop.objects.get(email=product.id_creator)
+    print(request.POST)
     try:
-        if request.method == "POST" and "buy_product" in request.POST:
-            product_buy = Product_buy()
+        if request.method == "POST" and "addToCartBtn" in request.POST:
+            cart_item = Cart()
+            cart_item.id_buyer = Account.objects.get(email=request.user)
+            cart_item.product_id = product.product_id
+            cart_item.id_creator = product.id_creator
+            cart_item.product_name = product.product_name
+            cart_item.country = product.country
+            cart_item.brand = product.brand
+            cart_item.rate_sum = product.rate_sum
+            cart_item.vote_sum = product.vote_sum
+            cart_item.rating = product.rating
+            cart_item.category = product.category
+            cart_item.sex = product.sex
+            cart_item.compound = product.compound
+            cart_item.size = product.size
+            cart_item.duration = product.duration
+            cart_item.price = product.price
+            cart_item.show_price = product.show_price
+            cart_item.description = product.description
+            cart_item.availability = product.availability
+            cart_item.amount = product.amount
+            cart_item.picture1 = product.picture1
+            cart_item.picture2 = product.picture2
+            cart_item.picture3 = product.picture3
+            cart_item.prevPicture = product.prevPicture
+            cart_item.save()
 
-            product_buy.price = product.show_price
-            product_buy.duration = product.duration
-            # product = Product_creator.objects.get(id=product_id)
-            product_buy.id_creator = product.id_creator
-            product_buy.product_name = product.product_name
-
-            user_buy = Account.objects.get(email=request.user)
-            product_buy.id_user_buy = user_buy.email
-
-            # TODO: как станет возможным добавлять таск, подумать откуда взять task_id
-            # product_buy.task_id = 'aaaaaaaaaaaaaaabaaaaaaaaaaaaaaac'
-            product_buy.status = 'Заказ принят на рассмотрение'
-            product_buy.message = request.POST['message']
-            product_buy.delivery_address = request.POST['address']
-            product_buy.amount = request.POST['amount']
-            product_buy.status_pay = False
-            product_buy.save()
             return HttpResponseRedirect(f'/goods/{product_id}/')
         # else:
         # product = Product_creator.objects.get(id=product_id)
@@ -878,7 +886,15 @@ def chat_page_list(request):
     return render(request, 'chatRoom.html', content)
 
 def cart_page(request):
-    return render(request, 'cart.html')
+    content = {}
+    user = request.user
+    cart_items = Cart.objects.filter(id_buyer = user)
+    content['items'] = [i for i in cart_items]
+    if request.method == 'POST' and 'decline' in request.POST:
+        Cart.objects.filter(id = request.POST['decline']).delete()
+        return HttpResponseRedirect('/cart/')
+
+    return render(request, 'cart.html', content)
 
 
 def getMsg(request, room_id):
