@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'bizopt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'u1788843_befreela',
-        'USER': 'u1788843_deg',
-        'PASSWORD': 'DEa.63636363',
-        'HOST': '31.31.196.26',
+        'NAME': 'u1815244_befreela',
+        'USER': 'u1815244_bf',
+        'PASSWORD': '4VX6tC2nSQg0Cpiz',
+        'HOST': '31.31.196.220',
         'PORT': '3306',
     #    'OPTIONS': {
     #        'init_command': "SET sql_mode='STRICT_TRANS_TABLES', innodb_strict_mode=1",
