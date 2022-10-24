@@ -41,7 +41,7 @@
                             <td class="uk-text-center">
                                 <button name="delete" form="goodsList" value="{{product.id}}" href="" type="submit"
                                     class="uk-button uk-button-danger uk-border-rounded uk-text-large"> X </button>
-                                <button name="edit" form="goodsList" value="{{product.id}}" href="" type="submit"
+                                <button name="edit" form="goodsList" value="{{product.id}}" href="" type="button"
                                     class="uk-button uk-button-primary uk-border-rounded uk-text-large Btn_edit"> edit </button>
                             </td>
                         </tr>
@@ -113,8 +113,8 @@
 
     $('.Btn_edit').on('click', {}, function (inBody) {
         var xhr = new XMLHttpRequest()
-        localStorage.page = 7
-        xhr.open('GET', `becomeCreatorTemplate/7/edit/${this.value}/`)
+        // localStorage.page = 7
+        xhr.open('GET', `becomeCreatorTemplates/edit/${this.value}/`)
         xhr.onload = function () {
             $('#MainWindowContainer').html(xhr.response)
         }

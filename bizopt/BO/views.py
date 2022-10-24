@@ -70,7 +70,7 @@ def upload_image(image, name):
 
 def gen_submenu(request):
     tags = Tag.objects.all()
-    context = {
+    content = {
         'submenu': [
             {'xpos': 'left', 'position': 'out', 'link': '', 'text': 'каталог'},
             {'xpos': 'right', 'position': 'out', 'link': '/orders/', 'text': 'Корзина'},
@@ -79,12 +79,12 @@ def gen_submenu(request):
                  for tag in tags]
     }
 
-    return context
+    return content
 
 
 def creators_page(request):
-    context = gen_menu(request)
-    return render(request, 'creators.html', context)
+    content = gen_menu(request)
+    return render(request, 'creators.html', content)
 
 
 def logout_view(request):
@@ -108,25 +108,25 @@ def yourTasks_page(request):
 
 
 def goodsSearch_page(request, product_name):
-    context = gen_menu(request)
+    content = gen_menu(request)
     products = Product_creator.objects.filter(
         Q(product_name__icontains=product_name) | Q(country__icontains=product_name) | Q(brand__icontains=product_name)
     )
-    context['products'] = products
-    return render(request, 'goods.html', context)
+    content['products'] = products
+    return render(request, 'goods.html', content)
 
 def goods_page(request):
-    context = gen_menu(request)
+    content = gen_menu(request)
     products = Product_creator.objects.all()
-    context['products'] = products
-    for element in context['products']:
+    content['products'] = products
+    for element in content['products']:
         element.flooredrating = math.floor(element.rating)
-    # context['products'].show_price = list(filter(None, products.price.split(",")))[0]
+    # content['products'].show_price = list(filter(None, products.price.split(",")))[0]
     
-    return render(request, 'goods.html', context)
+    return render(request, 'goods.html', content)
 
 def goodsSearch_page_category(request, category):
-    context = gen_menu(request)
+    content = gen_menu(request)
     cat = {
         'Clothing':'Одежда',
         'Shoes':'Обувь',
@@ -137,12 +137,12 @@ def goodsSearch_page_category(request, category):
     print(category)
     products = Product_creator.objects.filter( Q(category__icontains=cat[category]) )
 
-    context['category'] = cat[category]
-    context['products'] = products
-    return render(request, 'goods.html', context)
+    content['category'] = cat[category]
+    content['products'] = products
+    return render(request, 'goods.html', content)
 
 # def goodsSearch_page_subcategory(request, category, subcategory):
-#     context = gen_menu(request)
+#     content = gen_menu(request)
 #     products = Product_creator.objects.filter(
 #         Q(product_name__icontains=category) | Q(country__icontains=category) | Q(brand__icontains=category) | Q(category__icontains=category)
 #     )
@@ -150,24 +150,24 @@ def goodsSearch_page_category(request, category):
 #         Q(product_name__icontains=subcategory) | Q(country__icontains=subcategory) | Q(brand__icontains=subcategory)
 #         | Q(set__icontains=subcategory) | Q(subcategory__icontains=subcategory)
 #     )
-#     context['products'] = [{'id': product.id,
+#     content['products'] = [{'id': product.id,
 #                             'product_name': product.product_name,
 #                             'cost': product.price,
 #                             'availability': product.availability,
 #                             }
 #                            for product in products]
-#     return render(request, 'goodsSearch.html', context)
+#     return render(request, 'goodsSearch.html', content)
 
 def brands_page(request):
     user_id = 0
     if request.user.is_authenticated:
         user_id = Account.objects.get(email=request.user.email).id
-    context = gen_menu(request)
+    content = gen_menu(request)
     creators = Shop.objects.all()
     persons = Account.objects.all()
-    # context['persons'] = persons
+    # content['persons'] = persons
     brands = Shop.objects.all()
-    context['brands'] = [{
+    content['brands'] = [{
         'name': brand.name,
         'logoImage': brand.logoImage,
         'bgImage': brand.bgImage,
@@ -177,7 +177,7 @@ def brands_page(request):
         'email': brand.email,
         'phone': brand.phone,
     }for brand in brands]
-    context['creators'] = [{'name': creator.name,
+    content['creators'] = [{'name': creator.name,
                             'logoImage': creator.logoImage,
                             'bgImage': creator.bgImage,
                             'description': creator.description,
@@ -187,14 +187,14 @@ def brands_page(request):
                             'phone': creator.phone,
                             }
                            for creator, person in zip(creators, persons)]
-    return render(request, 'brands.html', context)
+    return render(request, 'brands.html', content)
 
 def sertCardBrend_page(request, shopnmae):
-    context = gen_menu(request)
+    content = gen_menu(request)
     profile = Shop.objects.get(name=shopnmae)
-    context['profile'] = profile
+    content['profile'] = profile
     products = Product_creator.objects.all()
-    context['products'] = [{'id': product.id,
+    content['products'] = [{'id': product.id,
                             'product_name': product.product_name,
                             'cost': product.price,
                             'availability': product.availability,
@@ -206,11 +206,11 @@ def sertCardBrend_page(request, shopnmae):
                            for product in products]
     if request.user.is_authenticated:
         user = Account.objects.get(email=request.user.email)
-        context['link'] = (user.id * profile.id) + user.id + profile.id
-    return render(request, 'cardBrand.html', context)
+        content['link'] = (user.id * profile.id) + user.id + profile.id
+    return render(request, 'cardBrand.html', content)
 
 def addTask_page(request):  # sourcery skip: hoist-statement-from-if
-    context = gen_menu(request)
+    content = gen_menu(request)
 
     if request.method == 'POST':
         form = addTasks(request.POST)
@@ -225,16 +225,16 @@ def addTask_page(request):  # sourcery skip: hoist-statement-from-if
             task.tags.add(request.POST['tag'])
             task.save()
             return redirect('/yourTasks/')
-        context["form"] = form
+        content["form"] = form
 
     else:
         form = addTasks()
-        context["form"] = form
-    return render(request, 'addTask.html', context)
+        content["form"] = form
+    return render(request, 'addTask.html', content)
 
 
 def becomeCreator_page(request):  # sourcery skip: low-code-quality
-    context = gen_menu(request)
+    content = gen_menu(request)
     user = Account.objects.get(email=request.user)
     shop = Shop.objects.get(email=request.user.email)
 
@@ -379,7 +379,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         print("CARDS")
 
     if request.method == 'GET' and "delete" in request.GET:
-        product = Product_creator.objects.get(product_id=request.GET['delete'])
+        product = Product_creator.objects.get(id=request.GET['delete'])
         product.delete()
         return HttpResponseRedirect("/becomeCreator/")
 
@@ -430,46 +430,53 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         for i in range(len(products)):
             products[i].status = statuses[statuses_list[i]]
             products[i].save()
-    return render(request, 'becomeCreator.html', context)
+    return render(request, 'becomeCreator.html', content)
 
 def editProduct_page(request, product_id):
     content = gen_menu(request)
-    print('AAAAAAAAAAAAAAAAAAAAA')
 
     try:
-        product = Product_creator.objects.get(product_id=product_id)
+        product = Product_creator.objects.get(id=product_id)
 
 
-    # data = {
-    #     'product_name': 'AAAAAAA',
-    #     'country':'AAAAAAA',
-    #     'brand':'AAAAAAA',
-    #     'description': 'AAAAAAA',
-    #     'category': 'AAAAAAA',
-    #     'duration': 'AAAAAAA',
-    #     'sex':'AAAAAAA',
-    #     'price':'AAAAAAA',
-    #     'width_product':'AAAAAAA',
-    #     'height_product':'AAAAAAA',
-    #     'length_product': 'AAAAAAA',
-    #     'width_packaging':'AAAAAAA',
-    #     'height_packaging': 'AAAAAAA',
-    #     'length_packaging': 'AAAAAAA',
-
-    # } initial = data
+        content['product'] = {
+            'product_id': product.product_id,
+            'id_creator': product.id_creator,
+            'product_name': product.product_name,
+            'country': product.country,
+            'brand': product.brand,
+            'rate_sum': product.rate_sum,
+            'vote_sum': product.vote_sum,
+            'rating': product.rating,
+            'category': product.category,
+            'sex': product.sex,
+            'compound': product.compound,
+            'size': product.size,
+            'duration': product.duration,
+            'price': product.price,
+            'show_price': product.show_price,
+            'description': product.description,
+            'availability': product.availability,
+            'amount': product.amount,
+            'picture1': product.picture1,
+            'picture2': product.picture2,
+            'picture3': product.picture3,
+            'prevPicture': product.prevPicture,
+        }
     except:
         pass
+
     form = ProductEditForm()
     content['form8'] = form
     
     # content['shop'] = Shop.objects.get(email=request.user.email)
 
-    print("AAAAAAAAAAAAAAAAAA")
 
     # form8.save()
 
 
-    return render(request, '/becomeCreatorTemplates/7/edit/', content)
+    return render(request, 'becomeCreatorTemplates/edit.html', content)
+
 
 
 
@@ -532,7 +539,7 @@ def becomeCreatorTemplate_page(request, name):
     elif name == '5':
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
-        content['products'] = [{'id': product.product_id,
+        content['products'] = [{'id': product.id,
                                 'id_creator': product.id_creator,
                                 'product_name': product.product_name,
                                 'country': product.country,
@@ -592,18 +599,18 @@ def becomeCreatorTemplate_page(request, name):
     return render(request, path, content)
 
 def tasks_page(request):
-    context = gen_menu(request)
+    content = gen_menu(request)
     tasks = Task.objects.all()
-    context['task_cards'] = [{'id': task.id,
+    content['task_cards'] = [{'id': task.id,
                               'name': task.name,
                               'description': task.description
                               } for task in tasks]
-    return render(request, 'tasks.html', context)
+    return render(request, 'tasks.html', content)
 
 
 def employers_page(request):
-    context = gen_menu(request)
-    return render(request, 'employers.html', context)
+    content = gen_menu(request)
+    return render(request, 'employers.html', content)
 
 # get rundom amount of ids from sertain DB element
 def random_DB_id(segment, amount):
@@ -619,22 +626,22 @@ def random_DB_id(segment, amount):
 
 
 def index_page(request):
-    context = gen_menu(request)
+    content = gen_menu(request)
     if request.user.is_authenticated:
-        context['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
-        context['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
-        return render(request, 'index.html', context)
+        content['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
+        content['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
+        return render(request, 'index.html', content)
     else:
-        return render(request, 'index.html', context)
+        return render(request, 'index.html', content)
 
 
 
 def cardTask_page(request, task_id):
-    context = gen_menu(request)
+    content = gen_menu(request)
     try:
         task = Task.objects.get(id=task_id)
-        context['task'] = task
-        return render(request, 'cardTask.html', context)
+        content['task'] = task
+        return render(request, 'cardTask.html', content)
     except Task.DoesNotExist as e:
         raise Http404 from e
 
@@ -644,7 +651,7 @@ def cardProduct_page(request, product_id):
     dt = datetime.now()
     df = DateFormat(dt)
     df.format(get_format('DATE_FORMAT'))
-    context = gen_menu(request)
+    content = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
     shop = Shop.objects.get(email=product.id_creator)
     print(request.POST)
@@ -696,14 +703,14 @@ def cardProduct_page(request, product_id):
             comment.save()
             product.save()
             return HttpResponseRedirect(f'/goods/{product_id}/')
-        context['product'] = product
-        context['product'].show_price = list(filter(None, product.price.split(",")))[0]
-        context['product'].sizes = list(filter(None, product.size.split(",")))
-        context['product'].prices = list(filter(None, product.price.split(",")))
-        context['product'].compounds = list(filter(None, product.compound.split(",")))
-        context['product'].rating = float(str(product.rating)[0:4])
-        context['product'].flooredrating = math.floor(product.rating)
-        context['shop'] = shop
+        content['product'] = product
+        content['product'].show_price = list(filter(None, product.price.split(",")))[0]
+        content['product'].sizes = list(filter(None, product.size.split(",")))
+        content['product'].prices = list(filter(None, product.price.split(",")))
+        content['product'].compounds = list(filter(None, product.compound.split(",")))
+        content['product'].rating = float(str(product.rating)[0:4])
+        content['product'].flooredrating = math.floor(product.rating)
+        content['shop'] = shop
 
 
 
@@ -712,7 +719,7 @@ def cardProduct_page(request, product_id):
         id_comment = product.id_creator
         user_product = Account.objects.get(email=id_comment)
         image_user_product = user_product.userImage
-        context['image_user_product'] = image_user_product
+        content['image_user_product'] = image_user_product
 
         for message in messages:
             # передача картинки пользователя, который выложил отзыв
@@ -730,22 +737,22 @@ def cardProduct_page(request, product_id):
             elif (int(df_message.y()) - int(df.y()) == 0) and (int(df_message.m()) - int(df.m()) != 0):
                 message.flag = "month"
                 message.created_data = int(df_message.m()) - int(df.m())
-                context['flag'] = flag
+                content['flag'] = flag
 
             else:
                 message.flag = "year"
                 message.created_data = int(df_message.y()) - int(df.y())
-                context['flag'] = flag
+                content['flag'] = flag
 
-        context['messages'] = messages
+        content['messages'] = messages
 
-        return render(request, 'cardProduct.html', context)
+        return render(request, 'cardProduct.html', content)
     except Task.DoesNotExist as e:
         raise Http404 from e
 
 
 def editTask_page(request, task_id):
-    context = gen_menu(request)
+    content = gen_menu(request)
     try:
         if request.method == 'POST':
             form = addTasks(request.POST)
@@ -759,25 +766,25 @@ def editTask_page(request, task_id):
                 task.save()
                 task.tags.add(form.cleaned_data['select'])
                 task.save()
-            context["form"] = form
+            content["form"] = form
             return redirect('/yourTasks/')
         else:
             form = addTasks()
-            context["form"] = form
-        return render(request, 'editTask.html', context)
+            content["form"] = form
+        return render(request, 'editTask.html', content)
     except Account.DoesNotExist as e:
         raise Http404 from e
 
 
 def infoTask_page(request):
-    context = gen_menu(request)
+    content = gen_menu(request)
     form = addTasks()
-    context["form"] = form
-    return render(request, 'infoTask.html', context)
+    content["form"] = form
+    return render(request, 'infoTask.html', content)
 
 
 def edit_profile(request):
-    context = gen_menu(request)
+    content = gen_menu(request)
     try:
         email = request.user
         person = Account.objects.get(email=email)
@@ -804,15 +811,15 @@ def edit_profile(request):
             person.save()
             return HttpResponseRedirect("/edit/")
         else:
-            context['user'] = person
-            return render(request, "editProfile.html", context)
+            content['user'] = person
+            return render(request, "editProfile.html", content)
 
     except Account.DoesNotExist as e:
         raise Http404 from e
 
 
 def profile(request, name):
-    context = gen_menu(request)
+    content = gen_menu(request)
     try:
         pers_data = Account.objects.get(username=name)
         pers_data.save()
@@ -830,8 +837,8 @@ def profile(request, name):
             city='',
         )
         item.save()
-    context['user'] = pers_data
-    return render(request, 'profile.html', context)
+    content['user'] = pers_data
+    return render(request, 'profile.html', content)
 
 
 def edit(request):
@@ -843,7 +850,7 @@ def edit(request):
 
 def login_page(request):
     form = SignUpForm(request.POST)
-    context = {
+    content = {
         'form': form
     }
     # вход
@@ -857,7 +864,7 @@ def login_page(request):
             return redirect('/')
         elif request.POST.get('password') != '':
             print('Try again! username or password is incorrect')
-            context['errors'] = 'Try again! username or password is incorrect'
+            content['errors'] = 'Try again! username or password is incorrect'
     # регистрация
     elif request.method == 'POST' and 'btnform1' in request.POST:
         # send_mail(
@@ -879,7 +886,7 @@ def login_page(request):
         else:
             print(form.errors)
 
-    return render(request, 'signin.html', context)
+    return render(request, 'signin.html', content)
 
 
 def signup(request):
@@ -894,10 +901,10 @@ def signup(request):
     else:
         print(form.errors)
 
-    context = {
+    content = {
         'form': form
     }
-    return render(request, 'signup.html', context)
+    return render(request, 'signup.html', content)
 
 
 def forgot_password_page(request):
