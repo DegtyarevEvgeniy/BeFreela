@@ -374,6 +374,73 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.save()
         return HttpResponseRedirect("/becomeCreator/")
 
+    if request.method == 'POST' and "save_changet_product" in request.POST:  
+        product = Product_creator.objects.get(product_id=request.POST['product_id'])
+
+        if request.FILES:
+
+            file1 = request.FILES['product_photo1']
+            file2 = request.FILES['product_photo2']
+            file3 = request.FILES['product_photo3']
+
+            filename1 = f'product_photo1_{str(request.user.email)}'
+            filename2 = f'product_photo2_{str(request.user.email)}'
+            filename3 = f'product_photo3_{str(request.user.email)}'
+
+            logoImageData1 = upload_image(file1, filename1)
+            logoImageData2 = upload_image(file2, filename2)
+            logoImageData3 = upload_image(file3, filename3)
+    
+            product.picture1 = logoImageData1[0]
+            product.picture2 = logoImageData2[0]
+            product.picture3 = logoImageData3[0]
+
+        # if "product_creator_tags" in request.POST:
+        #   form = MyForm(request.POST)
+        #   product.tags.add(form.cleaned_data['select'])
+        product.product_name = request.POST['product_name']
+        # product.price = request.POST['price']
+        product.description = request.POST['description']
+        product.brand = shop.name
+        size = ''
+        compound_name = ''
+        compound_percentage = ''
+        compound = ''
+        price = ''
+        amount = ''
+        for i in range(0, 16):
+            if request.POST.get(f'size_{i}'):
+                size += request.POST.get(f'size_{i}')
+                size += ','
+            else:
+                break
+            if request.POST.get(f'compName_{i}'):
+                compound_name += request.POST.get(f'compName_{i}')
+            if request.POST.get(f'compPercentage_{i}'):
+                compound_percentage += request.POST.get(f'compPercentage_{i}')
+            if request.POST.get(f'price_{i}'):
+                price += request.POST.get(f'price_{i}')
+                price += ','
+            if request.POST.get(f'amount_{i}'):
+                amount += request.POST.get(f'amount_{i}')
+                amount += ','
+        for name, percentage in zip(compound_name, compound_percentage):
+            compound += f"{name} {percentage},"
+        compound = list(filter(None, compound.split(",")))
+        product.size = size
+        product.compound = compound
+        product.price = price
+        product.amount = amount
+        product.show_price = price.split(',')[0]
+        product.country = request.POST['country']
+        product.category = request.POST['category']
+        product.duration = request.POST['duration']
+        product.sex = request.POST['sex']
+        account = Account.objects.get(email=request.user)
+        product.id_creator = account.email
+        product.save()
+        return HttpResponseRedirect("/becomeCreator/")
+
      
     if request.method == 'GET' and "product_cards" in request.GET:
         print("CARDS")
@@ -466,13 +533,6 @@ def editProduct_page(request, product_id):
     except:
         pass
 
-    form = ProductEditForm()
-    content['form8'] = form
-    
-    # content['shop'] = Shop.objects.get(email=request.user.email)
-
-
-    # form8.save()
 
 
     return render(request, 'becomeCreatorTemplates/edit.html', content)
@@ -567,34 +627,6 @@ def becomeCreatorTemplate_page(request, name):
         form = ProductCreateForm()
         content['form8'] = form
         content['shop'] = Shop.objects.get(email=request.user.email)
-
-    # elif name == '7':
-
-    #     products = Product_creator.objects.filter()
-
-    #     # data = {
-    #     #     'product_name': 'AAAAAAA',
-    #     #     'country':'AAAAAAA',
-    #     #     'brand':'AAAAAAA',
-    #     #     'description': 'AAAAAAA',
-    #     #     'category': 'AAAAAAA',
-    #     #     'duration': 'AAAAAAA',
-    #     #     'sex':'AAAAAAA',
-    #     #     'price':'AAAAAAA',
-    #     #     'width_product':'AAAAAAA',
-    #     #     'height_product':'AAAAAAA',
-    #     #     'length_product': 'AAAAAAA',
-    #     #     'width_packaging':'AAAAAAA',
-    #     #     'height_packaging': 'AAAAAAA',
-    #     #     'length_packaging': 'AAAAAAA',
-
-    #     # } initial = data
-    #     form = ProductEditForm()
-    #     content['form8'] = form
-        
-    #     content['shop'] = Shop.objects.get(email=request.user.email)
-    
-
 
     return render(request, path, content)
 

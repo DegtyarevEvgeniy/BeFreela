@@ -44,9 +44,10 @@
                 <div>
                     <h2>Изменить товар: <b>{{product.product_name}}</b></h2>
                     <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-around">
-                        <button class="uk-width-1-3 uk-button uk-button-danger uk-border-rounded" id="returnBtn">нет</button>
-                        <button class="uk-width-1-3 uk-button uk-button-secondary uk-border-rounded"
-                            style="background-color: green;" onclick="nextPrev(1)">да</button>
+                        <button class="uk-width-1-3 uk-button uk-button-danger uk-border-rounded"
+                            onclick="location.reload()">нет</button>
+                        <button class="uk-width-1-3 uk-button uk-button-primary uk-border-rounded" type="button"
+                            onclick="nextPrev(1)">да</button>
                     </div>
                 </div>
             </div>
@@ -80,6 +81,7 @@
                                     </path>
                                 </svg></i></label>
                         <p class="uk-text-bold uk-text-large uk-text-uppercase uk-text-truncate">{{product.brand}}</p>
+                        <input type="text" value="{{product.product_id}}" name="product_id" style="display: none" readonly>
                     </div>
                 </div>
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom" bis_skin_checked="1">
@@ -841,7 +843,8 @@
                             </svg></span>
                         <span class="uk-text-middle">Загрузи изображение</span>
                         <div uk-form-custom="" class="uk-form-custom" bis_skin_checked="1">
-                            <input type="file" accept="image/*" id="files1" name="product_photo1">
+                            <input type="file" accept="image/*" id="files1" value="{{product.picture1}}"
+                                name="product_photo1">
                             <span class="uk-link">Выбери одно</span>
                         </div>
                     </div>
@@ -871,7 +874,8 @@
                             </svg></span>
                         <span class="uk-text-middle">Загрузи изображение</span>
                         <div uk-form-custom="" class="uk-form-custom" bis_skin_checked="1">
-                            <input type="file" accept="image/*" id="files2" name="product_photo2">
+                            <input type="file" accept="image/*" id="files2" value="{{product.picture1}}"
+                                name="product_photo2">
                             <span class="uk-link">Выбери одно</span>
                         </div>
                     </div>
@@ -901,7 +905,8 @@
                             </svg></span>
                         <span class="uk-text-middle">Загрузи изображение</span>
                         <div uk-form-custom="" class="uk-form-custom" bis_skin_checked="1">
-                            <input type="file" accept="image/*" id="files3" name="product_photo3">
+                            <input type="file" accept="image/*" id="files3" value="{{product.picture1}}"
+                                name="product_photo3">
                             <span class="uk-link">Выбери одно</span>
                         </div>
                     </div>
@@ -926,7 +931,7 @@
             {% csrf_token %}
 
 
-            <div style="overflow:auto;" id="next-previous" bis_skin_checked="1">
+            <div style="overflow:auto; width: 100%" id="next-previous" bis_skin_checked="1">
                 <div style="float:right;" bis_skin_checked="1">
                     <button type="button" id="prevBtn"
                         style="display: none; border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0;"
@@ -939,7 +944,7 @@
                             </path>
                         </svg>
                     </button>
-                    <button name="product_creator" type="button" id="nextBtn"
+                    <button name="save_changet_product" type="button" id="nextBtn"
                         style="border-radius: 1000px; text-align:center; width: 50px; height: 50px; padding: 0; background-color: gray;"
                         class="uk-button uk-button-primary" onclick="nextPrev(1)">
                         <svg class="svg-inline--fa fa-angles-right" aria-hidden="true" focusable="false"
@@ -956,20 +961,10 @@
     </div>
 </div>
 
-<script>
-    $('#returnBtn').on('click', {}, function (inBody) {
-        var xhr = new XMLHttpRequest()
-        localStorage.page = 5
-        xhr.open('GET', 'becomeCreatorTemplates/5/')
-        xhr.onload = function () {
-            $('#MainWindowContainer').html(xhr.response)
-        }
-        xhr.send()
-    });
-</script>
 
 <script>
     document.querySelector("#files1").addEventListener("change", (e) => {
+        let url1 = "{{product.picture1}}"
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             const files = e.target.files;
             const output = document.querySelector("#result1");
@@ -981,7 +976,7 @@
                     const picFile = event.target;
                     const div = document.createElement("div");
                     div.innerHTML =
-                        `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                        `<img class="thumbnail" src="${url1}" title="${picFile.name}"/>`;
                     output.appendChild(div);
                 });
                 picReader.readAsDataURL(files[i]);
@@ -992,6 +987,7 @@
     });
 
     document.querySelector("#files2").addEventListener("change", (e) => {
+        let url2 = "{{product.picture2}}"
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             const files = e.target.files;
             const output = document.querySelector("#result2");
@@ -1003,7 +999,7 @@
                     const picFile = event.target;
                     const div = document.createElement("div");
                     div.innerHTML =
-                        `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                        `<img class="thumbnail" src="${url2}" title="${picFile.name}"/>`;
                     output.appendChild(div);
                 });
                 picReader.readAsDataURL(files[i]);
@@ -1014,6 +1010,7 @@
     });
 
     document.querySelector("#files3").addEventListener("change", (e) => {
+        let url3 = "{{product.picture3}}"
         if (window.File && window.FileReader && window.FileList && window.Blob) {
             const files = e.target.files;
             const output = document.querySelector("#result3");
@@ -1025,7 +1022,7 @@
                     const picFile = event.target;
                     const div = document.createElement("div");
                     div.innerHTML =
-                        `<img class="thumbnail" src="${picFile.result}" title="${picFile.name}"/>`;
+                        `<img class="thumbnail" src="${url3}" title="${picFile.name}"/>`;
                     output.appendChild(div);
                 });
                 picReader.readAsDataURL(files[i]);
@@ -1040,19 +1037,23 @@
     var inputnum = 0,
         sizeInput = 0,
         currentTab = 0;
+    shown = true;
 
     function PassChecker(n) {
-        console.log("PassChecker = " + n)
+        // console.log("PassChecker = " + n)
         let product_name = document.getElementById("product_name").value.length;
         let description = document.getElementById("description").value.length;
         let comps = document.getElementById('inputDiv').children.length
         let sizes = document.getElementById('sizeInput').children.length
         let btn = document.getElementById('nextBtn')
-        if (n == 1 && product_name > 0 && description > 0 && comps > 0 && sizes > 0) {
+        if (n == 1) {
+            return 1
+        }
+        if (n == 2 && product_name > 0 && description > 0 && comps > 0 && sizes > 0) {
             btn.style["background-color"] = 'blue'
             btn.disabled = false;
             return 1
-        } else if (n == 2) {
+        } else if (n == 3) {
             let prices = document.getElementsByClassName("price")
             let amount = document.getElementsByClassName("amount")
             let checker1 = false
@@ -1082,13 +1083,13 @@
                 btn.disabled = true;
                 return 0
             }
-        } else if (n == 3) {
+        } else if (n == 4) {
             btn.style["background-color"] = 'blue'
             localStorage.page = 5;
             btn.disabled = false;
             return 1
 
-        } else if (n == 4) {
+        } else if (n == 5) {
             localStorage.page = 5;
             btn.type = "submit"
             return 1
@@ -1105,12 +1106,13 @@
             sum = 10000000
         }
         form.innerHTML = sum + "₽"
-        PassChecker(2)
+        PassChecker(3)
     }
 
     function addComplectation() {
         let name = document.getElementById('product_name').value;
         let sizes = document.getElementById('sizeInput').children
+        // console.log("qweqw")
         table = document.getElementById('table')
         for (let i = 0; i < sizes.length; i++) {
             let size = sizes[i].getElementsByClassName('complectations_size')[0].value
@@ -1142,7 +1144,7 @@
         } else {
             name.placeholder = "Для добавления элемента необходимо заполнить эти поля";
         }
-        PassChecker(1)
+        PassChecker(2)
     }
 
     function addSize(el) {
@@ -1151,7 +1153,7 @@
             size.removeAttribute("disabled");
             size.placeholder = "Введите состав товара";
             var $inputGroup =
-                `<div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-3"> <input type="text" class="uk-input uk-width-3-5 complectations_size" name="size_${sizeInput}" value="${size.value}" readonly> <button class="uk-button uk-button-default uk-width-1-5" style="padding: 0" onclick="removeEl(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
+                `<div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-3"> <input type="text" class="uk-input uk-width-4-5 complectations_size" name="size_${sizeInput}" value="${size.value}" readonly> <button class="uk-button uk-button-default uk-width-1-5" style="padding: 0" onclick="removeEl(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
             // <button class="btn btn-outline-secondary" onclick="changeInput(this)" type="button"><span class="material-icons"> mode_edit </span></button>
             document.getElementById("sizeInput").insertAdjacentHTML("afterbegin", $inputGroup);
             size.value = "";
@@ -1163,7 +1165,7 @@
         } else {
             size.placeholder = "Для добавления элемента необходимо заполнить эти поля";
         }
-        PassChecker(1)
+        PassChecker(2)
     }
 
     function removeEl(el, arg) {
@@ -1174,7 +1176,7 @@
             mainInput.placeholder = "";
         }
         el.parentElement.remove();
-        PassChecker(1)
+        PassChecker(2)
     }
 
     function changeInput(el) {
@@ -1198,7 +1200,7 @@
         } else {
             inputPoleName.placeholder = "Заполните это поле или удалите его";
         }
-        PassChecker(1)
+        PassChecker(2)
     }
 
     function PercentageChecker(el) {
@@ -1216,34 +1218,37 @@
     function showTab(n) {
         let x = document.getElementsByClassName("tab");
         let len = document.getElementById('table').children.length
+        console.log(n)
         try {
             x[n].style.display = "block";
-            if (n === 0) {
-                PassChecker(1)
+            if (n === 1) {
+                setValues('{{product.compound}}', '{{product.size}}', '{{product.amount}}', '{{product.price}}')
+                // PassChecker(2)
                 for (let i = 0; i < len; i++) {
                     document.getElementById('table').children[0].remove()
                 }
                 document.getElementById("prevBtn").style.display = "none";
             } else if (n === 2) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
+                document.getElementById("prevBtn").style.display = "inline-block";
                 addComplectation()
-                document.getElementById("prevBtn").style.display = "inline";
-                PassChecker(2)
+                // PassChecker(4)
             } else if (n === 3) {
                 document.getElementById("nextBtn").style["background-color"] = 'gray'
-                document.getElementById("prevBtn").style.display = "inline";
-                PassChecker(3)
+                document.getElementById("prevBtn").style.display = "inline-block";
+                // PassChecker(4)
             } else if (n == x.length - 1) {
-                PassChecker(5)
+                // PassChecker(5)
                 document.getElementById("prevBtn").style.display = "none";
-                document.getElementById("nextBtn").style.display = "inline";
+                document.getElementById("nextBtn").style.display = "inline-block";
 
             } else {
                 for (let i = 0; i < len; i++) {
                     document.getElementById('table').children[0].remove()
                 }
-                document.getElementById("prevBtn").style.display = "inline";
+                document.getElementById("prevBtn").style.display = "inline-block";
             }
+            PassChecker(n + 1)
             fixStepIndicator(n)
         } catch {}
     }
@@ -1252,12 +1257,12 @@
         let x = document.getElementsByClassName("tab");
         let btn = document.getElementById("nextBtn");
         if (n > 0 && currentTab < 3) {
-            if (n == 0){
+            if (n == 0) {
                 document.getElementById("nextBtn").style["display"] = 'none';
                 showTab(currentTab);
-
             }
             if (PassChecker(currentTab + 1)) {
+                document.getElementById("nextBtn").style["display"] = 'block';
                 x[currentTab].style.display = "none";
                 currentTab = currentTab + n;
                 document.getElementById("nextBtn").style["background-color"] = 'gray';
@@ -1271,8 +1276,8 @@
         } else {
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-            if (currentTab === 4) {
-                PassChecker(4)
+            if (currentTab === 5) {
+                PassChecker(5)
                 document.getElementById('next-previous').classList.add("redirect");
             }
             showTab(currentTab);
@@ -1285,5 +1290,43 @@
             x.length; i++) {
             x[i].className = x[i].className.replace(" active", "");
         }
+    }
+
+    function setValues(compond, size, amount, price) {
+        compond = compond.split(',').filter(function (el) {
+            return el != '';
+        });
+        size = size.split(',').filter(function (el) {
+            return el != '';
+        });
+        amount = amount.split(',').filter(function (el) {
+            return el != '';
+        });
+        price = price.split(',').filter(function (el) {
+            return el != '';
+        });
+
+        if (shown) {
+            shown = false;
+            for (let i = 0; i < compond.length; ++i) {
+                let arr = compond[i].split(" ").filter(function (el) {
+                    return el != '';
+                });
+                inputnum++;
+                str = arr[0];
+                percent = arr[1];
+                var $inputGroup =
+                    `<div class="uk-flex uk-flex-center uk-flex-middle"> <input type="text" class="uk-input uk-width-3-6 complectations_name" name="compName_${inputnum}" value="${str}" readonly> <div class="uk-inline uk-width-1-4"> <input type="number" oninput="PercentageChecker(this)" class="uk-input complectations_percent" name="compPercentage_${inputnum}" value="${percent}" readonly> <span class="uk-form-icon uk-form-icon-flip">%</span> </div> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="changeInput(this)" type="button"> <i uk-icon="pencil" id="editon"></i> <i uk-icon="check" id="editoff" style="display: none"></i>  </button> <button class="uk-button uk-button-default uk-width-1-6" style="padding: 0" onclick="removeEl(this, 0)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
+                document.getElementById("inputDiv").insertAdjacentHTML("afterbegin", $inputGroup);
+            }
+            for (let i = 0; i < size.length; ++i) {
+                sizeInput++;
+                var $inputGroup =
+                    `<div class="uk-flex uk-flex-center uk-flex-middle uk-width-1-3"> <input type="text" class="uk-input uk-width-4-5 complectations_size" name="size_${sizeInput}" value="${size[i]}" readonly> <button class="uk-button uk-button-default uk-width-1-5" style="padding: 0" onclick="removeEl(this, 1)" type="button"> <i class="fa fa-minus"></i> </button> </div> `;
+                document.getElementById("sizeInput").insertAdjacentHTML("afterbegin", $inputGroup);
+            }
+
+        }
+
     }
 </script>
