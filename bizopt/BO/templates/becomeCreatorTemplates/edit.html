@@ -81,7 +81,8 @@
                                     </path>
                                 </svg></i></label>
                         <p class="uk-text-bold uk-text-large uk-text-uppercase uk-text-truncate">{{product.brand}}</p>
-                        <input type="text" value="{{product.product_id}}" name="product_id" style="display: none" readonly>
+                        <input type="text" value="{{product.product_id}}" name="product_id" style="display: none"
+                            readonly>
                     </div>
                 </div>
                 <div class="uk-flex uk-flex-top uk-flex-between uk-margin-medium-bottom" bis_skin_checked="1">
@@ -812,115 +813,6 @@
             </div>
 
             <div class="tab" style="display: none;" bis_skin_checked="1">
-
-                <article class="uk-article">
-
-                    <h1 class="uk-article-title"><a class="uk-link-reset" href="">Загрузите изображения товара</a></h1>
-
-                    <p class="uk-article-meta" style="width:80%">Загрузите товары в соответствии с описанием. В случае
-                        не соответсвия требованиям, картинка может быть удалена</p>
-
-                    <br>
-                    <br>
-
-                    <p class="uk-text-lead">Как выглядит товар спереди</p>
-
-
-
-
-                </article>
-
-                <div class="uk-margin uk-card uk-card-default uk-card-body" bis_skin_checked="1">
-
-                    <div class="js-upload1 uk-placeholder uk-text-center" bis_skin_checked="1">
-                        <span uk-icon="icon: cloud-upload" class="uk-icon"><svg width="20" height="20"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="none" stroke="#000" stroke-width="1.1"
-                                    d="M6.5,14.61 L3.75,14.61 C1.96,14.61 0.5,13.17 0.5,11.39 C0.5,9.76 1.72,8.41 3.31,8.2 C3.38,5.31 5.75,3 8.68,3 C11.19,3 13.31,4.71 13.89,7.02 C14.39,6.8 14.93,6.68 15.5,6.68 C17.71,6.68 19.5,8.45 19.5,10.64 C19.5,12.83 17.71,14.6 15.5,14.6 L12.5,14.6">
-                                </path>
-                                <polyline fill="none" stroke="#000" points="7.25 11.75 9.5 9.5 11.75 11.75"></polyline>
-                                <path fill="none" stroke="#000" d="M9.5,18 L9.5,9.5"></path>
-                            </svg></span>
-                        <span class="uk-text-middle">Загрузи изображение</span>
-                        <div uk-form-custom="" class="uk-form-custom" bis_skin_checked="1">
-                            <input type="file" accept="image/*" id="files1" value="{{product.picture1}}"
-                                name="product_photo1">
-                            <span class="uk-link">Выбери одно</span>
-                        </div>
-                    </div>
-
-                    <progress id="js-progressbar1" class="uk-progress" value="1" max="100" hidden=""></progress>
-
-
-                    <div id="result1" bis_skin_checked="1"></div>
-
-                </div>
-
-                <br>
-                <br>
-
-                <p class="uk-text-lead">Как выглядит товар сзади</p>
-
-                <div class="uk-margin uk-card uk-card-default uk-card-body" bis_skin_checked="1">
-
-                    <div class="js-upload2 uk-placeholder uk-text-center" bis_skin_checked="1">
-                        <span uk-icon="icon: cloud-upload" class="uk-icon"><svg width="20" height="20"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="none" stroke="#000" stroke-width="1.1"
-                                    d="M6.5,14.61 L3.75,14.61 C1.96,14.61 0.5,13.17 0.5,11.39 C0.5,9.76 1.72,8.41 3.31,8.2 C3.38,5.31 5.75,3 8.68,3 C11.19,3 13.31,4.71 13.89,7.02 C14.39,6.8 14.93,6.68 15.5,6.68 C17.71,6.68 19.5,8.45 19.5,10.64 C19.5,12.83 17.71,14.6 15.5,14.6 L12.5,14.6">
-                                </path>
-                                <polyline fill="none" stroke="#000" points="7.25 11.75 9.5 9.5 11.75 11.75"></polyline>
-                                <path fill="none" stroke="#000" d="M9.5,18 L9.5,9.5"></path>
-                            </svg></span>
-                        <span class="uk-text-middle">Загрузи изображение</span>
-                        <div uk-form-custom="" class="uk-form-custom" bis_skin_checked="1">
-                            <input type="file" accept="image/*" id="files2" value="{{product.picture1}}"
-                                name="product_photo2">
-                            <span class="uk-link">Выбери одно</span>
-                        </div>
-                    </div>
-
-                    <progress id="js-progressbar2" class="uk-progress" value="2" max="100" hidden=""></progress>
-
-
-                    <div id="result2" bis_skin_checked="1"></div>
-
-                </div>
-
-                <br>
-                <br>
-
-                <p class="uk-text-lead">Как выглядит шов товара</p>
-
-                <div class="uk-margin uk-card uk-card-default uk-card-body" bis_skin_checked="1">
-
-                    <div class="js-upload3 uk-placeholder uk-text-center" bis_skin_checked="1">
-                        <span uk-icon="icon: cloud-upload" class="uk-icon"><svg width="20" height="20"
-                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill="none" stroke="#000" stroke-width="1.1"
-                                    d="M6.5,14.61 L3.75,14.61 C1.96,14.61 0.5,13.17 0.5,11.39 C0.5,9.76 1.72,8.41 3.31,8.2 C3.38,5.31 5.75,3 8.68,3 C11.19,3 13.31,4.71 13.89,7.02 C14.39,6.8 14.93,6.68 15.5,6.68 C17.71,6.68 19.5,8.45 19.5,10.64 C19.5,12.83 17.71,14.6 15.5,14.6 L12.5,14.6">
-                                </path>
-                                <polyline fill="none" stroke="#000" points="7.25 11.75 9.5 9.5 11.75 11.75"></polyline>
-                                <path fill="none" stroke="#000" d="M9.5,18 L9.5,9.5"></path>
-                            </svg></span>
-                        <span class="uk-text-middle">Загрузи изображение</span>
-                        <div uk-form-custom="" class="uk-form-custom" bis_skin_checked="1">
-                            <input type="file" accept="image/*" id="files3" value="{{product.picture1}}"
-                                name="product_photo3">
-                            <span class="uk-link">Выбери одно</span>
-                        </div>
-                    </div>
-
-                    <progress id="js-progressbar3" class="uk-progress" value="3" max="100" hidden=""></progress>
-
-
-                    <div id="result3" bis_skin_checked="1"></div>
-
-                </div>
-
-            </div>
-
-            <div class="tab" style="display: none;" bis_skin_checked="1">
                 <h1>please wait</h1>
                 <div class="uk-flex uk-flex-center uk-flex-middle" bis_skin_checked="1">
                     <div class="loader" bis_skin_checked="1"></div>
@@ -961,77 +853,6 @@
     </div>
 </div>
 
-
-<script>
-    document.querySelector("#files1").addEventListener("change", (e) => {
-        let url1 = "{{product.picture1}}"
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            const files = e.target.files;
-            const output = document.querySelector("#result1");
-            output.innerHTML = "";
-            for (let i = 0; i < files.length; i++) {
-                if (!files[i].type.match("image")) continue;
-                const picReader = new FileReader();
-                picReader.addEventListener("load", function (event) {
-                    const picFile = event.target;
-                    const div = document.createElement("div");
-                    div.innerHTML =
-                        `<img class="thumbnail" src="${url1}" title="${picFile.name}"/>`;
-                    output.appendChild(div);
-                });
-                picReader.readAsDataURL(files[i]);
-            }
-        } else {
-            alert("Your browser does not support File API");
-        }
-    });
-
-    document.querySelector("#files2").addEventListener("change", (e) => {
-        let url2 = "{{product.picture2}}"
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            const files = e.target.files;
-            const output = document.querySelector("#result2");
-            output.innerHTML = "";
-            for (let i = 0; i < files.length; i++) {
-                if (!files[i].type.match("image")) continue;
-                const picReader = new FileReader();
-                picReader.addEventListener("load", function (event) {
-                    const picFile = event.target;
-                    const div = document.createElement("div");
-                    div.innerHTML =
-                        `<img class="thumbnail" src="${url2}" title="${picFile.name}"/>`;
-                    output.appendChild(div);
-                });
-                picReader.readAsDataURL(files[i]);
-            }
-        } else {
-            alert("Your browser does not support File API");
-        }
-    });
-
-    document.querySelector("#files3").addEventListener("change", (e) => {
-        let url3 = "{{product.picture3}}"
-        if (window.File && window.FileReader && window.FileList && window.Blob) {
-            const files = e.target.files;
-            const output = document.querySelector("#result3");
-            output.innerHTML = "";
-            for (let i = 0; i < files.length; i++) {
-                if (!files[i].type.match("image")) continue;
-                const picReader = new FileReader();
-                picReader.addEventListener("load", function (event) {
-                    const picFile = event.target;
-                    const div = document.createElement("div");
-                    div.innerHTML =
-                        `<img class="thumbnail" src="${url3}" title="${picFile.name}"/>`;
-                    output.appendChild(div);
-                });
-                picReader.readAsDataURL(files[i]);
-            }
-        } else {
-            alert("Your browser does not support File API");
-        }
-    });
-</script>
 
 <script>
     var inputnum = 0,
@@ -1084,12 +905,6 @@
                 return 0
             }
         } else if (n == 4) {
-            btn.style["background-color"] = 'blue'
-            localStorage.page = 5;
-            btn.disabled = false;
-            return 1
-
-        } else if (n == 5) {
             localStorage.page = 5;
             btn.type = "submit"
             return 1
@@ -1276,8 +1091,8 @@
         } else {
             x[currentTab].style.display = "none";
             currentTab = currentTab + n;
-            if (currentTab === 5) {
-                PassChecker(5)
+            if (currentTab === 4) {
+                PassChecker(4)
                 document.getElementById('next-previous').classList.add("redirect");
             }
             showTab(currentTab);

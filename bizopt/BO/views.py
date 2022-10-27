@@ -375,31 +375,9 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         return HttpResponseRedirect("/becomeCreator/")
 
     if request.method == 'POST' and "save_changet_product" in request.POST:  
-        product = Product_creator.objects.get(product_id=request.POST['product_id'])
-
-        if request.FILES:
-
-            file1 = request.FILES['product_photo1']
-            file2 = request.FILES['product_photo2']
-            file3 = request.FILES['product_photo3']
-
-            filename1 = f'product_photo1_{str(request.user.email)}'
-            filename2 = f'product_photo2_{str(request.user.email)}'
-            filename3 = f'product_photo3_{str(request.user.email)}'
-
-            logoImageData1 = upload_image(file1, filename1)
-            logoImageData2 = upload_image(file2, filename2)
-            logoImageData3 = upload_image(file3, filename3)
-    
-            product.picture1 = logoImageData1[0]
-            product.picture2 = logoImageData2[0]
-            product.picture3 = logoImageData3[0]
-
-        # if "product_creator_tags" in request.POST:
-        #   form = MyForm(request.POST)
-        #   product.tags.add(form.cleaned_data['select'])
+        product = Product_creator.objects.get(product_id=request.POST['product_id'])    
+        
         product.product_name = request.POST['product_name']
-        # product.price = request.POST['price']
         product.description = request.POST['description']
         product.brand = shop.name
         size = ''
