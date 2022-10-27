@@ -4,7 +4,8 @@
 <body>
     <div class="uk-flex uk-flex-between uk-flex-middle uk-width-4-5" style="margin: 0 auto">
         <h1>Корзина</h1>
-        <h3 class="uk-text-center uk-width-2-3">Здесь вы можете посмотреть какие товары вы выбрали и подкорректировать заказ</h3>
+        <h3 class="uk-text-center uk-width-2-3">Здесь вы можете посмотреть какие товары вы выбрали и подкорректировать
+            заказ</h3>
     </div>
 
 
@@ -13,8 +14,9 @@
 
         <form method="POST" class="uk-width-1">
             <div class="uk-width-1 uk-flex uk-flex-middle uk-flex-center">
-                <button class="uk-button uk-button-primary uk-border-rounded uk-width-3-5" style="margin: 0 auto; font-size: 1.5em; "
-            type="button" uk-toggle="target: #modal-close-default">Оплатить заказ</button>
+                <button class="uk-button uk-button-primary uk-border-rounded uk-width-3-5"
+                    style="margin: 0 auto; font-size: 1.5em;" type="button"
+                    uk-toggle="target: #modal-close-default">Оплатить заказ</button>
             </div>
             {% for product in items %}
             <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
@@ -28,7 +30,7 @@
                 </div>
                 <div class="uk-flex uk-flex-around uk-flex-center uk-width-2-5">
                     <div class="uk-width-2-5">
-                        <h3 class="uk-text-break" style="text-align: center">{{ product.show_price }} руб.</h3>
+                        <h3 class="uk-text-break" style="text-align: center">{{ product.price }} руб.</h3>
                     </div>
                     <div class="uk-width-auto">
                         <div class="uk-flex" style="margin-top: 5%">
@@ -63,12 +65,18 @@
                     <span class="uk-label" style="margin: 0 0 0 5%">{{user.first_name}} {{user.last_name}}</span>
                 </div>
                 <div class="uk-margin-top">
-                    <p>Отсканируйте QR-код и оплатите товар</p>
-                    <img
-                        src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg">
+                    <h3>В связи с техническими неполадками, на платформе пока не работает оплата товара</h3>
+                    <h3>приносим свои извенения за неудобства</h3>
+                    <!-- <p>Отсканируйте QR-код и оплатите товар</p> -->
+                    <!-- <img -->
+                        <!-- src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg"> -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <button class="uk-button uk-button-primary" type="submit" name="payButton">Оплатить</button>
+                    </form>
                 </div>
                 <button class="uk-button uk-button-default uk-margin-small-right uk-modal-close"
-                    style="margin-left: 75%; border-radius: 5px;  " type="button">Закрыть</button>
+                    style="margin-left: 75%; border-radius: 5px;" type="button">Закрыть</button>
             </div>
         </div>
     </div>

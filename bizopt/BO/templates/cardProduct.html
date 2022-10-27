@@ -114,14 +114,14 @@
                 {% if request.user.is_authenticated %}
                 <form method="POST">
                     {% csrf_token %}
-                    <button class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
-                        style="background-color: #B54F00;" type="submit" name="addToCartBtn">Добавить в карзину</button>
+                    <a class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
+                        style="background-color: #B54F00;" href="#ordering-window" uk-toggle>Добавить в карзину</a>
                 </form>
                 {% else %}
                 <a class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
                     href="/login">Добавить в карзину</a>
                 {% endif %}
-                <!-- <div id="modal-overflow" uk-modal>
+                <div id="ordering-window" uk-modal>
                     <div class="uk-modal-dialog">
                         <div>
                             <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -146,8 +146,8 @@
                                         class="uk-flex uk-uk-flex-center uk-flex-middle uk-width-expand uk-margin-medium-left">
                                         <a class="uk-button uk-button-link amount-changer" id="minusBtn"
                                             uk-icon="icon: minus"></a>
-                                        <input type="number" name="amount" min="1" max="1000" id="amount" value="1" style="margin:0 2%"
-                                            class="uk-input uk-width-1-5">
+                                        <input type="number" name="amount" min="1" max="1000" id="amount" value="1"
+                                            style="margin:0 2%" class="uk-input uk-width-1-5">
                                         <a class="uk-button uk-button-link amount-changer" id="plusBtn"
                                             uk-icon="icon: plus"></a>
                                     </div>
@@ -172,14 +172,14 @@
 
                                 {% csrf_token %}
                                 <button class="uk-button uk-button-primary" style="background-color: #B54F00;"
-                                    name="buy_product" type="submit"
+                                    name="addToCartBtn" type="submit"
                                     onclick="UIkit.notification({message: 'Запрос отправлен', status: 'success'})">Заказать
                                     товар</button>
                             </div>
                         </form>
 
                     </div>
-                </div> -->
+                </div>
             </div>
             <div class="uk-margin-medium-top uk-width-1">
                 <h3 class="uk-width-1 uk-text-left">Размеры:</h3>

@@ -25,7 +25,7 @@ from account.models import Account
 from .forms import ProductCreateForm
 from taggit.models import Tag
 from .models import Chat_room, Message
-from datetime import datetime
+from datetime import datetime, date
 
 from .forms import CustomUserChangeForm
 
@@ -433,6 +433,20 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         print(product.product_name)
         return HttpResponseRedirect("/becomeCreator/")
 
+    if request.method == 'POST' and set(["change_status_to_0", "change_status_to_1", "change_status_to_2", "change_status_to_3"]).intersection(request.POST):
+        stat = str(set(["change_status_to_0", "change_status_to_1", "change_status_to_2", "change_status_to_3"]).intersection(request.POST))[2:-2]
+        product = Product_buy.objects.get(id=request.POST[f'{stat}'])
+        statuses = {
+            '0': 'Заказ в обработке',
+            '1': 'Заказ в процессе сборки',
+            '2': 'Заказ готов',
+            '3': 'Заказ в процессе доставки',
+            '4': 'Заказ доставлен',
+            '5': 'Заказ отменен',
+        }
+        product.status = stat[-1]
+        product.save()
+        return HttpResponseRedirect("/becomeCreator/")
     if request.method == 'POST' and "decline" in request.POST:
         product = Product_buy.objects.get(id=request.POST['decline'])
         product.delete()
@@ -460,21 +474,21 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
             partner.email = user.email
             partner.save()
 
-    if request.method == 'POST' and "products_in_work" in request.POST:
-        statuses_list = request.POST.getlist('services')
-        # TODO: БЕЗ ЭТОГО СЛОВАРЯ ВОЗМОЖНЫХ ЗНАЧЕНИЙ СТАТУСА ВСЕ СЛОМАЕТСЯ!!!!!
-        #  ПРОВЕРИТЬ СООТВЕТСТВИЕ СЛОВАРЯ ЗНАЧЕНИЯМ НА ФРОНТЕ!
+    # if request.method == 'POST' and "products_in_work" in request.POST:
+    #     statuses_list = request.POST.getlist('services')
+    #     # TODO: БЕЗ ЭТОГО СЛОВАРЯ ВОЗМОЖНЫХ ЗНАЧЕНИЙ СТАТУСА ВСЕ СЛОМАЕТСЯ!!!!!
+    #     #  ПРОВЕРИТЬ СООТВЕТСТВИЕ СЛОВАРЯ ЗНАЧЕНИЯМ НА ФРОНТЕ!
 
-        statuses = {
-            '1': 'Заказ в работе',
-            '2': 'Заказ готов',
-            '3': 'Заказ в ожидании оплаты',
-            '4': 'Заказчик отказался от заказа'
-        }
-        products = Product_buy.objects.all()
-        for i in range(len(products)):
-            products[i].status = statuses[statuses_list[i]]
-            products[i].save()
+    #     statuses = {
+    #         '1': 'Заказ в работе',
+    #         '2': 'Заказ готов',
+    #         '3': 'Заказ в ожидании оплаты',
+    #         '4': 'Заказчик отказался от заказа'
+    #     }
+    #     products = Product_buy.objects.all()
+    #     for i in range(len(products)):
+    #         products[i].status = statuses[statuses_list[i]]
+    #         products[i].save()
     return render(request, 'becomeCreator.html', content)
 
 def editProduct_page(request, product_id):
@@ -572,8 +586,13 @@ def becomeCreatorTemplate_page(request, name):
                                 'product_name': product.product_name,
                                 'price': product.price,
                                 'picture': product.img,
+                                'status': product.status,
+                                'message': product.message,
+                                'delivery_address': product.delivery_address,
+
                                 }
                             for product in products]
+        
     elif name == '5':
         account = Account.objects.get(email=request.user)
         products = Product_creator.objects.filter(id_creator=account.email)
@@ -604,6 +623,9 @@ def becomeCreatorTemplate_page(request, name):
     elif name == '6':
         form = ProductCreateForm()
         content['form8'] = form
+        content['shop'] = Shop.objects.get(email=request.user.email)
+    
+    elif name == '7':
         content['shop'] = Shop.objects.get(email=request.user.email)
 
     return render(request, path, content)
@@ -664,33 +686,21 @@ def cardProduct_page(request, product_id):
     content = gen_menu(request)
     product = Product_creator.objects.get(id=product_id)
     shop = Shop.objects.get(email=product.id_creator)
-    print(request.POST)
     try:
         if request.method == "POST" and "addToCartBtn" in request.POST:
             cart_item = Cart()
-            cart_item.id_buyer = Account.objects.get(email=request.user)
-            cart_item.product_id = product.product_id
+            cart_item.id_user_buy = Account.objects.get(email=request.user)
             cart_item.id_creator = product.id_creator
-            cart_item.product_name = product.product_name
-            cart_item.country = product.country
-            cart_item.brand = product.brand
-            cart_item.rate_sum = product.rate_sum
-            cart_item.vote_sum = product.vote_sum
-            cart_item.rating = product.rating
-            cart_item.category = product.category
-            cart_item.sex = product.sex
+            cart_item.price = product.show_price
+            cart_item.duration = product.duration
             cart_item.compound = product.compound
             cart_item.size = product.size
-            cart_item.duration = product.duration
-            cart_item.price = product.price
-            cart_item.show_price = product.show_price
-            cart_item.description = product.description
-            cart_item.availability = product.availability
-            cart_item.amount = product.amount
-            cart_item.picture1 = product.picture1
-            cart_item.picture2 = product.picture2
-            cart_item.picture3 = product.picture3
-            cart_item.prevPicture = product.prevPicture
+            cart_item.product_name = product.product_name
+            cart_item.date_add = date.today()
+            cart_item.img = product.picture1
+            cart_item.amount = request.POST['amount']
+            cart_item.address = request.POST['address']
+            cart_item.message = request.POST['message']
             cart_item.save()
 
             return HttpResponseRedirect(f'/goods/{product_id}/')
@@ -974,8 +984,18 @@ def chat_page_list(request):
 def cart_page(request):
     content = {}
     user = request.user
-    cart_items = Cart.objects.filter(id_buyer = user)
+    cart_items = Cart.objects.filter(id_user_buy = user)
     content['items'] = [i for i in cart_items]
+    if request.method == 'POST' and 'payButton' in request.POST:
+        products = Cart.objects.filter(id_user_buy = request.user)
+        for item in products:
+            product = Product_buy()
+            product = item
+            print(product)
+            product.save()
+            item.delete()
+        return HttpResponseRedirect('/cart/')
+
     if request.method == 'POST' and 'decline' in request.POST:
         Cart.objects.filter(id = request.POST['decline']).delete()
         return HttpResponseRedirect('/cart/')
@@ -998,7 +1018,18 @@ def send(request):
     return HttpResponse('Message sent successfully.')
 
 def delivery_choice(request):
-    return render(request, 'becomeCreatorTemplates/deliveryChoice.html')
+    shop = Shop.objects.get(email=request.user)
+    content = {}
+    content['shop'] = shop
+    if request.method == 'POST' and 'add_deliveries' in request.POST:
+        shop.shipping_pony_express = request.POST['shipping_pony_express_input'] if 'shipping_pony_express_input' in request.POST else shop.shipping_pony_express
+        shop.shipping_yandex_delivery = request.POST['shipping_yandex_delivery_input'] if 'shipping_yandex_delivery_input' in request.POST else shop.shipping_yandex_delivery
+        shop.shipping_dostavista = request.POST['shipping_dostavista_input'] if 'shipping_dostavista_input' in request.POST else shop.shipping_dostavista
+        shop.shipping_sdek = request.POST['shipping_sdek_input'] if 'shipping_sdek_input' in request.POST else shop.shipping_sdek
+        shop.save()
+        return HttpResponseRedirect('/becomeCreator')
+
+    return render(request, 'deliveryChoice.html', content)
 
 def orders_page(request):
     content = gen_menu(request)
