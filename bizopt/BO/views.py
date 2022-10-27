@@ -1019,6 +1019,8 @@ def send(request):
     new_message.save()
     return HttpResponse('Message sent successfully.')
 
+def delivery_choice(request):
+    return render(request, 'becomeCreatorTemplates/deliveryChoice.html')
 
 def orders_page(request):
     content = gen_menu(request)
