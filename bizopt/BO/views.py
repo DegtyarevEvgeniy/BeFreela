@@ -990,8 +990,22 @@ def cart_page(request):
     if request.method == 'POST' and 'payButton' in request.POST:
         products = Cart.objects.filter(id_user_buy = request.user)
         for item in products:
+            # print(item.id_creator, item.id_user_buy, item.price, item.duration, item.compound, item.size, item.amount, item.product_name, item.status, item.message, item.is_payed, item.delivery_address, item.date_add, item.img)
             product = Product_buy()
-            product = item
+            product.id_creator = item.id_creator
+            product.id_user_buy = item.id_user_buy
+            product.price = item.price
+            product.duration = item.duration
+            product.compound = item.compound
+            product.size = item.size
+            product.amount = int(item.amount)
+            product.product_name = item.product_name
+            product.status = item.status
+            product.message = item.message
+            product.is_payed = item.is_payed
+            product.delivery_address = item.delivery_address
+            product.date_add = item.date_add
+            product.img = item.img
             print(product)
             product.save()
             item.delete()
