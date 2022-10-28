@@ -91,20 +91,20 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect("/")
 
+# !remove!
+# def yourTasks_page(request):
+#     content = gen_menu(request)
+#     tasks = Task.objects.filter(id_creator=request.user)
+#     content['tasks'] = [{
+#         'id': task.id,
+#         'name': task.name,
+#         'price': task.price,
+#         'description': task.description,
+#         'time': task.time,
+#         'status': task.status1,
+#     } for task in tasks]
 
-def yourTasks_page(request):
-    content = gen_menu(request)
-    tasks = Task.objects.filter(id_creator=request.user)
-    content['tasks'] = [{
-        'id': task.id,
-        'name': task.name,
-        'price': task.price,
-        'description': task.description,
-        'time': task.time,
-        'status': task.status1,
-    } for task in tasks]
-
-    return render(request, 'yourTasks.html', content)
+#     return render(request, 'yourTasks.html', content)
 
 
 def goodsSearch_page(request, product_name):
@@ -209,28 +209,29 @@ def sertCardBrend_page(request, shopnmae):
         content['link'] = (user.id * profile.id) + user.id + profile.id
     return render(request, 'cardBrand.html', content)
 
-def addTask_page(request):  # sourcery skip: hoist-statement-from-if
-    content = gen_menu(request)
+# !remove!
+# def addTask_page(request):  # sourcery skip: hoist-statement-from-if
+#     content = gen_menu(request)
 
-    if request.method == 'POST':
-        form = addTasks(request.POST)
-        if form.is_valid() and "addtask" in request.POST:
-            task = Task()
-            task.name = request.POST['task_name']
-            task.description = request.POST['description']
-            task.price = request.POST['price']
-            task.time = request.POST['date']
-            task.id_creator = str(request.user)
-            task.save()
-            task.tags.add(request.POST['tag'])
-            task.save()
-            return redirect('/yourTasks/')
-        content["form"] = form
+#     if request.method == 'POST':
+#         form = addTasks(request.POST)
+#         if form.is_valid() and "addtask" in request.POST:
+#             task = Task()
+#             task.name = request.POST['task_name']
+#             task.description = request.POST['description']
+#             task.price = request.POST['price']
+#             task.time = request.POST['date']
+#             task.id_creator = str(request.user)
+#             task.save()
+#             task.tags.add(request.POST['tag'])
+#             task.save()
+#             return redirect('/yourTasks/')
+#         content["form"] = form
 
-    else:
-        form = addTasks()
-        content["form"] = form
-    return render(request, 'addTask.html', content)
+#     else:
+#         form = addTasks()
+#         content["form"] = form
+#     return render(request, 'addTask.html', content)
 
 
 def becomeCreator_page(request):  # sourcery skip: low-code-quality
@@ -629,15 +630,15 @@ def becomeCreatorTemplate_page(request, name):
         content['shop'] = Shop.objects.get(email=request.user.email)
 
     return render(request, path, content)
-
-def tasks_page(request):
-    content = gen_menu(request)
-    tasks = Task.objects.all()
-    content['task_cards'] = [{'id': task.id,
-                              'name': task.name,
-                              'description': task.description
-                              } for task in tasks]
-    return render(request, 'tasks.html', content)
+# !remove!
+# def tasks_page(request):
+#     content = gen_menu(request)
+#     tasks = Task.objects.all()
+#     content['task_cards'] = [{'id': task.id,
+#                               'name': task.name,
+#                               'description': task.description
+#                               } for task in tasks]
+#     return render(request, 'tasks.html', content)
 
 
 def employers_page(request):
@@ -667,15 +668,15 @@ def index_page(request):
         return render(request, 'index.html', content)
 
 
-
-def cardTask_page(request, task_id):
-    content = gen_menu(request)
-    try:
-        task = Task.objects.get(id=task_id)
-        content['task'] = task
-        return render(request, 'cardTask.html', content)
-    except Task.DoesNotExist as e:
-        raise Http404 from e
+# !remove!
+# def cardTask_page(request, task_id):
+#     content = gen_menu(request)
+#     try:
+#         task = Task.objects.get(id=task_id)
+#         content['task'] = task
+#         return render(request, 'cardTask.html', content)
+#     except Task.DoesNotExist as e:
+#         raise Http404 from e
 
 
 def cardProduct_page(request, product_id):
@@ -770,37 +771,37 @@ def cardProduct_page(request, product_id):
     except Task.DoesNotExist as e:
         raise Http404 from e
 
+# !remove!
+# def editTask_page(request, task_id):
+#     content = gen_menu(request)
+#     try:
+#         if request.method == 'POST':
+#             form = addTasks(request.POST)
+#             if form.is_valid():
+#                 task = Task.objects.get(id=task_id)
+#                 task.name = request.POST['task_name']
+#                 task.description = request.POST['description']
+#                 task.price = request.POST['price']
+#                 task.time = request.POST['date']
+#                 task.id_creator = str(request.user)
+#                 task.save()
+#                 task.tags.add(form.cleaned_data['select'])
+#                 task.save()
+#             content["form"] = form
+#             return redirect('/yourTasks/')
+#         else:
+#             form = addTasks()
+#             content["form"] = form
+#         return render(request, 'editTask.html', content)
+#     except Account.DoesNotExist as e:
+#         raise Http404 from e
 
-def editTask_page(request, task_id):
-    content = gen_menu(request)
-    try:
-        if request.method == 'POST':
-            form = addTasks(request.POST)
-            if form.is_valid():
-                task = Task.objects.get(id=task_id)
-                task.name = request.POST['task_name']
-                task.description = request.POST['description']
-                task.price = request.POST['price']
-                task.time = request.POST['date']
-                task.id_creator = str(request.user)
-                task.save()
-                task.tags.add(form.cleaned_data['select'])
-                task.save()
-            content["form"] = form
-            return redirect('/yourTasks/')
-        else:
-            form = addTasks()
-            content["form"] = form
-        return render(request, 'editTask.html', content)
-    except Account.DoesNotExist as e:
-        raise Http404 from e
-
-
-def infoTask_page(request):
-    content = gen_menu(request)
-    form = addTasks()
-    content["form"] = form
-    return render(request, 'infoTask.html', content)
+# !remove!
+# def infoTask_page(request):
+#     content = gen_menu(request)
+#     form = addTasks()
+#     content["form"] = form
+#     return render(request, 'infoTask.html', content)
 
 
 def edit_profile(request):
@@ -1039,13 +1040,9 @@ def orders_page(request):
                         'id_user_buy': product.id_user_buy,
                         'price': product.price,
                         'product_name': product.product_name,
-                        'task_id': product.task_id,
                         'status': product.status,
                         'message': product.message,
-                        'payed_partner': product.payed_partner,
-                        'payed_user': product.payed_user,
-                        'status_pay': product.status_pay,
-                        'delivery_address': product.delivery_address,
+                        'is_payed': product.is_payed,
                         'delivery_address': product.delivery_address,
                         'date_add': product.date_add,
                         'img': product.img,

@@ -22,7 +22,7 @@
             <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
                 style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
                 <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
-                    <div><img src="{{product.picture1}}" alt="" width="200px" style="border-radius: 5px">
+                    <div><img src="{{product.img}}" alt="" width="200px" style="border-radius: 5px">
                     </div>
                     <div class="uk-flex-row">
                         <h2 class="uk-text-break">{{ product.product_name }}</h2>
@@ -37,8 +37,6 @@
                             {% csrf_token %}
                             <button class="uk-button uk-button-danger uk-border-rounded uk-width-1" style="margin: 0 1%"
                                 name="decline" value="{{product.id}}" type="submit">Отказаться</button>
-                            <!-- <a class="uk-button uk-button-primary uk-border-rounded uk-width-auto {{product.chat}}" -->
-                            <!-- id="cahtBtn" style="margin: 0 1%" type="button">Чат</a> -->
                         </div>
                     </div>
                 </div>
