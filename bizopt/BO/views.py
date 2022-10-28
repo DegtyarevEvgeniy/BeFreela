@@ -581,16 +581,22 @@ def becomeCreatorTemplate_page(request, name):
     elif name == '4':
         account = Account.objects.get(email=request.user)
         products = Product_buy.objects.filter(id_creator=account.email)
-        content['products'] = [{'id': product.id,
-                                'id_creator': product.id_creator,
-                                'customer': product.id_user_buy,
-                                'product_name': product.product_name,
-                                'price': product.price,
-                                'picture': product.img,
-                                'status': product.status,
-                                'message': product.message,
-                                'delivery_address': product.delivery_address,
-
+        content['products'] = [{
+                                'id_creator' : product.id_creator,
+                                'id_user_buy' : product.id_user_buy,
+                                'price' : product.price,
+                                'duration' : product.duration,
+                                'compound' : product.compound,
+                                'size' : product.size,
+                                'amount' : product.amount,
+                                'product_name' : product.product_name,
+                                'status' : product.status,
+                                'message' : product.message,
+                                'is_payed' : product.is_payed,
+                                'delivery_address' : product.delivery_address,
+                                'date_add' : product.date_add,
+                                'img' : product.img,
+                                'is_incart' : product.is_incart,
                                 }
                             for product in products]
         
@@ -689,7 +695,7 @@ def cardProduct_page(request, product_id):
     shop = Shop.objects.get(email=product.id_creator)
     try:
         if request.method == "POST" and "addToCartBtn" in request.POST:
-            cart_item = Cart()
+            cart_item = Product_buy()
             cart_item.id_user_buy = Account.objects.get(email=request.user)
             cart_item.id_creator = product.id_creator
             cart_item.price = product.show_price
@@ -929,25 +935,18 @@ def signup(request):
 
 
 def forgot_password_page(request):
-    content = {
-        'menu': gen_menu(request)
-    }
-    return render(request, 'forgotPassword.html', content)
+    return render(request, 'forgotPassword.html')
 
 
 def documents_page(request):
-    content = {
-        'menu': gen_menu(request)
-    }
-    return render(request, 'documents.html', content)
+    return render(request, 'documents.html')
 
+def documents_partners_page(request):
+    return render(request, 'documents.html')
 
 def documentTemplates_page(request, name):
-    content = {
-        'menu': gen_menu(request)
-    }
     path = f"documentsTemplates/template{name}.html"
-    return render(request, path, content)
+    return render(request, path)
 
 
 def chat_page(request, room_id):
@@ -985,34 +984,18 @@ def chat_page_list(request):
 def cart_page(request):
     content = {}
     user = request.user
-    cart_items = Cart.objects.filter(id_user_buy = user)
+    cart_items = Product_buy.objects.filter(id_user_buy = user)
     content['items'] = [i for i in cart_items]
+
     if request.method == 'POST' and 'payButton' in request.POST:
-        products = Cart.objects.filter(id_user_buy = request.user)
+        products = Product_buy.objects.filter(id_user_buy = request.user)
         for item in products:
-            # print(item.id_creator, item.id_user_buy, item.price, item.duration, item.compound, item.size, item.amount, item.product_name, item.status, item.message, item.is_payed, item.delivery_address, item.date_add, item.img)
-            product = Product_buy()
-            product.id_creator = item.id_creator
-            product.id_user_buy = item.id_user_buy
-            product.price = item.price
-            product.duration = item.duration
-            product.compound = item.compound
-            product.size = item.size
-            product.amount = int(item.amount)
-            product.product_name = item.product_name
-            product.status = item.status
-            product.message = item.message
-            product.is_payed = item.is_payed
-            product.delivery_address = item.delivery_address
-            product.date_add = item.date_add
-            product.img = item.img
-            print(product)
-            product.save()
-            item.delete()
+            item.is_incart = 0
+            item.save()
         return HttpResponseRedirect('/cart/')
 
     if request.method == 'POST' and 'decline' in request.POST:
-        Cart.objects.filter(id = request.POST['decline']).delete()
+        Product_buy.objects.filter(id = request.POST['decline']).delete()
         return HttpResponseRedirect('/cart/')
 
     return render(request, 'cart.html', content)

@@ -46,6 +46,7 @@ urlpatterns = [
     # path('tasks/', views.tasks_page),
     path('partners/', views.partners_page),
     path('documents/', views.documents_page),
+    path('documents/partners', views.documents_partners_page),
     path('documents/documentsTemplates/<name>/', views.documentTemplates_page),
     # path('employers/', views.employers_page),
     path('brands/', views.brands_page),

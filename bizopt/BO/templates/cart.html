@@ -19,6 +19,7 @@
                     uk-toggle="target: #modal-close-default">Оплатить заказ</button>
             </div>
             {% for product in items %}
+            {% if product.is_incart == 1 %}
             <div class="uk-flex uk-flex-between uk-flex-middle uk-with-1"
                 style="padding: 1%; margin: 2% auto; border-bottom: 1px solid;">
                 <div class="uk-flex uk-flex-around uk-flex-middle uk-width-3-5">
@@ -41,6 +42,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
             {% endfor %}
         </form>
     </div>
@@ -67,7 +69,7 @@
                     <h3>приносим свои извенения за неудобства</h3>
                     <!-- <p>Отсканируйте QR-код и оплатите товар</p> -->
                     <!-- <img -->
-                        <!-- src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg"> -->
+                    <!-- src="https://itumnik.ru/wp-content/uploads/2021/11/Risunok-1.-Izobrazhenie-QR-koda-sostoyashhego-iz-kvadratov.jpg"> -->
                     <form method="post">
                         {% csrf_token %}
                         <button class="uk-button uk-button-primary" type="submit" name="payButton">Оплатить</button>

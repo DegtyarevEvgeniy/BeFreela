@@ -62,22 +62,7 @@ class Product_buy(models.Model):
     delivery_address = models.CharField(max_length=500, default='')
     date_add = models.DateField(max_length=50, default='2000-01-01') 
     img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
-
-class Cart(models.Model):
-    id_creator = models.CharField(max_length=200, default='') #кто создал
-    id_user_buy = models.CharField(max_length=200, default='') #кто покупает
-    price = models.CharField(max_length=200, default='')
-    duration = models.CharField(max_length=200, default='')
-    compound = models.CharField('Срок получения товара', max_length=50, default='')
-    size = models.CharField(max_length=300, default='')
-    amount = models.IntegerField()
-    product_name = models.CharField(max_length=500, default='')
-    status = models.IntegerField(max_length=200, default='0')
-    message = models.CharField(max_length=200, default='')
-    is_payed = models.BooleanField(default=0)
-    delivery_address = models.CharField(max_length=500, default='')
-    date_add = models.DateField(max_length=50, default='2000-01-01') 
-    img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
+    is_incart = models.BooleanField(default=1)
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='')
@@ -146,3 +131,4 @@ class BePartner(models.Model):
     city = models.CharField(max_length=1000000)
     link = models.CharField(max_length=1000000)
     email = models.CharField(max_length=1000000)
+    phone = models.CharField(max_length=1000000)
