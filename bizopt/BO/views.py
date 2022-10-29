@@ -1,3 +1,4 @@
+from operator import ilshift
 import os
 from unicodedata import category
 
@@ -705,7 +706,8 @@ def cardProduct_page(request, product_id):
             cart_item = Product_buy()
             cart_item.id_user_buy = Account.objects.get(email=request.user)
             cart_item.id_creator = product.id_creator
-            cart_item.price = product.show_price
+            cart_item.brand = product.brand
+            cart_item.price = product.show_price * request.POST['amount']
             cart_item.duration = product.duration
             cart_item.compound = product.compound
             cart_item.size = product.size
@@ -993,6 +995,8 @@ def cart_page(request):
     user = request.user
     cart_items = Product_buy.objects.filter(id_user_buy = user)
     content['items'] = [i for i in cart_items]
+    content['shops'] = set([i.brand for i in cart_items]) 
+    content['sum'] = sum(int(i.price) for i in cart_items)
 
     if request.method == 'POST' and 'payButton' in request.POST:
         products = Product_buy.objects.filter(id_user_buy = request.user)
@@ -1042,6 +1046,7 @@ def orders_page(request):
     content['products'] = [{'id': product.id,
                         'id_creator': product.id_creator,
                         'id_user_buy': product.id_user_buy,
+                        'brand': product.brand,
                         'price': product.price,
                         'product_name': product.product_name,
                         'status': product.status,

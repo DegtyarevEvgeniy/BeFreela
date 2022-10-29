@@ -48,8 +48,9 @@ class Product_creator(models.Model):
    
 
 class Product_buy(models.Model):
-    id_creator = models.CharField(max_length=200, default='') #кто создал
-    id_user_buy = models.CharField(max_length=200, default='') #кто покупает
+    id_creator = models.CharField(max_length=200, default='') 
+    brand = models.CharField(max_length=200, default='') 
+    id_user_buy = models.CharField(max_length=200, default='')
     price = models.CharField(max_length=200, default='')
     duration = models.CharField(max_length=200, default='')
     compound = models.CharField('Срок получения товара', max_length=50, default='')
