@@ -666,6 +666,13 @@ def random_DB_id(segment, amount):
 
 def index_page(request):
     content = gen_menu(request)
+
+    products = Product_creator.objects.all()
+    # [for product in products[0:6]]
+
+    content['products_start'] = products[0:6]
+    content['products_bottom_1'] = products[7:12]
+    content['products_bottom_2'] = products[13:18]
     if request.user.is_authenticated:
         content['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
         content['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
