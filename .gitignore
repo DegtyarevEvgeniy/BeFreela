@@ -32,6 +32,7 @@
 BO/__pycache__/
 bizopt/__pycache__/
 BO/migrations/__pychache__/
+/bizopt/bizopt/settings.py
 
 # User-specific stuff
 .idea/**/workspace.xml
