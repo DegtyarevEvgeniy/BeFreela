@@ -674,8 +674,8 @@ def index_page(request):
     content['products_bottom_1'] = products[7:12]
     content['products_bottom_2'] = products[13:18]
     if request.user.is_authenticated:
-        content['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
-        content['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
+        # content['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
+        # content['prom_items'] = [i for i in random_DB_id(Product_creator, 8)]
         return render(request, 'index.html', content)
     else:
         return render(request, 'index.html', content)

@@ -1,27 +1,36 @@
     {% for product in products %}
-    <div style="height: 60vh; width: 25% ; background-color: none; color:black; padding: 0; margin: 3%;" class="uk-card-hover uk-card ">
-        <a class="uk-link-reset" href="/goods/{{product.id}}" style="width: 100%;">
+        <div style="height: 60vh; width: 25% ; background-color: #ccc; color:black; padding: 0; margin: 3%; border-radius: 0px 0px 0px 0px;" >
+            <a class="uk-link-reset" href="/goods/{{product.id}}" style="width: 100%; ">
 
-            <div style="height: 70%; background-size: cover;" uk-img data-src="{{product.picture1}}"></div>
-            <!-- uk-margin-small-left -->
-            <div>
-                <p style="font-weight: 450; font-size: 30px;" class=" uk-margin-remove-bottom">{{product.show_price}} ₽</p>
-                <!-- <p style="font-weight: 400; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom">{{product.brand}} Brand</p> -->
-                <p style="font-weight: 300; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom uk-panel uk-text-truncate">{{product.brand}} / {{ product.product_name }} kdbfjkbdsjfbdsbfsbdfbs bsj jlsb s bdfbsdfb sdb fbsdfjb sdjsfdbjhjsbdfjdbshjfb</p>
-                <p style="font-weight: 300; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom uk-panel uk-text-truncate">
-                    <p class="star">
+                <div style="height: 70%; background-size: cover;" uk-img data-src="{{product.picture1}}"></div>
+                <!-- uk-margin-small-left -->
+                <div>
+                    <p style="font-weight: 450; font-size: 30px;" class=" uk-margin-remove-bottom">{{product.show_price}} ₽</p>
+                    <!-- <p style="font-weight: 400; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom">{{product.brand}} Brand</p> -->
+                    <p style="font-weight: 300; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom uk-panel uk-text-truncate">{{product.brand}} / {{ product.product_name }} kdbfjkbdsjfbdsbfsbdfbs bsj jlsb s bdfbsdfb sdb fbsdfjb sdjsfdbjhjsbdfjdbshjfb</p>
+                    <p style="font-weight: 300; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom uk-panel uk-text-truncate">
+                        <p class="star">
 
-                    <strong>&star;</strong>
-                    <strong>&star;</strong>
-                    <strong>&star;</strong>
-                    <strong>&star;</strong>
-                    <strong>&star;</strong>
-                    
+                        <strong>&star;</strong>
+                        <strong>&star;</strong>
+                        <strong>&star;</strong>
+                        <strong>&star;</strong>
+                        <strong>&star;</strong>
+
+                        </p>
                     </p>
-                </p>
-            </div>
+                    <p></p>
+                </div>
 
-        </a>
-    </div>
+            </a>
+        </div>
+
 
     {% endfor %}
+
+    <style>
+        .frame{
+            width: 30%;
+            background-color: #ccc;
+        }
+    </style>
