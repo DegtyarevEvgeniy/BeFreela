@@ -8,6 +8,7 @@
 
 <body>
     <div style="width: 80%; margin-left: 10%">
+        {% if shops  %}
     <form method="post">
         <div>
             <div class="uk-flex-column">
@@ -98,54 +99,36 @@
             </div>
         </div>
     </form>
+        {% else %}
     
     <div>
-
         <div>
-            <p style="font-weight: 600; font-size: 2.625em; text-align: center;">Сложите в корзину нужные товары</p>
-            <p style="font-weight: 600; font-size: 2em; text-align: center">А чтобы их найти, загляните в каталог<br>или в раздел со скидками</p>
-            <div>
-                <a></a>
-                <a></a>
-            </div>
+            <h1 style="font-weight: 600; font-size: 2.5em; text-align: center;">Сложите в корзину нужные товары</h1>
+            <p style="font-weight: 600; font-size: 2em; text-align: center">А чтобы их найти, загляните в каталог</p>
+            
         </div>
         <div style="width: 100%">
-            <p style="font-weight: 600; font-size: 2.625em; text-align: center;">Топ скидок</p>
-            <div class="uk-grid" uk-grid>
-                <div style="height: 45vh; width: 30%; margin-right: 2%"  >
-                    <a class="uk-link-reset" href="/goods/{{product.id}}">
+            <p class="uk-width-1-2 uk-text-center" style="font-weight: 600; font-size: 2.5em; margin: 0 auto;">Как вам такие товары?</p>
+            <div class="uk-grid-match uk-grid-medium uk-child-width-1-3" style="margin: 2% auto 0 auto" uk-grid>
+                {% for items in randProducts %}
+                {% for item in items %}
+                <div style="height: 45vh;">
+                    <a class="uk-link-reset" href="/goods/{{item.id}}">
 
-                    <div style="height: 70%; " uk-img data-src="https://sun9-13.userapi.com/impg/WdBQX3pTiEevM5-Jq8PbRw3KCpSAt7ViTP1H8g/sdT05rynN9g.jpg?size=349x329&quality=96&sign=4a12051e3d1c4fd061634f112cce627a&type=album"></div>
+                    <div class="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" uk-img data-src="{{item.picture1}}"></div>
                     <div>
-                        <p style="font-weight: 300; font-size: 18px;" class="uk-margin-small-left uk-margin-remove-bottom">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <p style="font-weight: 300; font-size: 16px;" class="uk-margin-small-left uk-margin-remove-top uk-margin-remove-bottom">1990 руб.</p>
+                        <p style="font-weight: 300; font-size: 18px;" class="uk-margin-small-left uk-margin-remove-bottom uk-text-truncate">{{item.description}}</p>
+                        <p style="font-weight: 300; font-size: 16px;" class="uk-margin-small-left uk-margin-remove-top uk-margin-remove-bottom">{{item.show_price}} руб.</p>
                     </div>
                     </a>
                 </div>
-                <div style="height: 45vh; width: 30%; margin-right: 2%"  >
-                    <a class="uk-link-reset" href="/goods/{{product.id}}">
-
-                    <div style="height: 70%; " uk-img data-src="https://sun9-13.userapi.com/impg/WdBQX3pTiEevM5-Jq8PbRw3KCpSAt7ViTP1H8g/sdT05rynN9g.jpg?size=349x329&quality=96&sign=4a12051e3d1c4fd061634f112cce627a&type=album"></div>
-                    <div>
-                        <p style="font-weight: 300; font-size: 18px;" class="uk-margin-small-left uk-margin-remove-bottom">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <p style="font-weight: 300; font-size: 16px;" class="uk-margin-small-left uk-margin-remove-top uk-margin-remove-bottom">1990 руб.</p>
-                    </div>
-                    </a>
-                </div>
-                <div style="height: 45vh; width: 30%; margin: 0;"  >
-                    <a class="uk-link-reset" href="/goods/{{product.id}}">
-
-                    <div style="height: 70%; " uk-img data-src="https://sun9-13.userapi.com/impg/WdBQX3pTiEevM5-Jq8PbRw3KCpSAt7ViTP1H8g/sdT05rynN9g.jpg?size=349x329&quality=96&sign=4a12051e3d1c4fd061634f112cce627a&type=album"></div>
-                    <div>
-                        <p style="font-weight: 300; font-size: 18px;" class="uk-margin-small-left uk-margin-remove-bottom">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <p style="font-weight: 300; font-size: 16px;" class="uk-margin-small-left uk-margin-remove-top uk-margin-remove-bottom">1990 руб.</p>
-                    </div>
-                    </a>
-                </div>
+                {% endfor %}
+                {% endfor %}
             </div>
         </div>
     </div>
-    </div>
+    {% endif %}
+    
 </body>
 
 <script>

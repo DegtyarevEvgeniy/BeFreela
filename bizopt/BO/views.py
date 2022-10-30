@@ -46,9 +46,7 @@ def pageNotRequest(request):
 
 def gen_menu(request):
     if request.user.is_authenticated:
-        user = Account.objects.get(email=request.user.email)
-
-        return {'user': Account.objects.get(email=request.user.email), }
+        return {'user': Account.objects.get(email=request.user)}
 
     else:
         return {}
@@ -707,7 +705,7 @@ def cardProduct_page(request, product_id):
             cart_item.id_user_buy = Account.objects.get(email=request.user)
             cart_item.id_creator = product.id_creator
             cart_item.brand = product.brand
-            cart_item.price = product.show_price * request.POST['amount']
+            cart_item.price = int(product.show_price) * int(request.POST['amount'])
             cart_item.duration = product.duration
             cart_item.compound = product.compound
             cart_item.size = product.size
@@ -997,6 +995,7 @@ def cart_page(request):
     content['items'] = [i for i in cart_items]
     content['shops'] = set([i.brand for i in cart_items]) 
     content['sum'] = sum(int(i.price) for i in cart_items)
+    content['randProducts'] = [i for i in random_DB_id(Product_creator, 3)]
 
     if request.method == 'POST' and 'payButton' in request.POST:
         products = Product_buy.objects.filter(id_user_buy = request.user)
