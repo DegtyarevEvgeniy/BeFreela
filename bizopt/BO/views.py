@@ -673,6 +673,9 @@ def index_page(request):
     content['products_bottom_1'] = [i for i in random_DB_id(Product_creator, 6)]
     content['products_bottom_2'] = [i for i in random_DB_id(Product_creator, 6)]
 
+    content['products'] = products
+
+
     shops = Shop.objects.all()
 
     content['shops'] = shops[0:9]

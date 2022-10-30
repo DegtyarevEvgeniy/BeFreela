@@ -3,6 +3,32 @@
 {% block content %}
 
 <style>
+
+
+    .frame{
+        height: 60vh;
+        width: 25%;
+        /* background-color: #ccc; */
+        color:black;
+        padding: 1%;
+        margin: 1%;
+        border-radius: 10px 10px 10px 10px;
+        transition: 0;
+        
+    }
+
+    .frame:hover {
+        box-shadow: 0px 0px 25px 4px #ccc;
+        animation-name: example;
+        animation-duration: 4s;
+
+    }
+
+    .frame:hover .text_b {
+        display: block;
+    }
+
+            
     #leftBottomnMenu {
         position: relative;
         z-index: 1;
@@ -193,9 +219,9 @@
 
 
 
-<br>
-<br>
-<br>
+    <br>
+    <br>
+    <br>
 
 
 
@@ -206,7 +232,6 @@
         <ul class="uk-slider-items uk-grid uk-margin-large-top" style="margin: auto">
             <li class="uk-width-1 uk-flex">
 
-                {% for products in products_bottom_1 %}
                 {% for product in products %}
 
                 <div style="height: 45vh; width: 32%; margin: 0">
@@ -223,12 +248,12 @@
                 </div>
 
                 {% endfor %}
-                {% endfor %}
 
             </li>
             <li class="uk-width-1 uk-flex">
 
-                {% for products in products_bottom_2 %}
+                {% for product in products %}
+
 
                 <div style="height: 45vh; width: 32%; margin: 0">
                     <a class="uk-link-reset" href="/goods/{{product.id}}">
@@ -254,6 +279,50 @@
             style="background-color: black; color: white;" uk-slidenav-previous uk-slider-item="previous"></a>
         <a class="uk-position-center-right uk-margin-small-right uk-border-pill "
             style="background-color: black; color: white;" href="#" uk-slidenav-next uk-slider-item="next"></a>
+
+    </div>
+
+
+
+
+    <div class="uk-grid uk-margin-large-top">
+
+        {% for product in products %}
+
+        {{product.name}}
+
+        FFFFFFFFFFFFFFF
+
+
+        {% endfor %}
+
+            <!-- <div class="frame">
+                <a class="uk-link-reset" href="/goods/{{product.id}}" style="width: 100%;">
+
+                    <div style="height: 70%; background-size: cover;" uk-img data-src="{{product.picture1}}"></div>
+                    <div>
+                        <p style="font-weight: 450; font-size: 30px;" class=" uk-margin-remove-bottom">{{product.show_price}} ₽</p>
+                        <p style="font-weight: 300; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom uk-panel uk-text-truncate">{{product.brand}} / {{ product.product_name }} kdbfjkbdsjfbdsbfsbdfbs bsj jlsb s bdfbsdfb sdb fbsdfjb sdjsfdbjhjsbdfjdbshjfb</p>
+                        <p style="font-weight: 300; font-size: 20px;" class=" uk-margin-remove-top uk-margin-remove-bottom uk-panel uk-text-truncate">
+
+                            <p class="star">
+
+                            <strong>&star;</strong>
+                            <strong>&star;</strong>
+                            <strong>&star;</strong>
+                            <strong>&star;</strong>
+                            <strong>&star;</strong>
+
+                            </p>
+
+                        </p>
+                        <p style="font-weight: 300; font-size: 20px; display: none;" class="text_b uk-margin-remove-top uk-panel uk-text-truncate">Доступные размеры: {{product.size}}</p>
+                    </div>
+
+                </a>
+            </div> -->
+
+
 
     </div>
 
@@ -287,21 +356,27 @@
 
     </div> -->
 
-        <div class="uk-grid uk-margin-large-top" style="height: 90vh">
-            <h1>Популярные бренды</h1>
+        <div class="uk-grid uk-margin-large-top" style="height: 70vh">
+            <div class="uk-width-1 " style="display: flex; gap: 2%;height: 10px;">
+                <h1>Популярные бренды</h1>
+                <p> <a href="/brands/" class="uk-button uk-button-text"> Смотреть все</a></p>
 
-            <li class="uk-width-1 uk-flex">
-                                <div style="height: 45vh; width: 32%; margin: 0">
+            </div>
+            
 
-                {% for shop in shops %}
+            <li class="uk-width-1 ">
+                <div style="height: 45vh; width: 100%; margin: 0"  uk-grid>
 
-                <a class="uk-link-reset" href="/goods/{{product.id}}">
+                    {% for shop in shops %}
+
+                    <a class="uk-link-reset" href="/brands/{{shop.name}}">
 
 
-                <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="height: 100px; width: 100px; " uk-img data-src="{{shop.logoImage}}"></div>
-                </a>
+                    <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="height: 100px; width: 100px; border: #0A3644 solid;" uk-img data-src="{{shop.logoImage}}"></div>
+                    </a>
 
-                {% endfor %}
+                    {% endfor %}
+                    
 
                 </div>
 
