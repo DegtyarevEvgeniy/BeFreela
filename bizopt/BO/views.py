@@ -669,16 +669,17 @@ def index_page(request):
     products = Product_creator.objects.all()
     # [for product in products[0:6]]
 
-    content['products_start'] = [i for i in random_DB_id(Product_creator, 6)]
-    content['products_bottom_1'] = [i for i in random_DB_id(Product_creator, 6)]
-    content['products_bottom_2'] = [i for i in random_DB_id(Product_creator, 6)]
+   
+    # content['products_start'] = [i for i in random_DB_id(Product_creator, 6)]
+    # content['products_bottom_1'] = [i for i in random_DB_id(Product_creator, 6)]
+    # # content['products_bottom_2'] = [i for i in random_DB_id(Product_creator, 6)]
 
-    content['products'] = products
-
+    content['products_start'] = [product for product in products[0:6]]
+    content['products_bottom_1'] = [product for product in products[0:25]]
 
     shops = Shop.objects.all()
 
-    content['shops'] = shops[0:9]
+    content['shops'] = [shop for shop in shops[0:4]]
 
     if request.user.is_authenticated:
         # content['prom_shops'] =  [i for i in random_DB_id(Shop, 8)]
