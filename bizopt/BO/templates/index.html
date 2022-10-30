@@ -76,7 +76,7 @@
                 <div class="whitefont" style="margin-left: 5%; margin-top: 5%;">
                     <p style="font-weight: 600; font-size: 2.625em;" class="uk-margin-medium-left">Одежда</p>
                     <p style="font-weight: 300; font-size: 1.3em;" class="uk-margin-medium-left">Не упусти свой шанс
-                        порадовать <br> себя уеикольноый вещью<br> вместе с BeFreela</p>
+                        порадовать <br> себя уикальной вещью<br> вместе с BeFreela</p>
                     <div style="margin: auto; margin-top: 5%;" class="uk-margin-medium-left">
                         <a class="uk-button uk-button-secondary uk-border-pill" href="/goods/category/Clothing">Перейти
                             в каталог</a>
@@ -193,11 +193,15 @@
 
 
 
-
+<br>
+<br>
+<br>
 
 
 
     <div class=" uk-visible-toggle uk-position-relative" tabindex="-1" uk-slider>
+        <h1>Топ товаров</h1>
+
 
         <ul class="uk-slider-items uk-grid uk-margin-large-top" style="margin: auto">
             <li class="uk-width-1 uk-flex">
@@ -225,7 +229,6 @@
             <li class="uk-width-1 uk-flex">
 
                 {% for products in products_bottom_2 %}
-                {% for product in products %}
 
                 <div style="height: 45vh; width: 32%; margin: 0">
                     <a class="uk-link-reset" href="/goods/{{product.id}}">
@@ -241,7 +244,6 @@
                 </div>
 
                 {% endfor %}
-                {% endfor %}
 
             </li>
 
@@ -254,6 +256,62 @@
             style="background-color: black; color: white;" href="#" uk-slidenav-next uk-slider-item="next"></a>
 
     </div>
+
+
+    <!-- <div class="uk-slider-container-offset" uk-slider>
+
+        <h1>Популярные бренды</h1>
+
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+        <ul class="uk-slider-items uk-child-width-1-4@s uk-grid">
+            {% for shop in shops %}
+
+            <li>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-media-top">
+                        <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="height: 70%; " uk-img data-src="{{product.picture1}}"></div>
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">{{shop.name}}</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p> </div>
+                </div>
+            </li>
+
+            {% endfor %}
+
+        </ul>
+
+        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous" style="color: #ccc;"></a>
+        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next" style="color: #ccc;"></a>
+
+    </div> -->
+
+        <div class="uk-grid uk-margin-large-top" style="height: 90vh">
+            <h1>Популярные бренды</h1>
+
+            <li class="uk-width-1 uk-flex">
+                                <div style="height: 45vh; width: 32%; margin: 0">
+
+                {% for shop in shops %}
+
+                <a class="uk-link-reset" href="/goods/{{product.id}}">
+
+
+                <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light" style="height: 100px; width: 100px; " uk-img data-src="{{shop.logoImage}}"></div>
+                </a>
+
+                {% endfor %}
+
+                </div>
+
+            </li>
+
+        </div>
+
+
+
+</div>
 
 </div>
 
