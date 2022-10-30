@@ -29,7 +29,7 @@
                             </p>
                         </div>
                         {% for item in items %}
-                        {% if item.brand == shop %}
+                        {% if item.brand == shop and item.is_incart == 1 %}
 
                         <div class="uk-flex uk-margin">
 
@@ -66,9 +66,9 @@
 
                     <div class="uk-width-1-4 uk-flex-column uk-margin-left">
                         <div>
-                            <a class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1">Перейти
-                                к
-                                оформлению</a>
+                            <button class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1" name="payButton" type="submit"> 
+                                Перейти к оформлению
+                            </button>
                         </div>
                         <div class="uk-flex-column uk-border-rounded" style="background-color: lightgray; height: 30vh">
                             <div class="uk-flex uk-margin-left uk-margin-top">
