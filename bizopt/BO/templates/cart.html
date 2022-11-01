@@ -12,12 +12,12 @@
     <form method="post">
         <div>
             <div class="uk-flex-column">
-                <div class="uk-flex">
+                <div class="uk-flex" style="gap:2%">
                     <div>
-                        <p style="font-weight: 600; font-size: 2.625em;">Корзина</p>
+                        <!-- <p style="font-weight: 600; font-size: 2.625em;">Корзина</p> -->
+                        <h1 class="">Корзина</h1>
                     </div>
-                    <p class="uk-text-bottom uk-margin-small-left"
-                        style="font-weight: 600; font-size: 1em; margin-top: 30px;">n товаров</p>
+                    <p class="uk-text-bottom uk-margin-small-left">n товаров</p>
                 </div>
 
                 <div class="uk-width-1 uk-flex">
@@ -64,13 +64,17 @@
                         {% endfor %}
                     </div>
 
+
                     <div class="uk-width-1-4 uk-flex-column uk-margin-left">
+
                         <div>
                             <button class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1" name="payButton" type="submit"> 
                                 Перейти к оформлению
                             </button>
                         </div>
-                        <div class="uk-flex-column uk-border-rounded" style="background-color: lightgray; height: 30vh">
+
+                        <div class="uk-flex-column uk-border-rounded" style="background-color: rgba(211, 211, 211, 0.482); height: 30vh">
+                            
                             <div class="uk-flex uk-margin-left uk-margin-top">
                                 <div class="uk-margin-top">
                                     <p style="font-weight: 600; font-size: 1.45em;">Итого</p>
@@ -83,6 +87,7 @@
                                     <p style="font-weight: 600; font-size: 1em; margin: 0">0</p>
                                 </div>
                             </div>
+
                             <div class="uk-margin-left uk-margin-medium-top">
                                 <div>
                                     <div class="uk-flex">
@@ -93,8 +98,13 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
                     </div>
+
+
+
                 </div>
             </div>
         </div>
