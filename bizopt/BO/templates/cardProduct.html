@@ -138,7 +138,7 @@
                                 <h4 class="uk-margin-remove-top">Название товара</h4>
                                 <div class="uk-flex">
                                     <p class="uk-margin-small-top">Оплата: </p>
-                                    <p class="uk-margin-left uk-margin-small-top"> картой онлайн</p>
+                                    <p class="uk-margin-left uk-margin-small-top"> картой онлайн </p>
                                 </div>
                                 <div class="uk-flex">
                                     <p class="uk-margin-small-top">Количество: </p>
@@ -152,17 +152,19 @@
                                             uk-icon="icon: plus"></a>
                                     </div>
                                 </div>
-                                <div class="uk-flex">
-                                    <p class="uk-margin-small-top">Адрес доставки:</p>
-                                    <div class="uk-margin-left" style="width: 65%">
-                                        <input class="uk-input" name="address" id="form-stacked-text" type="text"
-                                            placeholder="г.Москва, Ленинградский проезд 111, кв 101, 100102">
-                                        <p class="uk-text-meta uk-margin-remove" style="font-size: 12px">Вводите адрес в
-                                            формате: "г. Город, улица, кв, почтовый индекc"</p>
+                                <div class="uk-flex uk-flex-top uk-flex-between uk-margin">
+                                    <p class="uk-margin-small-top uk-width-2-5">Количество: </p>
+                                    <div class="uk-grid-small" uk-grid>
+                                        {% for size in product.sizes %}
+                                        <label>
+                                            <input type="radio" name="size" class="uk-radio" id="" value="{{size}}">
+                                            {{size}}
+                                        </label>
+                                        {% endfor %}
                                     </div>
                                 </div>
                                 <p for="textarea">Пожелания к товару:</p>
-                                <textarea class="uk-textarea" name="message" id="" rows="5 "
+                                <textarea class="uk-textarea" name="message" id="" rows="5"
                                     style="width: 100%;"></textarea>
                             </div>
 
@@ -402,9 +404,10 @@
     const sizeBtn = document.querySelectorAll('.size');
 
     sizeBtn.forEach(el => el.addEventListener('click', event => {
-        let prices = "{{product.price}}".split(',')
+        let prices = "{{product.prices}}".slice(1, "{{product.prices}}".length - 1).split(',')
         let amount = "{{product.amount}}".split(',')
         let index = BtnList.indexOf(el)
+
         document.getElementById('price').innerHTML = prices[index] + " руб.";
     }));
 

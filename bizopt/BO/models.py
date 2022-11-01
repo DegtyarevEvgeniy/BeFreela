@@ -47,7 +47,22 @@ class Product_creator(models.Model):
     tags = TaggableManager()
    
 
-class Product_buy(models.Model):
+class Cart(models.Model):
+    id_creator = models.CharField(max_length=200, default='') 
+    brand = models.CharField(max_length=200, default='') 
+    id_user_buy = models.CharField(max_length=200, default='')
+    price = models.CharField(max_length=200, default='')
+    duration = models.CharField(max_length=200, default='')
+    compound = models.CharField('Срок получения товара', max_length=50, default='')
+    size = models.CharField(max_length=300, default='')
+    amount = models.IntegerField()
+    product_name = models.CharField(max_length=500, default='')
+    status = models.IntegerField(max_length=200, default='0')
+    message = models.CharField(max_length=200, default='')
+    payment_method = models.CharField(max_length=500, default='картой онлайн')
+    img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
+
+class Orders(models.Model):
     id_creator = models.CharField(max_length=200, default='') 
     brand = models.CharField(max_length=200, default='') 
     id_user_buy = models.CharField(max_length=200, default='')
@@ -61,9 +76,13 @@ class Product_buy(models.Model):
     message = models.CharField(max_length=200, default='')
     is_payed = models.BooleanField(default=0)
     delivery_address = models.CharField(max_length=500, default='')
+    payment_method = models.CharField(max_length=500, default='картой онлайн')
+    order_number = models.BigIntegerField(default='0')
+    date_receiving = models.DateField(max_length=50, default='2000-01-01') 
     date_add = models.DateField(max_length=50, default='2000-01-01') 
     img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
     is_incart = models.BooleanField(default=1)
+
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='')

@@ -335,36 +335,25 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         # product.price = request.POST['price']
         product.description = request.POST['description']
         product.brand = shop.name
-        size = ''
-        compound_name = ''
-        compound_percentage = ''
-        compound = ''
-        price = ''
-        amount = ''
+        size, compound_name, compound_percentage, compound, price, amount = [], [], [], [], [], []
         for i in range(0, 16):
             if request.POST.get(f'size_{i}'):
-                size += request.POST.get(f'size_{i}')
-                size += ','
-            else:
-                break
+                size += [request.POST.get(f'size_{i}')]
             if request.POST.get(f'compName_{i}'):
-                compound_name += request.POST.get(f'compName_{i}')
+                compound_name += [request.POST.get(f'compName_{i}')]
             if request.POST.get(f'compPercentage_{i}'):
-                compound_percentage += request.POST.get(f'compPercentage_{i}')
+                compound_percentage += [request.POST.get(f'compPercentage_{i}')]
             if request.POST.get(f'price_{i}'):
-                price += request.POST.get(f'price_{i}')
-                price += ','
+                price += [request.POST.get(f'price_{i}')]
             if request.POST.get(f'amount_{i}'):
-                amount += request.POST.get(f'amount_{i}')
-                amount += ','
+                amount += [request.POST.get(f'amount_{i}')]
         for name, percentage in zip(compound_name, compound_percentage):
-            compound += f"{name} {percentage},"
-        compound = list(filter(None, compound.split(",")))
-        product.size = size
-        product.compound = compound
-        product.price = price
-        product.amount = amount
-        product.show_price = price.split(',')[0]
+            compound += [f"{name} | {percentage}"]
+        product.size = str(size)[1:-1]
+        product.compound = str(compound)[1:-1]
+        product.price = str(price)[1:-1]
+        product.amount = str(amount)[1:-1]
+        product.show_price = price[0]
         product.country = request.POST['country']
         product.category = request.POST['category']
         product.duration = request.POST['duration']
@@ -373,51 +362,51 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.id_creator = account.email
         product.save()
         return HttpResponseRedirect("/becomeCreator/")
-
-    if request.method == 'POST' and "save_changet_product" in request.POST:  
-        product = Product_creator.objects.get(product_id=request.POST['product_id'])    
+    # if request.method == 'POST' and "save_changed_product" in request.POST:  
+    # # change button
+    #     product = Product_creator.objects.get(product_id=request.POST['product_id'])    
         
-        product.product_name = request.POST['product_name']
-        product.description = request.POST['description']
-        product.brand = shop.name
-        size = ''
-        compound_name = ''
-        compound_percentage = ''
-        compound = ''
-        price = ''
-        amount = ''
-        for i in range(0, 16):
-            if request.POST.get(f'size_{i}'):
-                size += request.POST.get(f'size_{i}')
-                size += ','
-            else:
-                break
-            if request.POST.get(f'compName_{i}'):
-                compound_name += request.POST.get(f'compName_{i}')
-            if request.POST.get(f'compPercentage_{i}'):
-                compound_percentage += request.POST.get(f'compPercentage_{i}')
-            if request.POST.get(f'price_{i}'):
-                price += request.POST.get(f'price_{i}')
-                price += ','
-            if request.POST.get(f'amount_{i}'):
-                amount += request.POST.get(f'amount_{i}')
-                amount += ','
-        for name, percentage in zip(compound_name, compound_percentage):
-            compound += f"{name} {percentage},"
-        compound = list(filter(None, compound.split(",")))
-        product.size = size
-        product.compound = compound
-        product.price = price
-        product.amount = amount
-        product.show_price = price.split(',')[0]
-        product.country = request.POST['country']
-        product.category = request.POST['category']
-        product.duration = request.POST['duration']
-        product.sex = request.POST['sex']
-        account = Account.objects.get(email=request.user)
-        product.id_creator = account.email
-        product.save()
-        return HttpResponseRedirect("/becomeCreator/")
+    #     product.product_name = request.POST['product_name']
+    #     product.description = request.POST['description']
+    #     product.brand = shop.name
+    #     size = ''
+    #     compound_name = ''
+    #     compound_percentage = ''
+    #     compound = ''
+    #     price = ''
+    #     amount = ''
+    #     for i in range(0, 16):
+    #         if request.POST.get(f'size_{i}'):
+    #             size += request.POST.get(f'size_{i}')
+    #             size += ','
+    #         else:
+    #             break
+    #         if request.POST.get(f'compName_{i}'):
+    #             compound_name += request.POST.get(f'compName_{i}')
+    #         if request.POST.get(f'compPercentage_{i}'):
+    #             compound_percentage += request.POST.get(f'compPercentage_{i}')
+    #         if request.POST.get(f'price_{i}'):
+    #             price += request.POST.get(f'price_{i}')
+    #             price += ','
+    #         if request.POST.get(f'amount_{i}'):
+    #             amount += request.POST.get(f'amount_{i}')
+    #             amount += ','
+    #     for name, percentage in zip(compound_name, compound_percentage):
+    #         compound += f"{name} {percentage},"
+    #     compound = list(filter(None, compound.split(",")))
+    #     product.size = size
+    #     product.compound = compound
+    #     product.price = price
+    #     product.amount = amount
+    #     product.show_price = price.split(',')[0].replace("'", '')
+    #     product.country = request.POST['country']
+    #     product.category = request.POST['category']
+    #     product.duration = request.POST['duration']
+    #     product.sex = request.POST['sex']
+    #     account = Account.objects.get(email=request.user)
+    #     product.id_creator = account.email
+    #     product.save()
+    #     return HttpResponseRedirect("/becomeCreator/")
 
      
     if request.method == 'GET' and "product_cards" in request.GET:
@@ -435,7 +424,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
 
     if request.method == 'POST' and set(["change_status_to_0", "change_status_to_1", "change_status_to_2", "change_status_to_3"]).intersection(request.POST):
         stat = str(set(["change_status_to_0", "change_status_to_1", "change_status_to_2", "change_status_to_3"]).intersection(request.POST))[2:-2]
-        product = Product_buy.objects.get(id=request.POST[f'{stat}'])
+        product = Cart.objects.get(id=request.POST[f'{stat}'])
         statuses = {
             '0': 'Заказ в обработке',
             '1': 'Заказ в процессе сборки',
@@ -448,7 +437,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
         product.save()
         return HttpResponseRedirect("/becomeCreator/")
     if request.method == 'POST' and "decline" in request.POST:
-        product = Product_buy.objects.get(id=request.POST['decline'])
+        product = Cart.objects.get(id=request.POST['decline'])
         product.delete()
         return HttpResponseRedirect("/becomeCreator/")
 
@@ -485,7 +474,7 @@ def becomeCreator_page(request):  # sourcery skip: low-code-quality
     #         '3': 'Заказ в ожидании оплаты',
     #         '4': 'Заказчик отказался от заказа'
     #     }
-    #     products = Product_buy.objects.all()
+    #     products = Cart.objects.all()
     #     for i in range(len(products)):
     #         products[i].status = statuses[statuses_list[i]]
     #         products[i].save()
@@ -579,7 +568,7 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         account = Account.objects.get(email=request.user)
-        products = Product_buy.objects.filter(id_creator=account.email)
+        products = Cart.objects.filter(id_creator=account.email)
         content['products'] = [{
                                 'id_creator' : product.id_creator,
                                 'id_user_buy' : product.id_user_buy,
@@ -611,14 +600,8 @@ def becomeCreatorTemplate_page(request, name):
                                 'vote_sum': product.vote_sum,
                                 'category': product.category,
                                 'set': product.size,
-                                'price': product.price.split(",")[0],
+                                'price': product.show_price,
                                 'description': product.description,
-                                # 'width_product': product.width_product,
-                                # 'height_product': product.height_product,
-                                # 'length_product': product.length_product,
-                                # 'width_packaging': product.width_packaging,
-                                # 'height_packaging': product.height_packaging,
-                                # 'length_packaging': product.length_packaging,
                                 'availability': product.availability,
                                 'picture1': product.picture1,
                                 'picture2': product.picture2,
@@ -710,11 +693,10 @@ def cardProduct_page(request, product_id):
     shop = Shop.objects.get(email=product.id_creator)
     try:
         if request.method == "POST" and "addToCartBtn" in request.POST:
-            cart_item = Product_buy()
+            cart_item = Cart()
             cart_item.id_user_buy = Account.objects.get(email=request.user)
             cart_item.id_creator = product.id_creator
             cart_item.brand = product.brand
-            cart_item.price = int(product.show_price) * int(request.POST['amount'])
             cart_item.duration = product.duration
             cart_item.compound = product.compound
             cart_item.size = product.size
@@ -722,8 +704,14 @@ def cardProduct_page(request, product_id):
             cart_item.date_add = date.today()
             cart_item.img = product.picture1
             cart_item.amount = request.POST['amount']
-            cart_item.address = request.POST['address']
             cart_item.message = request.POST['message']
+            cart_item.size = request.POST['size']
+            sizes = product.size.replace("'", '').split(',')
+            prices = product.price.replace("'", '').split(',')
+            for i in range(len(sizes)):
+                if sizes[i].strip() == request.POST['size'].strip():
+                    cart_item.price = int(prices[i].strip()) * int(request.POST['amount'])
+                    
             cart_item.save()
 
             return HttpResponseRedirect(f'/goods/{product_id}/')
@@ -747,10 +735,10 @@ def cardProduct_page(request, product_id):
             product.save()
             return HttpResponseRedirect(f'/goods/{product_id}/')
         content['product'] = product
-        content['product'].show_price = list(filter(None, product.price.split(",")))[0]
-        content['product'].sizes = list(filter(None, product.size.split(",")))
-        content['product'].prices = list(filter(None, product.price.split(",")))
-        content['product'].compounds = list(filter(None, product.compound.split(",")))
+        content['product'].show_price = product.price.replace("'", '').split(",")[0]
+        content['product'].sizes = product.size.replace("'", '').split(",")
+        content['product'].prices = [int(i.strip()) for i in product.price.replace("'", '').split(",")]
+        content['product'].compounds = product.compound.replace("'", '').split(",")
         content['product'].rating = float(str(product.rating)[0:4])
         content['product'].flooredrating = math.floor(product.rating)
         content['shop'] = shop
@@ -1000,21 +988,21 @@ def chat_page_list(request):
 def cart_page(request):
     content = {}
     user = request.user
-    cart_items = Product_buy.objects.filter(id_user_buy = user)
+    cart_items = Cart.objects.filter(id_user_buy = user)
     content['items'] = [i for i in cart_items]
-    content['shops'] = set([i.brand for i in cart_items]) 
+    content['shops'] = set()
+    for i in cart_items:
+        content['shops'].add(i.brand)
+        content['shops'] = set(content['shops'])
     content['sum'] = sum(int(i.price) for i in cart_items)
     content['randProducts'] = [i for i in random_DB_id(Product_creator, 3)]
-
     if request.method == 'POST' and 'payButton' in request.POST:
-        products = Product_buy.objects.filter(id_user_buy = request.user)
-        for item in products:
-            item.is_incart = 0
-            item.save()
+        products = Cart.objects.filter(id_user_buy = request.user)
+        print(12312312312312312312312)
         return HttpResponseRedirect('/cart/')
 
     if request.method == 'POST' and 'decline' in request.POST:
-        Product_buy.objects.filter(id = request.POST['decline']).delete()
+        Cart.objects.filter(id = request.POST['decline']).delete()
         return HttpResponseRedirect('/cart/')
 
     return render(request, 'cart.html', content)
@@ -1050,25 +1038,35 @@ def delivery_choice(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    products = Product_buy.objects.filter(id_user_buy=request.user)
-    content['products'] = [{'id': product.id,
-                        'id_creator': product.id_creator,
-                        'id_user_buy': product.id_user_buy,
-                        'brand': product.brand,
-                        'price': product.price,
-                        'product_name': product.product_name,
-                        'status': product.status,
-                        'message': product.message,
-                        'is_payed': product.is_payed,
-                        'delivery_address': product.delivery_address,
-                        'date_add': product.date_add,
-                        'img': product.img,
-                        'chat': (Account.objects.get(email=product.id_creator).id * Account.objects.get(email=product.id_user_buy).id) + Account.objects.get(email=product.id_creator).id + Account.objects.get(email=product.id_user_buy).id,
+    products = Cart.objects.filter(id_user_buy=request.user)
+    content['shops'] = set()
+    for i in products:
+        if not i.is_incart:
+            content['shops'].add(i.brand)
+            content['shops'] = set(content['shops'])
+    content['products'] = [{
+                        'id':product.id,
+                        'id_creator':product.id_creator,
+                        'brand':product.brand,
+                        'id_user_buy':product.id_user_buy,
+                        'price':product.price,
+                        'duration':product.duration,
+                        'compound':product.compound,
+                        'size':product.size,
+                        'amount':product.amount,
+                        'product_name':product.product_name,
+                        'status':product.status,
+                        'message':product.message,
+                        'is_payed':product.is_payed,
+                        'delivery_address':product.delivery_address,
+                        'date_add':product.date_add,
+                        'img':product.img,
+                        'is_incart':product.is_incart,
                         } for product in products]
     
 
     if request.method == "POST" and "decline" in request.POST:
-        Product_buy.objects.get(id=request.POST['decline']).delete()
+        Cart.objects.get(id=request.POST['decline']).delete()
         return HttpResponseRedirect('/orders/')
 
     return render(request, 'orders.html', content)
