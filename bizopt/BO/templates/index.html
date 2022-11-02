@@ -2,94 +2,16 @@
 
 {% block content %}
 
-<style>
+
+{% load static %}
 
 
-    .frame{
-        height: 60vh;
-        width: 15%;
-        /* background-color: #ccc; */
-        color:black;
-        padding: 1%;
-        margin: 1%;
-        border-radius: 10px 10px 10px 10px;
-        transition: 0;
-        
-    }
-
-    .frame:hover {
-        box-shadow: 0px 0px 25px 4px #ccc;
-        animation-name: example;
-        animation-duration: 4s;
-
-    }
-
-    .frame:hover .text_b {
-        display: block;
-    }
-
-            
-    #leftBottomnMenu {
-        position: relative;
-        z-index: 1;
-    }
-
-    #leftBottomnMenu:before {
-        content: "";
-        position: absolute;
-        float: left;
-        left: 0;
-        bottom: 0;
-        height: 1px;
-        width: 89%;
-        border-bottom: 1px solid #0A3644;
-    }
-
-    #rigthBottomnMenu {
-        position: relative;
-        z-index: 1;
-    }
-
-    #rigthBottomnMenu:before {
-        content: "";
-        position: absolute;
-        float: left;
-        left: 10%;
-        bottom: 0;
-        height: 1px;
-        width: 90%;
-        border-bottom: 1px solid #0A3644;
-    }
-
-    svg {
-        width: 30px;
-        height: 30px;
-    }
-
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+<link rel="stylesheet" href="{% static "css/index.css" %}">
+<link rel="stylesheet" href="{% static "js/index.js" %}">
 
 
-    .whitefont p {
-        color: black
-    }
 
-    .text-line {
-        position: relative;
-        left: 0;
-        top: 0;
-        animation: move 1s linear infinite alternate;
-    }
 
-    @keyframes move {
-        from {
-            transform: translateX(0%);
-        }
-
-        to {
-            transform: translateX(-50%);
-        }
-    }
-</style>
 
 <div style="width: 97%; margin: auto; padding-top: 5vh;">
 
@@ -338,24 +260,6 @@
 
 </div>
 
-
-<script>
-    document.getElementById('search_pole').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn').href = "/goods/search/" + document.getElementById(
-            'search_pole').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn').click();
-        }
-    });
-
-    document.getElementById('search_pole1').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn1').href = "/goods/search/" + document.getElementById(
-            'search_pole1').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn1').click();
-        }
-    });
-</script>
 
 {% include "footer.html" %}
 
