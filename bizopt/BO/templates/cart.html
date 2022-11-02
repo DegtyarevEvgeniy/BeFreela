@@ -162,15 +162,30 @@
         {% else %}
 
         <div>
+            <br>
+            <br>
+            <br>
             <div>
-                <h1 style="font-weight: 600; font-size: 2.5em; text-align: center;">Сложите в корзину нужные товары</h1>
-                <p style="font-weight: 600; font-size: 2em; text-align: center">А чтобы их найти, загляните в каталог
-                </p>
+                <h1 style="font-size: 2.5em; text-align: center;">Сложите в корзину нужные товары</h1>
+                <p style="text-align: center">А чтобы их найти, загляните в каталог</p>
+
+
+                <div class="uk-width-1 uk-flex-center" style="display: flex; gap: 2%;height: auto; margin: auto;">
+
+                    <p><a class="uk-button uk-button-secondary uk-border-pill uk-margin-small-top" href="/goods/">Показать еще</a></p>
+                    <p> <a href="/brands/" class="uk-button uk-button-text"> Смотреть все</a></p>
+
+                </div>
+
 
             </div>
+
+            <br>
+            <br>
+
             <div style="width: 100%">
-                <p class="uk-width-1-2 uk-text-center" style="font-weight: 600; font-size: 2.5em; margin: 0 auto;">Как
-                    вам такие товары?</p>
+                <h2 class="uk-width-1-2 uk-text-center" style="margin: 0 auto;">Как
+                    вам такие товары?</h2>
                 <div class="uk-grid-match uk-grid-medium uk-child-width-1-3" style="margin: 2% auto 0 auto" uk-grid>
                     {% for items in randProducts %}
                     {% for item in items %}
