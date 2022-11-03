@@ -704,7 +704,6 @@ def cardProduct_page(request, product_id):
             cart_item.date_add = date.today()
             cart_item.img = product.picture1
             cart_item.amount = request.POST['amount']
-            cart_item.message = request.POST['message']
             cart_item.size = request.POST['size']
             sizes = product.size.replace("'", '').split(',')
             prices = product.price.replace("'", '').split(',')
