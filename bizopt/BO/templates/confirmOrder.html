@@ -92,28 +92,65 @@
                         {% csrf_token %}
 
                         <div class="uk-flex-column">
-                            <div class="uk-width-1 uk-border-rounded uk-padding" style=" margin: 10px 0; background-color: #ccc; height: auto;">
+                            <div class="uk-width-1 uk-border-rounded uk-padding" style=" margin: 0; background-color:rgba(211, 211, 211, 0.251); height: auto; border: 1px solid black;">
+<!-- style="gap: 60%;" -->
+                                <div class="uk-flex" style="gap: 60%;">
+                                    <div>
+                                    <p class="" style=" font-size: 1.5em; margin:0; padding: 0;">Доставка</p>
 
-                                 <p class="uk-margin-left" style=" font-size: 1.5em; margin:0">Доставка <b
-                                        class="uk-text-uppercase">{{shop}}</b>
-                                </p>
+                                    </div>
+                                    <div>
+                                    <p><a href="" class="uk-button uk-button-text" style="padding-top: 1.5vh;">Изменить</a></p>
+
+                                    </div>
+
+                                  
+
+                                </div>
+
+
+
+                                <div class="uk-flex uk-margin-top" style="gap: 20%;">
+
+                                    <div class="uk-flex">
+                                        <span uk-icon="home"></span>
+                                        <div>
+                                            <p class="uk-margin-left" style=" font-size: 0.8em; margin:0">Курьером</p>
+                                            <p class="uk-margin-left" style=" font-size: 1.0em; margin:0">Глинищевский переулок, 10/15Бс4</p>
+                                        </div>
+                                    </div>
+                                     <div class="uk-flex">
+                                        <span uk-icon="world"></span>
+                                        <div>
+                                            <div class="uk-flex" style="gap: 3%;">
+                                                <p class="uk-margin-left" style=" font-size: 1.0em; margin:0;">Доставка</p>
+                                                <p class="" style=" font-size: 1.0em; margin:0;">продавца</p>
+
+                                            </div>
+                                            <p class="uk-margin-left" style=" font-size: 1.0em; margin:0;font-weight: 600;">{{shop}} BRAND</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                                 <!--
                                 <hr style="border: 2px solid #B54F00;"> -->
+
                             </div>
                             <div class="uk-width-1 uk-flex" style="gap: 3%;">
-                                   <div class="uk-width-1-2 uk-border-rounded uk-padding " style=" margin: 10px 0; background-color: #ccc; height: auto;">
+                                   <div class="uk-width-1-2 uk-border-rounded uk-padding" style="margin: 10px 0; background-color:rgba(211, 211, 211, 0.251); height: auto; border: 1px solid black;">
 
                                         <p class="uk-margin-left" style=" font-size: 1.5em; margin:0">Получатель <b
-                                                class="uk-text-uppercase">{{shop}}</b>
+                                                class="">{{shop}}</b>
                                         </p>
                                         <!--
                                         <hr style="border: 2px solid #B54F00;"> -->
                                     </div>
 
-                                    <div class="uk-width-1-2 uk-border-rounded uk-padding" style=" margin: 10px 0; background-color: #ccc; height: auto;">
+                                    <div class="uk-width-1-2 uk-border-rounded uk-padding" style="margin: 10px 0; background-color:rgba(211, 211, 211, 0.251); height: auto; border: 1px solid black;">
 
                                         <p class="uk-margin-left" style=" font-size: 1.5em; margin:0">Способ оплаты <b
-                                                class="uk-text-uppercase">{{shop}}</b>
+                                                class="">{{shop}}</b>
                                         </p>
                                         <!--
                                         <hr style="border: 2px solid #B54F00;"> -->
@@ -158,54 +195,6 @@
 
                         </div>
                     </div>
-
-                    <div id="submit-form" uk-modal>
-                        <div class="uk-modal-dialog">
-                            <form action="" method="post">
-                                <div>
-                                    <button class="uk-modal-close-default" type="button" uk-close></button>
-                                </div>
-                                <div class="uk-modal-header">
-                                    <div style="margin-top: 2%">
-                                        <h4 class="uk-text-center">Подтверждение оплаты</h4>
-                                    </div>
-                                </div>
-                                <div class="uk-modal-body uk-margin-left uk-margin-right uk-margin-bottom"
-                                    uk-overflow-auto style="padding: 0">
-                                    <img>
-                                    <div class="uk-flex">
-                                        <p class="uk-margin-small-top uk-width-1-5">Оплата: </p>
-                                        <p class="uk-margin-left uk-margin-small-top uk-width-expand"> Картой онлайн
-                                        </p>
-                                    </div>
-                                    <div class="uk-flex">
-                                        <p class="uk-margin-small-top uk-width-1-5">Адрес доставки:</p>
-                                        <div class="uk-margin-left uk-width-expand">
-                                            <input class="uk-input" name="address" id="form-stacked-text" type="text"
-                                                placeholder="г.Москва, Ленинградский проезд 111, кв 101, 100102">
-                                            <p class="uk-text-meta uk-margin-remove" style="font-size: 12px">
-                                                Вводите адрес в формате: "г. Город, улица, кв, почтовый индекc"
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <p for="textarea">Пожелания к товару:</p>
-                                    <textarea class="uk-textarea" name="message" id="" rows="5 "
-                                        style="width: 100%;"></textarea>
-                                </div>
-
-                                <div class="uk-modal-footer uk-text-right">
-                                    <button class="uk-button uk-button-default uk-modal-close"
-                                        type="button">Закрыть</button>
-                                    {% csrf_token %}
-                                    <a href="/confirmOrder">Заказать товар</a>
-                                    <button class="uk-button uk-button-primary" style="background-color: #B54F00;"
-                                        name="payButton" type="submit">Заказать товар</button>
-                                </div>
-
-                            </form>
-                        </div>
-                    </div>
-
 
                 </div>
             </div>
