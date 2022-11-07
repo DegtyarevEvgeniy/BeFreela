@@ -105,6 +105,11 @@ def logout_view(request):
 
 #     return render(request, 'yourTasks.html', content)
 
+def confirm_order(request):
+
+    content = gen_menu(request)
+    
+    return render(request, 'confirmOrder.html', content)
 
 def goodsSearch_page(request, product_name):
     content = gen_menu(request)

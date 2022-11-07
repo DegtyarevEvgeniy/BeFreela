@@ -121,12 +121,16 @@
                                 href="#submit-form" uk-toggle  style="background-color:#B54F00;">
                                 Перейти к оформлению
                             </a>
+                            <!-- <a class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1"
+                                href="/confirmOrder" uk-toggle  style="background-color:#B54F00;">
+                                Перейти к оформлению
+                            </a> -->
                         </div>
 
                         <div class="uk-flex-column uk-border-rounded uk-margin-top"
                             style="background-color: rgba(211, 211, 211, 0.175); height: auto; padding-bottom: 5%; border: 1px solid black;">
 
-                            <div class="uk-flex  uk-margin-top">
+                            <div class="uk-flex  uk-margin-top  uk-margin-bottom">
                                 <div class="uk-margin-top" style="margin: auto;">
                                     <p style="font-weight: 600; font-size: 1.45em;">Итого</p>
                                     <p style="font-weight: 600; font-size: 1em; margin: 0">Всего товар(ов)</p>
@@ -186,6 +190,7 @@
                                     <button class="uk-button uk-button-default uk-modal-close"
                                         type="button">Закрыть</button>
                                     {% csrf_token %}
+                                    <a href="/confirmOrder">Заказать товар</a>
                                     <button class="uk-button uk-button-primary" style="background-color: #B54F00;"
                                         name="payButton" type="submit">Заказать товар</button>
                                 </div>

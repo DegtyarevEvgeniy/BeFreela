@@ -72,6 +72,8 @@ urlpatterns = [
     path('cart/', views.cart_page),
     path('deliveryChoice/', views.delivery_choice),
 
+    path('confirmOrder/', views.confirm_order),
+
     
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 ]
