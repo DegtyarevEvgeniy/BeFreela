@@ -26,7 +26,6 @@
                         </p>
                     </div>
                     {% for product in products %}
-                    {% if product.brand == shop and product.is_incart == 0 %}
                     <div class="uk-flex uk-margin">
                         <div class="uk-width-3-5 uk-flex uk-flex-around">
                             <img src="{{product.img}}" width="100" alt="">
@@ -54,7 +53,6 @@
                             </div>
                         </div>
                     </div>
-                    {% endif %}
                     {% endfor %}
                     {% endfor %}
                 </div>

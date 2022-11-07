@@ -1037,7 +1037,7 @@ def delivery_choice(request):
 
 def orders_page(request):
     content = gen_menu(request)
-    products = Cart.objects.filter(id_user_buy=request.user)
+    products = Orders.objects.filter(id_user_buy=request.user)
     content['shops'] = set()
     for i in products:
         if not i.is_incart:
