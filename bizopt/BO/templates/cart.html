@@ -16,52 +16,98 @@
                         <!-- <p style="font-weight: 600; font-size: 2.625em;">Корзина</p> -->
                         <h1 class="">Корзина</h1>
                     </div>
-                    <p class="uk-text-bottom uk-margin-small-left">n товаров</p>
+                    <!-- <p class="uk-text-bottom uk-margin-small-left">n товаров</p> -->
                 </div>
 
                 <div class="uk-width-1 uk-flex">
                     <form method="post" class="uk-width-3-4">
                         <div class="uk-flex-column">
                             {% for shop in shops %}
-                            <div class="uk-width-1 uk-border-rounded"
-                                style="background-color: lightgrey; margin: 10px 0">
-                                <p class="uk-margin-left" style="font-weight: 600; font-size: 1.5em; margin:0">Заказ <b
+                            <div class="uk-width-1"
+                                style=" margin: 10px 0">
+                                <p class="uk-margin-left" style=" font-size: 1.5em; margin:0">Заказ <b
                                         class="uk-text-uppercase">{{shop}}</b>
                                 </p>
+                                <hr style="border: 2px solid #B54F00;">
                             </div>
+
+                            {% csrf_token %}
+
                             {% for item in items %}
                             {% if item.brand == shop %}
 
-                            <div class="uk-flex uk-margin">
+<!-- style="border: 1px solid black;" -->
 
-                                <img src="{{item.img}}" width="80" alt="">
+                                <div class="uk-flex uk-margin uk-padding" >
 
-                                <div class="uk-flex uk-margin-medium-left">
-                                    <div class="uk-grid-column-large" uk-grid-column>
-                                        <div>
-                                            <p style="font-weight: 600; font-size: 1.5em; margin-bottom: 0;">
-                                                {{item.name}}
-                                            </p>
-                                            <p style="font-weight: 600; font-size: 1em; margin-top: 0;">{{item.brand}}
-                                            </p>
+                                    <img src="{{item.img}}" width="150" alt="" >
+
+                                    <div class="uk-flex uk-margin-medium-left">
+                                        <div class="uk-grid-column-large" uk-grid-column>
+                                            <div>
+                                                <p style="font-weight: 600; font-size: 1.5em; margin-bottom: 0;">
+                                                    {{item.name}}NAme
+                                                </p>
+
+                                                <div class="uk-flex" style="gap:3%;">
+                                                    <div>
+                                                        <p style=" font-size: 1em; margin-top: 0;">{{item.brand}}Brand</p>
+                                                    </div>
+
+                                                    <!-- ЗДЕСЬ ДОЛЖНА БЫТЬ КОНЧЕНАЯ ПАЛОЧКА -->
+                                                    <!-- <div class="uk-divider-vertical" style="border: 2px solid #B54F00; height: 10px; margin: auto; padding: 0;"></div> -->
+                                                    <div>/</div>
+
+                                                    <div >
+                                                        <p style=" font-size: 1em; margin-top: 0;  width: auto;">{{item.price}}</p>
+                                                    </div>
+                                                    <div >
+                                                        <p style=" font-size: 1em; margin-top: 0;  width: auto;">₽</p>
+                                                    </div>
+                                                </div>
+
+                                              
+                                            </div>
+
+                                            <div class="uk-flex">
+                                                <div>
+                                                <span clas  s="uk-label" style="text-align: center;">XL</span>
+
+                                                </div>
+
+                                                    <div
+                                                        class="uk-flex uk-uk-flex-center uk-flex-middle uk-width-expand uk-margin-medium-left">
+                                                        <a class="uk-button uk-button-link amount-changer" id="minusBtn"
+                                                            uk-icon="icon: minus"></a>
+                                                        <input type="number" name="amount" min="1" max="1000" id="amount" value="1"
+                                                            style="margin:0 2%" class="uk-input uk-width-1-5">
+                                                        <a class="uk-button uk-button-link amount-changer" id="plusBtn"
+                                                            uk-icon="icon: plus" ></a>
+                                                </div>
+                                                <!-- <p style="font-weight: 300; font-size: 20px;" class="text_b uk-margin-remove-top uk-panel uk-text-truncate">XL</p>
+                                                <p style="font-weight: 300; font-size: 20px;" class="text_b uk-margin-remove-top uk-panel uk-text-truncate">M</p> -->
+
+                                            </div>
+                                            
                                         </div>
-                                        <div>
-                                            {% csrf_token %}
-                                            <button class="uk-button uk-button-default" name="decline"
-                                                value="{{item.id}}" type="submit" style="font-weight: 600; margin: 0;">
-                                                <span uk-icon="icon: close;"></span>
-                                                Удалить из корзины
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="uk-margin-large-left">
-                                        <p style="font-weight: 600; font-size: 1.5em;">{{item.price}} р</p>
-                                        <div>
-
+                                      
+                                        <div class="uk-grid-column-large uk-margin-large-left" uk-grid-column>
+                                            <div>
+                                                <p style="font-weight: 600; font-size: 1.8em;">{{item.price}} ₽</p>
+                                            </div>
+                                            <div>
+                                                <button class="uk-button uk-button-default" name="decline"
+                                                    value="{{item.id}}" type="submit" style="font-weight: 600;  margin: 0; width: auto; border: 0;">
+                                                    <span uk-icon="icon: close;"></span>
+                                                    <!-- Удалить -->
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+
+
+
                             {% endif %}
                             {% endfor %}
                             {% endfor %}
@@ -72,37 +118,33 @@
 
                         <div>
                             <a class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1"
-                                href="#submit-form" uk-toggle>
+                                href="#submit-form" uk-toggle  style="background-color:#B54F00;">
                                 Перейти к оформлению
                             </a>
                         </div>
 
-                        <div class="uk-flex-column uk-border-rounded"
-                            style="background-color: rgba(211, 211, 211, 0.482); height: 30vh">
+                        <div class="uk-flex-column uk-border-rounded uk-margin-top"
+                            style="background-color: rgba(211, 211, 211, 0.175); height: auto; padding-bottom: 5%; border: 1px solid black;">
 
-                            <div class="uk-flex uk-margin-left uk-margin-top">
-                                <div class="uk-margin-top">
+                            <div class="uk-flex  uk-margin-top">
+                                <div class="uk-margin-top" style="margin: auto;">
                                     <p style="font-weight: 600; font-size: 1.45em;">Итого</p>
-                                    <p style="font-weight: 600; font-size: 1em; margin: 0">Всего n товара(ов)</p>
+                                    <p style="font-weight: 600; font-size: 1em; margin: 0">Всего товар(ов)</p>
                                     <p style="font-weight: 600; font-size: 1em; margin: 0">Скидки</p>
                                 </div>
-                                <div class="uk-margin-top uk-margin-left">
-                                    <p style="font-weight: 600; font-size: 1.45em;">{{sum}} р</p>
-                                    <p style="font-weight: 600; font-size: 1em; margin: 0">{{sum}} р</p>
+                                <div class="uk-margin-top " style="margin: auto;">
+                                    <p style="font-weight: 600; font-size: 1.45em;">{{sum}} ₽</p>
+                                    <p style="font-weight: 600; font-size: 1em; margin: 0">{{sum}} ₽</p>
                                     <p style="font-weight: 600; font-size: 1em; margin: 0">0</p>
                                 </div>
                             </div>
 
-                            <div class="uk-margin-left uk-margin-medium-top">
-                                <div>
-                                    <div class="uk-flex">
-
-                                        <input class="uk-input uk-width-3-4 uk-margin-remove" placeholder="промокод"
-                                            type="text">
-                                        <button class="uk-button uk-button-secondary uk-margin-right">применить</button>
-                                    </div>
-                                </div>
+                            <div class="uk-flex uk-border-rounded uk-margin-left uk-margin-top">
+                                <input class="uk-input uk-width-3-4 uk-margin-remove " placeholder="Промокод"
+                                    type="text" style="border-top-left-radius: 5%; border-bottom-left-radius: 5%;">
+                                <button class="uk-button uk-button-secondary uk-margin-right" style="border-top-right-radius: 5%; border-bottom-right-radius: 5%;"> Применить</button>
                             </div>
+
                         </div>
                     </div>
 
@@ -122,7 +164,7 @@
                                     <img>
                                     <div class="uk-flex">
                                         <p class="uk-margin-small-top uk-width-1-5">Оплата: </p>
-                                        <p class="uk-margin-left uk-margin-small-top uk-width-expand"> картой онлайн
+                                        <p class="uk-margin-left uk-margin-small-top uk-width-expand"> Картой онлайн
                                         </p>
                                     </div>
                                     <div class="uk-flex">
