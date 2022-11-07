@@ -568,7 +568,7 @@ def becomeCreatorTemplate_page(request, name):
 
     elif name == '4':
         account = Account.objects.get(email=request.user)
-        products = Cart.objects.filter(id_creator=account.email)
+        products = Orders.objects.filter(id_creator=account.email)
         content['products'] = [{
                                 'id_creator' : product.id_creator,
                                 'id_user_buy' : product.id_user_buy,
