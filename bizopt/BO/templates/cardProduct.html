@@ -110,9 +110,34 @@
     .rate-area>label:active {
         position: relative;
     }
+    .roww {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        /* height: 10px; */
+        color: aliceblue;
+
+    }
+
+  .column {
+    /* padding: 15px; */
+    border: 1px solid #666;
+    margin: 5px 0;
+    background: #343436;
+    width: 100%;
+
+    }
+
+    ._1 {
+        flex: 100;
+    }
+
 </style>
 
 <div class="uk-width-4-5" style="margin: 0  auto">
+
+    <h2 class=" uk-width-1">{{product.product_name}}AAAAAAAAAAAAAAAA</h2>
+
     <container class="container uk-flex uk-flex-around uk-flex-top uk-width-1">
         <div class="uk-width-1-2 uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider>
 
@@ -152,30 +177,78 @@
 
         </div>
         <div class="uk-flex uk-flex-column uk-width-1-2 uk-text-center" style="padding-left: 5%">
+
+            <h2 class=" uk-width-1" style="text-align: left; font-weight: 600; font-weight: 600;">{{product.show_price}} ₽</h2>
+
             <div>
-                <h2 class="uk-text-truncate uk-width-1-2">{{product.product_name}}</h2>
+
             </div>
 
+            <!-- <div class="roww">
+
+                <div class="column _25">
+                   12%
+                </div>
+
+
+            </div> -->
+<!--             
             <div class="uk-card uk-card-default uk-width-3-5@m uk-text-center uk-margin-small-bottom"
                 style="padding: 2% 0">
                 <p class="uk-margin-left uk-width-2-3@m" style="margin: 0;"> <i class="fa-regular fa-shield-check"></i>
-                    Провернный продавец</p>
+                    Состав: </p>
             </div>
 
             <div class="uk-card uk-card-default uk-width-3-5@m uk-text-center uk-margin-small-top"
                 style="padding: 2% 0">
                 <p class="uk-margin-left uk-width-2-3@m" style="margin: 0;"> <i class="fa-regular fa-shield-check"></i>
-                    Доставка от поставщика</p>
+                    Размеры:</p>
+            </div> -->
+
+            <!-- <h1 id="price" class="uk-width-1 uk-text-left">{{product.show_price}} руб.</h1> -->
+
+            
+            <div class="uk-margin-medium-top uk-width-1 uk-flex" style="gap: 3%;">
+                <p class="uk-text-left" style="color: #8b8b8b;">Состав:</p>
+                <div class="uk-grid uk-grid-small uk-grid-match " id="sizelist" uk-grid>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                    <p>FFFFFFF - 12%</p>
+                </div>
+
             </div>
 
-            <h1 id="price" class="uk-width-1 uk-text-left">{{product.show_price}} руб.</h1>
-            <!--  -->
-            <div class="uk-text-left">
+
+            <div class="uk-margin-medium-top uk-width-1">
+                <p class="uk-width-1 uk-text-left">Размеры:</p>
+                <div class="uk-grid uk-grid-small uk-grid-match uk-width-4-5" id="sizelist" uk-grid>
+                    {% for size in product.sizes %}
+                    <button class="uk-button uk-button-link size">{{size}}</button>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="uk-text-left uk-margin-top">
                 {% if request.user.is_authenticated %}
                 <form method="POST">
                     {% csrf_token %}
                     <a class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
-                        style="background-color: #B54F00;" href="#ordering-window" uk-toggle>Добавить в карзину</a>
+                        style="background-color: #B54F00;" href="#ordering-window" uk-toggle>Добавить в корзину</a>
                 </form>
                 {% else %}
                 <a class="uk-button uk-button-secondary uk-width-2-3 uk-text-bold uk-margin-small-bottom"
@@ -234,15 +307,28 @@
                     </div>
                 </div>
             </div>
-            <div class="uk-margin-medium-top uk-width-1">
-                <h3 class="uk-width-1 uk-text-left">Размеры:</h3>
-                <div class="uk-grid uk-grid-small uk-grid-match uk-width-4-5" id="sizelist" uk-grid>
-                    {% for size in product.sizes %}
-                    <button class="uk-button uk-button-link size">{{size}}</button>
-                    {% endfor %}
-                </div>
 
+            <div class="uk-margin-top" style="text-align: left;">
+                <p>
+                    Доставит BRAND
+                </p>
             </div>
+
+            <div class="uk-text-left">
+                <a href=""><p style="margin: 0;">Все товары BRAND ></p></a>
+                <a href=""><p>Все футболки в категории ></p></a>
+            </div>
+
+
+            <div class="uk-text-left">
+                <a href="">
+                    <img width="96" height="40" src="https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png" alt="" style="border: 1px solid #666;" >
+                </a>
+            </div>
+
+
+
+            
 
         </div>
     </container>
@@ -269,7 +355,7 @@
                     <li class="uk-parent">
                         <a class="uk-text-muted uk-flex uk-flex-middle uk-flex-between"
                             style="border-bottom: 1px solid">
-                            <h2 class="uk-text-muted uk-margin-small-bottom">Харрактиристики</h2>
+                            <h2 class="uk-text-muted uk-margin-small-bottom">Характеристики</h2>
                             <span uk-icon="icon: menu"></span>
                         </a>
                         <ul class="uk-nav-sub uk-width-1">
