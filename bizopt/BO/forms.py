@@ -342,6 +342,77 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('first_name', 'email', 'password1', 'password2')
 
+class ProductEditForm(ModelForm):
+    class Meta:
+        model = Product_creator
+        fields = '__all__'
+        widgets = {
+            'product_name': TextInput(attrs={
+                'class': 'uk-form uk-input',
+                'placeholder': "Введите название товара",
+                'id': 'product_name',
+                'max_length': '100',
+                'oninput': 'PassChecker(1)',
+            }),
+            'country': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=COUNTRY_CHOICE),
+            'brand': TextInput(attrs={
+                'class': 'uk-form uk-input',
+                'id': 'brand',
+                'placeholder': 'Введите бренд товара',
+                'max_length': '100',
+                'oninput': 'PassChecker(1)',
+            }),
+            'description': Textarea(attrs={
+                'class': 'uk-form uk-textarea',
+                'id': 'description',
+                'placeholder': 'Введите описание товара',
+                'oninput': 'PassChecker(1)',
+            }),
+            'category': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=CATEGORY_CHOICE),
+            'duration': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=DURATION_CHOICE),
+            'sex': Select(attrs={
+                'class': 'uk-form uk-select',
+            }, choices=SEX_CHOICE),
+            'price': TextInput(attrs={
+                'class': 'uk-form uk-input uk-width-4-5',
+                'type': 'number',
+                'id': 'priceInput',
+                'oninput': 'recalc(this)',
+                'placeholder': 'Введите стоимость товара'
+            }),
+            'width_product': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+            }),
+            'height_product': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+            }),
+            'length_product': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+            }),
+            'width_packaging': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+            }),
+            'height_packaging': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+            }),
+            'length_packaging': TextInput(attrs={
+                'class': 'form-control',
+                'type': 'number',
+            }),
+
+        }
+
 
 class ProductCreateForm(ModelForm):
     class Meta:

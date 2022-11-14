@@ -17,7 +17,7 @@
 </head>
 <style>
     /* Chrome, Safari, Edge, Opera */
-    input::-webkit-outer-spin-button,
+input::-webkit-outer-spin-button,
     input::-webkit-inner-spin-button {
         -webkit-appearance: none;
         margin: 0;
@@ -29,7 +29,7 @@
     }
 </style>
 
-<body>
+<body style="pointer-events: auto;">
     <div class="uk-flex uk-flex-middle uk-flex-center"
         style="width: 100px; position: fixed; top: 3%; left: 0; z-index: 1000; border: none">
         <a class="uk-button uk-button-secondary uk-width-1" type="button" uk-toggle="target: #offcanvas-overlay"
@@ -60,6 +60,10 @@
             <li class="uk-active uk-flex uk-flex-middle uk-flex-center" style="position: fixed; top: 80%; width: 100px">
                 <a href="/" class="uk-button uk-button-default uk-border-circle uk-margin-bottom uk-width-auto"
                     style="background:  #B54F00; border: solid #B54F00 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: home"></a>
+            </li>
+            <li class="uk-active Btn">
+                <button class="uk-button uk-button-default uk-border-circle uk-margin-bottom uk-width-auto"
+                    style="background:  #B54F00; border: solid #B54F00 2px; color: white; width: 40px; height: 40px; padding: 0;" uk-icon="icon: location"></button>
             </li>
 
         </ul>
@@ -120,7 +124,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.13.7/dist/js/uikit-icons.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 

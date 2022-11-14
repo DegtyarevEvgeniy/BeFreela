@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+{% load static %}
+
+
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" type="image/x-icon" href="../../../media/logoImage/Befreed.png" />
@@ -11,9 +14,13 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
     <script src="https://kit.fontawesome.com/6fc980010f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+
     <!-- Yandex.Metrika counter -->
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         (function (m, e, t, r, i, k, a) {
             m[i] = m[i] || function () {
                 (m[i].a = m[i].a || []).push(arguments)
@@ -29,38 +36,23 @@
         })
         (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
+
         ym(90687318, "init", {
             clickmap: true,
             trackLinks: true,
             accurateTrackBounce: true,
             webvisor: true
         });
-    </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/90687318" style="position:absolute; left:-9999px;" alt="" /></div>
-    </noscript>
+    </script> -->
 
     <!-- /Yandex.Metrika counter -->
 
 </head>
-
-
 <style>
-    * {
-        font-family: 'Montserrat' !important;
-        /* font-size: 1.5em */
-    }
-
-    html {
-        min-height: 100%;
-        -webkit-text-size-adjust: 100%;
-
-        text-size-adjust: 100%
-    }
+    @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
 </style>
 
-<body sty style="min-height: 100%; width: 100%; margin: 0 auto;">
-
+<body class="uk-width-1" style="height: 100%;">
 
     {% include "menu.html" %}
 
@@ -81,13 +73,6 @@
     //     document.getElementById('searchBtn').href = "goods/search/" + el.value;
     // }
 
-    document.getElementById('search_pole').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn').href = "/goods/search/" + document.getElementById(
-            'search_pole').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn').click();
-        }
-    });
 
     const cards = document.querySelectorAll('.card-link');
 
@@ -96,14 +81,6 @@
             console.log(event.target.parentNode.className)
 
         });
-    });
-
-    document.getElementById('search_pole1').addEventListener('keyup', function (event) {
-        document.getElementById('searchBtn1').href = "/goods/search/" + document.getElementById(
-            'search_pole1').value;
-        if (event.keyCode == 13) {
-            document.getElementById('searchBtn1').click();
-        }
     });
 
     const cards1 = document.querySelectorAll('.card-link');

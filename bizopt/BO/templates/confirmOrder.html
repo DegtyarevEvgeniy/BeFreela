@@ -1,0 +1,274 @@
+<html lang="en">
+    {% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm order</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/css/uikit.min.css" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script src="https://kit.fontawesome.com/6fc980010f.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+    
+        <nav class="uk-navbar-container" style="margin-bottom: 0; height: 10vh; width: 100%; background-color: white; border-bottom: 2px solid #ccc;" uk-navbar>
+            <div class="uk-navbar-left uk-margin-left">
+                
+                <ul class="uk-navbar-nav">
+                    <li>
+                        <a href="/" class="uk-width-expand uk-padding-remove uk-flex uk-flex-middle">
+                            <img src="../../../media/logoImage/logo.svg" alt="" width="40">
+                            <img src="../../../media/logoImage/logo_text.svg" alt=""
+                                class="uk-width-small uk-margin-small-left">
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="uk-navbar-right uk-margin-right">
+
+                <ul class="uk-navbar-nav">
+                    <li>
+                    
+                    <ul class="uk-navbar-nav uk-width-auto">
+                        
+                       <li class="uk-active">
+                        <a uk-icon="icon: user"></a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                {% if user.is_partner %}
+                                <li>
+
+                                    <a href="/partners/" class="uk-button uk-button-link"
+                                        style="text-transform: none;">Вы
+                                        уже
+                                        партнер</a>
+                                </li>
+                                {% else %}
+                                <li class="uk-active">
+                                    <a href="/partners/" class="uk-button uk-button-link uk-text-normal"
+                                        style="text-transform: none;">Стать партнером</a>
+                                </li>
+                                {% endif %}
+                                <li class="uk-nav-divider"></li>
+                                <li class="uk-active"><a href="/edit/">Настройки профиля</a></li>
+                                <!-- <li class="uk-active"><a href="/chats">Чаты</a></li> -->
+                                <li class="uk-active"><a href="/logout/">Выйти</a></li>
+                                {% if user.is_admin and user.is_superuser and user.is_staff and user.is_active %}
+                                <li class="uk-active"><a href="/admin/">Админка</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </li>
+                    </ul>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+  <div style="width: 80%; margin-left: 10%">
+        <div>
+            <div class="uk-flex-column">
+                <br>
+
+                <div class="uk-flex uk-margin-bottom" style="gap:2%">
+                    <div>
+                        <!-- <p style="font-weight: 600; font-size: 2.625em;">Корзина</p> -->
+                        <h1 class="" style="font-weight: 450;">Оформление</h1>
+                    </div>
+                    <!-- <p class="uk-text-bottom uk-margin-small-left">n товаров</p> -->
+                </div>
+
+                <div class="uk-width-1 uk-flex">
+                    <form method="post" class="uk-width-3-4">
+                        {% csrf_token %}
+
+                        <div class="uk-flex-column">
+                            <div class="uk-width-1 uk-border-rounded uk-padding" style=" margin: 0; background-color:rgba(211, 211, 211, 0.251); height: auto; border: 1px solid black;">
+<!-- style="gap: 60%;" -->
+                                <div class="uk-flex" style="gap: 3%;">
+                                    <div>
+                                        <p class="" style="font-weight: 450; font-size: 1.5em; margin:0; padding: 0;">Доставка</p>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            <a href="" class="uk-button uk-button-text" style="padding-top: 1.2vh;">Изменить</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="uk-flex uk-margin-top" style="gap: 20%;">
+
+                                    <div class="uk-flex">
+                                        <span uk-icon="home"></span>
+                                        <div>
+                                            <p class="uk-margin-left" style=" font-size: 0.8em; margin:0">Курьером</p>
+                                            <p class="uk-margin-left" style=" font-size: 1.0em; margin:0">Глинищевский переулок, 10/15Бс4</p>
+                                        </div>
+                                    </div>
+                                     <div class="uk-flex">
+                                        <span uk-icon="world"></span>
+                                        <div>
+                                            <div class="uk-flex" style="gap: 3%;">
+                                                <p class="uk-margin-left" style=" font-size: 1.0em; margin:0;">Доставка</p>
+                                                <p class="" style=" font-size: 1.0em; margin:0;">продавца</p>
+
+                                            </div>
+                                            <p class="uk-margin-left" style=" font-size: 1.0em; margin:0;font-weight: 600;">{{shop}} BRAND</p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!--
+                                <hr style="border: 2px solid #B54F00;"> -->
+
+                            </div>
+                            <div class="uk-width-1 uk-flex" style="gap: 3%;">
+                                   <div class="uk-width-1-2 uk-border-rounded uk-padding" style="margin: 10px 0; background-color:rgba(211, 211, 211, 0.251); height: auto; border: 1px solid black;">
+
+                                        <!-- <p class="" style=" font-size: 1.5em; margin:0">Получатель</p> -->
+
+                                         <div class="uk-flex" style="gap: 3%;">
+                                            <div>
+                                                <p class="" style="font-weight: 450; font-size: 1.5em; margin:0; padding: 0;">Получатель</p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="" class="uk-button uk-button-text" style="padding-top: 1.2vh;">Изменить</a>
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="uk-flex uk-margin-top">
+                                            <span uk-icon="user"></span>
+                                            <div>
+                                                <p class="uk-margin-left" style=" font-size: 1.0em; margin:0">Евгений Дегтярев</p>
+                                                <p class="uk-margin-left" style=" font-size: 0.8em; margin:0">DegtyarevEA12@gmail.com</p>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <hr style="border: 2px solid #B54F00;"> -->
+                                    </div>
+
+                                    <div class="uk-width-1-2 uk-border-rounded uk-padding" style="margin: 10px 0; background-color:rgba(211, 211, 211, 0.251); height: auto; border: 1px solid black;">
+
+                                        <!-- <p class="" style=" font-size: 1.5em; margin:0">Способ оплаты</p> -->
+
+                                        <div class="uk-flex" style="gap: 3%;">
+                                            <div>
+                                                <p class="" style="font-weight: 450; font-size: 1.5em; margin:0; padding: 0;">Способ оплаты</p>
+                                            </div>
+                                            <div>
+                                                <p>
+                                                    <a href="" class="uk-button uk-button-text" style="padding-top: 1.2vh;">Изменить</a>
+                                                </p>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="uk-flex uk-margin-top">
+                                            <span uk-icon="tablet"></span>
+                                            <div>
+                                                <p class="uk-margin-left" style=" font-size: 1.0em; margin:0">Картой онлайн</p>
+                                            </div>
+                                        </div>
+                                        <!--
+                                        <hr style="border: 2px solid #B54F00;"> -->
+                                    </div>
+
+                            </div>
+
+
+
+                        </div>
+                    </form>
+
+                    <div class="uk-width-1-4 uk-flex-column uk-margin-left">
+
+                        <div>
+                            <a class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1"
+                                href="#submit-form" uk-toggle  style="background-color:#B54F00;">
+                                Подтвредить заказ
+                            </a>
+                            <!-- <a class="uk-button uk-button-secondary uk-border-rounded uk-button-large uk-width-1"
+                                href="/confirmOrder" uk-toggle  style="background-color:#B54F00;">
+                                Перейти к оформлению
+                            </a> -->
+                        </div>
+
+                        <div class="uk-flex-column uk-border-rounded uk-margin-top"
+                            style="background-color: rgba(211, 211, 211, 0.175); height: auto; padding-bottom: 5%; border: 1px solid black;">
+
+                            <div class="uk-flex  uk-margin-top uk-margin-bottom">
+                                <div class="uk-margin-top" style="margin: auto;">
+                                    <p style="font-weight: 600; font-size: 1.45em;">Итого</p>
+                                    <p style="font-weight: 600; font-size: 1em; margin: 0">Всего товар(ов)</p>
+                                    <p style="font-weight: 600; font-size: 1em; margin: 0">Скидки</p>
+                                </div>
+                                <div class="uk-margin-top " style="margin: auto;">
+                                    <p style="font-weight: 600; font-size: 1.45em;">{{sum}} ₽</p>
+                                    <p style="font-weight: 600; font-size: 1em; margin: 0">{{sum}} ₽</p>
+                                    <p style="font-weight: 600; font-size: 1em; margin: 0">0</p>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+
+    <footer>
+
+    </footer>
+
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.13.10/dist/js/uikit-icons.min.js"></script>
+<script>
+    // function red(el) {
+    //     document.getElementById('searchBtn').href = "goods/search/" + el.value;
+    // }
+
+
+    const cards = document.querySelectorAll('.card-link');
+
+    cards.forEach(card => {
+        card.addEventListener('click', function handleClick(event) {
+            console.log(event.target.parentNode.className)
+
+        });
+    });
+
+    const cards1 = document.querySelectorAll('.card-link');
+
+    cards1.forEach(card => {
+        card.addEventListener('click', function handleClick(event) {
+            console.log(event.target.parentNode.className)
+
+        });
+    });
+</script>
+</html>

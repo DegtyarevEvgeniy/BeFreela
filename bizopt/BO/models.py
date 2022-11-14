@@ -15,6 +15,10 @@ class Shop(models.Model):
     status = models.CharField(max_length=500, default='')
     email = models.CharField(max_length=60, default='example@example.com')
     phone = models.CharField(max_length=20, default='')
+    shipping_pony_express = models.CharField(max_length=500, default='')
+    shipping_yandex_delivery = models.CharField(max_length=500, default='')
+    shipping_dostavista = models.CharField(max_length=500, default='')
+    shipping_sdek = models.CharField(max_length=500, default='')
 
 class Product_creator(models.Model):
     product_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
@@ -27,7 +31,6 @@ class Product_creator(models.Model):
     rating = models.FloatField(default=0.0)
     category = models.CharField('Категория', max_length=50, default='')
     sex = models.CharField('Категория', max_length=50, default='')
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='')
     compound = models.CharField('Срок получения товара', max_length=50, default='')
     size = models.CharField(max_length=300, default='')
     duration = models.CharField(max_length=300, default='')
@@ -42,34 +45,44 @@ class Product_creator(models.Model):
     prevPicture = models.ImageField(default='')
 
     tags = TaggableManager()
-        # width_product = models.FloatField('', default=0)
-    # height_product = models.FloatField('', default=0)
-    # length_product = models.FloatField('', default=0)
-    # width_packaging = models.FloatField('', default=0)
-    # height_packaging = models.FloatField('', default=0)
-    # length_packaging = models.FloatField('', default=0)
-    # subcategory = models.CharField('Подкатегория', max_length=50, default='')
+   
 
-class Product_buy(models.Model):
-    id_creator = models.CharField(max_length=200, default='') #кто создал
-    id_user_buy = models.CharField(max_length=200, default='') #кто покупает
+class Cart(models.Model):
+    id_creator = models.CharField(max_length=200, default='') 
+    brand = models.CharField(max_length=200, default='') 
+    id_user_buy = models.CharField(max_length=200, default='')
     price = models.CharField(max_length=200, default='')
     duration = models.CharField(max_length=200, default='')
     compound = models.CharField('Срок получения товара', max_length=50, default='')
     size = models.CharField(max_length=300, default='')
     amount = models.IntegerField()
     product_name = models.CharField(max_length=500, default='')
-    task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    status = models.CharField(max_length=200, default='')
+    status = models.IntegerField(max_length=200, default='0')
     message = models.CharField(max_length=200, default='')
-    payed_partner = models.BooleanField(default=0)
-    payed_user = models.BooleanField(default=0)
-    status_pay = models.BooleanField(default=0)
+    payment_method = models.CharField(max_length=500, default='картой онлайн')
+    img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
+
+class Orders(models.Model):
+    id_creator = models.CharField(max_length=200, default='') 
+    brand = models.CharField(max_length=200, default='') 
+    id_user_buy = models.CharField(max_length=200, default='')
+    price = models.CharField(max_length=200, default='')
+    duration = models.CharField(max_length=200, default='')
+    compound = models.CharField('Срок получения товара', max_length=50, default='')
+    size = models.CharField(max_length=300, default='')
+    amount = models.IntegerField()
+    product_name = models.CharField(max_length=500, default='')
+    status = models.IntegerField(max_length=200, default='0')
+    message = models.CharField(max_length=200, default='')
+    is_payed = models.BooleanField(default=0)
     delivery_address = models.CharField(max_length=500, default='')
+    payment_method = models.CharField(max_length=500, default='картой онлайн')
+    order_number = models.BigIntegerField(default='0')
+    date_receiving = models.DateField(max_length=50, default='2000-01-01') 
     date_add = models.DateField(max_length=50, default='2000-01-01') 
     img = models.ImageField(default='https://i.ibb.co/z7zmCKn/2022-08-28-10-00-15.png')
-    prevImg = models.ImageField(default='')
-    # status2 = models.CharField(max_length=20, default='')
+    is_incart = models.BooleanField(default=1)
+
 
 class Comments_partner(models.Model):
     id_creator = models.CharField(max_length=200, default='')
@@ -90,7 +103,6 @@ class Task(models.Model):
     id_creator = models.CharField(max_length=200, default='') #кто создал
     status1 = models.CharField(max_length=20, default='')
     id_user_do = models.CharField(max_length=20, default='') #кто делает
-    task_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=50, default='anonymous')
     select = models.CharField(max_length=50, default='')
     description = models.CharField(max_length=500, default='')
@@ -135,7 +147,8 @@ class Message(models.Model):
 class BePartner(models.Model):
     brand_name = models.CharField(max_length=1000000)
     name = models.CharField(max_length=1000000)
-    phone = models.CharField(max_length=1000000)
+    shipping_ayndex = models.CharField(max_length=1000000)
     city = models.CharField(max_length=1000000)
     link = models.CharField(max_length=1000000)
     email = models.CharField(max_length=1000000)
+    phone = models.CharField(max_length=1000000)

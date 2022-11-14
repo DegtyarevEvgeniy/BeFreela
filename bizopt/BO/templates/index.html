@@ -2,162 +2,191 @@
 
 {% block content %}
 
-<style>
-    #leftBottomnMenu {
-        position: relative;
-        z-index: 1;
-    }
 
-    #leftBottomnMenu:before {
-        content: "";
-        position: absolute;
-        float: left;
-        left: 0;
-        bottom: 0;
-        height: 1px;
-        width: 89%;
-        border-bottom: 1px solid #0A3644;
-    }
+{% load static %}
 
-    #rigthBottomnMenu {
-        position: relative;
-        z-index: 1;
-    }
 
-    #rigthBottomnMenu:before {
-        content: "";
-        position: absolute;
-        float: left;
-        left: 10%;
-        bottom: 0;
-        height: 1px;
-        width: 90%;
-        border-bottom: 1px solid #0A3644;
-    }
-</style>
+<link rel="stylesheet" href="{% static "css/index.css" %}">
+<link rel="stylesheet" href="{% static "js/index.js" %}">
 
-<div style="margin: auto; width: 100%">
 
-    <div uk-slideshow="animation: push; ratio: 7:3; autoplay: true; pause-on-hover: true; min-height: 500; max-height: 1000">
 
-        <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
 
-            <ul class="uk-slideshow-items">
-                <li>
-                    <img src="../../../media/media/main_baner3.png"
-                        alt="" uk-cover>
-                        
-                </li>
-                <li>
-                    <img src="../../../media/media/main_baner2.png"
-                        alt="" uk-cover>
-                </li>
-                <li>
-                    <img src="../../../media/media/main_baner1.png"
-                        alt="" uk-cover>
-                </li>
-            </ul>
 
-            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous
-                uk-slideshow-item="previous"></a>
-            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next
-                uk-slideshow-item="next"></a>
- 
+
+<div class="uk-width-1" style="margin: auto;">
+    <div class="uk-width-1 uk-grid-match uk-flex" style="height: 45vh">
+        <div class="uk-width-1 uk-margin-right">
+            <div class="uk-width-1 uk-background-cover"
+                data-src="https://img.freepik.com/free-photo/young-person-wearing-hoodie-mockup_23-2149246123.jpg?w=1380&t=st=1667115336~exp=1667115936~hmac=2b0f3ec335471e4f3ee8cb94a11ecb33725a523699f8a07e789ac2c2cc7998c9"
+                uk-img>
+                <div class="whitefont" style="margin-left: 5%; margin-top: 5%; font-size: 2em;">
+                    <p style="font-weight: 600; font-size: 2.6em;" class="uk-margin-medium-left">Одежда</p>
+                    <p style="font-weight: 300; font-size: 1.3em;" class="uk-margin-medium-left">Не упусти свой шанс
+                        порадовать <br> себя уикальной вещью <br> вместе с BeFreela</p>
+                    <div style="margin: auto; margin-top: 5%;" class="uk-margin-medium-left">
+                        <a class="uk-button uk-button-secondary uk-border-rounded" style="font-size: 1.3em; padding: 2%"
+                            href="/goods/category/Clothing">Перейти
+                            в каталог</a>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
 
 
+<div style="width: 97%; margin: auto; padding-top: 5vh; font-size: 2em;">
 
-<div class="uk-section uk-section-default" style="width: 100%;">
-    <div class="uk-width-1 uk-flex uk-flex-column">
+    <div class="uk-grid-match uk-flex">
 
-        <!-- start of template -->
-        <div class="uk-flex-inline uk-flex-center" id="leftBottomnMenu">
-            <div class="uk-width-2-5 uk-flex uk-flex-bottom">
-                <img src="https://img.freepik.com/free-photo/fashion-portrait-of-young-elegant-woman_1328-2743.jpg?w=740&t=st=1662389608~exp=1662390208~hmac=3ec62a34d66e64b9bc8a326f921835704d4044ab136dcdb40355315ee5abaea4"
-                    alt="" width="500" height="800">
-            </div>
-            <div class="uk-width-2-5" style="border-left: 1px solid #0A3644;">
-                <h2 class="uk-flex uk-flex-center uk-flex-middle"
-                    style="width: 65px; height: 65px; color: white; background-color: #0A3644;">1</h2>
-                <div class="uk-text-left uk-width-4-5" style="margin: 0 auto">
-                    <h1>Дизайнерская одежда
-                    </h1>
-                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Всегда мечтали выделяться из толпы
-                        ярким луком? Тогда вы точно пришли по адресу. В BeFreela вы найдёте одежду для любых образов на
-                        свой вкус и цвет
-                    </p>
-                </div>
+        <div class="uk-width-1">
+            <div class="uk-flex-column">
+                <a class="uk-link-reset" href="/goods/category/Shoes">
+
+                    <div class="uk-background-cover" style="height: 25vh"
+                        data-src="https://img.freepik.com/free-photo/white-canvas-sneakers-unisex-footwear-fashion_53876-106040.jpg?w=1380&t=st=1667115187~exp=1667115787~hmac=813e26b07d62e51adc5b14dcbb4156cc30eb80f1e3e5adf5609227d3b6546065"
+                        uk-img>
+                        <div class="whitefont" style="padding-top: 5% ;">
+                            <p style="font-weight: 600; font-size: 2.625em; " class="uk-margin-large-left">Обувь</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a class="uk-link-reset" href="/goods/category/Interior">
+                    <div class="uk-flex" style="margin-top: 2vh">
+                        <div style="margin-right: 2vh" style="height: 35vh" class="uk-width-1-2 uk-background-cover"
+                            uk-img
+                            data-src="https://img.freepik.com/free-photo/top-view-of-female-property-in-bag_155003-13992.jpg?w=1380&t=st=1667078448~exp=1667079048~hmac=7f9aef695ae0a4cf3627adc5afc4faeae96994cdde8bd91fde6a27a9cd947ce6">
+                            <div class="whitefont uk-margin-top uk-text-center">
+                                <p style="font-weight: 600; font-size: 1.8em;">Аксессуары</p>
+                            </div>
+                        </div>
+                        <div style="height: 35vh" class="uk-width-1-2 uk-background-cover" uk-img
+                            data-src="https://img.freepik.com/free-photo/modern-interior-with-home-items-coziness-and-comfort-at-home_169016-4973.jpg?w=1380&t=st=1667115266~exp=1667115866~hmac=018222fae5c49e5c5aa46dd8d8c917e8d898e5422a3c07ac95283f8b985f7766">
+                            <div class="whitefont uk-margin-top uk-text-center">
+                                <p style="font-weight: 600; font-size: 1.8em; ">Для дома</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
-        <!-- end of template -->
-
-        <!-- start of template -->
-        <div class="uk-flex-inline uk-flex-center uk-flex-bottom" id="rigthBottomnMenu">
-            <div class="uk-width-2-5 uk-flex uk-flex-wrap uk-flex-wrap-around">
-                <div class="uk-text-left uk-width-1" style="margin: 10% auto 0 auto; padding-right: 10%">
-                    <h1>Обувь</h1>
-                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Залог хорошего образа и приятной
-                        прогулки - удобная обувь, в которой ты будешь чувствовать себя уверенно и комфортно. Скорее
-                        переходи во вкладку «Обувь» и смотри новинки BeFreela
-                    </p>
-                </div>
-                <h2 class="uk-flex uk-flex-center uk-flex-middle"
-                    style="margin-bottom: 0px;width: 65px; height: 65px; color: #0A3644; border: 1px solid #0A3644; border-bottom: none">
-                    2</h2>
-            </div>
-            <div class="uk-width-2-5" style="border-left: 1px solid #0A3644; padding-top: 5%">
-                <img src="https://img.freepik.com/premium-photo/pair-of-white-male-sneakers-on-orange-background-stylish-shoes-isolated_77190-5487.jpg?w=740"
-                    alt="" width="500" height="800">
-            </div>
-        </div>
-        <!-- end of template -->
-
-        <!-- start of template -->
-        <div class="uk-flex-inline uk-flex-center" id="leftBottomnMenu">
-            <div class="uk-width-2-5">
-                <img src="https://img.freepik.com/free-photo/beautiful-shot-of-a-black-purse-on-a-white-table-with-a-pink_181624-22681.jpg?w=1380&t=st=1662577832~exp=1662578432~hmac=b301ac8c4b860d94decec16e702b41611035faf4c09ce3feaf8b2105375dd8f9"
-                    alt="" width="500" height="800">
-            </div>
-            <div class="uk-width-2-5 uk-flex uk-flex-bottom" style="border-left: 1px solid #0A3644">
-                <div class="uk-text-left uk-width-4-5" style="margin: 0 auto 15% auto">
-                    <h1>Сумки</h1>
-                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Не можете подобрать нужную сумку под
-                        новый образ? Здесь вы можете найти все, что вам захочется. Дай волю фантазии и подбери
-                        ослепительные образы вместе с сумками из BeFreela
-                    </p>
-                </div>
-                <h2 class="uk-flex uk-flex-center uk-flex-middle"
-                    style="margin-bottom: 0px; width: 65px; height: 65px; color: white; background-color: #0A3644;">3
-                </h2>
-            </div>
-        </div>
-        <!-- end of template -->
-
-        <!-- start of template -->
-        <div class="uk-flex-inline uk-flex-center uk-flex-bottom" id="rigthBottomnMenu">
-            <div class="uk-width-2-5 uk-flex uk-flex-wrap uk-flex-wrap-around">
-                <div class="uk-text-left uk-width-1" style="margin: 10% auto 0 auto; padding-right: 10%">
-                    <h1>Интерьер</h1>
-                    <p class="uk-text-meta uk-text-break" style="font-size: 1.5em">Дом - это наше спокойствие,
-                        безопасность, гармония и удобство. Его украшает не ремонт, а душевность. Послушай своё сердце и
-                        создай тёплый уютный маленький мир вместе с BeFreela
-                    </p>
-                </div>
-                <h2 class="uk-flex uk-flex-center uk-flex-middle"
-                    style="margin-bottom: 0px;width: 65px; height: 65px; color: #0A3644; border: 1px solid #0A3644; border-bottom: none">
-                    4</h2>
-            </div>
-            <div class="uk-width-2-5" style="border-left: 1px solid #0A3644; padding: 5% 0 2% 0;">
-                <img src=" https://img.freepik.com/free-photo/aromatherapy-table-setting-with-scented-candles-and-towel_53876-123939.jpg?w=740&t=st=1662386863~exp=1662387463~hmac=65c188e5f579d3d7f82eca53aaee79ce00b8a0f78d7f3d889018cc0b7e31dba"
-                    alt="" width="500" height="800">
-            </div>
-        </div>
-        <!-- end of template -->
 
     </div>
+
+    <br>
+
+    <div uk-slider>
+        <ul class="uk-slider-items uk-child-width-1-3@s uk-child-width-1-4@">
+
+
+            <li class="uk-width-auto uk-margin-small-left">
+                <a class="uk-button uk-button-default uk-border-rounded" style=" font-size: 1.2em" href="/goods/">Все
+                    товары</button></a>
+            </li>
+
+            <li class="uk-width-auto uk-margin-small-left">
+                <a class="uk-button uk-button-default uk-border-rounded" style=" font-size: 1.2em"
+                    href="/goods/category/Clothing">Одежда</a>
+            </li>
+
+            <li class="uk-width-auto uk-margin-small-left">
+                <a class="uk-button uk-button-default uk-border-rounded" style=" font-size: 1.2em"
+                    href="/goods/category/Shoes">Обувь</a>
+            </li>
+
+            <li class="uk-width-auto uk-margin-small-left">
+                <a class="uk-button uk-button-default uk-border-rounded" style=" font-size: 1.2em"
+                    href="/goods/category/Bags">Сумки</a>
+            </li>
+
+            <li class="uk-width-auto uk-margin-small-left">
+                <a class="uk-button uk-button-default uk-border-rounded" style=" font-size: 1.2em"
+                    href="/goods/category/Interior">Интерьер</a>
+            </li>
+
+            <li class="uk-width-auto uk-margin-small-left">
+                <a class="uk-button uk-button-default uk-border-rounded" style=" font-size: 1.2em"
+                    href="/goods/category/Accessories">Аксессуары</a>
+            </li>
+
+
+        </ul>
+    </div>
+
+
+    <div class="uk-grid uk-margin-large-top">
+
+        <div class="uk-width-1">
+            <p class="uk-width-1" style="font-weight: 600; font-size: 2.25em; text-align: center;">↓ Популярные товары ↓
+            </p>
+        </div>
+
+
+        <div class="uk-wrap uk-width-1">
+            <div class="uk-grid uk-width-1" uk-grid style="margin-left: 2%;">
+
+                {% for product in products_start %}
+
+                <div class="uk-width-1-3" style="height: 30vh; margin: 0">
+                    <a class="uk-link-reset" href="/goods/{{product.id}}">
+                        <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+                            style="height: 70%; " uk-img data-src="{{product.picture1}}"></div>
+                        <div>
+                            <p style="font-weight: 300; font-size: 2em;"
+                                class="uk-margin-small-left uk-margin-remove-bottom">{{ product.product_name }}</p>
+                            <p style="font-weight: 300; font-size: 1.8em;"
+                                class="uk-margin-small-left uk-margin-remove-top uk-margin-remove-bottom">
+                                {{product.show_price}} ₽</p>
+                        </div>
+                    </a>
+                </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <hr>
+    <br>
+
+    <div class="uk-margin-large-top" tabindex="-1" uk-slider>
+        <h1 class="uk-margin-medium-left" style="font-size: 2em;">Новые бренды</h1>
+
+
+        <ul class="uk-slider-items uk-grid uk-margin-large-top" style="margin: auto">
+            <li class="uk-width-1 uk-flex">
+
+                {% for shop in shops %}
+
+                <div style="height: 45vh; width: 32%; margin: 0">
+                    <a class="uk-link-reset" href="/brands/{{shop.name}}">
+                        <div class="uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light"
+                            style="height: 70%; " uk-img data-src="{{shop.logoImage}}"></div>
+                        <div class="uk-text-center">
+                            <h1>{{shop.name}}</h1>
+                        </div>
+                    </a>
+                </div>
+
+                {% endfor %}
+
+            </li>
+
+        </ul>
+
+        <a class="uk-position-center-left uk-margin-small-left uk-border-pill" href="#" style="color: #ccc;"
+            uk-slidenav-previous uk-slider-item="previous"></a>
+        <a class="uk-position-center-right uk-margin-small-right uk-border-pill " style="color: #ccc;" href="#"
+            uk-slidenav-next uk-slider-item="next"></a>
+
+    </div>
+
+
 </div>
 
 
